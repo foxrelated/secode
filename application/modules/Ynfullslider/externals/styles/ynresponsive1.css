@@ -1,0 +1,31 @@
+
+/*----------  ADJUST ALIGN FOR ICON NAVIGATOR SLIDER  ----------*/
+.layout_ynfullslider_slider_container .ynfullslider_slider_navigator_1 .tparrows:before{
+	/*margin-top: 7px;*/
+}
+
+.layout_ynfullslider_slider_container .tparrows:before{
+	height: 40px;
+	line-height: 40px;
+	margin-top: 0;
+}
+
+
+.layout_ynfullslider_slider_container .ynfullslider_slider_navigator_2 .tparrows:before{
+	margin-top: -20px;
+}
+
+
+.ynfullslider_slider_preview{
+	/*-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-msbox-sizing: border-box;
+	box-sizing: border-box;*/
+}
+
+/*----------  FIXED LANDING PAGE TEMPLATE PURITY CONFIG ----------*/
+body[class^=ynresponsivepurity-] .layout_ynfullslider_slider_container{
+	max-width: 100% !important;
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}

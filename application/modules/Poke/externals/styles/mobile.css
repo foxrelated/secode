@@ -1,0 +1,62 @@
+/* icons */
+.notification_type_Poke
+{
+  background-image: url(~/application/modules/Poke/externals/images/poke_icon.png);
+}
+.activity_icon_Poke
+{
+  background-image: url(~/application/modules/Poke/externals/images/poke_icon.png);
+}
+.layout_poke_list_pokeusers
+{
+	margin-bottom:15px;
+}
+.layout_poke_list_pokeusers ul
+{
+  padding: 5px;
+	border-bottom-width:1px;
+}
+.layout_poke_list_pokeusers ul li
+{
+	padding:3px 3px;
+}
+.layout_poke_list_pokeusers ul li .poke_icon
+{
+	float:left;
+	margin-right:3px;
+	padding-top:3px;
+}
+.layout_poke_list_pokeusers ul li .users_poked
+{
+	overflow:hidden;
+}
+.layout_poke_list_pokeusers ul li .users_poked .users_poked_list
+{
+	clear:both;
+	padding:3px 0;
+}
+.layout_poke_list_pokeusers ul li .users_poked .users_poked_list div
+{
+	float:left;
+	font-size:11px;
+	margin-left:3px;
+}
+.poke_cancel 
+{
+	float:right !important;
+	margin-top:-3px;
+}
+.poke_cancel a
+{
+	float:right;
+	height:11px;
+	width:11px;
+	background:url(~/application/modules/Poke/externals/images/cancel_icon.png) no-repeat right;
+}
+.poke_cancel a:hover
+{
+	background:#3b5998 url(~/application/modules/Poke/externals/images/cancel_icon.png) no-repeat left;
+}
+.usersetting .global_form div.form-label{
+	width:1px;
+}

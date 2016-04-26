@@ -1,0 +1,229 @@
+
+/*Nested comment in AAF*/
+	.seao_nestcomment a.buttonlink {
+		background-size: 13px auto;
+		font-weight: normal;
+		padding-left: 18px;
+		padding-top: 1px;
+	}
+	.seao_advcomment .seao_nestcomment:hover > .seaocore_replies_info_op, 
+	.seao_reply li:hover > .seaocore_replies_info_op{
+		display:block;
+	}
+	#compose-nested-comment-photo-body + div.compose-menu {
+		position: absolute;
+		right:0;
+		top:0;
+	}
+	#compose-nested-comment-photo-body + div.compose-menu .buttonlink {
+		height:16px;
+	}
+	#compose-nested-comment-photo-body {
+		overflow: visible;
+		padding: 0;
+	}
+	.seao_nestcomment .comments_info{
+		width: 85%;
+		overflow: visible;
+		float: left;
+	}
+	.activity-comment-form button{
+		margin-top:5px;
+	}
+	ul.seao_advcomment,
+	.comments > ul > li.seao_nestcomment{
+		overflow: visible;
+		clear: both;	
+	}
+	ul.feed .seao_nestcomment .comments{
+		width: 100% !important;
+	}
+	ul.seao_reply {
+		padding-left: 5%;
+		margin-top: 10px;
+		width: 95%;
+		overflow: visible;
+	}
+	ul.seao_reply > li{
+		background-image: none;
+		border-width: 1px 0 0;
+		overflow: visible;
+		padding: 1%;
+		width: 99%;
+	}
+	.activity-reply-form {
+		display: inline-block;
+		width: 98.3%;
+	}
+	.activity-reply-form, form.activity-comment-form{
+		background-color: rgba(0, 0, 0, 0.04);
+		padding: 5px;
+	}
+	.comments .seaocore_comment_box{
+		padding:7px 5px;
+	}
+	
+/*Like and dislikes in AAF*/
+	.comment-likes-activity-item .nstcomment_unlike, .comment-likes-activity-item .nstcomment_like {
+		background-size: 12px auto;
+		padding-left: 15px;
+		vertical-align:middle;
+		height: 12px;
+		display: inline-table;
+		padding-bottom: 2px;
+	}
+	.nstcomment_wrap img , .seao_advcomment .nstcomment_unlike img, .seao_advcomment .nstcomment_like img, 
+	.comment-likes-activity-item .nstcomment_unlike img, .comment-likes-activity-item .nstcomment_like img,
+	.seao_nestcomment .comments_like img, .seao_nestcomment .comments_unlike img{
+		height: 12px;
+	}
+	.feed_item_date .nstcomment_wrap img {
+		vertical-align: bottom;
+		margin-bottom: -1px;
+	}
+	.comments .comments_date > li {
+		margin-bottom:3px;
+	}
+	.seao_nestcomment .comments_like img, .seao_nestcomment .comments_unlike img{
+		vertical-align: bottom;
+	}
+	.comments form .compose-content {
+		padding: 5px;
+	}
+	.comments .compose-container .overTxtLabel{
+		padding: 5px 0 0 5px;
+	}
+	.seao_nestcomment .comment_edit a.buttonlink,
+	.seao_nestcomment .reply_edit a.buttonlink{
+		background-size: auto;
+	}
+	.comments_date .comments_like, .comments_date .comments_unlike {
+		text-transform: capitalize;
+	}
+	
+/*textarea in feed*/
+	.seao_advcomment .activity-reply-form textarea,
+	html ul.feed .comments > form > textarea{
+		width:98.3%;
+	}
+
+/*Smilies in Feed*/
+	.adv_composer_tip {
+		background:#333333;
+		color: #FFFFFF;
+		display: none;
+		font-size: 11px !important;
+		font-weight: normal;
+		left: auto;
+		opacity: 0.8;
+		padding: 5px;
+		position: absolute;
+		right: 0;
+		white-space: nowrap;
+	}
+	html[dir="rtl"] .adv_composer_tip{
+		right:auto;
+		left:0px;
+	}
+	.adv_composer_tip img {
+		clear:both;
+		bottom: 0;
+		position: absolute;
+		right:5px;
+		margin:0 auto -7px;
+	}
+	html[dir="rtl"] .adv_composer_tip img{
+		left:5px;
+		right:auto;
+	}
+	.seao_emoticons .adv_post_smile {
+		background-position: center -2px;
+		right: 5px;
+		top: -21px;
+		position: absolute;
+	}
+	.layout_nestedcomment_comments .seao_emoticons .adv_post_smile{
+		background-position: center -1px;
+		/*top: -16px;*/
+	}
+	.seao_emoticons .adv_post_smile:hover {
+		background-position: center bottom;
+	}
+	.seao_emoticons {
+		position: relative;
+	}
+/*Add photo link inside the comment box*/
+	.seao_advcomment + form .compose-tray,
+	.seao_advcomment .compose-tray{
+		position:relative;
+	}
+	.seao_advcomment + form .compose-body #compose-photo-form-fancy-file,
+	.seao_advcomment .compose-body #compose-photo-form-fancy-file{
+		position: absolute;
+		right: 0;
+		top: -22px;
+		width: 20px;
+		padding: 0;
+		text-indent: -1200px;
+		background-position: left top;
+		height: 16px;
+	}
+
+/*Add Photo, Add link and Smiley Icons with Post Button*/
+	.seaocore_replies .compose-menu button + div {
+		display: inline-block;
+		float: right;
+		margin-top: 20px;
+	}
+	
+/*Add link >> Photo Attachment*/
+.seaocore_comments_attachment {
+	overflow: hidden;
+}
+.seaocore_comments_attachment .seaocore_comments_attachment_photo {
+	float:left;
+}
+/*Nested Comment in Photo lightbox*/
+.photo_lightbox_right_content .seaocore_replies_list .compose-content {
+	min-width: 90px;
+}
+/*Author photo Tooltip*/
+.seaocore_replies_author .seaocore_replies_author_photo_tooltip {
+	display:none;
+}
+.seaocore_replies_author .seaocore_comment_tips_wrap:hover .seaocore_replies_author_photo_tooltip {
+	display: block;
+}
+.seaocore_comment_tips_wrap {
+	position: relative;
+	display: inline-block;
+}
+.seaocore_comment_tips > img {
+	vertical-align: top;
+}
+.seaocore_comment_tips > a {
+	font-weight:normal !important;
+}
+.seaocore_replies_author_photo_tooltip {
+	overflow-x: hidden;
+  overflow-y: auto;
+	padding: 5px;
+	position: absolute;
+	width: 350px;
+	z-index: 200;
+	margin-left: 20px;
+  margin-top: -40px;
+  max-height:270px;
+}
+.seaocore_replies_author_photo_tooltip .tip_main_body {
+    max-width:295px;
+}
+
+/*Hide infotooltip from lightbox*/
+.photo_lightbox_right_content .seaocore_comment_tips_wrap{
+    display:none;
+}
+
+@media only screen and (max-width: 600px){
+ .seao_nestcomment .comments_info{ width:80%;}
+}

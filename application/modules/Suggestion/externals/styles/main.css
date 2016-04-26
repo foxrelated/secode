@@ -1,0 +1,704 @@
+/* $Id:main.css 2010-08-17 9:40:21Z SocialEngineAddOns Copyright 2009-2010 BigStep Technologies Pvt. Ltd. $ */
+
+/* NOTIFICATION TYPE ICONS */
+.icon_int_suggestion{
+	background-image:url(~/application/modules/Suggestion/externals/images/sugg_intr.png);
+}
+.notification_type_group_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/sugg_group.png);
+}
+
+.notification_type_siteevent_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/sugg_event.png);
+}
+
+.notification_type_sitestoreproduct_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/product.png);
+}
+.notification_type_sitestore_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/store.png);
+}
+.notification_type_page_album_suggestion,.notification_type_page_report_suggestion, .notification_type_album_suggestion, .notification_type_business_album_suggestion, .notification_type_group_album_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/sugg_album.png);
+}
+.notification_type_blog_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/sugg_blog.png);
+}
+.notification_type_page_event_suggestion, .notification_type_event_suggestion, .notification_type_business_event_suggestion, .notification_type_group_event_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/sugg_event.png);
+}
+.notification_type_classified_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/sugg_classified.png);
+}
+.notification_type_page_video_suggestion, .notification_type_video_suggestion, .notification_type_business_video_suggestion, .notification_type_group_video_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/sugg_video.png);
+}
+.notification_type_page_music_suggestion, .notification_type_music_suggestion, .notification_type_business_music_suggestion, .notification_type_group_music_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/sugg_music.png);
+}
+.notification_type_page_offer_suggestion, .notification_type_business_offer_suggestion, .notification_type_group_offer_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/offer.png);
+}
+.notification_type_recipe_suggestion{
+  background-image:url(~/application/modules/Suggestion/externals/images/recipe.png);
+}
+.notification_type_picture_suggestion{
+	background-image:url(~/application/modules/Suggestion/externals/images/sugg_photo.png);
+}
+.notification_type_friend_suggestion{
+	background-image:url(~/application/modules/Suggestion/externals/images/sugg_friend.png);
+}
+.notification_type_page_poll_suggestion, .notification_type_poll_suggestion, .notification_type_business_poll_suggestion, .notification_type_group_poll_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/sugg_poll.png);
+}
+.notification_type_forum_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/sugg_forum.png);
+}
+.notification_type_page_document_suggestion, .notification_type_document_suggestion, .notification_type_business_document_suggestion, .notification_type_group_document_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/document.png);
+}
+.notification_type_listing_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/list.png);
+}
+.notification_type_page_suggestion, .notification_type_business_suggestion, .notification_type_group_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/sitepage.png);
+}
+.notification_type_page_note_suggestion, .notification_type_business_note_suggestion, .notification_type_group_note_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/note.png);
+}
+.notification_type_page_review_suggestion, .notification_type_business_review_suggestion, .notification_type_group_review_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/review.png);
+}
+.notification_type_document_popup_suggestion, .icon_list_friend_suggestion, .icon_recipe_friend_suggestion, .recipe_suggest_friend, .icon_suggestion{
+  background-image:url(~/application/modules/Suggestion/externals/images/sugg_blub.png);
+}
+/* SUGGESTION WIDGETS */
+.layout_Suggestion_suggestion_link{
+	margin-bottom:15px;
+}
+.layout_Suggestion_suggestion_friend,
+.layout_Suggestion_explore_friend{
+	clear:both;
+}
+.generic_suggestion_widget{
+	+foreground;
+	+rounded;
+	padding:5px;
+	margin-bottom:15px;
+	overflow:hidden;
+}
+.generic_suggestion_widget div.loader_text{
+	height:50px;
+	color:$theme_font_color_light;
+}
+.generic_suggestion_widget img.loader{
+	margin:15px 0;
+}
+.suggest_cancel{
+	float:right;
+	height:11px;
+	width:11px;
+	background:url(~/application/modules/Suggestion/externals/images/close_icon.png) no-repeat right;
+	display:none;
+	position:absolute;
+	right:0;
+	top:3px;
+}
+html[dir="rtl"] .suggest_cancel{
+	float:left;
+	left:0;
+}
+.suggest_cancel:hover{
+	background:#3b5998 url(~/application/modules/Suggestion/externals/images/close_icon.png) no-repeat left;
+}
+.suggestion_list:hover .suggest_cancel{
+	display:block;
+}
+.generic_suggestion_widget .suggestion_view_all {
+	overflow:hidden;
+}
+.generic_suggestion_widget .suggestion_view_all a{
+	float:right;
+	font-weight:normal;
+	font-size:11px;
+	font-weight:bold;
+}
+html[dir="rtl"] .generic_suggestion_widget .suggestion_view_all a{
+	float:left;
+}
+.generic_suggestion_widget .tip > span{
+	margin-bottom:0 !important;
+}
+.suggestion_list{
+	padding:5px 0;
+	clear:both;
+}
+.suggestion_list .item_photo{
+	float:left;
+	margin-right:6px;
+}
+html[dir="rtl"] .suggestion_list .item_photo{
+	float:right;
+	margin-left:6px;
+	margin-right:0;
+}
+.suggestion_list .item_photo img{
+	width:48px;
+	height:48px;
+}
+.suggestion_list .item_details {
+	overflow:hidden;
+	position:relative;
+}
+.suggestion_list .item_details  .item_title{
+	padding-right:10px;
+	font-weight:bold;
+	overflow:hidden;
+}
+html[dir="rtl"] .suggestion_list .item_details  .item_title{
+	padding-left:10px;
+	padding-right:0;
+}
+.suggestion_list .item_details .item_stats{
+	margin:3px 0;
+}
+.suggestion_list .item_details .item_stats,
+.suggestion_list .item_details .item_stats div{
+	color:$theme_font_color_light;
+	font-size:11px;
+}
+.suggestion_list .item_details .item_stats .confirm_tip{
+	font-weight:bold;
+}
+.suggestion_list .item_details .item_stats .buttonlink{
+	line-height:16px;
+}
+/* EXPLORE SUGGESTION */
+.generic_suggestion_explore{
+  margin-right: 20px;
+  width: 45%;
+  display: inline-block;
+  vertical-align: top;
+}
+.layout_Suggestion_suggestion_friend .generic_suggestion_explore{
+	height:60px;
+}
+.suggestion_invite_userlist {
+	display:block;
+	padding-top:10px;
+	border-bottom-width:1px;
+	overflow:hidden;
+	clear:both;
+}
+.generic_suggestion_find{
+	margin-top:10px;
+}
+.generic_suggestion_find .generic_suggestion_explore{
+	float:left;
+	margin-right:20px;
+	width:30%;
+	height:90px;
+}
+html[dir="rtl"] .generic_suggestion_explore, html[dir="rtl"] .generic_suggestion_find .generic_suggestion_explore{
+	margin-left:20px;
+	margin-right:0;
+	float:right;
+}
+/*VIEW SUGGESTION LIST*/
+.suggestion_view_list {
+	overflow:auto;
+	border-top-width:1px;
+	padding:10px 5px;
+}
+.suggestion_view_list .item_photo{
+	float:left;
+	width:120px;
+	margin-right:10px;
+}
+html[dir="rtl"] .suggestion_view_list .item_photo{
+	float:right;
+	margin-left:10px;
+	margin-right:0;
+}
+.suggestion_view_list .item_photo img{
+	max-width:120px;
+}
+.suggestion_view_list .item_details{
+	overflow:hidden;
+}
+.suggestion_view_list .item_details div.title{
+	font-size:12px;
+	overflow:hidden;
+	font-weight:bold;
+}
+.suggestion_view_list .item_details .description {
+	margin-top:5px;
+	line-height:18px;
+}
+.suggestion_view_list .item_details .description,
+.suggestion_view_list .item_details .description div{
+	font-size:11px;
+	font-weight:normal;
+	color:$theme_font_color_light;
+}
+.suggestion_view_list .item_details .item_buttons{
+	float:left;
+	margin-top:15px;
+}
+.suggestion_view_list .item_details .item_buttons a{
+	+rounded;
+	padding:5px;
+	font-weight:bold;
+	border:none;
+	background-color:$theme_button_background_color;
+	border:1px solid $theme_button_border_color;
+	color:$theme_button_font_color;
+	background-image:url(~/application/modules/Core/externals/images/buttonbg.png);
+	background-repeat:repeat-x;
+	background-position:0px 1px;
+	display:inline-block;
+}
+.suggestion_view_list .item_details .item_buttons a.disabled{
+	background-color:#868686;
+}
+.suggestion_view_list .item_details .item_buttons a.disabled:hover, .suggestion_view_list .item_details .item_buttons a:hover {
+	background-color:$theme_button_background_color_hover;
+	cursor:pointer;
+	text-decoration:none;
+}
+.suggestion_view_list .item_details .item_buttons a.link{
+	background:none;
+	color:$theme_link_color;
+	text-decoration:$theme_link_decoration;
+	border:none;
+}
+.suggestion_view_list .item_details .item_buttons a.link:hover{
+	color:$theme_link_color_hover;
+	text-decoration:$theme_link_decoration_hover;
+}
+.suggestion_view_list .view_all{
+	float:right;
+	margin-right:15px;
+	font-size:12px;
+	font-weight:bold;
+}
+html[dir="rtl"] .suggestion_view_list .view_all{
+	float:left;
+	margin-right:0;
+	margin-left:15px;
+}
+.suggestions_heading{
+	font-size:13px;
+	font-weight:bold;
+	width:100%;
+	float:left;
+	padding:5px 0;
+	margin-top:10px;
+}
+html[dir="rtl"] .suggestions_heading{
+	float:right;
+}
+/* SUGGESTION UPDATED */
+.sugg-friend-sub-detail{
+	font-size:12px;
+	float:left;
+	margin-bottom:10px;
+	width:100%;
+}
+html[dir="rtl"] .sugg-friend-sub-detail{
+	float:right;
+}
+.suggestions-newupdate{
+	border-bottom-width:1px;
+	padding-bottom:10px;
+}
+.suggestions-newupdate span{
+	float:left;
+	padding-top:5px;
+	padding-left:5px;
+}
+html[dir="rtl"] .suggestions-newupdate span{
+	float:right;
+}
+span.button{
+	margin:0;
+	padding:0;
+}
+span.button a, a.button{
+	+rounded;
+	padding:6px 8px;
+	font-weight:bold !important;
+	border:none;
+	background-color:$theme_button_background_color;
+	border:1px solid $theme_button_border_color;
+	color:$theme_button_font_color !important;
+	background-image:url(~/application/modules/Core/externals/images/buttonbg.png);
+	background-repeat:repeat-x;
+	background-position:0px 1px;
+}
+span.button a:hover, a.button:hover{
+	background-color:$theme_button_background_color_hover;
+	cursor:pointer;
+	text-decoration:none;
+	color:$theme_button_font_color;
+}
+ul.requests > li > div > div + div > a.button, ul.requests > li > div > div + div > span.button{
+	font-size:.8em;
+}
+.ajex-suggestion{
+	float:left;
+	width:45%;
+	height:60px;
+	margin:5px;
+}
+html[dir="rtl"] .ajex-suggestion{
+	float:right;
+}
+.ajex-suggestion .thumb-img{
+	float:left;
+	margin-right:10px;
+}
+html[dir="rtl"] .ajex-suggestion .thumb-img{
+	float:right;
+	margin-left:10px;
+	margin-right:0;
+}
+/* PHOTO UPLOAD FORM */
+#profileform .form-label, #profileform .form-element{
+	float:none;
+	clear:both;
+	text-align:left;
+}
+#profileform .form-label{
+	margin-bottom:4px;
+}
+#profileform #preview-thumbnail img{
+	margin-right:5px;
+	font-size:0px;
+	line-height:0px;
+}
+html[dir="rtl"] #profileform #preview-thumbnail img{
+	margin-left:5px;
+	margin-right:0;
+}
+#profileform #preview-thumbnail img{
+	position:relative;
+	display:block;
+	visibility:visible;
+	opacity:1;
+	float:left;
+	overflow:hidden;
+}
+#profileform #done-wrapper div{
+	margin:0px;
+	padding:0px;
+}
+.suggestion_inviter{
+	clear:both;
+	float:left;
+	width:100%;
+	padding:10px 0;
+	border-bottom-width:1px;
+}
+.suggestion_inviter .page-heading{
+	font-weight:bold;
+	font-size:14px;
+	padding:5px 0;
+}
+.suggestion_inviter .page-des {
+ color:$theme_font_color_light;
+	font-size:11px;
+}
+.suggestion_inviter .header {
+	width:100%;
+	float:left;
+}
+.suggestion_inviter .header .title {
+	font-weight:bold;
+	float:left;
+}
+.suggestion_inviter .header .title img {
+	float:left;
+	margin-right:5px;
+}
+html[dir="rtl"] #profileform #preview-thumbnail img, 
+html[dir="rtl"] .suggestion_inviter,
+html[dir="rtl"] .suggestion_inviter .header,
+html[dir="rtl"] .suggestion_inviter .header .title,
+html[dir="rtl"] .suggestion_inviter .header .title img{
+	float:right;
+}
+html[dir="rtl"] .suggestion_inviter .header .title img{
+	margin-left:6px;
+	margin-right:0;
+}
+.suggestion_inviter .header .webmail-options {
+	float:right;
+	font-size:11px;
+	width:170px;
+}
+html[dir="rtl"] .suggestion_inviter .header .webmail-options{
+	float:left;
+}
+.suggestion_inviter .header .webmail-options .icons {
+	float:left;
+	margin-top:3px;
+}
+.suggestion_inviter .header .webmail-options .icons a {
+	margin:0 2px;
+	float:left;
+}
+.suggestion_inviter .sub-title {
+	clear:left;
+	margin:10px 0 0 10px;
+	float:left;
+	font-size:11px;
+	font-weight:bold;
+}
+.suggestion_inviter .sub-txt {
+	clear:left;
+	margin:10px 0 0 10px;
+	float:left;
+	font-size:11px;
+	color:$theme_font_color_light;
+	line-height:20px;
+}
+.suggestion_inviter .webacc-logos {
+	clear:both;
+	margin-top:10px;
+	float:left;
+	width:600px;
+}
+.suggestion_inviter .webacc-logos .webacc-logos-img{
+	width:200px;
+	float:left;
+	margin:5px 0;
+	height:50px;
+}
+html[dir="rtl"] .suggestion_inviter .header .webmail-options .icons,
+html[dir="rtl"] .suggestion_inviter .header .webmail-options .icons a,
+html[dir="rtl"] .suggestion_inviter .sub-title,
+html[dir="rtl"] .suggestion_inviter .webacc-logos,
+html[dir="rtl"] .suggestion_inviter .webacc-logos .webacc-logos-img{
+	float:right;
+}
+html[dir="rtl"] .suggestion_inviter .sub-title,
+html[dir="rtl"] .suggestion_inviter .sub-txt{
+	margin:10px 10px 0 0;
+}
+.suggestion_inviter .upload-contact-file {
+	clear:both;
+	margin-top:10px;
+	float:left;
+	margin-left:10px;
+}
+html[dir="rtl"] .suggestion_inviter .upload-contact-file{
+	float:right;
+	margin-right:10px;
+	margin-left:0;
+}
+.suggestion_inviter .upload-contact-file .op-cat {
+	float:left;
+	margin-right:10px;
+}
+html[dir="rtl"] .suggestion_inviter .upload-contact-file .op-cat{
+	float:right;
+	margin-left:10px;
+	margin-right:0;
+}
+.suggestion_inviter .upload-contact-file .op-field {
+	float:left;
+}
+html[dir="rtl"] .suggestion_inviter .upload-contact-file .op-field{
+	float:right;
+}
+.suggestion_inviter .upload-contact-file .op-field span {
+	font-size:11px;
+	color:$theme_font_color_light;
+}
+.suggestion_inviter .help-link {
+	float:right;
+	margin-top:10px;
+	font-size:11px;
+	width:170px;
+}
+html[dir="rtl"] .suggestion_inviter .help-link {
+	float:left;
+}
+.suggestion_inviter .people-search {
+	float:left;
+	margin:10px 0 0 20px;
+}
+html[dir="rtl"] .suggestion_inviter .people-search{
+	float:right;
+	margin:10px 20px 0 0;
+}
+.suggestion-help-popup {
+	height:350px;
+	overflow:auto;
+	width:460px;
+	margin-bottom:15px;
+}
+.suggestion-help-popup li a {
+ color:$theme_link_color !important;
+}
+.suggestion-help-popup li {
+	padding:11px 0;
+	list-style:none;
+}
+.suggestion-help-popup li ul {
+	padding:0 10px;
+	list-style:none;
+}
+.suggestion-help-popup li ul li {
+	font-size:11px;
+	padding:2px 0;
+}
+.suggestion-mail-supported img {
+	float:left;
+	margin-right:10px;
+	vertical-align:middle;
+	margin-top:5px;
+}
+html[dir="rtl"] .suggestion-mail-supported img{
+	float:right;
+	margin-left:10px;
+	margin-right:0;
+}
+/* SITE INTRODUCTION POPUP */
+.sugg_newuser{
+	margin:0 !important;
+	float:left;
+	max-height:400px;
+	overflow:auto;
+	padding:10px 2px 10px 6px !important;
+	width:430px !important;
+}
+html[dir="rtl"] .sugg_newuser{
+	float:left;
+	padding:10px 6px 10px 2px !important;
+}
+.sugg_newuser p{
+	float:left;
+	font-size:12px;
+	line-height:1.5em;
+	text-align:left;
+}
+html[dir="rtl"] .sugg_newuser p{
+	float:right;
+}
+.sugg_newuser div {
+	margin:0px !important;
+}
+/* PHOTO SUGGESTION */
+.suggestion-profile-image{
+	margin:15px 0 0 15px;
+}
+html[dir="rtl"] .suggestion-profile-image{
+	margin:15px 15px 0 0;
+}
+.suggestion-profile-image .global_form > div > div{
+	-moz-border-radius:0 0 0 0;
+	background-color:#F4F9FB;
+	border:0 none;
+	padding:0;
+}
+.suggestion-profile-image h4{
+	margin-bottom:10px;
+	font-size:13px;
+	font-weight:bold;
+}
+/* SUGGESTION LINK */
+#sugg_display_link_album{
+	float:left;
+}
+html[dir="rtl"] #sugg_display_link_album{
+	float:right;
+}
+#sugg_display_link_album a{
+	top:0px;
+	font-weight:bold;
+}
+#user_sugg_link_album {
+	margin-bottom:10px;
+}
+#sugg_display_link_music{
+	font-weight:bold;
+}
+#sugg_display_link_forum{
+	font-weight:bold;
+	float:right;
+	margin-left:15px;
+}
+html[dir="rtl"] #sugg_display_link_forum{
+	float:left;
+}
+#sugg_display_link_forum a{
+	background-position:0 0;
+	background-repeat:no-repeat;
+	display:inline-block;
+	font-weight:bold;
+	padding-left:21px;
+	font-size:0.8em;
+	line-height:16px;
+}
+#sugg_display_link_music a, #user_sugg_link_album a, #sugg_display_link_album a {
+	background-position:0 0;
+	background-repeat:no-repeat;
+	display:inline-block;
+	font-weight:bold;
+	padding-left:21px;
+}
+#sugg_display_link_forum a, #sugg_display_link_music a, #user_sugg_link_album a, #sugg_display_link_album a, .icon_blog_friend_suggestion, .icon_page_friend_suggestion, .icon_review_friend_suggestion, .icon_classified_friend_suggestion, .icon_business_friend_suggestion, .icon_group_friend_suggestion{
+	background-image:url(~/application/modules/Suggestion/externals/images/sugg_blub.png);
+}
+#sugg_display_link_poll,
+#sugg_display_link_video,
+#sugg_display_link_classified{
+	float:left;
+	margin-right:5px;
+}
+html[dir="rtl"] #sugg_display_link_poll,
+html[dir="rtl"] #sugg_display_link_video,
+html[dir="rtl"] #sugg_display_link_classified{
+	float:left;
+	margin-right:0px;
+	margin-left:5px;
+}
+#sugg_display_link_poll a, 
+#sugg_display_link_classified a,
+#sugg_display_link_video a {
+	font-weight:bold;
+}
+.suggestion_signup_invite {
+	float:left;
+}
+html[dir="rtl"] .suggestion_signup_invite{
+	float:right;
+}
+.suggestion_signup_invite .global_form > div > div > h3 + p{
+	max-width:450px;
+}
+/*Suggestion Signup step*/
+.suggestion_signup_invite .global_form, .suggestion_signup_invite .global_form > div, .suggestion_signup_invite .global_form > div > div {
+	background:none !important;
+	border:none !important;
+	border-radius:0px !important;
+	padding:0!important;
+}
+.suggestion-signup-step {
+	padding:0px !important;
+	border-bottom:none !important;
+}
+.suggestion_signup_des {
+	margin-top:2px;
+	max-width:550px !important;
+	padding:2px;
+}
+.findfriend_block_title{
+	font-weight:bold;
+	margin-bottom:5px;
+}
+.findfriend_block_icons{
+	margin-bottom:5px;
+}

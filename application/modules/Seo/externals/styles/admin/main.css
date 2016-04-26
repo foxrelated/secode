@@ -1,0 +1,38 @@
+
+#seo_form_notify .form-label label,
+#seo_form_edit .form-label label,
+#seo_form_schedule .form-label label {
+  font-weight: bold;
+}
+#seo_form_notify .form-element #url {
+  width: 98%;
+}
+.icon_seo_sitemap_add {
+  background-image: url(~/application/modules/Seo/externals/images/admin/add.png);
+}
+.icon_seo_sitemap_build {
+  background-image: url(~/application/modules/Seo/externals/images/admin/build.png);
+}
+
+.icon_seo_sitemap_notify {
+  background-image: url(~/application/modules/Seo/externals/images/admin/notify.png);
+}
+.icon_seo_sitemap_schedule {
+  background-image: url(~/application/modules/Seo/externals/images/admin/schedule.png);
+}
+.icon_seo_page_create {
+  background-image: url(~/application/modules/Seo/externals/images/admin/page/create.png);
+}
+
+.icon_seo_page_hook {
+  background-image: url(~/application/modules/Seo/externals/images/admin/page/hook.png);
+}
+
+#seo_hook_guide {
+  list-style: decimal;
+  list-style-position: outside;
+  margin: 10px;
+}
+#seo_hook_guide li {
+  margin: 10px;
+}

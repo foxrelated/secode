@@ -1,0 +1,740 @@
+"Fundraising";"Fundraising"
+"Featured Campaigns";"Featured Campaigns"
+
+# ------------ NOTIFICATION SETTINGS ----------
+"ACTIVITY_TYPE_YNFUNDRAISING_NOTIFY_CLOSE";"When a campaign that I am a follower  is closed"
+"ACTIVITY_TYPE_YNFUNDRAISING_NOTIFY_DONATE";"When an user donates to a campaign that I am the owner or a follower"
+"ACTIVITY_TYPE_YNFUNDRAISING_NOTIFY_INVI";"When an anonymous user donates to a campaign that I am the owner or a follower"
+"ACTIVITY_TYPE_YNFUNDRAISING_NOTIFY_REQUEST";"When someone sends a request to create campaign on your idea/trophy"
+"ACTIVITY_TYPE_YNFUNDRAISING_NOTIFY_EXPIRED";"When a campaign that I am a follower  is expired"
+"ACTIVITY_TYPE_YNFUNDRAISING_NOTIFY_REACHED";"When a campaign that I am a follower  is reached"
+"ACTIVITY_TYPE_YNFUNDRAISING_NOTIFY_NEWS";"When a campaign that I am a follower updates news"
+
+# ------------ ACTIVITY FEEDS ----------
+"_ACTIVITY_ACTIONTYPE_YNFUNDRAISING_ANONYMOUS";"When an anonymous user donates to a campaign"
+"_ACTIVITY_ACTIONTYPE_YNFUNDRAISING_ANONYMOUS_MSG";"When an anonymous user donates to a campaign and leave a message"
+"_ACTIVITY_ACTIONTYPE_YNFUNDRAISING_DONATE";"When an user donates to a campaign"
+"_ACTIVITY_ACTIONTYPE_YNFUNDRAISING_DONATE_MSG";"When an user donates to a campaign and leave a message"
+"_ACTIVITY_ACTIONTYPE_YNFUNDRAISING_NEW";"When someone creates a new campaign"
+
+# ----------- ITEM TYPES ------------
+"ITEM_TYPE_YNFUNDRAISING_CAMPAIGN";"Fundraising Campaign"
+"ITEM_TYPE_YNFUNDRAISING_SUPPORTER";"Fundraising Supporter"
+"ITEM_TYPE_YNFUNDRAISING_PHOTO";"Fundraising photo"
+"ITEM_TYPE_YNFUNDRAISING_ALBUM";"Fundraising album"
+"ITEM_TYPE_YNFUNDRAISING_NEW";"Fundraising new"
+"ITEM_TYPE_YNFUNDRAISING_FOLLOW";"Fundraising follower"
+"ITEM_TYPE_YNFUNDRAISING_DONATION";"Fundraising donation"
+"ITEM_TYPE_YNFUNDRAISING_TRANSACTION";"Fundraising transaction"
+
+# ----------- ACTION TYPES ------------
+"{var:$donor} has donated {var:$amount}:";"{var:$donor} has donated {var:$amount}:"
+"{var:$donor} has donated {var:$amount} and leave a message: {var:$message}";"{var:$donor} has donated {var:$amount} and leave a message: {var:$message}"
+"{item:$subject} has donated {var:$amount}:";"{item:$subject} has donated {var:$amount}:"
+"{item:$subject} has donated {var:$amount} and leave a message: {var:$message}";"{item:$subject} has donated {var:$amount} and leave a message: {var:$message}"
+"{item:$subject} has created a new campaign:";"{item:$subject} has created a new campaign:"
+
+# ----------- NOTIFICATION TYPES ------------
+"Campaign {item:$object} has been closed.";"Campaign {item:$object} has been closed."
+"Campaign {item:$object} has been reached.";"Campaign {item:$object} has been reached."
+"Campaign {item:$object} has been expired.";"Campaign {item:$object} has been expired."
+"{item:$subject} has updated news in {item:$object}.";"{item:$subject} has updated news in {item:$object}."
+"{item:$subject} has donated {var:$amount} to {item:$object}.";"{item:$subject} has donated {var:$amount} to {item:$object}."
+"{var:$donor} has donated {var:$amount} to {item:$object}.";"{var:$donor} has donated {var:$amount} to {item:$object}."
+"{item:$subject} has sent a request to {item:$object}.";"{item:$subject} has sent a request to {item:$object}."
+
+
+# ------------ BACK END --------------
+# ---- Gateway Settings Page
+"YNFUNDRAISING_ADMIN_GATEWAYS_DESCRIPTION";"Browse and manage payment gateways."
+# ---- Manage Campaigns Page
+"Manage Campaigns";"Manage Campaigns"
+"YNFUNDRAISING_VIEWS_SCRIPTS_ADMINMANAGE_INDEX_DESCRIPTION";"This page lists all of the campaigns your users have created. You can use this page to monitor these campaigns. Entering criteria into the filter fields will help you find specific campaigns. Leaving the filter fields blank will show all the campaigns on your social network."
+"There is no campaign.";"There is no campaign.	"
+"You do not have any campaigns that match your search criteria.";"You do not have any campaigns that match your search criteria."
+"Keyword";"Keyword"
+"Please pick a valid day (yyyy-mm-dd)";"Please pick a valid day (yyyy-mm-dd)"
+"From Date";"From Date"
+"To Date";"To Date"
+"Type";"Type"
+"Status";"Status"
+"Featured";"Featured"
+"ID";"ID"
+"Owner";"Owner"
+"Creation Date";"Creation Date"
+"In";"In"
+"Options";"Options"
+"Search";"Search"
+"Next";"Next"
+
+# -- Item Type
+"Trophy";"Trophy"
+"Idea";"Idea"
+"User";"User"
+"All";"All"
+
+# -- Campaign Status
+"Ongoing";"Ongoing"
+"Draft";"Draft"
+"Reached";"Reached"
+"Expired";"Expired"
+"Closed";"Closed"
+
+# --
+# ---- Statistics Page
+"Statistics";"Statistics"
+"YNFUNDRAISING_VIEWS_SCRIPTS_ADMINSTATISTICS_DESCRIPTION";"This page lists all of the transactions. Entering criteria into the filter fields will help you find specific transactions. Leaving the filter fields blank will show all the transactions."
+"Date";"Date"
+"Campaign";"Campaign"
+"Donor";"Donor"
+"Transaction ID";"Transaction ID"
+"Amount";"Amount"
+"Email Address";"Email Address"
+"Option";"Option"
+"Anonymous";"Anonymous"
+"Back to Campaign";"Back to Campaign"
+"Donation Statistics";"Donation Statistics"
+' to ';' to '
+"Back";"Back"
+"Guest";"Guest"
+# ---- Global Settings
+"Global Settings";"Global Settings"
+#"These settings affect all members in your community.";"These settings affect all members in your community."
+#"*Enable Test Mode?";"*Enable Test Mode?"
+#"Allow admin to test fundraisings by using development mode?";"Allow admin to test fundraisings by using development mode?"
+#"Yes";"Yes"
+#"No";"No"
+#"Addthis Profile ID";"Addthis Profile ID"
+#"*Default Currency";"*Default Currency"
+#"*Default Country";"*Default Country"
+#"Rate Campaign";"Rate Campaign"
+#"Allow user to rate their own campaign?";"Allow user to rate their own campaign?"
+#"Number of Campaigns per page";"Number of Campaigns per page"
+#"How many campaigns will be shown per page? (Enter a number from 1 to 999)";"How many campaigns will be shown per page? (Enter a number from 1 to 999)"
+#"Create Campaign Time Out";"Create Campaign Time Out"
+#"Time out (hours) for requester to create campaign after their request is accepted by idea/trophy owners";"Time out (hours) for requester to create campaign after their request is accepted by idea/trophy owners"
+
+# ---- Member Level Settings
+"Member Level Settings";"Member Level Settings"
+"YNFUNDRAISING_FORM_ADMIN_LEVEL_DESCRIPTION";"These settings are applied on a per member level basis. Start by selecting the member level you want to modify, then adjust the settings for that level below."
+
+
+
+# ---- Email Templates
+"Email Templates";"Email Templates"
+
+# ---- Currency
+"Currencies";"Currencies"
+
+# -------- FRONT END --------
+"w ";"w "
+"d ";"d "
+"h ";"h "
+"m";"m"
+# ---- Supporters Page
+"%s Supporter With";"%s Supporter With";"%s Supporters With"
+"Search...";"Search..."
+"%s click";"%s click";" %s clicks"
+"%s donor";"%s donor";"%s donors"
+"%s like";"%s like";"%s likes"
+"%s view";"%s view";"%s views"
+"Supporters";"Supporters"
+"This campaign does not have any supporters that match your search criteria.";"This campaign does not have any supporters that match your search criteria."
+"This campaign does not have any supporters.";"This campaign does not have any supporters."
+
+# ---- Donors Page
+"%s Donor With";"%s Donor With";"%s Donors With"
+"All Donors";"All Donors"
+"Donated Amount: %s";"Donated Amount: %s"
+"This campaign does not have any donors that match your search criteria.";"This campaign does not have any donors that match your search criteria."
+"This campaign does not have any donors.";"This campaign does not have any donors."
+
+# ---- Browse Campaigns Page
+"Fundraising";"Fundraising"
+"Browse Campaigns";"Browse Campaigns"
+
+# -- Featured Widget
+"Featured Campaigns";"Featured Campaigns"
+"Created by %s";"Created by %s"
+"Raised of %s Goal";"Raised of %s Goal"
+"%1s donor - %2s like - %3s view";" %1s donor - %2s like - %3s view";" %1s donors - %2s likes - %3s views"
+"Thank You, Donors";"Thank You, Donors"
+
+# -- Create New Campaigns Widget
+"Create New Campaigns";"Create New Campaigns"
+
+# -- Top Donors Widget
+"Top Donors";"Top Donors"
+"Donated in %s campaign";"Donated in %s campaign";"Donated in %s campaigns"
+"View All";"View All"
+
+# -- Tag Widget
+"Tags";"Tags"
+"%s campaign";"%s campaign";"%s campaigns"
+
+# -- Statistics Widget
+"Statistics";"Statistics"
+"On Going:";"On Going:"
+"Reached goal:";"Reached goal:"
+"Expired:";"Expired:"
+"Closed:";"Closed:"
+
+# ---- Recent Campaigns Page
+"Recent Campaigns";"Recent Campaigns"
+"Closed Campaign";"Closed Campaign"
+"Featured Campaign";"Featured Campaign"
+"%s Campaign";"%s Campaign"
+"Raised";"Raised"
+"Time Left";"Time Left"
+"Created by %s";"Created by %s"
+"Unlimited";"Unlimited"
+
+# -- Idea Box's Campaigns Widget
+"Idea Box's Campaigns";"Idea Box's Campaigns"
+
+# ----- Past Campaigns Page
+"Past Campaigns";"Past Campaigns"
+
+# ----- My Campaigns Page
+"My Campaigns";"My Campaigns"
+"You do not have any campaign.";"You do not have any campaign."
+"Limited: %s left";"Limited: %s left"
+"Delete";"Delete"
+"Edit";"Edit"
+"Close";"Close"
+"View Statistics";"View Statistics"
+"Close Campaign";"Close Campaign"
+"Delete Campaign";"Delete Campaign"
+"*Reason";"*Reason"
+
+"Are you sure you want to close this campaign?";"Are you sure you want to close this campaign?"
+"Are you sure you want to delete this campaign?";"Are you sure you want to delete this campaign?"
+"Your message will be sent to all donors. The campaign has been closed successfully.";"Your message will be sent to all donors. The campaign has been closed successfully."
+"Your campaign has been closed successfully.";"Your campaign has been closed successfully."
+"Your campaign has been deleted successfully.";"Your campaign has been deleted successfully."
+"Send Message to Donors";"Send Message to Donors"
+"Send Message";"Send Message"
+"skip this step";"skip this step"
+"Idea/Trophy Detail";"Idea/Trophy Detail"
+"Creator: %s";"Creator: %s"
+"Created date: %s";"Created date: %s"
+
+# -- Search Widget
+"View";"View"
+"My Own Campaigns";"My Own Campaigns"
+"My Donated Campaigns";"My Donated Campaigns"
+"Save Changes";"Save Changes"
+
+# ----- My Requests Page
+"Deleted Member";"Deleted Member"
+"My Requests";"My Requests"
+"Requested Date";"Requested Date"
+"Title";"Title"
+"Cancel Request";"Cancel Request"
+"View Campaign";"View Campaign"
+"Create Campaign";"Create Campaign"
+"View Reason";"View Reason"
+"There are no requests that match your search query.";"There are no requests that match your search query."
+"Request campaign successfully.";"Request campaign successfully."
+# -- Request Status
+"Approved";"Approved"
+"Denied";"Denied"
+"Waiting";"Waiting"
+"Reason";"Reason"
+
+# -- Search Request Widget
+"Idea/Trophy Title";"Idea/Trophy Title"
+
+# ----- Statistics Page
+"This week";"This week"
+"This month";"This month"
+"This year";"This year"
+"By day";"By day"
+"By month";"By month"
+"By week";"By week"
+"List";"List"
+"Show";"Show"
+"Chart";"Chart"
+"Previous";"Previous"
+"Next";"Next"
+"Currency: %s";"Currency: %s"
+"Donation Statistics";"Donation Statistics"
+"View Details";"View Details"
+"Transaction Details";"Transaction Details"
+"Order details";"Order details"
+"Donation Date";"Donation Date"
+"Payment Details";"Payment Details"
+"Donation Amount";"Donation Amount"
+"Campaign Name";"Campaign Name"
+"There is no transactions that match your search query.";"There is no transactions that match your search query."
+"There is no transaction.";"There is no transaction."
+"Back";"Back"
+# ----- Manage Request Page ----
+"Manage Requests";"Manage Requests"
+"Requested Member";"Requested Member"
+"Requested";"Requested"
+"Approve";"Approve"
+"Deny";"Deny"
+"There is no request.";"There is no request."
+"There is no request that match your search query.";"There is no request that match your search query."
+"Approve Request";"Approve Request"
+"Are you sure you want to approve this request?";"Are you sure you want to approve this request?"
+"This request is approved successfully.";"This request is approved successfully."
+"Deny Request";"Deny Request"
+"Are you sure you want to deny this request?";"Are you sure you want to deny this request?"
+"This request is denied successfully.";"This request is denied successfully."
+"Content";"Content"
+"Deny Request";"Deny Request"
+"Delete Request";"Delete Request"
+"Are you sure you want to delete this request?";"Are you sure you want to delete this request?"
+"Delete";"Delete"
+"This request is deleted successfully.";"This request is deleted successfully."
+"Are you sure you want to cancel the request to create campaign?";"Are you sure you want to cancel the request to create campaign?"
+"Your request is cancelled successfully.";"Your request is cancelled successfully."
+
+# ---- Create Campaign Page ----
+# -- Level
+"Main Information";"Main Information"
+"Gallery";"Gallery"
+"Sponsor Levels";"Sponsor Levels"
+"Contact Information";"Contact Information"
+"Email Message and Conditions";"Email Message and Conditions"
+"Invite Friends";"Invite Friends"
+"Publish";"Publish"
+
+"Create Stand-alone Campaign";"Create Stand-alone Campaign"
+"Create Campaign From Idea/Trophy";"Create Campaign From Idea/Trophy"
+"My Ideas/Trophies";"My Ideas/Trophies"
+"Other Ideas/Trophies";"Other Ideas/Trophies"
+"Find Ideas/Trophies Name...";"Find Ideas/Trophies Name..."
+"Find";"Find"
+"Create Fundraising Campaign";"Create Fundraising Campaign"
+"Are you sure you want to create fundraising campaign for this idea?";"Are you sure you want to create fundraising campaign for this idea?"
+"Are you sure you want to create fundraising campaign for this trophy?";"Are you sure you want to create fundraising campaign for this trophy?"
+"cancel";"cancel"
+"You do not have any idea/trophy that match your search criteria.";"You do not have any idea/trophy that match your search criteria."
+"or";"or"
+"Create New Campaign";"Create New Campaign"
+"*Campaign Name";"*Campaign Name"
+"Tags (Keywords)";"Tags (Keywords)"
+"Separate tags with commas.";"Separate tags with commas."
+"Separate emails with commas.";"Separate emails with commas."
+"*Short Description";"*Short Description"
+"*Main Description";"*Main Description"
+"Photo*";"Photo*"
+"*Your PayPal Account";"*Your PayPal Account"
+"*Fundraising Goal";"*Fundraising Goal"
+"*Currency";"*Currency"
+"Expiry Date";"Expiry Date"
+"Minimum Donation Amount";"Minimum Donation Amount"
+"(Enter up to predefined 5 donation amount to available on the page)";"(Enter up to predefined 5 donation amount to available on the page)"
+"Allow anonymous donation? If donor selects anonymous donation then his name and photo are hidden from public";"Allow anonymous donation? If donor selects anonymous donation then his name and photo are hidden from public"
+"or ";"or "
+"There is no any idea/trophy.";"There is no any idea/trophy."
+"Select a date";"Select a date"
+"Location";"Location"
+"Add address/city/zip/country";"Add address/city/zip/country"
+"Location/Venue";"Location/Venue"
+"Address";"Address"
+"City";"City"
+"Zip/Postal Code";"Zip/Postal Code"
+"Country";"Country"
+"Refresh map";"Refresh map"
+"Privacy";"Privacy"
+"Who may see this campaign?";"Who may see this campaign?"
+"Predefined List";"Predefined List"
+"Add More Donation Amount";"Add More Donation Amount"
+"Comment Privacy";"Comment Privacy"
+"Who may post comments on this campaign?";"Who may post comments on this campaign?"
+"Donate Privacy";"Donate Privacy"
+"Who may donate this campaign?";"Who may donate this campaign?"
+"Main image of campaign (jpg, png, gif, jpeg)";"Main image of campaign (jpg, png, gif, jpeg)"
+"Choose File";"Choose File"
+"The donation amount invalid.";"The donation amount invalid."
+"The donation amount should be greater than minimum donation amount.";"The donation amount should be greater than minimum donation amount."
+"Select Images(s)";"Select Images(s)"
+"Video";"Video"
+"Enter YouTube URL...";"Enter YouTube URL..."
+"Add Photos";"Add Photos"
+"You can not upload photos!";"You can not upload photos!"
+"Max file size limit exceeded (probably).";"Max file size limit exceeded (probably)."
+"Invalid request method";"Invalid request method"
+"No file";"No file"
+"Invalid Upload";"Invalid Upload"
+"An error occurred.";"An error occurred."
+"Manage Photo(s)";"Manage Photo(s)"
+"Add More Photos";"Add More Photos"
+"Main Photo";"Main Photo"
+"Delete Photo";"Delete Photo"
+"Clear List";"Clear List"
+"Remove";"Remove"
+"There is currently no sponsor level.";"There is currently no sponsor level."
+"Add Another Level";"Add Another Level"
+"Continue";"Continue"
+"Your request for fundraising campaign creation will be sent to idea owner.";"Your request for fundraising campaign creation will be sent to idea owner."
+"Your request for fundraising campaign creation will be sent to trophy owner.";"Your request for fundraising campaign creation will be sent to trophy owner."
+"Are you sure you want to send this request?";"Are you sure you want to send this request?"
+"Your request was be sent to idea owner. Please go to My Request page to check it.";"Your request was be sent to idea owner. Please go to My Request page to check it."
+"Your request was be sent to trophy owner. Please go to My Request page to check it.";"Your request was be sent to trophy owner. Please go to My Request page to check it."
+"Cancel";"Cancel"
+"Send Request";"Send Request"
+"Amount";"Amount"
+"Description";"Description"
+"Add Level";"Add Level"
+"Add Sponsor Level successfully.";"Add Sponsor Level successfully."
+"Remove Sponsor Level successfully.";"Remove Sponsor Level successfully."
+"Full Name";"Full Name"
+"Phone";"Phone"
+"State";"State"
+"Street";"Street"
+"About Me";"About Me"
+"Subject:";"Subject:"
+"Message";"Message"
+"Terms and Conditions";"Terms and Conditions"
+"Thank you for contributing a campaign";"Thank you for contributing a campaign"
+"Recipients";"Recipients"
+"Custom Message";"Custom Message"
+"Send Invites";"Send Invites"
+"Type your friend name...";"Type your friend name..."
+"Publish Campaign";"Publish Campaign"
+"YNFUNDRAISING_PUBLISH_STEP_SEVEN";"You have successfully created fundraising campaign. Please click on 'Publish' button to make your campaign available for other members"
+
+# -- Privacy Options
+"Everyone";"Everyone"
+"Friends and Networks";"Friends and Networks"
+"Friends of Friends";"Friends of Friends"
+"Friends Only";"Friends Only"
+"Just Me";"Just Me"
+"All Registered Members";"All Registered Members"
+
+# ----- View Campaign Page
+"Email";"Email"
+"Donate";"Donate"
+"Updates";"Updates"
+"Description";"Description"
+"View Statistic";"View Statistic"
+"Promote Campaign";"Promote Campaign"
+"Follow";"Follow"
+"Unfollow";"Unfollow"
+"This reason will be sent to the owner to notify why the campaign is closed";"This reason will be sent to the owner to notify why the campaign is closed"
+"The campaign has been closed successfully.";"The campaign has been closed successfully."
+"Invite friends successfully.";"Invite friends successfully."
+"Donate Box Code";"Donate Box Code"
+"Options to show";"Options to show"
+"Donate Button";"Donate Button"
+"Donors";"Donors"
+"Created by";"Created by"
+"%1s Raised of %2s Goal";"%1s Raised of %2s Goal"
+"Shares";"Shares"
+"Clicks";"Clicks"
+"Viral Lifl";"Viral Lifl"
+"Campaign Owner";"Campaign Owner"
+"All Campaign (%s)";"All Campaign (%s)"
+"(%s rate)";"(%s rate)";"(%s rates)"
+"Edit Campaign Details";"Edit Campaign Details"
+"Edit Campaign";"Edit Campaign"
+"Email Donors";"Email Donors"
+"Thank you, Donors";"Thank you, Donors"
+"News";"News"
+"Ex: http://www.yoursite.com/ (max 256 characters)";"Ex: http://www.yoursite.com/ (max 256 characters)"
+"Short description";"Short description"
+"(click to donate)";"(click to donate)"
+"Email To All Donors";"Email To All Donors"
+"Personal Message";"Personal Message"
+"Send Mail";"Send Mail"
+
+# -- News Widget
+"News";"News"
+"Post a News Update";"Post a News Update"
+"*News headline";"*News headline"
+"Link";"Link"
+"*Content";"*Content"
+"(max 256 characters)";"(max 256 characters)"
+"Example: http://www.yoursite.com/ (max 256 characters)";"Example: http://www.yoursite.com/ (max 256 characters)"
+"*Required Fields (max 2000 characters)";"*Required Fields (max 2000 characters)"
+"You do not have any news.";"You do not have any news."
+"Are you sure you want to delete this news?";"Are you sure you want to delete this news?"
+"More at";"More at"
+"The link is invalid!";"The link is invalid!"
+"Please enter news headline!";"Please enter news headline!"
+"Please enter content of news!";"Please enter content of news!"
+"Edit news successfully!";"Edit news successfully!"
+"Delete news successfully!";"Delete news successfully!"
+
+# -- Donate Campaign Page
+"Donate Campaign";"Donate Campaign"
+"Thank you for helping out";"Thank you for helping out"
+"Other";"Other"
+"Your donation";"Your donation"
+"Leave your message";"Leave your message"
+"Let them know why you donated, honor a love one, or send words of encouragement. Your comment will appear on their campaign activity";"Let them know why you donated, honor a love one, or send words of encouragement. Your comment will appear on their campaign activity"
+"Email";"Email"
+"Make Donation Anonymous";"Make Donation Anonymous"
+"Summary Donation Information";"Summary Donation Information"
+"Your donation must be a number and at least ";"Your donation must be a number and at least "
+"You must agree to the terms and conditions to proceed.";"You must agree to the terms and conditions to proceed."
+"This will hide your name and donor information from all public activity feeds however the campaign will still receive your donor information";"This will hide your name and donor information from all public activity feeds however the campaign will still receive your donor information"
+
+#mail templates
+#fundraising_requestApproved
+
+_EMAIL_FUNDRAISING_REQUESTAPPROVED_TITLE;"Request is approved (Send to Requester)"
+_EMAIL_FUNDRAISING_REQUESTAPPROVED_DESCRIPTION;"The purpose of this email is to send to requester to notify their request is approved."
+_EMAIL_FUNDRAISING_REQUESTAPPROVED_SUBJECT;"Your request is approved "
+_EMAIL_FUNDRAISING_REQUESTAPPROVED_BODY;"[header]
+
+Congratulation, your request is approved by [parent_owner] who is a [campaign_type] owner. Please create a fundraising campaign for this [campaign_type] with publish status within [time_out] by following link.
+
+[create_campaign_link]
+
+You cannot create campaign anymore if it comes to time out period
+
+[footer]"
+
+#fundraising_requestTimeoutRequester
+
+_EMAIL_FUNDRAISING_REQUESTTIMEOUTREQUESTER_TITLE;"The request comes to timeout (send to Requester)"
+_EMAIL_FUNDRAISING_REQUESTTIMEOUTREQUESTER_DESCRIPTION;"The email is to send to requester who their request is approved but they did not create campaign before the time our comes."
+_EMAIL_FUNDRAISING_REQUESTTIMEOUTREQUESTER_SUBJECT;"Your Request has Expired"
+_EMAIL_FUNDRAISING_REQUESTTIMEOUTREQUESTER_BODY;"[header]
+
+Sorry, your request has expired since your campaign did not publish within [time_out]
+
+[footer]"
+
+#fundraising_requestTimeoutOwner
+
+_EMAIL_FUNDRAISING_REQUESTTIMEOUTOWNER_TITLE;"The request comes to timeout (Send to Idea/Trophy Owner)"
+_EMAIL_FUNDRAISING_REQUESTTIMEOUTOWNER_DESCRIPTION;"The email is to send to trophy/idea owner to notify that the requester, who he approved to create campaign, did not create fundraising within timeout."
+_EMAIL_FUNDRAISING_REQUESTTIMEOUTOWNER_SUBJECT;"Campaign still have not created yet"
+_EMAIL_FUNDRAISING_REQUESTTIMEOUTOWNER_BODY;"[header]
+
+The [requester_name] did not create campaign with Publish status within allowance time. Currently, this member cannot create campaign due to the expiry time. Please, go to [manage_request_link] and choose another person who wants to create fundraising campaign on your [campaign_type]
+
+[footer]"
+
+#fundraising_createCampaignToRequester
+
+_EMAIL_FUNDRAISING_CREATECAMPAIGNTOREQUESTER_TITLE;"Create Campaign"
+_EMAIL_FUNDRAISING_CREATECAMPAIGNTOREQUESTER_DESCRIPTION;"The aim of mail to notice the campaign owner about creating campaign successfully."
+_EMAIL_FUNDRAISING_CREATECAMPAIGNTOREQUESTER_SUBJECT;"Your Campaign has been created on [social_site]"
+_EMAIL_FUNDRAISING_CREATECAMPAIGNTOREQUESTER_BODY;"[header]
+
+Congratulations on launching your [campaign_name]
+
+Here's a list of this to do to get you off to a great start:
+
+- Make your Campaign look great - add Photo galleries, YouTube URL and descriptions
+- Send a donation email to everyone you know with our email feature
+- Share your Campaign on Facebook, Twitter and other social networks
+- Use Promote feature to get more donation
+
+Let the fundraising begin
+
+[footer]"
+
+#fundraising_createCampaignToOtherRequester
+
+_EMAIL_FUNDRAISING_CREATECAMPAIGNTOOTHERREQUESTER_TITLE;"Notify other requesters when campaign is created successfully"
+_EMAIL_FUNDRAISING_CREATECAMPAIGNTOOTHERREQUESTER_DESCRIPTION;"The purpose of this email is to send to requesters who also want to create fundraising on the idea/trophy but the campaign is created and run."
+_EMAIL_FUNDRAISING_CREATECAMPAIGNTOOTHERREQUESTER_SUBJECT;"Thanks for your attention"
+_EMAIL_FUNDRAISING_CREATECAMPAIGNTOOTHERREQUESTER_BODY;"[header]
+
+Thank you for choosing [parent_name] to create fundraising campaign. However, [parent_owner] has chosen [campaign_owner] who will represent him/her to do this job. Your attention is very much appreciated and you can also donate the campaign as following link
+[campaign_link]
+Thank you for making a difference and good luck
+
+[footer]"
+
+#fundraising_thanksDonor
+
+_EMAIL_FUNDRAISING_THANKSDONOR_TITLE;"Thanks Donor"
+_EMAIL_FUNDRAISING_THANKSDONOR_DESCRIPTION;"The purpose of this email is to send letter of thanks to donor when they contribute to campaign."
+_EMAIL_FUNDRAISING_THANKSDONOR_SUBJECT;"Thank you for contributing a campaign"
+_EMAIL_FUNDRAISING_THANKSDONOR_BODY;"[header]
+
+Thank you for choosing to contribute [campaign_name] of [campaign_owner]. Your contribution is very much appreciated and the money you will raise will go towards a brighter future. Every dollar you raise makes a real difference for our campaign
+
+For more information on how your donations is helping to make differences, you can visit our fundraising with the following link to get updated information
+
+[campaign_link]
+
+In Addition, [campaign_owner] added the following personal message:
+[personal_message]
+
+Thank you again, and we look forward to your continued support.
+
+[footer]"
+
+#fundraising_updatingDonor
+
+_EMAIL_FUNDRAISING_UPDATINGDONOR_TITLE;"Updating donors"
+_EMAIL_FUNDRAISING_UPDATINGDONOR_DESCRIPTION;"This email is to notice the campaign owner to know who has just donated/contributed to their campaign."
+_EMAIL_FUNDRAISING_UPDATINGDONOR_SUBJECT;"You have a new donor"
+_EMAIL_FUNDRAISING_UPDATINGDONOR_BODY;"[header]
+
+[donor_name] has been contributed to your Campaign
+[campaign_link]
+
+[footer]"
+
+#fundraising_campaignExpiredToOwner
+
+_EMAIL_FUNDRAISING_CAMPAIGNEXPIREDTOOWNER_TITLE;"Campaign Expired (send to Campaign Owner)"
+_EMAIL_FUNDRAISING_CAMPAIGNEXPIREDTOOWNER_DESCRIPTION;"This mail will be sent to Campaign owner to notice their Campaign expired."
+_EMAIL_FUNDRAISING_CAMPAIGNEXPIREDTOOWNER_SUBJECT;"Your Campaign Expired"
+_EMAIL_FUNDRAISING_CAMPAIGNEXPIREDTOOWNER_BODY;"[header]
+
+Your campaign has been expired and hidden from listings:
+[campaign_link]
+
+[footer]"
+
+#fundraising_campaignExpiredToParent
+
+_EMAIL_FUNDRAISING_CAMPAIGNEXPIREDTOPARENT_TITLE;"Campaign Expired (Send To Idea/Trophy Owner)"
+_EMAIL_FUNDRAISING_CAMPAIGNEXPIREDTOPARENT_DESCRIPTION;"The email is to notify idea/trophy owner that the campaign is created on their idea/trophy expired."
+_EMAIL_FUNDRAISING_CAMPAIGNEXPIREDTOPARENT_SUBJECT;"Campaign on your idea/trophy has been expired"
+_EMAIL_FUNDRAISING_CAMPAIGNEXPIREDTOPARENT_BODY;"[header]
+
+The campaign on your idea/trophy has been expired and hidden from listings:
+[campaign_link]
+
+[footer]"
+
+#fundraising_campaignExpiredToDonor
+
+_EMAIL_FUNDRAISING_CAMPAIGNEXPIREDTODONOR_TITLE;"Campaign Expired (Send To Donors)"
+_EMAIL_FUNDRAISING_CAMPAIGNEXPIREDTODONOR_DESCRIPTION;"This mail is to send to donors who donated the campaigns to notice their donated campaign is expired."
+_EMAIL_FUNDRAISING_CAMPAIGNEXPIREDTODONOR_SUBJECT;"The campaign which you donated has been expired"
+_EMAIL_FUNDRAISING_CAMPAIGNEXPIREDTODONOR_BODY;"[header]
+
+The Campaign [campaign_name] is expired, please go to this link to check the status of this campaign
+[campaign_link]
+Thank you for making difference and good luck
+
+[footer]"
+
+#fundraising_campaignGoalToOwner
+
+_EMAIL_FUNDRAISING_CAMPAIGNGOALTOOWNER_TITLE;"Campaign Closed Due to Reaching the Fundraising Goal (Send to Campaign Owner)"
+_EMAIL_FUNDRAISING_CAMPAIGNGOALTOOWNER_DESCRIPTION;"This mail will be sent to campaign owner when campaign achieve the fundraising goal."
+_EMAIL_FUNDRAISING_CAMPAIGNGOALTOOWNER_SUBJECT;"Your Campaign Reached the Fundraising Goal"
+_EMAIL_FUNDRAISING_CAMPAIGNGOALTOOWNER_BODY;"[header]
+
+Your campaign has been closed due to reaching the fundraising goal. Please check it here:
+[campaign_link]
+
+[footer]"
+
+#fundraising_campaignGoalToParent
+
+_EMAIL_FUNDRAISING_CAMPAIGNGOALTOPARENT_TITLE;"Campaign Closed Due to Reaching Fundraising Goal (Send to Idea/Trophy Owner)"
+_EMAIL_FUNDRAISING_CAMPAIGNGOALTOPARENT_DESCRIPTION;"This email is to notify idea/trophy owner that the campaign on their idea/trophy achieved the fundraising goal."
+_EMAIL_FUNDRAISING_CAMPAIGNGOALTOPARENT_SUBJECT;"The campaign on your idea/trophy reached the fundraising goal"
+_EMAIL_FUNDRAISING_CAMPAIGNGOALTOPARENT_BODY;"[header]
+
+The campaign on your idea/trophy has been closed due to reaching the fundraising goal. Please check it here:
+[campaign_link]
+
+[footer]"
+
+
+#fundraising_campaignGoalToDonor
+
+_EMAIL_FUNDRAISING_CAMPAIGNGOALTODONOR_TITLE;"Campaign Closed Due to Reaching the Fundraising Goal (Send to Donors)"
+_EMAIL_FUNDRAISING_CAMPAIGNGOALTODONOR_DESCRIPTION;"This mail will be sent to all donors when campaign achieve the fundraising goal."
+_EMAIL_FUNDRAISING_CAMPAIGNGOALTODONOR_SUBJECT;"The Campaign which you donated has been reached goal"
+_EMAIL_FUNDRAISING_CAMPAIGNGOALTODONOR_BODY;"
+Deal all donors
+Your campaign that you donated has been closed due to reaching the fundraising goal. Please check it here:
+
+[campaign_link]
+
+[footer]"
+
+#fundraising_campaignClosedToOwner
+
+_EMAIL_FUNDRAISING_CAMPAIGNCLOSEDTOOWNER_TITLE;"Campaign Close (Send to Campaign Owner)"
+_EMAIL_FUNDRAISING_CAMPAIGNCLOSEDTOOWNER_DESCRIPTION;"The email is to notify that the campaign has been closed due to some reason."
+_EMAIL_FUNDRAISING_CAMPAIGNCLOSEDTOOWNER_SUBJECT;"Your campaign has been closed"
+_EMAIL_FUNDRAISING_CAMPAIGNCLOSEDTOOWNER_BODY;"[header]
+
+Your campaign has been closed due to [reason]. Please check it here:
+[campaign_link]
+
+[footer]"
+
+#fundraising_campaignClosedToParent
+
+_EMAIL_FUNDRAISING_CAMPAIGNCLOSEDTOPARENT_TITLE;"Campaign Close (Send to idea/trophy Owner)"
+_EMAIL_FUNDRAISING_CAMPAIGNCLOSEDTOPARENT_DESCRIPTION;"The email is to notify that the campaign on their trophy/idea owner has been closed due to some reason."
+_EMAIL_FUNDRAISING_CAMPAIGNCLOSEDTOPARENT_SUBJECT;"The campaign on your idea/trophy has been closed"
+_EMAIL_FUNDRAISING_CAMPAIGNCLOSEDTOPARENT_BODY;"[header]
+
+Your campaign has been closed due to [reason]. Please check it here:
+[campaign_link]
+
+[footer]"
+
+#fundraising_campaignClosedToDonor
+
+_EMAIL_FUNDRAISING_CAMPAIGNCLOSEDTODONOR_TITLE;"Campaign Close (Send to Donors)"
+_EMAIL_FUNDRAISING_CAMPAIGNCLOSEDTODONOR_DESCRIPTION;"This email will be sent to all donors when campaign owner closed their campaign and input some personal message."
+_EMAIL_FUNDRAISING_CAMPAIGNCLOSEDTODONOR_SUBJECT;"The campaign which you donated has been closed"
+_EMAIL_FUNDRAISING_CAMPAIGNCLOSEDTODONOR_BODY;"
+
+Dear all donors
+Your campaign that you donated has been closed
+In Addition, [campaign_owner] added the following personal message
+[personal_message]
+[campaign_link]
+
+[footer]"
+
+#fundraising_inviteFriends
+
+_EMAIL_FUNDRAISING_INVITEFRIENDS_TITLE;"Invite Friends"
+_EMAIL_FUNDRAISING_INVITEFRIENDS_DESCRIPTION;"The purpose of this email is to send people who is invited to donate fundraising campaign."
+_EMAIL_FUNDRAISING_INVITEFRIENDS_SUBJECT;"[inviter_name] invited you to the fundraising campaign [campaign_name]"
+_EMAIL_FUNDRAISING_INVITEFRIENDS_BODY;"[header]
+
+[inviter_name] invited you to [campaign_name]
+
+To check out this fundraising campaign, follow the link below:
+[campaign_link]
+
+In addition, [inviter_name] added the following personal message
+[message]
+
+[footer]"
+
+#fundraising_emailToDonors
+_EMAIL_FUNDRAISING_EMAILTODONORS_TITLE;"Email To All Donors"
+_EMAIL_FUNDRAISING_EMAILTODONORS_DESCRIPTION;"The purpose of this email is to send message to all donors."
+_EMAIL_FUNDRAISING_EMAILTODONORS_SUBJECT;"[subject]"
+_EMAIL_FUNDRAISING_EMAILTODONORS_BODY;"[header]
+
+[message]
+
+[footer]"
+
+#notify_campaign_activated
+"_EMAIL_NOTIFY_CAMPAIGN_ACTIVATED_TITLE";"Your campaign has been activated"
+"_EMAIL_NOTIFY_CAMPAIGN_ACTIVATED_DESCRIPTION";"This is the email that gets sent to owner when campaign has been activated"
+"_EMAIL_NOTIFY_CAMPAIGN_ACTIVATED_SUBJECT";"Your campaign has been activated"
+"_EMAIL_NOTIFY_CAMPAIGN_ACTIVATED_BODY";"[header]
+
+Your campaign has been activated. Please visit at http://[host][object_link] to more information.
+
+[footer]"
+
+#notify_campaign_inactivated
+"_EMAIL_NOTIFY_CAMPAIGN_INACTIVATED_TITLE";"Your campaign has been in-activated"
+"_EMAIL_NOTIFY_CAMPAIGN_INACTIVATED_DESCRIPTION";"This is the email that gets sent to owner when campaign has been in-activated"
+"_EMAIL_NOTIFY_CAMPAIGN_INACTIVATED_SUBJECT";"Your campaign has been in-activated"
+"_EMAIL_NOTIFY_CAMPAIGN_INACTIVATED_BODY";"[header]
+
+Your campaign has been in-activated. Please visit at http://[host][object_link] to more information.
+
+[footer]"

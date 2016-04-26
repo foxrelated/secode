@@ -1,0 +1,108 @@
+/*Manage Artist*/
+.sesvideo_manage_artist_form{
+	width:100%;
+}
+.sesvideo_manage_artist_form *{
+	box-sizing:border-box;
+}
+.sesvideo_manage_artist_form_head > div{
+	background-color: #f5f5f5;
+	padding: 10px;
+	border-bottom: 1px solid #aaa;
+	float:left;
+	font-weight: bold;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	white-space: nowrap;
+}
+.sesvideo_manage_artist_form_head,
+.sesvideo_manage_artist_form_list{
+	width:60%;
+}
+.sesvideo_manage_artist_form_list{
+	margin-bottom:10px;
+}
+.sesvideo_manage_artist_form_list li{
+	border-bottom: 1px solid #eee;
+	cursor:move;
+	clear:both;
+	overflow:hidden;
+}
+.sesvideo_manage_artist_form_list li:nth-child(odd){
+	background-color:#fff;
+}
+.sesvideo_manage_artist_form_list li:nth-child(even) {
+	background-color: #f8f8f8;
+}
+.sesvideo_manage_artist_form_list li > div{
+	padding: 10px;
+	font-size: .9em;
+	float:left;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	vertical-align: top;
+	white-space: normal;
+}
+.sesvideo_artist_popup input[type="text"]{
+	margin-bottom:10px;
+	width:300px;
+}
+
+#likevideos > fieldset > div {
+  margin-left: 3%;
+  width: 45%;
+  display: inline-block;
+}
+#likevideos > fieldset > div > div {
+	width: 100%;
+}
+/*Popup Form*/
+.sesvideo_create_gallery_popup{width:400px;}
+.sesvideo_create_gallery_popup #gallery_name-label{margin-bottom:5px;}
+.sesvideo_create_gallery_popup label{font-weight:bold;}
+.sesvideo_create_gallery_popup input{width:100%;}
+
+/*Import Music*/
+button.sesvideo_import_button{
+	background-color: #83b64e;
+	background-image: url(~/application/modules/Sesvideo/externals/images/admin/import.png);
+	background-position: 5px center;
+	background-repeat: no-repeat;
+	border: medium none;
+	border-radius: 0;
+	font-size: 17px;
+	font-weight: normal;
+	padding: 10px 10px 10px 35px;
+	text-shadow: inherit;
+}
+button.sesvideo_import_button:hover{
+	background-color: #78a946;
+}
+.sesvideo_import_msg span{
+	background-position: 5px center;
+	background-repeat: no-repeat;
+	border-radius: 0;
+	color: #fff;
+	display: inline-block;
+	font-size: 17px;
+	padding: 10px 10px 10px 35px;
+}
+.sesvideo_import_loading span{
+	background-color: #6fbbde;
+	background-image: url(~/application/modules/Sesvideo/externals/images/admin/loading.GIF);
+}
+.sesvideo_import_success span{
+	background-color: #83b64e;
+	background-image: url(~/application/modules/Sesvideo/externals/images/admin/success.png);
+}
+.sesvideo_import_error span{
+	background-color: #c12e2a;
+	background-image: url(~/application/modules/Sesvideo/externals/images/admin/error.png);
+}
+/*Add Item of the day Popup*/
+.sesvideo_add_itemoftheday_popup .form-label{
+	float:none !important;
+}
+.sesvideo_add_itemoftheday_popup .event_calendar_container{
+	float:none;
+}

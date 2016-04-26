@@ -1,0 +1,103 @@
+/* $Id:carousel.css 2015-3-1 00:00:00 SocialEngineSolutions $*/
+
+.sesvideo_carousel_wrapper{
+  clear:both;
+  position:relative;
+  overflow:hidden;
+  padding:0;
+  width:100%;
+}
+.sesvideo_carousel{
+  overflow:hidden;
+  width:100%;
+}
+.sesvideo_carousel_wrapper .sesvideo_listing_grid{
+  margin:0 5px
+}
+.sesvideo_carousel_wrapper .sesvideo_listing_grid .sesvideo_thumb{
+	border-width:0;
+	padding:0;
+}
+/*Horizontal Carousel*/
+.sesvideo_carousel_h_wrapper{
+	padding:0;
+}
+.sesvideo_carousel_h_wrapper .sesvideo_carousel_nav a{
+	box-shadow:0px 0px 3px rgba(0, 0, 0, .5);
+	background-color:#fff;
+	border-radius:2px;
+	margin-top:-13px;
+	top:50%;
+	position:absolute;
+	transition:all 0.3s ease 0s;
+	opacity:0;
+  filter:alpha(opacity=0); /* For IE8 and earlier */
+	height:25px;
+	line-height:25px;
+	padding:0;
+	text-align:center;
+	width:25px;
+}
+.sesvideo_carousel_h_wrapper:hover .sesvideo_carousel_nav a{
+  opacity:1;
+  filter:alpha(opacity=100); /* For IE8 and earlier */
+}
+.sesvideo_carousel_h_wrapper a.sesvideo_carousel_nav_pre{
+	border-radius:2px 0 0 2px;
+  left:15px;
+}
+.sesvideo_carousel_h_wrapper:hover a.sesvideo_carousel_nav_pre{
+  left:5px;
+}
+.sesvideo_carousel_h_wrapper a.sesvideo_carousel_nav_nxt{
+  border-radius:0 2px 2px 0;
+	right:15px;
+}
+.sesvideo_carousel_h_wrapper:hover a.sesvideo_carousel_nav_nxt{
+  right:5px;
+}
+.sesvideo_carousel_h_wrapper .sesvideo_carousel_nav a i:before{
+	color:#222;
+	float:left;
+	font-size:22px;
+	margin-top:2px;
+}
+.sesvideo_carousel_h_wrapper:hover a.sesvideo_carousel_nav_pre i:before{
+	margin-right:2px;
+}
+.sesvideo_carousel_h_wrapper:hover a.sesvideo_carousel_nav_nxt i:before{
+	margin-left:2px;
+}
+/*Vertical Carousel*/
+.sesvideo_carousel_v_wrapper{
+	border-style:solid;
+	border-width:1px;
+	padding:5px;
+}
+.sesvideo_carousel_v_wrapper .sesvideo_listing_grid{
+  margin:0 !important;
+	width:100% !important;
+}
+.sesvideo_carousel_v_wrapper .sesvideo_carousel_nav{
+  clear:both;
+  margin-top:10px;
+  text-align:center;
+}
+.sesvideo_carousel_v_wrapper .sesvideo_carousel_nav a{
+	box-shadow:0 0 1px rgba(0, 0, 0, .1);
+	border-radius:2px;
+	border-width:1px;
+	display:inline-block;
+	height:25px;
+	line-height:25px;
+	padding:0;
+	text-align:center;
+	width:25px;
+}
+.sesvideo_carousel_v_wrapper .sesvideo_carousel_nav a:hover{
+	background-image:url(../images/transprant-bg.png);
+}
+.sesvideo_carousel_v_wrapper .sesvideo_carousel_nav a i:before{
+  font-size:22px;
+  float:left;
+}

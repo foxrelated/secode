@@ -1,0 +1,2 @@
+INSERT IGNORE INTO `engine4_core_menuitems` (`name`, `module`, `label`, `plugin`, `params`, `menu`, `submenu`, `order`) VALUES
+('facebooksepage_friend_home', 'facebookse', 'My Facebook', 'Facebookse_Plugin_Menus', '{"route":"facebookse_index_settings"}', 'user_home', '', 999);

@@ -1,0 +1,187 @@
+/* $Id: main.css 6590 2010-12-31 9:40:21Z SocialEngineAddOns Copyright 2009-2010 BigStep Technologies Pvt. Ltd. $ */
+.pad_left_20 {
+	padding-left:20px;
+}
+/**/
+.clear {
+	clear:both !important;
+}
+.floatR {
+	float:right !important;
+}
+.floatL {
+	float:left !important;
+}
+.mtop_5 {
+	margin-top:5px;
+}
+.mtop_10 {
+	margin-top:10px;
+}
+.mbot_10 {
+	margin-bottom:10px;
+}
+.mleft_10 {
+	margin-left:10px;
+}
+.bold {
+	font-weight:bold;
+}
+.admin_list_add_icon {
+	background-image: url(~/application/modules/List/externals/images/plus_icon.png);
+}
+.admin_list_statistics_table td {
+	font-weight:bold;
+}
+#global_page_list-admin-items-add-category .global_form_popup dt label {
+	font-weight:normal;
+}
+#global_page_list-admin-items-add-category .global_form_popup button {
+	margin-top:0px;
+}
+#global_page_list-admin-items-add-category .settings #title-label, #global_page_list-admin-items-add-category .settings .form-label {
+	width:70px;
+	clear: left;
+	float: left;
+	font-weight: bold;
+	overflow: hidden;
+	padding-right: 15px;
+}
+#global_page_list-admin-items-add-category .settings #title-element, #global_page_list-admin-items-add-category .settings .form-element {
+	float: left;
+	overflow: hidden;
+}
+#global_page_list-admin-items-add-category .global_form_popup dt label {
+	font-weight:bold;
+	margin-top:3px;
+	margin-bottom:15px;
+}
+#global_page_list-admin-items-add-category .settings .form-description {
+	width:500px;
+}
+#global_page_list-admin-items-add-category #buttons-wrapper {
+	margin-top:10px;
+}
+.list_subcategory_backgroundimage {
+	margin-top:18px !important;
+}
+.icon_list_admin_import{background-image:url(~/application/modules/List/externals/images/import.png);}
+.icon_list_admin_import_manage{background-image:url(~/application/modules/List/externals/images/files.png);}
+.icon_list_admin_add{background-image:url(~/application/modules/List/externals/images/add.png);}
+.icon_list_admin_back{background-image:url(~/application/modules/List/externals/images/back.png);}
+
+/*style for Import Listing section start here*/
+.importlisting_form{
+	-moz-border-radius: 7px;
+	-webkit-border-radius: 7px;
+	border-radius: 7px;
+	background-color: #E9F4FA;
+	padding: 10px;
+	float: left;
+	overflow: hidden;
+	margin-bottom:15px;
+}
+.importlisting_form > div{
+	background: #fff;
+	border: 1px solid #d7e8f1;
+	overflow: hidden;
+	padding: 20px;
+}
+.importlisting_elements{
+	clear:both;
+	border: 1px solid #EEEEEE;
+	overflow:hidden;
+	float:left;
+	width:500px;
+}
+.importlisting_elements span{
+	background-color: #F8F8F8;
+	clear: both;
+	float: left;
+	font-size: 13px;
+	width: 100%;
+	padding:3px;
+}
+.importlisting_elements span + span{
+	border-top: 1px solid #EEEEEE;
+}
+.importlisting_elements span img{
+	margin-right:10px;
+	vertical-align:middle;
+	float:left;
+	margin-top:3px;
+}
+.importlisting_elements span b{
+	float:left;
+	max-width:450px;
+}
+.importlisting_elements span.green{color:green;}
+.importlisting_elements span.red{color:red;}
+.importlisting_form > div .import_button{
+	clear: both;
+	float: left;
+	margin-top: 10px;
+}
+.importlisting_form > div .error-message,
+.importlisting_form > div .success-message{
+	float:left;
+	width:100%;
+}
+.importlisting_form > div .error-message > span,
+.importlisting_form > div .success-message > span{
+	background-position: 8px 5px;
+	background-repeat: no-repeat;
+	border-radius: 3px 3px 3px 3px;
+	clear: left;
+	float: left;
+	margin:0 0 15px 0;
+	overflow: hidden;
+	padding: 5px 15px 5px 32px;
+}
+.importlisting_form > div .success-message > span{
+	border: 1px solid #CCCCCC;
+	background-color: #E9FAEB;
+}
+.importlisting_form > div .error-message > span{
+	border: 1px solid #ff0000;
+	background-color: #ffe3e3;
+}
+.importlisting_form > div strong{font-weight:bold;font-size:14px;}
+.list_upload_csv_popup .settings .form-wrapper{
+	width:500px !important;
+}
+.list_upload_csv_popup #buttons-label{display:none!important;}
+.icon_lists_log {
+	background-image: url(~/application/modules/List/externals/images/log_clear.png);
+}
+.icon_lists_import {
+	background-image: url(~/application/modules/List/externals/images/import.png);
+}
+.icon_lists_download_csv {
+	background-image: url(~/application/modules/List/externals/images/download.gif);
+}
+.list_upload_csv_popup_loader > div{
+	margin:200px 0 0 250px;
+	text-align:center;
+}
+.importlisting_form_list {
+	list-style: decimal outside none !important;
+	padding-left: 10px;
+}
+.importlisting_form_list > li {
+    margin-left: 20px;
+    padding: 7px 12px 7px 1px;
+}
+#global_page_list-admin-importlisting-import .settings .form-element .description {
+   max-width: 300px;
+}
+/*style for Import Listing section end here*/
+
+.sead_admin_search .search form > div.cat_loader {
+	display: none;
+	margin-top: 18px !important;
+}
+
+#global_page_list-admin-settings-add-icon #photo-element{
+	margin-top:10px;
+}

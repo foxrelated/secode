@@ -1,0 +1,162 @@
+/* $Id:main.css by SocialEngineAddOns $ */
+/* css for like button*/
+.fb_iframe_widget iframe, .fb_edge_widget_with_comment{position:inherit;clear:both!important;left:0px;width:100%;z-index:1;min-height:20px;}
+.facebookse_comments_box .fb_iframe_widget iframe{z-index:0;}
+.fb_iframe_widget > span{position:relative !important;}
+.fb_iframe_widget > span + span{position:absolute !important;}
+.fb_iframe_widget > span + span.fb_iframe_widget{display:block;}
+.fb_edge_widget_with_comment span.fb_edge_comment_widget, .fb_edge_widget_with_comment span.fb_send_button_form_widget{left:auto !important;top:auto!important;clear:both !important;}
+#fbcontent_album{position:relative;clear:both;margin:10px 0 15px;width:100%;}
+#global_page_album-album-view ul.thumbs{clear:both;}
+#fbcontent_poll{width:100%;clear:both;float:left;margin:10px 0;position:relative;}
+#global_page_poll-index-view .layout_middle{overflow:visible !important;}
+#fbcontent_video{margin:10px 0;position:relative;}
+#fbcontent_forum{clear:both;margin:5px 0 0;position:relative}
+#fbcontent_forum .fbcontent_forum{clear:both;width:450px;float:left;}
+#fbcontent_music, #fbcontent_classified, #fbcontent_blog{position:relative;margin:10px 0 0 0;}
+#fbcontent_document{position:relative;clear:both;margin:10px 0;width:100%;display:block;}
+.layout_Facebookse_facebookse_listprofilelike, .layout_Facebookse_facebookse_groupprofilelike, .layout_Facebookse_facebookse_eventprofilelike, .layout_Facebookse_facebookse_userprofilelike{margin-bottom:10px;clear:both;position:relative;}
+.connect_comment_widget_full_input_textarea{width:100px !important;}
+.layout_Facebookse_facebookse_recipeprofilelike{margin-bottom:10px;}
+.layout_Facebookse_facebookse_userfeed .fb_button{float:left;}
+/*css for invite friend block*/
+.layout_Facebookse_facebookse_invitefriend{clear:both;overflow:auto;margin-bottom:15px;}
+#facefile{padding:5px;}
+#facefile .white, .layout_Facebookse_facebookse_userfeed .white, .layout_Facebookse_facebookse_invitefriend .white{border:1px solid #f1f2f1;padding:5px;line-height:14px;	vertical-align:top;font-size:11px;color:#666;overflow:auto;clear:both;}
+.layout_Facebookse_facebookse_invitefriend ul{+foreground;+rounded;overflow:auto;}
+.layout_Facebookse_facebookse_invitefriend ul li{clear:both;padding:5px;overflow:auto;}
+.layout_Facebookse_facebookse_invitefriend a.fbconnect_invite_btn{font-weight:bold;font-size:11px;}
+.layout_Facebookse_facebookse_invitefriend #next_prev{+foreground;padding:3px 5px;font-weight:bold;overflow:auto;clear:both;}
+.layout_Facebookse_facebookse_invitefriend #next_prev .next{float:right;}
+.layout_Facebookse_facebookse_invitefriend #next_prev .prev{float:left;}
+.layout_Facebookse_facebookse_invitefriend #facebookse_nonsitefbfriend a img{margin:4px 4px 4px 5px;}
+.layout_Facebookse_facebookse_websitelike{clear:both;margin-bottom:15px;position:relative;}
+.Facebookse_facebookse_websitelike, .layout_Facebookse_facebookse_commonlike{margin:10px 0;clear:both;}
+.layout_Facebookse_facebookse_websitelike ul{+foreground;+rounded;padding:5px;}
+.layout_right .layout_Facebookse_facebookse_websitelike .fb_iframe_widget iframe, .layout_left .layout_Facebookse_facebookse_websitelike .fb_iframe_widget iframe{width:98% !important;}
+.layout_left .layout_Facebookse_facebookse_websitelike .fb_edge_widget_with_comment span.fb_edge_comment_widget iframe.fb_ltr, .layout_right .layout_Facebookse_facebookse_websitelike .fb_edge_widget_with_comment span.fb_edge_comment_widget iframe.fb_ltr{width:420px !important;}
+/* css for widgets */
+.layout_Facebookse_facebookse_bookmarks, .layout_Facebookse_facebookse_activity, .layout_Facebookse_facebookse_facepile, .layout_Facebookse_facebookse_likebox, .layout_Facebookse_facebookse_recommendation{margin-bottom:15px;}
+/*facebook comments box*/
+.facebookse_comments{margin-top:10px;overflow:hidden;}
+.facebookse_comments ul.clr{margin-bottom:6px;}
+.facebookse_comments > div, .facebookse_comments_box{float:left;}
+.facebookse_comments_dark{background-color:#333333;}
+
+/*Facebook Like Button*/
+.fblike_button a{
+	background-color:#FFFFFF;
+	background-image:-webkit-gradient(linear, left top, left bottom, from( rgba(255, 255, 255, .1)), to( rgba(191, 191, 191, .2))); /* Saf4+, Chrome */
+	background-image:-webkit-linear-gradient( rgba(255, 255, 255, .1), rgba(191, 191, 191, .2)); /* Chrome 10+, Saf5.1+ */
+	background-image:   -moz-linear-gradient( rgba(255, 255, 255, .1), rgba(191, 191, 191, .2)); /* FF3.6 */
+	background-image:    -ms-linear-gradient( rgba(255, 255, 255, .1), rgba(191, 191, 191, .2)); /* IE10 */
+	background-image:     -o-linear-gradient( rgba(255, 255, 255, .1), rgba(191, 191, 191, .2)); /* Opera 11.10+ */
+	border:1px solid #CECECE;
+	border-radius:3px 3px 3px 3px;
+  display:block;
+	font-size:12px;
+	font-weight:bold;
+	outline:medium none;
+	padding:5px 7px;
+}
+.fblike_button a:hover{
+	border:1px solid #cccccc;
+	text-decoration:none;
+}
+.fblike_button a i{
+	height:16px;
+	width:16px;
+}
+.fblike_button a span{
+	color:#333333;
+}
+.fblike_button a i, .fblike_button a span{
+  background-size: contain;
+  display:inline-block;
+  height:16px;
+  vertical-align:middle;
+}
+
+/*Facebook Like Button Comment Box*/
+.fblikebutton .fblike_button,
+.fblikebutton .fblikebutton_counts{
+  display:inline-block;
+  vertical-align:middle;
+}
+.fblikebutton .fblikebutton_counts{
+  font-size: 11px;
+  margin-left: 5px;
+}
+[dir="rtl"]  .fblikebutton .fblikebutton_counts{
+  margin-left: 0px;
+   margin-right: 5px;
+}
+.fblikebutton_postcommentbox_wrap{
+  background-color:$theme_body_background_color;
+  border:1px solid $theme_border_dark_color;
+  margin-top:5px;
+  position:absolute;
+  width:400px;
+  z-index:1;
+}
+.fblikebutton_postcommentbox_arrow{
+  border-color:transparent transparent $theme_border_dark_color;
+  border-style:none solid solid;
+  border-width:0 5px 5px 5px;
+  height:0;
+  left:5px;
+  top:-5px;
+  width:0;
+}
+[dir="rtl"] .fblikebutton_postcommentbox_arrow{
+  left:auto;
+  right:5px;
+}
+.fblikebutton_postcommentbox{
+  padding:10px;
+}
+.fblikebutton_postcommentbox img.fb_thummb{
+  margin-right:5px;
+}
+[dir="rtl"] .fblikebutton_postcommentbox img.fb_thummb{
+  margin-left:5px;
+  margin-right:0;
+}
+.fblikebutton_postcommentbox_txtbox textarea{
+  border-radius:0;
+  margin-bottom:5px;
+  min-height:50px;
+  padding:3px;
+  resize:vertical;
+  width:316px;
+}
+.fblikebutton_postcommentbox p{
+  margin-bottom:3px;
+}
+.fblikebutton_postcommentbox_buttons{
+  background-image:url(~/application/modules/Seaocore/externals/images/blk-bg.png);
+  border-top:1px solid $theme_border_dark_color;
+  padding:5px;
+  text-align:right;
+}
+[dir="rtl"] .fblikebutton_postcommentbox_buttons{
+  text-align:left;
+}
+.fblikebutton_postcommentbox_buttons button{
+  font-size:11px;
+  padding:5px 7px;
+}
+.fblikebutton_showfaces{
+  margin-top:5px;
+}
+.fblikebutton_showfaces span + span{
+  margin-left:5px;
+}
+[dir="rtl"] .fblikebutton_showfaces span + span{
+  margin-left:0;
+  margin-right:5px;
+}
+.fblikebutton_showfaces img{
+  height:30px;
+  width:30px;
+}

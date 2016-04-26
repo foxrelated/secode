@@ -1,0 +1,10 @@
+
+/* NOTIFICATION TYPE ICONS */
+.notification_type_wink_new
+{
+  background-image: url(~/application/modules/Winkgreeting/externals/images/wink.gif);
+}
+.notification_type_greeting_new
+{
+  background-image: url(~/application/modules/Winkgreeting/externals/images/greeting.png);
+}

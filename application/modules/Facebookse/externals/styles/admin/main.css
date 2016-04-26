@@ -1,0 +1,127 @@
+/* $Id: main.css by SocialEngineAddOns $ */
+
+/*Like Setting Page*/
+.settings .form-wrapper {
+	overflow:auto !important;
+}
+.settings .form-label {
+	clear:none !important;
+}
+.settings div.form-element input[type="text"] {
+	width:190px !important;
+}
+.facebookse_likesetting_formL {
+	float:left;
+	width:550px;
+}
+.facebookse_likesetting_formL .form-label {
+	width:110px !important;
+}
+.facebookse_likesetting_formL .form-element .description {
+	margin:0 0 10px;
+	width:350px !important;
+	overflow:hidden;
+	max-width:none !important;
+}
+.facebookse_likesetting_formL #buttons-wrapper button {
+	float:left;
+}
+.facebookse_likesetting_formR {
+	float:right;
+	width:390px;
+	clear:none !important;
+}
+.facebookse_likesetting_formR .form-label {
+	width:100px !important;
+}
+.facebookse_likesetting_formR .form-element {
+	width:200px;
+}
+.facebookse_likesetting_formR .form-element .description {
+	margin:0 0 10px;
+	width:200px !important;
+	overflow:hidden;
+	max-width:none !important;
+	min-width:100px !important;
+}
+.facebookse_likesetting_formR #buttons-wrapper button {
+	float:left;
+}
+/*FB Social Plugins Settings*/
+.facebookse_fbsp_form .form-element {
+	width:600px !important;
+}
+.facebookse_fbsp_form .form-element .description {
+	margin:0 0 10px;
+	max-width:600px !important;
+	min-width:300px;
+	overflow:hidden;
+}
+.facebookse_socialplugin_priview {
+	text-align:center;
+}
+.facebookse_socialplugin_priview h3 {
+	margin:10px 0 0;
+}
+.facebookse_socialplugin_priview > div {
+	text-align:center;
+	margin-top:10px;
+}
+.facebookse_statistics_activeuser_table {
+	border: 1px solid #DDDDDD;
+	clear:both;
+	width:450px;
+}
+.facebookse_statistics_activeuser_table th {
+	background-color: #739EB9;
+	color: #FFFFFF;
+	font-weight: bold;
+	padding: 3px 5px;
+	font-size:11px;
+	text-align: center;
+}
+.facebookse_statistics_activeuser_table td {
+	background-color: #F4F4F4;
+	font-weight: bold;
+	padding: 3px 5px;
+	font-size:11px;
+	text-align: center;
+}
+.facebookse_statistics_activeuser_form .form-elements {
+	overflow: hidden;
+}
+.facebookse_statistics_activeuser_form .form-label {
+	width: 100px;
+	float: left;
+	clear: left;
+	font-weight: bold;
+	padding-right: 15px;
+	overflow: hidden;
+	padding-top:3px;
+	color:#000;
+}
+.facebookse_statistics_activeuser_form .form-element {
+	float: left;
+	overflow: hidden;
+}
+.facebookse_show_insightsfb_table {
+	width:450px;
+	clear:both;
+}
+.facebookse_show_insightsfb_table td.form1 {
+	padding:5px;
+	background-color: #E9F4FA;
+	border: 1px solid #DDDDDD;
+	width:50%;
+	color:#000;
+}
+.facebookse_show_insightsfb_table td.form2 {
+	padding:5px;
+	background-color: #F4F4F4;
+	border: 1px solid #DDDDDD;
+	width:50%;
+	color:#000;
+}
+.settings .form-element b.fnone {
+	float:none;
+}

@@ -1,0 +1,595 @@
+.ynfundraising_list_campaigns.thumbs{
+	li{
+		width: 170px;
+
+		.thumbs_photo:hover{
+			padding: 0;
+		}
+	}
+}
+
+/* Slishow fundraing profile*/
+.layout_ynfundraising_campaigns_profile_info #ynfundraising_navigation-slideshow {
+	/*-moz-border-radius: 3px;*/
+	/*-webkit-border-radius: 3px;
+		margin-bottom: 15px;
+	*/
+	border-radius: 3px;
+	/*background-color: none;*/
+	border-color: #d0e2ec;
+	border-width: 1px;
+	padding: 15px 0 0 15px;
+	overflow: hidden;
+	width: 100%;
+	height:350px;
+}
+
+body[id^=global_page_ynfundraising] ul.thumbs .thumbs_photo, ul.thumbs .thumbs_photo:hover
+{
+	padding:0px;
+	border: 1px solid transparent;
+}
+.layout_ynfundraising_campaigns_profile_info .featured_ynfundraising_img_wrapper
+{
+	float:left;
+}
+.layout_ynfundraising_campaigns_profile_info .ynfundraising_viewmore{
+	font-size: 11px;
+	font-weight: 700;
+}
+.layout_ynfundraising_campaigns_profile_info .featured_ynfundraising .ynfundraising_info {
+	margin: 0 35px 0 215px;
+}
+.layout_ynfundraising_campaigns_profile_info #ynfundraising_navigation-slideshow span {
+	position: absolute;
+	left:15px;
+	right: 15px;
+}
+.layout_ynfundraising_campaigns_profile_info #ynfundraising_navigation-slideshow .ynfundraising_album_photo
+{
+	border: 1px solid #ddd;
+	width: 350px;
+	height: 200px;
+	overflow: hidden;
+	text-align: center;
+}
+.layout_ynfundraising_campaigns_profile_info #ynfundraising_navigation-slideshow span img
+{
+	width: 100%;
+	border: none;
+	margin: 0 auto;
+	display: block;
+}
+
+.layout_ynfundraising_campaigns_profile_info #ynfundraising_navigation-slideshow ul.ynfundraising_pagination {
+	/*float: right;*/
+	position: absolute;
+	right: 15px;
+	top: 320px;
+}
+.layout_ynfundraising_campaigns_profile_info #ynfundraising_navigation-slideshow .ynfundraising_pagination li {
+	display: inline-block;
+}
+.layout_ynfundraising_campaigns_profile_info #ynfundraising_navigation-slideshow .ynfundraising_pagination a {
+	display: block;
+	width: 13px;
+	height: 0;
+	padding-top: 12px;
+	background-image: url(~/application/modules/Ynfundraising/externals/images/pagination.png);
+	background-position: 0 0;
+	float: left;
+	overflow: hidden;
+}
+.layout_ynfundraising_campaigns_profile_info #ynfundraising_navigation-slideshow .ynfundraising_pagination a:hover,
+.layout_ynfundraising_campaigns_profile_info #ynfundraising_navigation-slideshow .ynfundraising_pagination a.current {
+	background-position: 0 -12px;
+}
+.layout_ynfundraising_campaigns_profile_info .ynfundraising_albumfeatured_info
+{
+	background: url(~/application/modules/Ynfundraising/externals/images/slide_bg_info.png) repeat transparent;
+	position: absolute;
+	bottom: 0;
+	left: 0px;
+	padding: 10px 10px 10px 17px;
+	width: 95%;
+}
+.layout_ynfundraising_campaigns_profile_info div.ynfundraising_albumfeatured_info > .ynfundraising_album_title
+{
+	font-weight: bold;
+}
+.layout_ynfundraising_campaigns_profile_info div.ynfundraising_albumfeatured_info > .ynfundraising_album_title > h3
+{
+	background: none transparent!important;
+	padding: 0;
+	font-weight: 700;
+}
+.layout_ynfundraising_campaigns_profile_info div.ynfundraising_albumfeatured_info > .ynfundraising_album_title > h3  > a:link,
+.layout_ynfundraising_campaigns_profile_info div.ynfundraising_albumfeatured_info > .ynfundraising_album_info,
+.layout_ynfundraising_campaigns_profile_info div.ynfundraising_albumfeatured_info > .ynfundraising_album_info a
+{
+	color: white;
+}
+/* end slideshow*/
+
+
+/* Slishow fundraing profile*/
+.layout_ynfundraising_campaigns_featured #ynfundraising_navigation-slideshow {
+	/*-moz-border-radius: 3px;*/
+	/*-webkit-border-radius: 3px;
+		margin-bottom: 15px;
+	*/
+	border-radius: 3px;
+	/*background-color: none;*/
+	border-color: #d0e2ec;
+	border-width: 1px;
+	padding: 15px 0 0 15px;
+	overflow: hidden;
+	width: 100%;
+	height:350px;
+}
+.layout_ynfundraising_campaigns_featured .featured_ynfundraising_img_wrapper
+{
+	float:left;
+}
+.layout_ynfundraising_campaigns_featured .ynfundraising_viewmore{
+	font-size: 11px;
+	font-weight: 700;
+}
+.layout_ynfundraising_campaigns_featured .featured_ynfundraising .ynfundraising_info {
+	margin: 0 35px 0 215px;
+}
+.layout_ynfundraising_campaigns_featured #ynfundraising_navigation-slideshow span {
+	position: absolute;
+	left:15px;
+	right: 15px;
+}
+.layout_ynfundraising_campaigns_featured #ynfundraising_navigation-slideshow .ynfundraising_album_photo
+{
+	border: 1px solid #ddd;
+	width: 350px;
+	height: 200px;
+	overflow: hidden;
+	text-align: center;
+}
+.layout_ynfundraising_campaigns_featured #ynfundraising_navigation-slideshow span img
+{
+	width: 100%;
+	border: none;
+	margin: 0 auto;
+	display: block;
+}
+
+.layout_ynfundraising_campaigns_featured #ynfundraising_navigation-slideshow ul.ynfundraising_pagination {
+	/*float: right;*/
+	position: absolute;
+	right: 15px;
+	top: 320px;
+}
+.layout_ynfundraising_campaigns_featured #ynfundraising_navigation-slideshow .ynfundraising_pagination li {
+	display: inline-block;
+}
+.layout_ynfundraising_campaigns_featured #ynfundraising_navigation-slideshow .ynfundraising_pagination a {
+	display: block;
+	width: 12px;
+	height: 0;
+	padding-top: 12px;
+	background-image: url(~/application/modules/Ynfundraising/externals/images/pagination.png);
+	background-position: 0 0;
+	float: left;
+	overflow: hidden;
+}
+.layout_ynfundraising_campaigns_featured #ynfundraising_navigation-slideshow .ynfundraising_pagination a:hover,
+.layout_ynfundraising_campaigns_featured #ynfundraising_navigation-slideshow .ynfundraising_pagination a.current {
+	background-position: 0 -12px;
+}
+.layout_ynfundraising_campaigns_featured .ynfundraising_albumfeatured_info
+{
+	background: url(~/application/modules/Ynfundraising/externals/images/slide_bg_info.png) repeat transparent;
+	position: absolute;
+	bottom: 0;
+	left: 0px;
+	padding: 10px 10px 10px 17px;
+	width: 95%;
+}
+.layout_ynfundraising_campaigns_featured div.ynfundraising_albumfeatured_info > .ynfundraising_album_title
+{
+	font-weight: bold;
+}
+.layout_ynfundraising_campaigns_featured div.ynfundraising_albumfeatured_info > .ynfundraising_album_title > h3
+{
+	background: none transparent!important;
+	padding: 0;
+	font-weight: 700;
+}
+.layout_ynfundraising_campaigns_featured div.ynfundraising_albumfeatured_info > .ynfundraising_album_title > h3  > a:link,
+.layout_ynfundraising_campaigns_featured div.ynfundraising_albumfeatured_info > .ynfundraising_album_info,
+.layout_ynfundraising_campaigns_featured div.ynfundraising_albumfeatured_info > .ynfundraising_album_info a
+{
+	color: white;
+}
+
+
+.layout_ynfundraising_campaigns_featured .ynfundraising_info
+{
+	background: url(/luannd/demo/application/modules/Ynfundraising/externals/images/slide_bg_info.png?c=197) repeat transparent;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	padding: 10px 10px 10px 15px;
+	width: 100%;
+}
+.layout_ynfundraising_campaigns_featured .ynfundraising_title a,
+.layout_ynfundraising_campaigns_featured .ynfundraising_owner,
+.layout_ynfundraising_campaigns_featured .ynfundraising_owner a,
+.layout_ynfundraising_campaigns_featured .ynfundraising_description,
+.layout_ynfundraising_campaigns_featured .ynfundraising_browse_info_donate_mobile {
+	color:#FFF !important;
+}
+.layout_ynfundraising_campaigns_featured .ynfundraising_browse_info_donate_mobile p
+{
+	font-size: 11px;
+	margin-bottom: 0px !important; 
+}
+/* end slideshow*/
+
+.layout_ynfundraising_campaigns_profile_info .featured_ynfundraisings_img,
+.layout_ynfundraising_campaigns_featured .featured_ynfundraisings_img
+{
+	height: 300px;
+	overflow: hidden;	
+}
+
+
+.layout_ynfundraising_campaigns_profile_info .ynfundraising_div
+{
+	background: #1b1714;
+	height: 375px;
+}
+.layout_ynfundraising_campaigns_profile_info #ynfundraising_gallery_slides
+{
+	margin:0 auto;
+}
+
+.layout_ynfundraising_campaigns_profile_info .featured_ynfundraisings_img embed,
+.layout_ynfundraising_campaigns_profile_info .ynfundraising_gallery_slides_container .slides_control .wrapper 
+{
+	width: 100%!important;
+}
+.layout_ynfundraising_campaigns_profile_info .ynfundraising_gallery_slides_container .slides_control .panel
+{
+	border:none;
+}
+
+.layout_ynfundraising_campaigns_for_parent .ynFRaising_campaign_PriceIColRight 
+{
+	width: 218px;
+}
+#smoothbox_window #global_page_ynfundraising-index-promote
+{
+	margin-left:5px;
+}
+#global_page_ynfundraising-donate-summary .global_form .form-elements .form-wrapper button
+{
+	padding: 0 35px 0 45px;
+}
+#global_page_ynfundraising-campaign-view-all-donors .ynfundraising_create_right_menu,
+#global_page_ynfundraising-campaign-view-all-supporters .ynfundraising_create_right_menu
+{
+	float: right;
+	margin-bottom: 10px;
+}
+
+#global_page_ynfundraising-index-create h4>span
+{
+	padding: 6px 6px 6px 6px;
+	margin-top: -6px;
+}
+#global_page_ynfundraising-campaign-view-all-donors ul.ynFRaising_viewAllUL > li,
+#global_page_ynfundraising-campaign-view-all-supporters ul.ynFRaising_viewAllUL > li
+{
+	margin-bottom: 0px;
+}
+
+.layout_ynfundraising_campaigns_profile_info #ynfundraising_gallery_slides{
+	height: 370px;
+}
+#ynfundraising_gallery_slides .pagination li a img
+{
+	width: 26px;
+	height: 26px;
+}
+#ynfundraising_gallery_slides .pagination
+{
+	left: 30px;
+}
+
+
+#global_page_ynfundraising-index-create .search .buttons
+{
+	margin-top: 24px !important;
+}
+#global_page_ynfundraising-index-create .search form > div button
+{
+	padding: 7px .5em !important;
+}
+
+#global_page_ynfundraising-campaign-view-statistics-chart .global_form_box > div > button
+{
+	padding: .5em .8em;
+}
+body[id^=global_page_ynfundraising] .admin_statistics_nav
+{
+	margin-bottom: 10px;
+}
+
+#global_page_ynfundraising-campaign-view-statistics-chart .ynfundraising_create_right_menu{
+	float: right;
+}
+
+#ynFRaising_createSearchUL_ideabox a.ynFRaising_createSearch_thumb
+{
+	height: 120px;
+	overflow: hidden;
+	display: block;
+	border: 1px solid #ddd;
+}
+
+ul.ynFRaising_createSearchUL > li
+{
+	min-height: 166px;
+}
+
+#ynfundraising_create_step_four #about_me-element
+{
+	margin-left:0px !important;
+}
+.layout_ynfundraising_campaigns_profile_news .global_form > div
+{
+	padding:5px !important;
+}
+#smoothbox_window .ynFRaising_donateCode
+{
+	width: 50%;
+}
+#smoothbox_window #global_page_ynfundraising-index-invite-friends #global_content_simple,
+#smoothbox_window #global_page_ynfundraising-index-add-location #ynfundraising_google_map_component,
+#smoothbox_window #global_page_ynfundraising-index-add-location #global_content_simple,
+#smoothbox_window #global_page_ynfundraising-index-add-location #ynfundraising_google_map_component #map
+{
+	width:100% !important;
+}
+
+
+#global_page_ynfundraising-index-create ul.ynFRaising_viewGeneralUL {
+    overflow: visible;
+}
+
+body[id^=global_page_ynfundraising] ul.ynFRaising_createSearchUL>li {
+    width: 48%;
+    padding: 1%;
+    margin: 10px 1%;
+}
+
+body[id^=global_page_ynfundraising] div.quicklinks a:hover
+{
+	color: #FFF;
+}
+
+
+
+
+#ynfundraising_create_step1 .form-elements #buttons-wrapper .form-element > a#submit,
+#global_page_ynfundraising-index-create-step-three .global_form_popup > a.smoothbox,
+body[id^=global_page_ynfundraising] .admin_statistics_nav > a#admin_stats_offset_previous,
+body[id^=global_page_ynfundraising] .admin_statistics_nav > a#admin_stats_offset_next,
+#global_page_ynfundraising-donate-summary .global_form .form-elements #donate-submit_wrapper a#donate-edit_wrapper
+{
+	border:none;
+}
+
+#global_page_ynfundraising-index-edit-step-one #ynfundraising_create_step1 div#main_description-element
+{
+	margin-left: 0px;
+}
+
+
+
+
+@media (max-width: 992px)
+{
+	#ynfundraising_gallery_slides .pagination
+	{
+		display: none;
+	}
+	/*
+	.layout_ynfundraising_campaigns_profile_info #ynfundraising_gallery_slides
+		{
+			height: 297px !important;
+		}
+		.slides_container.ynfundraising_gallery_slides_container .panel
+		{
+			left:0px !important;
+		}
+		#ynfundraising_gallery_slides
+		{
+			background: transparent;
+		}*/
+	
+	
+	.layout_ynfundraising_campaigns_profile_info #ynfundraising_gallery_slides,
+	.slides_container.ynfundraising_gallery_slides_container,
+	.slides_container.ynfundraising_gallery_slides_container .panel
+	{
+		width: 100%;
+	}
+	ul.ynfundraising_campaigns_browse > li
+	{
+		position: relative;		
+	}
+	ul.ynfundraising_campaigns_browse > li .ynfundraising_campaigns_browse_options
+	{
+		position: absolute;
+		bottom: 0px;
+		right: 0;
+		width: auto;
+	}
+	ul.ynfundraising_campaigns_browse > li .ynfundraising_campaigns_browse_options > a
+	{
+		display: inline-block;
+	}
+	ul.ynfundraising_campaigns_browse > li .ynfundraising_campaigns_browse_info
+	{
+		padding-bottom: 15px;
+	}
+    
+    body[id^=global_page_ynfundraisin] ul.ynFRaising_viewGeneralUL > li .ynFRaising_createSearchBtn {
+        display: block;
+    }
+    #global_page_ynfundraising-index-edit-step-one .layout_middle,
+    #global_page_ynfundraising-index-create-step-four .layout_middle,
+    #global_page_ynfundraising-index-create-step-five .layout_middle,
+    #global_page_ynfundraising-index-create-step-six .layout_middle,
+    #global_page_ynfundraising-index-create-step-seven .layout_middle
+	{
+		clear: both;
+	}
+}
+
+@media (max-width: 767px)
+{	
+	#ynfundraising_create_step_five textarea, #ynfundraising_create_step_six textarea
+	{
+		width: 100% !important;
+	}
+	#global_page_ynfundraising-index-create ul.ynFRaising_viewGeneralUL>li
+	{
+		width:100%;
+	}
+	#global_page_ynfundraising-campaign-view-statistics-chart .ynfundraising_create_right_menu
+	{
+		float: left;
+		margin-bottom: 10px;
+	}
+	
+}
+
+@media (max-width: 480px)
+{		
+	#global_page_ynfundraising-photo-upload .progress,
+	#global_page_ynfundraising-photo-upload #files
+	{
+		width: 100%!important;
+	}
+	#global_page_ynfundraising-campaign-view-all-donors ul.ynFRaising_viewAllUL > li,
+	#global_page_ynfundraising-campaign-view-all-supporters ul.ynFRaising_viewAllUL > li
+	{
+		margin-bottom: 5px;
+		width: 100%;
+	}
+	#global_page_ynfundraising-campaign-view-all-donors ul.ynFRaising_viewAllUL > li:first-child,
+	#global_page_ynfundraising-campaign-view-all-supporters ul.ynFRaising_viewAllUL > li:first-child
+	{
+		margin-top: 5px;
+	}
+	
+	.layout_ynfundraising_campaigns_profile_news .ynFRaising_PostNew_Submitbtn
+	{
+		margin-left: 18px;
+	}
+	
+	#global_page_ynfundraising-index-view #smoothbox_window .ynFRaising_PromoteWrapper
+	{
+		width:100% !important;
+		padding: 5px 0 5px 5px !important;
+	}
+	#smoothbox_window .ynFRaising_donateCode
+	{
+		width: 100% !important;
+		margin-right: 0px !important;
+	}
+	
+	ul.thumbs.ynfundraising_list_campaigns > li
+	{
+		height:auto!important;
+	}
+	ul.thumbs.ynfundraising_list_campaigns > li
+	{
+		width:98%!important;
+	}
+	ul.thumbs.ynfundraising_list_campaigns .thumbs_photo > span,
+	.ynfundraising_campaign_photo	
+	{
+		width: 100%!important;
+	}
+	div.ynfundraising_campaign_featured_info>.ynfundraising_browse_info_blurb,
+	.ynFRaising_campaign_FeaturePrice
+	{
+		display:none;
+	}
+	.layout_ynfundraising_campaigns_featured .ynfundraising_browse_info_donate_mobile 
+	{
+		display: block;
+	}			
+	
+	.ynFRaising_featuredLabelWrapper
+	{
+		width:103%;
+	}
+	.ynFRaising_featuredLabelCorner
+	{
+		width:100%;
+	}
+	
+	.layout_ynfundraising_campaigns_profile_photo #ynfundraising_campaign_photo > img,
+	.layout_ynfundraising_campaigns_profile_owner > div > a > img
+	{
+		max-width:100% !important;
+	}
+	#global_page_ynfundraising-index-create-step-two .photo-delete-wrapper
+	{
+		clear:left;
+	}
+    
+    #smoothbox_window #global_page_ynfundraising-index-promote .ynFRaising_PromoteWrapper {
+        width: auto;
+        padding: 10px 0;
+    }
+    
+    #smoothbox_window #global_page_ynfundraising-index-promote span#global_content_simple {
+        width: auto; 
+    }
+}
+
+@media (max-width: 320px)
+{
+	table.ynfundraising_transaction_table thead tr th:first-child,
+	table.ynfundraising_transaction_table tbody tr td:first-child
+	{
+		display:none !important;
+		padding:5px;
+	}
+	table.ynfundraising_transaction_table thead tr th,
+	table.ynfundraising_transaction_table tbody tr td
+	{
+		padding:5px !important;
+	}
+	#ynfundraising_create_step1 #allow_anonymous-element label
+	{
+		width:90%;	
+	}	
+	
+	
+	#smoothbox_window #global_page_ynfundraising-index-add-location #country-wrapper select,
+	#smoothbox_window #ynfundraising_google_map_component iframe#gmap
+	{
+		width:100%;
+	}
+	
+}
+.ynresponsive-metro
+{
+	.ynfundraising_slideshow_container .dssControlContainer
+	{
+		top: -48px;
+	}
+}

@@ -1,0 +1,912 @@
+"Unhighlight Announcement";"Unhighlight Announcement"
+"Edit Announcement";"Edit Announcement"
+"Delete Announcement";"Delete Announcement"
+"By %1$s";"By %1$s"
+"There are no announcements yet.";"There are no announcements yet."
+"Host by %1$s";"Host by %1$s"
+"Host by";"Host by"
+"There are no events view on this map";"There are no events view on this map"
+"Previous week";"Previous week"
+"Previous month";"Previous month"
+"Event Type";"Event Type"
+"Online Event";"Online Event"
+"Offline Event";"Offline Event"
+"Specify";"Specify"
+"Tags (Keywords)";"Tags (Keywords)"
+"Metadata Keywords";"Metadata Keywords"
+"Separate tags with commas.";"Separate tags with commas."
+"Put in keywords for so that Search Engine can search your event more easily. Separate keywords with commas.";"Put in keywords for so that Search Engine can search your event more easily. Separate keywords with commas."
+"Cover Photo";"Cover Photo"
+"Invited guests can invite groups as well";"Invited guests can invite groups as well"
+"This month";"This month"
+"This week";"This week"
+"Today";"Today"
+"Upcoming";"Upcoming"
+"Radius (mile)..";"Radius (mile).."
+"Sort by";"Sort by"
+"Search events..";"Search events.."
+"EVENT_FIELDS_VIEWS_SCRIPTS_ADMINFIELDS_DESCRIPTION";"Your members will be asked to provide some information about their event information when creating a new event. Create some event questions that allow them to describe their event in a way that relates to the theme of your community. To reorder the event questions, click on their names and drag them up or down."
+"YNEVENT_VIEWS_SCRIPTS_ADMINREVIEWS_INDEX_DESCRIPTION";"This page lists all of the reviews & reports your users have posted. You can use this page to monitor these items and delete offensive material if necessary."
+"Event";"Event"
+"Events";"Events"
+"Event Photos";"Event Photos"
+"Past Events";"Past Events"
+"My Events";"My Events"
+"view";"view"
+"Photo";"Photo"
+"of";"of"
+"Prev";"Prev"
+"Next";"Next"
+"By";"By"
+"View All Events";"View All Events"
+"My Calendar";"My Calendar"
+"Advanced Event";"Advanced Event"
+"Ongoing";"Ongoing"
+"View More...";"View More..."
+"Follow";"Follow"
+"Unfollow";"Unfollow"
+"Category";"Category"
+"All Categories";"All Categories"
+"The search value is not valid !";"The search value is not valid !"
+"Watch Topic";"Watch Topic"
+# ynevent admin form manage
+"Date Start";"Date Start"
+"Date End";"Date End"
+"Owner";"Owner"
+"Event Start";"Event Start"
+"Event End";"Event End"
+"Event Created";"Event Created"
+"Search by name of:";"Search by name of:"
+"Search by date of:";"Search by date of:"
+"Key search:";"Key search:"
+"From Date:";"From Date:"
+"To Date:";"To Date:"
+"ID";"ID"
+"Views";"Views"
+"view";"view"
+"edit";"edit"
+"Title";"Title"
+
+# ynevent admin form categories
+"delete";"delete"
+"Delete";"Delete"
+"Event Categories";"Event Categories"
+"Category Name";"Category Name"
+"Options";"Options"
+"Add New Category";"Add New Category"
+"Are you sure you want to delete the selected events?";"Are you sure you want to delete the selected events?"
+"Delete Selected";"Delete Selected"
+"Sub-Category";"Sub-Category"
+"add sub-category";"add sub-category"
+"view sub-category";"view sub-category"
+
+# ynevent widget browse search
+"Everyone's Events";"Everyone's Events"
+"Only My Friends's Events";"Only My Friends's Events"
+"Events I may Attending";"Events I may Attending"
+"Events I'm Attending";"Events I'm Attending"
+"Events I'm Invited";"Events I'm Invited"
+"Events I'm Following";"Events I'm Following"
+
+
+# ynevent admin form level setting
+"Member Level Settings";"Member Level Settings"
+"Default Level";"Default Level"
+"Super Admins";"Super Admins"
+"Admins";"Admins"
+"Moderators";"Moderators"
+"Public";"Public"
+
+"Delete Event:";"Delete Event:"
+"Create New Event";"Create New Event"
+"Edit Event";"Edit Event"
+"Join Event";"Join Event"
+"Delete Event";"Delete Event"
+"Leave Event";"Leave Event"
+"led by";"led by"
+"Upload Photos";"Upload Photos"
+
+"Nobody has created an event yet.";"Nobody has created an event yet."
+"Be the first to %1$screate%2$s one!";"Be the first to %1$screate%2$s one!"
+"Tip: %1$sClick here%2$s to create a event or %3$sbrowse%2$s for events to join!";"Tip: %1$sClick here%2$s to create a event or %3$sbrowse%2$s for events to join!"
+
+"event";"event";"events"
+"%s event";"%s event";"%s events"
+"%s guest";"%s guest";"%s guests"
+"%s member";"%s member";"%s members"
+"%s rate";"%s rate";"%s rates"
+"%s like";"%s like";"%s likes"
+"%s attending";"%s attending";"%s attendings"
+"%s ynevent invite";"%s event invite";"%s events invite"
+"hosted by %1$s";"hosted by %1$s"
+"led by %1$s";"led by %1$s"
+"'%s view";"'%s view"
+
+"Close";"Close"
+
+"&#187; Photos";"&#187; Photos"
+"&#187;";"&#187;"
+"Photos";"Photos"
+
+
+"Type a tag or select a name from the list.";"Type a tag or select a name from the list."
+"Tagged:";"Tagged:"
+
+"Added";"Added"
+"ADD TAG";"ADD TAG"
+"Add Tag";"Add Tag"
+"Edit";"Edit"
+"Delete";"Delete"
+"Share";"Share"
+"Report";"Report"
+"Make Profile Photo";"Make Profile Photo"
+"Quote";"Quote"
+
+"&#187; Discussions";"&#187; Discussions"
+"Discussions";"Discussions"
+
+"Back to Event";"Back to Event"
+"Post New Topic";"Post New Topic"
+"reply";"reply";"replies"
+"Last Post";"Last Post"
+
+"Stop Watching Topic";"Stop Watching Topic"
+"Back to Topics";"Back to Topics"
+"Post Reply";"Post Reply"
+"Make Sticky";"Make Sticky"
+"Remove Sticky";"Remove Sticky"
+"Open";"Open"
+"Rename";"Rename"
+"This topic has been closed.";"This topic has been closed."
+
+"Starts:";"Starts:"
+"Ends:";"Ends:"
+"Hosted by";"Hosted by"
+"Location:";"Location:"
+
+"Event Details";"Event Details"
+"Edit Event Details";"Edit Event Details"
+"Edit Event Style";"Edit Event Style"
+"Share This Event";"Share This Event"
+"Invite Guests";"Invite Guests"
+"Message Members";"Message Members"
+"Guests";"Guests"
+"Photos";"Photos"
+"Discussions";"Discussions"
+
+"Date";"Date"
+"Time";"Time"
+"Where";"Where"
+"Host";"Host"
+"Led by";"Led by"
+"RSVPs";"RSVPs"
+"Map";"Map"
+
+"%s person";"%s person";"%s people"
+"'%s attending";"'%s attending";"'%s attendings"
+"%s rating";"%s rating";"%s ratings"
+"Thanks for rating!";"Thanks for rating!"
+"Add Rates";"Add Rates"
+"attending";"attending"
+"maybe attending";"maybe attending"
+"not attending";"not attending"
+"Attending";"Attending"
+"Maybe Attending";"Maybe Attending"
+"Not Attending";"Not Attending"
+"ignore request";"ignore request"
+"Remind me before";"Remind me before"
+"Your RSVP";"Your RSVP"
+"you already rated";"you already rated"
+"please login to rate";"please login to rate"
+"click to rate";"click to rate"
+"Upcoming Events";"Upcoming Events"
+"All";"All"
+"Unlike";"Unlike"
+"Like";"Like"
+
+"Search Guests";"Search Guests"
+
+"View All Photos";"View All Photos"
+"No photos have been uploaded to this event yet.";"No photos have been uploaded to this event yet."
+"The image you selected was too large.";"The image you selected was too large."
+
+"Event left";"You are no longer a member of this event."
+"Members invited";"Members invited"
+"Event joined";"You have successfully RSVPed to this event."
+"Invalid Method";"Invalid Method"
+"Invalid Data";"Invalid Data"
+"You have accepted the invite to the event %s";"You have accepted the invite to the event %s"
+
+"Your changes have been saved.";"Your changes have been saved."
+"Your invite request has been sent.";"Your invite request has been sent."
+"Your invite request has been cancelled.";"Your invite request has been cancelled."
+
+"Event invite accepted";"Event invite accepted"
+"Event invite rejected";"Event invite rejected"
+"Event member removed.";"The selected member has been removed from this event."
+"Event request approved";"Event request approved"
+
+"Changes saved";"Your changes have been saved."
+"Photo deleted";"Photo deleted"
+
+"Max file size limit exceeded (probably).";"Max file size limit exceeded (probably)."
+"Invalid request method";"Invalid request method"
+"No file";"No file"
+"Invalid Upload";"Invalid Upload"
+"An error occurred.";"An error occurred"
+
+"Post deleted.";"The selected post has been deleted."
+"This has been closed for posting.";"This has been closed for posting."
+"Topic renamed.";"This topic has been successfully renamed."
+"Topic deleted.";"This topic has been deleted."
+
+"Category:";"Category:"
+"All Category";"All Category"
+"View:";"View:"
+"Member";"Member"
+
+"Everyone's events";"Everyone's events"
+"Only My Friends' events";"Only My Friends' events"
+
+"List By:";"List By:"
+"Search:";"Search:"
+"All My Events";"All My Events"
+"Only Events I Lead";"Only Events I Lead"
+
+"Accept Event Invitation";"Accept Event Invitation"
+"Would you like to join this event?";"Would you like to join this event?"
+"Join Event";"Join Event"
+
+"Approve Invite Request";"Approve Invite Request"
+"Would you like to approve this invite request?";"Would you like to approve this invite request?"
+"Approve Request";"Approve Request"
+
+"Cancel Invite Request";"Cancel Invite Request"
+"Would you like to cancel your request for an invite to this event?";"Would you like to cancel your request for an invite to this event?"
+"Cancel Request";"Cancel Request"
+
+"Join Event";"Join Event"
+"Would you like to join this event?";"Would you like to join this event?"
+
+"Leave Event";"Leave Event"
+"Are you sure you want to leave this event?";"Are you sure you want to leave this event?"
+
+"Reject Event Invitation";"Reject Event Invitation"
+"Would you like to reject the invitation to this event?";"Would you like to reject the invitation to this event?"
+"Reject Invitation";"Reject Invitation"
+"Cancel";"Cancel"
+
+"Remove Member";"Remove Member"
+"Are you sure you want to remove this member from the event?";"Are you sure you want to remove this member from the event?"
+
+"Request Event Membership";"Request Event Membership"
+"Would you like to request membership in this Event?";"Would you like to request membership in this Event?"
+"Send Request";"Send Request"
+
+"Delete Event Photo";"Delete Event Photo"
+"Are you sure you want to delete this photo?";"Are you sure you want to delete this photo?"
+"Delete Photo";"Delete Photo"
+
+"Edit Event Photo";"Edit Event Photo"
+"Title";"Title"
+"Description";"Description"
+"Save Changes";"Save Changes"
+
+"Add New Photos";"Add New Photos"
+"Choose photos on your computer to add to this album. (2MB maximum)";"Choose photos on your computer to add to this album. (2MB maximum)"
+"Save Photos";"Save Photos"
+
+"Reply";"Reply"
+"Body";"Body"
+
+"Delete Post";"Delete Post"
+"Are you sure you want to delete this post?";"Are you sure you want to delete this post?"
+
+"Edit Post";"Edit Post"
+"Post Discussion Topic";"Post Discussion Topic"
+"Message";"Message"
+"cancel";"cancel"
+"or";"or"
+
+"Delete Topic";"Delete Topic"
+"Are you sure you want to delete this topic?";"Are you sure you want to delete this topic?"
+
+"Rename Topic";"Rename Topic"
+
+"Event Name";"Event Name"
+"Event Description";"Event Description"
+"Start Time";"Start Time"
+"End Time";"End Time"
+"Main Photo";"Main Photo"
+"Event Category";"Event Category"
+
+"People can search for this event";"People can search for this event"
+"People must be invited to RSVP for this event";"People must be invited to RSVP for this event"
+"Invited guests can invite other people as well";"Invited guests can invite other people as well"
+
+"Everyone";"Everyone"
+"Registered Members";"Registered Members"
+"Members Only";"Members Only"
+"All Registered Members";"All Registered Members"
+"Friends and Networks";"Friends and Networks"
+"Friends of Friends";"Friends of Friends"
+"Friends Only";"Friends Only"
+"Event Guests Only";"Event Guests Only"
+"Just Me";"Just Me"
+
+"Privacy";"Privacy"
+"Who may see this event?";"Who may see this event?"
+
+"Comment Privacy";"Comment Privacy"
+"Who may post comments on this event?";"Who may post comments on this event?"
+
+"Photo Uploads";"Photo Uploads"
+"Who may upload photos to this event?";"Who may upload photos to this event?"
+"All Members";"All Members"
+"Only the Owner";"Only the Owner"
+"Create Event";"Create Event"
+
+"Delete Event";"Delete Event"
+"Are you sure you want to delete this event?";"Are you sure you want to delete this event?"
+
+"Host";"Host"
+
+"Invite Members";"Invite Members"
+"Choose the people you want to invite to this event.";"Choose the people you want to invite to this event."
+"Members";"Members"
+"Choose All Friends";"Choose All Friends"
+"Send Invites";"Send Invites"
+
+"Event Styles";"Event Styles"
+"Custom Event Styles";"Custom Event Styles"
+"You can change the colors, fonts, and styles of your event by adding CSS code below. The contents of the text area below will be output between <style> tags on your event.";"You can change the colors, fonts, and styles of your event by adding CSS code below. The contents of the text area below will be output between <style> tags on your event."
+
+"No topics have been posted in this event yet.";"No topics have been posted in this event yet."
+
+"This event has %1$s guest.";"This event has %1$s guest.";"This event has %1$s guests."
+"This event has %1$s guest that matched the query ""%2$s"".";"This event has %1$s guest that matched the query ""%2$s"".";"This event has %1$s guests that matched the query ""%2$s""."
+"This event has %s member waiting approval or waiting for a invite response.";"This event has %s member waiting approval or waiting for a invite response.";"This event has %s members waiting approval or waiting for a invite response."
+"See Waiting";"See Waiting"
+
+"Add Friend";"Add Friend"
+"Remove Friend";"Remove Friend"
+"Remove Member";"Remove Member"
+"Approve Request";"Approve Request"
+"Reject Request";"Reject Request"
+"Cancel Invite";"Cancel Invite"
+
+"Previous";"Previous"
+"Next";"Next"
+"No events have been added to this event yet.";"No events have been added to this event yet."
+"Send me notifications when other members reply to this topic.";"Send me notifications when other members reply to this topic."
+"Transfer Owner";"Transfer Owner"
+"Please choose a member you want to transfer the owner role to:";"Please choose a member you want to transfer the owner role to:"
+"Event Owner Transfer";"Event Owner Transfer"
+
+"ACTIVITY_TYPE_EVENT_IMPORT_BLOG";"When I import blog into event."
+"ACTIVITY_TYPE_FRIEND_HOST";"When your friend is become host in event."
+"ADMIN_ACTIVITY_TYPE_YNEVENT_CREATE";"When a user (subject) creates a new event (object)."
+"ADMIN_ACTIVITY_TYPE_YNEVENT_JOIN";"When a user (subject) joins an event (object)."
+"ADMIN_ACTIVITY_TYPE_YNEVENT_PHOTO_UPLOAD";"When a user (subject) uploads a photo to an event (object)."
+"ADMIN_ACTIVITY_TYPE_YNEVENT_TOPIC_CREATE";"When a user (subject) creates a new event topic (object)."
+"ADMIN_ACTIVITY_TYPE_YNEVENT_TOPIC_REPLY";"When a user (subject) replies to an event topic (object)."
+"ADMIN_ACTIVITY_TYPE_YNEVENT_TRANSFER";"When a user (subject) transfer the event owner to another user (object)"
+
+"_ACTIVITY_ACTIONTYPE_YNEVENT_TRANSFER";"Transferring event owner to other member"
+"_ACTIVITY_ACTIONTYPE_YNEVENT_CREATE";"New events"
+"_ACTIVITY_ACTIONTYPE_YNEVENT_VIDEO_CREATE";"When a video was created for the event."
+"_ACTIVITY_ACTIONTYPE_YNEVENT_JOIN";"Joining an event"
+"_ACTIVITY_ACTIONTYPE_YNEVENT_PHOTO_UPLOAD";"Uploading a photo to an event"
+"_ACTIVITY_ACTIONTYPE_YNEVENT_TOPIC_CREATE";"Creating an event discussion topic"
+"_ACTIVITY_ACTIONTYPE_YNEVENT_TOPIC_REPLY";"Replying to an event discussion topic"
+
+"ACTIVITY_TYPE_YNEVENT_TRANSFER";"When someone transfer owner of a event to me."
+"ACTIVITY_TYPE_YNEVENT_ACCEPTED";"When my request to attend an event is approved."
+"ACTIVITY_TYPE_YNEVENT_DELETE";"When an event is removed"
+"ACTIVITY_TYPE_YNEVENT_EDIT_DELETE";"When the event the I joined has been moved to another event"
+"ACTIVITY_TYPE_YNEVENT_APPROVE";"When someone request to join my event."
+"ACTIVITY_TYPE_YNEVENT_CREATE";"When a new event is created"
+"ACTIVITY_TYPE_YNEVENT_DISCUSSION_REPLY";"When people reply to discussion topics that I've replied to."
+"ACTIVITY_TYPE_YNEVENT_DISCUSSION_RESPONSE";"When people reply to discussion topics that I create."
+"ACTIVITY_TYPE_YNEVENT_INVITE";"When I'm invited to attend an event."
+"ACTIVITY_TYPE_YNEVENT_JOIN";"When someone joins an event."
+"ACTIVITY_TYPE_YNEVENT_PHOTO_UPLOAD";"When someone uploads a photo to an event."
+"ACTIVITY_TYPE_YNEVENT_TOPIC_CREATE";"When someone creates a new event topic."
+"ACTIVITY_TYPE_YNEVENT_TOPIC_REPLY";"When someone replies to an event topic."
+"ACTIVITY_TYPE_YNEVENT_CHANGE_DETAILS";"When event's owner change an event's details"
+"ACTIVITY_TYPE_YNEVENT_REMIND";"When an event is coming"
+"ACTIVITY_TYPE_YNEVENT_INVITE_MESSAGE";"When I'm invited to attend an event with an included message."
+"ACTIVITY_TYPE_YNEVENT_NOTIFY_START";"When an event was started"
+"ACTIVITY_TYPE_YNEVENT_NOTIFY_END";"When an event was ended"
+
+"Manage Events";"Manage Events"
+"Categories";"Categories"
+"Event Members";"Event Members"
+"Add Category";"Add Category"
+"Member Level";"Member Level"
+"Allow Profile Style";"Allow Profile Style"
+"Category Name";"Category Name"
+"These settings affect all members in your community.";"These settings affect all members in your community."
+"Edit Category";"Edit Category"
+"EVENT_FORM_ADMIN_LEVEL_DESCRIPTION";"These settings are applied on a per member level basis. Start by selecting the member level you want to modify, then adjust the settings for that level below."
+"EVENT_FORM_ADMIN_LEVEL_AUTHVIDEO_DESCRIPTION";"Your users can choose from any of the options checked below when they decide who can create videos in their events. If you do not check any options, all members will be allowed to create videos."
+"Allow Viewing of Events?";"Allow Viewing of Events?"
+"EVENT_FORM_ADMIN_LEVEL_VIEW_DESCRIPTION";"Do you want to let users view events? If set to no, some other settings on this page may not apply."
+"No, do not allow photo events to be viewed.";"No, do not allow photo events to be viewed."
+"Yes, allow viewing and subscription of photo events.";"Yes, allow viewing and subscription of photo events."
+"Yes, allow members to view all events, even private ones.";"Yes, allow members to view all events, even private ones."
+
+"Allow Creation of Events?";"Allow Creation of Events?"
+"EVENT_FORM_ADMIN_LEVEL_CREATE_DESCRIPTION";"Do you want to let users create events? If set to no, some other settings on this page may not apply. This is useful if you want users to be able to view events and manage their subscriptions, but only want certain levels to be able to create events."
+"No, do not allow events to be created.";"No, do not allow events to be created."
+"Yes, allow creation of events.";"Yes, allow creation of events."
+
+"Allow Editing of Events?";"Allow Editing of Events?"
+"Do you want to let users edit and delete events?";"Do you want to let users edit and delete events?"
+"No, do not allow events to be edited.";"No, do not allow events to be edited."
+"Yes, allow  members to edit their own events.";"Yes, allow members to edit their own events."
+
+"Event Privacy";"Event Privacy"
+"YNEVENT_FORM_ADMIN_LEVEL_AUTHVIEW_DESCRIPTION";"Your users can choose from any of the options checked below when they decide who can see their event. If you do not check any options, everyone will be allowed to view events."
+
+"Event Posting Options";"Event Posting Options"
+"YNEVENT_FORM_ADMIN_LEVEL_AUTHCOMMENT_DESCRIPTION";"Your users can choose from any of the options checked below when they decide who can post to their event discussions. If you do not check any options, everyone will be allowed to post."
+
+"Photo Upload Options";"Photo Upload Options"
+"YNEVENT_FORM_ADMIN_LEVEL_AUTHUPHOTO_DESCRIPTION";"Your users can choose from any of the options checked below when they decide who can upload photos to their events. If you do not check any options, all members will be allowed to upload."
+
+"List By:";"List By:"
+"Start Time";"Start Time"
+"Recently Created";"Recently Created"
+"Most Popular";"Most Popular"
+
+"Delete Event?";"Delete Event?"
+"Are you sure that you want to delete this event? It will not be recoverable after being deleted.";"Are you sure that you want to delete this event? It will not be recoverable after being deleted."
+
+"YNEVENT_VIEWS_SCRIPTS_ADMINMANAGE_INDEX_DESCRIPTION";"This page lists all of the event entries your users have posted. You can use this page to monitor these events and delete offensive material if necessary."
+"There are no events posted by your members yet.";"There are no events posted by your members yet."
+
+"YNEVENT_VIEWS_SCRIPTS_ADMINSETTINGS_CATEGORIES_DESCRIPTION";"If you want to allow your users to categorize their events, create the categories below. This feature is useful if you want to list all your users' event that If you have no categories, your users will not be given the option of assigning a event category."
+"There are currently no categories.";"There are currently no categories."
+
+"Delete Event Category?";"Delete Event Category?"
+"Are you sure that you want to delete this category? It will not be recoverable after being deleted.";"Are you sure that you want to delete this category? It will not be recoverable after being deleted."
+"Are you sure that you want to delete this category? <br /> All sub-categories will be deleted. It will not be recoverable after being deleted.";"Are you sure that you want to delete this category? <br /> All sub-categories will be deleted. It will not be recoverable after being deleted."
+
+"ITEM_TYPE_YNEVENT";"Events"
+"ITEM_TYPE_YNEVENT_ALBUM";"Event Albums"
+"ITEM_TYPE_YNEVENT_PHOTO";"Event Photos"
+"ITEM_TYPE_YNEVENT_TOPIC";"Event Discussion Topics"
+"ITEM_TYPE_YNEVENT_POST";"Event Discussion Posts"
+
+"event_activity_ynevent_transfer";"Owner Transfering in event."
+
+"Events Plugin";"Events Plugin"
+"Do you want to let members edit and delete events?";"Do you want to let members edit and delete events?"
+"Allow Deletion of Events?";"Allow Deletion of Events?"
+"Do you want to let members delete events? If set to no, some other settings on this page may not apply.";"Do you want to let members delete events? If set to no, some other settings on this page may not apply."
+"Yes, allow members to delete their own events.";"Yes, allow members to delete their own events."
+"No, do not allow members to delete their events.";"No, do not allow members to delete their events."
+"Allow Commenting on Events?";"Allow Commenting on Events?"
+"Do you want to let members of this level comment on events?";"Do you want to let members of this level comment on events?"
+"Yes, allow members to comment on events.";"Yes, allow members to comment on events."
+"No, do not allow members to comment on events.";"No, do not allow members to comment on events."
+"Friends and Networks (user events only)";"Friends and Networks (user events only)"
+"Friends of Friends (user events only)";"Friends of Friends (user events only)"
+"Friends Only (user events only)";"Friends Only (user events only)"
+"event Members (event events only)";"event Members (event events only)"
+"Event Guests Only";"Event Guests Only"
+"All Guests";"All Guests"
+"Just Me";"Just Me"
+"Yes, allow custom profile styles.";"Yes, allow custom profile styles."
+"No, do not allow custom profile styles.";"No, do not allow custom profile styles."
+
+"Event Profile Discussions";"Event Profile Discussions"
+"Event Profile Info";"Event Profile Info"
+"Event Profile Members";"Event Profile Members"
+"Event Profile Photo";"Event Profile Photo"
+"Event Profile Photos";"Event Profile Photos"
+"Event Profile RSVP";"Event Profile RSVP"
+"Event Profile Status";"Event Profile Status"
+"Profile Events";"Profile Events"
+"Most Rated";"Most Rated"
+"Events Calendar";"Events Calendar"
+"Recent Events";"Recent Events"
+"Most Liked";"Most Liked"
+"Most Attending";"Most Attending"
+"Popular Advanced Events";"Popular Advanced Events"
+"Recent Events";"Recent Events"
+
+"Select a date";"Select a date"
+
+"Please select a time from the dropdown.";"Please select a time from the dropdown."
+"Please select a date from the calendar.";"Please select a date from the calendar."
+
+"%1$s at %2$s";"%1$s at %2$s"
+"Awaiting Reply";"Awaiting Reply"
+"awaiting reply";"awaiting reply"
+
+# categories
+"Arts";"Arts"
+"Business";"Business"
+"Conferences";"Conferences"
+"Festivals";"Festivals"
+"Food";"Food"
+"Fundraisers";"Fundraisers"
+"Galleries";"Galleries"
+"Health";"Health"
+"Just For Fun";"Just For Fun"
+"Kids";"Kids"
+"Learning";"Learning"
+"Literary";"Literary"
+"Movies";"Movies"
+"Museums";"Museums"
+"Neighborhood";"Neighborhood"
+"Networking";"Networking"
+"Nightlife";"Nightlife"
+"On Campus";"On Campus"
+"Organizations";"Organizations"
+"Outdoors";"Outdoors"
+"Pets";"Pets"
+"Politics";"Politics"
+"Sales";"Sales"
+"Science";"Science"
+"Spirituality";"Spirituality"
+"Sports";"Sports"
+"Technology";"Technology"
+"Theatre";"Theatre"
+"Other";"Other"
+"Today";"Today"
+"Sunday";"Sunday"
+"Monday";"Monday"
+"Tuesday";"Tuesday"
+"Wednesday";"Wednesday"
+"Thursday";"Thursday"
+"Friday";"Friday"
+"Saturday";"Saturday"
+"Sun";"Sun"
+"Mon";"Mon"
+"Tue";"Tue"
+"Wed";"Wed"
+"Thu";"Thu"
+"Fri";"Fri"
+"Sat";"Sat"
+" or ";" or "
+"Go";"Go"
+"&#187; Events";"&#187; Events"
+
+"January";"January"
+"February";"February"
+"March";"March"
+"April";"April"
+"May";"May"
+"June";"June"
+"July";"July"
+"August";"August"
+"September";"September"
+"October";"October"
+"November";"November"
+"December";"December"
+
+"Jan";"Jan"
+"Feb";"Feb"
+"Mar";"Mar"
+"Apr";"Apr"
+"May";"May"
+"Jun";"Jun"
+"Jul";"Jul"
+"Aug";"Aug"
+"Sep";"Sep"
+"Oct";"Oct"
+"Nov";"Nov"
+"Dec";"Dec"
+
+"Su";"Su"
+"Mo";"Mo"
+"Tu";"Tu"
+"We";"We"
+"Th";"Th"
+"Fr";"Fr"
+"Sa";"Sa"
+
+# notification types
+"%1$s has invited you to the event %2$s";"%1$s has invited you to the event %2$s"
+"{item:$subject} has {item:$object:posted} on a {itemParent:$object::event topic} you created.";"{item:$subject} has {item:$object:posted} on a {itemParent:$object::event topic} you created."
+"{item:$subject} has {item:$object:posted} on a {itemParent:$object::event topic} you posted on.";"{item:$subject} has {item:$object:posted} on a {itemParent:$object::event topic} you posted on."
+"{item:$subject} has invited you to the event {item:$object}.";"{item:$subject} has invited you to the event {item:$object}."
+"Your request to join the event {item:$subject} has been approved.";"Your request to join the event {item:$subject} has been approved."
+"{item:$subject} has requested to join the event {item:$object}.";"{item:$subject} has requested to join the event {item:$object}."
+"Event {var:$ynevent_title} that you have been joined, is deleted by {item:$subject}.";"Event {var:$ynevent_title} that you have been joined, is deleted by {item:$subject}."
+
+# action types
+"{item:$subject} created a new event:";"{item:$subject} created a new event:"
+"{item:$subject} joined the event {item:$object}";"{item:$subject} joined the event {item:$object}"
+"{item:$subject} added {var:$count} photo(s).";"{item:$subject} added {var:$count} photo(s)."
+"{item:$subject} posted a {item:$object:topic} in the event {itemParent:$object:event}: {body:$body}";"{item:$subject} posted a {item:$object:topic} in the event {itemParent:$object:event}: {body:$body}"
+"{item:$subject} replied to a {item:$object:topic} in the event {itemParent:$object:event}: {body:$body}";"{item:$subject} replied to a {item:$object:topic} in the event {itemParent:$object:event}: {body:$body}"
+
+# mail templates
+
+# notify_ynevent_accepted
+"_EMAIL_NOTIFY_YNEVENT_ACCEPTED_TITLE";"Advanced Event Approved"
+"_EMAIL_NOTIFY_YNEVENT_ACCEPTED_DESCRIPTION";"This email is sent to the member when they are approved to join an event."
+"_EMAIL_NOTIFY_YNEVENT_ACCEPTED_SUBJECT";"You have been approved to join the event [object_title]"
+"_EMAIL_NOTIFY_YNEVENT_ACCEPTED_BODY";"[header]
+
+You have been approved to join the event ""[object_title]"". Please click the following link to view it:
+
+http://[host][object_link]
+
+[footer]"
+
+# notify_ynevent_approve
+"_EMAIL_NOTIFY_YNEVENT_APPROVE_TITLE";"Advanced Event Request"
+"_EMAIL_NOTIFY_YNEVENT_APPROVE_DESCRIPTION";"This email is sent to the member when someone requests to join their event."
+"_EMAIL_NOTIFY_YNEVENT_APPROVE_SUBJECT";"[sender_title] has requested to join the event [object_title]"
+"_EMAIL_NOTIFY_YNEVENT_APPROVE_BODY";"[header]
+
+[sender_title] has requested to join the event ""[object_title]"". Please click the following link to view it:
+
+http://[host][object_link]
+
+[footer]"
+
+# notify_ynevent_discussion_reply
+"_EMAIL_NOTIFY_YNEVENT_DISCUSSION_REPLY_TITLE";"Advanced Event Discussion Reply"
+"_EMAIL_NOTIFY_YNEVENT_DISCUSSION_REPLY_DESCRIPTION";"This email is sent to the member when people reply to discussion topics that the member created."
+"_EMAIL_NOTIFY_YNEVENT_DISCUSSION_REPLY_SUBJECT";"A member has posted a reply to your topic ""[object_title]"" in the event ""[object_parent_title]"""
+"_EMAIL_NOTIFY_YNEVENT_DISCUSSION_REPLY_BODY";"[header]
+
+[sender_title] has posted a reply to your topic ""[object_title]"" in the event ""[object_title]"":
+
+""[message]""
+
+Please click the following link to view it:
+
+http://[host][object_link]
+
+[footer]"
+
+# notify_event_discussion_response
+"_EMAIL_NOTIFY_YNEVENT_DISCUSSION_RESPONSE_TITLE";"Event Discussion Response"
+"_EMAIL_NOTIFY_YNEVENT_DISCUSSION_RESPONSE_DESCRIPTION";"This email is sent to the member when people reply to discussion topics that the member replied to."
+"_EMAIL_NOTIFY_YNEVENT_DISCUSSION_RESPONSE_SUBJECT";"A member has posted a reply to the topic ""[object_title]"" you replied to in the event ""[object_parent_title]"""
+"_EMAIL_NOTIFY_YNEVENT_DISCUSSION_RESPONSE_BODY";"[header]
+
+[sender_title] has posted a reply to the topic ""[object_title]"" you replied to in the event ""[object_parent_title]""":
+
+""[message]""
+
+Please click the following link to view it:
+
+http://[host][object_link]
+
+[footer]"
+
+# notify_event_invite
+"_EMAIL_NOTIFY_EVENT_INVITE_TITLE";"Advanced Event Invitation"
+"_EMAIL_NOTIFY_EVENT_INVITE_DESCRIPTION";"This email is sent to someone when they are invited to an event."
+"_EMAIL_NOTIFY_EVENT_INVITE_SUBJECT";"You have been invited to join the event [object_title]"
+"_EMAIL_NOTIFY_EVENT_INVITE_BODY";"[header]
+
+You have been invited to join the event ""[object_title]"". Please click the following link to view it:
+
+http://[host][object_link]
+
+[footer]"
+
+# notify_ynevent_invite
+"_EMAIL_NOTIFY_YNEVENT_INVITE_TITLE";"Advanced Event Invitation"
+"_EMAIL_NOTIFY_YNEVENT_INVITE_DESCRIPTION";"This email is sent to someone when they are invited to an event."
+"_EMAIL_NOTIFY_YNEVENT_INVITE_SUBJECT";"You have been invited to join the event [object_title]"
+"_EMAIL_NOTIFY_YNEVENT_INVITE_BODY";"[header]
+
+You have been invited to join the event ""[object_title]"". Please click the following link to view it:
+
+http://[host][object_link]
+
+[footer]"
+
+# notify_ynevent_invite_message
+"_EMAIL_NOTIFY_YNEVENT_INVITE_MESSAGE_TITLE";"Advanced Event Invitation With Message"
+"_EMAIL_NOTIFY_YNEVENT_INVITE_MESSAGE_DESCRIPTION";"This email is sent to someone when they are invited to an event."
+"_EMAIL_NOTIFY_YNEVENT_INVITE_MESSAGE_SUBJECT";"You have been invited to join the event [object_title]"
+"_EMAIL_NOTIFY_YNEVENT_INVITE_MESSAGE_BODY";"[header]
+
+You have been invited to join the event ""[object_title]"". Please click the following link to view it:
+
+http://[host][object_link]
+
+----------------------------------------
+[message]
+----------------------------------------
+
+[footer]"
+
+# notify_ynevent_change_details
+"_EMAIL_NOTIFY_YNEVENT_CHANGE_DETAILS_TITLE";"Advanced Event Change Details"
+"_EMAIL_NOTIFY_YNEVENT_CHANGE_DETAILS_DESCRIPTION";"This email is sent to someone when the event they following was changed"
+"_EMAIL_NOTIFY_YNEVENT_CHANGE_DETAILS_SUBJECT";"Details of the event [object_title] has been changed"
+"_EMAIL_NOTIFY_YNEVENT_CHANGE_DETAILS_BODY";"[header]
+
+Details of the event ""[object_title]"" you following has been changed. Please click the following link to view it:
+http://[host][object_link]
+[footer]"
+
+# notify_ynevent_remind
+"_EMAIL_NOTIFY_YNEVENT_REMIND_TITLE";"Advanced Event Remind"
+"_EMAIL_NOTIFY_YNEVENT_REMIND_DESCRIPTION";"This email is sent to someone to remind that an event is coming"
+"_EMAIL_NOTIFY_YNEVENT_REMIND_SUBJECT";"Reminder: The event [object_title] is coming"
+"_EMAIL_NOTIFY_YNEVENT_REMIND_BODY";"[header]
+
+The event ""[object_title]"" is coming. Please click the following link to view it:
+
+http://[host][object_link]
+
+[footer]"
+
+# notify_ynevent_notify_start
+"_EMAIL_NOTIFY_YNEVENT_NOTIFY_START_TITLE";"Advanced Event Notify Start"
+"_EMAIL_NOTIFY_YNEVENT_NOTIFY_START_DESCRIPTION";"This email is sent to someone to remind that an event already started"
+"_EMAIL_NOTIFY_YNEVENT_NOTIFY_START_SUBJECT";"Notification: The event [object_title] already started"
+"_EMAIL_NOTIFY_YNEVENT_NOTIFY_START_BODY";"[header]
+
+The event ""[object_title]"" already started. Please click the following link to view it:
+
+http://[host][object_link]
+
+[footer]"
+
+# notify_ynevent_notify_end
+"_EMAIL_NOTIFY_YNEVENT_NOTIFY_END_TITLE";"Advanced Event Notify End"
+"_EMAIL_NOTIFY_YNEVENT_NOTIFY_END_DESCRIPTION";"This email is sent to someone to remind that an event almost ended"
+"_EMAIL_NOTIFY_YNEVENT_NOTIFY_END_SUBJECT";"Notification: The event [object_title] almost ended"
+"_EMAIL_NOTIFY_YNEVENT_NOTIFY_END_BODY";"[header]
+
+The event ""[object_title]"" almost ended. Please click the following link to view it:
+
+http://[host][object_link]
+
+[footer]"
+
+# notify_ynevent_delete
+"_EMAIL_NOTIFY_YNEVENT_DELETE_TITLE";"Advanced Event was deleted"
+"_EMAIL_NOTIFY_YNEVENT_DELETE_DESCRIPTION";"This email is sent to someone when the event they following was deleted"
+"_EMAIL_NOTIFY_YNEVENT_DELETE_SUBJECT";"The event [object_title] has been deleted"
+"_EMAIL_NOTIFY_YNEVENT_DELETE_BODY";"[header]
+
+Event [object_title] that you have been joined, was deleted .
+
+[footer]"
+
+"You have not joined any events yet.";"You have not joined any events yet."
+"There are no events yet.";"There are no events yet."
+"Why don't you %1$screate one%2$s?";"Why don't you %1$screate one%2$s?"
+"There are no past events yet.";"There are no past events yet."
+"Date Created";"Date Created"
+"You have no friends you can invite.";"You have no friends you can invite."
+
+"Event doesn't exists or not authorized to delete";"Event doesn't exists or not authorized to delete"
+"The selected event has been deleted.";"The selected event has been deleted."
+
+"You have not entered any users or emails to invite joining event !";"You have not entered any users or emails to invite joining event !"
+"Add a person message";"Add a person message"
+"Promote This Calendar";"Promote This Calendar"
+"There is no event in this month";"There is no event in this month"
+"Calendar Box Code";"Calendar Box Code"
+"Popular Events";"Popular Events"
+"Brief Description";"Brief Description"
+"Set 0 for unlimited participants";"Set 0 for unlimited participants"
+"Event Capacity";"Event Capacity"
+"Url";"Url"
+"Who may create videos for this event?";"Who may create videos for this event?"
+"No location was set";"No location was set"
+"Create New Video";"Create New Video"
+"Sponsor Name";"Sponsor Name"
+"Create Sponsor";"Create Sponsor"
+"No sponsors have been added in this event yet.";"No sponsors have been added in this event yet."
+"Sponsors";"Sponsors"
+"This is the profile for an advanced event";"This is the profile for an advanced event"
+"Nearest Location Events";"Nearest Location Events"
+"Within the radius of distance (miles)";"Within the radius of distance (miles)"
+"Radius";"Radius"
+"Number of events in this widget";"Number of events in this widget"
+"Editing: Advanced Event Profile Near Location";"Editing: Advanced Event Profile Near Location"
+"miles";"miles"
+"Who may create videos for this event?";"Who may create videos for this event?"
+"Invited guests can invite events as well";"Invited guests can invite events as well"
+"Set 0 for free";"Set 0 for free"
+"Price";"Price"
+"Location Name";"Location Name"
+"Full Address";"Full Address"
+"Please choose the following events you would like to invite to join this event.";"Please choose the following events you would like to invite to join this event."
+"You have no events you can invite.";"You have no events you can invite."
+"Max 250 characters";"Max 250 characters"
+"Please Select";"Please Select"
+"One Time Event";"One Time Event"
+"Repeating Event";"Repeating Event"
+"Email";"Email"
+"Phone";"Phone"
+"Contact Information";"Contact Information"
+"Add address/city/zip/country";"Add address/city/zip/country"
+"Daily";"Daily"
+"daily";"daily"
+"Weekly";"Weekly"
+"weekly";"weekly"
+"Monthly";"Monthly"
+"monthly";"monthly"
+"Next event";"Next event"
+"End Repeat";"End Repeat"
+"Repeat";"Repeat"
+"Value is required and can't be empty";"Value is required and can't be empty"
+"does not appear to be a float";"does not appear to be a float"
+"Invite your events";"Invite your events"
+"Please choose the following events you would like to invite to join this event.";"Please choose the following events you would like to invite to join this event."
+"You have no events you can invite.";"You have no events you can invite."
+"cancel";"canel"
+"Send Invites";"Send Invites"
+"Choose All events";"Choose All events"
+"Message is sent successfully";"Message is sent successfully"
+"Please choose at least a event to send invite!";"Please choose at least a event to send invite!"
+"There is no video found";"There is no video found"
+"Invite events";"Invite events"
+"Promote This Event";"Promote This Event"
+"Keyword";"Keyword"
+"Address";"Address"
+"Country";"Country"
+"City";"City"
+"Mile(s) from Zip/Postal Code";"Mile(s) from Zip/Postal Code"
+"Zip/Postal Code";"Zip/Postal Code"
+"Search";"Search"
+"Add Sponsor";"Add Sponsor"
+"Delete Event Sponsor?";"Delete Event Sponsor?"
+"Are you sure that you want to delete the event sponsor? It will not be recoverable after being deleted.";"Are you sure that you want to delete the event sponsor? It will not be recoverable after being deleted."
+"Link";"Link"
+"Event {item:$object} is changed by {item:$subject}.";"Event {item:$object} is changed by {item:$subject}."
+"Event {var:$ynevent_title} that you have been joined is deleted by {item:$subject}.";"Event {var:$ynevent_title} that you have been joined is deleted by {item:$subject}."
+"Event {var:$ynevent_title} that you have been joined is moved to {item:$object} by {item:$subject}.";"Event {var:$ynevent_title} that you have been joined is moved to {item:$object} by {item:$subject}."
+"Longitude";"Longitude"
+"Latitude";"Latitude"
+"Refresh map";"Refresh map"
+"Add this location";"Add this location"
+"Only this event";"Only this event"
+"All events";"All events"
+"Following events";"Following events"
+"Please select";"Please select"
+"No location was set";"No location was set"
+"more";"more"
+"less";"less"
+"Please choose the type of event to delete";"Please choose the type of event to delete"
+"Event Box Code";"Event Box Code"
+"Options to show:";"Options to show:"
+"Added Successfully";"Added Successfully"
+"Edit Sponsor";"Edit Sponsor"
+"Video Creation";"Video Creation"
+"Please enter the address";"Please enter the address"
+"not found";"not found"
+"Create";"Create"
+"cancel";"cancel"
+" or ";" or "
+"Deleted Successfully";"Deleted Successfully"
+"{item:$subject} posted a new video:";"{item:$subject} posted a new video:"
+"Please enter the zipcode/postal code";"Please enter the zipcode/postal code"
+"Please enter the <b>Zip/Postal code</b> to search with <b>Mile(s) from Zip/Postal Code</b>";"Please enter the <b>Zip/Postal code</b> to search with <b>Mile(s) from Zip/Postal Code</b>"
+"View more";"View more"
+"There is no video found.";"There is no video found."
+"More at";"More at"
+"Liked";"Liked"
+"You are allowed creating only %s event in the repeat chain.";"You are allowed creating only %s event in the repeat chain.";"You are allowed creating only %s events in the repeat chain."
+"{item:$subject} posted a new video:";"{item:$subject} posted a new video:"
+"Start time of the event must be less than the end repeat time";"Start time of the event must be less than the end repeat time"
+"There were no events found matching your search criteria.";"There were no events found matching your search criteria."
+"You have not led any events yet.";"You have not led any events yet."
+"This event has 0 guests that match your search criteria.";"This event has 0 guests that match your search criteria."
+"EVENT_FIELDS_VIEWS_SCRIPTS_ADMINFIELDS_DESCRIPTION":"Your members will be asked to provide some information about their event information when creating a new event. Create some event questions that allow them to describe their event in a way that relates to the theme of your community. To reorder the event questions, click on their names and drag them up or down."
+"Current location...";"Current location..."
+"Radius (mile)";"Radius (mile)"
+"Enter a location";"Enter a location"
+"Write Review";"Write Review"
+"Submit";"Submit"
+"Sent report successfully.";"Sent report successfully."
+"EVENT_FORM_ADMIN_LEVEL_AUTHFILE_DESCRIPTION";"Your users can choose from any of the options checked below when they decide who can upload files in their events. If you do not check any options, all members will be allowed to create files."
+"(Enter up to %s specific instances)";"(Enter up to %s specific instances)"

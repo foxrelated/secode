@@ -1,0 +1,441 @@
+/* $Id: mobile.css 2010-11-04 9:40:21Z SocialEngineAddOns Copyright 2009-2010 BigStep Technologies Pvt. Ltd. $ */
+
+/*icons*/
+.icon_type_blog_likes{
+	background-image: url(~/application/modules/Sitelike/externals/images/likes_blog.png);
+}
+.icon_type_suggestion_likes{
+	background-image: url(~/application/modules/Sitelike/externals/images/like_blub.png);
+}
+.icon_type_classified_likes{
+	background-image: url(~/application/modules/Sitelike/externals/images/likes_classified.png);
+}
+.icon_type_video_likes{
+	background-image: url(~/application/modules/Sitelike/externals/images/likes_video.png);
+}
+.icon_type_poll_likes{
+	background-image: url(~/application/modules/Sitelike/externals/images/likes_poll.png);
+}
+.item_icon_sitepage_album,.event,.group,
+.icon_type_album_likes{
+	background-image: url(~/application/modules/Sitelike/externals/images/likes_album.png);
+}
+.icon_type_music_likes{
+	background-image: url(~/application/modules/Sitelike/externals/images/likes_music.png);
+}
+.icon_type_forum_likes{
+	background-image: url(~/application/modules/Sitelike/externals/images/likes_forum.png);
+}
+.icon_type_list_likes{
+	background-image: url(~/application/modules/Sitelike/externals/images/list.png);
+}
+.icon_type_group_likes{
+	background-image: url(~/application/modules/Sitelike/externals/images/likes_group.png);
+}
+.icon_type_message_likes{
+	background-image: url(~/application/modules/Sitelike/externals/images/likes_message.png);
+}
+.icon_type_document_likes{
+	background-image: url(~/application/modules/Sitelike/externals/images/document.png);
+}
+.activity_icon_like_item, .activity_icon_like_sitelike{
+	background-image: url(~/application/modules/Sitelike/externals/images/like.png);
+}
+.icon_type_recipe_likes{
+	background-image: url(~/application/modules/Sitelike/externals/images/recipe.png);
+}
+.icon_type_sitepagenote_likes{
+	background-image: url(~/application/modules/Sitelike/externals/images/sitepagenote.png);
+}
+.icon_type_sitepagereview_likes{
+	background-image: url(~/application/modules/Sitelike/externals/images/review.png);
+}
+.icon_type_photo_likes, .item_icon_list_photo, .item_icon_sitepagenote_photo, .item_icon_recipe_photo{
+	background-image: url(~/application/modules/Sitelike/externals/images/likes_photo.png);
+}
+
+/*activity icon type liked*/
+.notification_type_liked, .notification_type_liked_commented, .activity_icon_like_recipe, .activity_icon_like_user, .activity_icon_like_poll, .item_icon_like, .activity_icon_like_classified, .activity_icon_like_blog, .activity_icon_like_sitepage_page, .activity_icon_like_list_listing, .activity_icon_like_album, .activity_icon_like_album_photo, .activity_icon_like_playlist, .activity_icon_like_video, .activity_icon_like_event, .activity_icon_like_event_photo, .activity_icon_like_group, .activity_icon_like_group_photo, .activity_icon_like_document, .activity_icon_like_forum_topic, .activity_icon_like_sitepage_album, .activity_icon_like_sitepage_photo,  .activity_icon_like_sitepagepoll_poll {
+	background-image: url(~/application/modules/Sitelike/externals/images/like.png) !important;
+}
+.tag_likes{
+	background-image: url(~/application/modules/Sitelike/externals/images/thumb-up.png);
+	background-position:4px center;
+	background-repeat:no-repeat;
+	padding-left:25px !important;
+}
+/* MOST LIKES WIDGET */
+ul.layout_sitelike_list_like_widget > li.sitelike_tabs_content > ul > li{
+	clear: both;
+	overflow: hidden;
+	padding: 3px 5px 3px 5px;
+}
+ul.layout_sitelike_list_like_widget div.sitelike_thumb{
+  float: left;
+  display: block;
+	margin-right:6px;
+}
+ul.layout_sitelike_list_like_widget div.sitelike_thumb img{
+	width:48px;
+	height:48px;
+}
+ul.layout_sitelike_list_like_widget .sitelike_info{
+	overflow: hidden;
+}
+ul.layout_sitelike_list_like_widget .sitelike_title{
+	font-weight: bold;
+}
+ul.layout_sitelike_list_like_widget .sitelike_stats{
+	color: $theme_font_color_light;
+	font-size: .8em;
+	float:left;
+	margin-top:7px;
+}
+ul.layout_sitelike_list_like_widget > li.sitelike_tabs_content > ul > div > ul > li.likes_view_thumb{
+	float:left;
+	clear:none;
+	padding:4px 6px;
+}
+ul.layout_sitelike_list_like_widget > li.sitelike_tabs_content > ul > div > ul > li.likes_view_thumb a > img{
+	width:48px;
+	height:48px;
+}
+ul.layout_sitelike_list_like_widget .sitelike_stats .buttonlink{
+	line-height:16px;
+}
+ul.layout_sitelike_list_like_widget .sitelike_info .sitelike_button{
+	float:right;
+	margin:3px 10px 5px 0;
+}
+.layout_sitelike_list_like_widget .tip{
+	margin:2px;
+	margin-left:15px;
+}
+ul.layout_sitelike_list_like_widget .tip span{
+	font-size:.8em;
+	margin:0;
+}
+/* BROWSE LIKE ITEMS */
+.layout_sitelike_browse_list_like_widget .tabs_alt{
+	margin-bottom:5px;
+}
+.layout_sitelike_browse_list_like_widget > ul > li{
+	clear: both;
+	overflow: hidden;
+	padding:10px 5px;
+	border-bottom-width:1px;
+}
+.layout_sitelike_browse_list_like_widget > div > div > ul > li.likes_view_thumb{
+	float:left;
+	clear:none;
+	padding:4px 6px;
+}
+.layout_sitelike_browse_list_like_widget div.sitelike_thumb{
+	float: left;
+	display: block;
+}
+.layout_sitelike_browse_list_like_widget div.sitelike_thumb > img{
+	height:48px;
+	width:48px;
+}
+.layout_sitelike_browse_list_like_widget .sitelike_info{
+	padding: 0px 0px 0px 6px;
+	overflow: hidden;
+	float:left;
+}
+.layout_sitelike_browse_list_like_widget .sitelike_title{
+	font-weight: bold;
+	max-width:320px;
+}
+.layout_sitelike_browse_list_like_widget .sitelike_stats{
+	color: $theme_font_color_light;
+	font-size: .8em;
+	float:left;
+	margin-top:3px;
+}
+.layout_sitelike_browse_list_like_widget .sitelikes_right_links{
+	float:right;
+}
+.layout_sitelike_browse_list_like_widget .sitelikes_right_links .likes_link{
+	float:right;
+}
+.layout_sitelike_browse_list_like_widget .sitelikes_right_links .likes_link .buttonlink{
+	line-height:16px;
+	font-size:11px;
+}
+.layout_sitelike_browse_list_like_widget .sitelikes_right_links .sitelike_button{
+	float:right;
+	margin:5px 0 0;
+	clear:both;
+}
+/* LIKES TOOLTIP*/
+div.jq-checkpointSubhead{
+	display:none;
+}
+div.jq-checkpointSubhead{
+	position:absolute;
+	z-index:100;
+	margin-left:-70px;
+}
+.sitelikes_tooltip_content_outer{
+	-moz-border-radius:3px 3px 3px 3px;
+	display: block;
+	background: #222;
+	color: #fff;
+	text-align: left;
+	padding: 5px;
+	width: 170px;
+	font-size: .8em;
+	margin:0;
+	-moz-box-shadow:3px 3px 3px #bcbcbc;
+	-webkit-box-shadow:3px 3px 3px #bcbcbc;
+	box-shadow: 3px 3px 3px #bcbcbc;
+	float:left;
+}
+.sitelikes_tooltip_content_outer .sitelikes_tooltip_content_inner{
+	width:160px;
+	float:left;
+	background:#ffffff;
+	padding:5px;
+	position:relative;
+}
+.sitelikes_tooltip_content_outer .sitelikes_tooltip_content_inner .tooltip_arrow{
+	position:absolute;
+	width:100%;
+	text-align:center;
+	top:-18px;
+}
+.sitelikes_tooltip_content_outer .sitelikes_tooltip_content_inner .tooltip_arrow img{
+	border:none;
+	width:13px;
+	height:9px;
+	float:none;
+}
+.sitelikes_tooltip_content_outer .sitelikes_tooltip_content_inner .tooltip_sitelike_title{
+	font-weight:bold;
+	color:#398bcc !important;
+}
+.sitelikes_tooltip_content_outer .sitelikes_tooltip_content_inner .tooltip_sitelike_title a{
+	color:#398bcc !important;
+}
+.sitelikes_tooltip_content_outer .sitelikes_tooltip_content_inner .tooltip_sitelikes_stat{
+	font-size: .8em;
+	color:#acacac;
+	float:left;
+	margin-top:10px;
+	font-weight:bold;
+}
+.sitelikes_tooltip_content_outer .sitelikes_tooltip_content_inner .sitelike_button{
+	float:right;
+	margin:6px 20px 5px 0;
+}
+/* LIKE BUTTON */
+.sitelike_button a{
+	padding:3px 5px;
+	text-decoration:none;
+	font-weight:bolder;
+	border:1px solid #cecece;
+	clear:both;
+	font-size:11px;
+	float:left;
+	outline:none;
+	background-image:url(~/application/modules/Sitelike/externals/images/sitelike_button_bg.png) !important;
+}
+.sitelike_button a:hover{
+	text-decoration:none;
+	background-image:url(~/application/modules/Sitelike/externals/images/sitelike_button_hover_bg.png) !important;
+}
+.sitelike_button a i.like_thumbup_icon{
+	height:13px;
+	width:13px;
+	float:left;
+	margin-right:5px;
+}
+.sitelike_button a i.like_thumbdown_icon{
+	height:13px;
+	width:13px;
+	float:left;
+	margin-right:5px;
+}
+.sitelike_button a span{
+	float:left;
+}
+/* MEMBER LIKES WIDGETS */
+.layout_sitelike_common_friend_like, .layout_sitelike_common_like, .layout_sitelike_profile_user_likes{
+	margin-top:10px;
+	margin-bottom:10px;
+	clear:both;
+}
+ul.sitelike_users_block{
+	+foreground;
+	+rounded;
+	padding: 5px;
+}
+.sitelike_users_block_links{
+	overflow:auto;
+	padding:0 3px;
+	font-weight:bold;
+}
+ul.sitelike_users_block .sitelike_users_block_links > a{
+	margin:2px 0;
+	font-size:11px;
+}
+ul.sitelike_users_block > li{
+	clear: both;
+	overflow: hidden;
+}
+ul.sitelike_users_block .likes_member_list{
+	float:left;
+	width:48px;
+	padding:5px;
+	overflow:hidden;
+}
+ul.sitelike_users_block .likes_member_list .likes_member_thumb{
+	float: left;
+	display: block;
+	width: 48px;
+	height: 48px;
+	margin-bottom:3px;
+}
+ul.sitelike_users_block .likes_member_list .likes_member_thumb img{
+	height:48px;
+	width:48px;
+}
+ul.sitelike_users_block .likes_member_list .likes_member_name{
+	font-size:11px;
+	float:left;
+	text-align:center;
+	width:100%;
+}
+/* LIKES POPUP */
+.popup_like_button{
+	float:right;
+}
+.sitelike_members_popup_bottom{
+	width:560px;
+	margin:0px 0 0 10px;
+	float:left;
+	padding:5px;
+	text-align:right
+}
+.layout_sitelike_common_like_button{
+	overflow:hidden;
+}
+.layout_sitelike_common_like_button .sitelike_button {
+	margin:0px 10px;
+}
+/* CSS OVERRIDES */
+.layout_list_profile_status, .layout_event_profile_status, .layout_user_profile_status, .layout_group_profile_status {
+	float:left;
+}
+.layout_core_container_tabs{
+	clear:both;
+}
+#display_like_unlike_link .sitelike_button {
+	float: right;
+	margin-left: 15px;
+}
+/* LIKE USER LIKES PAGES */
+.sitelike_likes_content{
+	overflow:hidden;
+}
+.sitelike_likes_content .paging{
+	clear:both;
+	margin:10px 0;
+}
+.sitelike_likes_content .list_items{
+	padding:10px 5px;
+	border-bottom-width:1px;
+	overflow:hidden;
+}
+.sitelike_likes_content .list_items .item_photo{
+	float:left;
+	margin-right:10px;
+}
+.sitelike_likes_content .list_items .item_photo .thumb_normal{
+	width:100px;
+}
+.sitelike_likes_content .list_items .item_details{
+	overflow:hidden;
+}
+.sitelike_likes_content .list_items .item_title{
+	font-weight:bold;
+	max-width:100%;
+}
+.sitelike_likes_content .list_items .item_stat{
+	color: $theme_font_color_light;
+	font-size: .8em;
+	float:left;
+	margin-top:5px;
+}
+.sitelike_likes_content .list_items .item_list_right{
+	float:right;
+	text-align:right;
+}
+.sitelike_likes_content .list_items .item_list_right .sitelike_button{
+	float:right;
+	margin-top:5px;
+}
+.sitelike_likes_content .list_items .item_list_right .sugg_friend{
+	float:right;
+	clear:both;
+	margin-top:5px;
+}
+/*css for member like me */
+.sitelike_member_likes_user_tabs {
+	+rounded(3px);
+	+foreground;
+	padding:5px;
+	overflow:hidden;
+}
+.sitelike_member_likes_user_tabs input{
+	background-image: url(~/application/modules/Sitelike/externals/images/search.png);
+	background-position:0 50%;
+	padding-left:17px;
+	width:200px;
+	background-repeat:no-repeat;
+}
+.sitelike_member_likes_user_tabs .link{
+	float:left;
+}
+.sitelike_member_likes_user_tabs .link a{
+	+rounded;
+	display: block;
+	padding: 3px 5px;
+	font-weight: bold;
+	text-decoration: none;
+	color: $theme_buttontabs_font_color;
+	background-color: $theme_buttontabs_background_color;
+	float:left;
+	margin-right:10px;
+}
+.sitelike_member_likes_user_tabs a.selected{
+	background-color: $theme_buttontabs_background_color_active;
+	color: $theme_buttontabs_font_color_active;
+}
+.sitelike_member_likes_user_tabs a.right-link{
+	float:right;
+	margin-right:10px;
+	margin-top:3px;
+}
+#global_page_sitelike-index-memberlike .sitelike_likes_content .list_items{
+	float: left !important;
+	height: 60px;
+	width: 90%;
+}
+.sitelike_likes_content .list_items .friends_option{
+	display:none;
+}
+/* MESSAGE POPUP */
+#likes_forum_num_likes{
+	+foreground;
+	background-image: none;
+	border: none;
+	padding: 5px;
+	border-top: 1px solid $theme_foreground_border_color;
+	overflow: hidden;
+	margin-bottom: 1px;
+	font-size:.8em;
+	width:400px;
+	font-weight:bold;
+}

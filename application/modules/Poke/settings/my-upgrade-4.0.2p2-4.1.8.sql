@@ -1,0 +1,1 @@
+UPDATE `engine4_activity_actiontypes` SET `body` = '{item:$subject} poked {item:$object}.' WHERE `engine4_activity_actiontypes`.`type` = 'Poke';

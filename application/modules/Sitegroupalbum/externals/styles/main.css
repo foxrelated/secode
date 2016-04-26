@@ -1,0 +1,24 @@
+
+.item_icon_sitegroup_album, .notification_type_sitegroupalbum_create{
+  background-image: url(~/application/modules/Sitegroup/externals/images/photo/view.png);
+}
+/* Activity Feed Album */
+ul.feed .feed_attachment_sitegroup_photo {
+	display: inline-block;
+	overflow: hidden;
+	margin: 0px 0px 5px 0px;
+	vertical-align: top;
+}
+ul.feed .feed_attachment_sitegroup_photo a {
+	display: block;
+	float: left;
+}
+ul.feed .feed_attachment_sitegroup_photo a > img {
+	display: inline-block;
+	max-width: 90px;
+	max-height: 90px;
+	vertical-align: top;
+}
+#sitegroupalbum-wrapper {
+    display: none; 
+}

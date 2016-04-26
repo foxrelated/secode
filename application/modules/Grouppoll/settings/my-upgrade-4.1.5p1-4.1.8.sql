@@ -1,0 +1,1 @@
+ALTER TABLE `engine4_grouppoll_polls` ADD `closed` INT( 11 ) NOT NULL DEFAULT '0' AFTER `approved`;

@@ -1,0 +1,40 @@
+#news_navigation .about > * 
+{
+	background: #eee;
+}
+#news_navigation-slideshow {
+	width: 530px;
+	height: 150px;
+	float: left;
+	margin-bottom: 15px;
+	clear:both;
+}
+#news_navigation-slideshow span {
+	position: absolute;
+	left: 0;
+	right: 0;
+}
+
+#news_navigation-slideshow ul.news_pagination {
+	float: right;
+	position: absolute;
+	right: 5px;
+	top: -25px;
+}
+#news_navigation-slideshow .news_pagination li {
+	display: inline-block;
+}
+#news_navigation-slideshow .news_pagination a {
+	display: block;
+	width: 12px;
+	height: 0;
+	padding-top: 12px;
+	background-image: url(~/application/modules/Ultimatenews/externals/images/pagination.png);
+	background-position: 0 0;
+	float: left;
+	overflow: hidden;
+}
+#news_navigation-slideshow .news_pagination a:hover, 
+#news_navigation-slideshow .news_pagination a.current {
+	background-position: 0 -12px;
+}

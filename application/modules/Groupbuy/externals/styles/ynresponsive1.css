@@ -1,0 +1,590 @@
+ul.generic_list_widget li div.groupbuy_widget_info div.groupbuy_widget_photo .groupbuy_widget_info_photo a img,
+.layout_groupbuy_search_listing_deals img.deal_thumb_medium,
+.layout_groupbuy_profile_buy_deals img.deal_thumb_medium, 
+.layout_groupbuy_profile_sell_deals img.deal_thumb_medium, 
+.layout_groupbuy_listing_deals img.deal_thumb_medium 
+{
+    width: 100%;
+}
+.layout_groupbuy_email_form #subscription_email_form p.form-description
+{
+	width: auto;
+}
+
+ul.generic_list_widget li div.groupbuy_widget_info div.groupbuy_widget_photo .groupbuy_widget_info_photo a,
+ul.groupbuy_list>li>div.groupbuy_browse_photo a 
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+ul.generic_list_widget li div.groupbuy_widget_info div.groupbuy_widget_photo {
+    height:  140px;
+}
+
+ul.groupbuy_list>li>div.groupbuy_browse_photo {
+    height: 185px;
+}
+
+ul.groupbuy_list .groupbuy_browse_info p {
+    margin: 0;
+}
+
+/*** update 2014/02/10 ***/
+ul.groupbuy_list .groupbuy_browse_info p.groupbuy_browse_info_title {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+#global_page_groupbuy-index-statistic .admin_search {
+    max-width: 100% !important;
+}
+
+.layout_groupbuy_featured_deals div.groupbuy_valueprice_info dl.groupbuy_valueprice_block:last-child > dt, 
+.layout_groupbuy_featured_deals dl#groupbuy_save_price_block > dt:first-child, 
+.layout_groupbuy_featured_deals dl.groupbuy_valueprice_block dt.fixcss {
+    width: auto;
+}
+/*** ./end update 2014/02/10 ***/
+
+dl.groupbuy_valueprice_block dd {
+    float: right;
+    margin-right: 10px;
+}
+
+div.groupbuy_valueprice div.imgbutton {
+    border: 2px solid #fff;
+    background: #f00;
+    background-image: none !important;
+    padding-left: 0px !important;
+    text-align: center;
+    border-radius: 20px;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+
+.groupbuy_detail_description_right {
+    padding: 20px 15px 15px 15px;
+}
+
+div.groupbuy_map_canvas_featured,
+div#groupbuy_google_map_component {
+    max-width: 100%;
+}
+
+.groupbuy_buy_it {
+    height: 28px;
+    padding-left: 30px;
+    width: 180px;
+}
+
+.groupbuy_detail_left dl,
+.groupbuy_detail_left dt,
+.layout_groupbuy_featured_deals dl, 
+.layout_groupbuy_featured_deals dt {
+    margin: 0px;
+    padding: 0px;
+}
+
+/**** fix slide show ***/
+#global_page_groupbuy-index-detail div.groupbuy_detail_left,
+div.groupbuy_feature_left {
+    width: 250px;
+    padding-left: 10px;
+    margin-right: 7px;
+}
+
+div.groupbuy_detail_left div.groupbuy_detail_timerleft,
+div.groupbuy_feature_left div.groupbuy_timerleft {
+    width: 100%;
+}
+
+div.groupbuy_detail_left dl#groupbuy_discount_block,
+div.groupbuy_feature_left dl#groupbuy_discount_block {
+    height: 84px;
+    top: 0px;
+}
+
+
+div.groupbuy_valueprice_info dl.groupbuy_valueprice_block:last-child > dt,
+dl#groupbuy_save_price_block > dt:first-child,
+dl.groupbuy_valueprice_block dt.fixcss {
+    width: 60px;
+    padding-left: 5px;
+}
+
+/*** update 2014/02/10 ***/
+dl.groupbuy_valueprice_block {
+    width: 71%;
+}
+
+div.groupbuy_valueprice_info dl.groupbuy_valueprice_block:last-child > dt,
+dl#groupbuy_save_price_block > dt:first-child, {
+    width: auto;
+    float: left;
+}
+
+#groupbuy_save_price_block dt {
+    padding-top: 10px;
+}
+/*** ./end update 2014/02/10 ***/
+
+div.groupbuy_valueprice {
+    width: auto;
+    min-width: 280px;
+    margin-bottom: 6px;
+}
+
+#global_page_groupbuy-index-detail div.groupbuy_detail_slideshow #myGallery, 
+#global_page_groupbuy-index-detail #myGallerySet, 
+#global_page_groupbuy-index-detail #flickrGallery,
+div.groupbuy_feature_slideshow #myGallery, #myGallerySet, #flickrGallery {
+    overflow: hidden;
+    width: auto;
+} 
+
+/***** fix form *****/
+#global_page_groupbuy-index-buygift textarea {
+    max-width: 100%;
+}
+
+#global_page_groupbuy-index-buygift button {
+    color: #fff;
+}
+
+.layout_groupbuy_search_listing_deals ul.groupbuy_list>li {
+    width: 23%;
+}
+.layout_groupbuy_profile_buy_deals ul.groupbuy_list>li, 
+.layout_groupbuy_profile_sell_deals ul.groupbuy_list>li 
+{
+    width: 31%;
+    margin: 0px 0px 16px 16px;
+    height: auto;
+}
+.layout_groupbuy_listing_deals ul.groupbuy_list>li 
+{
+	margin: 0px 0px 16px 16px !important; /*** update 2014/02/10 ***/
+	width: 47.47%;
+}
+
+/***** fix share *****/
+.addthis_32x32_style .addthis_counter.addthis_bubble_style {
+    width: 64px !important;
+}
+
+#global_page_groupbuy-index-transaction .admin_table {
+    width: 100%;
+}
+
+#global_page_groupbuy-index-create #deals_create div[id$=time-wrapper] select {
+    width: 65px;   
+}
+
+#global_page_groupbuy-index-create #deals_create > div > div {
+    width: 100%;
+}
+
+#global_page_groupbuy-index-statistic div.admin_search div.form-elements > div {
+    display: inline-block;
+    float: inherit !important;
+}
+
+#global_page_groupbuy-index-statistic div.buttons #minh {
+    float: none !important;
+}
+
+div[class^=layout_groupbuy_profile] .layout_middle {
+    overflow: hidden;
+}
+
+#global_page_groupbuy-index-statistic div.admin_search div.form-elements,
+div[class^=layout_groupbuy_profile] ul.groupbuy_list>li>div.groupbuy_browse_photo {
+    height: auto !important;
+}
+
+#global_page_groupbuy-index-buygift .global_form_popup {
+    max-width: 100%;
+}
+.groupbuy_detail_description_right
+{
+	background: none;
+}
+table.admin_table thead tr th,
+#global_page_groupbuy-account-index table tbody tr:first-child
+{
+	background-color: $theme_link_color !important;
+	border-bottom: 1px solid transparent!important;
+	color: $theme_body_background_color !important;
+}
+#global_page_groupbuy-account-index table tbody tr:first-child th
+{
+	color: $theme_body_background_color !important;
+}
+ul.groupbuy_list > li
+{
+	border: 1px solid $theme_link_color !important;
+}
+
+@media (max-width: 1024px)
+{
+	.layout_groupbuy_search_listing_deals ul.groupbuy_list>li 
+  {
+      width: 31%;
+  }
+  .layout_groupbuy_profile_buy_deals ul.groupbuy_list>li, 
+  .layout_groupbuy_profile_sell_deals ul.groupbuy_list>li 
+	{
+		width: 31%;
+		margin: 0px 0px 10px 10px;
+	}
+}
+
+@media (max-width: 991px)
+{
+    #global_page_groupbuy-index-manage-selling .layout_right 
+    {
+        position: relative;
+    }
+    
+    .layout_groupbuy_search_listing_deals ul.groupbuy_list>li 
+    {
+        width: 46%;
+    }
+    
+    #global_page_groupbuy-index-manage-buying .layout_middle,
+    body[id^=global_page_groupbuy] #global_content { position: relative; }
+    
+    body[id^=global_page_groupbuy] #global_content .layout_right { top: 64px; right: 15px; }
+    
+    #global_page_groupbuy-index-transaction .admin_table tr th:last-child,
+    #global_page_groupbuy-index-transaction .admin_table tr th:first-child + th,
+    #global_page_groupbuy-index-transaction .admin_table tr th:first-child + th + th,
+    #global_page_groupbuy-index-transaction .admin_table tr td:last-child,
+    #global_page_groupbuy-index-transaction .admin_table tr td:first-child + td,
+    #global_page_groupbuy-index-transaction .admin_table tr td:first-child + td + td {
+        display: none;
+    }
+        
+    #global_page_groupbuy-index-statistic .admin_table tr th:first-child,
+    #global_page_groupbuy-index-statistic .admin_table tr th:first-child + th + th,
+    #global_page_groupbuy-index-statistic .admin_table tr td:first-child,
+    #global_page_groupbuy-index-statistic .admin_table tr td:first-child + td + td {
+        display: none;
+    }
+    .layout_groupbuy_profile_buy_deals ul.groupbuy_list>li, 
+	  .layout_groupbuy_profile_sell_deals ul.groupbuy_list>li 
+		{
+			width: 47%;
+			margin: 0px 0px 10px 10px;
+		}
+}
+
+
+@media (max-width: 767px) 
+{
+    body[id^=global_page_groupbuy] #global_content .layout_right { top: 64px; right: 0px; }
+    
+    .groupbuy_detail_description_left,
+    .groupbuy_detail_description_right,
+    div.groupbuy_detail_fineprint,
+    div.detail_hightlight,
+    div.groupbuy_feature_hightlight,
+    div.groupbuy_feature_fineprint 
+    {
+        float: inherit;
+        width: 100%;      
+        padding: 5px 0;
+        border: 0;  
+    }
+    .groupbuy_detail_description_right 
+    {
+        margin: 0;
+    }
+    
+    .layout_groupbuy_search_listing_deals ul.groupbuy_list>li 
+    {
+        float: inherit;
+        width: 100%;
+        margin: 10px 0 !important;
+    }
+    .layout_groupbuy_profile_buy_deals  ul.groupbuy_list>li,
+    .layout_groupbuy_profile_sell_deals  ul.groupbuy_list>li
+    {
+    	width: 46%;
+    }
+    
+    div.groupbuy_feature_left,
+    #global_page_groupbuy-index-detail div.groupbuy_detail_left,
+    #global_page_groupbuy-index-detail div.groupbuy_detail_slideshow #myGallery, 
+    #global_page_groupbuy-index-detail #myGallerySet, 
+    #global_page_groupbuy-index-detail #flickrGallery,
+    div.groupbuy_feature_slideshow #myGallery, #myGallerySet, #flickrGallery {
+        float: inherit;
+        width: 100%;
+        padding: 0;
+    }
+    
+    div.groupbuy_detail_slideshow,
+    div.groupbuy_feature_slideshow {
+        position: relative;
+    }
+    
+    #global_page_groupbuy-index-detail div.groupbuy_detail_left,
+    div.groupbuy_feature_left {
+        padding-top: 366px !important;
+    }
+    
+    #global_page_groupbuy-index-detail div.groupbuy_detail_slideshow #myGallery, 
+    #global_page_groupbuy-index-detail #myGallerySet, 
+    #global_page_groupbuy-index-detail #flickrGallery,
+    div.groupbuy_feature_slideshow #myGallery, #myGallerySet, #flickrGallery {
+        position: absolute;
+        top: 0px;
+    }
+    
+    div.groupbuy_valueprice {
+        background: #55677a;
+        min-width: 0;
+    }
+    
+    .groupbuy_valueprice_price div.imgbutton {
+        float: right;
+        margin-right: 20px;
+        
+    }
+    
+    body[id^=global_page_groupbuy] .layout_groupbuy_search_deals div.form-elements {
+        height: auto !important;
+    }
+    
+    .nomobile {
+    	display: none !important;
+    } 
+    
+	body[id^=global_page_groupbuy] ul.groupbuy_browse > li	{
+		position: relative;
+	}
+
+	body[id^=global_page_groupbuy] ul.groupbuy_browse .groupbuy_browse_info {
+		padding-bottom: 30px;
+	}
+
+	body[id^=global_page_groupbuy] ul.groupbuy_browse > li .groupbuy_browse_options {
+		position: absolute;
+		bottom: 5px;
+		right: 0;
+		width: auto;
+	}
+
+	ul.groupbuy_browse > li .groupbuy_browse_options>a {
+		display: inline-block;
+	}
+
+	/* hide technical btn */
+	ul.groupbuy_browse > li .groupbuy_browse_options>a.buttonlink.icon_groupbuy_photo_new,
+	ul.groupbuy_browse > li .groupbuy_browse_options>a.buttonlink.icon_groupbuy_edit {
+		display: none !important;
+	}
+    
+    .layout_groupbuy_search_listing_deals ul.groupbuy_list>li {
+        width: 100%;
+    }
+    .layout_groupbuy_listing_deals ul.groupbuy_list>li 
+		{
+			 	width: 100%;
+        margin: 10px  0!important;
+		}
+    
+    #global_page_groupbuy-index-transaction .admin_table tr th:first-child + th + th + th,
+    #global_page_groupbuy-index-transaction .admin_table tr th:first-child + th + th + th + th,
+    #global_page_groupbuy-index-transaction .admin_table tr td:first-child + td + td + td,
+    #global_page_groupbuy-index-transaction .admin_table tr td:first-child + td + td + td + td,
+    #global_page_groupbuy-index-statistic .admin_table tr th:first-child + th + th + th + th,
+    #global_page_groupbuy-index-statistic .admin_table tr th:first-child + th + th + th + th + th,
+    #global_page_groupbuy-index-statistic .admin_table tr td:first-child + td + td + td + td,
+    #global_page_groupbuy-index-statistic .admin_table tr td:first-child + td + td + td + td + td{
+        display: none;
+    }
+    
+    #deals_create .event_calendar_container {
+    	height: 30px;
+    }
+    
+    div[class^=layout_groupbuy_profile] ul.groupbuy_list>li {
+        width: 100%;
+        float: inherit;
+    }
+    div.groupbuy_detail_description
+    {
+    	padding: 0;
+    }
+}
+
+@media (max-width: 480px) 
+{
+    .layout_groupbuy_search_deals #filter_form .form-wrapper {
+        float: none;
+    }   
+    
+    body[id^=global_page_groupbuy] .layout_middle {
+        overflow: visible;
+    }
+    
+    #global_page_groupbuy-index-transaction .admin_table tr th:first-child + tr,
+    #global_page_groupbuy-index-transaction .admin_table tr td:first-child + td,
+    #global_page_groupbuy-index-transaction .admin_table tr th:first-child + th + th + th + th + th + th,
+    #global_page_groupbuy-index-transaction .admin_table tr td:first-child + td + td + td + td + td + td {
+        display: none;
+    }
+    
+    #global_page_groupbuy-index-manage-selling img.deal_thumb_medium,
+    #global_page_groupbuy-index-manage-buying img.deal_thumb_medium {
+        width: 80px;
+        height: auto;
+    }
+    
+    .layout_groupbuy_profile_buy_deals ul.groupbuy_list > li, 
+    .layout_groupbuy_profile_sell_deals ul.groupbuy_list > li 
+    {
+        float: none;
+        width: 100%;
+        margin: 18px  0!important;
+    }
+    table.admin_table tbody tr td
+    {
+    	padding: 7px 2px!important;
+    }
+    #global_page_groupbuy-photo-upload #files
+    {
+    	width:100%;
+    }
+    #global_page_groupbuy-photo-upload .progress
+    {
+    	width: 75%!important;
+    }
+    
+}
+
+/* fix metro template*/
+.ynresponsive-metro
+{
+	.layout_groupbuy_search_deals #filter_form #Search-wrapper
+	{
+		margin-top: 7px;
+	}
+	.layout_groupbuy_search_deals #filter_form
+	{
+		padding-bottom: 0px!important;
+	}
+	div.groupbuy_valueprice_price_price
+	{
+		width: 50%;
+	}
+	dl.groupbuy_valueprice_block dd
+	{
+		font-size: 15px;
+		font-weight: bold;
+	}
+	div.groupbuy_valueprice_info dl.groupbuy_valueprice_block:last-child > dt,
+	dl#groupbuy_save_price_block > dt:first-child, dl.groupbuy_valueprice_block dt.fixcss 
+	{
+		width: auto;
+	}
+	div.groupbuy_valueprice_info dl.groupbuy_valueprice_block:last-child > dt
+	{
+		padding-top: 11px;
+	}
+}
+ body[id^=global_page_groupbuy].ynresponsive-metro
+{
+	.headline
+	{
+		background-color: #FFF;
+		margin-bottom: 15px;
+	}
+}
+#global_page_groupbuy-index-detail.ynresponsive-metro
+{
+	.generic_list_widget
+	{
+		background-color: #FFF;
+	}
+}
+#global_page_groupbuy-account-index.ynresponsive-metro #global_content,
+#global_page_groupbuy-faqs-index.ynresponsive-metro #global_content,
+#global_page_groupbuy-index-buy-deal.ynresponsive-metro #global_content,
+#global_page_groupbuy-index-transaction.ynresponsive-metro #global_content,
+#global_page_yncredit-spend-credit-confirm.ynresponsive-metro #global_content,
+#global_page_groupbuy-index-publish.ynresponsive-metro #global_content,
+#global_page_groupbuy-help-detail.ynresponsive-metro #global_content
+{
+	background-color: #FFF;
+}
+#global_page_groupbuy-help-detail.ynresponsive-metro #global_content > h2,
+#global_page_groupbuy-faqs-index.ynresponsive-metro #global_content > h2,
+#global_page_groupbuy-index-publish.ynresponsive-metro #global_content > h2
+{
+	padding: 0 0.5em;
+}
+#global_page_groupbuy-index-publish.ynresponsive-metro #global_content > div.tip
+{
+	padding-bottom: 20px;
+}
+#global_page_groupbuy-index-publish .contentbox button.spend_credit
+{
+	border: 0;
+	width: 132px!important;
+	margin-top: 0;
+}
+#global_page_groupbuy-index-buy-deal.ynresponsive-metro #global_content > h2,
+#global_page_groupbuy-index-transaction.ynresponsive-metro #global_content > h3
+{
+	padding-left: 10px;
+}
+#global_page_groupbuy-help-detail.ynresponsive-metro #global_content > .global_content,
+#global_page_groupbuy-faqs-index.ynresponsive-metro #global_content > .faqs-lists,
+#global_page_groupbuy-index-publish.ynresponsive-metro #global_content > div.table,
+#global_page_groupbuy-faqs-index.ynresponsive-metro #global_content > div,
+#global_page_groupbuy-faqs-index.ynresponsive-metro #global_content
+{
+	padding: 0 1.5em;
+}
+#global_page_groupbuy-faqs-index.ynresponsive-metro #global_content > div.headline
+{
+	padding: 15px 0;
+	padding-left: 20px;
+}
+.groupbuy_detail_description_left img,
+.groupbuy_detail_description_left iframe,
+.detail_hightlight iframe,
+.detail_hightlight img,
+.groupbuy_detail_fineprint iframe,
+.groupbuy_detail_fineprint img
+{
+	width: 100%;
+	max-width: 640px
+}
+.layout_groupbuy_search_deals
+{
+    #filter_form
+    {
+
+        #Search-wrapper
+        {
+
+            margin-top: 8px;
+
+        }
+    }
+}
+
+.yngroupbuy-deal-button-form .global_form > div > div{
+    border: none !important;
+}
+.yngroupbuy-deal-button-form .global_form{
+    float: left;
+}

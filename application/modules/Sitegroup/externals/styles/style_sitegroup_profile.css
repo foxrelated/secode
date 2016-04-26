@@ -1,0 +1,1478 @@
+/* $Id: style_sitegroup_profile.css 2011-05-05 9:40:21Z SocialEngineAddOns Copyright 2010-2011 BigStep Technologies Pvt. Ltd. $ */
+/*	View group start here */
+.layout_sitegroup_mainphoto_sitegroup {
+	margin-bottom:15px;
+	overflow:hidden;
+	clear:both;
+}
+.sitegroup_addremove_fav_popup_wrapper {
+	width:500px;
+}
+.sitegroup_addremove_fav_popup_title {
+	padding:5px;
+	border-bottom-width:1px;
+	margin-bottom:10px;
+	font-weight:bold;
+	font-size:14px;
+}
+.sitegroup_addremove_fav_popup .sitegroup_addremove_fav_popup_img {
+	float:left;
+	margin-right:10px;
+	width:102px;
+}
+[dir="rtl"] .sitegroup_addremove_fav_popup .sitegroup_addremove_fav_popup_img{
+	float:right;
+	margin-left:10px;
+	margin-right:0px;
+}
+.sitegroup_addremove_fav_popup .sitegroup_addremove_fav_popup_img img {
+	width:100px;
+	float:left;
+}
+[dir="rtl"] .sitegroup_addremove_fav_popup .sitegroup_addremove_fav_popup_img img{
+	float:right;
+}
+.sitegroup_addremove_fav_popup .sitegroup_addremove_fav_popup_detail {
+	overflow:hidden;
+}
+.sitegroup_addremove_fav_popup .sitegroup_addremove_fav_popup_detail b {
+	float:left;
+	width:100%;
+	margin-bottom:15px;
+}
+[dir="rtl"] .sitegroup_addremove_fav_popup .sitegroup_addremove_fav_popup_detail b{
+	float:right;
+}
+.sitegroup_addremove_fav_popup .sitegroup_addremove_fav_popup_detail p {
+	margin-top:15px;
+	clear:both;
+}
+#profile_options .sitegroups_gutter_options li {
+	border-bottom-width:1px;
+	border-top:none;
+}
+#profile_options .sitegroups_gutter_options {
+	white-space:normal;
+}
+.sitegroup_profile_sponsorfeatured {
+	height:30px;
+	width:100%;
+	clear:both;
+	text-align:center;
+	line-height:30px;
+	font-size:17px;
+	color:#fff;
+	font-weight:bold;
+	text-shadow:#666 0px 0px 5px;
+}
+.layout_sitegroup_options_sitegroup {
+	clear:both;
+	margin-bottom:15px;
+	overflow:hidden;
+}
+.sitegroup_photo > img {
+	max-width:none;
+	width:100%;
+	border:none !important;
+}
+.sitegroup_photo_edit_wrapper {
+	position:relative;
+	cursor:pointer;
+}
+.sitegroup_photo_edit_wrapper .sitegroup_photo_edit {
+	display:none;
+	position:absolute;
+	right:0px;
+	background:#222;
+	opacity:.9;
+	color: #fff;
+	padding:5px;
+	color:#FFFFFF;
+	font-size:11px;
+	font-weight:normal;
+}
+.sitegroup_photo_edit_wrapper .sitegroup_photo_edit img {
+	float:left;
+	margin-right:5px;
+}
+[dir="rtl"] .sitegroup_photo_edit_wrapper .sitegroup_photo_edit img{
+	float:right;
+	margin-left:5px;
+	margin-right:0px;
+}
+.sitegroup_photo_edit_wrapper:hover .sitegroup_photo_edit {
+	display:block;
+}
+.sitegroup_socialshare span {
+	margin-right:5px;
+}
+.sitegroup_socialshare span + span + span + span + span + span + span {
+	margin-right:0px;
+}
+.sitegroup_socialshare span img {
+	border:none !important;
+}
+.profile_fields > ul > li > span {
+	width:160px
+}
+.layout_sitegroup_location_sitegroup .profile_fields > ul > li > span + span, .layout_sitegroup_info_sitegroup .profile_fields > ul > li > span + span {
+	width:auto;
+	overflow:hidden;
+}
+/*Group View Print and Tell a friend Popup*/
+.sitegroup_tellafriend_popup {
+	margin:15px 0 0 15px;
+	width:560px;
+}
+.sitegroup_tellafriend_popup .global_form > div > div {
+	width:530px;
+	max-height:480px;
+	overflow:auto;
+	padding:8px !important;
+}
+.sitegroup_tellafriend_popup p.description {
+	font-size:11px !important;
+}
+.sitegroup_tellafriend_popup .global_form div.form-element{
+	max-width:350px;	
+}
+.sitegroup_tellafriend_popup .global_form input + label{
+	width:300px;
+}
+/*Over view write widget starts here*/
+#global_page_sitegroup-index-view .layout_activity_feed h3, .layout_seaocore_feed h3, .layout_sitegroupmember_profile_sitegroupmembers h3{
+	display:none;
+}
+.layout_sitegroup_overview_sitegroup > h3{
+	display:none;
+}
+.layout_sitegroup_write_group {
+	clear:both;
+}
+div.sitegroup_write_overview {
+	margin-bottom:15px;
+	overflow:auto;
+}
+div.sitegroup_write_overview a {
+	outline:none;
+}
+div.sitegroup_write_overview div {
+	font-size:11px;
+}
+div.details, div.write_link, div.sitegroup_write_overview .des_edit {
+	padding:5px 5px 7px;
+	border-width:1px;
+	border-style:solid;
+	overflow:auto;
+}
+div.sitegroup_write_overview .des {
+	margin-top:2px;
+	overflow:hidden;
+}
+.sitegroup_contect_field .edit_icon, div.sitegroup_write_overview .edit_icon {
+	float:right;
+	margin-left:5px;
+	width:18px;
+}
+[dir="rtl"] .sitegroup_contect_field .edit_icon, [dir="rtl"] div.sitegroup_write_overview .edit_icon{
+	float:left;
+	margin-left:0px;
+	margin-right:5px;
+}
+.sitegroup_contect_field .edit_icon a, div.sitegroup_write_overview .edit_icon a {
+	height:18px;
+	width:18px;
+	display:block;
+	background:url(../images/write_edit_icon.png);
+}
+.sitegroup_contect_field .edit_icon a:hover, div.sitegroup_write_overview .edit_icon a:hover {
+	background:url(../images/write_edit_icon.png) 0 18px;
+}
+div.sitegroup_write_overview .textarea {
+	float:left;
+	width:80%;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+	border-radius: 0px;
+}
+[dir="rtl"] div.sitegroup_write_overview .textarea{
+	float:right;
+}
+div.sitegroup_write_overview .textarea textarea {
+	float:left;
+	width:99%;
+	padding:2px;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+	border-radius: 0px;
+	border-width:1px;
+	border-style:solid;
+	height:120px;
+	font-size:11px;
+}
+[dir="rtl"] div.sitegroup_write_overview .textarea textarea{
+	float:right;
+}
+.layout_sitegroup_overview_sitegroup ol {
+	margin-left:20px;
+}
+.layout_sitegroup_overview_sitegroup ul {
+	margin-left:20px;
+	list-style-type:disc;
+}
+[dir="rtl"] .layout_sitegroup_overview_sitegroup ol,
+[dir="rtl"] .layout_sitegroup_overview_sitegroup ul{
+	margin-left:0px;
+	margin-right:20px;
+}
+/*Over view write widget ends here*/
+/* like sitegroup Like  widgets start here  */
+.layout_sitegroup_group_like {
+	clear:both;
+	overflow:auto;
+	width:100%;
+}
+.sitegrouplike_users_block_links {
+	overflow:auto;
+	padding:0 3px;
+}
+ul.sitegrouplike_users_block h3 {
+	padding:5px 5px 0px;
+	margin-bottom:3px;
+	border-bottom-width:1px;
+	padding-bottom:5px;
+}
+ul.sitegrouplike_users_block .likes_viewall_link {
+	float:right;
+	margin:5px 0;
+	font-size:11px;
+}
+[dir="rtl"] ul.sitegrouplike_users_block .likes_viewall_link {
+	float:left;
+}
+ul.sitegrouplike_users_block > li {
+	clear:both;
+	overflow:hidden;
+	padding:0;
+}
+ul.sitegrouplike_users_block .likes_member_sitegroup {
+	float:left;
+	width:48px;
+	padding:5px;
+	overflow:hidden;
+}
+ul.sitegrouplike_users_block .likes_member_sitegroup .likes_member_thumb {
+	float:left;
+	display:block;
+	width:48px;
+	height:48px;
+	margin-bottom:3px;
+}
+ul.sitegrouplike_users_block .likes_member_sitegroup .likes_member_name {
+	font-size:11px;
+	float:left;
+	text-align:center;
+	width:100%;
+}
+[dir="rtl"] ul.sitegrouplike_users_block .likes_member_sitegroup,
+[dir="rtl"] ul.sitegrouplike_users_block .likes_member_sitegroup .likes_member_thumb,
+[dir="rtl"] ul.sitegrouplike_users_block .likes_member_sitegroup .likes_member_name{
+	float:right;
+}
+ul.sitegroup_sidebar_info li {
+	clear:both;
+	overflow:hidden;
+	padding:2px 5px;
+}
+ul.sitegroup_sidebar_info li,
+ul.sitegroup_sidebar_info li > div{
+	font-size:11px;
+}
+.sitegroup_sidebar_info_photo {
+	margin-right: 6px !important;
+}
+ul.sitegroup_sidebar_info li span {
+	font-weight:normal;
+}
+ul.sitegroup_sidebar_info li ul li {
+	padding:0px;
+	padding:1px 0;
+}
+ul.sitegroup_sidebar_insights > li span {
+	display: block;
+	float: left;
+	font-size: 1.4em;
+	margin-right: 6px;
+}
+ul.sitegroup_sidebar_insights > li div {
+	display: block;
+	float: left;
+	line-height: 1.7em;
+}
+[dir="rtl"] ul.sitegroup_sidebar_insights > li span,
+[dir="rtl"] ul.sitegroup_sidebar_insights > li div{
+	float:right;
+}
+ul.sitegroup_sidebar_insights > li a {
+	float:right !important;
+	font-size:11px;
+}
+[dir="rtl"] ul.sitegroup_sidebar_insights > li a{
+	float:left !important;
+}
+.sitegroup_total_likes {
+	font-size:17px;
+	display:block;
+	font-weight:bold !important;
+}
+/*Location Tab*/
+.sitegroup_profile_location {
+	padding:5px !important;
+	margin-bottom:15px;
+}
+/*View group layout simple css start here*/
+.layout_sitegroup_thumbphoto_sitegroup{
+	clear:both;
+	overflow:hidden;
+}
+#global_page_sitegroup-layout-widget .global_form div.form-label {
+	width:70px;
+}
+.layout_simple_head {
+	border-top-width:1px;
+	border-top-style:solid;
+	height:25px;
+	line-height:25px;
+	font-weight:bold;
+	margin:10px 0;
+	padding:0 10px;
+}
+#sitegroup_options ul {
+	padding:0px;
+	margin: 0px;
+	white-space: nowrap;
+}
+#sitegroup_options li {
+	font-weight:bold;
+	border-bottom-width:1px;
+}
+#sitegroup_options li a {
+	display:block;
+	padding:5px 5px 5px 25px;
+	background-position:5px;
+}
+[dir="rtl"] #sitegroup_options li a{
+	padding:5px 25px 5px 5px;
+	background-position:right 50%;
+}
+#sitegroup_options li a:hover {
+	text-decoration:none;
+}
+.layout_sitegroupmember_profile_sitegroupmembers, .layout_sitegroupmusic_profile_sitegroupmusic, .layout_core_profile_links, .layout_sitegroup_info_sitegroup, .layout_sitegroup_overview_sitegroup, .layout_sitegrouppoll_profile_sitegrouppolls, .layout_sitegroupnote_profile_sitegroupnotes, .layout_sitegroupevent_profile_sitegroupevents, .layout_sitegroupdocument_profile_sitegroupdocuments, .layout_sitegroupreview_profile_sitegroupreviews, .layout_sitegroup_discussion_sitegroup, .layout_sitegroupform_sitegroup_viewform, .layout_sitegroupoffer_profile_sitegroupoffers, .layout_sitegroupvideo_profile_sitegroupvideos, .layout_sitegroup_location_sitegroup, .layout_sitegroup_photos_sitegroup, .layout_seaocore_feed, .layout_sitegroupintegration_profile_items, .layout_activity_feed{
+	clear:both;
+}
+/*View group layout simple css end here*/
+/*sitegroup list filters start here*/
+.sitegroup_list_filters {
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	padding:7px;
+	overflow:hidden;
+	margin-bottom:15px;
+	clear:both;
+}
+.sitegroup_list_filter_first {
+	float:left;
+	width:25%;
+	padding-top:3px;
+}
+.sitegroup_list_filter_field {
+	float:left;
+	width:35%;
+}
+.sitegroup_list_filter_field select{
+	width:185px;
+}
+[dir="rtl"] .sitegroup_list_filter_first,
+[dir="rtl"] .sitegroup_list_filter_field{
+	float:right;
+}
+.layout_sitegroupevent_profile_sitegroupevents .sitegroup_list_filter_field {
+	width:45%;
+}
+/*sitegroup list filters end here*/
+/*CSS FOR ALL SITEGROUP MODULE LIST ON SITEGROUP PROFILE START HERE*/
+.layout_sitegroupmusic_profile_sitegroupmusic > h3, .layout_sitegroupform_sitegroup_viewform > h3, .layout_sitegroupoffer_profile_sitegroupoffers > h3, .layout_sitegroup_discussion_sitegroup > h3, .layout_sitegroupreview_profile_sitegroupreviews h3, .layout_sitegrouppoll_profile_sitegrouppolls h3, .layout_sitegroupevent_profile_sitegroupevents > h3, .layout_sitegroupnote_profile_sitegroupnotes h3, .layout_sitegroupintegration_mixprofile_items > h3, .layout_sitegroupintegration_profile_items > h3, .layout_sitegroupdocument_profile_sitegroupdocuments > h3 {
+	display:none;
+}
+ul.sitegroup_profile_list {
+	clear:both;
+}
+ul.sitegroup_profile_list > li {
+	clear:both;
+	padding:10px;
+	overflow:hidden;
+}
+ul.sitegroup_profile_list > li + li {
+	border-top-width:1px;
+	padding-top:15px;
+}
+ul.sitegroup_profile_list > li > img, ul.sitegroup_profile_list > li > a {
+	display:block;
+	float:left;
+	overflow:hidden;
+	margin-right:8px;
+	font-weight:bold;
+}
+[dir="rtl"] ul.sitegroup_profile_list > li > img, [dir="rtl"]ul.sitegroup_profile_list > li > a {
+	float:right;
+}
+ul.sitegroup_profile_list li > a img {
+	border-width:1px;
+}
+ul.sitegroup_profile_list li .sitegroup_profile_list_options {
+	float:right;
+	padding:0 10px;
+	width:150px;
+}
+[dir="rtl"] ul.sitegroup_profile_list li .sitegroup_profile_list_options{
+	float:left;
+}
+ul.sitegroup_profile_list li .sitegroup_profile_list_options > a {
+	clear:both;
+	margin:3px 0px 0px 0px;
+	font-size:.8em;
+	padding-top:1px;
+	float:left;
+	line-height:16px;
+}
+[dir="rtl"] ul.sitegroup_profile_list li .sitegroup_profile_list_options > a{
+	float:right;
+}
+ul.sitegroup_profile_list li .sitegroup_profile_list_info {
+	overflow:hidden;
+}
+ul.sitegroup_profile_list li .sitegroup_profile_list_title {
+	font-weight:bold;
+	margin-bottom:5px;
+	overflow:auto;
+}
+ul.sitegroup_profile_list li .sitegroup_profile_list_title > a, ul.sitegroup_profile_list li .sitegroup_profile_list_title .list_title {
+	font-size:14px;
+	overflow:hidden;
+}
+ul.sitegroup_profile_list li .sitegroup_profile_list_title span {
+	float:right;
+}
+[dir="rtl"] ul.sitegroup_profile_list li .sitegroup_profile_list_title span {
+	float:left;
+}
+ul.sitegroup_profile_list li .sitegroup_profile_list_info_date {
+	font-size:.8em;
+}
+ul.sitegroup_profile_list li .sitegroup_profile_list_info_date .rating_star_big_generic {
+	width:8px;
+	height:8px;
+}
+ul.sitegroup_profile_list li .sitegroup_profile_list_info_des {
+	margin-top:5px;
+}
+ul.sitegroup_profile_list li .sitepag_member_status{
+	clear:both;
+}
+ul.sitegroup_profile_list li .sitepag_member_status .icon_sitegroups_edit{
+	padding-left:13px;
+	margin-left:5px;
+	text-decoration:none !important;
+}
+/*CSS FOR ALL SITEGROUP MODULE LIST ON SITEGROUP PROFILE END HERE*/
+.sitegroupdocument_alert-message {
+	color:#FF0000;
+	font-size:11px;
+	font-weight:normal;
+	line-height:13px;
+	margin:5px 0;
+}
+.sitegroupdocument_alert-message img {
+	vertical-align:middle;
+}
+/*SITEGROUP EVENT TAB WIDGET START HERE*/
+.sitegroup_event_profile_links {
+	float:right;
+	font-weight:normal;
+	margin-bottom:10px;
+}
+[dir="rtl"] .sitegroup_event_profile_links{
+	float:left;
+}
+.sitegroup_event_profile_links a {
+	font-weight:normal;
+}
+.sitegroup_event_profile_links a.selected {
+	font-weight:bold;
+}
+/*SITEGROUP EVENT SIDEBAR WIDGET START HERE*/
+.sitegroupevent_sidebar .sitegroupevent_sidebar_header {
+	clear:both;
+	overflow:auto;
+	padding-bottom:5px;
+	border-bottom-width:1px;
+	border-bottom-style:solid;
+}
+.sitegroupevent_sidebar .sitegroupevent_sidebar_header span {
+	float:left;
+}
+[dir="rtl"] .sitegroupevent_sidebar .sitegroupevent_sidebar_header span{
+	float:right;
+}
+.sitegroupevent_sidebar .sitegroupevent_sidebar_header span + span {
+	float:right;
+}
+[dir="rtl"] .sitegroupevent_sidebar .sitegroupevent_sidebar_header span + span{
+	float:left;
+}
+.sitegroupevent_sidebar .sitegroupevent_sidebar_header a {
+	font-size:11px;
+}
+.sitegroupevent_sidebar ul li {
+	padding:5px 0;
+	clear:both;
+}
+.sitegroupevent_sidebar ul li > a {
+	float:left;
+	margin-right:5px;
+}
+[dir="rtl"] .sitegroupevent_sidebar ul li > a{
+	float:right;
+	margin-left:5px;
+	margin-right:0px;
+}
+.sitegroupevent_sidebar_photo {
+	float:left;
+}
+[dir="rtl"] .sitegroupevent_sidebar_photo{
+	float:right;
+}
+.sitegroupevent_sidebar ul li .sitegroupevent_info {
+	overflow:auto;
+}
+.sitegroupevent_sidebar ul li .sitegroupevent_title {
+	font-weight:bold;
+}
+.sitegroupevent_sidebar ul li .sitegroupevent_details {
+	font-size:.8em;
+	margin-top:3px;
+}
+/*SITEGROUP EVENT SIDEBAR WIDGET END HERE*/
+/*Siteoagedocument tooltip*/
+.sitegroupdocument_tooltip {
+	-moz-border-radius:3px 3px 3px 3px;
+	display: block;
+	background: #222;
+	color: #fff;
+	text-align: left;
+	padding: 5px;
+	width: 260px;
+	font-size: .8em;
+	margin:0;
+	-moz-box-shadow:3px 3px 3px #bcbcbc;
+	-webkit-box-shadow:3px 3px 3px #bcbcbc;
+	box-shadow: 3px 3px 3px #bcbcbc;
+	float:left;
+}
+.sitegroupdocument_tooltip .sitegroupdocument_tooltip_content {
+	width:250px;
+	float:left;
+	background:#FFFFFF;
+	padding:5px;
+	position:relative;
+}
+[dir="rtl"] .sitegroupdocument_tooltip,
+[dir="rtl"] .sitegroupdocument_tooltip .sitegroupdocument_tooltip_content{
+	float:right;
+}
+.sitegroupdocument_tooltip .sitegroupdocument_tooltip_content, .sitegroupdocument_tooltip .sitegroupdocument_tooltip_content div {
+	font-family:Arial, Helvetica, sans-serif !important;
+	line-height:18px;
+}
+.sitegroupdocument_tooltip .sitegroupdocument_tooltip_content a, .sitegroupdocument_tooltip .sitegroupdocument_tooltip_content div a {
+	color:#398bcc !important;
+}
+.sitegroupdocument_tooltip .sitegroupdocument_tooltip_title {
+	font-weight:bold;
+	font-size:13px;
+}
+.sitegroupdocument_tooltip .sitegroupdocument_tooltip_details {
+	font-size:11px;
+	color:#acacac;
+}
+.sitegroupdocument_tooltip .sitegroupdocument_tooltip_details .rating_star_big_generic {
+	width:9px;
+	height:9px;
+	margin-top:3px;
+}
+.sitegroupdocument_tooltip .tooltip_arrow {
+	position:absolute;
+	width:250px;
+	text-align:center;
+	top:-18px;
+}
+.sitegroupdocument_tooltip .tooltip_arrow img {
+	border:none;
+	width:13px;
+	height:9px;
+	float:none;
+}
+/*Siteoagedocument widgets*/
+/*Sitegroupdocument Featured Carousel*/
+div.browse_sitegroupdocument_carousel {
+	clear:both;
+	padding:0 !important;
+	overflow:auto;
+}
+.sitegroupdocument_carousel {
+	width:728px !important;
+	margin:0 !important;
+	text-align:center;
+	border-width:1px;
+	padding:5px;
+	float:left;
+	display:block;
+	-moz-border-radius:3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+.sitegroupdocument_carousel_sitegroupdocuments {
+	width: 692px;
+	padding-top:1px;
+	margin: 0px 5px 0px 5px;
+	text-align: center;
+	overflow: hidden;
+}
+.browse_carousel_item {
+	padding: 5px;
+	text-align:center;
+	font-size:11px;
+}
+.browse_carousel_item img {
+	width:120px;
+	height:120px;
+	border:1px solid #dadada;
+	float:left;
+}
+.browse_carousel_item a img:hover {
+	width:120px;
+	height:120px;
+	border:1px solid #ccc;
+}
+/*Sitegroupdocument Featured Carousel end*/
+/*Sitegroupmusic start */
+.layout_sitegroupmusic_profile_player {
+	margin-bottom:15px;
+}
+/*Sitegroupmusic end*/
+/*
+ P *ROFILE MUSIC PLAYER
+ Styles the mini-player that only shows up on the member profile group.
+ */
+#sitegroupprofile_music_player {
+	margin-top: 5px;
+}
+#sitegroupprofile_music_player h3 {
+	display: none;
+}
+#sitegroupprofile_music_player .music_player_art {
+	display: none;
+}
+#sitegroupprofile_music_player .music_player_button_prev, #sitegroupprofile_music_player .music_player_button_next {
+	display: none;
+}
+#sitegroupprofile_music_player .music_player_button_play {
+	margin: 0px;
+}
+#sitegroupprofile_music_player .music_player_trackname {
+	font-weight: normal;
+}
+/*
+ A *CTIVITY FEED COMPOSER  ALBUM PHOTO
+ These styles are used for the attachment composer above the
+ main feed.
+ */
+#compose-photo-activator, #compose-photo-menu span {
+	display: none;
+}
+
+/* contact details */
+.layout_sitegroup_contactdetails_sitegroup {
+	clear: both;
+	margin-bottom:10px;
+	overflow: hidden;
+	padding: 5px;
+}
+.sitegroup_contect_field {
+	float:left;
+	margin-right:15px;
+	line-height:22px;
+}
+[dir="rtl"] .sitegroup_contect_field {
+	float:right;
+	margin-left:15px;
+	margin-right:0;
+}
+.sitegroup_contect_field > img {
+	float:left;
+	margin-right:5px;
+	margin-top:4px;
+}
+[dir="rtl"] .sitegroup_contect_field > img{
+	float:right;
+	margin-right:0;
+	margin-left:5px;
+}
+.layout_left .sitegroup_contect_field, .layout_right .sitegroup_contect_field {
+	clear:both;
+	margin-right:0px;
+}
+.sitegroup_contect_det {
+	float:left;
+}
+[dir="rtl"] .sitegroup_contect_det{
+	float:right;
+}
+.layout_right .sitegroup_contect_det {
+	max-width:130px;
+	overflow:hidden;
+}
+.sitegroup_contect_det > div {
+	font-size:11px;
+	font-weight:bold;
+}
+.sitegroup_contect_field input {
+	margin-top:3px;
+	height:12px;
+	padding:2px;
+	font-size:11px;
+	width:120px;
+}
+.sitegroup_contect_field .edit_icon {
+	margin-top:4px;
+}
+.sitegroup_contect_error {
+	float:left;
+	color:#FF0000;
+	padding:0 5px;
+	font-size:11px;
+}
+[dir="rtl"] .sitegroup_contect_error{
+	float:right;
+}
+
+/*Music Feed Composer*/
+#compose-music-activator, #compose-music-menu span {
+	display: none;
+}
+#compose-sitegroupmusic-activator, #compose-sitegroupmusic-menu span{
+	background-repeat: no-repeat;
+	background-image: url(../images/music/music.png);
+}
+#compose-sitegroupmusic-form-fancy-file{
+	background-image: url(../images/music/new.png);
+}
+a.compose-sitegroupmusic-link{
+	background-image: url(../images/music/play.png);
+	background-repeat: no-repeat;
+	padding-left: 20px;
+}
+a.compose-sitegroupmusic-link-playing{
+	background-image: url(../images/music/upload_loading.gif);
+	background-repeat: no-repeat;
+	padding-left: 20px;
+}
+html[dir="rtl"] a.compose-sitegroupmusic-link, html[dir="rtl"] a.compose-sitegroupmusic-link-playing{
+	background-position: 100% 0%;
+	padding-left: 0px;
+	padding-right: 20px;
+}
+/*
+ * VIDEO CSS
+ * here all video css which comes in group profile.
+ */
+/*Video Feed Composer*/
+#compose-video-activator, #compose-video-menu span {
+	display: none;
+}
+#compose-sitegroupvideo-body .compose-preview-image{
+	float: left;
+	margin-right: 2px;
+	border-width: 1px;
+	border-style:solid;
+}
+html[dir="rtl"] #compose-sitegroupvideo-body .compose-preview-image{
+	float: right;
+	margin-right: 0px;
+	margin-left: 2px;
+}
+#compose-sitegroupvideo-body .compose-preview-info{
+	overflow: hidden;
+	float:none !important;
+}
+#compose-sitegroupvideo-body .compose-preview-info a{
+	font-weight: bold;
+	display: block;
+	margin-bottom: 2px;
+}
+#compose-sitegroupvideo-body .compose-preview-info > div{
+	font-size: .8em;
+}
+#compose-sitegroupvideo-activator, #compose-sitegroupvideo-menu span{
+	background-image: url(../images/icons/sitegroupvideo_new.png);
+	background-repeat: no-repeat;
+}
+#compose-sitegroupvideo-form-input{
+	width: 300px;
+	margin-top: 5px;
+}
+#compose-sitegroupvideo-form-submit{
+	margin-top: 5px;
+	clear: both;
+}
+/*Group Profile Video Listing*/
+.layout_sitegroupvideo_sitegroup_video h3{
+	display:none;
+}
+ul.sitegroupvideo_profile > li{
+	clear: both;
+	overflow: hidden;
+	padding:10px;
+}
+ul.sitegroupvideo_profile > li + li{
+	border-top-width: 1px;
+	padding: 10px;
+}
+ul.sitegroupvideo_profile > li > a{
+	float:left;
+}
+ul.sitegroupvideo_profile li .sitegroupvideo_thumb_wrapper{
+	margin-right:7px;
+}
+ul.sitegroupvideo_profile li .sitegroupvideo_play{
+	overflow:hidden;
+	margin-bottom:10px;
+}
+ul.sitegroupvideo_profile li .sitegroupvideo_play object{
+	float:left;
+}
+.sitegroupvideo_close{
+	float:left;
+	height:11px;
+	width:11px;
+	margin-left:7px;
+	cursor:pointer;
+	background:url(../images/close_icon.png) no-repeat right;
+}
+.sitegroupvideo_close:hover{
+	background:#3b5998 url(../images/close_icon.png) no-repeat left;
+}
+.sitegroupvideo_profile_options{
+	float: left;
+	margin:10px 0 0;
+}
+.sitegroupvideo_profile_options a{
+	margin: 3px 0px 0px 0px;
+	font-size: .8em;
+	padding-top: 1px;
+	float:left;
+	margin-right:15px;
+}
+.sitegroupvideo_profile_info{
+	overflow: hidden;
+}
+.sitegroupvideo_profile_title{
+	font-size:14px;
+	margin-bottom:5px;
+	font-weight:bold;
+}
+.sitegroupvideo_profile_title > a{
+	overflow:hidden;
+}
+.sitegroupvideo_profile_title span{
+	float:right;
+	margin-left:10px;
+}
+.sitegroupvideo_profile_info_date{
+	font-size: .8em;
+}
+.sitegroupvideo_profile_info_desc{
+	margin-top: 5px;
+}
+.sitegroup_video_rate{
+	height:9px;
+	width:9px;
+}
+/*Group Profile Form*/
+.layout_sitegroupform_sitegroup_viewform .global_form > div{
+	float:none;
+}
+.layout_sitegroupform_sitegroup_viewform .global_form div > p{
+	max-width: none !important;
+}
+.layout_sitegroupform_sitegroup_viewform .global_form div.form-element{
+	max-width:300px !important;
+}
+
+/*Photo Feed Composer*/
+#compose-sitegroupphoto-activator, #compose-sitegroupphoto-menu span{
+	background-repeat: no-repeat;
+	background-image: url(../images/photo/upload.png);
+}
+#compose-sitegroupphoto-preview-image{
+	max-width: 160px;
+}
+#compose-sitepagae-photo-form-fancy-file{
+	background-image: url(../images/photo/add.png);
+}
+
+
+
+/*User Facebook Group Feed Widget*/
+.layout_advancedactivity_feeds_sitegroupfacebook,
+.layout_sitegroup_fblikebox_sitegroup{
+	margin-bottom:15px;
+}
+.group_fb_feed_mainbox .white{
+	margin:5px;
+}
+.group_fb_feed_box_top{
+	padding:5px 0;
+	margin:0 5px;
+}
+.group_fb_group_photo{
+	float:left;
+	margin-right:5px;
+}
+.group_fb_group_info{
+	overflow:hidden;
+}
+.group_fb_group_name{
+	font-weight:bold;
+	font-size:14px;	
+	margin-bottom:5px;
+}
+.group_fb_group_like_button{
+	clear:both;
+}
+.group_fb_feed_box{
+	padding:0 5px;
+	margin-bottom:5px;
+}
+ul.group_fb_feeds{
+	clear: both;
+	max-height: 400px;
+	overflow: auto;
+}
+ul.group_fb_feeds > li{
+	padding: 10px 0;
+	overflow: hidden;
+}
+ul.group_fb_feeds > li + li{
+	border-top-width: 1px;
+}
+ul.group_fb_feeds .feed_item_generated{
+	margin-bottom:5px;
+}
+ul.group_fb_feeds .feed_item_photo{
+	float: left;
+	overflow: hidden;
+	margin-right: 7px;
+	line-height: 0px;
+	font-size: 0px;
+}
+ul.group_fb_feeds .feed_item_photo > a{
+	text-decoration: none;
+}
+ul.group_fb_feeds .feed_item_photo > a > img{
+	display: block;
+}
+ul.group_fb_feeds .feed_item_body{
+	overflow:hidden;
+}
+ul.group_fb_feeds .feed_item_username{
+	font-weight: bold;
+}
+ul.group_fb_feeds .feed_item_body_txt{
+	display:inline;
+}
+ul.group_fb_feeds .feed_item_stats{
+	padding-top: 5px;
+}
+ul.group_fb_feeds .feed_item_stats i{
+	background-position:center;
+	background-repeat: no-repeat;
+	display: inline-block;
+	float:left;
+	margin-right:5px;
+	height: 16px;
+	width: 16px;
+}
+ul.group_fb_feeds .feed_item_stats .feed_item_time{
+	font-size: 11px;
+	padding-top:1px;
+	vertical-align: top;
+	width: 10000px;
+}
+ul.group_fb_feeds .feed_item_attachments{
+	overflow: hidden;
+	padding:2px 0px;
+}
+ul.group_fb_feeds .feed_item_link_title{
+	font-size: .8em;
+	font-weight: bold;
+	margin-bottom: 2px;
+}
+ul.group_fb_feeds .feed_item_link_desc{
+	font-size: 0.8em;
+}
+ul.group_fb_feeds .feed_attachment_facebook {
+	display: block;
+	overflow: hidden;
+	margin: 0px 5px 5px 0px;
+	vertical-align: top;
+}
+ul.group_fb_feeds .feed_attachment_facebook > div > a {
+	display: block;
+	float: left;
+	margin-right: 7px;
+}
+ul.group_fb_feeds .feed_attachment_facebook_photo{
+	padding:2px;
+	margin-bottom:5px;
+}
+ul.group_fb_feeds .feed_attachment_facebook > div > a > img {
+	display: inline-block;
+	max-width: 130px;
+	max-height: 130px;
+	vertical-align: top;
+}
+ul.group_fb_feeds .feed_attachment_facebook > div > div {
+	overflow: hidden;
+	padding:3px 3px 3px 10px;
+}
+ul.group_fb_feeds .feed_attachment_facebook > div > a + div {
+	overflow: hidden;
+	padding:0px;
+	border:none;
+	clear:both;
+}
+ul.group_fb_feeds .feed_attachment_facebook > div > a.feed_attachment_facebook_photo + div{
+	clear:both;
+}
+
+/*Profile Announcements*/
+.sitegroup_profile_announcements{
+	border-width: 1px;
+	border-radius: 5px;
+	padding:0 10px;
+	margin-bottom: 15px;
+}
+ul.sitegroup_profile_announcements > li{
+	padding:10px 0;
+}
+ul.sitegroup_profile_announcements > li + li{
+	border-top-width:1px;	
+}
+/* Group Profile Title  */
+.layout_sitegroup_title_sitegroup{
+	float:left;
+	margin-right:10px !important;
+	margin-bottom:10px;
+}
+.layout_sitegroup_title_sitegroup #profile_status > h2{
+	letter-spacing:0px;
+}
+.layout_sitegroup_profile_status{
+	float:left;
+}
+.layout_sitelike_common_like_button {
+	float: left;
+	margin: 0 10px 5px;
+}
+.layout_Facebookse_facebookse_commonlike{
+	clear:both;
+	margin-bottom:15px;
+}
+/*Profile Cover Photo Start Here*/
+.layout_sitegroup_group_cover_information_sitegroup,
+.layout_sitegroupmember_groupcover_photo_sitegroupmembers{
+	clear:both;	
+	margin-bottom:15px;
+}
+.sitegroup_cover_information_wrapper{
+	margin:0;
+}
+.sitegroup_cover_wrapper {
+	position:relative;
+	clear:both;
+	padding:0px;
+}
+.sitegroup_cover_photo {
+	overflow:hidden;
+	position: relative;
+	height:100%;
+	width:100%;
+}
+.sitegroup_cover_photo img {
+	width:100%;
+	min-height:100%;
+	border:none;
+	position: absolute;
+}
+.sitegroup_cover_photo_empty {
+	border:none;
+}
+.sitegroup_cover_wrapper .draggable{
+	opacity: 0.5;
+	cursor: move;
+}
+/*Profile Cover Photo Endst Here*/
+/*Profile Cover Members Starts Here*/
+.sitegroup_members_cover_listing{
+	border-style:solid;
+	border-width:1px;
+	height:120px;
+	overflow:hidden;
+}
+.sitegroup_members_cover_listing .sitegroup_members_cover_member {
+	float: left;
+	height:120px;
+	overflow: hidden;
+	position: relative;
+	width: 120px;
+}
+.sitegroup_members_cover_listing img.thumb_profile {
+	width:100%;
+	min-height:120px;
+	border:none;
+	float:left;
+}
+span.sitegroup_members_cover_member_name {
+	display:none;
+	left:0;
+	right:0;
+	width:100%;
+	bottom:0px;
+	background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+	background-image: -ms-linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+	background-image: -moz-linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+	background-image: -o-linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+	background-image: -webkit-gradient(transparent, rgba(0, 0, 0, 0.9));
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(0, 0, 0, 0.0)), color-stop(1, rgba(0, 0, 0, 0.9)));
+	position:absolute;
+	text-align:center;
+	overflow:hidden;
+}
+span.sitegroup_members_cover_member_name a {
+	text-decoration:none;
+	color:#fff;
+}
+.sitegroup_members_cover_member:hover .sitegroup_members_cover_member_name {
+	display:block;
+}
+/*Profile Cover Members Ends Here*/
+/*Cover Information Starts Here*/
+.sitegroup_cover_information{
+	border-style:solid;
+	border-width:1px;
+	clear: both;
+	padding:10px 30px 20px;
+}
+.sp_coverinfo_profile_photo_wrapper{
+	width:165px;
+	float:left;
+	margin-right:15px;
+	position:relative;
+	height:2px;
+	overflow:visible;
+}
+.sp_coverinfo_profile_photo{
+	background-color: #FFFFFF;
+	border-radius: 3px 3px 3px 3px;
+	border-style: solid;
+	border-width: 1px;
+	bottom: -45px;
+	overflow: hidden;
+	padding: 2px;
+	position: absolute;
+}
+.sp_coverinfo_profile_photo .sitegroup_profile_sponsorfeatured{
+	font-size: 11px;
+	height: auto;
+	line-height: inherit;
+	padding: 5px;
+	width: auto;
+}
+.sp_coverinfo_profile_photo .sitegroup_photo{
+	height:160px;
+	width:160px;
+	overflow:hidden;
+}
+.sp_coverinfo_profile_photo .sitegroup_photo table{
+	height:100%;
+	width:100%;
+}
+.sp_coverinfo_profile_photo .sitegroup_photo table td{
+	text-align:center;
+}
+.sp_coverinfo_profile_photo .sitegroup_photo table td img{
+	width:100%;
+	border:none;
+  max-height: none;
+  max-width: none;
+}
+.sp_coverinfo_status{
+	overflow:hidden;
+}
+.sp_coverinfo_status h2{
+	margin-bottom:5px;
+	font-size:20px;
+	font-weight:bold;
+	letter-spacing:normal;
+}
+.sp_coverinfo_status .sp_coverinfo_stats,
+.sp_coverinfo_count{
+	font-size:11px;
+}
+.sp_coverinfo_status .sp_coverinfo_stats.seaocore_txt_light a{
+	color: #999999;	
+}
+.sp_coverinfo_buttons{
+	float:right;
+	margin-left:10px;
+}
+.sp_coverinfo_buttons > div{
+	float:left;
+}
+.sp_coverinfo_buttons .layout_seaocore_seaocore_follow,
+.sp_coverinfo_buttons .layout_seaocore_like_button,
+.sp_coverinfo_buttons .sitegroup_button{
+	margin:0 0 0 10px;
+}
+.sp_coverinfo_buttons .seaocore_follower_count{
+	display:none;
+}
+.seaocore_follow_button_wrap{
+	margin-right:0px !important;
+}
+/*Cover Information Ends Here*/
+/*Cover Photo Add Edit Options Starts Here*/
+.sitegroup_cover_options {
+	position:absolute;
+	top:10px;
+	right:70px;
+	display:none;
+}
+.sitegroup_cover_options_btm {
+	bottom: 10px;
+	top: auto !important;
+}
+.sitegroup_cover_wrapper:hover .sitegroup_cover_options {
+	display:block;
+}
+.sitegroup_cover_options > ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	border-radius: 3px;
+}
+.sitegroup_cover_options ul {
+	background-color:#fff;
+	border: 1px solid #999;
+	float:left;
+}
+.sitegroup_cover_options ul.sitegroup_cover_options_pulldown {
+	display: none;
+}
+.sitegroup_cover_options li:hover ul.sitegroup_cover_options_pulldown {
+	display: block;
+	position: absolute;
+}
+.sitegroup_cover_options .sitegroup_cover_photo_btn {
+	position: relative;
+	font-weight: bold;
+	cursor:pointer;
+}
+.sitegroup_cover_options .sitegroup_cover_photo_btn, 
+ul.sitegroup_cover_options_pulldown li a {
+	background-repeat: no-repeat;
+	background-position: 5px center;
+	display: block;
+	font-size:11px;
+	color:#333;
+	padding:5px 5px 5px 25px;
+}
+.cover_photo_wap .cover_tip_wrap{
+	line-height: 26px;
+	position: absolute;
+	text-align: center;
+	top: 50%;
+	margin-top:-13px;
+	width: 100%;
+}
+.cover_photo_wap .cover_tip {
+	background: #546185 url(../images/drag.png) 9px 8px no-repeat;
+	background-color: rgba(0, 0, 0, .4);
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	border-radius:5px;
+	color: #fff;
+	display: inline;
+	font-size: 13px;
+	font-weight: bold;
+	padding: 4px 9px 6px 29px;
+}
+ul.sitegroup_cover_options_pulldown li + li {
+	border-top: 1px solid #999;
+}
+ul.sitegroup_cover_options_pulldown li a {
+	text-decoration: none;
+	white-space: nowrap;
+}
+ul.sitegroup_cover_options_pulldown li a:hover {
+	background-color:#CCC;
+}
+ul.sitegroup_cover_options_pulldown li {
+	float: none;
+}
+.sitegroup_cover_options ul.save-button{
+	background:none;
+	border:none;
+}
+.sitegroup_cover_options ul.save-button li{
+	display:inline;
+	margin-left:5px;
+}
+.sitegroup_cover_options ul.save-button li .sitegroup_cover_action{
+	background-color: #FFFFFF;
+	border:1px solid #AAAAAA;
+	border-radius:3px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+	padding:5px 7px;
+	font-size:11px;
+	font-weight:bold;
+	cursor:pointer;
+	color:#555555;
+}
+/*Cover Photo Add Edit Options Ends Here*/
+/*Cover Photo Upload Photo Popup Starts Here*/
+.upload_cover_photo_popup{
+	margin:15px 0 0 15px;
+	width:315px;
+}
+.upload_cover_photo_form .form-label{
+	margin:10px 0 5px;
+	font-weight:bold;
+}
+.upload_cover_photo_popup button{
+	clear:both;
+	margin-top:15px;
+}
+.upload_cover_photo_popup .seaocore_content_loader{
+	margin:15px auto 0 !important;
+}
+/*Cover Photo Upload Photo Popup Ends Here*/
+/*Cover Photo Choose Photo Popup Starts Here*/
+.sitegroup_choose_cover_content ul.thumbs{
+	margin:10px;
+}
+.sitegroup_choose_cover_content ul.thumbs li{
+	clear: none;
+	display: inline-block;
+	float: none;
+	height: auto;
+	margin-bottom: 10px;
+	vertical-align: top;
+}
+/*Cover Photo Choose Photo Popup Endss Here*/
+/*Sitegroup Buttons*/
+.sitegroup_button{
+	background-color: #FFFFFF;
+	background-image: url(../images/btn-bg.png) !important;
+	background-position: center bottom;
+	background-repeat: repeat-x;
+	border: 1px solid #CECECE;
+	border-radius: 3px 3px 3px 3px;
+	clear: both;
+	float: left;
+	font-size: 12px;
+	font-weight: bold;
+	outline: medium none;
+	padding: 7px;
+}
+.sitegroup_button:hover{
+	text-decoration:none;
+	background-image:url(../images/btn-bg-hover.png) !important;
+}
+.sitegroup_button i{
+	background-position:center;
+	background-repeat:no-repeat;
+	float:left;
+	height:13px;
+	margin-right:5px;
+	width:13px;
+}
+.sitegroup_button i.add_people{
+	background-image:url(../images/icons/plus13.png);
+}
+.sitegroup_button span {
+  color: #333333;
+}
+.sitegroup_button i.plus_icon{
+	background-image:url(../images/icons/plus13.png);
+}
+.sitegroup_button i.minus_icon{
+	background-image:url(../images/icons/minus13.png);
+}
+.icon_sitegroup_notification {
+    background-image:url(../images/notification.png);
+}
+
+/*==================================Responsive Css work for page Plugin====================================*/
+
+@media screen and (max-width:920px){
+	/* announce ments tab content */
+.sitegroup_profile_announcements .sitegroup_profile_list_info_des.show_content_body > div {width: 100% !important;}	
+}
+
+@media only screen and (max-width: 768px) {
+/* Overview tab images profile page */
+.layout_sitegroup_overview_sitegroup img{width:100%;}
+/* Embeded object videos */
+  object, embed {width: 100%;}
+/* sitegroup profile select box- notes tab */
+	.sitegroup_list_filter_field select{width:95%;max-width:inherit;}
+}
+
+@media only screen and (max-width: 600px) {
+/* search filter form */
+.sitegroup_list_filters div, .sitegroup_list_filters div select, .sitegroup_list_filters div input[type="text"] {box-sizing: border-box;margin: 4px 0 0;
+max-width: inherit !important;min-width: inherit !important;padding: 5px 0;width: 100% !important;}
+.sitegroup_list_filter_field input, .sitegroup_list_filter_field select{margin:3px 0 0 0;}
+/*Group View Print and Tell a friend Popup*/
+.sitegroup_tellafriend_popup {margin:0px; width:100%;}
+.sitegroup_tellafriend_popup .global_form > div > div {width:96%; padding:2% !important;}
+.sitegroup_tellafriend_popup .global_form input + label{width:100%;}
+}
+
+@media only screen and (max-width: 450px) {
+/* group profiel info tab */
+  .layout_sitegroup_location_sitegroup .profile_fields > ul > li > span + span, .layout_sitegroup_info_sitegroup .profile_fields > ul > li > span + span{width:100%;}
+/* group profile forms form */
+	.layout_sitegroupform_sitegroup_viewform .global_form div.form-element{max-width:100% !important;}
+/* Sitegroup list info notes tab */
+  ul.sitegroup_profile_list li .sitegroup_profile_list_info{width:100%;margin:10px 0 0 0;display:inline-block;}
+  ul.sitegroup_profile_list li .sitegroup_profile_list_options {float: left;padding: 0;width: 100%;}
+  ul.sitegroup_profile_list li .sitegroup_profile_list_options a {clear: none;margin: 4px 10px 8px 0;}
+/* Profile page video tab */
+  .sitegroupvideo_profile_info{width:100%;display:inline-block;margin:10px 0 0;}
+	ul.sitegroupvideo_profile > li > a {display: table;float: none;margin: 0 auto;}
+}

@@ -1,0 +1,76 @@
+
+/*Checkin Button as a button*/
+.stchecckin_button{
+	border-radius:5px;
+	border:0px;
+	box-shadow:0 1px 2px rgba(0, 0, 0, 0.4);
+	color:#FFFFFF;
+	cursor:pointer;
+	display:block;
+	margin-bottom:10px;
+	text-shadow:0 -1px 1px rgba(0, 0, 0, 0.2);
+}
+.stchecckin_button > div{
+	border-radius:5px;
+	width:100%;
+	padding:0;
+	text-align:left;
+	line-height:30px;
+}
+.stchecckin_button > div span{
+	display:inline-block;
+	vertical-align:middle;
+}
+/*Checkin Button as a link*/
+.stchecckin_link{
+	border-bottom:1px solid $theme_border_medium_color;
+	padding-bottom:5px;
+}
+.stchecckin_link span, .stchecckin_link a{
+	display:inline-block;
+	vertical-align:middle;
+}
+.stchecckin_link a{
+	margin-top:6px;
+	margin-left:5px;
+	font-weight:bold;
+}
+.stcheckin_check{
+	color:#FFFFFF;
+	padding:0 8px;
+	font-weight:bold;
+	margin-top:2px;
+	overflow:hidden;
+	text-align:left;
+}
+.stcheck_button_wide > div{
+	margin-right:15px;
+}
+.stcheckin_checkin_link{
+	margin-top:6px;
+}
+.stcheck_ckeckin_stat{
+	display: block;
+	font-size:$theme_font_size_small;
+	margin-top:5px;
+}
+
+/*IF Admin choose Show in Singal Line then below css will apply*/
+.stchecckin_button_show_full .stchecckin_button, 
+.stchecckin_button_show_full .stcheck_ckeckin_stat,
+.stchecckin_button_show_full .stcheck_ckeckin_sep{
+	display:inline-block;
+	margin:0 5px 0 0;
+}
+.stchecckin_button_show_full .stchecckin_link{
+	border:none;
+	display:inline-block;
+	margin:0 5px 0 0;
+}
+.stchecckin_button_show_full .stchecckin_link span,
+.stchecckin_button_show_full .stchecckin_link a{
+	vertical-align:inherit;
+}
+.stchecckin_button_show_full .stcheck_ckeckin_stat{
+	margin:0 5px;
+}

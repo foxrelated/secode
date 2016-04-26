@@ -1,0 +1,310 @@
+/* $Id: list_tooltip.css 6590 2010-12-31 9:40:21Z SocialEngineAddOns Copyright 2009-2010 BigStep Technologies Pvt. Ltd. $ */
+
+/*	css for suggestlist tooltip start here */
+div.suggestlist_tooltip {
+	position:absolute;
+	z-index:100;
+	margin-left:170px;
+	float:left;
+}
+[dir="rtl"] div.suggestlist_tooltip{
+	margin-right:170px;
+	float:right;
+	margin-left:auto;
+}
+.suggestlist_tooltip_content_outer {
+	-moz-border-radius:3px 3px 3px 3px;
+	display: block;
+	background: #222;
+	color: #fff;
+	text-align: left;
+	padding: 5px;
+	width: 260px;
+	font-size: .8em;
+	margin:0;
+	-moz-box-shadow:3px 3px 3px #bcbcbc;
+	-webkit-box-shadow:3px 3px 3px #bcbcbc;
+	box-shadow: 3px 3px 3px #bcbcbc;
+	float:left;
+}
+[dir="rtl"] .suggestlist_tooltip_content_outer{
+	float:right;
+	text-align:right;
+}
+.suggestlist_tooltip_content_outer .suggestlist_tooltip_content_inner {
+	width:250px;
+	float:left;
+	background:#FFFFFF;
+	padding:5px;
+	position:relative;
+}
+[dir="rtl"] .suggestlist_tooltip_content_outer .suggestlist_tooltip_content_inner{
+	float:right;
+}
+.suggestlist_tooltip_arrow {
+	position:absolute;
+	width:10px;
+	text-align:center;
+	left:-14px;
+}
+[dir="rtl"] .suggestlist_tooltip_arrow {
+	right:-14px;
+	left:auto;
+}
+[dir="rtl"] .suggestlist_tooltip_arrow img{
+	-moz-transform: scaleX(-1);
+	-o-transform: scaleX(-1);
+	-webkit-transform: scaleX(-1);
+	transform: scaleX(-1);
+	filter: FlipH;
+	-ms-filter: "FlipH";
+}
+.suggestlist_tooltip_arrow img {
+	border:none;
+	width:9px;
+	height:13px;
+	float:none;
+}
+.suggestlists_tooltip_info {
+	overflow: hidden;
+}
+.suggestlists_tooltip_info .title {
+	font-weight:bold;
+	margin-bottom:1px;
+	float:left;
+	width:100%;
+}
+.suggestlists_tooltip_info .title a {
+	color:#5F93B4;
+	max-width:200px;
+	float:left;
+}
+[dir="rtl"] .suggestlists_tooltip_info .title,
+[dir="rtl"] .suggestlists_tooltip_info .title a {
+	float:right;
+}
+.suggestlists_tooltip_info .title a:hover {
+	color:#4e81a1;
+}
+.suggestlists_tooltip_info .title span {
+	margin-left:5px;
+	margin-top:3px;
+	float:right;
+}
+[dir="rtl"] .suggestlists_tooltip_info .title span{
+	float:left;
+	margin-right:5px;
+	margin-left:0;
+}
+.suggestlists_tooltip_info_date {
+	font-size: .8em;
+	color: #999999;
+}
+.suggestlists_tooltip_info_date ul {
+	padding:0;
+}
+.suggestlists_tooltip_info_date ul li {
+	padding:0;
+}
+/*	css for suggstlisttooltip end here */
+/* _show_tooltip */
+.list_show_tooltip {
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	display: none;
+	position: absolute;
+	background: #222;
+	opacity: .9;
+	color: #fff;
+	text-align: center;
+	padding: 5px;
+	width: 90px;
+	font-size: .8em;
+	margin-top: -25px;
+	margin-left: -35px;
+}
+[dir="rtl"] .list_show_tooltip {
+	text-align:center;
+	margin-right:-35px;
+	margin-left:auto;
+}
+.list_show_tooltip_wrapper:hover .list_show_tooltip {
+	display: block;
+}
+.list_show_tooltip_wrapper img.select_view {
+	cursor:pointer;
+	margin:0 3px;
+}
+/*	css for tooltip start here */
+div.list_tooltip {
+	position:absolute;
+	z-index:100;
+	margin-left:-64px;
+}
+[dir="rtl"] div.list_tooltip{
+	margin-right:-64px;
+	margin-left:auto;
+}
+.list_tooltip_content_outer {
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius:3px;
+	display: block;
+	background: #222;
+	color: #fff;
+	text-align: left;
+	padding: 5px;
+	width: 260px;
+	font-size: .8em;
+	margin:0;
+	-moz-box-shadow:3px 3px 3px #bcbcbc;
+	-webkit-box-shadow:3px 3px 3px #bcbcbc;
+	box-shadow: 3px 3px 3px #bcbcbc;
+	float:left;
+}
+.list_tooltip_content_outer .list_tooltip_content_inner {
+	width:250px;
+	float:left;
+	background:#FFFFFF;
+	padding:5px;
+	position:relative;
+}
+[dir="rtl"] .list_tooltip_content_outer,
+[dir="rtl"] .list_tooltip_content_outer .list_tooltip_content_inner{
+	float:right;
+}
+.list_tooltip_arrow {
+	position:absolute;
+	width:250px;
+	text-align:center;
+	top:-18px;
+}
+[dir="rtl"] .list_tooltip_arrow{
+	text-align:center;
+}
+.list_tooltip_arrow img {
+	border:none;
+	width:13px;
+	height:9px;
+	float:none;
+}
+.lists_tooltip_info {
+	overflow: hidden;
+}
+.lists_tooltip_info .title {
+	font-weight:bold;
+	margin-bottom:1px;
+	float:left;
+	width:100%;
+	color:#5F93B4;
+}
+.lists_tooltip_info .title > a {
+	color:#5F93B4;
+	max-width:200px;
+	float:left;
+}
+[dir="rtl"] .lists_tooltip_info .title,
+[dir="rtl"] .lists_tooltip_info .title > a{
+	float:right;
+}
+.lists_tooltip_info .title a:hover {
+	color:#4e81a1;
+}
+.lists_tooltip_info .title span {
+	margin-left:5px;
+	margin-top:3px;
+	float:right;
+}
+[dir="rtl"] .lists_tooltip_info .title span{
+	margin-left:0px;
+	margin-right:5px;
+	float:left;
+}
+.lists_tooltip_info_date {
+	font-size: .8em;
+	color:#999;
+}
+.lists_tooltip_info_date a {
+	color:#4587C0;
+}
+.lists_tooltip_info_date a:hover {
+	color:#246195;
+}
+/*	css for tooltip end here */
+/*Map Location Details Tooltip start hete*/
+#map_canvas {
+	clear:both;
+}
+ul.lists_locationdetails {
+	clear: both;
+	width:300px;
+	margin-right:10px;
+	padding:10px;
+}
+ul.lists_locationdetails > li {
+	clear: both;
+	padding: 0px 0px 15px 0px;
+	overflow: hidden;
+}
+ul.lists_locationdetails .lists_locationdetails_info_title {
+	font-weight:bold;
+	width:100%;
+	margin-bottom:5px;
+	color:#4587C0;
+}
+ul.lists_locationdetails .lists_locationdetails_info_title > a {
+	color:#4587C0;
+	float:left;
+	max-width:250px;
+}
+[dir="rtl"] ul.lists_locationdetails .lists_locationdetails_info_title > a{
+	float:right;
+}
+ul.lists_locationdetails .lists_locationdetails_info_title > a:hover {
+	color:#246195;
+}
+ul.lists_locationdetails .lists_locationdetails_info_title span {
+	float:right;
+	margin-right:5px;
+}
+[dir="rtl"] ul.lists_locationdetails .lists_locationdetails_info_title span{
+	float:left;
+	margin-left:5px;
+	margin-right:0px;
+}
+ul.lists_locationdetails .lists_locationdetails_info_title span.list_rating_star span {
+	float:left;
+}
+[dir="rtl"] ul.lists_locationdetails .lists_locationdetails_info_title span.list_rating_star span{
+	float:right;
+}
+ul.lists_locationdetails .lists_locationdetails_photo {
+	float: left;
+	overflow: hidden;
+	margin-right: 8px;
+}
+[dir="rtl"] ul.lists_locationdetails .lists_locationdetails_photo{
+	float:right;
+	margin-left: 8px;
+	margin-right: 0;
+}
+ul.lists_locationdetails .lists_locationdetails_photo img {
+	width: 100px;
+	max-height:120px;
+}
+ul.lists_locationdetails .lists_locationdetails_info {
+	overflow: hidden;
+}
+ul.lists_locationdetails .lists_locationdetails_info_date {
+	font-size: .8em;
+	color: #999;
+	line-height:16px;
+}
+ul.lists_locationdetails .lists_locationdetails_info_date a {
+	color:#5F93B4;
+}
+ul.lists_locationdetails .lists_locationdetails_info_date a:hover {
+	color:#4e81a1;
+}
+/*Map Location Details Tooltip end hete*/

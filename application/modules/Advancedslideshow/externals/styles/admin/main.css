@@ -1,0 +1,119 @@
+/* $Id: main.css 2011-10-22 9:40:21Z SocialEngineAddOns Copyright 2010-2011 BigStep Technologies Pvt. Ltd. $ */
+
+/* icons */
+.advslideshow_icon_help {
+	background-image: url(~/application/modules/Advancedslideshow/externals/images/admin/help.png);
+}
+.advslideshow_guidelines_faq li > div {
+	clear:both;
+	border-left:3px solid #ccc;
+	padding:5px 5px 5px 10px;
+	margin:5px;
+	font-family:arial;
+	line:height:18px;
+}
+.advslideshow_guidelines_faq li div b {
+	font-weight:bold;
+}
+.advslideshow_guidelines_faq li div p {
+	clear:both;
+	margin:5px 0;
+}
+.advslideshow_code_popup {
+	font-family: arial, verdana, tahoma, sans-serif;
+	font-size:11px;
+	background-color: #E9F4FA;
+	overflow: hidden;
+	padding: 10px;
+	margin:10px 10px 0;
+}
+.advslideshow_code_popup > div {
+	background:#FFFFFF;
+	border: 1px solid #D7E8F1;
+	overflow: hidden;
+	padding: 10px;
+}
+.advslideshow_code_popup * {
+	font-family: arial, verdana, tahoma, sans-serif;
+}
+.advslideshow_code_popup_tbs {
+	clear:both;
+	margin-top:10px;
+	float:left;
+	width:98%;
+	position: relative;
+}
+.advslideshow_code_popup_tbs a {
+	padding:3px 7px;
+	background:#E6F6FF;
+	border:1px solid #8EB7CD;
+	float:left;
+	margin-right:5px;
+	margin-bottom:-1px;
+	font-weight:bold;
+	outline:none;
+}
+.advslideshow_code_popup_tbs a:hover {
+	text-decoration:none;
+}
+.advslideshow_code_popup_tbs a.active {
+	background:#B0D5E8;
+	border-bottom-color:#B0D5E8;
+	color:#000;
+}
+.advslideshow_codetop {
+	background-color: #B0D5E8;
+	color: #000000;
+	font-weight: bold;
+	margin: 10px auto 0;
+	padding: 3px;
+	width: 98%;
+	border:1px solid #8EB7CD;
+	border-bottom:none;
+	float:left;
+	clear:both;
+}
+.advslideshow_codemain {
+	background-color: #FAFCFE;
+	border: 1px solid #8EB7CD;
+	color: #465584;
+	font-family: Courier, Courier New, Verdana, Arial;
+	margin: 0 auto;
+	padding:10px 3px;
+	width: 98%;
+	float:left;
+	clear:both;
+	height:60px;
+}
+.advslideshow_code_popup_btm {
+	padding:5px 0;
+	width:98%;
+	margin-top:10px;
+	float:left;
+}
+.advslideshow_code_popup_btm a {
+	padding:2px 5px;
+	background-color: #B0D5E8;
+	color: #000000;
+	margin-right:5px;
+	border:1px solid #5D889F;
+}
+.advslideshow_code_popup_btm a:hover {
+	text-decoration:none;
+	background-color: #82AFC6;
+}
+
+/*TinyMC Editor of noobslidshow*/
+#slide_html-wrapper .defaultSkin iframe{
+  height:300px !important;
+}
+.slidshow-list table.admin_table tr td:last-child{
+	white-space:inherit;
+}
+/*Demo Tab on Admin Side*/
+#global_page_advancedslideshow-admin-settings-demo .settings{
+    max-width:410px;
+}
+#global_page_advancedslideshow-admin-settings-demo .settings .form-wrapper{
+   overflow: hidden !important;
+}

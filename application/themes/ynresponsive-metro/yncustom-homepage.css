@@ -1,0 +1,16 @@
+@include "constants.css";
+#global_page_user-index-home{
+	background:#fff;
+	#global_content{
+		padding-top:0;
+	}
+	.layout_page_user_index_home{
+		margin-left: -20px;
+		margin-right: -20px;
+	}
+}
+.layout_page_user_index_home{
+	.layout_right{
+		width:340px;
+	}
+}

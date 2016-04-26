@@ -1,0 +1,476 @@
+/* $Id: main.css 6590 2014-01-02 00:00:00Z SocialEngineAddOns Copyright 2013-2014 BigStep Technologies Pvt. Ltd. $ */
+
+.mtop_5{
+	margin-top:5px;
+}
+.mtop10{
+	margin-top:10px;
+}
+b, .bold{
+	font-weight:bold;
+}
+.siteevent_statistics_table td{
+	font-weight:bold;
+}
+/*Mapping Table*/
+.siteevent_mapping_table tr{
+	width:890px;
+	float:left;
+}
+.siteevent_mapping_table tr th,
+.siteevent_mapping_table tr td{
+	width:870px;
+	float:left;
+}
+.siteevent_mapping_table .siteevent_mapping_table_name{
+	width:35%;
+}
+.siteevent_mapping_table .siteevent_mapping_table_name span{
+	float:left;
+	margin-right:5px;
+}
+.siteevent_mapping_table .siteevent_mapping_table_value{
+	width:40%;
+	min-height:10px;
+}
+.siteevent_mapping_table .siteevent_mapping_table_option{
+	width:15%;
+}
+/*style for Import Event section start here*/
+.icon_siteevent_admin_import{
+	background-image:url(~/application/modules/Siteevent/externals/images/import.png);
+}
+.icon_siteevent_admin_import_manage{
+	background-image:url(~/application/modules/Siteevent/externals/images/files.png);
+}
+
+.siteevent_upload_csv_popup .settings .form-wrapper{
+	width:500px !important;
+}
+.siteevent_upload_csv_popup #buttons-label{
+	display:none!important;
+}
+.icon_siteevents_log{
+	background-image: url(~/application/modules/Siteevent/externals/images/log_clear.png);
+}
+.icon_siteevents_import{
+	background-image: url(~/application/modules/Siteevent/externals/images/import.png);
+}
+.icon_siteevents_download_csv{
+	background-image: url(~/application/modules/Siteevent/externals/images/download.gif);
+}
+.icon_siteevents_generate_csv{
+	background-image: url(~/application/modules/Siteevent/externals/images/icons/file.png);
+}
+.siteevent_upload_csv_popup_loader > div{
+	margin:200px 0 0 250px;
+	text-align:center;
+}
+.importevent_form_siteevent{
+	list-style: decimal outside none !important;
+	padding-left: 10px;
+}
+.importevent_form_siteevent > li{
+	margin-left: 20px;
+	padding: 7px 12px 7px 1px;
+}
+#global_page_siteevent-admin-importevent-import .settings .form-element .description{
+	max-width: 300px;
+}
+/*Manage Events*/
+.siteevent_admin_event_search{
+	max-width:inherit;
+}
+.siteevent_admin_event_search .search{
+	float:none;
+}
+.siteevent_admin_event_search .search form > div{
+	margin:0px 10px 10px 0;
+}
+.siteevent_admin_event_search .search form label{
+	margin-bottom:3px;
+}
+.siteevent_admin_event_search .search div div{
+	margin:0;
+}
+.siteevent_admin_event_search .search div input,
+.siteevent_admin_event_search div select{
+	padding:3px;
+	max-width:150px;
+	margin:0;
+}
+.siteevent_admin_event_search .search div input{
+	padding:4px;
+}
+.siteevent_manage_msg{
+	width:450px;
+}
+p.siteevent_description{
+	font-size: 11px;
+	margin-top: 3px;
+}
+/*style for Import Event section end here*/
+.sead_admin_search .search form > div.cat_loader{
+	display: none;
+	margin-top: 18px !important;
+}
+.siteevent_assign_badge_list_popup{
+	margin:10px;
+}
+.siteevent_assign_badge_list{
+	list-style:none;
+	margin:15px 0;
+	overflow:auto;
+	max-height:300px;
+	overflow:auto;
+}
+.siteevent_assign_badge_list_popup form{
+	width:600px !important;
+}
+.siteevent_assign_badge_list li{
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius:3px;
+	text-align:center;
+	font-weight:bold;
+	float:left;
+	width:90px;
+	height:75px;
+	margin-bottom:10px;
+	padding:5px;
+	border:1px solid #FFFFFF;
+}
+.siteevent_assign_badge_list li.selected{
+	background:#E9F4FA;
+	border:1px solid #D0E2EC;
+}
+.siteevent_assign_badge_list li img{
+	max-width:50px;
+	max-height:50px;
+	border:none;
+	margin:0px auto 0px;
+}
+.siteevent_assign_badge_list li div.badge_name {
+	clear: both;
+	font-size: 11px;
+	margin: 5px auto;
+	text-align: center;
+}
+/*tooltip*/
+.siteevent_assign_badge_list_tip{
+	background: #222;
+	clear: both;
+	display: none;
+	margin-left: 18px;
+	margin-top: 26px;
+	max-width: 160px;
+	opacity: 0.9;
+	padding: 5px 15px 5px 5px;
+	position: absolute;
+	text-align: left;
+}
+.siteevent_assign_badge_list_tip_wrapper:hover .siteevent_assign_badge_list_tip{
+	display: block;
+	clear:both;
+}
+.siteevent_assign_badge_list_tip img{
+	left: 18px;
+	top: -7px;
+	position: absolute;
+}
+.siteevent_assign_badge_list_tip div{
+	clear:both;
+	color: #FFFFFF;
+	font-size: 0.8em;
+}
+/*Price info*/
+.siteevent_price_info_image{
+	background: white;
+	border: 1px solid #E8E8E8;
+	display: inline-block;
+	padding: 3px 3px 1px;
+}
+.siteevent_price_info_image img{
+	max-height:30px;
+	max-width:100px;
+}	
+.siteevent_wheretobuy_popup .form-label{
+	width:80px !important;
+}
+.siteevent_wheretobuy_popup .form-element .description{
+	max-width:300px !important;
+}
+/*Manage Editors*/
+.siteevent_add_more{
+	font-size:11px;
+	font-weight:bold;
+}
+.siteevent_editor_list .thumb_icon{
+	height:48px;
+	width:48px;
+}
+/*Manage Badges*/
+.siteevent_img_pre{
+	max-width:200px !important;
+}
+/*Editor Edit Form*/
+.siteevent_popup_form .settings .form-elements{
+	width:560px;
+}
+.siteevent_popup_form .settings .form-label{
+	width:130px;
+}
+.siteevent_popup_form .settings .form-element{
+	max-width:420px;
+}
+/*review parameters*/
+.siteevent_parameters_popup{
+	margin:10px;
+}
+.siteevent_parameters_popup form > div > div{
+	min-height:200px;
+}
+.siteevent_parameters_popup .form-elements{
+	width:300px;
+}
+.siteevent_parameters_popup .form-label{
+	display:none !important;
+}
+.siteevent_parameters_popup form{
+	float:none;
+}
+.siteevent_parameters_popup input[type="text"]{
+	display: block;
+	margin-bottom: 5px;
+}
+.siteevent_parameters_popup #addOptionLink{
+	clear: both;
+	display: block;
+	font-size:11px;
+}
+/*Event Detail Popup*/
+.siteevent_event_details_view{
+	width:600px;
+}
+.siteevent_event_details_view .top{
+	padding:10px 0;
+}
+.siteevent_event_details_view .top img{
+	width:35px;
+	margin-right:10px;
+	vertical-align:middle;
+}
+.siteevent_event_details_view .top a{
+	font-weight:bold;
+}
+.siteevent_event_details_view td{
+	padding:3px;
+}
+.siteevent_event_details_view td b{
+	font-weight:bold;
+}
+/*Categories Page*/
+.siteevent_categories_left{
+	border-right-width:2px;
+	float:left;
+	margin-right:-2px;
+	width:340px;
+}
+.siteevent_cat_list_wrapper{
+	border-top-width:1px;
+	margin-top:10px;
+	padding-top:10px;
+}
+.siteevent_cat_list{
+	margin-bottom:10px;
+}
+.siteevent_cat_handle{
+	float:left;
+	cursor: move;
+	margin-right: 5px;
+	vertical-align: middle;
+}
+.siteevent_cat_det{
+	overflow:hidden;
+	font-size:12px;
+}
+.siteevent_cat_det_name{
+	display: list-item;
+	overflow: hidden;
+	white-space: nowrap;
+}
+.siteevent_cat_det_options{
+	float:right;
+	margin-right:10px;
+	margin-left:5px;
+}
+.siteevent_cat_icon{
+	display:inline-block;
+	height:16px;
+	vertical-align:middle;
+	width:16px;
+	text-indent:-999px;
+}
+.siteevent_cat_showhide{
+	vertical-align:middle;
+	float:left;
+	margin-right:5px;
+}
+.siteevent_cat_new{
+	font-size:11px;
+	margin-top:5px;
+	padding-left: 20px;
+}
+.siteevent_cat{
+	font-size:12px;
+}
+.siteevent_cat_selected{
+	background-color:#CFF7FF;
+	font-weight:bold;
+}
+.siteevent_sub_cat_wrapper{
+	margin-top: 10px;
+	padding-left: 20px;
+}
+.siteevent_sub_cat_wrapper .siteevent_sub_cat_wrapper{
+	padding-left:30px;
+}
+.siteevent_categories_right{
+	border-left-width:2px;
+	overflow:hidden;
+	padding-left:10px;
+}
+.siteevent_categories_right .settings form > div{
+	padding:20px;
+}
+.siteevent_categories_right .settings .form-label{
+	width:100px;
+}
+.siteevent_categories_right .settings .form-element{
+	max-width:420px;
+}
+.siteevent_categories_icon{
+	max-width:24px;
+}
+.siteevent_categories_banner_img{
+	max-width:300px;
+}
+/*Ratings*/
+.siteevent_rating_star_generic{
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background-repeat: no-repeat;
+  font-size: 1px;
+  cursor: default;
+}
+.rating_star_y{background-image: url(~/application/modules/Siteevent/externals/images/rating/star_y.png);}
+.rating_star_half_y{ background-image: url(~/application/modules/Siteevent/externals/images/rating/star_half_y.png);}
+.rating_star_r{background-image: url(~/application/modules/Siteevent/externals/images/rating/star_r.png);}
+.rating_star_half_r{background-image: url(~/application/modules/Siteevent/externals/images/rating/star_half_r.png);}
+.rating_star_b{background-image: url(~/application/modules/Siteevent/externals/images/rating/star_b.png);}
+.rating_star_half_b{background-image: url(~/application/modules/Siteevent/externals/images/rating/star_half_b.png);}
+.siteevent_rating_star_disabled{background-image: url(~/application/modules/Siteevent/externals/images/rating/star_disable.png);}
+
+/*Add Item AUTOSUGGEST */
+ul.siteevent_categories-autosuggest
+{
+  position: absolute;
+  padding: 0px;
+  width: 300px;
+  siteevent-style: none;
+  z-index: 50;
+  border: 1px solid #d2d1d1;
+  margin: 0px;
+  siteevent-style: none;
+  cursor: pointer;
+  background: #fff;
+}
+ul.siteevent_categories-autosuggest > li
+{
+  padding: 3px;
+  overflow: hidden;
+}
+ul.siteevent_categories-autosuggest > li + li
+{
+  border-top: 1px solid #d2d1d1;
+}
+ul.siteevent_categories-autosuggest > li img
+{
+  width: 48px;
+  height: 48px;
+  display: block;
+  float: left;
+  margin-right: 5px;
+}
+ul.siteevent_categories-autosuggest > li.autocompleter-selected
+{
+  background: #dbdbdb;
+  color: #333;
+}
+ul.siteevent_categories-autosuggest > li.autocompleter-choices
+{
+  font-size: .8em;
+	overflow:hidden;
+}
+ul.siteevent_categories-autosuggest > li.autocompleter-choices .autocompleter-choice
+{
+  line-height: 20px;
+	overflow:hidden;
+}
+ul.siteevent_categories-autosuggest > li:hover
+{
+  background: #dbdbdb;
+  color: #222;
+}
+ul.siteevent_categories-autosuggest > li span.autocompleter-queried
+{
+  font-weight: bold;
+}
+ul.siteevent_categories-autosuggest .search-working
+{
+  background-image: none;
+}
+.autocompleter-choice
+{
+  cursor: pointer;
+}
+.autocompleter-choice:hover
+{
+  color: #5ba1cd;
+}
+/*admin profile fields*/
+.siteevent_custom_fields .admin_field{
+	float:left;
+}
+ul.siteevent_custom_fields .admin_field > span{
+	background-image:none;
+}
+.siteevent_custom_fields .admin_field_checkbox{
+	clear: none;
+	float: left;
+	margin: 13px 0 0 10px;
+}
+.siteevent_settings_form .settings form{float:none !important;}		
+.siteevent_settings_form .settings .form-element {
+	max-width: 650px !important;
+}
+.siteevent_settings_form .settings .form-description {
+	max-width: none !important;
+	width:auto !important;
+}
+.siteevent_settings_form .settings .form-element .description {
+	max-width: 650px !important;
+}
+#global_page_siteeventadmincontact-admin-mails-index .event_calendar_container input[type="text"]{
+  padding: 3px;
+}
+/*Global Settings*/
+.siteevent_global_settings div + h3{
+  border-bottom-width: 1px;
+  margin-top: 15px;
+  padding-bottom: 10px;
+}
+table.seaocore_admin_table tbody tr td:last-child{
+	white-space: inherit;
+}

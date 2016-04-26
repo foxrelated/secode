@@ -1,0 +1,33 @@
+  /* like button start here */
+  .sitelike_button a{
+    background-color:#f1f2f1;
+    background-position:bottom;
+    padding:3px 5px;
+    text-decoration:none;
+    font-weight:bolder;
+    border:1px solid #cecece;
+    clear:both;
+    font-size:11px;
+    float:left;
+    outline:none;
+  }
+  .sitelike_button a:hover
+  {
+    background-color:#f1f2f1;
+  }
+  .sitelike_button a i.like_thumbup_icon
+  {
+		background-image: url(/application/modules/Sitelike/externals/images/thumb-up.png);
+  }
+  .sitelike_button a i.like_thumbdown_icon
+  {
+		background-image: url(/application/modules/Sitelike/externals/images/thumb-down.png);
+  }
+  .sitelike_button a span{
+    color: #666666;
+  }
+  .sitelike_button a:hover span
+  {
+    color:#666666;
+  }
+  /* like button end here */

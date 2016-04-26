@@ -1,0 +1,2 @@
+INSERT IGNORE INTO `engine4_core_menuitems` (`name`, `module`, `label`, `plugin`, `params`, `menu`, `submenu`, `enabled`, `custom`, `order`) VALUES
+('sitetagcheckin_gutter_editlocation', 'sitetagcheckin', 'Edit Location', 'Sitetagcheckin_Plugin_Menus', '', 'event_profile', '', 1, 0, 999);

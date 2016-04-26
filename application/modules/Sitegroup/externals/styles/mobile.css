@@ -1,0 +1,936 @@
+/* $Id: mobile.css 2011-05-05 9:40:21Z SocialEngineAddOns Copyright 2010-2011 BigStep Technologies Pvt. Ltd. $ */.clear{clear:both !important;}
+.item_icon_sitegroup{
+	background-image:url(~/application/modules/Sitegroup/externals/images/icons/sitegroup.png);
+}
+.fleft{float:left!important;}
+.fright{float:right!important;}
+.mright10{margin-right:10px;!important}
+.mtop10{margin-top:10px!important;}
+.mleft5{margin-top:5px!important;}
+.mtop15{margin-top:15px!important;}
+.mbot15{margin-bottom:15px!important;}
+.ptop10{padding-top:10px!important;}
+.p5{padding:15px!important;}
+.border0{border:none !important}
+.bold{font-weight:bold!important;}
+.widthfull{width:100%!important;}
+
+.navigation .sitegroup_main_create,
+.navigation .sitegroup_main_claim{
+	display:none;
+}
+.layout_sitegroup_recently_popular_random_sitegroup #sitegroup_home_group_tab5,
+.layout_sitegroup_recently_popular_random_sitegroup #sitegroup_home_group_tab4{
+	display:none;
+}
+/*CSS FOR ALL LISTINGS SATRT HERE*/
+.sitegroup_view_grid{
+	display:none !important;
+}
+ul.seaocore_browse_list
+{
+  clear: both;
+}
+ul.seaocore_browse_list > li
+{
+  clear: both;
+  padding: 0px 0px 15px 0px;
+  overflow: hidden;
+}
+ul.seaocore_browse_list > li .lists_highlight{
+	background-color:$theme_foreground_background_color;
+	padding:5px;
+}
+ul.seaocore_browse_list > li + li
+{
+  padding-top: 15px;
+  border-top-width: 1px;
+}
+ul.seaocore_browse_list .seaocore_browse_list_photo
+{
+  float: left;
+  overflow: hidden;
+  margin-right: 8px;
+}
+ul.seaocore_browse_list .seaocore_browse_list_photo img
+{
+  width: 100px;
+}
+ul.seaocore_browse_list .seaocore_browse_list_options
+{
+  float: right;
+  overflow: hidden;
+  padding-left: 20px;
+	width:150px;
+	display:none;
+}
+ul.seaocore_browse_list .seaocore_browse_list_options > a
+{
+  clear: both;
+  display: block;
+  margin: 5px;
+  font-size: .8em;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+ul.seaocore_browse_list .seaocore_browse_list_info
+{
+  overflow: hidden;
+}
+ul.seaocore_browse_list .seaocore_browse_list_info_title
+{
+	font-weight:bold;
+	overflow:hidden;
+}
+ul.seaocore_browse_list .seaocore_browse_list_info_title h3
+{
+  margin: 0px;
+	overflow:hidden;
+}
+ul.seaocore_browse_list .seaocore_browse_list_info_title .seaocore_title
+{
+	overflow:hidden;
+	font-weight:bold;
+}
+ul.seaocore_browse_list .seaocore_browse_list_info_title span{
+	float:right;
+	margin-right:5px;
+	margin-left:5px;
+}
+ul.seaocore_browse_list .seaocore_browse_list_info_title span.list_rating_star span
+{
+	float:left;
+	margin:2px;
+}
+ul.seaocore_browse_list .seaocore_browse_list_info_date
+{
+  font-size: .8em;
+  color: $theme_font_color_light;
+}
+ul.seaocore_browse_list .seaocore_browse_list_info_blurb
+{
+  margin-top: 5px;
+}
+#global_page_sitegroup-mobi-index .seaocore_browse_list_info_title span{
+	display:none;
+}
+.seaocore_browse_list_info .sitegroupoffer_box{
+	display:none;
+}
+/*CSS FOR ALL LISTINGS END HERE*/
+/*css for all modules view group*/
+.sitegroup_viewgroups_head {
+	padding-bottom:0 !important;
+	overflow:auto;
+	margin-bottom:5px !important;
+}
+.sitegroup_viewgroups_head img{
+	display:none;
+}	
+.sitegroup_viewgroups_head h2 {
+	overflow:hidden;
+	font-size:17px;
+	text-align:center;
+}
+.sitegroup_viewgroups_head > a {
+	float:left;
+}
+/*sitegroup home group and browse group tabs content*/
+.layout_core_container_tabs {
+	clear:both;
+}
+#global_page_sitegroup-index-home .layout_core_container_tabs .tabs_alt {
+	margin-bottom:5px !important;
+}
+.sitegroup_view_select {
+	clear:both;
+	width:100%;
+	padding:0 0 5px 0;
+	float:left;
+	border-bottom-width:1px;
+	margin-bottom:10px;
+}
+.sitegroup_view_select span {
+	cursor:pointer;
+	float:right;
+	margin:3px 10px;
+}
+.layout_sitegroup_recently_popular_random_sitegroup {
+	margin-bottom:15px;
+}
+.sitegroup_img_view {
+	clear:both;
+	width:100%;
+}
+.sitegroup_img_view_sitegroup {
+	overflow:hidden;
+	width:100%;
+	float:left;
+	clear:both;
+}
+.sitegroup_img_view .sitegroup_browse_thumb {
+	display: block;
+	height: 190px;
+	margin: 10px auto;
+	padding: 2px;
+	text-align: center;
+	width: 102px;
+}
+.sitegroup_img_view .sitegroup_browse_thumb > div {
+	float:left;
+	display:block;
+	width:102px;
+	position:relative;
+	margin-bottom:3px;
+}
+.sitegroup_img_view .sitegroup_browse_thumb > div > a {
+	border-width:1px;
+	border-style:solid;
+	display:inline-block;
+	vertical-align:bottom;
+}
+.sitegroup_img_view .sitegroup_browse_thumb > div > a:hover {
+	border-width:1px;
+	border-style:solid;
+}
+.sitegroup_img_view .sitegroup_browse_thumb > div > a > span {
+	width:100px;
+	height:150px;
+	background-position:center 50%;
+	display:block;
+	background-repeat:no-repeat;
+}
+.sitegroup_browse_thumb ul, .sitegroup_browse_thumb ul li {
+	margin:0px;
+	padding:0px;
+}
+.sitegroup_browse_thumb ul li > a {
+	font-size:11px;
+}
+.sitegroup_browse_thumb_hover_color {
+	background-color:#000;
+	opacity:0.2;
+	filter:alpha(opacity=20);
+	position: absolute;
+	width:102px;
+	height:152px;
+	top:0;
+	z-index:100;
+}
+.sitegroup_browse_thumb_hover_like_button {
+	margin-left:28px;
+	position:absolute;
+	top:64px;
+	z-index:110;
+}
+.sitegroup_browse_thumb_hover_unlike_button {
+	margin-left:20px;
+	position:absolute;
+	top:66px;
+	z-index:110;
+}
+.sitegroup_browse_thumb_hover_loader {
+	margin-left: 35px;
+	position: absolute;
+	top: 65px;
+	z-index: 110;
+}
+.sitegroup_browse_liked,
+.sitegroup_browse_liked ul li > a{
+	background-color:$theme_buttontabs_background_color_active;
+	color:$theme_buttontabs_font_color_active;
+}
+/* like button start here */
+.layout_sitegroup_title_sitegroup #profile_status > h2 {
+	letter-spacing:0px;
+}
+.layout_sitegroup_profile_status {
+	float:left;
+}
+.layout_sitegroup_group_like_button {
+	float:left;
+	margin-bottom:5px;
+}
+
+
+/*sitegroup profile group*/
+#global_page_sitegroup-mobi-view .layout_core_container_tabs .tip{ display:none;}
+.layout_sitegroup_overview_sitegroup .seaocore_add{display:none;}
+.layout_sitegroup_title_sitegroup #profile_status{
+	text-align:center;
+}
+.layout_sitegroup_mainphoto_sitegroup {
+	margin:10px auto;
+	width:200px;
+	overflow: hidden;
+	clear:both;
+}
+.layout_sitegroup_mainphoto_sitegroup .sitegroup_photo > img{
+	width:200px;
+	border:none !important;
+}
+.sitegroup_photo_edit_wrapper .sitegroup_photo_edit{display:none !Important;}
+.sitegroup_profile_sponsorfeatured {
+	height:30px;
+	width:100%;
+	clear:both;
+	text-align:center;
+	line-height:30px;
+	font-size:17px;
+	color:#fff;
+	font-weight:bold;
+	text-shadow:#666 0px 0px 5px;
+}
+.layout_sitegroup_info_sitegroup .comments{
+	width:auto;
+}
+.layout_sitegroup_info_sitegroup .comments .comments_options
+{
+	text-align:left;
+}
+.layout_sitegroup_overview_sitegroup .tip{
+	display:none;
+}
+.group_photo_lightbox_content{
+	background-color:$theme_body_background_color;
+}
+li.sitegroupoffer_show {
+	border:2px dashed $theme_foreground_border_color !important;
+	border-top:2px dashed $theme_foreground_border_color !important;
+	background-color:$theme_foreground_background_color;
+}
+/*FEED ITEMS*/
+ul.feed .feed_attachment_sitegroup_group {
+	display:block;
+	overflow:hidden;
+	margin:0px 5px 5px 0px;
+	vertical-align:top;
+}
+ul.feed .feed_attachment_sitegroup_group > div > a {
+	display:block;
+	float:left;
+	margin-right:7px;
+}
+ul.feed .feed_attachment_sitegroup_group > div > a > img {
+	display:inline-block;
+	max-width:90px;
+	max-height:90px;
+	vertical-align:top;
+}
+ul.feed .feed_attachment_sitegroup_group > div > div {
+	overflow:hidden;
+}
+
+
+/*activity feeds*/
+/*sitegroupnote feed item start here*/
+.feed_attachment_sitegroupnote_note > div{
+  overflow: hidden;
+}
+.feed_attachment_sitegroupnote_note > div > a{
+  display: inline-block;
+  float: left;
+  margin-right: 7px;
+}
+.feed_attachment_sitegroupnote_note > div > a > img{
+  display: block;
+  max-width: 90px;
+  max-height: 90px;
+}
+.feed_attachment_sitegroupnote_note > div > div{
+  overflow: hidden;
+}
+/*sitegroupnote feed item end here*/
+/*sitegroupvent feed item start here*/
+.feed_attachment_sitegroupevent_event > div{
+  overflow: hidden;
+}
+.feed_attachment_sitegroupevent_event > div > a{
+  display: inline-block;
+  float: left;
+  margin-right: 7px;
+}
+.feed_attachment_sitegroupevent_event > div > a > img{
+  display: block;
+  max-width: 90px;
+  max-height: 90px;
+}
+.feed_attachment_sitegroupevent_event > div > div{
+  overflow: hidden;
+}
+/*sitegroupvent feed item end here*/
+/*sitegroupoffer feed item start here*/
+.feed_attachment_sitegroupoffer_offer > div{
+  overflow: hidden;
+}
+.feed_attachment_sitegroupoffer_offer > div > a{
+  display: inline-block;
+  float: left;
+  margin-right: 7px;
+}
+.feed_attachment_sitegroupoffer_offer > div > a > img{
+  display: block;
+  max-width: 90px;
+  max-height: 90px;
+}
+.feed_attachment_sitegroupoffer_offer > div > div{
+  overflow: hidden;
+}
+/*sitegroupoffer feed item end here*/
+/*CSS FOR ALL SITEGROUP MODULE LIST ON SITEGROUP PROFILE START HERE*/
+.layout_core_container_tabs .layout_right{
+ display:none;
+}
+.seaocore_add,
+.layout_sitegroupmusic_profile_sitegroupmusic > h3,
+.layout_sitegroupform_sitegroup_viewform > h3,
+.layout_sitegroupoffer_profile_sitegroupoffers > h3,
+.layout_sitegroup_discussion_sitegroup > h3,
+.layout_sitegroupreview_profile_sitegroupreviews h3,
+.layout_sitegrouppoll_profile_sitegrouppolls h3,
+.layout_sitegroupevent_profile_sitegroupevents > h3,
+.layout_sitegroupnote_profile_sitegroupnotes h3,
+.layout_sitegroupdocument_profile_sitegroupdocuments > h3{
+	display:none;
+}
+.layout_sitegroupreview_profile_sitegroupreviews .seaocore_add{
+	display:block;
+}
+ul.sitegroup_profile_list {
+	clear:both;
+}
+ul.sitegroup_profile_list > li {
+	clear:both;
+	padding:10px;
+	overflow:hidden;
+}
+ul.sitegroup_profile_list > li + li {
+	border-top-width:1px;
+	padding-top:15px;
+}
+ul.sitegroup_profile_list > li > img, 
+ul.sitegroup_profile_list > li > a {
+	display:block;
+	float:left;
+	overflow:hidden;
+	margin-right:8px;
+	font-weight:bold;
+}
+ul.sitegroup_profile_list li > a img {
+	border-width:1px;
+}
+ul.sitegroup_profile_list li .sitegroup_profile_list_options {
+	display:none;
+}
+ul.sitegroup_profile_list li .sitegroup_profile_list_info {
+	overflow:hidden;
+}
+ul.sitegroup_profile_list li .sitegroup_profile_list_title {
+	font-weight:bold;
+	margin-bottom:5px;
+	overflow:auto;
+}
+ul.sitegroup_profile_list li .sitegroup_profile_list_title > a, 
+ul.sitegroup_profile_list li .sitegroup_profile_list_title .list_title {
+	font-size:14px;
+	overflow:hidden;
+}
+ul.sitegroup_profile_list li .sitegroup_profile_list_title span {
+	float:right;
+}
+ul.sitegroup_profile_list li .sitegroup_profile_list_info_date {
+	font-size:.8em;
+	color:$theme_font_color_light;
+}
+ul.sitegroup_profile_list li .sitegroup_profile_list_info_date .rating_star_big_generic {
+	width:8px;
+	height:8px;
+}
+ul.sitegroup_profile_list li .sitegroup_profile_list_info_des {
+	margin-top:5px;
+}
+/*CSS FOR ALL SITEGROUP MODULE LIST ON SITEGROUP PROFILE END HERE*/
+/*sitegroup list filters start here*/
+.sitegroup_list_filters {
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	padding:7px;
+	overflow:hidden;
+	margin-bottom:15px;
+	clear:both;
+	+foreground;
+}
+.sitegroup_list_filter_first {
+	float:left;
+	width:auto !important;
+	padding-top:3px;
+}
+.sitegroup_list_filter_field {
+	float:left;
+	width:auto!important;
+}
+.layout_sitegroupevent_profile_sitegroupevents .sitegroup_list_filter_field{
+	width:auto!important;
+}
+/*sitegroup list filters end here*/
+
+
+
+
+/*css for all icon and constand start here*/
+/* ICONS */
+.icon_sitegroup_ad_create {
+	background-image:url(~/application/modules/Sitegroup/externals/images/icons/plus16.gif);
+}
+.icon_sitegroup_update {
+	background-image:url(~/application/modules/Sitegroup/externals/images/update.png);
+}
+.icon_sitegroup_info {
+	background-image:url(~/application/modules/Sitegroup/externals/images/info.png);
+}
+.icon_sitegroup_form {
+	background-image:url(~/application/modules/Sitegroup/externals/images/form.png);
+}
+.icon_sitegroup_publish {
+	background-image:url(~/application/modules/Sitegroup/externals/images/sitegroup_publish.png);
+}
+.icon_sitegroups_invite {
+	background-image:url(~/application/modules/Sitegroup/externals/images/invite.png);
+}
+.icon_sitegroups_new {
+	background-image:url(~/application/modules/Sitegroup/externals/images/create.png);
+}
+.icon_sitegroups_edit {
+	background-image:url(~/application/modules/Sitegroup/externals/images/edit.png);
+}
+.icon_sitegroups_dashboard {
+	background-image:url(~/application/modules/Sitegroup/externals/images/dashboard.png);
+}
+.icon_sitegroups_close {
+	background-image:url(~/application/modules/Sitegroup/externals/images/close.png);
+}
+.icon_sitegroups_open {
+	background-image:url(~/application/modules/Sitegroup/externals/images/unclose.png);
+}
+.icon_sitegroups_delete {
+	background-image:url(~/application/modules/Sitegroup/externals/images/delete.png);
+}
+.icon_sitegroups_add {
+	background-image:url(~/application/modules/Sitegroup/externals/images/plus_icon.png);
+}
+.icon_sitegroups_photo_new {
+	background-image:url(~/application/modules/Sitegroup/externals/images/upload.png);
+}
+.icon_sitegroups_back {
+	background-image:url(~/application/modules/Sitegroup/externals/images/back.png);
+}
+.icon_sitegroups_share {
+	background-image:url(~/application/modules/Sitegroup/externals/images/share.png);
+}
+.icon_sitegroups_print {
+	background-image:url(~/application/modules/Sitegroup/externals/images/printer.png);
+}
+.icon_sitegroups_report {
+	background-image:url(~/application/modules/Sitegroup/externals/images/report.png);
+}
+.icon_sitegroups_tellafriend {
+	background-image:url(~/application/modules/Sitegroup/externals/images/tellafriend_icon.png);
+}
+.sitegroup_quick_create {
+	background-image:url(~/application/modules/Sitegroup/externals/images/icons/sitegroup_add.png);
+}
+.notification_type_sitegroup_manageadmin, .activity_icon_sitegroup_new {
+	background-image:url(~/application/modules/Sitegroup/externals/images/icons/sitegroup.png);
+}
+.sitegroup_gutter_editstyle {
+	background-image:url(~/application/modules/Sitegroup/externals/images/style.png);
+}
+.icon_sitegroups_overview, .sitegroup_gutter_editoverview {
+	background-image:url(~/application/modules/Sitegroup/externals/images/overview_icon.png);
+}
+.icon_sitegroups_map {
+	background-image:url(~/application/modules/Sitegroup/externals/images/map.png);
+}
+.icon_sitegroups_map_edit {
+	background-image:url(~/application/modules/Sitegroup/externals/images/map_edit_icon.png);
+}
+.item_icon_sitegroup_photo,
+.activity_icon_sitegroup_photo_upload {
+	background-image:url(~/application/modules/Sitegroup/externals/images/photo/view.png);
+}
+.icon_sitegroups_comment {
+	background-image:url(~/application/modules/Sitegroup/externals/images/comment.png);
+}
+.item_icon_sitegroup_topic, .activity_icon_sitegroup_topic_create, .icon_sitegroups_discussion {
+	background-image:url(~/application/modules/Sitegroup/externals/images/comment.png);
+}
+.sitegroup_gutter_favourite {
+	background-image:url(~/application/modules/Sitegroup/externals/images/link.gif);
+}
+.sitegroup_gutter_favouritedelete {
+	background-image:url(~/application/modules/Sitegroup/externals/images/unlink.gif);
+}
+.sitegroup_gutter_editlayout {
+	background-image:url(~/application/modules/Sitegroup/externals/images/layout_edit.png);
+}
+.icon_sitegroups_dispute {
+	background-image:url(~/application/modules/Sitegroup/externals/images/icon-dispute.gif);
+}
+.icon_sitegroups_claim {
+	background-image:url(~/application/modules/Sitegroup/externals/images/claim.png);
+}
+.icon_sitegroups_group-owner {
+	background-image:url(~/application/modules/Sitegroup/externals/images/group-owner.png);
+}
+.icon_sitegroup_back {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/back16.gif);
+}
+.sitepge_photos_list div.thumb_photo .photo_hide a {
+	background-image: url(~/application/modules/Sitegroup/externals/images/close_icon.png) !important;
+}
+.icon_sitegroup_group_link {
+	background-image: url(~/application/modules/Sitegroup/externals/images/group_link.png);
+}
+/*css for all link button start here*/
+.sitegroup_badge_buttons a,
+.sitegroup_featuredadmins_add a, .sitegroup_create_link a, .sitegroup_getstarted_btn a, .sitegroup_edit_content .sitegroup_edit_header > a {
+	padding:5px 10px;
+	font-weight:bold;
+	border:none;
+	background-repeat:repeat-x;
+	background-position:0px 1px;
+	font-size:11px;
+	outline:none;
+}
+.sitegroup_badge_buttons a:hover, 
+.sitegroup_featuredadmins_add a:hover, .sitegroup_create_link a:hover, .sitegroup_getstarted_btn a:hover, .sitegroup_edit_content .sitegroup_edit_header > a:hover {
+	cursor:pointer;
+	text-decoration:none;
+}
+/*css for all link button end here*/
+/*css for all icon and constand end here*/
+/*discussion icon start here*/
+.icon_sitegroup_post_new {
+	background-image: url(~/application/modules/Sitegroup/externals/images/post/create.png);
+}
+.icon_sitegroup_post_edit {
+	background-image: url(~/application/modules/Sitegroup/externals/images/post/edit.png);
+}
+.icon_sitegroup_post_reply {
+	background-image: url(~/application/modules/Sitegroup/externals/images/post/reply.png);
+}
+.icon_sitegroup_post_stick {
+	background-image: url(~/application/modules/Sitegroup/externals/images/post/stick.png);
+}
+.icon_sitegroup_post_unstick {
+	background-image: url(~/application/modules/Sitegroup/externals/images/post/unstick.png);
+}
+.icon_sitegroup_post_close {
+	background-image: url(~/application/modules/Sitegroup/externals/images/post/close.png);
+}
+.icon_sitegroup_post_open {
+	background-image: url(~/application/modules/Sitegroup/externals/images/post/unclose.png);
+}
+.icon_sitegroup_post_rename {
+	background-image: url(~/application/modules/Sitegroup/externals/images/post/rename.png);
+}
+.icon_sitegroup_post_delete {
+	background-image: url(~/application/modules/Sitegroup/externals/images/post/delete.png);
+}
+.icon_sitegroup_post_quote {
+	background-image: url(~/application/modules/Sitegroup/externals/images/post/quote.png);
+}
+.icon_sitegroup_topic_watch {
+	background-image: url(~/application/modules/Sitegroup/externals/images/watch.png);
+}
+.icon_sitegroup_topic_unwatch {
+	background-image: url(~/application/modules/Sitegroup/externals/images/unwatch.png);
+}
+.icon_sitegroup_photo_new {
+	background-image: url(~/application/modules/Sitegroup/externals/images/photo/upload.png);
+}
+.icon_sitegroup_photo_view {
+	background-image: url(~/application/modules/Sitegroup/externals/images/photo/view.png);
+}
+ul.sitegroup_sitegroups .sitegroup_sitegroups_sticky a {
+	background-image: url(~/application/modules/Sitegroup/externals/images/post/stick.png);
+}
+div.sitegroup_sitegroups_thread_options_closed {
+	background-image: url(~/application/modules/Sitegroup/externals/images/post/close.png);
+}
+.activity_icon_sitegroup_topic_reply, .item_icon_sitegroup_post, .notification_type_sitegroup_discussion_response, .notification_type_sitegroup_discussion_reply {
+	background-image: url(~/application/modules/Sitegroup/externals/images/types/post.png);
+}
+/*discussion icon end here*/
+/*note icon start here*/
+ /* ICONS */
+.activity_icon_sitegroupnote_admin_new, .activity_icon_sitegroupnote_new, .icon_sitegroupnote_note {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/note.png);
+}
+.icon_sitegroupnote_new {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/new.png);
+}
+.icon_sitegroupnote_edit {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/edit.png);
+}
+.icon_sitegroupnote_delete {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/delete.png);
+}
+.icon_sitegroupnote_photo_new {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/upload.png);
+}
+.icon_sitegroupnote_photo_edit {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/album_editinfo.png);
+}
+.icon_sitegroupnote_viewall {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/note.png);
+}
+.icon_sitegroupnote_publish {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/sitegroupnote_publish.png);
+}
+.icon_sitegroupnote_photos_flip_horizontal {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/flip_horizontal.png);
+}
+.icon_sitegroupnote_photos_flip_vertical {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/flip_vertical.png);
+}
+.icon_sitegroupnote_photos_rotate_ccw {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/rotate_ccw.png);
+}
+.icon_sitegroupnote_photos_rotate_cw {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/rotate_cw.png);
+}
+/*note icon end here*/
+/*event icon start here*/
+.notification_type_sitegroupevent_invite, 
+.notification_type_sitegroupevent_accepted,
+.icon_sitegroupevent,
+.item_icon_sitegroupevent_event {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/sitegroupevent.png);
+}
+.icon_sitegroupevent_new, .icon_sitegroupevent_create {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/sitegroupevent_create.png);
+}
+.icon_sitegroupevent_edit {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/edit.png);
+}
+.activity_icon_sitegroupevent_join,
+.icon_sitegroupevent_join {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/sitegroupevent_join.png);
+}
+.icon_sitegroupevent_delete {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/delete.png);
+}
+.icon_sitegroupevent_leave {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/sitegroupevent_leave.png);
+}
+.icon_sitegroupevent_accept {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/sitegroupevent_accept.png);
+}
+.icon_sitegroupevent_reject {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/sitegroupevent_reject.png);
+}
+.icon_sitegroupevent_cancel {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/sitegroupevent_cancel.png);
+}
+.sitegroupevent_rsvp .sitegroupevent_radio_loading {
+	background-image: url(~/application/modules/Sitegroup/externals/images/loading.gif);
+}
+/*event icon end here*/
+/*poll icon start here*/
+ /* ACTION TYPE ICONS */
+.activity_icon_comment_sitegrouppoll {
+	background-image: url(~/application/modules/Sitegroup/externals/images/types/post.png);
+}
+/* ITEM TYPE ICONS */
+.item_icon_sitegrouppoll_detail,
+.icon_sitegrouppoll_viewall,
+.item_icon_sitegrouppoll_poll,
+.item_icon_sitegrouppoll {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/sitegrouppoll.png) !important;
+}
+/* ICONS */
+.icon_sitegrouppoll_new {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/sitegrouppoll_new.png);
+}
+.icon_sitegrouppoll_delete {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/sitegrouppoll_delete.png);
+}
+.sitegrouppoll_view_single .sitegrouppoll_radio_loading {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/loading.gif);
+}
+/*poll icon end here*/
+/*document icon start here*/
+.activity_icon_comment_sitegroupdocument {
+	background-image: url(~/application/modules/Sitegroup/externals/images/types/post.png);
+}
+.item_icon_sitegroupdocument {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/sitegroupdocument.png) !important;
+}
+.icon_sitegroupdocument_new {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/sitegroupdocument_new.png);
+}
+.icon_sitegroupdocument_edit {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/sitegroupdocument_edit.png);
+}
+.icon_sitegroupdocument_delete {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/sitegroupdocument_delete.png);
+}
+.item_icon_sitegroupdocument_detail, .icon_sitegroupdocument_viewall {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/sitegroupdocument_allentries.png);
+}
+.icon_sitegroupdocument_featured0 {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/sitegroupdocument_goldmedal0.png);
+}
+.icon_sitegroupdocument_featured1 {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/sitegroupdocument_goldmedal1.png);
+}
+.icon_sitegroupdocument_publish {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/sitegroupdocument_publish.png);
+}
+.item_icon_sitegroupdocument_document {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/sitegroupdocument16.png);
+}
+/*document icon end here*/
+/*video icons start here*/
+ /* ICONS */
+.item_icon_sitegroupvideo_video, .activity_icon_sitegroupvideo_new, .icon_type_sitegroupvideo {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/video16.png);
+}
+.icon_sitegroupvideo_comment {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/comment.png);
+}
+.icon_type_sitegroupvideo_new {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/sitegroupvideo_new.png);
+}
+.icon_type_sitegroupvideo_edit {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/edit.png);
+}
+.icon_type_sitegroupvideo_delete {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/delete.png);
+}
+.icon_type_sitegroupvideo_back {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/back.gif);
+}
+.icon_type_sitegroupvideo_share {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/share.png);
+}
+.icon_type_sitegroupvideo_report {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/sitegroupvideo_report.png);
+}
+.icon_type_sitegroupvideo_embed {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/embed.png);
+}
+/*video icons end here*/
+/*review icons start here*/
+.activity_icon_sitegroupreview_new, .icon_sitegroups_review, .activity_icon_review_sitegroup {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/review.png);
+}
+.icon_sitegroupreview_back {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/back16.gif);
+}
+/*review icons end here*/
+/*offer icons start here*/
+.sitegroupoffer_type_offer {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/offer.png);
+}
+.sitegroupoffer_type_addoffer {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/add.png);
+}
+.sitegroupoffer_type_editoffer {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/edit.png);
+}
+.sitegroupoffer_type_deleteoffer {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/delete.png);
+}
+.sitegroupoffer_type_makefeatured {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/offer_featured.png);
+}
+.sitegroupoffer_type_removefeatured {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/offer_unfeatured.png);
+}
+.item_icon_sitegroupoffer_offer {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/offer.png);
+}
+/*offer icons end here*/
+/*invite icons start here*/
+ .sitegroupinvite_gutter_sitegroupinvite {
+	background-image:url(~/application/modules/Sitegroup/externals/images/icons/invite.png);
+}
+.notification_type_sitegroup_suggested {
+	background-image:url(~/application/modules/Sitegroup/externals/images/icons/sitegroup.png);
+}
+/*invite icons end here*/
+/*album icon sstart here*/
+/*icons*/
+.sitegroup_icon_photos_new {
+	background-image: url(~/application/modules/Sitegroup/externals/images/photo/add.png);
+}
+.activity_icon_sitegroupalbum_photo_new, .sitegroup_icon_photos_manage {
+	background-image: url(~/application/modules/Sitegroup/externals/images/photo/view.png);
+}
+.sitegroup_icon_photos_settings {
+	background-image: url(~/application/modules/Sitegroup/externals/images/photo/album_editinfo.png);
+}
+.sitegroup_icon_photos_delete {
+	background-image: url(~/application/modules/Sitegroup/externals/images/photo/album_delete.png);
+}
+.icon_sitegroup_photos_flip_horizontal {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/flip_horizontal.png);
+}
+.icon_sitegroup_photos_flip_vertical {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/flip_vertical.png);
+}
+.icon_sitegroup_photos_rotate_ccw {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/rotate_ccw.png);
+}
+.icon_sitegroup_photos_rotate_cw {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/rotate_cw.png);
+}
+/*album icon end here*/
+/*sitegroupmusic icons start here*/
+/* ICONS */
+.icon_sitegroupmusic_new{
+  background-image: url(~/application/modules/Sitegroup/externals/images/photo/add.png);
+}
+.icon_sitegroupmusic_edit{
+  background-image: url(~/application/modules/Sitegroup/externals/images/edit.png);
+}
+.icon_sitegroupmusic_delete{
+  background-image: url(~/application/modules/Sitegroup/externals/images/delete.png);
+}
+.icon_music_playonprofile,
+.icon_music_disableonprofile{
+  background-image: url(~/application/modules/Sitegroup/externals/images/upload.png);
+}
+.icon_music_upload{
+  background-image: url(~/application/modules/Sitegroup/externals/images/upload.png);
+}
+/*sitegroupmusic icons end here*/
+/*Browse Location*/
+.sitegroup_map_container, .sitegroup_map_container_right{
+	display:none !important;
+}
+.sitegroup_advanced_search_form #fieldset-grp3 .form-wrapper{
+	width:auto !important;
+	float:none !important;
+}
+.sitegroup_advanced_search_form #fieldset-grp3 .form-element input[type="text"], 
+.sitegroup_advanced_search_form #fieldset-grp3 .form-element select{
+	width:95% !important;	
+}
+.sitegroup_advanced_search_form #fieldset-grp3 .description{
+	margin-bottom:10px;
+}
+.sitegroup_advanced_search_form #advances_search{
+	margin:10px 0 0!important;
+}
+.sitegroup_advanced_search_form #fieldset-grp1, 
+.sitegroup_advanced_search_form #fieldset-grp2{
+	margin-top:10px !important;
+}
+#global_page_sitegroup-index-mobilemap .sitegroup_advanced_search_form #fieldset-grp1 .form-wrapper, 
+#global_page_sitegroup-index-mobilemap .sitegroup_advanced_search_form #fieldset-grp2 .form-wrapper{
+	display:block;
+}

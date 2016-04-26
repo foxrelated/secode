@@ -1,0 +1,40 @@
+
+.activity_icon_sitetagcheckin_content, .item_icon_sitetagcheckin, .activity_icon_sitetagcheckin_add_to_map, .notification_type_sitetagcheckin_addlocation,.activity_icon_sitetagcheckin_status, .activity_icon_sitetagcheckin_checkin, .activity_icon_sitetagcheckin_post,.activity_icon_sitetagcheckin_post_self{background-image:url(~/application/modules/Sitetagcheckin/externals/images/icon/checkin.png);}
+.notification_type_sitetagcheckin_tagged, .notification_type_sitetagcheckin_page_tagged, .notification_type_sitetagcheckin_business_tagged{background-image:url(~/application/modules/User/externals/images/types/tag.png);}
+.notification_type_sitetagcheckin_tagged_location, .sitetagcheckin_icon_map_add{background-image:url(~/application/modules/Sitetagcheckin/externals/images/icon/map-add.png);}
+.stcheckin_icon_map_search{background-image:url(~/application/modules/Seaocore/externals/images/map-search.png);}
+.sitetagcheckin_icon_add{background-image:url(~/application/modules/Sitetagcheckin/externals/images/icon/add.png);}
+.sitetagcheckin_icon_map{background-image:url(~/application/modules/Sitetagcheckin/externals/images/icon/map.png);}
+input[type="text"].checkin-loading{background-image:url(~/application/modules/Sitetagcheckin/externals/images/spinner.gif);}
+.sitecheckin-autosuggest-contener{background-color:#fff;position:absolute;border:2px solid #999;white-space:nowrap;z-index:100;overflow:hidden;}
+.sitecheckin-autosuggest{max-height:258px;width:100%;float:left;overflow:hidden;}
+.sitecheckin-autosuggest .seaocore-autosuggest{border:none;max-height:200px;}
+.sitecheckin-autosuggest .autocompleter-choice{line-height:17px !important;min-height:34px;}
+.sitecheckin-autosuggest .autocompleter-choice div{font-size:11px;}
+.sitecheckin-autosuggest-map {height:150px;}
+.chekin_autosuggest_just_use{text-align:center;font-weight:bold;}
+.scroll_content{width:100%;height:100%;float:left;overflow:hidden;}
+.sitecheckin-autosuggest .verticalScroll{float:right;margin-right:2px;position:relative;z-index:100;}
+.verticalTrack{height:300px;width:6px;position:relative;overflow:hidden;}
+.verticalThumbTop, .verticalThumbBottom{display:none;}
+.verticalThumb {background-color:#AAAAAA;border-radius:7px;position:absolute;width:6px;}
+#panel-content-area .verticalScroll{float:right;margin-right:2px;position:relative;z-index:100;}
+.seaocheckinmaparea{background-color:$theme_foreground_background_color;border:1px solid $theme_foreground_border_color;}
+.seaocheckinmapfilters{ background-color:$theme_buttontabs_background_color;color:$theme_buttontabs_font_color;}
+.seaocheckinmapfilters + .seaocheckinmapfilters{border-left:2px solid $theme_border_dark_color;}
+.seaocheckinmapfilters:hover{ background-color:$theme_buttontabs_background_color_hover;color:$theme_buttontabs_font_color_hover;}
+.seaocheckinmapfilters.active{ background-color:$theme_buttontabs_background_color_active;color:$theme_buttontabs_font_color_active;}
+.stcheckin_map_tip_header{border-bottom:1px solid $theme_border_medium_color;}
+.seaocheckinshowlocation .overTxtLabel{color:$theme_font_color_light;font-size:11px;margin-top:2px;}
+ul.feed .feed_item_bodytext{color:$theme_font_color;}
+#global_page_sitetagcheckin-checkin-check-in{background-color:$theme_form_background_color;}
+.stcheckin_checkin_box_cont{ background-color:$theme_body_background_color;border:1px solid $theme_border_medium_color;}
+.stcheckin_compose_container, .stcheckin_checkin_box .compose-tray{ background-color:$theme_body_background_color;border:1px solid $theme_border_medium_color;}
+.stcheckin_feed_delete_btn a{border:1px solid $theme_border_medium_color;}
+.stcheckin_feed_delete_btn a:hover{border:1px solid $theme_pulldown_background_color_active;}
+.stcheckin_suggest_location{+foreground;+rounded;}
+.eventlocation_map_container, .eventlocation_map_container_map_area{background-color:$theme_body_background_color;border-color:$theme_border_dark_color;}
+.stcheckin_advanced_search #fieldset-grp1, .stcheckin_advanced_search #fieldset-grp2{border-color:$theme_border_medium_color}
+/*Feed Photos*/
+.checkin-feed-photo{border:1px solid $theme_photo_border_color;}
+.checkin-feed-photo:hover{border:1px solid $theme_photo_border_color_hover;}

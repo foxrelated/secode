@@ -1,0 +1,48 @@
+INSERT IGNORE INTO `engine4_sitelike_settings` (`content_type`, `tab1_show`, `tab1_duration`, `tab1_name`, `tab1_entries`, `tab2_show`, `tab2_duration`, `tab2_name`, `tab2_entries`, `tab3_show`, `tab3_duration`, `tab3_name`, `tab3_entries`, `view_layout`) VALUES
+( 'sitegroup_group', '1', '7', 'This Week', 3, '1', '30', 'This Month', 3, '1', 'overall',
+   'Overall', 3,'1'),
+( 'sitegroup_album', '1', '7', 'This Week', 3, '1', '30', 'This Month', 3, '1', 'overall', 'Overall',
+3, '1'),
+('sitegroupvideo_video', '1', '7', 'This Week', 3, '1', '30', 'This Month', 3, '1', 'overall',
+'Overall', 3, '1'),
+('sitegrouppoll_poll', '1', '7', 'This Week', 3, '1', '30', 'This Month', 3, '1', 'overall', 'Overall',
+3, '1'),
+('sitegroupnote_note', '1', '7', 'This Week', 3, '1', '30', 'This Month', 3, '1', 'overall', 'Overall',
+3, '1'),
+('sitegroupreview_review', '1', '7', 'This Week', 3, '1', '30', 'This Month', 3, '1', 'overall',
+'Overall', 3, '1'),
+('sitegroupmusic_playlist', '1', '7', 'This Week', 3, '1', '30', 'This Month', 3, '1', 'overall',
+'Overall', 3, '1'),
+('sitegroup_photo', '1', '7', 'This Week', 3, '1', '30', 'This Month', 3, '1', 'overall', 'Overall', 3,
+'1'),
+('sitegroupevent_event', '1', '7', 'This Week', 3, '1', '30', 'This Month', 3, '1', 'overall',
+'Overall', 3, '1'),
+('sitegroupnote_photo', '1', '7', 'This Week', 3, '1', '30', 'This Month', 3, '1', 'overall',
+'Overall', 3, '1');
+
+INSERT IGNORE INTO `engine4_sitelike_mixsettings` ( `module`, `resource_type`, `resource_id`, `item_title`, `title_items`, `value`, `default`, `enabled`) VALUES
+( 'sitegroup', 'sitegroup_group', 'group_id', 'Groupes', 'Group', 1, 1, 1),
+( 'sitegroupalbum', 'sitegroup_photo', 'photo_id', 'Group Album Photos', 'Group Album Photo', 1, 1, 1),
+( 'sitegroupalbum', 'sitegroup_album', 'album_id', 'Group Albums', 'Group Album', 1, 1, 1),
+( 'sitegroupdocument', 'sitegroupdocument_document', 'document_id', 'Group Documents', 'Group Document', 1, 1, 1),
+( 'sitegroupevent', 'sitegroupevent_event', 'event_id', 'Group Events', 'Group Event', 1, 1, 1),
+( 'sitegroupmusic', 'sitegroupmusic_playlist', 'playlist_id', 'Group Music', 'Group Music', 1, 1, 1),
+( 'sitegroupnote', 'sitegroupnote_photo', 'photo_id', 'Group Note Photos', 'Group Note Photo', 1, 1, 1),
+( 'sitegroupnote', 'sitegroupnote_note', 'note_id', 'Group Notes', 'Group Note', 1, 1, 1),
+( 'sitegrouppoll', 'sitegrouppoll_poll', 'poll_id', 'Group Polls', 'Group Poll', 1, 1, 1),
+( 'sitegroupreview', 'sitegroupreview_review', 'review_id', 'Group Reviews', 'Group Review', 1, 1,1),
+( 'sitegroupvideo', 'sitegroupvideo_video', 'video_id', 'Group Videos', 'Group Video', 1, 1, 1);
+
+INSERT IGNORE INTO `engine4_activity_actiontypes` (`type`, `module`, `body`, `enabled`, `displayable`,
+`attachable`, `commentable`, `shareable`, `is_generated`) VALUES
+('like_sitegroup_group', 'sitegroup', '{item:$subject} likes the groups {item:$object}:', 0, 5, 1, 1, 1, 1),
+('like_sitegroup_photo', 'sitegroupalbum', '{item:$subject} likes the group album photo {item:$object}:', 0, 5, 1, 1, 1, 1),
+('like_sitegroup_album', 'sitegroupalbum', '{item:$subject} likes the group album {item:$object}:', 0, 5, 1, 1, 1, 1),
+('like_sitegroupdocument_document', 'sitegroupdocument', '{item:$subject} likes the group document {item:$object}:', 0, 5, 1, 1, 1, 1),
+('like_sitegroupevent_event', 'sitegroupevent', '{item:$subject} likes the group event {item:$object}:', 0, 5, 1, 1, 1, 1),
+('like_sitegroupmusic_playlist', 'sitegroupmusic', '{item:$subject} likes the group music {item:$object}:', 0, 5, 1, 1, 1, 1),
+('like_sitegroupnote_photo', 'sitegroupnote', '{item:$subject} likes the group note photo {item:$object}:', 0, 5, 1, 1, 1, 1),
+('like_sitegroupnote_note', 'sitegroupnote', '{item:$subject} likes the group note {item:$object}:', 0, 5, 1, 1, 1, 1),
+('like_sitegrouppoll_poll', 'sitegrouppoll', '{item:$subject} likes the group poll {item:$object}:', 0, 5, 1, 1, 1, 1),
+('like_sitegroupreview_review', 'sitegroupreview', '{item:$subject} likes the group review {item:$object}:', 0, 5, 1, 1, 1, 1),
+('like_sitegroupvideo_video', 'sitegroupvideo', '{item:$subject} likes the group video {item:$object}:', 0, 5, 1, 1, 1, 1);

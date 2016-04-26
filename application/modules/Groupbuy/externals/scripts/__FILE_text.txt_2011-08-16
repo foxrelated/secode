@@ -1,0 +1,120 @@
+18:21:53 (callback) hello log
+18:21:53 (callback) Array
+(
+    [action] => callback
+    [req4] => d3UeXL6Li0sbe3ch
+    [req5] => 7OYUMyihPuGGg74N
+    [transaction_subject] => 
+    [txn_type] => web_accept
+    [payment_date] => 00:26:59 Aug 17, 2011 PDT
+    [last_name] => User
+    [residence_country] => US
+    [pending_reason] => multi_currency
+    [item_name] => 
+    [payment_gross] => 
+    [mc_currency] => AUD
+    [business] => store1_1300518495_biz@gmail.com
+    [payment_type] => instant
+    [protection_eligibility] => Ineligible
+    [verify_sign] => ATBRF-dObtabCdAXrsGu9P42wyrFAre21ZR7b.krDUyFy9uN8drZi3TT
+    [payer_status] => verified
+    [test_ipn] => 1
+    [tax] => 0.00
+    [payer_email] => nam.ng_1311565252_per@gmail.com
+    [txn_id] => 91501700E4642940A
+    [quantity] => 1
+    [receiver_email] => store1_1300518495_biz@gmail.com
+    [first_name] => Test
+    [payer_id] => 7GWWXV8J4P7KU
+    [receiver_id] => 7784D9TRHVK9C
+    [item_number] => 
+    [handling_amount] => 0.00
+    [payment_status] => Pending
+    [shipping] => 0.00
+    [mc_gross] => 45.00
+    [custom] => 
+    [charset] => windows-1252
+    [notify_version] => 3.2
+    [ipn_track_id] => xyoe1NPI8fUOHpohdaV2Jg
+)
+
+18:26:27 (callback) hello log
+18:26:27 (callback) Array
+(
+    [action] => callback
+    [req4] => 3PpQAPGf5HBSMeHp
+    [req5] => nT89CSxEUkC1UozF
+    [transaction_subject] => 
+    [txn_type] => web_accept
+    [payment_date] => 00:31:33 Aug 17, 2011 PDT
+    [last_name] => User
+    [residence_country] => US
+    [pending_reason] => multi_currency
+    [item_name] => 
+    [payment_gross] => 
+    [mc_currency] => AUD
+    [business] => store1_1300518495_biz@gmail.com
+    [payment_type] => instant
+    [protection_eligibility] => Ineligible
+    [verify_sign] => AFcWxV21C7fd0v3bYYYRCpSSRl31ALplGfSgbNPh12IaZz8t0HNcR36T
+    [payer_status] => verified
+    [test_ipn] => 1
+    [tax] => 0.00
+    [payer_email] => nam.ng_1311565252_per@gmail.com
+    [txn_id] => 8NR67315GV522425N
+    [quantity] => 1
+    [receiver_email] => store1_1300518495_biz@gmail.com
+    [first_name] => Test
+    [payer_id] => 7GWWXV8J4P7KU
+    [receiver_id] => 7784D9TRHVK9C
+    [item_number] => 
+    [handling_amount] => 0.00
+    [payment_status] => Pending
+    [shipping] => 0.00
+    [mc_gross] => 45.00
+    [custom] => 
+    [charset] => windows-1252
+    [notify_version] => 3.2
+    [ipn_track_id] => NMkGTaicI-PNDth-EDtG7w
+)
+
+18:39:20 (callback) hello log
+18:39:20 (callback) Array
+(
+    [action] => callback
+    [req4] => eq6US8KQHDnsFNG4
+    [req5] => yLqdeabELEKMiQ8Y
+    [transaction_subject] => 
+    [txn_type] => web_accept
+    [payment_date] => 00:44:25 Aug 17, 2011 PDT
+    [last_name] => User
+    [residence_country] => US
+    [pending_reason] => multi_currency
+    [item_name] => 
+    [payment_gross] => 
+    [mc_currency] => AUD
+    [business] => store1_1300518495_biz@gmail.com
+    [payment_type] => instant
+    [protection_eligibility] => Ineligible
+    [verify_sign] => AFcWxV21C7fd0v3bYYYRCpSSRl31AbMbLunNsMXiS.xt4xJ3CMAIHgp4
+    [payer_status] => verified
+    [test_ipn] => 1
+    [tax] => 0.00
+    [payer_email] => nam.ng_1311565252_per@gmail.com
+    [txn_id] => 2YD56796PX621954P
+    [quantity] => 1
+    [receiver_email] => store1_1300518495_biz@gmail.com
+    [first_name] => Test
+    [payer_id] => 7GWWXV8J4P7KU
+    [receiver_id] => 7784D9TRHVK9C
+    [item_number] => 
+    [handling_amount] => 0.00
+    [payment_status] => Pending
+    [shipping] => 0.00
+    [mc_gross] => 45.00
+    [custom] => 
+    [charset] => windows-1252
+    [notify_version] => 3.2
+    [ipn_track_id] => WLoyNN7HBP1mryqYef-fBg
+)
+

@@ -1,0 +1,670 @@
+/* $Id: mobile.css 6590 2010-12-31 9:40:21Z SocialEngineAddOns Copyright 2009-2010 BigStep Technologies Pvt. Ltd. $ */
+
+.icon_list_photo_new{
+  background-image: url(~/application/modules/List/externals/images/photo/upload.png);
+}
+.icon_list_photo_view{
+  background-image: url(~/application/modules/List/externals/images/photo/view.png);
+}
+.icon_lists_photo_new{
+	display:none !important;
+}
+/**/
+.clear{
+	clear:both !important;
+}
+.floatR{
+	float:right !important;
+}
+.floatL{
+	float:left !important;
+}
+.mtop_5{
+	margin-top:5px;
+}
+.mtop_10{
+	margin-top:10px;
+}
+.mbot_10{
+	margin-bottom:10px;
+}
+.mleft_10{
+	margin-left:10px;
+}
+.bold{
+	font-weight:bold;
+}
+/*
+FEED ITEMS
+Styles items with group attachments in the feed.
+*/
+ul.feed .feed_attachment_list_listing
+{
+  display: block;
+  overflow: hidden;
+  margin: 0px 5px 5px 0px;
+  vertical-align: top;
+}
+ul.feed .feed_attachment_list_listing > div > a
+{
+  display: block;
+  float: left;
+  margin-right: 7px;
+}
+ul.feed .feed_attachment_list_listing > div > a > img
+{
+  display: inline-block;
+  max-width: 90px;
+  max-height: 90px;
+  vertical-align: top;
+}
+ul.feed .feed_attachment_list_listing > div > div
+{
+  overflow: hidden;
+}
+/*View Listing*/
+.layout_list_mainphoto_list {
+	float: left;
+	margin-right: 7px;
+	overflow: hidden;
+}
+.layout_list_mainphoto_list .list_photo{
+  inline-block;
+}
+.layout_list_mainphoto_list .list_photo > img{
+	width:150px;
+	border:none !important;
+}
+.layout_list_info_list .comments .comments_options{
+	text-align:left !important;
+}
+.list_profile_sponsorfeatured
+{
+	height:30px;
+	width:100%;
+	clear:both;
+	text-align:center;
+	line-height:30px;
+	font-size:17px;
+	color:#fff;
+	font-weight:bold;
+	text-shadow: #666 0px 0px 5px;
+}
+
+.layout_list_title_list{
+	overflow: hidden;
+}
+.layout_list_title_list #profile_status > h2{
+	display: block;
+	font-size: 1.5em;
+	margin-bottom: 3px;
+}
+#profile_options li{
+	float:left;
+}
+#profile_options li a{
+	background-image:none !important;
+}
+/* like button start here */
+.layout_list_listing_like_button 
+{
+	margin-bottom: 5px;
+	overflow:hidden;
+	
+}
+.list_like_button a{
+	padding:3px 5px;
+	text-decoration:none;
+	font-weight:bolder;
+	border:1px solid #cecece;
+	font-size:11px;
+	float:left;
+	outline:none;
+	background-image:url(~/application/modules/List/externals/images/listlike_button_bg.png) !important;
+}
+.list_like_button a:hover
+{
+ text-decoration:none;
+ background-image:url(~/application/modules/List/externals/images/listlike_button_hover_bg.png) !important;
+}
+.list_like_button a i.list_like_thumbup_icon,
+.list_like_button a i.list_like_thumbdown_icon
+{
+ height:13px;
+ width:13px;
+ float:left;
+ margin-right:5px;
+}
+.list_like_button a i.list_like_thumbup_icon
+{
+ background-image:url(~/application/modules/List/externals/images/thumb-up.png);
+}
+.list_like_button a i.list_like_thumbdown_icon
+{
+ background-image:url(~/application/modules/List/externals/images/thumb-down.png);
+}
+.list_like_button a span{
+ float:left;
+}
+/* like button end here */
+/* view page tabs start here */
+.layout_list_info_list h4 {
+    font-size: 1.3em;
+    letter-spacing: -1px;
+}
+
+
+/* view page tabs end here */
+
+
+
+
+
+
+
+
+/*VIEW PHOTO*/
+#global_page_list-photo-view #global_content > h2 {
+	font-size: 1.3em;
+	text-align: center;
+}
+#global_page_list-photo-view.albums_viewmedia {
+	margin: 0;
+	max-width: none;
+	min-width: 0;
+}
+#global_page_list-photo-view .list_photo_nav {
+	margin-top: 15px;
+	text-align: center;
+}
+#global_page_list-photo-view .list_photo_nav > div {
+	float: none;
+	text-align: center;
+}
+#global_page_list-photo-view .list_photo_nav > div + div {
+    font-weight: bold;
+    margin-top: 10px;
+}
+#global_page_list-photo-view .list_photo_nav > div + div > a{
+	+rounded(3px);
+	display: inline-block;
+	padding: 4px 7px;
+	font-size: 11pt;
+	background-color: $theme_buttontabs_background_color;
+	color: $theme_buttontabs_font_color_hover;
+}
+#global_page_list-photo-view .list_photo_nav > div + div > a + a{margin-left:15px;}
+#global_page_list-photo-view .list_photo_info{
+  +rounded(0px);
+  background: none;
+  border: none;
+  padding: 0px;
+}
+#global_page_list-photo-view .list_photo_container {
+	margin: 10px 0 0;
+	text-align: center;
+}
+#global_page_list-photo-view #media_image
+{
+  text-align: center;
+  max-width: 95%;
+}
+#global_page_list-photo-view .list_photo_title
+{
+  text-align: center;
+  font-size: 13pt;
+}
+#global_page_list-photo-view .list_photo_description
+{
+  margin-top: 3px;
+  font-size: .8em;
+  text-align: center;
+  font-size: 10pt;
+  margin-top: 3px;
+}
+#global_page_list-photo-view .list_photo_date,
+#global_page_list-photo-view .albums_viewmedia_info_actions
+{
+  display: none;
+}
+#global_page_list-photo-view  .comments {
+    width: auto;
+}
+
+
+/*
+BROWSE listS
+These styles are used on the browse lists page
+*/
+.layout_list_listings_list
+{
+	padding:5px;
+	overflow:auto;
+}
+.browselists_criteria
+{
+  padding: 7px;
+}
+.lists_browse_filters
+{
+	+foreground;
+}
+.browselists_criteria > ul > li
+{
+  margin-bottom: 7px;
+}
+.browselists_criteria > ul > li
+{
+  clear: both;
+  font-size: 0.8em;
+  overflow: hidden;
+}
+.browselists_criteria > ul > li > span
+{
+  display: block;
+  margin-bottom: 3px;
+}
+.lists_browse_filters .form-wrapper
+{
+  overflow: hidden;
+}
+.lists_browse_filters .integer_field .form-element
+{
+  float: left;
+  overflow: hidden;
+}
+.lists_browse_filters .integer_field label
+{
+  display: block;
+  margin-bottom: 2px;
+}
+.lists_browse_filters .integer_field .form-element + .form-element
+{
+  margin-left: 5px;
+}
+.lists_browse_filters .integer_field input {
+  width: 50px;
+}
+.browselists_criteria > ul > li > ul > li
+{
+	margin-top:3px;
+	padding-top:3px;
+}
+.browselists_criteria > ul > li #locationmiles{max-width:110px;}
+
+/* hide menu items */
+.headline .tabs .navigation li > a.list_main_create
+{
+  display: none;
+}
+
+
+
+
+/*CSS FOR ALL LISTINGS SATRT HERE*/
+ul.seaocore_browse_list
+{
+  clear: both;
+}
+ul.seaocore_browse_list > li
+{
+  clear: both;
+  padding: 0px 0px 15px 0px;
+  overflow: hidden;
+}
+ul.seaocore_browse_list > li .lists_highlight{
+	background-color:$theme_foreground_background_color;
+	padding:5px;
+}
+ul.seaocore_browse_list > li + li
+{
+  padding-top: 15px;
+  border-top-width: 1px;
+}
+ul.seaocore_browse_list .seaocore_browse_list_photo
+{
+  float: left;
+  overflow: hidden;
+  margin-right: 8px;
+}
+ul.seaocore_browse_list .seaocore_browse_list_photo img
+{
+  width: 100px;
+}
+ul.seaocore_browse_list .seaocore_browse_list_options
+{
+  float: right;
+  overflow: hidden;
+  padding-left: 20px;
+	width:150px;
+	display:none;
+}
+ul.seaocore_browse_list .seaocore_browse_list_options > a
+{
+  clear: both;
+  display: block;
+  margin: 5px;
+  font-size: .8em;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+ul.seaocore_browse_list .seaocore_browse_list_info
+{
+  overflow: hidden;
+}
+ul.seaocore_browse_list .seaocore_browse_list_info_title
+{
+	font-weight:bold;
+	overflow:hidden;
+}
+ul.seaocore_browse_list .seaocore_browse_list_info_title h3
+{
+  margin: 0px;
+	overflow:hidden;
+}
+ul.seaocore_browse_list .seaocore_browse_list_info_title .seaocore_title
+{
+	overflow:hidden;
+	font-weight:bold;
+}
+ul.seaocore_browse_list .seaocore_browse_list_info_title span{
+	float:right;
+	margin-right:5px;
+	margin-left:5px;
+}
+ul.seaocore_browse_list .seaocore_browse_list_info_title span.list_rating_star span
+{
+	float:left;
+	margin:2px;
+}
+ul.seaocore_browse_list .seaocore_browse_list_info_date
+{
+  font-size: .8em;
+  color: $theme_font_color_light;
+}
+ul.seaocore_browse_list .seaocore_browse_list_info_blurb
+{
+  margin-top: 5px;
+}
+/*CSS FOR ALL LISTINGS END HERE*/
+
+/*LIST HOME AND BROWSE PAGE TABS CONTENT START HERE*/
+.layout_core_container_tabs
+{
+	clear:both;
+}
+#global_page_list-index-home .layout_core_container_tabs .tabs_alt
+{
+	margin-bottom:5px !important;
+}
+.advlist_view_select
+{
+	clear:both;
+	width:100%;
+	padding:0 0 5px 0;
+	float:left;
+	border-bottom-width:1px;
+	margin-bottom:10px;
+}
+.advlist_view_select span
+{
+	cursor:pointer;
+	float:right;
+	margin:3px;
+}
+.layout_list_recently_popular_random_list{margin-bottom:15px;}
+.list_img_view
+{
+	clear:both;
+	width:100%;
+	overflow:auto;
+}
+.list_img_view_list
+{
+	overflow:hidden;
+	width:100%;
+	float:left;
+	clear:both;
+}
+.list_img_view .list_thumb
+{
+	display: block;
+	margin: 15px auto;
+	padding: 0;
+	width: 138px;
+	text-align:center;
+}
+.list_img_view .list_thumb ul li > a
+{
+	padding:4px;
+	border-width:1px; 
+	border-style:solid;
+	display:inline-block;
+	vertical-align:bottom;
+}
+.list_img_view .list_thumb ul li > a:hover
+{
+	border-width:1px;
+	border-style:solid;
+}
+.list_img_view .list_thumb ul li > a + a
+{
+	border:none !important;
+}
+.list_img_view .list_thumb ul li > a > span
+{
+	width:132px;
+	height:106px;
+	background-position:center 50%;
+	display:block;
+	background-repeat:no-repeat;
+}
+.list_thumb ul,
+.list_thumb ul li
+{
+	margin:0px;
+	padding:0px;
+}
+/*map view widgets*/
+.layout_list_listings_list #list_browse_map_canvas,
+.layout_list_recently_popular_random_list #rmap_canvas {
+	width: 100% !important;
+	height: 400px;
+	float: left;
+}
+.layout_list_listings_list #list_browse_map_canvas > div,
+.layout_list_recently_popular_random_list #rmap_canvas > div{
+	position: static !important;
+	height: 300px;
+}
+.layout_list_listings_list #infoPanel,
+.layout_list_recently_popular_random_list #infoPanel {
+	float: left;
+	margin-left: 10px;
+}
+.layout_list_listings_list #infoPanel div,
+.layout_list_recently_popular_random_list #infoPanel div {
+	margin-bottom: 5px;
+}
+/*LIST HOME AND BROWSE PAGE TABS CONTENT END HERE*/
+
+/* 	LIST VIDEO */
+/* video List Profuile tab start here*/
+.layout_list_video_list .seaocore_add{
+	display:none;
+}
+.list_video_thumb_options{
+	display:none;
+}
+ul.list_video_list
+{
+  overflow: hidden;
+}
+ul.list_video_list > li
+{
+  margin: 0px 10px 0px 0px;
+	overflow:hidden;
+	clear:both;
+	overflow:auto;
+	padding:0 10px 10px; 
+}
+ul.list_video_list > li > a
+{
+	float:left;
+}
+ul.list_video_list > li + li
+{
+	border-top-width:1px;
+	border-top-style:solid;
+	padding-top:10px;
+}
+ul.list_video_list > li .video_thumb_wrapper
+{
+	margin-right:10px;
+}
+ul.list_video_list li .video_play
+{
+	overflow:hidden;
+	float:left;
+	margin-bottom:5px;
+	margin-right:10px;
+}
+ul.list_video_list li .video_play object
+{
+	float:left;
+}
+ul.list_video_list li .video_close
+{
+	float:left;
+	margin-left:7px;
+	cursor:pointer;
+}
+ul.list_video_list .list_video_thumb_options
+{
+	width:140px;
+	float:right;
+	margin-left:15px;
+}
+ul.list_video_list .list_video_thumb_options a 
+{
+	clear: both;
+	font-size: 0.8em;
+	height: 16px;
+	margin: 3px 0 0;
+	padding-top: 1px;
+}
+ul.list_video_list .video_info
+{
+  overflow: hidden;
+	min-width:200px;
+}
+ul.list_video_list .video_info .video_title
+{
+	font-weight:bold;
+	margin-bottom:4px;
+	font-size:13px;
+}
+ul.list_video_list .video_info .video_des
+{
+	margin-bottom:5px;
+}
+ul.list_video_list .video_info .list_video_stat
+{
+	font-size:0.8em;
+}
+ul.list_video_list .video_info .list_video_stat > span
+{
+	float:left;
+	margin-right:5px;
+}
+ul.list_video_list .video_info .list_video_stat > span + span
+{
+	margin-top:2px;
+}
+/* video List Profuile tab end here*/
+
+/*css for video end here*/
+
+/*
+	EDIT PHOTOS LISTING
+*/
+ul.lists_editphotos
+{
+  width: 600px;
+}
+ul.lists_editphotos > li
+{
+  padding-top: 15px;
+  clear: both;
+  overflow: hidden;
+  padding-bottom: 15px;
+}
+ul.lists_editphotos .lists_editphotos_photo
+{
+  float: left;
+  margin-right: 15px;
+  overflow: hidden;
+}
+ul.lists_editphotos .lists_editphotos_photo img
+{
+  display: block;
+  margin: 3px;
+  width: 170px;
+}
+ul.lists_editphotos .lists_editphotos_info
+{
+  overflow: hidden;
+}
+ul.lists_editphotos .lists_editphotos_title_input input,
+{
+  margin: 2px 0px 6px 0px;
+  width: 25em;
+}
+ul.lists_editphotos .lists_editphotos_caption_input textarea
+{
+  margin: 2px 0px 6px 0px;
+  width: 25em;
+  height: 3em;
+  min-height: 0px;
+}
+ul.lists_editphotos .lists_editphotos_label
+{
+  float: left;
+}
+ul.lists_editphotos .lists_editphotos_cover
+{
+  float: left;
+}
+ul.lists_editphotos .photo-delete-wrapper
+{
+  float: left;
+  margin-right: 15px;
+}
+ul.lists_editphotos .photo-delete-wrapper > label
+{
+  display: block;
+  float: left;
+}
+
+/*Location Tab*/
+.advlist_profile_location
+{
+	padding:5px !important;
+	margin-bottom:15px;
+}
+.layout_list_location_list #list_view_map_canvas {
+	width: 100%;
+	height: 500px;
+
+}
+.layout_list_location_list #map_list_view_map_canvas > div{
+	position: static !important;
+	height: 500px;
+}
+.layout_list_location_list #infoPanel {
+	float: left;
+	margin-left: 10px;
+}
+.layout_list_location_list #infoPanel div {
+	margin-bottom: 5px;
+}

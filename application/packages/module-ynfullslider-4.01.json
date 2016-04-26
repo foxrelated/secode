@@ -1,0 +1,2546 @@
+{
+  "type": "module",
+  "name": "ynfullslider",
+  "version": "4.01",
+  "revision": null,
+  "path": "application\/modules\/Ynfullslider",
+  "repository": null,
+  "date": "Fri, 11 Mar 2016 11:01:44 +0000",
+  "title": "YN - Full Slider",
+  "description": "",
+  "thumb": null,
+  "developer": null,
+  "authors": [
+    "<a href=\"http:\/\/socialengine.younetco.com\/\" title=\"YouNet Company\" target=\"_blank\">YouNet Company<\/a>"
+  ],
+  "changeLog": null,
+  "meta": {
+    "date": "Fri, 11 Mar 2016 11:01:44 +0000",
+    "title": "YN - Full Slider",
+    "description": "",
+    "developer": null,
+    "authors": [
+      "<a href=\"http:\/\/socialengine.younetco.com\/\" title=\"YouNet Company\" target=\"_blank\">YouNet Company<\/a>"
+    ],
+    "changeLog": null
+  },
+  "actions": [
+    "install",
+    "upgrade",
+    "refresh",
+    "enable",
+    "disable"
+  ],
+  "callback": {
+    "path": null,
+    "class": "Engine_Package_Installer_Module",
+    "priority": 100
+  },
+  "dependencies": null,
+  "tests": [
+    
+  ],
+  "permissions": [
+    
+  ],
+  "structure": {
+    "application\/modules\/Ynfullslider": {
+      "type": "directory",
+      "path": "application\/modules\/Ynfullslider",
+      "structure": [
+        {
+          "path": "Model",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "Model\/Slider.php",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 3169,
+          "sha1": "a9f410da201e9427b82e65ca2e3a8ede15dcc463"
+        },
+        {
+          "path": "Model\/DbTable",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "Model\/DbTable\/.htempty",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 0,
+          "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+        },
+        {
+          "path": "Model\/DbTable\/Slides.php",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 1214,
+          "sha1": "1b0a4541ccf48eca63e923d931ec2037c4002a82"
+        },
+        {
+          "path": "Model\/DbTable\/Sliders.php",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 1373,
+          "sha1": "7c1e179df97d7f977136d31fdaa3d0a3ff2a6c7f"
+        },
+        {
+          "path": "Model\/Slide.php",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 2898,
+          "sha1": "34adb9014cb55afd013d8e8c8e77419d86ca07e8"
+        },
+        {
+          "path": "widgets",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "widgets\/slider-container",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "widgets\/slider-container\/index.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 8942,
+          "sha1": "f671ac7f5fde01dbf41e1d5c94a95a7004d65390"
+        },
+        {
+          "path": "widgets\/slider-container\/Controller.php",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 786,
+          "sha1": "0d4fa2d9886eca504fa6a38e62d2f06cdda25e59"
+        },
+        {
+          "path": "controllers",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "controllers\/AdminSliderController.php",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 13273,
+          "sha1": "da12d5f5dd42085d4ec395135baeb01e65a1d294"
+        },
+        {
+          "path": "controllers\/AdminSlidesController.php",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 1436,
+          "sha1": "5157598fbdd16af5bc5d5c59be7ca21fc4952feb"
+        },
+        {
+          "path": "controllers\/IndexController.php",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 173,
+          "sha1": "3d79e533f9bcc7d925171724dc1c4e94dcf3b68d"
+        },
+        {
+          "path": "controllers\/AdminSlidersController.php",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 2482,
+          "sha1": "ccad626a75a13b5eae00cf7a7ddeb09880f4ee1f"
+        },
+        {
+          "path": "controllers\/AdminIndexController.php",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 2230,
+          "sha1": "9a9dd913ba2bacc0bf53951839af8fbd531d90a6"
+        },
+        {
+          "path": "controllers\/AdminSlideController.php",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 6473,
+          "sha1": "47e44dd5800140709821beefc8b4e816303b8c31"
+        },
+        {
+          "path": "Form",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "Form\/.htempty",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 0,
+          "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+        },
+        {
+          "path": "Form\/Admin",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "Form\/Admin\/Element",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "Form\/Admin\/Element\/Text.php",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 667,
+          "sha1": "f25c83dbbfe0ab27c5ab3366dcbdcef3e45f4599"
+        },
+        {
+          "path": "Form\/Admin\/Search.php",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 1229,
+          "sha1": "caaf8623c07133d3614122715db40e188e5b2fef"
+        },
+        {
+          "path": "Form\/Admin\/Slide",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "Form\/Admin\/Slide\/General.php",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 4826,
+          "sha1": "400600c72394bf9af48cd75068acbb57c373e276"
+        },
+        {
+          "path": "Form\/Admin\/Slider",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "Form\/Admin\/Slider\/Background.php",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 6785,
+          "sha1": "67deaa797b589b6f236d62517acccee8dce355cd"
+        },
+        {
+          "path": "Form\/Admin\/Slider\/General.php",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 8621,
+          "sha1": "3bc0b4389315ef825118cb4ede8112fdb7a9cbef"
+        },
+        {
+          "path": "Form\/Admin\/Slider\/Navigator.php",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 2618,
+          "sha1": "076baaea24862a4010503866dfe7c1150dc9cfb3"
+        },
+        {
+          "path": "Form\/Admin\/Slider\/Finish.php",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 464,
+          "sha1": "871cccd02cf5740d495a4f3eed38b4e33c18f164"
+        },
+        {
+          "path": "externals",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/assets",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/assets\/small_left.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 670,
+          "sha1": "ef46d02a29df7d76b0cfc9fefa4a3cd840114587"
+        },
+        {
+          "path": "externals\/assets\/black50.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 259,
+          "sha1": "ae14f4bdfe918bb5a456657f95abebf2f280754f"
+        },
+        {
+          "path": "externals\/assets\/arrow_right.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 820,
+          "sha1": "a511f4396317872415f15c539775b746e9d73a58"
+        },
+        {
+          "path": "externals\/assets\/small_arrows.psd",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 44620,
+          "sha1": "bdb73e84f96d7dc9be5363f3a4350d08cb1929e9"
+        },
+        {
+          "path": "externals\/assets\/arrows.psd",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 49804,
+          "sha1": "40e51f7af31958d6bcadf643b13d5b0adbb982ef"
+        },
+        {
+          "path": "externals\/assets\/loader2.gif",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 3208,
+          "sha1": "83b3252952e1e8c98deb5e6eb64e150c594dd97b"
+        },
+        {
+          "path": "externals\/assets\/bullets2.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 278,
+          "sha1": "7d439624c4fd88f5b0382e03d0755479cd232ef3"
+        },
+        {
+          "path": "externals\/assets\/shadow2.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 5661,
+          "sha1": "87f10795b2f699469c2cce6ea246d90355fbf559"
+        },
+        {
+          "path": "externals\/assets\/timer.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 125,
+          "sha1": "9620e53c9e0a5b5d55e15b23f556e2089e903fc1"
+        },
+        {
+          "path": "externals\/assets\/arrowleft.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 43543,
+          "sha1": "cec8ccd99dc64aa84d5ed8272c24a8bf47bdb7f7"
+        },
+        {
+          "path": "externals\/assets\/arrow_left2.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 348,
+          "sha1": "2d7427218baa3794acadf57282e9a22b71cc4b0b"
+        },
+        {
+          "path": "externals\/assets\/gridtile_3x3_white.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 935,
+          "sha1": "b44bfcf9ceee0e674ec361f4f7beb5d4ccbde975"
+        },
+        {
+          "path": "externals\/assets\/grain.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 16323,
+          "sha1": "9ed7d7f07bfc10c94957926313cf9381e6468141"
+        },
+        {
+          "path": "externals\/assets\/white50.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 260,
+          "sha1": "5103144c8e9a020b736d4b37d3fa0a47b0418fc2"
+        },
+        {
+          "path": "externals\/assets\/loader.gif",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 2545,
+          "sha1": "accdac8a7abeab0e21c49539aad0a973addb28ef"
+        },
+        {
+          "path": "externals\/assets\/arrow_large_left.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 2686,
+          "sha1": "e6d25647c40bd3f0012f645532cb010774d4d26f"
+        },
+        {
+          "path": "externals\/assets\/arrowright.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 43719,
+          "sha1": "7d5cd5965fde4b11211bb2178fde38e36e6c4476"
+        },
+        {
+          "path": "externals\/assets\/shadow3.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 6428,
+          "sha1": "5a4ea0bcf5690764821486c6decb803f84f77d48"
+        },
+        {
+          "path": "externals\/assets\/large_left.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 1517,
+          "sha1": "a4a4243c5c653a7024d7626911f849a954e8aba8"
+        },
+        {
+          "path": "externals\/assets\/gridtile.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 933,
+          "sha1": "f2c0e89f73600c91cbd9c665b27ba9e427cc68d2"
+        },
+        {
+          "path": "externals\/assets\/arrow_left.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 807,
+          "sha1": "e1de2bac9319a54d6e047414bada00699d0db5c4"
+        },
+        {
+          "path": "externals\/assets\/small_right_boxed.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 807,
+          "sha1": "6cf9b0f8aa436f1aff15ebfe06b72f5a5b1a4954"
+        },
+        {
+          "path": "externals\/assets\/arrow_right2.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 343,
+          "sha1": "463b85d993b75f696cb8f9d4f7d85d02672ed145"
+        },
+        {
+          "path": "externals\/assets\/coloredbg.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 184,
+          "sha1": "02ba7ca593b1aecc13bc821b1043cbbb3e9421a0"
+        },
+        {
+          "path": "externals\/assets\/bullets.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 1153,
+          "sha1": "a66e518b4f92f33d91cd6aa619d5a21fda1f897f"
+        },
+        {
+          "path": "externals\/assets\/arrow_large_right.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 2674,
+          "sha1": "e087b2a1e3b0310ca12afbb44a28f7faafed9e4b"
+        },
+        {
+          "path": "externals\/assets\/bullet_boxed.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 924,
+          "sha1": "fd0b4f0a044dd49711928d80f938c166416630e7"
+        },
+        {
+          "path": "externals\/assets\/small_left_boxed.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 846,
+          "sha1": "8037626ecd60e691ba9b5d927933a4543417a870"
+        },
+        {
+          "path": "externals\/assets\/gridtile_white.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 931,
+          "sha1": "8d8bfc66a5c53238c37dfe1c8bfc26e6ec8f7cb8"
+        },
+        {
+          "path": "externals\/assets\/navigdots.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 743,
+          "sha1": "1e42fea545323b05d3ae43ac3fa04844be0fdc63"
+        },
+        {
+          "path": "externals\/assets\/gridtile_3x3.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 938,
+          "sha1": "fd476a7bfe9d1119d8c702d44bb6171896f2a67f"
+        },
+        {
+          "path": "externals\/assets\/small_right.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 668,
+          "sha1": "dc185c45a7da8a0a478982940e22ed29290cc77b"
+        },
+        {
+          "path": "externals\/assets\/navigdots_bgtile.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 149,
+          "sha1": "2d59671152b28684969f68874e94a35e814a8ca3"
+        },
+        {
+          "path": "externals\/assets\/timerdot.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 122,
+          "sha1": "127b6facc33d3cb14d9683cd71ed04616bbc5864"
+        },
+        {
+          "path": "externals\/assets\/shadow1.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 4289,
+          "sha1": "d133713f29be2c20f0701b4b36cabf098cd92ee0"
+        },
+        {
+          "path": "externals\/assets\/bullet.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 2254,
+          "sha1": "9a1c103a60d72225f4b33af8dc3504b80151eb78"
+        },
+        {
+          "path": "externals\/assets\/boxed_bgtile.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 2746,
+          "sha1": "e97db089dbfdb5bca131c5d4ef601a32f1132de0"
+        },
+        {
+          "path": "externals\/assets\/bullets.psd",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 35372,
+          "sha1": "a2f1375a3b1097136eaf13bae4dac42d3de51bee"
+        },
+        {
+          "path": "externals\/assets\/large_right.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 1561,
+          "sha1": "b2078ea4889800ef9da8649c11882a6ddc54a169"
+        },
+        {
+          "path": "externals\/assets\/transparent.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 287,
+          "sha1": "580958c4273960b7f56da7a58db14c4925436bcc"
+        },
+        {
+          "path": "externals\/scripts",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/ynfullslider.image.element.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 381,
+          "sha1": "a8baeb16fe2b227af815170cbc6fd435462b43fb"
+        },
+        {
+          "path": "externals\/scripts\/jquery.themepunch.revolution.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 108772,
+          "sha1": "0f2a52a46b383725ab8cbb31496326a157b4cd75"
+        },
+        {
+          "path": "externals\/scripts\/ynfullslider.button.element.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 377,
+          "sha1": "46337cc315f0c523e0d620abd24a9f88093d834a"
+        },
+        {
+          "path": "externals\/scripts\/jquery-1.9.1.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 92678,
+          "sha1": "2fcca8a8b50c6490a03d9239096781c1962d9193"
+        },
+        {
+          "path": "externals\/scripts\/.htempty",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 0,
+          "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+        },
+        {
+          "path": "externals\/scripts\/jquery.themepunch.plugins.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 85219,
+          "sha1": "71c6aacb4fa6f1a96c1d9f3385bc576fe12f6494"
+        },
+        {
+          "path": "externals\/scripts\/tinymce",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/themes",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/themes\/modern",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/themes\/modern\/theme.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 9296,
+          "sha1": "8e1a26dc18304253c96aeaf24df18f586a6b6ccc"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/skins",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/skins\/lightgray",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/skins\/lightgray\/skin.ie7.min.css",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 31322,
+          "sha1": "515a6feef92aae52f052dc6a41b3cdddd0f08db8"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/skins\/lightgray\/skin.min.css",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 33402,
+          "sha1": "fe3676d11ce22457265ab51cebe026b7d643c9d1"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/skins\/lightgray\/content.inline.min.css",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 2676,
+          "sha1": "3a314c2ef30e7d76b3a9c27be4fd3be56ba07afe"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/skins\/lightgray\/img",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/skins\/lightgray\/img\/trans.gif",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 43,
+          "sha1": "67a69b5842050a142e050eb3b08a59e03e7fa71b"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/skins\/lightgray\/img\/object.gif",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 152,
+          "sha1": "b523c9f648e2ae1c4ba7bde7739203bc6997755f"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/skins\/lightgray\/img\/loader.gif",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 2608,
+          "sha1": "5640ea4d0eba1c390f587ec69463c9a5196b7fa2"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/skins\/lightgray\/img\/anchor.gif",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 53,
+          "sha1": "94f8e44b364eb00e6f691f92dc069fd64b17fc61"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/skins\/lightgray\/fonts",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/skins\/lightgray\/fonts\/tinymce-small.eot",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 9492,
+          "sha1": "9092371fe1487289f1f5244637bace4de1bceed1"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/skins\/lightgray\/fonts\/tinymce.ttf",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 17128,
+          "sha1": "5e5f020344148c5587e65e87aae60ec2a73bb650"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/skins\/lightgray\/fonts\/tinymce-small.ttf",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 9304,
+          "sha1": "65ad98649eb5051746bb48c60529cabc927b67a2"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/skins\/lightgray\/fonts\/tinymce-small.svg",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 24789,
+          "sha1": "8e88d071e97879803ee03a128f9a08fde367aebe"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/skins\/lightgray\/fonts\/tinymce.svg",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 45354,
+          "sha1": "edb139b196f501243b5b60ff85e27923c8fe4443"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/skins\/lightgray\/fonts\/tinymce.woff",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 17204,
+          "sha1": "00b130981f44cc93eeffaafbf2f10036d7d7b7c3"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/skins\/lightgray\/fonts\/tinymce-small.woff",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 9380,
+          "sha1": "b35be779df340fe3336a5619165e965fb1b09970"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/skins\/lightgray\/fonts\/tinymce.eot",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 17292,
+          "sha1": "956921992ff4e60c4787f9ba00d346c55f3f756e"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/skins\/lightgray\/content.min.css",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 3091,
+          "sha1": "59bc3064ef947b30cdfe9d30d2cf79e7841fa39d"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/tinymce.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 372380,
+          "sha1": "2eea324885582916dd2730893a9557220394b2f6"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/langs",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/langs\/readme.md",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 154,
+          "sha1": "3fb59451a1990b806893aec7a09bd95a02053288"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/license.txt",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 26931,
+          "sha1": "09d6448cc62e4397b0f4d7fea473f6122cfa10fb"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/contextmenu",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/contextmenu\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 891,
+          "sha1": "f4b0c0b7d70d67544523a634e747bac8d0ae95d7"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/advlist",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/advlist\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 1303,
+          "sha1": "2dea2e8b7ff9105336fd25b1c806c5a606700457"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/visualblocks",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/visualblocks\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 1153,
+          "sha1": "e4dd01381493ad802c9c38b4a1c84347a3b3b51c"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/visualblocks\/css",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/visualblocks\/css\/visualblocks.css",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 5227,
+          "sha1": "5b120610c66c5127c366d5d01cad8dc57f766c22"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/fullpage",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/fullpage\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 6291,
+          "sha1": "8cb06f65beb1374bc42fb65b808abc8df16dd94c"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/code",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/code\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 721,
+          "sha1": "6ef45e5c18feb4c2406f8c7a28eae34d4ab1a053"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/lists",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/lists\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 8638,
+          "sha1": "1ec34977b311519eb38da77f38fe155cf60c85ff"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/noneditable",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/noneditable\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 1126,
+          "sha1": "dd94c44d2ea928bfc5b5dc33ad38b827fe92ad6a"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/image",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/image\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 8169,
+          "sha1": "8edfc26130a2333d35d37d66cbb63f183bbe37a1"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/visualchars",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/visualchars\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 1259,
+          "sha1": "474a3cf0a60c82a868cdf2a2e5408b6c2d7a0a73"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/bbcode",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/bbcode\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 3136,
+          "sha1": "d63b09300b0ba54e29bfbef6790c626274b13905"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/media",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/media\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 11556,
+          "sha1": "970ab87966e563138dbd9769f01fea1afb1b3d84"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/media\/moxieplayer.swf",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 20017,
+          "sha1": "eef17de9e7102ef80a5da457344694fc70cc1428"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/textcolor",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/textcolor\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 3800,
+          "sha1": "19fb7fdd769fb4cc1cc1859db7c529f487835474"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/fullscreen",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/fullscreen\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 1674,
+          "sha1": "d92fa20c3db703814cea7545bc1250ca2d7290ca"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/pagebreak",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/pagebreak\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 1230,
+          "sha1": "1cc875105f1350830f357214f696c591627da09a"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/template",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/template\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 4326,
+          "sha1": "0be0d7f0e57bbe6e279cc904641cf3e3af38429e"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/legacyoutput",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/legacyoutput\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 3301,
+          "sha1": "6e85beb165fa208b4b206a14cae6cdd5ea21d5f5"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/textpattern",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/textpattern\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 2751,
+          "sha1": "23a05dded8934205e5fee6e705172f5d624d8a22"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/print",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/print\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 293,
+          "sha1": "1db19d22d314262fdf31ce0b835e1f24c37eec0a"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/link",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/link\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 4517,
+          "sha1": "5fd57364abb97bfde8ef86a04c4c652303bc4674"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/save",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/save\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 1156,
+          "sha1": "6192e1c8c3d3556816026598ac1ff85a9e37f2da"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/imagetools",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/imagetools\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 27564,
+          "sha1": "fb1621c295c384c542b1226ae584304a6eb507f7"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/tabfocus",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/tabfocus\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 1270,
+          "sha1": "3f1d2180e042aa67a2fee2e211de25989b3abb7d"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/preview",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/preview\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 1389,
+          "sha1": "e2b35b5f40d194af4d326d391c623941a1d29305"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/colorpicker",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/colorpicker\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 1222,
+          "sha1": "e686620051b5d7f533ab6f813063ac604d9d262e"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/charmap",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/charmap\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 7944,
+          "sha1": "ce572fdf04ecf1add402fe8446a0c42c5ad9ea3e"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/directionality",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/directionality\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 726,
+          "sha1": "26131f3f28f9f931e9ea0a8e5f1ef007706f3fc4"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/spellchecker",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/spellchecker\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 9804,
+          "sha1": "779d3f22e42bff3ae15c93acc1998eaffc76ca9b"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/insertdatetime",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/insertdatetime\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 1978,
+          "sha1": "146c52f4b7d57460be1797471c4ba102b3dd6ada"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/layer",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/layer\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 2857,
+          "sha1": "bec469242bef5acedd8729b6a8161238d4015949"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/autolink",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/autolink\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 1961,
+          "sha1": "19380ccd0e8fb9bb45cca6806f98db941ff63f57"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/table",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/table\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 42866,
+          "sha1": "c137e9ca4bcc9f8064c0f431911262cba3ddc55c"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/importcss",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/importcss\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 2223,
+          "sha1": "ff1ffaa5a25940a664a3a94322f7c488fd3bcb02"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/codesample",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/codesample\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 19949,
+          "sha1": "cad1959cbc63fc52f7113807f10915ccf6bc49d4"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/codesample\/css",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/codesample\/css\/prism.css",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 2427,
+          "sha1": "d8c0332332c033f99754e4bca9e68c423c07663e"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/wordcount",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/wordcount\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 928,
+          "sha1": "4f509c7dc6a6f86cc4172bd2edf45141287d8495"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/example_dependency",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/example_dependency\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 73,
+          "sha1": "542cfcc2e403635375337eb796866f4f215cb3f7"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/paste",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/paste\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 16176,
+          "sha1": "b0794aaa2da1ec29aba6a3d824e28311b58b217d"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/autosave",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/autosave\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 2185,
+          "sha1": "16db5893d5965e0575b5cd77b1d48ed1423f0ed6"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/autoresize",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/autoresize\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 1903,
+          "sha1": "1f5e71561a66be0ca80386b1dc84bafb3aa29b96"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/nonbreaking",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/nonbreaking\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 655,
+          "sha1": "59884f75d3e2bc6c1f7ed7867004a998a92bfe7f"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/anchor",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/anchor\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 616,
+          "sha1": "0efa4a7ba4fd02065f521f7f6bdabae287d69b3c"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/hr",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/hr\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 322,
+          "sha1": "6a305889f4b3e54a46d82c37d1e782bebc78185a"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/example",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/example\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 658,
+          "sha1": "296bb1093117ac72789fb569ae9bc58afefce56e"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/example\/dialog.html",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 220,
+          "sha1": "62ac3bd0ef0bc7b70b3c0751a82cf49bf76f137b"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/searchreplace",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/searchreplace\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 6493,
+          "sha1": "672403e275a79577cbba5d4c0fe2ce04852d0496"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/emoticons",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/emoticons\/plugin.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 911,
+          "sha1": "b9769dd1dbb31f3a676c262d8f34cfdaabdac21c"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/emoticons\/img",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/emoticons\/img\/smiley-money-mouth.gif",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 321,
+          "sha1": "aa6d158a4e1767d3b981c95bae20bf9d2d623c8b"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/emoticons\/img\/smiley-frown.gif",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 340,
+          "sha1": "33c37ae10d06d87deec51785c80f818d153c06b0"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/emoticons\/img\/smiley-foot-in-mouth.gif",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 342,
+          "sha1": "9fab159b0e7f25cda8a95b54f2cf8e7ec2af1841"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/emoticons\/img\/smiley-kiss.gif",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 338,
+          "sha1": "c03faf64c2b9a7b2b9d1f8c63beeb9f96d52bce4"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/emoticons\/img\/smiley-smile.gif",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 344,
+          "sha1": "032840c8e5fd62094307c3fa76b2f5677e3e65e7"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/emoticons\/img\/smiley-wink.gif",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 350,
+          "sha1": "127d363345a2f9734d7d103e9b32897729794420"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/emoticons\/img\/smiley-laughing.gif",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 343,
+          "sha1": "e17b03304237dc4dea25e044e9cbb771b83ab26b"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/emoticons\/img\/smiley-innocent.gif",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 336,
+          "sha1": "bfd4d17c9fb8fe0b5e2103df9e8981c3888c4c1a"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/emoticons\/img\/smiley-sealed.gif",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 323,
+          "sha1": "f69b3b5b1e1e2eae12a7e40d2e883b3271074302"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/emoticons\/img\/smiley-cool.gif",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 354,
+          "sha1": "e0d8fff0141e190d1a9b1b17c2aa19f42ef6b1a5"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/emoticons\/img\/smiley-tongue-out.gif",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 328,
+          "sha1": "2f7c418bd798060ec211349f7b89a88a5f20c2f1"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/emoticons\/img\/smiley-embarassed.gif",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 331,
+          "sha1": "514fe86c52e7334abbeb8f7791e73b4352f57851"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/emoticons\/img\/smiley-undecided.gif",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 337,
+          "sha1": "db75f18c34a24ddc39850fa8cdb515241353a4bd"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/emoticons\/img\/smiley-surprised.gif",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 338,
+          "sha1": "4cb67dcbd32bb939e6f97b3f7fa3318c4c35fd3e"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/emoticons\/img\/smiley-cry.gif",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 329,
+          "sha1": "e49d26bb2132650fd44438131e94756129161ac7"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/plugins\/emoticons\/img\/smiley-yell.gif",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 336,
+          "sha1": "7ac8d3481c307185a103e73ee59dda2654717c01"
+        },
+        {
+          "path": "externals\/scripts\/tinymce\/jquery.tinymce.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 3591,
+          "sha1": "61467ade19c9a64daea68eb87090f328cc42fba6"
+        },
+        {
+          "path": "externals\/scripts\/ynfullslider-actions.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 271,
+          "sha1": "be46ae6236117cf395948893396ca8c08fa9cb51"
+        },
+        {
+          "path": "externals\/scripts\/ynfullslider.elements.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 6213,
+          "sha1": "48463443f85a00f463b47fa7973d75274d209d6d"
+        },
+        {
+          "path": "externals\/scripts\/jqColorPicker.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 11297,
+          "sha1": "70702bc911295260fd4b4680ff5ac4d89f0d2f5f"
+        },
+        {
+          "path": "externals\/scripts\/ynfullslider.base.element.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 3323,
+          "sha1": "15c03efe0f70bcc24ef0cd9a00084fc722fb3d80"
+        },
+        {
+          "path": "externals\/scripts\/ynfullslider.video.element.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 294,
+          "sha1": "c0706bc187afae1403550cf4b0c1c78c3fe8ce34"
+        },
+        {
+          "path": "externals\/scripts\/ynfullslider.slide.editor.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 3043,
+          "sha1": "dbbe811885000ff48f7ab0f850d030b21733ee40"
+        },
+        {
+          "path": "externals\/scripts\/owl.carousel.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 23936,
+          "sha1": "e5862559db659ffd530c91452d668c5e7b3f0f2d"
+        },
+        {
+          "path": "externals\/scripts\/ynfullslider.text.element.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 3353,
+          "sha1": "a7745fcd6362b5685bc75f53486c651d32466693"
+        },
+        {
+          "path": "externals\/scripts\/jquery-ui.min.js",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 240434,
+          "sha1": "ddc2a6147ff8ea6d3b618c6d74a91e488c0e2ebe"
+        },
+        {
+          "path": "externals\/styles",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/styles\/settings.css",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 71952,
+          "sha1": "d73638c71e97cc7e25d5130a2bf38ebf68e3ef5f"
+        },
+        {
+          "path": "externals\/styles\/main.css",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 2932,
+          "sha1": "ace14da0504f2e97b72151bdbdbfcaa94a21aa44"
+        },
+        {
+          "path": "externals\/styles\/navstylechange.css",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 2746,
+          "sha1": "c195c7982a22f8d41eec57ab96009f9d25557973"
+        },
+        {
+          "path": "externals\/styles\/grabbing.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 116,
+          "sha1": "5d75bfe2b7be91f751ad27e83233e5979546e3ca"
+        },
+        {
+          "path": "externals\/styles\/admin",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/styles\/admin\/main.css",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 25328,
+          "sha1": "27a467462718a063101045b1656b9d8c6c510776"
+        },
+        {
+          "path": "externals\/styles\/jquery-ui.min.css",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 29279,
+          "sha1": "84093b320ed6b5e368ea38c08f3c9a6407cd05c9"
+        },
+        {
+          "path": "externals\/styles\/images",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/styles\/images\/ui-icons_cc0000_256x240.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 4549,
+          "sha1": "6b1a0488942231683e4de67f98ade3ca812a789d"
+        },
+        {
+          "path": "externals\/styles\/images\/ui-icons_ffffff_256x240.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 6299,
+          "sha1": "164b3ca6bf1a3fbbf174f79438f442ddd8366d47"
+        },
+        {
+          "path": "externals\/styles\/images\/ui-icons_777777_256x240.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 6999,
+          "sha1": "527e4156afffd139321c99ff3b0511cdfbbec99b"
+        },
+        {
+          "path": "externals\/styles\/images\/ui-icons_555555_256x240.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 6988,
+          "sha1": "300ca4ca7a75c3e0ebdd7382b7b72e84f3c156b5"
+        },
+        {
+          "path": "externals\/styles\/images\/ui-icons_444444_256x240.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 6992,
+          "sha1": "1b001f402aaa716d502a6f41c0a1d6e208fdfa55"
+        },
+        {
+          "path": "externals\/styles\/images\/ui-icons_777620_256x240.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 4549,
+          "sha1": "d4ce3b60e8accf444c5dff542ed600b9cff36452"
+        },
+        {
+          "path": "externals\/styles\/owl.carousel.css",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 1547,
+          "sha1": "986a35e93e719dd08b35c8c8762626ceb495418a"
+        },
+        {
+          "path": "externals\/font",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/font\/revicons.eot",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 12136,
+          "sha1": "f3a83bc4abd0d4f968fc45ec14da4636a8159b38"
+        },
+        {
+          "path": "externals\/font\/revicons.ttf",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 11968,
+          "sha1": "a3b3b3a91df3025adcdbc700519dd7be75e275f5"
+        },
+        {
+          "path": "externals\/font\/revicons.woff",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 7536,
+          "sha1": "d942ae11706c3f7e511e3c49b0e4574d7ad199c4"
+        },
+        {
+          "path": "externals\/font\/revicons.svg",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 13532,
+          "sha1": "f03b58d5bf0fa2db6a5cbdc032c1075d6a39d4cb"
+        },
+        {
+          "path": "externals\/.htaccess",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 147,
+          "sha1": "9f1638a8edbe1c5d28789e017fb35b2f2465f01e"
+        },
+        {
+          "path": "externals\/images",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/images\/shadow-2.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 2291,
+          "sha1": "7a384c6860f106bff57500c6fde21146853feb24"
+        },
+        {
+          "path": "externals\/images\/nav-5.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 105659,
+          "sha1": "cad1f2d24a6cc5dfe649836967d6ed1b291dcb6f"
+        },
+        {
+          "path": "externals\/images\/bg3.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 46255,
+          "sha1": "191533bb4dafb3a4131873ad5fabf7fee1eb9ffc"
+        },
+        {
+          "path": "externals\/images\/bg-gradient-corner.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 176769,
+          "sha1": "4f54aa2779319842546dcee5fdb6a0076bf432b6"
+        },
+        {
+          "path": "externals\/images\/.htempty",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 0,
+          "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+        },
+        {
+          "path": "externals\/images\/bg2.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 45806,
+          "sha1": "6f10a160c7665cab6351afbacfe2cd831f383cb3"
+        },
+        {
+          "path": "externals\/images\/nav-6.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 106084,
+          "sha1": "a1386bf319fb330ab5e0f6eccfdf857ddcdd0523"
+        },
+        {
+          "path": "externals\/images\/shadow-1.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 2034,
+          "sha1": "bc91455148ed5aad89f299d8fb7306d5f89c046f"
+        },
+        {
+          "path": "externals\/images\/bg-gradient.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 175859,
+          "sha1": "421b0edc2d3d96ef7fd8278d56061ccc39486877"
+        },
+        {
+          "path": "externals\/images\/nav-2.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 105575,
+          "sha1": "53ef638c83dcd4cabd91588825a1769ebf65c965"
+        },
+        {
+          "path": "externals\/images\/transparent.png",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 191,
+          "sha1": "999a370620628b03a11aa1a85bf328233e59fc8a"
+        },
+        {
+          "path": "externals\/images\/nav-3.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 106227,
+          "sha1": "33df32bfdad5bd21231500d9400c5dd423afc66c"
+        },
+        {
+          "path": "externals\/images\/bg-empty-slide.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 124709,
+          "sha1": "47628c6cc60fdd96eee044476cc6cd4a58c53b0b"
+        },
+        {
+          "path": "externals\/images\/nav-1.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 106970,
+          "sha1": "2a93acb2829556096e45db331abcba1deac979d4"
+        },
+        {
+          "path": "externals\/images\/bg1.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 46972,
+          "sha1": "591dcbf9d07edbc96d3606a4a86879a35936ed23"
+        },
+        {
+          "path": "externals\/images\/nav_1.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 106970,
+          "sha1": "2a93acb2829556096e45db331abcba1deac979d4"
+        },
+        {
+          "path": "externals\/images\/shadow-3.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 2174,
+          "sha1": "e3ea882901bfa66339f27d8d8376791927729bd5"
+        },
+        {
+          "path": "externals\/images\/bg4.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 45108,
+          "sha1": "d8fb32ff58aa81d973b2ede464a517cfb83ac701"
+        },
+        {
+          "path": "externals\/images\/shadow-0.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 5350,
+          "sha1": "b5ea8036cfc073709afb919622eb63d0f8a0ada0"
+        },
+        {
+          "path": "externals\/images\/nav-4.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 106339,
+          "sha1": "778e90c2763bfec5dd2c0429bf25419b18ce4c67"
+        },
+        {
+          "path": "settings",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "settings\/content.php",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 1094,
+          "sha1": "57ed3ffeeac6ef6c5dced51811d655598218eb1b"
+        },
+        {
+          "path": "settings\/manifest.php",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 1271,
+          "sha1": "f90cea06feaf022955fc7342ef3a044aeea6caa7"
+        },
+        {
+          "path": "settings\/my.sql",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 2342,
+          "sha1": "ba6935c9c0c45fc54c1eb5e177261194be6de685"
+        },
+        {
+          "path": "Bootstrap.php",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 91,
+          "sha1": "e718e20aa5ce219a2423ee789ed7da449aa8347e"
+        },
+        {
+          "path": "Api",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "Api\/Core.php",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 70,
+          "sha1": "7fc7a855e8d6c2d95c45506d49202a82e0dbfc79"
+        },
+        {
+          "path": "Api\/Image.php",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 3757,
+          "sha1": "46a611c84dd11fcc37ae9366703f2ecf556d8610"
+        },
+        {
+          "path": "views",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "views\/scripts",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "views\/scripts\/_slider_item.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 2903,
+          "sha1": "d6dbf2eb34bd5f5c2a51cc09a22e4b8196e6c1b2"
+        },
+        {
+          "path": "views\/scripts\/admin-slider",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "views\/scripts\/admin-slider\/general.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 1449,
+          "sha1": "10af6264fd6f7e5845870d06bca8b8557788ae06"
+        },
+        {
+          "path": "views\/scripts\/admin-slider\/clone.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 1039,
+          "sha1": "c216f47e96583b5bccc8bd8e46dcfebeab87ff9e"
+        },
+        {
+          "path": "views\/scripts\/admin-slider\/finish.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 2189,
+          "sha1": "ce348a7aebaee3705927644953bfcb1e5fae5089"
+        },
+        {
+          "path": "views\/scripts\/admin-slider\/background.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 2177,
+          "sha1": "52d821e399ddfaf4cef5a68b8ede701b9a752433"
+        },
+        {
+          "path": "views\/scripts\/admin-slider\/manage-slides.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 8118,
+          "sha1": "13a259a1209f3d3c686455bbb13ad94b18d66b0d"
+        },
+        {
+          "path": "views\/scripts\/admin-slider\/navigator.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 1329,
+          "sha1": "375e0fc078edd5df971b1f9bc23b04fe11b02381"
+        },
+        {
+          "path": "views\/scripts\/_slider_edit_steps.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 1500,
+          "sha1": "81f0b4e53cd6646073aed4c8ae8714965e068f92"
+        },
+        {
+          "path": "views\/scripts\/_slider_edit_shadow.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 1443,
+          "sha1": "7681f574af91c0406d854807e47f5d7d653b58f2"
+        },
+        {
+          "path": "views\/scripts\/_slider_preview.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 5109,
+          "sha1": "6bc58edf77a36ee81673b52215a4a61afed72730"
+        },
+        {
+          "path": "views\/scripts\/_slide_item.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 2986,
+          "sha1": "cb76d690df959d88e49994a0a63c814f6578b1ba"
+        },
+        {
+          "path": "views\/scripts\/admin-sliders",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "views\/scripts\/admin-sliders\/index.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 4719,
+          "sha1": "2a50cac8b78195f36041d5f8fa1e00cd6691dabe"
+        },
+        {
+          "path": "views\/scripts\/admin-sliders\/delete.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 847,
+          "sha1": "bb12e9e83e66aba9c75fd7bf2be7e44ce01122bc"
+        },
+        {
+          "path": "views\/scripts\/admin-slides",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "views\/scripts\/admin-slides\/index.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 4954,
+          "sha1": "56eb01bdb0ad3f371dc587bbe85a2cb537736c03"
+        },
+        {
+          "path": "views\/scripts\/admin-slides\/delete.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 844,
+          "sha1": "fa0fb111df8b013148b146d3b9abe934ae450860"
+        },
+        {
+          "path": "views\/scripts\/admin-slide",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "views\/scripts\/admin-slide\/general.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 2305,
+          "sha1": "78ee39cf721dc9dfc62d75f92492c65b735e53a0"
+        },
+        {
+          "path": "views\/scripts\/admin-slide\/editor.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 6924,
+          "sha1": "c91a7a8f89e30f0462a7dd362f52c0860cb8858b"
+        },
+        {
+          "path": "views\/scripts\/_slider_edit_navigator.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 1257,
+          "sha1": "7697d0f2318639c6539d0af803acd133c95787cf"
+        },
+        {
+          "path": "views\/scripts\/index",
+          "dir": true,
+          "file": false,
+          "perms": "0755",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "views\/scripts\/index\/index.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 1,
+          "sha1": "3a52ce780950d4d969792a2559cd519d7ee8c727"
+        },
+        {
+          "path": "views\/scripts\/_Html5Upload.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 5112,
+          "sha1": "1fcead722a7033776dc1f54c51d53e4c50495b93"
+        },
+        {
+          "path": "views\/scripts\/_slider_edit_transitions.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 4539,
+          "sha1": "70b8ca7203f040a0eb2f239dd8b1aeb66ddd0538"
+        },
+        {
+          "path": "sftp-config.json",
+          "dir": false,
+          "file": true,
+          "perms": "0644",
+          "size": 1476,
+          "sha1": "8e819a073e819f53e445de44271af4b88aa81c88"
+        }
+      ]
+    },
+    "application\/languages\/en\/ynfullslider.csv": {
+      "type": "file",
+      "path": "application\/languages\/en\/ynfullslider.csv",
+      "structure": {
+        "path": "ynfullslider.csv",
+        "dir": false,
+        "file": true,
+        "perms": "0644",
+        "size": 0,
+        "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+      }
+    }
+  }
+}

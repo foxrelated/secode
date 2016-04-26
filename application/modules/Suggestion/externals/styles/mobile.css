@@ -1,0 +1,118 @@
+/* $Id: mobile.css 2010-08-17 9:40:21Z SocialEngineAddOns Copyright 2009-2010 BigStep Technologies Pvt. Ltd. $ */
+
+/* NOTIFICATION TYPE ICONS */
+.notification_type_group_suggestion {
+	background-image: url(~/application/modules/Suggestion/externals/images/sugg_group.png);
+}
+.notification_type_page_album_suggestion, .notification_type_album_suggestion {
+	background-image: url(~/application/modules/Suggestion/externals/images/sugg_album.png);
+}
+.notification_type_blog_suggestion {
+	background-image: url(~/application/modules/Suggestion/externals/images/sugg_blog.png);
+}
+.notification_type_page_event_suggestion, .notification_type_event_suggestion {
+	background-image: url(~/application/modules/Suggestion/externals/images/sugg_event.png);
+}
+.notification_type_classified_suggestion {
+	background-image: url(~/application/modules/Suggestion/externals/images/sugg_classified.png);
+}
+.notification_type_page_video_suggestion, .notification_type_video_suggestion {
+	background-image: url(~/application/modules/Suggestion/externals/images/sugg_video.png);
+}
+.notification_type_page_music_suggestion, .notification_type_music_suggestion {
+	background-image: url(~/application/modules/Suggestion/externals/images/sugg_music.png);
+}
+.notification_type_recipe_suggestion{
+  background-image: url(~/application/modules/Suggestion/externals/images/recipe.png);
+}
+.notification_type_picture_suggestion{
+	background-image: url(~/application/modules/Suggestion/externals/images/sugg_photo.png);
+}
+.notification_type_friend_suggestion{
+	background-image: url(~/application/modules/Suggestion/externals/images/sugg_friend.png);
+}
+.notification_type_page_poll_suggestion, .notification_type_poll_suggestion {
+	background-image: url(~/application/modules/Suggestion/externals/images/sugg_poll.png);
+}
+.notification_type_forum_suggestion {
+	background-image: url(~/application/modules/Suggestion/externals/images/sugg_forum.png);
+}
+.notification_type_page_document_suggestion, .notification_type_document_suggestion {
+	background-image: url(~/application/modules/Suggestion/externals/images/document.png);
+}
+.notification_type_listing_suggestion {
+	background-image: url(~/application/modules/Suggestion/externals/images/list.png);
+}
+.notification_type_page_suggestion {
+	background-image: url(~/application/modules/Suggestion/externals/images/sitepage.png);
+}
+.notification_type_page_note_suggestion {
+	background-image: url(~/application/modules/Suggestion/externals/images/note.png);
+}
+.notification_type_page_review_suggestion {
+	background-image: url(~/application/modules/Suggestion/externals/images/review.png);
+}
+.notification_type_document_popup_suggestion, .icon_list_friend_suggestion .icon_recipe_friend_suggestion{
+  background-image: url(~/application/modules/Suggestion/externals/images/sugg_blub.png);
+}
+
+/* SUGGESTION WIDGETS */
+.generic_suggestion_widget{
+	+foreground;
+	+rounded;
+	padding: 5px;
+	margin-bottom:15px;
+	overflow:hidden;
+}
+.generic_suggestion_widget img.loader{
+	margin:15px 0;
+}
+.suggest_cancel{
+	float:right;
+	height:11px;
+	width:11px;
+	background:url(~/application/modules/Suggestion/externals/images/close_icon.png) no-repeat right;
+}
+.suggest_cancel:hover{
+	background:#3b5998 url(~/application/modules/Suggestion/externals/images/close_icon.png) no-repeat left;
+}
+.view_all {
+	float:right;
+	font-weight:normal;
+}
+.generic_suggestion_widget .tip > span{
+	margin-bottom:0 !important;
+}
+.suggestion_list{
+	padding:5px 0;
+	clear:both;
+}
+.suggestion_list .item_photo{
+	float:left;
+	margin-right:6px;
+}
+.suggestion_list .item_photo img{
+	width:48px;
+	height:48px;
+}
+.suggestion_list .item_details {
+	overflow:hidden;
+}
+.suggestion_list .item_details  .item_title{
+	font-weight:bold;
+	overflow:hidden;
+}
+.suggestion_list .item_details .item_stats{
+	margin:3px 0;
+}
+.suggestion_list .item_details .item_stats,
+.suggestion_list .item_details .item_stats div{
+	color:$theme_font_color_light;
+	font-size:11px;
+}
+.suggestion_list .item_details .item_stats .confirm_tip{
+	font-weight:bold;
+}
+.suggestion_list .item_details .item_stats .buttonlink{
+	line-height:16px;
+}

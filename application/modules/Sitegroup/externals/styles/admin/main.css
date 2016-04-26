@@ -1,0 +1,704 @@
+/* $Id: main.css 2011-05-05 9:40:21Z SocialEngineAddOns Copyright 2010-2011 BigStep Technologies Pvt. Ltd. $ */
+@include "constants.css";
+@scan "application/modules" "externals/styles/admin/main.css" "Core";
+/**/
+.clear{
+	clear:both !important;
+}
+.fleft{
+	float:left !important;
+}
+.fright{
+	float:right !important;
+}
+.bold{
+	font-weight:bold;
+}
+.pad_left_20
+{
+	padding-left:20px;
+}
+.pleft5{
+	padding-left:5px;
+}
+.admin-txt-normal{
+	white-space:normal !important;
+}
+.border0{
+	border:none !important;
+}
+.mtop10{
+	margin-top:10px;
+}
+.center{
+	text-align:center;
+}
+.icon_sitegroup_admin_import{background-image:url(~/application/modules/Sitegroup/externals/images/admin/import.png);}
+.icon_sitegroup_admin_import_manage{background-image:url(~/application/modules/Sitegroup/externals/images/admin/files.png);}
+.icon_sitegroup_admin_add{background-image:url(~/application/modules/Sitegroup/externals/images/admin/add.png);}
+.icon_sitegroup_admin_back{background-image:url(~/application/modules/Sitegroup/externals/images/admin/back.png);}
+.moor-cursor {
+	background-image: url(~/application/modules/Sitegroup/externals/images/moor_cursor.gif);
+	width: 12px;
+	height: 12px;
+}
+.moor-arrows {
+	background-image: url(~/application/modules/Sitegroup/externals/images/moor_arrows.gif);
+	top: 9px;
+	left: 270px;
+	width: 41px;
+	height: 9px;
+}
+
+/*Add Item AUTOSUGGEST */
+ul.sitegroup_categories-autosuggest
+{
+  position: absolute;
+  padding: 0px;
+  width: 300px;
+  sitegroup-style: none;
+  z-index: 50;
+  border: 1px solid #d2d1d1;
+  margin: 0px;
+  sitegroup-style: none;
+  cursor: pointer;
+  background: #fff;
+}
+ul.sitegroup_categories-autosuggest > li
+{
+  padding: 3px;
+  overflow: hidden;
+}
+ul.sitegroup_categories-autosuggest > li + li
+{
+  border-top: 1px solid #d2d1d1;
+}
+ul.sitegroup_categories-autosuggest > li img
+{
+  width: 48px;
+  height: 48px;
+  display: block;
+  float: left;
+  margin-right: 5px;
+}
+ul.sitegroup_categories-autosuggest > li.autocompleter-selected
+{
+  background: #dbdbdb;
+  color: #333;
+}
+ul.sitegroup_categories-autosuggest > li.autocompleter-choices
+{
+  font-size: .8em;
+	overflow:hidden;
+}
+ul.sitegroup_categories-autosuggest > li.autocompleter-choices .autocompleter-choice
+{
+  line-height: 20px;
+	overflow:hidden;
+}
+ul.sitegroup_categories-autosuggest > li:hover
+{
+  background: #dbdbdb;
+  color: #222;
+}
+ul.sitegroup_categories-autosuggest > li span.autocompleter-queried
+{
+  font-weight: bold;
+}
+ul.sitegroup_categories-autosuggest .search-working
+{
+  background-image: none;
+}
+.autocompleter-choice
+{
+  cursor: pointer;
+}
+.autocompleter-choice:hover
+{
+  color: #5ba1cd;
+}
+.sitegroup_admin_popup
+{
+	+rounded(5px);
+	background-color: #E9F4FA;
+	float: left;
+	padding: 7px;
+	margin:10px;
+}
+.sitegroup_admin_popup > div
+{
+	background: none repeat scroll 0 0 #FFFFFF;
+	border: 1px solid #D7E8F1;
+	overflow: hidden;
+	padding: 10px;
+}
+.sitegroup_admin_popup > div .global_form_popup
+{
+	padding:5px;
+}
+/*change category popup*/
+.sitegroup_change_cat_popup
+{
+	min-height:280px;
+}
+#global_page_sitegroup-admin-changeowner .global_form_popup button,
+.global_form_popup .sitegroup_change_cat_popup button
+{
+	margin-top:10px;
+}
+.sitegroup_change_cat_popup .form-label
+{
+	margin-bottom:3px;
+}
+.sitegroup_change_cat_popup .form-label label
+{
+	font-weight:bold;
+}
+/*claim take action popup*/
+.sitegroup_claim_action_popup .settings form {
+	overflow: auto;
+	max-height:450px;
+	width:610px;
+}
+.sitegroup_claim_action_popup .settings .form-wrapper {
+	padding: 7px 0;
+}
+.sitegroup_claim_action_popup .settings .form-element {
+	max-width: 350px;
+}
+.sitegroup_claim_action_popup .settings div.form-element textarea {
+	min-height: 70px;
+	min-width: 0;
+	width: 300px;
+}
+.sitegroup_claim_action_popup .settings form > div {
+	padding:10px;
+}
+#global_page_sitegroup-admin-claim-processclaim table.admin_table thead tr th,
+#global_page_sitegroup-admin-claim-processclaim table.admin_table tbody tr td{
+	padding:7px 1px;
+	font-size:11px;
+}
+#global_page_sitegroup-admin-claim-processclaim .search form > div
+{
+	margin:0px 10px 10px 0;
+}
+/*admin group layout*/
+#global_page_sitegroup-admin-defaultlayout-index .settings form 
+{
+	float:none;
+}
+#global_page_sitegroup-admin-defaultlayout-index .settings .form-element
+{
+	max-width:650px;
+}
+#global_page_sitegroup-admin-defaultlayout-index .settings .form-description,
+#global_page_sitegroup-admin-defaultlayout-index .settings .form-element .description
+{
+	max-width:none;
+}
+/*item os the day*/
+#global_page_sitegroup-admin-items-add-group .global_form_popup dt label{font-weight:normal;}
+#global_page_sitegroup-admin-items-add-group .global_form_popup button
+{
+  margin-top:0px;
+}
+#global_page_sitegroup-admin-items-add-group .settings #title-label,
+#global_page_sitegroup-admin-items-add-group .settings .form-label {
+  width:70px;
+  clear: left;
+  float: left;
+  font-weight: bold;
+  overflow: hidden;
+  padding-right: 15px;
+}
+#global_page_sitegroup-admin-items-add-group .settings #title-element,
+#global_page_sitegroup-admin-items-add-group .settings .form-element {
+  float: left;
+  overflow: hidden;
+}
+#global_page_sitegroup-admin-items-add-group .global_form_popup dt label{
+  font-weight:bold;
+  margin-top:3px;
+  margin-bottom:15px;
+}
+#global_page_sitegroup-admin-items-add-group .settings .form-description{
+  width:500px;
+}
+#global_page_sitegroup-admin-items-add-group #buttons-wrapper{
+  margin-top:10px;
+}
+/*settings*/
+.sitegroup_settings_form .settings form{float:none !important;}		
+.sitegroup_settings_form .settings .form-element {
+	max-width: 650px !important;
+}
+.sitegroup_settings_form .settings .form-description {
+	max-width: none !important;
+	width:auto !important;
+}
+.sitegroup_settings_form .settings .form-element .description {
+	max-width: 650px !important;
+}
+/*css for packages group start here*/
+.sitegroup_pakage_form .settings form {
+	float:none;
+}
+.sitegroup_pakage_form .settings .form-description {
+	max-width: none;
+}
+.settings .form-description{
+	max-width: none !important;
+}
+.sitegroup_pakage_form .settings .form-element .description,
+.sitegroup_pakage_form .settings .form-element{
+	max-width:650px;
+}
+.sitegroup_pakage_form #buttons-label{
+	display:none;
+}
+.sitegroup_pakage_form input[type="checkbox"]{
+	float:left;
+}
+.sitegroup_pakage_form .settings .form-options-wrapper{
+	max-width:none;
+}
+.sitegroup_pakage_form .settings .form-options-wrapper li{
+	min-width:300px;
+}
+.sitegroup_pakage_form label.optional{
+	float:left;
+	max-width:600px;
+	margin-top:-2px;
+}
+#order-element li.package-list{
+	cursor: move;
+}
+#order-element li.package-list:hover{
+	background:#fbfbfb;
+}
+#global_page_sitegroup-admin-settings-form-search .admin_table th > div,
+#global_page_sitegroup-admin-package-index .admin_table th > div{
+	font-weight:bold;
+	float:left;
+	padding:0 5px;
+	white-space:normal;
+	font-size:11px;
+}
+#order-element li.package-list .admin_table td > div{
+	float:left;
+	padding:0 5px;
+	white-space:normal;
+}
+.sitegroup_package_group
+{
+	padding:10px;
+	+rounded(3px);
+	clear:both;
+	background-color: #E9F4FA;
+}
+ul.sitegroup_package_list
+{
+	padding:5px;
+	border:1px solid #D0E2EC;
+	background-color: #FFFFFF;
+}
+ul.sitegroup_package_list > li + li
+{
+	border-top-width:1px;
+	border-top-style:solid;
+}
+ul.sitegroup_package_list > li
+{
+	clear:both;
+	overflow:hidden;
+	padding:10px 10px;
+	width:660px;
+}
+ul.sitegroup_package_list .sitegroup_package_list_title
+{
+	overflow:auto;
+	padding-bottom:5px;
+	margin-bottom:5px;
+}
+ul.sitegroup_package_list .sitegroup_package_list_title h3
+{
+	letter-spacing:normal;
+	margin-top:3px;
+	overfloaw:hidden;
+}
+.sitegroup_create_link
+{
+	float:right;
+}
+.sitegroup_create_link a
+{
+	float:left;
+}
+.sitegroup_package_stat
+{
+	padding:5px;
+	overflow:hidden;
+	font-size:11px;
+	background-color: #E9F4FA;
+}
+.sitegroup_package_stat span
+{
+	float: left;
+	line-height: 16px;
+	margin-right: 10px;
+	width: 150px;
+}
+.sitegroup_package_stat_apps
+{
+	clear:both;
+	width:auto !important;
+}
+.sitegroup_package_stat b
+{
+	font-weight:bold;
+}
+ul.sitegroup_package_list .sitegroup_list_details
+{
+	clear:both;
+	float:left;
+	margin-top:10px;
+}
+/*css for packages group end here*/
+/*view group*/
+#global_page_sitegroup-admin-viewsitegroup-detail td{
+	padding:3px;
+	vertical-align:top;
+}
+#global_page_sitegroup-admin-viewsitegroup-detail td b{
+	font-weight:bold;
+}
+/* small icons */
+#global_page_sitegroup-admin-viewsitegroup-detail .rating_star_generic{
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	background-repeat: no-repeat;
+	font-size: 1px;
+	cursor: default;
+}
+#global_page_sitegroup-admin-viewsitegroup-detail .rating_star,
+#global_page_sitegroup-admin-viewsitegroup-detail .rating_star_half{
+	background-image: url(~/application/modules/Core/externals/images/star.png);
+}
+#global_page_sitegroup-admin-viewsitegroup-detail .rating_star_half{
+	background-image: url(~/application/modules/Core/externals/images/star_half.png);
+	width: 4px;
+}
+.sitegroup_admin_search > .search > form div
+{
+	margin:0px 10px 10px 0;
+}
+.sitegroup_admin_search{
+	max-width:950px !important;
+}
+.sitegroup_admin_search .cat_loader{
+	margin-top:18px;
+	display:none;
+}
+.sitegroup_admin_search .sitegroup_search_button{
+	clear:both;
+	margin:10px 0 0;
+}
+#global_page_sitegroup-admin-viewsitegroup-index table.admin_table thead tr th,
+#global_page_sitegroup-admin-viewsitegroup-index table.admin_table tbody tr td{
+	padding:7px 1px;
+	font-size:11px;
+}
+/*css for add profile questions */
+
+#global_page_sitegroup-admin-fields-field-create .global_form_smoothbox {
+    overflow: hidden;
+    padding: 0 15px 5px;
+}
+#global_page_sitegroup-admin-fields-field-edit textarea,
+#global_page_sitegroup-admin-fields-field-create .global_form_smoothbox textarea {
+	height: 150px;
+}
+#global_page_sitegroup-admin-fields-field-create .global_form_smoothbox .form-wrapper{margin-top:15px;}
+.admin_sitegroup_content_draggable{
+
+	overflow:auto;
+}
+.admin_sitegroup_content_draggable div{
+    float:left;
+	font-size: 7pt;
+}
+.admin_sitegroup_content_draggable div + div {
+    color: #CCCCCC;
+}
+/*FAQ Groups*/
+.sitegroup_faq_tabs ul li a{
+	font-size:11px !important;
+}
+.admin_sitegroup_files_wrapper 
+{
+  +rounded;
+	background: #E9F4FA;
+  padding: 10px;
+}
+.admin_sitegroup_files
+{
+  +rounded;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #ccc;
+  overflow-y: auto;
+	list-style:decimal !important;
+	padding-left:10px;
+}
+.admin_sitegroup_files > li
+{
+  margin-left: 20px;
+	padding: 7px 12px 7px 1px;
+}
+.admin_sitegroup_files > li + li
+{
+  border-top: 1px solid #eee;
+}
+.sitegroup_faq li > div{
+	clear:both;
+	border-left:3px solid #ccc;
+	padding:5px 5px 5px 10px;
+	margin:5px;
+	font-family:arial;
+	line:height:18px;
+}
+.sitegroup_faq li div ul li ul{
+	list-style: circle;
+	padding-left: 10px;
+	margin-left:5px;
+}
+
+.sitegroup_faq li div ul{
+	list-style: disc;
+	padding-left: 10px;
+}
+.code{ background-color:#F9F6D5;padding:10px;color:#000;font-family: "Trebuchet MS",tahoma,verdana,arial,serif;overflow:auto;}
+.code img{ 
+	margin-top:10px;
+}
+
+/*#global_page_sitegroup-admin-fields-field-create #select-action{display:none;}*/
+
+.sitegroup_admin_statistic td{font-weight:bold;}
+#global_page_sitegroup-admin-settings-sitegroupcategories .settings .global_form
+{
+	-moz-border-radius: 7px;
+	-webkit-border-radius: 7px;
+	border-radius: 7px;
+	background-color: #E9F4FA;
+	padding: 10px;
+	float: left;
+	overflow: hidden;
+}
+#global_page_sitegroup-admin-settings-sitegroupcategories .settings .global_form > div
+{
+	background: #fff;
+	border: 1px solid #d7e8f1;
+	overflow: hidden;
+	padding: 20px;
+}
+.admin_sitegroup_cat
+{
+	margin-bottom:10px;
+}
+.admin_sitegroup_cat > div > span a
+{
+	font-weight:bold;
+}
+.admin_sitegroup_categories
+{
+	padding-left: 5px;
+	margin-top:10px;
+}
+.sitegroup_add_new_cat{
+	padding-left: 20px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+.sitegroup_subcat_handle{
+	vertical-align: middle; 
+	margin-right: 5px; 
+	cursor: move;
+}
+.sitegroup-layout-popup{
+	height:500px;
+	width:500px;
+}
+/*style for Import Listing section start here*/
+.importlisting_form
+{
+	-moz-border-radius: 7px;
+	-webkit-border-radius: 7px;
+	border-radius: 7px;
+	background-color: #E9F4FA;
+	padding: 10px;
+	float: left;
+	overflow: hidden;
+	margin-bottom:15px;
+}
+.importlisting_form > div
+{
+	background: #fff;
+	border: 1px solid #d7e8f1;
+	overflow: hidden;
+	padding: 20px;
+}
+.importlisting_elements
+{
+	clear:both;
+	border: 1px solid #EEEEEE;
+	overflow:hidden;
+	float:left;
+	width:500px;
+}
+.importlisting_elements span
+{
+	background-color: #F8F8F8;
+	clear: both;
+	float: left;
+	font-size: 13px;
+	width: 100%;
+	padding:3px;
+}
+.importlisting_elements span + span
+{
+	border-top: 1px solid #EEEEEE;
+}
+.importlisting_elements span img
+{
+	margin-right:10px;
+	vertical-align:middle;
+	float:left;
+	margin-top:3px;
+}
+.importlisting_elements span b
+{
+	float:left;
+	max-width:450px;
+}
+.importlisting_elements span.green{color:green;}
+.importlisting_elements span.red{color:red;}
+.importlisting_form > div .import_button{
+	clear: both;
+	float: left;
+	margin-top: 10px;
+}
+.importlisting_form > div .error-message,
+.importlisting_form > div .success-message
+{
+	float:left;
+	width:100%;
+}
+.importlisting_form > div .error-message > span,
+.importlisting_form > div .success-message > span
+{
+	background-position: 8px 5px;
+	background-repeat: no-repeat;
+	border-radius: 3px 3px 3px 3px;
+	clear: left;
+	float: left;
+	margin:0 0 15px 0;
+	overflow: hidden;
+	padding: 5px 15px 5px 32px;
+}
+.importlisting_form > div .success-message > span
+{
+	border: 1px solid #CCCCCC;
+	background-color: #E9FAEB;
+}
+.importlisting_form > div .error-message > span
+{
+	border: 1px solid #ff0000;
+	background-color: #ffe3e3;
+}
+.importlisting_form > div strong{font-weight:bold;font-size:14px;}
+.sitegroup_upload_csv_popup .settings .form-wrapper
+{
+	width:500px !important;
+}
+.sitegroup_upload_csv_popup #buttons-label{display:none!important;}
+.icon_sitegroups_log {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/log_clear.png);
+}
+.icon_sitegroups_import {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/import.png);
+}
+.icon_sitegroups_download_csv {
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/download.gif);
+}
+.sitegroup_upload_csv_popup_loader > div
+{
+	margin:200px 0 0 250px;
+	text-align:center;
+}
+.importlisting_form_list {
+
+    list-style: decimal outside none !important;
+    padding-left: 10px;
+}
+.importlisting_form_list > li {
+    margin-left: 20px;
+    padding: 7px 12px 7px 1px;
+}
+#global_page_sitegroup-admin-importlisting-import .settings .form-element .description {
+   max-width: 300px;
+}
+.sitegroup_edit_tabs_popup .form-element{
+	clear:both
+}
+/*style for Import Listing section end here*/
+/*Tip for activity feed tab */
+.sitegroup_activity_tip{
+	background-color:#b10000 !important;
+	color:#fff !important;
+}
+.sitegroup_activity_tip a{
+	font-weight:bold;
+	text-decoration:underline !important;
+	color:#FFFFFF !important;
+}
+/**/
+#sitegroup_postfbpage-element > p.description + ul{
+	clear: both;
+	list-style: disc;
+}
+#sitegroup_postfbpage-element > p.description + ul > li {
+	line-height: 20px;
+}
+
+.settings textarea#sitegroup_defaultgroupcreate_email{
+	min-height:40px !important;
+	height:30px;
+}
+
+.icon_sitegroup_generate_csv{
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/file.png);
+}
+
+/*admin profile fields*/
+.sitegroup_custom_fields .admin_field{
+	float:left;
+}
+ul.sitegroup_custom_fields .admin_field > span{
+	background-image:none;
+}
+.sitegroup_custom_fields .admin_field_checkbox{
+	clear: none;
+	float: left;
+	margin: 13px 0 0 10px;
+}
+.importlisting_form_sitegroup{
+	list-style: decimal outside none !important;
+	padding-left: 10px;
+}
+.importlisting_form_sitegroup > li{
+	margin-left: 20px;
+	padding: 7px 12px 7px 1px;
+}

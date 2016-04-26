@@ -1,0 +1,14 @@
+
+/*Notification Icons*/
+.notification_type_sitegroup_join, .notification_type_sitegroupmember_approve, .notification_type_sitegroupmember_invite {
+	background-image: url(~/application/modules/Sitegroupmember/externals/images/member/join.png);
+}
+.notification_type_sitegroup_addmember{
+	background-image:url(~/application/modules/Sitegroup/externals/images/add_more_groups.png);
+}
+.notification_type_sitegroupmember_accepted{
+	background-image: url(~/application/modules/Sitegroupmember/externals/images/member/accept.png);
+}
+.notification_type_sitegroupmember_invite{
+	background-image: url(~/application/modules/Sitegroupmember/externals/images/member/invite.png);
+}

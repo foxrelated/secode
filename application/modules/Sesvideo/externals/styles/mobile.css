@@ -1,0 +1,249 @@
+/* $Id:main.css 2015-4-1 00:00:00 SocialEngineSolutions $*/
+
+/*Icons*/
+.item_icon_video{background-image:url(~/application/modules/Sesvideo/externals/images/types/video.png);}
+.sesvideo_icon_video_add{background-image:url(~/application/modules/Sesvideo/externals/images/new.png);}
+.item_icon_sesvideo_chanel,
+.activity_icon_sesvideo_chanel_new,
+.sesvideo_quick_chanelcreate{background-image:url(~/application/modules/Sesvideo/externals/images/types/channel.png);}
+.notification_type_sesvideo_chanel_follow,
+.activity_icon_sesvideo_chanel_follow{background-image:url(~/application/modules/Sesvideo/externals/images/follow.png);}
+
+.notification_type_sesvideo_favourite_chanel,
+.notification_type_sesvideo_favourite_video{
+	background-image:url(~/application/modules/Sesbasic/externals/images/icons/favourite.png);
+}
+.notification_type_sesvideo_video_rating,
+.activity_icon_sesvideo_chanel_rating,
+.activity_icon_sesvideo_video_rating{
+	background-image:url(~/application/modules/Sesbasic/externals/images/icons/star.png);
+}
+/*Generic Container*/
+[class*='layout_sesvideo_'], [id^='global_page_sesvideo-'] .layout_core_content{
+  clear:both;
+  margin-bottom:15px;
+}
+[class*='layout_sesvideo_']:after, [id^='global_page_sesvideo-'] .layout_core_content:after{
+  clear:both;
+  content:'';
+  display:block;
+}
+[id^='global_page_sesvideo-'] .layout_core_content + .layout_core_comments{
+  border-top:1px solid $theme_border_medium_color;
+  padding-top:10px;
+}
+[id^='global_page_sesvideo-'] .layout_core_content + .layout_core_comments > h3{
+  display:none;
+}
+[class*='tab_layout_sesvideo_']{
+  margin:0;
+  clear:none;
+}
+/*VIDEO LISTING*/
+.sesbasic_tabs_container .sesvideo_video_listing{
+	padding:0 5px;
+}
+.sesvideo_video_listing{
+  position:relative;
+}
+.sesvideo_thumb{
+	border:1px solid $theme_border_color;
+	position:relative;
+	padding:2px;
+	overflow:hidden;
+}
+.sesvideo_thumb:hover{
+	border:1px solid $theme_border_medium_color;
+}
+.sesvideo_thumb .sesvideo_thumb_img > span{
+  background-position:center center;
+  background-repeat:no-repeat;
+  background-size:cover;
+  display:block;
+  height:100%;
+  width:100%;
+}
+.sesvideo_thumb .sesvideo_thumb_nolightbox > span{
+  background-position:center center;
+  background-repeat:no-repeat;
+  background-size:cover;
+  display:block;
+  height:100%;
+  width:100%;
+}
+.sesvideo_watch_later_btn{
+  background-image:url(~/application/modules/Sesvideo/externals/images/clock.png);
+  background-color:#000;
+  background-position:center center;
+  background-repeat:no-repeat;
+  background-size:13px auto;
+  border-radius:0 4px 0 0;
+  bottom:2px;
+  height:20px;
+  left:2px;
+  position:absolute;
+  text-align:center;
+  width:20px;
+	opacity:0;
+	filter:alpha(opacity=0);
+}
+[dir="rtl"] .sesvideo_watch_later_btn{
+	left:auto;
+	right:2px;
+	text-align:center;
+}
+.selectedWatchlater{
+  background-color:#ff4500;
+}
+.sesvideo_thumb:hover .sesvideo_watch_later_btn,
+.sesvideo_thumb .sesvideo_watch_later_btn.selectedWatchlater{
+	opacity:1;
+	filter:alpha(opacity=100);
+}
+.sesvideo_length{
+  background:#111;
+  border-radius:4px 0 0;
+  bottom:2px;
+  color:#fff;
+  display:inline-block;
+  font-size:11px;
+	line-height:20px;
+	height:20px;
+  padding:0 5px;
+  position:absolute;
+  right:2px;
+}
+[dir="rtl"] .sesvideo_length{
+	left:2px;
+	right:auto;
+}
+.sesbasic_pinboard_list_item_top .sesvideo_watch_later_btn{bottom:0;left:0;}
+[dir="rtl"] .sesbasic_pinboard_list_item_top .sesvideo_watch_later_btn{left:auto;right:0px;}
+.sesbasic_pinboard_list_item_top .sesvideo_length{bottom:0;right:0;}
+[dir="rtl"] .sesbasic_pinboard_list_item_top .sesvideo_length{left:0;right:auto;}
+
+/*Play Button in Listings*/
+.sesvideo_play_btn{
+	left:50%;
+	margin:-15px 0 0 -15px;
+	position:absolute;
+	top:50%;
+	height:30px;
+	text-decoration:none !important;
+	width:30px;
+	z-index:1;
+}
+.sesvideo_play_btn:before{
+  color:rgba(255, 255, 255 , .8);
+  font-size:40px;
+}
+.sesvideo_play_btn_wrap:hover .sesvideo_play_btn:before,
+.sesvideo_listing_in_grid:hover .sesvideo_play_btn:before,
+.sesvideo_listing_in_grid2:hover .sesvideo_play_btn:before{
+	color:#ff4500;
+}
+/*Listing Buttons*/
+.sesvideo_thumb_btns{
+	margin-left:2px;
+  position:absolute;
+  opacity:0;
+  top:-20px;
+  right:10px;
+  z-index:2;
+  -webkit-transition:all 500ms ease;
+  -moz-transition:all 500ms ease;
+  transition:all 500ms ease;
+}
+[dir="rtl"] .sesvideo_thumb_btns{
+	margin-left:0;
+	margin-right:2px;
+  left:10px;
+  right:auto;
+}
+.sesvideo_thumb:hover .sesvideo_thumb_btns,
+.sesvideo_listing_in_grid:hover .sesvideo_thumb_btns,
+.sesvideo_activity_video:hover .sesvideo_thumb_btns,
+.sesvideo_listing_in_grid2:hover .sesvideo_thumb_btns{
+	opacity:1;
+	top:10px;
+}
+/* VIDEO IFRAMES */
+.vimeo_iframe_big, .youtube_iframe_big{width:100%;}
+.sesvideo_object{display:none;}
+/*FEED COMPOSER*/
+#compose-video-body{overflow:hidden;}
+#compose-video-body .compose-preview-image{float:left;margin-right:2px;border:1px solid $theme_photo_border_color;width:150px;}
+html[dir="rtl"] #compose-video-body .compose-preview-image{float:right;margin-right:0px;margin-left:2px;}
+#compose-video-body .compose-preview-info{overflow:hidden;}
+#compose-video-body .compose-preview-info a{font-weight:bold;display:block;margin-bottom:2px;}
+#compose-video-body .compose-preview-info > div{font-size:.8em;}
+
+/*ACTIVITY FEED COMPOSER VIDEO*/
+#compose-video-activator, #compose-video-menu span{background-image:url(~/application/modules/Sesvideo/externals/images/new.png);background-repeat:no-repeat;}
+#compose-video-form-input{margin-top:5px;width:300px;}
+#compose-video-form-submit{margin-top:5px;clear:both;}
+
+/*VIDEO ATTACHMENT*/
+.sesvideo_attachment_thumb{float:left;height:180px;margin:0 10px 0 0;width:240px;}
+[dir="rtl"] .sesvideo_attachment_thumb{float:right;margin:0 0 0 10px;}
+.sesvideo_attachment_thumb .sesvideo_attachment_thumb_img{display:block;height:100%;width:100%;}
+.sesvideo_attachment_info{overflow:hidden;}
+.sesvideo_attachment_info > a{font-weight:bold;}
+.sesvideo_attachment_desc{margin-top:5px;font-size:.8em;}
+.sesvideo_object{margin-bottom:10px;}
+.feed_item_attachments .sesvideo_object iframe{height: 300px;width: 450px;}
+.sesvideo_attachment_info h3{margin-bottom:0px;}
+/*CHANNEL ATTACHMENT*/
+.feed_attachment_sesvideo_chanel > div > a{float:left;margin:0 10px 0 0;}
+[dir="rtl"] .feed_attachment_sesvideo_chanel > div > a{float:right;margin:0 0 0 10px;}
+.feed_attachment_sesvideo_chanel > div > a + div{overflow:hidden;}
+/*ACTION TYPE ICONS*/
+.activity_icon_comment_video{background-image:url(~/application/modules/Core/externals/images/types/post.png);}
+/*ITEM TYPE ICONS*/
+.item_icon_sescideo{background-image:url(~/application/modules/Sesvideo/externals/images/types/video.png);}
+/*NOTIFICATION TYPE ICONS*/
+.notification_type_video_processed{background-image:url(~/application/modules/Sesvideo/externals/images/new.png);}
+/*Option Box*/
+.sesvideo_option_box{
+	background-color:$theme_list_background_color;
+	border:1px solid $theme_border_medium_color;
+}
+.sesvideo_option_box a{
+  color:$theme_font_color !important;
+}
+.sesvideo_option_box a:hover{
+	background-color:$theme_list_background_color_hover;
+}
+/*PLAYLIST*/
+.sesvideo_playlist_grid{
+	background-color:$theme_list_background_color;
+}
+/*Update Photo Popup*/
+.sesvideo_photo_update_popup_container{
+	background-color:$theme_body_background_color;
+}
+.sesvideo_photo_update_popup_header{
+  background-image:url(~/application/modules/Sesbasic/externals/images/t-img-light.png);
+}
+/*Slideshow*/
+.cd-primary-nav-dropdown{
+	background-color:$theme_list_background_color;
+}
+.cd-primary-nav-dropdown:before{
+	border-bottom-color:$theme_list_background_color !important;
+}
+.cd-primary-nav-dropdown li a:hover{
+	background-color:$theme_list_background_color_hover;
+}
+/*Channel Form*/
+.sesvideo_create_channel_tabs ul li.active a{background-color:$theme_list_background_color_hover;color:$theme_font_color;}
+.sesvideo_create_channel_tabs ul li.active a:after{border-top-color:$theme_list_background_color_hover !important;}
+/*Watch Now Button*/
+.sesvideo_cat_video_list_button{
+	border:2px solid $theme_button_background_color;
+	color:$theme_button_background_color !important;
+}
+.sesvideo_cat_video_list_button:hover{
+	border:2px solid #fff;
+	color:#fff !important;
+}

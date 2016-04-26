@@ -1,0 +1,139 @@
+/* $Id: style_siteevent_print.css 6590 2014-01-02 00:00:00Z SocialEngineAddOns Copyright 2013-2014 BigStep Technologies Pvt. Ltd. $ */
+
+body{
+	background:#fff;
+}
+div, td {
+	color: #555555;
+	font-size: 10pt;
+	text-align: left;
+}
+* {
+	font-family: tahoma,arial,verdana,sans-serif;
+}
+* {
+	border: 0 solid #EAEAEA;
+	margin: 0;
+	padding: 0;
+}
+#global_content_simple {
+    width: 100%;
+}
+.siteevent_print_page{
+	padding:30px;
+}
+.siteevent_print_page_header{
+	padding: 5px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	overflow: auto;
+	margin-bottom:10px;
+}
+.siteevent_print_page_header span{
+  margin-bottom: 1px;
+	font-size:1.5em;
+	letter-spacing:normal;
+	float:left;
+	font-style:italic;
+}
+.siteevent_print_page_header #printdiv{
+  float:right;
+	margin-top:5px;
+}
+
+.siteevent_diary_view{
+  overflow:hidden;
+}
+.siteevent_diary_view_title{
+  font-size:17px;
+  font-weight:bold;
+  margin-bottom:5px;
+}
+.siteevent_diary_view_stats{
+  font-size:0.8em;
+  margin-bottom:3px;
+	color:grey;
+}
+
+ul.seaocore_browse_list {
+	clear: both;
+	margin-top:10px;
+}
+ul.seaocore_browse_list > li {
+	border-top-width: 1px;
+	clear: both;
+	overflow: hidden;
+	padding: 10px 10px;
+	margin:0px !important;
+}
+.seaocore_browse_list_photo {
+	float: left;
+	margin-right: 8px;
+	overflow: hidden;
+}
+.seaocore_browse_list_photo img {
+	width: 100px;
+	border: 1px solid #DDDDDD;
+}
+.seaocore_browse_list_options {
+	float: right;
+	overflow: hidden;
+	padding-left: 20px;
+	width: 150px;
+}
+.seaocore_browse_list_options > a {
+	clear: both;
+	display: block;
+	font-size: 0.8em;
+	line-height: inherit !important;
+	margin: 5px;
+	padding-bottom: 2px;
+	padding-top: 2px;
+}
+.seaocore_browse_list_info {
+	overflow: hidden;
+}
+.seaocore_browse_list_info_title {
+	font-weight: bold;
+	overflow: hidden;
+}
+.seaocore_browse_list_info_title h3 {
+	background: none repeat scroll 0 0 transparent;
+	font-weight: bold;
+	margin: 0;
+	overflow: hidden;
+	padding: 0;
+}
+.seaocore_browse_list_info_title p {
+	font-size: 1.3em;
+	margin: 0 0 5px;
+	overflow: hidden;
+}
+.seaocore_browse_list_info_title .seaocore_title {
+	font-weight: bold;
+	overflow: hidden;
+}
+ul.seaocore_browse_list .seaocore_browse_list_info_title span {
+	float: right;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+ul.seaocore_browse_list span.list_rating_star span {
+	float: left;
+	margin: 2px;
+}
+.seaocore_browse_list_info_date {
+	color: #999999;
+	font-size: 0.8em;
+	margin-top: 3px;
+}
+.seaocore_browse_list_info_blurb {
+	margin-top: 5px;
+}
+.seaocore_pagination {
+	clear: both;
+	margin-top: 10px;
+}
+.seaocore_pagination > div {
+	margin: 0;
+}

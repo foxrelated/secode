@@ -1,0 +1,10 @@
+.layout_spamcontrol_spamcontrol_list{
+    margin-top: 10px;
+    padding: 10px;
+    overflow: hidden;
+    +foreground;
+    +rounded;
+}
+.notification_type_user_warn{
+    background-image: url(~/application/modules/Spamcontrol/externals/images/spam.png);
+}

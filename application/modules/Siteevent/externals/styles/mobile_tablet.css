@@ -1,0 +1,173 @@
+/* $Id: mobile_tablet.css 6590 2014-01-02 00:00:00Z SocialEngineAddOns Copyright 2013-2014 BigStep Technologies Pvt. Ltd. $ */
+
+/*Notification Type Icons*/
+.item_icon_siteevent,
+.item_icon_siteevent_event,
+.notification_type_siteevent_invite, .notification_type_siteevent_suggested,
+.notification_type_siteevent_rsvp_change,.notification_type_siteevent_join,
+.notification_type_siteevent_event_editor, .notification_type_siteevent_member,
+.notification_type_siteevent_location_updated,.notification_type_siteevent_location_updated_parent,
+.notification_type_siteevent_title_updated,.notification_type_siteevent_title_updated_parent,
+.notification_type_siteevent_venue_updated,.notification_type_siteevent_venue_updated_parent,
+.notification_type_siteevent_date_time_updated,.notification_type_siteevent_date_time_updated_parent
+{
+	background-image:url(~/application/modules/Siteevent/externals/images/types/event.png);
+}
+.notification_type_siteevent_approved_review, 
+.notification_type_siteevent_editorreview, 
+.notification_type_siteevent_write_review, .item_icon_siteevent_review{
+	background-image:url(~/application/modules/Siteevent/externals/images/review.png);
+}
+.notification_type_siteevent_notificationpost, 
+.notification_type_siteevent_notificationpost_parent, 
+.notification_type_siteevent_contentcomment, 
+.item_icon_siteevent_topic, 
+.notification_type_siteevent_discussion_new, 
+.notification_type_siteevent_discussion_response{
+  background-image:url(~/application/modules/Siteevent/externals/images/types/post.png);
+}
+.notification_type_siteevent_host, 
+.notification_type_siteevent_promote, 
+.notification_type_siteevent_page_host, 
+.notification_type_siteevent_group_host, 
+.notification_type_siteevent_business_host, 
+.notification_type_siteevent_store_host{
+  background-image:url(~/application/modules/Siteevent/externals/images/member/promote.png);
+}
+/*Tabs Icon*/
+.tab_layout_siteevent_editor_profile_reviews_siteevent .tab-icon i{
+  background-image: url(~/application/modules/Sitemobile/externals/images/icons/review.png); 
+}
+.tab_layout_siteevent_profile_siteevent .tab-icon i{
+  background-image: url(~/application/modules/Sitemobile/externals/images/icons/list.png); 
+}
+
+.siteevent_icon{
+  width:16px;
+  height:16px;
+  display:inline-block;
+}
+.siteevent_icon_strip{
+  background-image:url(~/application/modules/Siteevent/externals/images/img-strip.png);
+}
+.siteevent_icon_host{
+  background-position:-208px -30px;
+}
+.siteevent_icon_time{
+  background-position:-145px -8px;
+}
+.siteevent_icon_location{
+  background-position:-165px -7px;
+}
+.siteevent_icon_facebook{
+  background-position:-7px -7px;
+}
+.siteevent_icon_twitter{
+  background-position:-27px -7px;
+}
+.siteevent_icon_website{
+  background-position:-48px -7px;
+}
+.siteevent_icon_profile{
+  background-position:-67px -7px;
+}
+.siteevent_icon_message{
+  background-position:-87px -7px;
+}
+.siteevent_icon_download{
+  background-position:-107px -7px;
+}
+.siteevent_icon_calendar{
+  background-position:-125px -7px;
+}
+.siteevent_icon_birthday{
+  background-position:-187px -7px;
+}
+.siteevent_icon_request{
+  background-position:-208px -7px;
+}
+.siteevent_icon_tag{
+  background-position:-166px -30px;
+}
+.siteevent_icon_link{
+  background-position:-125px -30px;
+}
+.siteevent_icon_users{
+  background-position:-146px -30px;
+}
+.siteevent_icon_venue{
+  background-position:-187px -31px;
+}
+.siteevent_icon_user{
+  background-position:-224px -30px;
+}
+.siteevent_icon_msg{
+  background-position:-107px -30px;
+}
+.siteevent_icon_stats{
+  background-position:-87px -31px;
+}
+.siteevent_icon_price{
+  background-position:-67px -30px;
+}
+.siteevent_icon_rating{
+  background-position:-46px -30px;
+}
+.siteevent_icon_date{
+  background-position:-27px -30px;  
+}
+.siteevent_icon_contact{
+  background-position:-240px -30px;  
+}
+.siteevent_icon_mail{
+  background-position:-256px -30px;  
+}
+.siteevent_icon_web{
+  background-position:-272px -30px;  
+}
+.siteevent_icon_plus{
+  background-position:-24px -30px;  
+}
+.siteevent_icon_diary_a{
+  background-position:-7px -30px;  
+}
+
+/*Event Listings Information*/
+.siteevent_listings_stats{
+  margin-top:5px;
+  overflow:hidden;
+  clear:both;
+  line-height:normal;
+  font-weight:normal;
+}
+.siteevent_listings_stats i{
+  float:left;
+  margin-right:3px;
+}
+.siteevent_listings_stats div img{
+	margin-right:3px;
+}
+.siteevent_listings_stats .stats_rating_star .list_rating_star{
+  margin-right:10px;
+}
+.siteevent_listings_stats_wrap .siteevent_listings_stats{
+  float:left;
+  clear:none;
+  line-height:normal;
+  margin-right:10px;
+}
+.siteevent_listings_host_h{
+  background-image:url(~/application/modules/Siteevent/externals/images/bg2.png);
+  margin:-5px -7px 5px;
+  padding:5px;
+}
+.siteevent_listings_host > a,
+.siteevent_listings_host > img{
+  float:left;
+  margin-right:10px;
+}
+.siteevent_listings_host > a img,
+.siteevent_listings_host > img{
+  height:25px;
+  width:25px;
+}

@@ -1,0 +1,164 @@
+/* $Id:mobile_tablet 2010-08-17 9:40:21Z SocialEngineAddOns Copyright 2009-2010 BigStep Technologies Pvt. Ltd. $ */
+
+/*NOTIFICATION TYPE ICONS*/
+.icon_int_suggestion{
+	background-image:url(~/application/modules/Suggestion/externals/images/sugg_intr.png);
+}
+.notification_type_group_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/sugg_group.png);
+}
+
+.notification_type_siteevent_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/sugg_event.png);
+}
+
+.notification_type_sitestoreproduct_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/product.png);
+}
+.notification_type_sitestore_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/store.png);
+}
+.notification_type_page_album_suggestion,.notification_type_page_report_suggestion, .notification_type_album_suggestion, .notification_type_business_album_suggestion, .notification_type_group_album_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/sugg_album.png);
+}
+.notification_type_blog_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/sugg_blog.png);
+}
+.notification_type_page_event_suggestion, .notification_type_event_suggestion, .notification_type_business_event_suggestion, .notification_type_group_event_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/sugg_event.png);
+}
+.notification_type_classified_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/sugg_classified.png);
+}
+.notification_type_page_video_suggestion, .notification_type_video_suggestion, .notification_type_business_video_suggestion, .notification_type_group_video_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/sugg_video.png);
+}
+.notification_type_page_music_suggestion, .notification_type_music_suggestion, .notification_type_business_music_suggestion, .notification_type_group_music_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/sugg_music.png);
+}
+.notification_type_page_offer_suggestion, .notification_type_business_offer_suggestion, .notification_type_group_offer_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/offer.png);
+}
+.notification_type_recipe_suggestion{
+  background-image:url(~/application/modules/Suggestion/externals/images/recipe.png);
+}
+.notification_type_picture_suggestion{
+	background-image:url(~/application/modules/Suggestion/externals/images/sugg_photo.png);
+}
+.notification_type_friend_suggestion{
+	background-image:url(~/application/modules/Suggestion/externals/images/sugg_friend.png);
+}
+.notification_type_page_poll_suggestion, .notification_type_poll_suggestion, .notification_type_business_poll_suggestion, .notification_type_group_poll_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/sugg_poll.png);
+}
+.notification_type_forum_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/sugg_forum.png);
+}
+.notification_type_page_document_suggestion, .notification_type_document_suggestion, .notification_type_business_document_suggestion, .notification_type_group_document_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/document.png);
+}
+.notification_type_listing_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/list.png);
+}
+.notification_type_page_suggestion, .notification_type_business_suggestion, .notification_type_group_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/sitepage.png);
+}
+.notification_type_page_note_suggestion, .notification_type_business_note_suggestion, .notification_type_group_note_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/note.png);
+}
+.notification_type_page_review_suggestion, .notification_type_business_review_suggestion, .notification_type_group_review_suggestion {
+	background-image:url(~/application/modules/Suggestion/externals/images/review.png);
+}
+.notification_type_document_popup_suggestion, .icon_list_friend_suggestion, .icon_recipe_friend_suggestion, .recipe_suggest_friend, .icon_suggestion{
+  background-image:url(~/application/modules/Suggestion/externals/images/sugg_blub.png);
+}
+.sugg_seemore{
+  font-weight:bold;
+  text-align:center;
+  padding:0 5px 7px;
+}
+.sugg_list_grid{
+	overflow:hidden;
+ 	float:left;
+	clear:both;
+  padding:0;
+  margin:0;
+  text-align:center;
+ 	width:100%;
+}
+.sugg_list_grid > li{
+  background-color:$theme_foreground_background_color;
+	border:1px solid $theme_border_medium_color;
+  border-radius:5px;
+  display:inline-block;
+  height:175px;
+  margin:0 5px 15px 0;
+  overflow:hidden;
+  padding:5px;
+  vertical-align:top;
+  width:135px;
+}
+@media all and (max-width:320px){
+  .sugg_list_grid > li{
+    height:auto;
+    width:90%;
+  }
+  .iscroll_container li{
+    width:135px;
+  }
+}
+.sugg_list_grid_img{
+  background-color:#FFFFFF;
+  background-image:url(~/application/modules/Suggestion/externals/images/nophoto_thumb.png);
+  background-position:center;
+  background-repeat:no-repeat;
+  border:1px solid #DDDDDD;
+  display:flex;
+  height:100px;
+  margin-bottom:7px;
+  overflow:hidden;
+  vertical-align:middle;
+  width:100%;
+}
+.sugg_list_grid_img img{
+  height:100%;
+  width:100%;
+}
+.sugg_list_grid_cnt{
+	display:block;
+  text-align:left;
+}
+.sugg_list_grid_cnt_rel{
+  float:right;
+  margin:0px 0px 0px 10px;
+}
+.sugg_list_grid_cnt_rel.ui-item-member-action{
+  float:right;
+  position:inherit;
+  margin:-5px 0px 0px 10px;
+}
+.sugg_list_grid_cnt .ui-item-member-action a.userlink{
+  background-size:26px;
+}
+.sugg_list_grid_title{
+  font-size:12px;
+  font-weight:bold;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sugg_list_grid_stats{
+	font-size:0.8em;
+	margin-bottom:5px;
+  display:block;
+}
+.sugg_list_grid_stats p{
+  margin:0;
+}
+.sugg_list_grid_title, .sugg_list_grid_stats{
+  overflow:hidden;
+}
+.suggestion_icon{
+  height:16px;
+  width:16px;
+  float:right;
+}

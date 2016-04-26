@@ -1,0 +1,187 @@
+/* $Id: mobile.css 2010-12-08 9:40:21Z SocialEngineAddOns Copyright 2010-2011 BigStep Technologies Pvt. Ltd. $ */
+
+/* ACTION TYPE ICONS */
+.activity_icon_comment_grouppoll {
+	background-image: url(~/application/modules/Core/externals/images/types/post.png);
+}
+/* ITEM TYPE ICONS */
+.item_icon_grouppoll_poll {
+	background-image: url(~/application/modules/Grouppoll/externals/images/grouppoll16.png);
+}
+/* ICONS */
+.icon_grouppoll_new {
+	background-image: url(~/application/modules/Grouppoll/externals/images/new.png);
+}
+/* hide menu items */
+/*Grouppoll side widgets*/
+.layout_grouppoll_profile_grouppoll, .layout_grouppoll_like_grouppolls, .layout_grouppoll_comment_grouppolls, .layout_grouppoll_view_grouppolls, .layout_grouppoll_vote_grouppolls, .layout_grouppoll_recent_grouppolls {
+	clear: both;
+	margin-top: 15px;
+	overflow: hidden;
+}
+/* GROUPPOLL COMMON CSS */
+.grouppoll_view_single ul.grouppoll_options {
+ +rounded(3px);
+}
+.grouppoll_view_single ul.grouppoll_options > li {
+	clear: both;
+	overflow: hidden;
+}
+.grouppoll_view_single ul.grouppoll_options > li + li {
+	margin-top: 10px;
+}
+.grouppoll_view_single .grouppoll_radio {
+	float: left;
+	width: 20px;
+	height: 18px;
+	overflow: hidden;
+}
+.grouppoll_view_single .grouppoll_radio > input {
+	display: block;
+	float: left;
+	margin-left: 1px;
+}
+.grouppoll_view_single .grouppoll_radio_loading {
+	float: left;
+	width: 20px;
+	height: 18px;
+	background-image: url(~/application/modules/Grouppoll/externals/images/loading.gif);
+	background-repeat: no-repeat;
+	overflow: hidden;
+}
+.grouppoll_view_single .grouppoll_radio_loading input {
+	display: none;
+}
+.grouppoll_view_single .grouppoll_option {
+	margin-bottom: 3px;
+}
+.grouppoll_view_single .grouppoll_answer {
+ +rounded;
+	width: 10px;
+	height: 15px;
+	font-size: 1px;
+	margin-right: 5px;
+	float: left;
+	overflow: hidden;
+}
+.grouppoll_view_single .grouppoll_answer_total {
+	display: block;
+	height: 15px;
+	font-size: .7em;
+	width: 70px;
+	float: left;
+	padding: 2px 0px 0px 0px;
+}
+.grouppoll_view_single div.grouppoll-answer-1 {
+	background-color: #aaea4f;
+}
+.grouppoll_view_single div.grouppoll-answer-2 {
+	background-color: #ea4f4f;
+}
+.grouppoll_view_single div.grouppoll-answer-3 {
+	background-color: #4faaea;
+}
+.grouppoll_view_single div.grouppoll-answer-4 {
+	background-color: #eaaa4f;
+}
+.grouppoll_view_single div.grouppoll-answer-5 {
+	background-color: #4f5eea;
+}
+.grouppoll_view_single div.grouppoll-answer-6 {
+	background-color: #4feabc;
+}
+.grouppoll_view_single div.grouppoll-answer-7 {
+	background-color: #e54fea;
+}
+.grouppoll_view_single div.grouppoll-answer-8 {
+	background-color: #eae84f;
+}
+.grouppoll_view_single .grouppoll_stats {
+	margin-top: 15px;
+}
+.grouppoll_view_single .grouppoll_stats > a {
+	font-weight: bold;
+}
+.feed_grouppoll_rich_content .grouppoll_option {
+	font-size:0.8em;
+}
+.feed_grouppoll_rich_content .grouppoll_answer {
+	margin-top: 1px;
+	height: 10px;
+}
+.feed_grouppoll_rich_content .grouppoll_answer_total {
+	padding-top: 0;
+}
+.feed_grouppoll_rich_content ul.grouppoll_options {
+	padding: 10px;
+	background-color: $theme_foreground_background_color;
+	margin: 7px 0px;
+}
+.feed_grouppoll_rich_content ul.grouppoll_options > li {
+	clear: both;
+	overflow: hidden;
+}
+.feed_grouppoll_rich_content ul.grouppoll_options > li + li {
+	clear: both;
+	margin-top: 5px;
+	overflow: hidden;
+}
+.feed_grouppoll_rich_content .grouppoll_stats {
+	display: none;
+	margin-top: 5px;
+	font-size: 0.9em;
+}
+.feed_grouppoll_rich_content .grouppoll_stats > a {
+	font-weight: normal;
+}
+/* GROUPPOLL MAIN VIEW PAGE */
+#global_page_grouppoll-index-view #global_content > h2 {
+	float:none !important;
+	text-align: center;
+}
+.grouppolls_view_backlink {
+	display:none;
+}
+div.grouppolls_view {
+	text-align: center;
+}
+div.grouppolls_view .grouppolls_view_info_date {
+	text-align: center;
+	color:$theme_font_color_light;
+	margin:5px 0;
+}
+div.grouppolls_view .grouppoll_desc {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	text-align: center;
+	padding: 0px 5%;
+}
+div.grouppolls_view .grouppoll_options {
+	margin: 0px 5%;
+	padding: 10px;
+	background-color: $theme_foreground_background_color;
+	max-width: none;
+}
+div.grouppolls_view .grouppoll_stats {
+	text-align:center;
+}
+div.grouppolls_view .comments {
+	margin-top: 10px;
+	width: auto;
+}
+/* GROUPPOLL PROFILE TAB LIST */
+.layout_grouppoll_profile_grouppolls h3 {
+	display:none;
+}
+.grouppoll_filter_widget {
+	display:none;
+}
+a.grouppolls_profile_photo {
+	display: block;
+	float: left;
+	margin-right: 8px;
+}
+.grouppoll_owner {
+	background-color:$theme_foreground_background_color;
+	padding-top:10px !important;
+}

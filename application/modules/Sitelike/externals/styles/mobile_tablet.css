@@ -1,0 +1,25 @@
+
+.main-navigation .core_main_sitelike i.ui-menu-icon{
+  background-image: url(~/application/modules/Sitemobile/externals/images/icons/thumbup.png); 
+}
+/**/
+.liked-item-list ul .sm-ui-browse-items{
+  min-height: 40px !important;
+  padding: 0.7em 15px 0.7em 60px;
+}
+.liked-item-list ul .sm-ui-browse-items .liked-item-photo{
+  left: 5px;
+  margin-top: -24px;
+  position: absolute;
+  top: 50%;
+}
+.liked-item-list ul .sm-ui-browse-items .liked-item-photo img{
+  height: 48px;
+  width: 48px;
+}
+.liked-item-list .item-listlike-button{
+  margin: -10px 0 0;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+}

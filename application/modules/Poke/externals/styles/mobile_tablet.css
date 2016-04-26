@@ -1,0 +1,93 @@
+/* icons */
+.poke_type_icon,
+.notification_type_Poke,
+.activity_icon_Poke{
+	background-image: url(~/application/modules/Poke/externals/images/poke_icon.png);
+}
+/* poke popup css start */
+#global_page_poke-pokeusers-pokeuser .global_form {
+	margin:10px 10px 0 10px;
+}
+#global_page_poke-pokeusers-pokeuser .global_form .form-wrapper img {
+	float:left;
+	margin-right:10px;
+	max-width:100px;
+	max-height:200px;
+}
+#global_page_poke-pokeusers-pokeuser .tip {
+	margin:10px 10px 0;
+}
+#global_page_poke-pokeusers-pokeuser .tip span {
+	margin-bottom:0px !important;
+}
+/* poke popup css end */
+.layout_poke_list_pokeusers, .layout_poke_list_toppokers, .layout_poke_list_recentpoked, .layout_poke_list_pokedrecently, .layout_poke_list_mostpokers{
+	margin-bottom:15px;
+}
+.users_poked .users_poked_list {
+	clear:both;
+	padding:3px 0;
+}
+.users_poked .users_poked_list div {
+	float:left;
+	font-size:11px;
+	margin-left:3px;
+}
+a.poke_remove{
+	position:absolute;
+	display:none;
+	right:0px;
+	height:11px;
+	width:11px;
+	background:url(~/application/modules/Poke/externals/images/cancel_icon.png) no-repeat right;
+}
+a.poke_remove:hover {
+	background:#3b5998 url(~/application/modules/Poke/externals/images/cancel_icon.png) no-repeat left;
+}
+.users_poked_list{
+	position:relative;
+	overflow:hidden;
+}
+.users_poked_list:hover .poke_remove{
+	display:block;
+}
+.poke_type_icon{
+	background-position: left 50%;
+	background-repeat: no-repeat;
+	line-height: 16px;
+	padding-left: 20px;
+}
+.usersetting .global_form div.form-label {
+	display:none;
+}
+.no-pokes {
+	text-align:center;
+	margin-top:50px;
+}
+.no-pokes .ui-icon{
+	display:inline;
+}
+.no-pokes .ui-icon,
+.no-pokes .ui-icon:before{
+	font-size:90px;
+	margin:0;
+	line-height:normal;	
+}
+.no-pokes span{
+	display:block;
+	font-size:20px;
+}
+.no_pokes_icon{
+background-image: url(~/application/modules/Poke/externals/images/poke_icon.png);
+background-size: 28px;
+background-repeat: no-repeat;
+background-position: center;
+display: inline-block;
+height: 28px;
+line-height: 28px;
+margin: 0;
+padding: 0;
+text-align: center;
+position: relative;
+width: 32px;
+}

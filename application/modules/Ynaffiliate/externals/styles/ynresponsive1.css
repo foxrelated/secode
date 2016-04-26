@@ -1,0 +1,171 @@
+body[id^=global_page_ynaffiliate] #formborder { padding: 0; }
+
+body[id^=global_page_ynaffiliate] .table_scroll {
+    overflow: inherit;
+}
+
+body[id^=global_page_ynaffiliate] .ynaffiliate_text {
+    height: 30px;
+}
+
+.layout_ynaffiliate_mini_menu .ynaffiliate_quicklinks_menu
+{
+	background-color: transparent;
+	border: 1px solid rgba(0, 0, 0, .12);
+}
+.layout_ynaffiliate_mini_menu .ynaffiliate_quicklinks_menu > li + li
+{
+	border-color: #ddd; 
+}
+
+
+body[id^=global_page_ynaffiliate] .yntable-item input[type=text],
+body[id^=global_page_ynaffiliate] .yntable-item input[type=password],
+body[id^=global_page_ynaffiliate] .yntable-item input[type=email] {
+    width: 69%;
+}
+
+.layout_ynaffiliate_mini_menu
+{
+	width:220px;
+}
+body[id^=global_page_ynaffiliate] .datepicker_jqui{
+	z-index: 999;
+	width: 193px;
+	height: 166px;
+}
+body[id^=global_page_ynaffiliate] .datepicker_jqui .days .titles .title
+{
+	padding-top: 0px;
+}
+body[id^=global_page_ynaffiliate] .datepicker_jqui .days .day
+{
+	width: 24px;
+	height: 16px;
+	padding-top: 0px;
+	padding-right: 4px;
+	margin: 0 2px 3px 0;
+}
+body[id^=global_page_ynaffiliate] .global_form #submit-element
+{
+	margin-top: 15px;
+}
+
+
+#global_page_ynaffiliate-sources-dynamic .yntable-item input {
+    width: 100%;
+}
+
+body[id^=global_page_ynaffiliate] form#filter_form .form-wrapper+.form-wrapper {
+    margin-top: 0;
+}
+
+@media (max-width: 991px)
+{
+	body[id^=global_page_ynaffiliate] .ynaffiliate_title,
+	body[id^=global_page_ynaffiliate] .ynaffiliate_value		
+	{
+		display:none
+	}
+	.ynaffiliate-menu-top ul.navigation
+	{
+		li a.ynresume_main_more
+		{
+			display: none;
+		}
+		li > ul
+		{
+			padding: 0;
+			background: transparent;
+			position: initial;
+			display:block;
+		}
+	}
+	.ynaffiliate-menu-top li > ul {
+		margin-top: 0;
+		border: 0;
+	}
+
+	.ynaffiliate-menu-top li > ul li + li {
+		border-top: 0;
+	}
+} 
+
+
+@media (max-width: 767px) 
+{
+    body[id^=global_page_ynaffiliate] .adv_affiliate_account > div {
+        float: none;
+        width: 100%;
+        padding-top: 10px;
+    }   
+	body[id^=global_page_ynaffiliate] .ynaffiliate_status
+	{
+		display:none
+	}
+    
+    body[id^=global_page_ynaffiliate] .yntable-item input[type=text],
+    body[id^=global_page_ynaffiliate] .yntable-item input[type=password],
+    body[id^=global_page_ynaffiliate] .yntable-item input[type=email] {
+        width: 100%;
+        max-width: 100%;
+    }    
+    
+    .yntable .yntable-item .label-cell-block {
+        width: 100%;
+        display: block;
+    }
+}
+
+@media (max-width: 640px)
+{
+    body[id^=global_page_ynaffiliate] .yntable-item .label-cell-block {
+        display: block;
+        width: 100%;
+        padding: 5px 0;
+    }
+    
+    body[id^=global_page_ynaffiliate] .f1 .form-elements div.form-wrapper {
+        float: none;
+    }
+    
+    body[id^=global_page_ynaffiliate] .f1 .form-elements input[type="text"] {
+        max-width: 85%;
+        width: 300px;
+    }
+    
+    body[id^=global_page_ynaffiliate] .f1 .form-elements div.form-element {
+        width: 90%;
+    }
+}
+@media (max-width: 480px)
+{
+	body[id^=global_page_ynaffiliate] .global_form #submit-element
+	{
+		margin-top: 0px;
+	}
+	body[id^=global_page_ynaffiliate] .f1 .form-elements div.form-wrapper
+	{
+		width:100%;
+		margin-bottom: 10px;
+	}
+	
+}
+@media (max-width: 320px)
+{
+	body[id^=global_page_ynaffiliate] .ynaffiliate_points,
+	body[id^=global_page_ynaffiliate] .ynaffiliate_status,
+	body[id^=global_page_ynaffiliate] .ynaffiliate_request_date
+	{
+		display:none
+	}	
+}
+
+
+/*Clear padding when item active*/
+body.ynresponsive1,
+body.ynresponsive-photo{
+	.tabs.ynaffiliate-menu-top > ul li.active>a{
+		padding: 0px;
+	}
+}

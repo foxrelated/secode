@@ -1,0 +1,532 @@
+/* $Id:style_siteevent_dashboard.css 6590 2014-01-02 00:00:00Z SocialEngineAddOns Copyright 2013-2014 BigStep Technologies Pvt. Ltd. $ */
+
+
+/**/
+.siteevent_dashboard_info_image{
+	text-align:center;
+}
+.siteevent_dashboard_info_image img{
+	float: left;
+  border:none;
+	width:100%;
+}
+.siteevent_dashboard_content{
+	overflow:hidden;
+}
+.siteevent_dashboard_content > h3{
+	margin-bottom:5px;
+}
+.siteevent_dashboard_header{
+	overflow:hidden;
+	padding:0 5px 5px;
+	margin-bottom:5px;
+}
+.siteevent_dashboard_header .siteevent_dashboard_header_title{
+	font-size:17px;
+	margin-right:10px;
+}
+[dir="rtl"] .siteevent_dashboard_header .siteevent_dashboard_header_title{
+	margin-right:0px;
+	margin-left:10px;
+}
+/*Dashboard Forms*/
+.siteevent_dashboard_content .global_form > div{
+	float:none !important;
+}
+.siteevent_dashboard_content .global_form > div > div > h3 + p{
+	max-width:none;
+}
+.siteevent_dashboard_content #style-element,
+.siteevent_dashboard_content #overview-element{
+	max-width:none;
+}
+.siteevent_dashboard_content .global_form div.form-element{
+	max-width:500px;
+	min-width:300px;
+}
+.siteevent_dashboard_content .global_form input + label{
+	max-width:450px;
+}
+.siteevent_dashboard_content .defaultSkin table.mceLayout{
+	width:450px !important;
+}
+.siteevent_dashboard_content .defaultSkin iframe{
+	height:350px !important;
+}
+.siteevent_editstyle .global_form textarea{
+	width:600px;
+	max-width:none;
+	height:150px;
+	max-height:170px;
+}
+.siteevent_editstyle .global_form textarea + p, .siteevent_editstyle .global_form #terms_of_use-element p {
+	max-width:none;
+}
+.siteevent_editstyle #submit-label{
+	display:none;
+}
+.siteevent_editstyle .global_form #submit-element{
+	clear:both;
+}
+.siteevent_status_icon{
+	margin-right:5px;
+	float:left;
+}
+[dir="rtl"] .siteevent_status_icon{
+	float:right;
+}
+/*Price Information*/
+.siteevent_db_price_info_wrapper{
+	border-radius:5px;
+	padding:10px;
+}
+.siteevent_db_price_info_head{
+	margin-bottom:5px;
+	padding:0 5px;
+}
+.siteevent_db_price_info_head .fright{
+	margin-left:10px;
+}
+[dir="rtl"] .siteevent_db_price_info_head .fright{
+	margin-left:0px;
+	margin-right:10px;
+}
+.siteevent_db_price_info_head .siteevent_db_price_info_head_title{
+	overflow:hidden;
+	font-size:17px;
+}
+.siteevent_db_price_info{
+	border-top-width:1px;
+	border-top-style:solid;
+}
+.siteevent_db_price_info table{
+	width:100%;
+}
+.siteevent_db_price_info table .odd{
+	background-image:url(../images/bg1.png);
+}
+.siteevent_db_price_info table tr td{
+	padding:5px;
+}
+.siteevent_db_price_info_image{
+	width:20%;
+	font-weight:bold;
+}
+.siteevent_db_price_info_image > a{
+	border-style:solid;
+	border-width:1px;
+	float:left;
+	font-size:11px;
+	font-weight:bold;
+	overflow:hidden;
+	padding:3px;
+	text-decoration:none !important;
+	white-space:nowrap;
+	max-width:100px;
+}
+[dir="rtl"] .siteevent_db_price_info_image > a{
+	float:right;
+}
+.siteevent_db_price_info_image > a img{
+	max-height:30px;
+	max-width:100px;
+}
+.siteevent_db_price_contact_info{
+	width:35%;
+	font-size:11px;
+	padding-left:10px;
+}
+[dir="rtl"] .siteevent_db_price_contact_info{
+	padding-left:0px;
+	padding-right:10px;
+}
+.siteevent_db_price_contact_info > span{
+	padding:2px 0;
+}
+.siteevent_db_price_contact_info span i{
+	margin-right:5px;
+	display:block;
+	height:16px;
+	width:16px;
+}
+[dir="rtl"] .siteevent_db_price_contact_info span i{
+	margin-right:0;
+	margin-left:5px;
+}
+.siteevent_db_price_contact_info span.address i{
+	background-image:url(../images/icons/map-pin.png);
+}
+.siteevent_db_price_contact_info span.number i{
+	background-image:url(../images/icons/mobile.png);
+}
+.siteevent_db_price_info_value{
+	font-weight:bold;
+	width:10%;
+}
+.siteevent_db_price_info_options{
+	text-align:right;
+}
+[dir="rtl"] .siteevent_db_price_info_options{
+	text-align:left;
+}
+/*Edit Location Page starts here*/
+.siteevent_edit_location_form{
+	clear:both;
+	margin-bottom:15px;
+}
+.siteevent_edit_location_map,
+.siteevent_edit_location_form{
+	border-width:1px;
+	border-style:solid;
+	background-image:url(../images/bg2.png);
+	display:block;
+	overflow:auto;
+	border-radius:10px;
+	padding:10px;
+}
+.siteevent_edit_location_form .global_form_box, .siteevent_edit_location_form .global_form_box .form-elements{
+	background:none !important;
+	border:none;
+	padding:0px !important;
+}
+.siteevent_edit_location_form .global_form_box > div{
+	overflow:auto;
+}
+.siteevent_edit_location_form .formlocation_edit_label{
+	font-weight:bold;
+	float:left;
+	margin-right:5px;
+}
+[dir="rtl"] .siteevent_edit_location_form .formlocation_edit_label{
+	float:right;
+	margin-right:0;
+	margin-right:5px;
+}
+.siteevent_edit_location_form .formlocation_add{
+	float:left;
+}
+[dir="rtl"] .siteevent_edit_location_form .formlocation_add{
+	float:right;
+}
+.edit_location_form .global_form_box > div .form-elements{
+	overflow:auto;
+}
+.siteevent_edit_location_form .global_form_box > div .form-elements > div{
+	float:left;
+	overflow:hidden;
+	margin-right:10px;
+	margin-bottom:10px;
+}
+[dir="rtl"] .siteevent_edit_location_form .global_form_box > div .form-elements > div{
+	float:right;
+	margin-left:10px;
+	margin-right:0px;
+}
+.siteevent_edit_location_form .global_form_box > div .form-elements > div + div + div + div{
+	clear:both;
+}
+.siteevent_edit_location_form .global_form_box > div .form-elements > div + div + div + div + div{
+	clear:none;
+}
+.siteevent_edit_location_form .global_form_box > div .form-elements #submit-wrapper{
+	clear:both;
+}
+.siteevent_edit_location_form .global_form_box > div .form-elements div label{
+	font-size:8pt;
+	font-weight:bold;
+	display:block;
+}
+.siteevent_edit_location_form .global_form_box > div .form-elements #submit-wrapper .form-label{
+	height:0px;
+}
+.siteevent_dashboard_content #mapCanvas{
+	height:425px;
+}
+/*Edit Location Page endss here*/
+/*Edit & Upload Media*/
+/*Upload Photos */
+.siteevent_form_upload div.form-element{
+   max-width: inherit !important;
+}
+.siteevent_form_upload #file-label, 
+.siteevent_form_upload #submit-label{
+	display:none;
+}
+.siteevent_form_upload #file-element #demo-status{
+	width:auto;
+}
+ul.siteevent_edit_media{
+	overflow:hidden;
+}
+ul.siteevent_edit_media > li{
+	clear:both;
+	overflow:hidden;
+	padding-bottom:15px;
+	padding-top:15px;
+}
+ul.siteevent_edit_media .siteevent_video_thumb_wrapper,
+ul.siteevent_edit_media .siteevent_edit_media_thumb{
+	float:left;
+	margin-right:15px;
+	overflow:hidden;
+}
+[dir="rtl"] ul.siteevent_edit_media .siteevent_video_thumb_wrapper,
+[dir="rtl"] ul.siteevent_edit_media .siteevent_edit_media_thumb{
+	float:right;
+	margin-left:15px;
+	margin-right:0px;
+}
+ul.siteevent_edit_media .siteevent_edit_media_thumb img{
+	display:block;
+	margin:3px;
+	width:170px;
+}
+ul.siteevent_edit_media .siteevent_edit_media_info{
+	overflow:hidden;
+}
+ul.siteevent_edit_media .siteevent_edit_media_title input{
+ margin:2px 0px 6px 0px;
+ width:25em;
+}
+ul.siteevent_edit_media .siteevent_edit_media_caption textarea{
+	margin:2px 0px 6px 0px;
+	width:25em;
+	height:3em;
+	min-height:0px;
+}
+ul.siteevent_edit_media .siteevent_edit_media_options{
+	float:left;
+	margin-right:15px;
+}
+[dir="rtl"] ul.siteevent_edit_media .siteevent_edit_media_options{
+	float:right;
+	margin-left:15px;
+	margin-right:0;
+}
+ul.siteevent_edit_media .siteevent_edit_media_options_label{
+	float:left;
+}
+[dir="rtl"] ul.siteevent_edit_media .siteevent_edit_media_options_label{
+	float:right;
+}
+ul.siteevent_edit_media .siteevent_edit_media_options_check{
+	float:left;
+}
+ul.siteevent_edit_media .siteevent_edit_media_options > label{
+	display:block;
+	float:left;
+}
+[dir="rtl"] ul.siteevent_edit_media .siteevent_edit_media_options_check,
+[dir="rtl"] ul.siteevent_edit_media .siteevent_edit_media_options > label{
+	float:right;
+}
+.siteevent_edit_videos_button div.form-label{
+  width: 190px;
+}
+/*Video Add*/
+.siteevent_video_add_options{
+	clear:both;
+	margin-top:10px;
+}
+.siteevent_video_add_options p{
+	margin:5px 0;
+}
+.siteevent_video_add_options > div{
+	margin-top:5px;
+}
+.siteevent_video_add_source{
+	margin-top:15px;
+	clear:both;
+}
+/* css for edit pages form */
+.siteevent_form{
+	clear:both;
+	overflow:hidden;
+}
+.siteevent_form > div{
+	overflow:hidden;
+	margin:0px auto 0px auto;
+}
+.siteevent_form > div > div{
+	-moz-border-radius:8px;
+	-webkit-border-radius:8px;
+	border-radius:8px;
+	border-width:5px;
+	border-style:solid;
+	padding:12px 12px 12px 12px;
+	overflow:hidden;
+}
+.siteevent_form .form-element{
+  max-width:inherit;
+}
+/*manage announcements start*/
+.siteevent_manage_announcements_list {
+	clear:both;
+	overflow:hidden;
+	border-top-width:1px;
+	padding-top:10px;
+	margin-top:10px;
+}
+.siteevent_manage_announcements_option {
+	float:right;
+	margin-left:10px;
+}
+.siteevent_manage_announcements_option a{
+	margin-left:10px;
+	line-height:normal;
+}
+.siteevent_manage_announcements_title,
+.siteevent_manage_announcements_dates{
+	overflow:hidden;
+	margin-bottom:5px;	
+}
+.siteevent_manage_announcements_option img{
+	float:left;
+}
+.siteevent_manage_announcements_title span{
+	font-weight:bold;
+	font-size:15px;
+}
+.siteevent_post_announcement .defaultSkin iframe {
+  height:350px !important;
+}
+
+/*Manage Leaders CSS starts here*/
+.siteevent_leaders {
+	overflow:auto;
+}
+.siteevent_leaders_list {
+	clear:both;
+	padding:10px 50px;
+	overflow:auto;
+}
+.siteevent_leaders > div {
+	border-bottom-width:1px;
+}
+.siteevent_leaders_thumb {
+	margin-right:10px;
+	float:left;
+}
+html[dir="rtl"] .siteevent_leaders_thumb{
+	float:right;
+	margin-left:10px;
+	margin-right:0;
+}
+.siteevent_leaders .siteevent_leaders_detail {
+	overflow:hidden;
+}
+.siteevent_leaders .siteevent_leaders_detail span {
+	font-weight:bold;
+	overflow:hidden;
+}
+.siteevent_leaders_cancel {
+	float:right;
+	margin-left:10px;
+}
+html[dir="rtl"] .siteevent_leaders_cancel{
+	float:left;
+	margin-right:10px;
+	margin-left:0;
+}
+.siteevent_leaders_cancel a{
+	margin-top:5px;
+}
+.siteevent_leaders_input{
+	margin:0px 10px 0 50px;
+}
+html[dir="rtl"] .siteevent_leaders_input{
+	float:right;
+	margin:0px 5px 0 10px;
+}
+.siteevent_leaders_input input[type="text"]{
+	margin-top:5px;
+  padding: 5px;
+	width:300px;
+}
+.siteevent_leaders_input,
+.siteevent_leaders_button{
+  display: inline-block;
+  vertical-align: bottom;
+}
+/*Manage Leaders CSS ends here*/
+/*Edit host popup*/
+.siteevent_edit_host_form{
+  margin:15px 0 0 15px;
+  padding: 0;
+/*  max-height:570px;
+  overflow-y: scroll;*/
+}
+.siteevent_edit_host_form .global_form > div > div {
+  width:700px;
+}
+.siteevent_edit_host_form .global_form div.form-label {
+  width:120px;
+}
+.siteevent_edit_host_form .global_form div.form-element{
+  width:500px;
+}
+.siteevent_edit_host_form textarea,
+.siteevent_edit_host_form .compose-content{
+  width:400px !important;
+}
+.siteevent_viewevents_head
+padding-bottom:5px;
+overflow:auto;
+margin-bottom:10px;
+}
+.siteevent_viewevents_head h2
+font-size: 17px;
+letter-spacing: normal;
+overflow: hidden;
+margin-bottom:3px;
+}
+.siteevent_viewevents_head > a{
+		float:left;
+}
+.siteevent_viewevents_head img{
+		float:left;
+		margin-right:5px;
+}
+//PACKAGE BASED
+.siteevent_edit_content {
+	overflow:hidden;
+}
+.siteevent_edit_content > tip{
+	margin-bottom:5px;
+	margin-top:5px;
+}
+.siteevent_edit_content > tip span{
+	margin:0 auto;
+	float:none;
+}
+.siteevent_dashboard_content #terms_of_use-element {
+    max-width: none;
+}
+#terms_of_use-label {
+    display: none;
+}
+/* Responsive work */
+@media screen and (max-width:920px){
+	/* Dashboard >> coupons */
+	.siteevent_dashboard_content .siteevent_coupon_photo, 
+	.siteevent_dashboard_content .siteevent_coupon_details{width:100%;text-align:center;margin-right:0;}	
+	/*Dashboard >> Manage leaders*/
+	div.siteevent_leaders_input {margin-left: 0;margin-bottom: 10px;}
+	div.siteevent_leaders_input input[type="text"] {box-sizing: border-box; width: 100%;}
+}
+@media screen and (max-width:768px){
+	/*Dashboard >> Photos*/
+	ul.siteevent_edit_media .siteevent_video_thumb_wrapper, 
+	ul.siteevent_edit_media div.siteevent_edit_media_thumb {float: none;}
+}
+@media screen and (max-width:600px){
+	/* Event coupons */
+	.siteevent_dashboard_content .siteevent_coupon_block > div {float: left;margin: 10px 0;text-align: center;width: 100%;}	
+	/*Event Dashboard*/
+	.siteevent_dashboard_content {padding: 10px;}
+	.siteevent_dashboard_content .global_form div.form-element {max-width: 100% !important; min-width: 100% !important;}
+	.siteevent_dashboard_content #style-element, .siteevent_dashboard_content #overview-element {min-width: 100%;}
+	.siteevent_dashboard_content .global_form div.form-element, div img.thumb_profile_edit {max-width: 100% !important; min-width: 100%;}
+	ul.siteevent_edit_media div.siteevent_edit_media_thumb img {display:inline-block;}
+	div.siteevent_dashboard_info_image img{float:none;}
+}

@@ -1,0 +1,857 @@
+/* $Id: main.css 6590 2014-01-02 00:00:00Z SocialEngineAddOns Copyright 2013-2014 BigStep Technologies Pvt. Ltd. $ */
+
+.siteevent_icon_link::before,
+.icon_siteevents_mail::before{ 
+	font-family: 'FontAwesome';
+	font-weight: normal;
+	font-size: 16px;
+	line-height: 16px;
+	margin-right: 7px;
+}
+a.siteevent_icon_link::before {content: "\\f0c1";}
+a.icon_siteevents_mail::before {content: "\\f0e0";}
+/*Icons*/
+.icon_siteevent_dashboard {
+  background-image:url(~/application/modules/Siteevent/externals/images/icons/edit-event.png);
+}
+.icon_siteevent_tip{
+  background-image: url(~/application/modules/Core/externals/images/tip.png);
+}
+.icon_siteevent_add,#compose-siteevent-activator{
+  background-image: url(~/application/modules/Siteevent/externals/images/icons/create.png);
+}
+.icon_siteevent_subscribe{
+  background-image: url(~/application/modules/Siteevent/externals/images/subscribe.png);
+}
+.icon_siteevent_unsubscribe{
+  background-image: url(~/application/modules/Siteevent/externals/images/unsubscribe.png);
+}
+.siteevent_item_icon_back{
+	background-image:url(~/application/modules/Siteevent/externals/images/back.png);
+}
+.siteevent_icon_send{
+	background-image:url(~/application/modules/Siteevent/externals/images/send.png);
+}
+/*.siteevent_icon_link{
+	background-image:url(~/application/modules/Siteevent/externals/images/link.png);
+}*/
+.siteevent_carousel_loader{
+	background-image:url(~/application/modules/Seaocore/externals/images/loading.gif);
+}
+.notification_type_siteevent_editor_assign, .siteevent_icon_editor{
+	background-image:url(~/application/modules/Siteevent/externals/images/icons/editor.png);
+}
+.siteevent_icon_star{
+	background-image:url(~/application/modules/Siteevent/externals/images/star.png);
+}
+.siteevent_icon_edit{
+	background-image:url(~/application/modules/Siteevent/externals/images/icons/dashboard.png);
+}
+.siteevent_icon_share {
+	background-image:url(~/application/modules/Siteevent/externals/images/share.png);
+}
+.notification_type_shared {
+	background-image:url(~/application/modules/Seaocore/externals/images/share.png);
+}
+.notification_type_SITEEVENT_JOIN_WAITLIST {
+	background-image:url(~/application/modules/Siteevent/externals/images/member/join.png);
+}
+.notification_type_siteeventticket_order_place {
+	background-image:url(~/application/modules/Siteevent/externals/images/order.png);
+}
+#compose-siteevent-activator{
+  background-repeat: no-repeat;
+}
+/*Feeds & Notifications */
+
+.item_icon_siteevent,.item_icon_siteevent_event, .activity_icon_siteevent_new, 
+.activity_icon_siteevent_join,.activity_icon_siteevent_leave,.activity_icon_siteevent_maybe_join,
+.activity_icon_siteevent_mid_join,.activity_icon_siteevent_mid_leave,.activity_icon_siteevent_mid_maybe,
+.activity_icon_siteevent_location_updated,.activity_icon_siteevent_location_updated_parent,
+.activity_icon_siteevent_title_updated,.activity_icon_siteevent_title_updated_parent,
+.activity_icon_siteevent_venue_updated,.activity_icon_siteevent_venue_updated_parent,
+.activity_icon_siteevent_date_time_updated,.activity_icon_siteevent_date_time_updated_parent,
+.activity_icon_siteevent_date_time_extended,.activity_icon_siteevent_date_time_extended_parent,
+.activity_icon_siteevent_post,.activity_icon_siteevent_post_parent,
+.notification_type_siteevent_invite, .notification_type_siteevent_suggested,
+.notification_type_siteevent_rsvp_change,.notification_type_siteevent_join,
+.notification_type_siteevent_event_editor, .notification_type_siteevent_member,
+.notification_type_siteevent_location_updated,.notification_type_siteevent_location_updated_parent,
+.notification_type_siteevent_title_updated,.notification_type_siteevent_title_updated_parent,
+.notification_type_siteevent_venue_updated,.notification_type_siteevent_venue_updated_parent,
+.notification_type_siteevent_date_time_updated,.notification_type_siteevent_date_time_updated_parent
+{
+	background-image:url(~/application/modules/Siteevent/externals/images/types/event.png);
+}
+
+.notification_type_siteevent_approved_review, 
+.notification_type_siteevent_editorreview, 
+.notification_type_siteevent_write_review, .item_icon_siteevent_review, .activity_icon_siteevent_userreview_add, .activity_icon_siteevent_userreview_add{
+	background-image:url(~/application/modules/Siteevent/externals/images/review.png);
+}
+.activity_icon_video_siteevent{
+  background-image:url(~/application/modules/Siteevent/externals/images/video.png);
+}
+.notification_type_siteevent_notificationpost, .activity_icon_siteevent_notificationpost,
+.notification_type_siteevent_notificationpost_parent, .activity_icon_siteevent_notificationpost_parent,
+.notification_type_siteevent_contentcomment, .activity_icon_comment_siteevent_event, .activity_icon_nestedcomment_siteevent_event, .activity_icon_comment_siteevent_review, .item_icon_siteevent_topic, .notification_type_siteevent_discussion_new, .notification_type_siteevent_discussion_response, .activity_icon_siteevent_topic_create{
+  background-image:url(~/application/modules/Siteevent/externals/images/types/post.png);
+}
+/*Member Icons*/
+.icon_siteevents_invite,
+.icon_siteevents_inviteguests {
+  background-image:url(~/application/modules/Siteevent/externals/images/member/invite.png);
+}
+.icon_siteevents_invitejoin,
+.notification_type_siteevent_approve{
+  background-image:url(~/application/modules/Siteevent/externals/images/member/join.png);
+}
+.icon_siteevents_inviteleave {
+  background-image:url(~/application/modules/Siteevent/externals/images/member/leave.png);
+}
+.icon_siteevents_tickets {
+	background-image:url(~/application/modules/Siteevent/externals/images/tickets.png);
+}
+.icon_siteevents_invitecancel {
+  background-image:url(~/application/modules/Siteevent/externals/images/member/cancel.png);
+}
+.icon_siteevents_inviteaccept, .icon_siteevents_request, .notification_type_siteevent_accepted {
+  background-image:url(~/application/modules/Siteevent/externals/images/member/accept.png);
+}
+.icon_siteevents_invitereject {
+  background-image:url(~/application/modules/Siteevent/externals/images/member/reject.png);
+}
+.icon_siteevents_remove {
+  background-image:url(~/application/modules/Siteevent/externals/images/member/remove.png);
+}
+.icon_siteevents_confirm{
+	background-image:url(~/application/modules/Siteevent/externals/images/member/confirm.png);
+}
+.icon_siteevents_confirmed{
+	background-image:url(~/application/modules/Siteevent/externals/images/member/confirmed.png);
+}
+.icon_siteevents_unconfirmed{
+	background-image:url(~/application/modules/Siteevent/externals/images/member/unconfirmed.png);
+}
+.notification_type_siteevent_host, .icon_siteevents_promote, .activity_icon_siteevent_promote, .notification_type_siteevent_promote, .notification_type_siteevent_page_host, .notification_type_siteevent_group_host, .notification_type_siteevent_business_host, .notification_type_siteevent_store_host{
+  background-image:url(~/application/modules/Siteevent/externals/images/member/promote.png);
+}
+.icon_siteevents_demote {
+  background-image:url(~/application/modules/Siteevent/externals/images/member/demote.png);
+}
+/*Like*/
+.notification_type_siteevent_contentlike{
+  background-image:url(~/application/modules/Seaocore/externals/images/icons/thumb_up.png);
+}
+/*Diary*/
+.diary_icon{
+	background-image:url(~/application/modules/Siteevent/externals/images/icons/diary_add.png);
+}
+.siteevent_icon_diary, .item_icon_siteevent_diary{
+	background-image:url(~/application/modules/Siteevent/externals/images/icons/diary.png);
+}
+/*List*/
+.siteevent_icon_list {
+	background-image:url(~/application/modules/Siteevent/externals/images/list.png);
+}
+/*Photos*/
+.notification_type_siteevent_photo_upload, .activity_icon_siteevent_photo_upload, .item_icon_siteevent_photo{
+  background-image:url(~/application/modules/Siteevent/externals/images/photo/view.png);
+}
+
+
+/**/
+.siteevent_myevents_top .siteevent_icon {
+	background-image: none;
+	margin-right: 5px;
+}
+.siteevent_myevents_top .siteevent_icon::before{    
+	font-family: fontawesome;
+  font-style: normal;
+	font-size: 14px;
+}
+.siteevent_icon.item_icon_siteevent_event::before 			{content: "\\f073";}
+.siteevent_icon.siteevent_icon_diary::before 						{content: "\\f02d";}
+.siteevent_icon.siteevent_icon_list::before 						{content: "\\f022";}
+.siteevent_icon.icon_siteevent_add::before							{content: "\\f271";}
+.siteevent_myevents_top .siteevent_link_wrap 						{margin-right: 10px;}
+.siteevent_share_links_toggle .seao_icon_share::before {
+	content: "\\f1e0";
+	margin-right: 7px;
+}
+.siteevent_icon{
+  width:16px;
+  height:16px;
+  display:inline-block;
+}
+.siteevent_icon_strip {
+	background-image: none;
+	margin: 0 7px 0 0;
+	text-align:center;
+}
+.siteevent_icon_strip::before, 
+.siteevent_share_links_toggle .seao_icon_share::before{
+	font-family: FontAwesome;
+	font-style: normal;
+	font-size: 16px;
+	line-height: 16px;
+}
+.siteevent_icon_host::before, 
+.siteevent_icon_user::before, 
+.siteevent_icon_profile::before {content: "\\f007";}
+.siteevent_icon_calendar::before, 
+.siteevent_icon_time::before {content: "\\f073";}
+.siteevent_icon_location::before {content: "\\f041";}
+.siteevent_icon_date::before {content: "\\f067";}
+.siteevent_icon_stats::before {content: "\\f080";}
+
+.siteevent_icon_venue::before {content: "\\f015";}
+.siteevent_icon_tag::before {content: "\\f0c6";}
+.siteevent_icon_link::before {content: "\\f02b";}
+.siteevent_icon_users::before {content: "\\f0c0";}
+.siteevent_icon_price::before {content: "\\f1c0";}
+.siteevent_icon_diary_a::before {content: "\\f02d";}
+.siteevent_icon_message::before,
+.siteevent_icon_msg::before,
+.siteevent_icon_mail::before {content: "\\f0e0";}
+.siteevent_icon_facebook::before {content: "\\f230";}
+.siteevent_icon_twitter::before {content: "\\f099";}
+.siteevent_icon_website::before {content: "\\f0ac";}
+.siteevent_icon_download::before {content: "\\f019";}
+.siteevent_icon_birthday::before {content: "\\f1fd";}
+.siteevent_icon_request::before {content: "\\f112";}
+.siteevent_icon_rating::before {content: "\\f091";}
+.siteevent_icon_contact::before {content: "\\f10b";}
+.siteevent_icon_web::before {content: "\\f108";}
+.siteevent_icon_plus::before {content: "\\f067";}
+/*.siteevent_icon_strip{
+  background-image:url(~/application/modules/Siteevent/externals/images/img-strip.png);
+}
+.siteevent_icon_host{
+  background-position:-208px -30px;
+}
+.siteevent_icon_time{
+  background-position:-145px -8px;
+}
+.siteevent_icon_location{
+  background-position:-165px -7px;
+}
+.siteevent_icon_date{
+ background-position:-124px -8px;	
+}
+.siteevent_icon_stats{
+ background-position:-87px -30px;
+}*/
+.br_body_bg, .siteevent_board_list > div{
+	background-color:$theme_body_background_color;
+}
+.siteevent_profile_loading_image{
+	background-image:url(~/application/modules/Seaocore/externals/images/loading.gif);
+	width:100%;
+	height:150px;
+	background-repeat:no-repeat;
+	background-position:center;
+}
+.siteevent_pro_specs li{
+	border-color:$theme_border_medium_color;
+}
+/*theme light color*/
+.siteevents_browse_filters .form-element span.overTxtLabel{
+	color:$theme_font_color_light;
+}
+/*theme foreground css*/
+.siteevent_popular_locations,
+.siteevent_sponsored_categories,
+ul.siteevent_siteevents .siteevent_siteevents_replies, 
+.siteevent_siteevents_options, 
+.siteevent_photo_info{
+	+foreground;
+}
+.siteevent_browse_side_category{
+	padding:5px;
+	background-color: $theme_foreground_background_color;
+  border-width: 5px;
+  border-radius: none;
+	margin-bottom:15px;
+}
+.siteevent_side_widget{
+	+foreground;
+	+rounded;
+}
+/*Announcement Form*/
+.siteevent_form > div > div{
+	background-color: $theme_form_background_color;
+} 
+.siteevent_form > div > div{
+	border-color:$theme_form_border_color;
+}
+/*theme foreground background color css*/
+.siteevent_categories_block{
+	background-color:$theme_foreground_background_color;
+}
+/*theme body background color css*/
+ul.siteevent_discussion_thread .siteevent_discussion_thread_body blockquote, .siteevent_categories_block > li{
+	background-color:$theme_body_background_color;
+}
+/*theme border medium color*/
+ul.siteevent_discussion_thread .siteevent_discussion_thread_body blockquote, 
+.siteevent_img_view .siteevent_thumb ul li > a, 
+.siteevent_layout_left .global_form > div > div ul + ul, 
+.siteevent_layout_right .global_form > div > div ul + ul{
+	border-color:$theme_border_medium_color;
+}
+/*theme border dark color*/
+.siteevent_img_view .siteevent_thumb ul li > a:hover, 
+.siteevent_categories_siteevent h6, .print_event_title{
+	border-color:$theme_border_dark_color;
+}
+/*theme border color light*/
+ul.siteevent_video_siteevent > li + li, 
+.siteevent_categories_siteevent .sub_cat a,{
+	border-color:$theme_border_color;
+}
+/*theme foreground border*/
+.siteevent_quick_specs ul li + li,
+.siteevent_popular_locations li + li,
+.edit_location_form .global_form_box > div, 
+.siteevent_categories_block > li, 
+div.siteevent_photo_info, 
+.siteeventlike_users_block_links{
+	border-color:$theme_foreground_border_color !important;
+}
+/*ul.siteevent_browse_side_category li .cat, 
+ul.siteevent_browse_side_category li .subcat a, 
+ul.siteevent_browse_side_category li{
+	border-color:$theme_foreground_border_color_light;
+}*/
+.siteevent_categories_box_head,
+.siteevent_categories_siteevent .sub_cat a:hover{
+	background-color:$theme_border_color;
+}
+/*theme rounded css*/
+.siteevent_sponsored_categories, div.siteevent_photo_info, .siteevent_categories_block, .siteevent_siteevents_options, ul.siteevent_siteevents .siteevent_siteevents_replies{
+	+rounded;
+}
+/*theme siteevent background color*/
+div.siteevent_photo_view #media_photo{
+	border:1px solid $theme_photo_border_color;
+}
+/*css for color and background end here*/
+/*FEED ITEMS*/
+ul.feed .feed_attachment_siteevent_event{
+	display:block;
+	overflow:hidden;
+	margin:0px 5px 5px 0px;
+	vertical-align:top;
+}
+[dir="rtl"] ul.feed .feed_attachment_siteevent_event{
+	margin:0px 0 5px 5px;
+}
+ul.feed .feed_attachment_siteevent_event > div > a{
+	display:block;
+	float:left;
+	margin-right:7px;
+}
+[dir="rtl"] ul.feed .feed_attachment_siteevent_event > div > a{
+	float:right;
+	margin-left:7px;
+	margin-right:0px;
+}
+ul.feed .feed_attachment_siteevent_event > div > a > img{
+	display:block;
+	max-width:90px;
+	max-height:90px;
+	vertical-align:top;
+}
+ul.feed .feed_attachment_siteevent_event > div > div{
+	overflow:hidden;
+}
+
+/*blocks*/
+.siteevent_review_block{
+	background-image:url(~/application/modules/Siteevent/externals/images/bg2.png);
+	border-style:solid;
+	border-width:1px;
+}
+button.siteevent_buttonlink,
+a.siteevent_buttonlink{
+  background-image: none;
+  background-color:$theme_button_background_color;
+  border:1px solid $theme_button_border_color;
+  color:$theme_button_font_color !important;
+  border-radius: 2px;
+  text-shadow: inherit;
+  padding:6px 12px;
+  /*font-weight:bold;*/
+  border:none;
+	display:block;
+	font-size:13px;
+  text-align:center;
+	line-height: normal;
+}
+a.siteevent_buttonlink:hover{
+  background-color:$theme_button_background_color_hover;
+  cursor:pointer;
+	text-decoration:none;
+}
+/*Rich Content*/
+.siteevent_review_rich_content_title{
+	font-size:11px;
+	margin-bottom:5px;
+}
+.siteevent_review_rich_content_title a{
+	font-weight:bold;
+}
+.siteevent_review_rich_content_stats{
+	color:$theme_font_color_light;
+	font-size:11px;
+	margin-bottom:2px;
+}
+/*Video Icons*/
+.item_icon_siteevent_video, .notification_type_siteevent_video_new, .activity_icon_siteevent_video_new, .icon_type_siteevent_video, .icon_siteevents_video{
+	background-image:url(~/application/modules/Siteevent/externals/images/video16.png);
+}
+.icon_siteevents_video_new{
+  background-image:url(~/application/modules/Siteevent/externals/images/video_add.png);
+}
+/*Video Feeds*/
+.feed_item_attachments .siteevent_video_thumb_wrapper{
+  margin-right:7px;
+}
+html[dir="rtl"] .feed_item_attachments .siteevent_video_thumb_wrapper{
+  margin-right:0px;
+  margin-left:7px;
+}
+.feed_item_attachments .video_info{
+  overflow:hidden;
+}
+.feed_item_attachments .video_info > a{
+  font-size:.8em;
+  font-weight:bold;
+}
+.video_title{
+  font-size:.8em;
+  font-weight:bold;
+  display:inline-block;
+  clear:both;
+}
+.feed_item_attachments .video_desc{
+  margin-top:2px;
+  font-size:.8em;
+}
+/*Vidoe Thumb*/
+.siteevent_video_length{
+  +opacity(.7);
+  +rounded(4px, true, true, false, true);
+  display:inline-block;
+  position:absolute;
+  margin:6px;
+  padding:3px 5px 3px 5px;
+  background:#000;
+  color:#fff;
+  font-size:.7em;
+}
+.siteevent_video_thumb_wrapper{
+  float:left;
+  margin-bottom:2px;
+  background:#666;
+}
+html[dir="rtl"] .siteevent_video_thumb_wrapper{
+  float:right;
+}
+.siteevent_video_thumb_wrapper:hover{
+  background:#777;
+}
+.siteevent_video_thumb_wrapper a{
+  display:block;
+}
+.siteevent_video_thumb_wrapper img,
+.siteevent_video_thumb_wrapper span.item_nophoto{
+  display:block;
+  margin:5px;
+  border:1px solid #888;
+  max-height:inherit !important;
+  max-width:inherit !important;
+  width: 180px;
+}
+/*Profile Photo Strip*/
+.siteevent_thumbs > li, .siteevent_prpfile_photos_strip ul li{
+	border-color:$theme_border_medium_color;
+}
+.siteevent_thumbs > li:hover, .siteevent_prpfile_photos_strip ul li:hover{
+	border-color:$theme_border_dark_color
+}
+/*Profile Advanced Tabs*/
+.siteevent_main_tabs_alt > ul > li > a, .siteevent_main_tabs_alt .tab_pulldown_contents_wrapper{
+	background-color:$theme_topbar_menu_background_color !important;
+	color:$theme_topbar_menu_link_color !important;
+}
+.siteevent_main_tabs_alt > ul > li.tab_active > a, .siteevent_main_tabs_alt > ul > li.tab_active > a:hover, 
+.siteevent_main_tabs_alt > ul > li.active > a, .siteevent_main_tabs_alt > ul > li.active > a:hover{
+	background-color:$theme_border_medium_color !important;
+	color:$theme_font_color !important;
+}
+/*stars*/
+.siteevent_rating_star_generic{
+  display:inline-block;
+  width:12px;
+  height:12px;
+  background-repeat:no-repeat;
+  font-size:1px;
+  cursor:default;
+}
+/*.rating_star_y{background-image:url(~/application/modules/Siteevent/externals/images/rating/star_y.png);}
+.rating_star_half_y{ background-image:url(~/application/modules/Siteevent/externals/images/rating/star_half_y.png);}
+.rating_star_r{background-image:url(~/application/modules/Siteevent/externals/images/rating/star_r.png);}
+.rating_star_half_g{background-image:url(~/application/modules/Siteevent/externals/images/rating/star_half_g.png);}
+.rating_star_b{background-image:url(~/application/modules/Siteevent/externals/images/rating/star_b.png);}
+.rating_star_half_b{background-image:url(~/application/modules/Siteevent/externals/images/rating/star_half_b.png);}
+.siteevent_rating_star_disabled{background-image:url(~/application/modules/Siteevent/externals/images/rating/star_disable.png);}*/
+/*Searchbox*/
+.siteevent-search-box .form-elements{
+  background-color: $theme_body_background_color;
+  border: 1px solid $theme_border_medium_color;
+}
+
+/*Event Listings Information*/
+.siteevent_listings_stats{
+  margin:5px 0 10px 0;
+  overflow:hidden;
+  clear:both;
+  line-height:normal;
+}
+.siteevent_listings_stats i{
+  float:left;
+  /*margin-right:3px;*/
+}
+.siteevent_listings_stats:hover i{
+	color:$theme_link_color_hover;	
+}
+.siteevent_listings_stats div img{
+	margin-right:3px;
+}
+.siteevent_listings_stats .stats_rating_star .list_rating_star{
+  margin-right:10px;
+}
+.siteevent_listings_stats_wrap .siteevent_listings_stats{
+  float:left;
+  clear:none;
+  line-height:normal;
+  margin-right:10px;
+}
+.siteevent_listings_host_h, .siteevent_listings_host{
+  /*background-image:url(~/application/modules/Siteevent/externals/images/bg2.png);
+  margin:-5px -7px 5px;
+  padding:5px;*/
+	position: absolute;
+	right: 6px;
+	top: -30px;
+	z-index: 1;
+}
+.siteevent_listings_userrating{
+  border-bottom-width: 1px;
+  padding-bottom: 5px;
+}
+.siteevent_listings_host > a,
+.siteevent_listings_host > img{
+  float:left;
+  /*margin-right:10px;*/
+}
+.siteevent_listings_host > a img,
+.siteevent_listings_host > img{
+	border: 2px solid #fff;
+  border-radius: 50%;
+  height:45px;
+  width:45px;
+}
+/*Create & Edit Event Page*/
+.siteevent_event_form .global_form > div{
+  float:none;
+}
+.siteevent_event_form .global_form > div > div > h3 + p{
+  max-width: inherit;
+}
+.siteevent_event_form .global_form > div > div > h3 + p .siteevent_link_wrap {
+  margin-left: 60px;
+}
+.siteevent_event_form .global_form div.form-element{
+  max-width:500px;
+}
+.siteevent_event_form .global_form input[type="text"]{
+  display: inline-block;
+  max-width: inherit;
+  width: 300px;
+}
+.siteevent_event_form .global_form #online_event,
+.siteevent_event_form #event_details_repeat_info{
+  display: inline-block;
+  margin: 0 5px;
+  font-size: 11px;
+}
+.siteevent_event_form #online_events-element{
+  background:url(~/application/modules/Siteevent/externals/images/bg2.png) repeat;
+  border-radius: 5px;
+  font-size: 11px;
+  padding: 5px;
+}
+.seao_smoothbox_lightbox_content .siteevent_event_form #online_events-element{
+	max-width:450px;
+}
+.seao_smoothbox_lightbox_content .siteevent_event_form #online_events-element a,
+.seao_smoothbox_lightbox_content .siteevent_event_form #online_event{
+	display:block;
+	margin: 5px 0 0;
+}
+.siteevent_event_form div.form-elements p{
+  font-size: 11px;
+}
+.siteevent_event_form .defaultSkin table.mceLayout{
+  width:450px !important;
+}
+.siteevent_event_form .defaultSkin iframe{
+  height:300px !important;
+}
+/*Show Map*/
+.siteevent_event_form #location_map-element{
+  height: 100px;
+  width: 300px;
+}
+/*Show Host*/
+.choose_host .tag-autosuggest{
+  width:356px !important;
+}
+.choose_host ul.tag-autosuggest > li{
+  white-space: normal;
+}
+.siteevent_create_host .form-element #host_info span,
+.siteevent_create_host .host_cancel_link a,
+.siteevent_create_host .host_cancel_link span,
+.siteevent_create_host .choose_host select,
+.siteevent_create_host .choose_host input{
+  display: inline-block;
+  vertical-align: middle;
+}
+.siteevent_create_host .host_deatils{
+  margin-right: 20px;
+}
+.siteevent_create_host .host_title_link{
+  font-weight: bold;
+}
+.siteevent_create_host .host_photo img{
+  height: 25px;
+  width: 25px;
+}
+.siteevent_create_host .form-element select{
+  width: 100px;
+}
+.siteevent_create_host .form-element input[type='text']{
+  width: 250px;
+}
+.siteevent_create_host .host_cancel_link{
+  font-size: 11px;
+  font-weight: bold;
+}
+/*Show Host Links*/
+ul.host-links{
+  clear: both;
+  float: left;
+  margin: 5px 22px 0;
+}
+ul.host-links li{
+  margin:10px 0;
+}
+ul.host-links li input[type='text']{
+  margin-left: 5px;
+}
+/*Select Date Field*/
+.siteevent_event_form .event_calendar_container button{
+  padding: 0;
+}
+.siteevent_event_form .event_calendar_container + select,
+.siteevent_event_form .event_calendar_container + select + select,
+.siteevent_event_form .event_calendar_container + select + select + select{
+  margin-left:5px;
+}
+.siteevent_event_form button.disabled,
+.siteevent_event_form select:disabled{
+  opacity: .5;
+}
+/*Repeat Event Form*/
+.siteevent_repeatevent_form_wrapper{
+  width:700px;
+}
+.siteevent_repeatevent_form_wrapper .global_form,
+.siteevent_repeatevent_form_wrapper .global_form > div{
+  float: none;
+}
+.siteevent_repeatevent_form div.form-elements{
+  margin-top: 10px;
+}
+.siteevent_repeatevent_form div.form-label{
+  width: 130px;
+}
+.siteevent_repeatevent_form div.form-element{
+  width: 480px;
+}
+.siteevent_repeatevent_form div.event_calendar_container{
+  display: inline;
+}
+.siteevent_repeatevent_form button.event_calendar{
+  padding: 0;
+}
+.siteevent_repeatevent_form .form-element-weekly input,
+.siteevent_repeatevent_form .form-element-weekly label{
+  display: inline-block;
+  clear: none;
+  float: none;
+  vertical-align: middle;
+}
+.siteevent_repeatevent_form .form-element-weekly input + label{
+  margin: 0 15px 0 0;
+}
+.siteevent_repeatevent_form .buttons-wrapper{
+  padding-bottom: 3px;
+}
+.siteevent_repeatevent_form .buttons-wrapper button{
+  padding:7px 10px;
+  line-height: normal;
+}
+
+
+.siteevent-date-list {
+  border-width: 1px;
+  list-style: none outside none;
+  max-height: 200px;
+  overflow-y: auto;
+  width: 300px;
+}
+.siteevent-date-list li {
+  background:#FFFFFF;
+  font-size:11px;
+  font-weight: normal;
+  padding: 5px;
+}
+.siteevent-date-list li + li{
+  border-top-width: 1px;
+}
+.siteevent-date-list li a{
+  float: right;
+  font-weight: bold;
+}
+#siteevents_create_quick{
+  min-width: 700px;
+}
+/*Event Composer Link in Advanced Activity Feed*/
+.adv_post_compose_menu #compose-siteevent-activator{
+  background-image: url(~/application/modules/Siteevent/externals/images/icons/create-disable.png);
+}
+.adv_post_compose_menu #compose-siteevent-activator:hover{
+  background-image: url(~/application/modules/Siteevent/externals/images/icons/create.png);
+}
+.adv-active .adv_post_compose_menu #compose-siteevent-activator{
+  background-image: url(~/application/modules/Siteevent/externals/images/icons/create.png);
+}
+.siteevent_locationmiles_tip{
+    margin:-6px 0 0 5px;
+}
+
+#siteevent-followsiteeventevent, #siteevent-siteeventactivitycomment, #siteevent-siteeventactivitylike,
+#siteevent-siteeventdatetimeupdated, #siteevent-siteeventdatetimeupdatedparent, #siteevent-siteeventjoin,
+#siteevent-siteeventlocationupdated, #siteevent-siteeventlocationupdatedparent, #siteevent-siteeventnotificationpost,#siteevent-siteeventnotificationpost, #siteevent-siteeventnotificationpostparent, #siteevent-siteeventrsvpchange,#siteevent-siteeventvenueupdated, #siteevent-siteeventitleupdated_parent, #siteevent-siteeventvenueupdated, #siteevent-siteeventvenueupdatedparent,#siteevent-siteeventtitleupdated, #siteevent-siteeventphotoupload, #siteevent-siteeventreviewwrite, #siteevent-siteeventdiscussionnew,#siteevent-siteeventwritereview,#siteevent-siteeventtitleupdatedparent, #siteevent-siteeventvideonew, #siteevent-siteeventcontentcomment, #siteevent-siteeventcontentlike 
+{
+    display: none;
+}
+
+label[for="siteevent-followsiteeventevent"] { display: none !important; }
+label[for="siteevent-siteeventactivitycomment"] { display: none !important; }
+label[for="siteevent-siteeventactivitylike"] { display: none !important; }
+label[for="siteevent-siteeventcontentcomment"] { display: none !important; }
+label[for="siteevent-siteeventcontentlike"] { display: none !important; }
+label[for="siteevent-siteeventdatetimeupdated"] { display: none !important; }
+label[for="siteevent-siteeventdatetimeupdatedparent"] { display: none !important; }
+label[for="siteevent-siteeventjoin"] { display: none !important; }
+label[for="siteevent-siteeventlocationupdated"] { display: none !important; }
+label[for="siteevent-siteeventlocationupdatedparent"] { display: none !important; }
+label[for="siteevent-siteeventnotificationpost"] { display: none !important; }
+label[for="siteevent-siteeventnotificationpostparent"] { display: none !important; }
+label[for="siteevent-siteeventrsvpchange"] { display: none !important; }
+label[for="siteevent-siteeventtitleupdated"] { display: none !important; }
+label[for="siteevent-siteeventtitleupdatedparent"] { display: none !important; }
+label[for="siteevent-siteeventvenueupdated"] { display: none !important; }
+label[for="siteevent-siteeventvenueupdatedparent"] { display: none !important; }
+label[for="siteevent-siteeventphotoupload"] { display: none !important; }
+label[for="siteevent-siteeventreviewwrite"] { display: none !important; }
+label[for="siteevent-siteeventwritereview"] { display: none !important; }
+label[for="siteevent-siteeventdiscussionnew"] { display: none !important; }
+label[for="siteevent-siteeventvideonew"] { display: none !important; }
+#siteevents_create_quick.global_form input + label, #siteevents_create_form.global_form input + label {
+width:92%;
+}
+
+.siteevent_top_link{
+  margin-top: -22px;
+}
+
+.siteevent_bottom_link {
+  margin-top: 22px;
+}
+//PACKAGE BASED
+.siteevent_edit_content .tip{
+  clear:none;
+  margin-bottom:15px;
+}
+.siteevent_edit_content .tip span{
+  margin-bottom:0;
+}
+ .siteevent_create_link a{
+  background-color: $theme_button_background_color;
+  background-image: url(~/application/modules/Core/externals/images/buttonbg.png);
+  background-position: 0 1px;
+  background-repeat: repeat-x;
+  border: 1px solid #50809B;
+  border-radius: 3px;
+  color: #FFFFFF !important;
+  font-weight: bold !important;
+  padding: 6px 8px;
+}
+.siteevent_create_link a:hover{
+  background-color:$theme_button_background_color_hover;
+  text-decoration:none;
+}
+
+/*Widget >> Add to My calender*/
+.siteevent_calender_button .dropdown_menu {
+	background-color: $theme_body_background_color;
+	border: 2px solid $theme_border_color;
+}
+.siteevent_calender_button .dropdown_menu::after {
+	border-bottom: 10px solid $theme_border_color;
+}
+/*Grid Footer*/
+.siteevent_grid_footer > div {
+	background-color: $theme_body_background_color;
+}
+/*Event detail table*/
+.siteevent_detail_table table td.event_actlinks a{
+	height: 20px;
+	width:20px;
+	display: inline-block;
+	margin: 0 5px;
+	background-image: url(~/application/modules/Siteevent/externals/images/actlinks.png);
+	background-repeat: no-repeat;
+}
+a.siteevent_icon_detail {background-position: 0 0;}
+a.siteevent_icon_edit {background-position: -20px 0;}
+a.siteevent_icon_delete {background-position: -41px 0;}
+a.siteevent_icon_message {background-position: -65px 0;}
+a.siteevent_icon_user {background-position: -91px 0;}
+.event_actlinks a.siteevent_icon_message::before {content: "";}
+
+/*Events*/
+.siteevent_profile_side_event .siteevent_listings_stats:hover i 	{color: $theme_link_color;}
+.siteevent_profile_side_event .siteevent_listings_stats a:hover i {color: $theme_link_color_hover;}
+
+/*Responsive css work start form here*/
+@media only screen and (max-width: 920px) {
+	.siteevent_event_form select#starttime-hour, .siteevent_event_form select#starttime-minute, .siteevent_event_form select#starttime-ampm, .siteevent_event_form select#endtime-hour, .siteevent_event_form select#endtime-minute, .siteevent_event_form select#endtime-ampm {width: auto;}
+}

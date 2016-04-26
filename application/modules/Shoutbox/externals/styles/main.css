@@ -1,0 +1,82 @@
+/**
+ * @author     George Coca
+ * @website    geodeveloper.net <info@geodeveloper.net>   
+ */
+ 
+ .layout_shoutbox_shoutbox {
+     margin-bottom: 15px;
+ }
+ 
+.layout_shoutbox_shoutbox .item_photo_user {
+    width: 24px;
+    height: 24px;
+    display: block;
+}
+
+.layout_shoutbox_shoutbox .shoutbox_thumb {
+    width: 24px;
+    height: 24px;
+    float: left;
+}
+
+.layout_shoutbox_shoutbox .shoutbox_body {
+    font-size: 11px;
+    margin-left: 35px;
+    margin-bottom: 5px;
+}
+
+.layout_shoutbox_shoutbox li {
+    border-top: 1px solid #eee;
+    padding-top: 5px;
+    clear: both;
+    position: relative;
+    min-height: 30px;
+}
+
+.layout_shoutbox_shoutbox li:hover .shoutbox_date {
+    display: block;
+}
+
+.layout_shoutbox_shoutbox .shoutbox_date {
+    font-size: 9px;
+    display: none;
+    background-color: #FFFFFF;
+    position: absolute;
+    right: 0;
+    top: -6px;
+    color: grey;
+    
+}
+
+.layout_shoutbox_shoutbox .shoutbox_input {
+    margin-top: 7px;
+    height: 24px;
+}
+
+.layout_shoutbox_shoutbox .shoutbox_msg {
+    clear: both;
+    border: 1px solid #555;
+    width: 170px;
+    font-size: 11px;
+    color: grey;
+}
+
+.layout_shoutbox_shoutbox .shoutbox_loading {
+    width: 24px;
+    height: 24px;
+    background-image: url(~/application/modules/Core/externals/images/loading.gif);
+    background-position: -2000px -2000px;
+    background-repeat: no-repeat;
+    float: left;
+}
+
+.shoutbox_history {
+    font-size: 11px;
+    text-align: right;
+    margin-bottom: 5px;
+}
+
+.shoutbox_smoothbox {
+    width: 300px;
+    padding: 20px;
+}

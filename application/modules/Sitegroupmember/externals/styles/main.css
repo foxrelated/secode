@@ -1,0 +1,35 @@
+/*Icons*/
+.notification_type_sitegroup_join, .notification_type_sitegroupmember_approve, .notification_type_sitegroupmember_invite {
+	background-image: url(~/application/modules/Sitegroupmember/externals/images/member/join.png);
+}
+.activity_icon_sitegroup_join, .icon_sitegroup_join, .icon_sitegroup_join_group, .notification_type_sitegroup_addmember{
+	background-image:url(~/application/modules/Sitegroup/externals/images/add_more_groups.png);
+}
+.icon_sitegroup_member{
+	background-image: url(~/application/modules/Sitegroupmember/externals/images/member/member.png);
+}
+.notification_type_sitegroupmember_accepted, .icon_sitegroup_accept, .icon_sitegroup_accept{
+	background-image: url(~/application/modules/Sitegroupmember/externals/images/member/accept.png);
+}
+.icon_sitegroup_ad_member{
+	background-image: url(~/application/modules/Sitegroup/externals/images/icons/add.png);
+}
+.notification_type_sitegroupmember_invite{
+	background-image: url(~/application/modules/Sitegroupmember/externals/images/member/invite.png);
+}
+.icon_sitegroup_leave{
+	background-image: url(~/application/modules/Sitegroupmember/externals/images/member/leave.png);
+}
+.sitegroupmember_profile_list_options_wrapper:hover .settings_icon,
+.sitegroupmember_profile_list_options{
+	background-color:$theme_pulldown_contents_background_color;
+	border:1px solid $theme_pulldown_border_color;
+}
+#sitegroupmember-sitegroupmembernotificationpost, #sitegroupmember-sitegroupmembernotificationpostparent, #sitegroupmember-sitegroupjoin
+{
+    display: none;
+}
+
+label[for="sitegroupmember-sitegroupmembernotificationpost"] { display: none !important; }
+label[for="sitegroupmember-sitegroupmembernotificationpostparent"] { display: none !important; }
+label[for="sitegroupmember-sitegroupjoin"] { display: none !important; }

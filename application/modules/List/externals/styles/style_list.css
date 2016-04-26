@@ -1,0 +1,1746 @@
+/* $Id: style_list.css 6590 2010-12-31 9:40:21Z SocialEngineAddOns Copyright 2009-2010 BigStep Technologies Pvt. Ltd. $ */
+
+/* ICONS */
+.icon_list_publish {
+	background-image: url(../images/list_publish.png);
+}
+.icon_lists_edit {
+	background-image: url(../images/edit.png);
+}
+.icon_lists_close {
+	background-image: url(../images/close.png);
+}
+.icon_lists_open {
+	background-image: url(../images/unclose.png);
+}
+.icon_lists_delete {
+	background-image: url(../images/delete.png);
+}
+.icon_lists_photo_new {
+	background-image: url(../images/upload.png);
+}
+.icon_lists_printer {
+	background-image: url(../images/printer.png);
+}
+.icon_lists_back {
+	background-image: url(../images/back.png);
+}
+.icon_lists_share {
+	background-image: url(../images/share.png);
+}
+.icon_lists_messageowner {
+	background-image: url(../images/send.png);
+}
+.icon_lists_report {
+	background-image: url(../images/report.png);
+}
+.icon_lists_review {
+	background-image: url(../images/review.png);
+}
+.icon_lists_tellafriend {
+	background-image: url(../images/tellafriend_icon.png);
+}
+.list_quick_create {
+	background-image: url(../images/icons/list_add.png);
+}
+.list_gutter_editstyle {
+	background-image: url(../images/style.png);
+}
+.icon_lists_overview, .list_gutter_editoverview {
+	background-image: url(../images/overview_icon.png);
+}
+.icon_lists_map_edit {
+	background-image: url(../images/map_edit_icon.png);
+}
+
+.floatR{
+	float:right !important;
+}
+[dir="rtl"] .floatR{
+	float:left !important;
+}
+.floatL{
+	float:left !important;
+}
+[dir="rtl"] .floatL{
+	float:right !important;
+}
+.mtop_5{
+	margin-top:5px;
+}
+.mtop_10{
+	margin-top:10px;
+}
+.mbot_10{
+	margin-bottom:10px;
+}
+.mleft_10{
+	margin-left:10px;
+}
+[dir="rtl"] .mleft_10{
+	margin-left:0;
+	margin-right:10px;
+}
+.bold{
+	font-weight:bold;
+}
+/* 
+	LIST VIDEO
+	edit css here for list videos
+*/
+.activity_icon_video_list {
+	background-image: url(../images/video.png);
+}
+.icon_lists_video_new {
+	background-image: url(../images/video_add.png);
+}
+.icon_lists_video {
+	background-image: url(../images/video.png);
+}
+.list_video_options {
+	clear:both;
+	margin-top:10px;
+}
+.list_video_options p {
+	margin:5px 0;
+}
+.list_video_source {
+	float:left;
+	margin-top:15px;
+	clear:both;
+}
+[dir="rtl"] .list_video_source{
+	float:right;
+}
+/* edit videos css starts here */
+ul.lists_editvideos {
+	width: 600px;
+}
+ul.lists_editvideos > li {
+	padding: 15px 0;
+	clear: both;
+	overflow: hidden;
+}
+ul.lists_editvideos .video_thumb_wrapper {
+	float: left;
+	margin-right: 15px;
+	overflow: hidden;
+}
+html[dir="rtl"] ul.lists_editvideos .video_thumb_wrapper{
+	float:right;
+	margin-left:15px;
+	margin-right:0px;
+}
+ul.lists_editvideos .lists_editvideos_info {
+	overflow: hidden;
+}
+ul.lists_editvideos .lists_editvideos_title_input input[type="text"] {
+	margin: 2px 0px 6px 0px;
+	width: 25em;
+}
+ul.lists_editvideos .lists_editvideos_caption_input textarea {
+	margin: 2px 0px 6px 0px;
+	width: 25em;
+	height: 3em;
+	min-height: 0px;
+}
+/* edit videos css ends here */
+/* video List Profuile tab start here*/
+ul.list_video_list {
+	overflow: hidden;
+}
+ul.list_video_list > li {
+	margin: 0px 10px 0px 0px;
+	overflow:hidden;
+	clear:both;
+	overflow:auto;
+	padding:0 10px 10px;
+}
+ul.list_video_list > li > a {
+	float:left;
+}
+html[dir="rtl"] ul.list_video_list > li > a{
+	float:right;
+}
+ul.list_video_list > li + li {
+	border-top-width:1px;
+	border-top-style:solid;
+	padding-top:10px;
+}
+ul.list_video_list > li .video_thumb_wrapper {
+	margin-right:10px;
+}
+html[dir="rtl"] ul.list_video_list > li .video_thumb_wrapper{
+	margin-left:10px;
+	margin-right:0px;
+}
+ul.list_video_list li .video_play {
+	overflow:hidden;
+	float:left;
+	margin-bottom:5px;
+}
+ul.list_video_list li .video_play object {
+	float:left;
+}
+html[dir="rtl"] ul.list_video_list li .video_play, html[dir="rtl"] ul.list_video_list li .video_play object{
+	float:right;
+}
+ul.list_video_list li .video_close {
+	float:left;
+	margin-left:7px;
+	cursor:pointer;
+}
+html[dir="rtl"] ul.list_video_list li .video_close{
+	float:right;
+	margin-right:7px;
+	margin-left:0px;
+}
+ul.list_video_list .list_video_thumb_options {
+	width:140px;
+	float:right;
+	margin-left:15px;
+}
+html[dir="rtl"] ul.list_video_list .list_video_thumb_options{
+	float:left;
+	margin-right:15px;
+	margin-left:0px;
+}
+ul.list_video_list .list_video_thumb_options a {
+	clear: both;
+	font-size: 0.8em;
+	height: 16px;
+	margin: 3px 0 0;
+	padding-top: 1px;
+}
+ul.list_video_list .video_info {
+	overflow: hidden;
+	min-width:400px;
+}
+ul.list_video_list .video_info .video_title {
+	font-weight:bold;
+	margin-bottom:4px;
+	font-size:13px;
+}
+ul.list_video_list .video_info .video_des {
+	margin-bottom:5px;
+}
+ul.list_video_list .video_info .list_video_stat {
+	font-size:0.8em;
+}
+ul.list_video_list .video_info .list_video_stat > span {
+	float:left;
+	margin-right:5px;
+}
+html[dir="rtl"] ul.list_video_list .video_info .list_video_stat > span {
+	float:right;
+	margin-left:5px;
+}
+ul.list_video_list .video_info .list_video_stat > span + span {
+	margin-top:2px;
+}
+/* video List Profuile tab end here*/
+/*css for video end here*/
+/* List Edit Pages */
+.list_layout_left {
+	float:left;
+	vertical-align:top;
+	width:540px;
+}
+[dir="rtl"] .list_layout_left{
+	float:right;
+}
+.list_layout_left .global_form > div {
+	float:none !important;
+}
+.list_layout_left .lists_editphotos {
+	width:auto !important;
+}
+.list_layout_right {
+	float:right;
+	margin-left:5px;
+	padding:0;
+	vertical-align:top;
+	width:400px;
+}
+[dir="rtl"] .list_layout_right{
+	float:left;
+	margin-right:5px;
+	margin-left:0px;
+}
+.list_layout_right .global_form > div > div {
+	width:366px;
+}
+.list_layout_left .global_form > div > div ul + ul, .list_layout_right .global_form > div > div ul + ul {
+	border-top-width:1px;
+	border-top-style:solid;
+}
+.list_layout_left .global_form > div > div ul.lists_editphotos {
+	border:none;
+}
+.list_editstyle .global_form textarea {
+	width:500px;
+	max-width:550px;
+	height:150px;
+	max-height:170px;
+}
+.list_editstyle .global_form #submit-element {
+	clear:both;
+	margin-bottom:10px;
+}
+.list_editstyle .global_form div > p {
+	max-width:480px;
+}
+.list_edit_wrapper h3{
+	margin-bottom:6px;
+}
+/*Category Side Widget*/
+.list_browse_category{
+	padding:5px;
+}
+.list_browse_category > li{
+	padding:5px;
+	clear:both;
+}
+.list_browse_category > li + li{
+	border-top-style:solid;
+	border-top-width:1px;
+}
+.list_browse_category .right_bottom_arrow{
+	float:right;
+	margin-left:5px;
+	outline:none;
+}
+.list_browse_category .cat_icon{
+	float:left;
+	margin-right:5px;
+	width:16px;
+}
+.list_browse_category .cat_icon img{
+	max-width:16px;
+}
+.list_browse_category .cat_name{
+	overflow:hidden;
+}
+/*Second Level Category*/
+.list_browse_category > li ul{
+	clear:both;
+	margin-left:5px;
+	margin:5px 0 0px 10px;
+}
+.list_browse_category > li ul li{
+	clear:both;
+	padding:2px 0;
+}
+/*Third Level Category*/
+.list_browse_category > li ul li ul{
+	clear:both;
+	margin:5px 0 5px 10px;
+}
+.list_browse_category > li ul li ul li{
+	clear:both;
+	padding:2px 0;
+}
+/*Searchbox*/
+.layout_list_searchbox_list{
+	margin-bottom:15px;
+}
+.layout_list_searchbox_list .form-label{
+	display:none;
+}
+.layout_list_searchbox_list .form-element input{
+	width:95%;
+}
+.layout_list_searchbox_list .tag-autosuggest #list_see_all > div.autocompleter-choice {
+	font-weight: bold;
+	text-align: center;
+}
+/*Rating*/
+.layout_list_ratings_list .rating {
+	padding-top: 3px;
+	text-align: center;
+}
+.layout_list_ratings_list .rating span {
+	float: none;
+}
+/* View page start here */
+.layout_list_mainphoto_list {
+	margin-bottom:15px;
+}
+.list_profile_sponsorfeatured {
+	height:30px;
+	width:100%;
+	margin:0 1px;
+	clear:both;
+	text-align:center;
+	line-height:30px;
+	font-size:17px;
+	color:#fff;
+	font-weight:bold;
+	text-shadow: #666 0px 0px 5px;
+}
+[dir="rtl"] .list_profile_sponsorfeatured{
+	text-align:center;
+}
+.layout_list_options_list {
+	clear:both;
+	margin-bottom:15px;
+}
+.list_socialshare span {
+	margin-right:5px;
+}
+[dir="rtl"] .list_socialshare span{
+	margin-left:5px;
+	margin-right:0px;
+}
+.list_socialshare span img {
+	border:none !important;
+}
+.list_socialshare span + span + span + span + span + span + span {
+	margin-right:0px;
+}
+[dir="rtl"] .list_socialshare span + span + span + span + span + span + span {
+	margin-left:0px;
+}
+.list_rating{
+	padding-top: 3px;
+}
+.list_rating span{
+	float: none;
+}
+/*Listing View Print and Tell a friend Popup*/
+.advlist_tellafriend_popup {
+	margin:15px 0 0 15px;
+	width:400px;
+}
+.advlist_tellafriend_popup .global_form > div > div {
+	width:366px;
+	max-height:470px;
+	overflow:auto;
+}
+.advlist_tellafriend_popup .global_form div.form-label {
+	width:90px;
+}
+/*Over view write widget starts here*/
+.layout_list_write_page {
+	clear:both;
+}
+div.list_write_overview {
+	overflow:auto;
+}
+div.list_write_overview a {
+	outline:none;
+}
+div.list_write_overview div {
+	font-size:11px;
+}
+div.details, div.write_link, div.list_write_overview .des_edit {
+	padding:5px 5px 7px;
+	border-width:1px;
+	border-style:solid;
+	overflow:auto;
+}
+div.list_write_overview .des {
+	margin-top:2px;
+	overflow:hidden;
+}
+div.list_write_overview .edit_icon {
+	float:right;
+	margin-left:5px;
+	width:18px;
+}
+[dir="rtl"] div.list_write_overview .edit_icon{
+	margin-right:5px;
+	margin-left:0px;
+	float:left;
+}
+div.list_write_overview .edit_icon a {
+	height:18px;
+	width:18px;
+	display:block;
+	background: url(../images/write_edit_icon.png);
+}
+div.list_write_overview .edit_icon a:hover {
+	background: url(../images/write_edit_icon.png) 0 18px;
+}
+div.list_write_overview .textarea {
+	float:left;
+	width:80%;
+	-moz-border-radius:0px;
+	-webkit-border-radius:0px;
+	border-radius:0px;
+}
+[dir="rtl"] div.list_write_overview .textarea{
+	float:right;
+}
+div.list_write_overview .textarea textarea {
+	float:left;
+	width:99%;
+	padding:2px;
+	-moz-border-radius:0px;
+	-webkit-border-radius:0px;
+	border-radius:0px;
+	border-width:1px;
+	border-style:solid;
+	height:120px;
+}
+[dir="rtl"] div.list_write_overview .textarea textarea{
+	float:right;
+}
+/*Over view write widget ends here*/
+/* like list Like  widgets start here  */
+.listlike_users_block_links {
+	overflow:auto;
+	padding:0 3px;
+	font-weight:bold;
+}
+.listlike_users_block_links a {
+	margin:2px 0;
+	font-size:11px;
+}
+ul.listlike_users_block > li {
+	clear: both;
+	overflow: hidden;
+	padding: 0px !important;
+}
+ul.listlike_users_block .likes_member_list {
+	float:left;
+	width:48px;
+	padding:5px;
+	overflow:hidden;
+}
+ul.listlike_users_block .likes_member_list .likes_member_thumb {
+	float: left;
+	display: block;
+	width: 48px;
+	height: 48px;
+	margin-bottom:3px;
+}
+ul.listlike_users_block .likes_member_list .likes_member_name {
+	font-size:11px;
+	float:left;
+	text-align:center;
+	width:100%;
+}
+[dir="rtl"] ul.listlike_users_block .likes_member_list,
+[dir="rtl"] ul.listlike_users_block .likes_member_list .likes_member_name{
+	float:right;
+}
+/* CSS FOR LIST INFO WIDGET START*/
+ul.list_sidebar_info li {
+	clear: both;
+	overflow: hidden;
+	padding:2px 5px;
+	font-size:11px !important;
+}
+ul.list_sidebar_info li a {
+	float:none !important;
+	margin:0px !important;
+}
+ul.list_sidebar_info li span {
+	font-weight:normal;
+}
+ul.list_sidebar_info li ul li {
+	padding:1px 0;
+}
+/*overview tab*/
+.layout_list_info_list .profile_fields > ul > li > span + span {
+	overflow: hidden;
+	width: auto;
+}
+.layout_list_overview_list ol {
+	margin-left:20px;
+	width:100%;
+}
+[dir="rtl"] .layout_list_overview_list ol{
+	margin-right:20px;
+	margin-left:0px;
+}
+.layout_list_overview_list ul {
+	margin-left:20px;
+	list-style-type:disc;
+}
+[dir="rtl"] .layout_list_overview_list ul{
+	margin-right:20px;
+	margin-left:0px;
+}
+/*Review Tab*/
+ul.list_profile_review > li {
+	clear: both;
+	overflow: hidden;
+	padding: 0px 0px 15px 0px;
+}
+ul.list_profile_review > li + li {
+	border-top-width: 1px;
+	padding-top: 15px;
+}
+ul.list_profile_review > li > a {
+	display: block;
+	float: left;
+	overflow: hidden;
+	margin-right: 8px;
+	font-weight: bold;
+}
+html[dir="rtl"] ul.list_profile_review > li > a {
+	float: right;
+	margin-right: 0px;
+	margin-left: 8px;
+}
+ul.list_profile_review .list_profile_review_options {
+	float: right;
+	width: 120px;
+	padding-left: 15px;
+}
+[dir="rtl"] ul.list_profile_review .list_profile_review_options{
+	float:left;
+	margin-right:8px;
+	margin-left:0px;
+}
+ul.list_profile_review .list_profile_review_options a {
+	clear: both;
+	margin: 3px 0px 0px 0px;
+	font-size: .8em;
+	padding-top: 1px;
+	height: 16px;
+	float:left;
+}
+[dir="rtl"] ul.list_profile_review .list_profile_review_options a{
+	float:right;
+}
+ul.list_profile_review .list_profile_review_info {
+	overflow: hidden;
+}
+ul.list_profile_review .list_profile_review_info .title {
+	margin-bottom:4px;
+	font-weight:bold;
+	font-size:13px;
+}
+ul.list_profile_review .list_profile_review_info_date {
+	font-size: .8em;
+}
+ul.list_profile_review .list_profile_review_info_desc {
+	margin-top: 5px;
+}
+ul.list_profile_review .list_profile_review_photo > img {
+	display: block;
+}
+#global_page_list-review-edit .global_form, #global_page_list-review-create .global_form {
+	margin:15px 0 0 20px;
+	overflow:visible;
+	width:470px;
+}
+#global_page_list-review-edit .global_form > div, #global_page_list-review-create .global_form > div {
+	width:100%;
+}
+#global_page_list-review-edit .global_form div.form-label, #global_page_list-review-create .global_form div.form-label {
+	width:100px;
+}
+#global_page_list-review-edit .global_form div.form-element input[type="text"], #global_page_list-review-create .global_form div.form-element input[type="text"] {
+	width:304px;
+}
+/*Location Tab*/
+.advlist_profile_location {
+	padding:5px !important;
+	margin-bottom:15px;
+}
+.layout_list_location_list #list_view_map_canvas{
+	width: 100%;
+	height: 500px;
+}
+.layout_list_location_list #map_list_view_map_canvas > div {
+	height: 500px;
+}
+.layout_list_location_list #infoPanel {
+	float: left;
+	margin-left: 10px;
+}
+[dir="rtl"] .layout_list_location_list #infoPanel{
+	float:right;
+	margin-right:10px;
+	margin-left:0px;
+}
+.layout_list_location_list #infoPanel div {
+	margin-bottom: 5px;
+}
+/*
+View Advanceslist Photo
+These styles are used on the view photo page within
+an album.
+*/
+div.list_photo_view {
+	margin: 25px auto 0px auto;
+	max-width: 750px;
+	min-width: 400px;
+	overflow: visible;
+}
+div.list_photo_view #media_photo {
+	margin: auto;
+	display: block;
+	max-width: 720px;
+}
+div.list_photo_view .list_photo_nav {
+	clear: both;
+	overflow: hidden;
+	margin-bottom: 4px;
+}
+div.list_photo_view .list_photo_nav > div {
+	float: left;
+	overflow: visible;
+}
+[dir="rtl"] div.list_photo_view .list_photo_nav > div{
+	float:right;
+}
+div.list_photo_view .list_photo_nav > div + div {
+	float: none;
+	text-align: right;
+}
+[dir="rtl"] div.list_photo_view .list_photo_nav > div + div{
+	text-align:left;
+	float:none;
+}
+div.list_photo_view .list_photo_nav > div + div > a + a {
+	margin-left: 20px;
+}
+[dir="rtl"] div.list_photo_view .list_photo_nav > div + div > a + a{
+	margin-right:20px;
+	margin-left:0px;
+}
+div.list_photo_info {
+	text-align: center;
+	padding: 10px;
+	border-width:5px;
+	border-style:solid;
+}
+[dir="rtl"] div.list_photo_info{
+	text-align:center;
+}
+div.list_photo_info p {
+	text-align: left;
+}
+div.list_photo_container {
+	position: relative;
+	display: inline-block;
+}
+div.list_photo_container a:link {
+	text-decoration: none;
+}
+.list_photo_info #media_image{
+	max-width:720px;
+}
+div.list_photo_view > span + div > a {
+	display: block;
+	margin-bottom: 5px;
+	text-align: center;
+}
+div.list_photo_view > span + div > a:link {
+	display: block;
+	margin-bottom: 5px;
+	text-align: center;
+}
+[dir="rtl"] div.list_photo_view > span + div > a,
+[dir="rtl"] div.list_photo_view > span + div > a:link{
+	text-align:center;
+}
+div.list_photo_info .list_photo_title {
+	margin-top: 5px;
+	font-weight: bold;
+}
+div.list_photo_info .list_photo_description {
+	font-size: .8em;
+	margin-top: 3px;
+}
+div.list_photo_info .list_photo_title + .list_photo_tags, div.list_photo_info .list_photo_description + .list_photo_tags {
+	margin-top: 15px;
+}
+div.list_photo_info .list_photo_tags {
+	font-size: .8em;
+	margin-top: 5px;
+}
+div.list_photo_info .list_photo_date {
+	font-size: .8em;
+	margin-top: 5px;
+}
+div.list_photo_view > div.comments {
+	margin-top: 15px;
+}
+/*LIST HOME AND BROWSE PAGE TABS CONTENT START HERE*/
+.layout_core_container_tabs {
+	clear:both;
+}
+#global_page_list-index-home .layout_core_container_tabs .tabs_alt {
+	margin-bottom:15px !important;
+}
+.advlist_view_select {
+	clear:both;
+	width:100%;
+	padding:0 0 5px 0;
+	float:left;
+	border-bottom-width:1px;
+	margin-bottom:10px;
+}
+[dir="rtl"] .advlist_view_select{
+	float:right;
+}
+.advlist_view_select span {
+	cursor:pointer;
+	float:right;
+	margin:3px;
+}
+[dir="rtl"] .advlist_view_select span{
+	float:left;
+}
+.layout_list_item_list,
+.layout_list_recently_popular_random_list {
+	margin-bottom:15px;
+}
+.list_img_view {
+	clear:both;
+	width:100%;
+	overflow:hidden;
+}
+.list_img_view_list {
+	overflow:hidden;
+	width:100%;
+	float:left;
+	clear:both;
+}
+[dir="rtl"] .list_img_view_list{
+	float:right;
+}
+.list_img_view .list_thumb {
+	float: left;
+	margin: 15px 19px;
+	display:block;
+	width:138px;
+	height:135px;
+	padding:0px;
+	text-align:center;
+}
+[dir="rtl"] .list_img_view .list_thumb{
+	float:right;
+	text-align:center;
+}
+.list_img_view .list_thumb ul li > a {
+	padding:4px;
+	border-width:1px;
+	border-style:solid;
+	display:inline-block;
+	vertical-align:bottom;
+}
+.list_img_view .list_thumb ul li > a:hover {
+	border-width:1px;
+	border-style:solid;
+}
+.list_img_view .list_thumb ul li > a + a {
+	border:none !important;
+}
+.list_img_view .list_thumb ul li > a > span {
+	width:132px;
+	height:106px;
+	background-position:center 50%;
+	display:block;
+	background-repeat:no-repeat;
+}
+.list_thumb ul, .list_thumb ul li {
+	margin:0px;
+	padding:0px;
+}
+.list_rmap_canvas {
+	width: 550px;
+	height: 450px;
+}
+.layout_list_listings_list #list_browse_map_canvas, 
+.layout_list_recently_popular_random_list #rmap_canvas {
+	width: 100% !important;
+	height: 400px;
+	float: left;
+}
+[dir="rtl"] .layout_list_listings_list #list_browse_map_canvas, 
+[dir="rtl"] .layout_list_recently_popular_random_list #rmap_canvas{
+	float:right;
+}
+.layout_list_listings_list #list_browse_map_canvas > div, .layout_list_recently_popular_random_list #rmap_canvas > div {
+	height: 300px;
+}
+.layout_list_listings_list #infoPanel, .layout_list_recently_popular_random_list #infoPanel {
+	float: left;
+	margin-left: 10px;
+}
+[dir="rtl"] .layout_list_listings_list #infoPanel, [dir="rtl"] .layout_list_recently_popular_random_list #infoPanel{
+	float:right;
+	margin-right:10px;
+	margin-left:0px;
+}
+.layout_list_listings_list #infoPanel div, .layout_list_recently_popular_random_list #infoPanel div {
+	margin-bottom: 5px;
+}
+/*LIST HOME AND BROWSE PAGE TABS CONTENT END HERE*/
+/*List Home page categories list*/
+.list_categories_block {
+	display:block;
+	overflow:auto;
+	padding: 10px;
+	margin-bottom:15px;
+}
+.list_categories_block > li {
+	padding:5px;
+	border-width:1px;
+	border-style:solid;
+	overflow:auto;
+}
+.list_categories_block > li > div + div + div {
+	margin-right:0px;
+}
+.list_categories_list h6 {
+	font-size:13px;
+	font-weight:bold;
+	border-bottom-width:1px;
+	border-bottom-style:solid;
+	padding:5px;
+}
+.list_categories_list .sub_cat {
+	clear:both;
+}
+.list_categories_list .sub_cat a {
+	display:block;
+	clear:both;
+	padding:5px 5px 5px 6px;
+	border-bottom-width:1px;
+	border-bottom-style:solid;
+}
+.list_categories_list .sub_cat a:hover {
+	background-image: url(../images/transparent_bg.png);
+	text-decoration:none;
+	background-repeat:repeat;
+}
+.list_categories_list .sub_cat a img {
+	float:left;
+	margin-right:6px;
+	margin-top:3px;
+}
+[dir="rtl"] .list_categories_list .sub_cat a img{
+	float:right;
+	margin-left:6px;
+	margin-right:0px;
+}
+.list_categories_list .sub_cat a span {
+	display:table-cell;
+}
+/*
+BROWSE listS
+These styles are used on the browse lists page
+*/
+.layout_list_listings_list {
+	padding:5px;
+	overflow:auto;
+}
+.browselists_criteria {
+	padding: 7px;
+}
+.browselists_criteria > ul > li {
+	margin-bottom: 7px;
+}
+.browselists_criteria > ul > li {
+	clear: both;
+	font-size: 0.8em;
+	overflow: hidden;
+}
+.browselists_criteria > ul > li > span {
+	display: block;
+	margin-bottom: 3px;
+}
+.lists_browse_filters .form-wrapper {
+	overflow: hidden;
+}
+.lists_browse_filters .integer_field .form-element {
+	float: left;
+	overflow: hidden;
+}
+[dir="rtl"] .lists_browse_filters .integer_field .form-element{
+	float:right;
+}
+.lists_browse_filters .integer_field label {
+	display: block;
+	margin-bottom: 2px;
+}
+.lists_browse_filters .integer_field .form-element + .form-element {
+	margin-left: 5px;
+}
+[dir="rtl"] .lists_browse_filters .integer_field .form-element + .form-element {
+	margin-right:5px;
+	margin-left:0px;
+}
+.lists_browse_filters .integer_field input {
+	width: 50px;
+}
+.browselists_criteria > ul > li > ul > li {
+	margin-top:3px;
+	padding-top:3px;
+}
+.browselists_criteria > ul > li #locationmiles {
+	max-width:110px;
+}
+.lists_browse_filters .browse-separator-wrapper{
+	display:none;
+}
+/*Create & Edit Listing*/
+#end_date_enable-wrapper .form-options-wrapper{
+	margin-bottom: 5px;
+	overflow:hidden;
+}
+#lists_create .calendar_output_span{
+	display:inline-block;
+	margin-right:15px;
+}
+#lists_create #end_date-wrapper select + select {
+	margin-left: 5px;
+}
+/*EDIT PHOTOS LISTING*/
+ul.lists_editphotos {
+	width: 600px;
+}
+ul.lists_editphotos > li {
+	padding-top: 15px;
+	clear: both;
+	overflow: hidden;
+	padding-bottom: 15px;
+}
+ul.lists_editphotos .lists_editphotos_photo {
+	float: left;
+	margin-right: 15px;
+	overflow: hidden;
+}
+[dir="rtl"] ul.lists_editphotos .lists_editphotos_photo{
+	float:right;
+	margin-left:15px;
+	margin-right:0px;
+}
+ul.lists_editphotos .lists_editphotos_photo img {
+	display: block;
+	margin: 3px;
+	width: 170px;
+}
+ul.lists_editphotos .lists_editphotos_info {
+	overflow: hidden;
+}
+ul.lists_editphotos .lists_editphotos_title_input input, {
+ margin: 2px 0px 6px 0px;
+ width: 25em;
+}
+ul.lists_editphotos .lists_editphotos_caption_input textarea {
+	margin: 2px 0px 6px 0px;
+	width: 25em;
+	height: 3em;
+	min-height: 0px;
+}
+ul.lists_editphotos .lists_editphotos_label {
+	float: left;
+}
+ul.lists_editphotos .lists_editphotos_cover {
+	float: left;
+}
+[dir="rtl"] ul.lists_editphotos .lists_editphotos_label, [dir="rtl"] ul.lists_editphotos .lists_editphotos_cover{
+	float:right;
+}
+ul.lists_editphotos .photo-delete-wrapper {
+	float: left;
+	margin-right: 15px;
+}
+[dir="rtl"] ul.lists_editphotos .photo-delete-wrapper{
+	float:right;
+	margin-left:15px;
+	margin-right:0px;
+}
+ul.lists_editphotos .photo-delete-wrapper > label {
+	display: block;
+	float: left;
+}
+[dir="rtl"] ul.lists_editphotos .photo-delete-wrapper > label{
+	float:right;
+}
+/*
+list PHOTOS UPLOAD FORM
+Some minor changes to the global form.
+*/
+.list_form_upload #file-label, .list_form_upload #submit-label {
+	display: none;
+}
+/*Edit overview*/
+#global_page_list-index-overview .defaultSkin table.mceLayout {
+	width:700px !important;
+}
+#global_page_list-index-overview .lists_editphotos .defaultSkin table.mceLayout {
+	width:450px !important;
+}
+#global_page_list-index-overview .defaultSkin iframe {
+	height:350px !important;
+}
+#global_page_list-index-overview .global_form > div {
+	width:734px;
+}
+#global_page_list-index-overview .global_form div.form-element {
+	max-width:800px;
+}
+#global_page_list-index-overview .global_form > div > div > h3 + p {
+	max-width:700px;
+}
+#global_page_list-index-editstyle .defaultSkin table.mceLayout {
+	width:470px !important;
+}
+#global_page_list-index-editstyle .lists_editphotos .defaultSkin table.mceLayout {
+	width:430px !important;
+}
+.list_status_icon {
+	margin-right:5px;
+	float:left;
+}
+[dir="rtl"] .list_status_icon{
+	margin-left:5px;
+	margin-right:5px;
+	float:right;
+}
+/*Edit Location Page starts here*/
+#global_page_list-index-editlocation .layout_middle {
+	margin:0px;
+	padding:5px;
+}
+.edit_location_form {
+	clear:both;
+	margin-bottom:15px;
+}
+.edit_location_form .global_form_box {
+	display:block;
+	overflow:auto;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+	padding: 10px;
+	border:none;
+}
+.edit_location_form .global_form_box > div {
+	padding:10px;
+	border-width:1px;
+	border-style:solid;
+	overflow:auto;
+}
+.edit_location_form .global_form_box > div .formlocation_edit_label {
+	font-weight:bold;
+	float:left;
+	margin-right:5px;
+}
+[dir="rtl"] .edit_location_form .global_form_box > div .formlocation_edit_label{
+	float:right;
+	margin-left:5px;
+	margin-right:0px;
+}
+.edit_location_form .global_form_box > div .formlocation_add {
+	float:left;
+	width:650px;
+}
+[dir="rtl"] .edit_location_form .global_form_box > div .formlocation_add{
+	float:right;
+}
+.edit_location_form .global_form_box > div .form-elements {
+	overflow:auto;
+}
+.edit_location_form .global_form_box > div .form-elements > div {
+	float: left;
+	overflow: hidden;
+	margin-right: 10px;
+	margin-bottom:10px;
+}
+[dir="rtl"] .edit_location_form .global_form_box > div .form-elements > div{
+	float:right;
+	margin-left:10px;
+	margin-right:0px;
+}
+.edit_location_form .global_form_box > div .form-elements > div + div + div + div {
+	clear:both;
+}
+.edit_location_form .global_form_box > div .form-elements > div + div + div + div + div {
+	clear:none;
+}
+.edit_location_form .global_form_box > div .form-elements #submit-wrapper {
+	clear:both;
+}
+.edit_location_form .global_form_box > div .form-elements div label {
+	font-size: 8pt;
+	font-weight: bold;
+	display: block;
+}
+.edit_location_form .global_form_box > div .form-elements #submit-wrapper .form-label {
+	height:0px;
+}
+#global_page_list-index-editlocation #mapCanvas {
+	width:100%;
+	padding:0px;
+	height:425px;
+}
+/*Edit Location Page endss here*/
+/*POST List TOPIC FORM*/
+#list_topic_create .form-elements {
+	margin-top: 10px;
+}
+#list_topic_create .form-label,
+#global_page_list-topic-post .form-label {
+	clear: both;
+	float: none;
+	text-align: left;
+	margin-bottom: 3px;
+}
+html[dir="rtl"] #list_topic_create .form-label {
+	text-align: right;
+}
+#list_topic_create #watch-label,
+#global_page_list-topic-post #watch-label{
+	display: none;
+}
+#list_topic_create #body-element,
+#global_page_list-topic-post #body-element{
+	max-width:inherit;
+}
+/*
+	REPLY TO List TOPIC FORM
+*/
+#list_topic_reply h3, #list_topic_reply #body-label, #list_topic_reply #submit-label {
+	display: none;
+}
+#list_topic_reply .form-elements {
+	margin-top: 0px;
+}
+#list_topic_reply #watch-label {
+	display: none;
+}
+#list_topic_reply #body-element{
+	max-width:inherit;
+}
+/* lists tab and view page */
+.list_lists_options {
+	padding: 10px;
+	margin-bottom: 5px;
+}
+.list_lists_options a {
+	margin-right: 15px;
+}
+html[dir="rtl"] .list_lists_options a {
+	margin-right: 0px;
+	margin-left: 15px;
+}
+ul.list_lists > li {
+	padding: 10px 10px 10px 0px;
+	overflow: hidden;
+}
+ul.list_lists > li + li {
+	border-top-width: 1px;
+}
+ul.list_lists .list_lists_replies {
+	float: left;
+	overflow: hidden;
+	text-align: center;
+	margin-right: 10px;
+	width: 40px;
+	padding: 7px 10px 7px 10px;
+	font-size: .8em;
+}
+html[dir="rtl"] ul.list_lists .list_lists_replies {
+	float: right;
+	margin-right: 0px;
+	margin-left: 10px;
+}
+ul.list_lists .list_lists_replies span {
+	font-size: 2em;
+	display: block;
+}
+ul.list_lists .list_lists_info {
+	overflow: hidden;
+}
+ul.list_lists h3 {
+	margin-bottom: 0px;
+}
+ul.list_lists .list_lists_sticky a {
+	background-image: url(../images/post/stick.png);
+	background-repeat: no-repeat;
+	padding-left: 20px;
+	background-position: 0px .2em;
+}
+html[dir="rtl"] ul.list_lists .list_lists_sticky a {
+	background-position: right center;
+	padding-left: 0px;
+	padding-right: 20px;
+}
+ul.list_lists .list_lists_lastreply {
+	float: right;
+	overflow: hidden;
+	width: 250px;
+	margin-left: 10px;
+}
+html[dir="rtl"] ul.list_lists .list_lists_lastreply {
+	float: left;
+	margin-left: 0px;
+	margin-right: 10px;
+}
+ul.list_lists .list_lists_lastreply > a {
+	float: left;
+	display: block;
+}
+html[dir="rtl"] ul.list_lists .list_lists_lastreply > a {
+	float: right;
+}
+ul.list_lists .list_lists_lastreply > a > img {
+	display: block;
+}
+ul.list_lists .list_lists_lastreply_info {
+	overflow: hidden;
+	padding-left: 5px;
+}
+html[dir="rtl"] ul.list_lists .list_lists_lastreply_info {
+	padding-left: 0px;
+	padding-right: 5px;
+}
+ul.list_lists .list_lists_lastreply_info_date {
+	font-size: .8em;
+}
+/* some overrides on the tab page for spacing purposes */
+div.list_lists_list {
+	margin-top: 10px;
+	border-top-width: 1px;
+}
+div.list_lists_list h3 {
+	font-size: 1em;
+	letter-spacing: 0px;
+}
+div.list_lists_list .list_lists_sticky a {
+	background-position: 0px 0px;
+}
+html[dir="rtl"] div.list_lists_list .list_lists_sticky a {
+	background-position: top right;
+}
+/* view list list thread */
+.list_thread_view h3{
+	margin-bottom:10px;
+}
+div.list_lists_thread_options .buttonlink {
+	padding-top: 1px;
+	font-size: .8em;
+	height: 16px;
+	margin-right: 15px;
+	line-height:normal;
+}
+html[dir="rtl"] div.list_lists_thread_options .buttonlink {
+	margin-right: 0px;
+	margin-left: 15px;
+}
+div.list_lists_thread_options_closed {
+	background-image: url(../images/post/close.png);
+	background-repeat: no-repeat;
+	padding-left: 20px;
+	display: inline-block;
+	margin-left: 20px;
+}
+html[dir="rtl"] div.list_lists_thread_options_closed {
+	background-position: right center;
+	padding-left: 0px;
+	margin-left: 0px;
+	padding-right: 20px;
+	margin-right: 20px;
+}
+ul.list_lists_thread {
+	margin: 10px 0px 10px 0px;
+	overflow: hidden;
+}
+ul.list_lists_thread > li {
+	overflow: hidden;
+	border: 1px;
+	border-style:solid;
+}
+ul.list_lists_thread > li + li {
+	margin-top: 5px;
+}
+ul.list_lists_thread .list_lists_thread_photo {
+	float: left;
+	overflow: hidden;
+	width: 120px;
+	font-weight: bold;
+	padding: 5px 10px 7px 10px;
+}
+html[dir="rtl"] ul.list_lists_thread .list_lists_thread_photo {
+	float: right;
+}
+ul.list_lists_thread .list_lists_thread_photo a + a {
+	display: block;
+	margin-top: 2px;
+	clear: both;
+}
+ul.list_lists_thread .list_lists_thread_info {
+	padding: 0px 10px 5px 5px;
+	overflow: hidden;
+}
+html[dir="rtl"] ul.list_lists_thread .list_lists_thread_info {
+	padding: 0px 5px 5px 10px;
+}
+ul.list_lists_thread .list_lists_thread_details {
+	padding: 6px 0px 6px 0px;
+	border-bottom-width:1px;
+	border-bottom-style:solid;
+}
+ul.list_lists_thread .list_lists_thread_details_date {
+	font-size: .8em;
+	overflow: hidden;
+}
+ul.list_lists_thread .list_lists_thread_details_options {
+	margin-top: -2px;
+	float: right;
+	overflow: hidden;
+	text-align: right;
+}
+html[dir="rtl"] ul.list_lists_thread .list_lists_thread_details_options {
+	float: left;
+	text-align: left;
+}
+ul.list_lists_thread .list_lists_thread_details_options .buttonlink {
+	font-size: .8em;
+	height: 16px;
+	margin-left: 10px;
+	line-height:normal;
+}
+html[dir="rtl"] ul.list_lists_thread .list_lists_thread_details_options .buttonlink {
+	margin-left: 0px;
+	margin-right: 10px;
+}
+ul.list_lists_thread .list_lists_thread_body {
+	padding: 5px 0px 5px 0px;
+}
+ul.list_lists_thread .list_lists_thread_body blockquote {
+	border-width: 1px;
+	border-style:dashed;
+	padding: 10px;
+}
+.icon_list_post_new {
+	background-image: url(../images/post/create.png);
+}
+.icon_list_post_edit {
+	background-image: url(../images/post/edit.png);
+}
+.icon_list_post_reply {
+	background-image: url(../images/post/reply.png);
+}
+.icon_list_post_stick {
+	background-image: url(../images/post/stick.png);
+}
+.icon_list_post_unstick {
+	background-image: url(../images/post/unstick.png);
+}
+.icon_list_post_close {
+	background-image: url(../images/post/close.png);
+}
+.icon_list_post_open {
+	background-image: url(../images/post/unclose.png);
+}
+.icon_list_post_rename {
+	background-image: url(../images/post/rename.png);
+}
+.icon_list_post_delete {
+	background-image: url(../images/post/delete.png);
+}
+.icon_list_post_quote {
+	background-image: url(../images/post/quote.png);
+}
+.icon_list_topic_watch {
+	background-image: url(../images/watch.png);
+}
+.icon_list_topic_unwatch {
+	background-image: url(../images/unwatch.png);
+}
+.icon_list_photo_new {
+	background-image: url(../images/photo/upload.png);
+}
+.icon_list_photo_view {
+	background-image: url(../images/photo/view.png);
+}
+.activity_icon_list_topic_reply, .item_icon_list_post, .notification_type_list_discussion_response, .notification_type_list_discussion_reply {
+	background-image: url(../images/types/post.png);
+}
+/* like button start here */
+.layout_list_title_list,
+.layout_list_profile_status {
+	float:left;
+}
+[dir="rtl"] .layout_list_title_list, 
+[dir="rtl"] .layout_list_profile_status{
+	float:right;
+}
+.layout_list_listing_like_button {
+	float: left;
+	margin:0 10px 5px;
+}
+[dir="rtl"] .layout_list_listing_like_button{
+	float:right;
+}
+.list_like_button a {
+	padding:3px 5px;
+	text-decoration:none;
+	font-weight:bolder;
+	border:1px solid #cecece;
+	clear:both;
+	font-size:11px;
+	float:left;
+	outline:none;
+	background-image:url(../images/listlike_button_bg.png) !important;
+}
+[dir="rtl"] .list_like_button a{
+	float:right;
+}
+.list_like_button a:hover {
+	text-decoration:none;
+	background-image:url(../images/listlike_button_hover_bg.png) !important;
+}
+.list_like_button a i.list_like_thumbup_icon, 
+.list_like_button a i.list_like_thumbdown_icon {
+	height:13px;
+	width:13px;
+	float:left;
+	margin-right:5px;
+}
+[dir="rtl"] .list_like_button a i.list_like_thumbup_icon, 
+[dir="rtl"] .list_like_button a i.list_like_thumbdown_icon {
+	float:right;
+	margin-left:5px;
+	margin-right:0px;
+}
+.list_like_button a i.list_like_thumbup_icon {
+	background-image:url(../images/thumb-up.png);
+}
+.list_like_button a i.list_like_thumbdown_icon {
+	background-image:url(../images/thumb-down.png);
+}
+.list_like_button a span {
+	float:left;
+}
+[dir="rtl"] .list_like_button a span{
+	float:right;
+}
+/* like button end here */
+/*CSS FOR ALL WIDGETS LAYOUT START HERE*/
+.layout_list_random_list, .layout_list_mostviewed_list, .layout_list_recentlyposted_list, .layout_list_mostrated_list, .layout_list_mostlikes_list, .layout_list_mostcommented_list, .layout_list_recentview_list, .layout_list_recentfriend_list, .layout_list_newlisting_list, .layout_list_search_list, .layout_list_tagcloud_list, .layout_list_listing_like, .layout_list_socialshare_list, .layout_list_write_page, .layout_list_information_list, .layout_list_sponsored_list, .layout_list_categories_list, .layout_list_ratings_list, .layout_list_tags_list, .layout_list_archives_list, .layout_list_userlisting_list, .layout_list_suggestedlist_list, .layout_list_mostdiscussion_list, .layout_list_popularlocation_list, .layout_list_related_listings_view_list {
+	clear: both;
+	margin-bottom: 15px;
+	overflow: hidden;
+}
+/*css for featured listings slideshow*/
+.list_controllers {
+	background-image:url(../images/controller-options.png);
+}
+.list_controllers:hover {
+	background-image:url(../images/controller-options.png);
+}
+/*CSS FOR ALL WIDGETS LAYOUT END HERE*/
+
+.list_photo > img {
+	border:none !important;
+	max-width:none;
+	width:100%;
+}
+.list_photo_edit_wrapper {
+	position:relative;
+	cursor:pointer;
+}
+.list_photo_edit_wrapper .list_photo_edit {
+	display:none;
+	position:absolute;
+	right:0px;
+	background:#222;
+	opacity:.9;
+	color: #fff;
+	padding:5px;
+	color:#FFFFFF;
+	font-size:11px;
+	font-weight:normal;
+}
+[dir="rtl"] .list_photo_edit_wrapper .list_photo_edit{
+	left:0px;
+	right:auto;
+}
+.list_photo_edit_wrapper .list_photo_edit img {
+	float:left;
+	margin-right:5px;
+}
+[dir="rtl"] .list_photo_edit_wrapper .list_photo_edit img{
+	float:right;
+	margin-left:15px;
+	margin-right:0px;
+}
+.list_photo_edit_wrapper:hover .list_photo_edit {
+	display:block;
+}
+
+.list_tabs_loader_img{
+	margin:40px 0;
+}
+
+
+
+
+/*Browse Location Page*/
+.list_advanced_search_form{
+	clear:both;
+	overflow:hidden;
+	margin-bottom:15px;
+}
+.list_advanced_search_form li{
+	margin:5px 0 0 13px;
+}
+.list_advanced_search_form li#group1,
+.list_advanced_search_form li#group2,
+.list_advanced_search_form li#group3{
+	margin:0px;
+}
+.list_advanced_search_form  .form-wrapper + .form-wrapper{
+	margin:0px !important;
+}
+.list_advanced_search_form #fieldset-grp3 .form-wrapper{
+	width:35%;
+	float:left;
+}
+.list_advanced_search_form #fieldset-grp3 #locationmiles-wrapper{
+	float:left;
+	width:20%;
+}
+.list_advanced_search_form #advances_search{
+	float: left;
+	font-size: 11px;
+	margin-top: 20px;
+}
+html[dir="rtl"] .list_advanced_search_form #fieldset-grp3 .form-wrapper,
+html[dir="rtl"] .list_advanced_search_form #fieldset-grp3 #locationmiles-wrapper,
+html[dir="rtl"] .list_advanced_search_form #advances_search{
+	float:right;
+}
+.list_advanced_search_form #fieldset-grp3 .form-label{
+	font-weight:bold;
+}
+.list_advanced_search_form #fieldset-grp3 .form-element input[type="text"],
+.list_advanced_search_form #fieldset-grp3 .form-element select{
+	font-size:16px;
+	width:90%;
+}
+.list_advanced_search_form #fieldset-grp3 .description{
+	font-size:10px;
+	padding-top:5px;
+}
+.list_advanced_search_form #fieldset-grp1, 
+.list_advanced_search_form #fieldset-grp2{
+	border-width:1px;
+	border-style:solid;
+	clear:both;
+	margin:5px 0 0;
+	padding:10px 5px 10px 0;
+	display:none;
+}
+.list_advanced_search_form #fieldset-grp1 .form-wrapper,
+.list_advanced_search_form #fieldset-grp2 .form-wrapper{
+	margin-left:10px !important;
+	display:inline-block;
+	margin-bottom:5px;
+}
+html[dir="rtl"] .list_advanced_search_form #fieldset-grp1 .form-wrapper, 
+html[dir="rtl"] .list_advanced_search_form #fieldset-grp2 .form-wrapper{
+	margin-left:0px;
+	margin-right:10px;
+}
+.list_advanced_search_form #fieldset-grp2 #or-wrapper{
+	display:block;
+}
+.list_advanced_search_form #fieldset-grp2 #or-wrapper .form-label{
+	border-top-width: 1px;
+	float: left;
+	margin:10px 0 5px;
+	position: relative;
+	width: 100%;
+}
+html[dir="rtl"] .list_advanced_search_form #fieldset-grp2 #or-wrapper .form-label{
+	float:right;
+}
+.list_advanced_search_form #fieldset-grp2 #or-wrapper .form-label label{
+	font-size: 13px;
+	font-weight: bold;
+	left: 50%;
+	position: absolute;
+	top: -10px;
+}
+.list_advanced_search_form #done-wrapper{
+	padding-top:10px;
+}
+.list_advanced_search_form #done-wrapper > div{
+	display:inline;
+}
+.list_advanced_search_form #done-wrapper .form-label{
+	display:none !Important;
+}
+.list_advanced_search_form  .browse-separator-wrapper{
+	display:none;
+}
+.list_browse_location{
+	clear:both;
+	margin-bottom:15px;
+	position:relative;
+	overflow:hidden;
+	width:100%;
+}
+.list_map_container_list{
+	overflow:hidden;
+	padding-right:10px;
+}
+.list_map_container_list ul.seaocore_browse_list{
+	margin-right:5px;
+}
+.list_map_container_list ul.seaocore_browse_list li{
+	border-top-width:1px;
+	padding-top:10px;
+}
+.list_browse_location_paging{
+	overflow:hidden;
+}
+.list_browse_location_paging > div{
+	display:inline;
+	float:left;
+	margin:0px;
+}
+.list_map_container_right{
+	width:40%;
+	padding:1px;
+	float:right;
+	min-height:600px;
+}
+.list_map_container{
+	border-width:1px;
+	border-style:solid;
+	width:40%;
+}
+.list_map_container.absolute{
+	position:absolute;
+	right:0px !important;
+	top:0;
+}
+.list_map_container.fixed{
+	position:fixed;
+	top:0px;
+}
+.list_map_container.bottom{
+	bottom:0px;
+	position:absolute;
+	right:0px !important
+}
+.list_map_container.list_map_container_exp{
+	width:600px !important;
+}
+.list_map_container.list_map_container_exp #listlocation_browse_map_canvas{
+	height:500px !important;
+}
+.list_map_container_topbar{
+	padding:5px;
+	overflow:hidden;
+}
+.list_map_container_map_area{
+	border-style:solid none none none;
+	border-width:1px;
+	width:100%;
+}

@@ -1,0 +1,4 @@
+DROP TABLE IF EXISTS `engine4_facebookse_comments`;
+CREATE TABLE IF NOT EXISTS `engine4_facebookse_comments` (`comment_id` int(10) unsigned NOT NULL AUTO_INCREMENT, `content_type` varchar(100) NOT NULL, `enable` tinyint(1) unsigned NOT NULL DEFAULT "1", `commentbox_privacy` TINYINT( 1 ) UNSIGNED NOT NULL DEFAULT '1', `commentbox_width` varchar(20) NOT NULL DEFAULT "450", `commentbox_color` varchar(11) NOT NULL, PRIMARY KEY (`comment_id`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_unicode_ci AUTO_INCREMENT=1;
+
+UPDATE `engine4_core_likes` SET `resource_type` = 'user' WHERE `engine4_core_likes`.`resource_type` = 'member' ; 

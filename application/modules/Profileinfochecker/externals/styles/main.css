@@ -1,0 +1,14 @@
+.main-div {
+	width:100%; 
+	height:15px; 
+	border: $theme_link_color 1px solid;
+}
+.main-div div {
+	background-color: $theme_foreground_border_color;
+}
+.layout_profileinfochecker_info_checker h3 {
+  font-size: 0.8em;
+  font-weight: bold;
+  letter-spacing: normal;
+  margin-top:15px;
+}

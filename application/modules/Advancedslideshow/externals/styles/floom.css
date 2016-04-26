@@ -1,0 +1,151 @@
+/* $Id: floom.css copyright : http://blog.olicio.us/2009/07/25/floom/ $ */ 
+
+#blinds-cont,
+#blindsextended1-cont,
+#blindsextended2-cont,
+#blindsextended3-cont,
+#blindsmiddle1-cont,
+#blindsmiddle2-cont,
+#blindsmiddle3-cont,
+#blindsleft1-cont,
+#blindsleft2-cont,
+#blindsleft3-cont,
+#blindsright1-cont,
+#blindsright2-cont,
+#blindsright3-cont,
+#blindsfullwidth1-cont,
+#blindsfullwidth4-cont,
+#blindsfullwidth5-cont,
+#blindsfullwidth2-cont,
+#blindsfullwidth3-cont
+{
+	border-style:solid;
+	border-width:1px;
+	padding:5px;
+	margin-bottom:15px;
+  -moz-border-radius:3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+#blinds,
+#blindsextended1,
+#blindsextended2,
+#blindsextended3,
+#blindsmiddle1,
+#blindsmiddle2,
+#blindsmiddle3,
+#blindsleft1,
+#blindsleft2,
+#blindsleft3,
+#blindsright1,
+#blindsright2,
+#blindsright3,
+#blindsfullwidth1,
+#blindsfullwidth4,
+#blindsfullwidth5,
+#blindsfullwidth2,
+#blindsfullwidth3
+{
+	margin: 0 auto;
+	position:relative;
+}
+#blinds a,
+#blindsextended1 a,
+#blindsextended2 a,
+#blindsextended3 a,
+#blindsmiddle1 a,
+#blindsmiddle2 a,
+#blindsmiddle3 a,
+#blindsleft1 a,
+#blindsleft2 a,
+#blindsleft3 a,
+#blindsright1 a,
+#blindsright2 a,
+#blindsright3 a,
+#blindsfullwidth1 a,
+#blindsfullwidth4 a,
+#blindsfullwidth5 a,
+#blindsfullwidth2 a,
+#blindsfullwidth3 a
+{
+	margin:0;
+	padding:0;
+	float:left;
+}
+.floom_container 
+{
+	overflow: hidden;
+}
+.floom_progressbar 
+{
+	height: 3px;
+	background: #fff;
+	width: 0;
+	position: absolute;
+	bottom: 1px;
+	z-index: 99;
+	font-size: 1px;
+	clear:both;
+}
+.floom_slice 
+{
+	z-index: 10;
+}
+.floom_vertical 
+{
+	float: left;
+}
+
+.floom_caption,
+.floom_captionextended1,
+.floom_captionextended2, 
+.floom_captionextended3,
+.floom_captionmiddle1,
+.floom_captionmiddle2,
+.floom_captionmiddle3,
+.floom_captionleft1,
+.floom_captionleft2,
+.floom_captionleft3,
+.floom_captionright1,
+.floom_captionright2,
+.floom_captionright3, 
+.floom_captionwidth1,
+.floom_captionwidth4,
+.floom_captionwidth5,
+.floom_captionwidth2,
+.floom_captionwidth3
+{
+	font: normal 12px/22px Arial, sans-serif;
+	left: 0;
+	right:0;
+	position: absolute;
+	z-index: 11;
+	height:auto !important;
+	padding:3px 10px;
+/*	opacity:0.7 !important;
+	filter:alpha(opacity=70) !important;*/
+}
+.floom_caption h1,
+.floom_captionextended1 h1,
+.floom_captionextended2 h1, 
+.floom_captionextended3 h1,
+.floom_captionmiddle1 h1,
+.floom_captionmiddle2 h1,
+.floom_captionmiddle3 h1,
+.floom_captionleft1 h1,
+.floom_captionleft2 h1,
+.floom_captionleft3 h1,
+.floom_captionright1 h1,
+.floom_captionright2 h1,
+.floom_captionright3 h1, 
+.floom_captionwidth1 h1,
+.floom_captionwidth4 h1,
+.floom_captionwidth5 h1,
+.floom_captionwidth2 h1,
+.floom_captionwidth3 h1
+{
+	margin:0px;
+	padding:0px;
+	margin-bottom:0px;
+	font-size:22px;
+}

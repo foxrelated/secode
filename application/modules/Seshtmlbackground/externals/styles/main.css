@@ -1,0 +1,24 @@
+
+
+.cd-primary-nav-dropdown{
+	background-color:$theme_list_background_color;
+}
+.cd-primary-nav-dropdown:before{
+	border-bottom-color:$theme_list_background_color !important;
+}
+.cd-primary-nav-dropdown li a:hover{
+	background-color:$theme_list_background_color_hover;
+}
+.cd-mini-menu .core_mini_signup,
+.cd-mini-menu .sm_minimenu_links > li > a.signup-link{
+	background-color:$theme_button_background_color;
+	color:$theme_button_font_color;
+}
+.cd-mini-menu .core_mini_signup:hover,
+.cd-mini-menu .sm_minimenu_links > li > a.signup-link:hover{
+	background-color:$theme_button_background_color_hover;
+}
+.cd-slider-searchbox .slideshow_searchbox_input:before{
+	border-right-color:$theme_button_background_color !important;
+	border-left-color:$theme_button_background_color !important;
+}

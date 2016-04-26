@@ -1,0 +1,63 @@
+/* $Id:main.css 2010-17-11 9:40:21Z SocialEngineAddOns Copyright 2009-2010 BigStep Technologies Pvt. Ltd. $ */
+
+/*icons*/
+.icon_type_message_birthday{background-image:url(~/application/modules/Birthday/externals/images/message.png);}
+.icon_type_wish_birthday{background-image:url(~/application/modules/Birthday/externals/images/wish.png);}
+.activity_icon_birthday_post{background-image:url(~/application/modules/Birthday/externals/images/wish.png);}
+/* SHOW BIRTHDAY WIDGETS */
+.layout_birthday_show_birthdays{margin-bottom:15px;}
+ul.layout_birthday_widget{+foreground; +rounded;padding:5px;overflow:auto;clear:both;}
+ul.layout_birthday_widget > li{clear:both;overflow:hidden;}
+ul.layout_birthday_widget li div.tip{width:auto !important;margin:5px 0;}
+ul.layout_birthday_widget li div.tip > span{margin:5px 0;float:none !important;display:block;width:auto;}
+/* Calendar start here*/
+ul.layout_birthday_birthdaycalendar_widget{+foreground; +rounded;padding:5px;overflow:auto;clear:both;}
+div.birthday_calendar{background:$theme_body_background_color;padding:0;margin:0 auto;overflow:hidden;width:100%;}
+div.birthday_calendar table { width:100%;}
+div.birthday_calendar .caption{border:1px #dbdbdb solid;overflow:hidden;}
+div.birthday_calendar .caption a{color:#5F93B4;}
+div.birthday_calendar .caption a:hover{color:#4e81a1;}
+div.birthday_calendar .caption div{font-size:10px;height:25px;line-height:25px;text-align:right;vertical-align:bottom;float:left;font-weight:bold;}
+html[dir="rtl"] div.birthday_calendar .caption div{float:right;text-align:left !important;}
+div.birthday_calendar .caption div.pre{width:10%;padding-left:2px;text-align:center;}
+html[dir="rtl"] div.birthday_calendar .caption div.pre{padding-right:2px;padding-left:0;}
+div.birthday_calendar .caption div.nxt{width:10%;padding-right:2px;text-align:center;}
+html[dir="rtl"] div.birthday_calendar .caption div.nxt{padding-left:2px;padding-right:0;}
+div.birthday_calendar .caption div.month_name{width:77%;text-align:center;}
+div.birthday_calendar td{border:1px #dbdbdb solid;}
+div.birthday_calendar .active{background-color:rgba(211, 211, 211, 0.3);}
+div.birthday_calendar .today_birthday{background-color:rgba(211, 211, 211, 0.8);}
+div.birthday_calendar .active a.birthdate_link, 
+div.birthday_calendar .active a.birthdate_link:hover, div.birthday_calendar .today_birthday a.birthdate_link, div.birthday_calendar .today_birthday a.birthdate_link:hover{color:$theme_font_color;text-decoration:none;font-weight:bold;}
+div.birthday_calendar td div.day{ display:block;font-size:11px; min-width:20px;padding:5px 0;text-align:center;vertical-align:bottom;width:100%;}
+/* Calendar end here */
+/* When display both title and thumb */
+.birthday_widget_userlist{overflow:auto;padding:3px 0;width:48px;padding:5px;float:left;text-align:center;overflow:hidden;}
+.birthday_widget_userlist a.birthday_userlist_thumb{display:block;float:left;margin-bottom:3px;}
+html[dir="rtl"] .birthday_widget_userlist, html[dir="rtl"] .birthday_widget_userlist a.birthday_userlist_thumb{float:right;}
+html[dir="rtl"] div.birthday_calendar .caption div.pr, html[dir="rtl"] div.birthday_calendar .caption div.nxt, html[dir="rtl"] div.birthday_calendar .caption div.month_name, html[dir="rtl"] .birthday_widget_userlist{text-align:center !important;}
+.birthday_widget_userlist a.birthday_userlist_thumb img{display:block;height:48px;padding:0px;margin:0px;width:48px;}
+.birthday_widget_userlist .birthday_userlist_name{font-size:11px;word-wrap:break-word;}
+/* When display only name */
+.birthday_widget_name_list .b_wish_icon{float:left;margin-right:1px;}
+.birthday_widget_name_list .b_wish_icon + ul{overflow:hidden;}
+li.birthday_widget_name_list li{font-size:11px;float:left;}
+html[dir="rtl"] .birthday_widget_name_list .b_wish_icon, html[dir="rtl"] li.birthday_widget_name_list li{float:right;}
+.birthday-show-more{clear:both;float:right !important;font-size:11px;margin:5px 0;}
+html[dir="rtl"] .birthday-show-more{float:left !important;}
+/* All Birthday List */
+.birthday_view h3 img{float:left;margin-right:5px;margin-top:3px;}
+html[dir="rtl"] .birthday_view h3 img{float:right;margin-left:5px;margin-right:0;}
+.birthday_list{overflow:hidden;width:100%;margin-bottom:20px;margin-top:20px;}
+.birthday_list h4{margin-bottom:0px;width:100%;clear:both;border-bottom:none;float:left;}
+.birthday_list .birthday_list_item{padding:10px 5px;width:47%;border-top-width:1px;}
+.birthday_list .birthday_list_item div.item_thumb{float:left;display:block;width:55px;height:48px;}
+html[dir="rtl"] .birthday_list h4, html[dir="rtl"] .birthday_list .birthday_list_item div.item_thumb{float:right;}
+.birthday_list .birthday_list_item div.item_thumb img{padding:0px;margin:0px;}
+.birthday_list .birthday_list_item .item_info{padding:0px 0px 0px 6px;overflow:hidden;float:left;}
+html[dir="rtl"] .birthday_list .birthday_list_item .item_info{padding:0px 6px 0px 0;float:right;}
+.birthday_list .birthday_list_item .item_info .item_title{font-weight:bold;max-width:250px;}
+.birthday_list .birthday_list_item .item_info .item_stat{font-size:.8em;color:$theme_font_color_light;}
+.birthday_list_item_right_links{float:right;width:120px;}
+html[dir="rtl"] .birthday_list_item_right_links{float:left;}
+.birthday_list_item_right_links .buttonlink{font-size:11px;line-height:16px;clear:both;}

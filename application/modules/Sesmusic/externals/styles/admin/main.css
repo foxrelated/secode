@@ -1,0 +1,102 @@
+/* $Id:main.css 2015-3-1 00:00:00 SocialEngineSolutions $*/
+
+/*Manage Artist*/
+.sesmusic_manage_artist_form{
+	width:100%;
+}
+.sesmusic_manage_artist_form *{
+	box-sizing:border-box;
+}
+.sesmusic_manage_artist_form_head > div{
+	background-color: #f5f5f5;
+	padding: 10px;
+	border-bottom: 1px solid #aaa;
+	float:left;
+	font-weight: bold;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	white-space: nowrap;
+}
+.sesmusic_manage_artist_form_head,
+.sesmusic_manage_artist_form_list{
+	width:60%;
+}
+.sesmusic_manage_artist_form_list{
+	margin-bottom:10px;
+}
+.sesmusic_manage_artist_form_list li{
+	border-bottom: 1px solid #eee;
+	cursor:move;
+	clear:both;
+	overflow:hidden;
+}
+.sesmusic_manage_artist_form_list li:nth-child(odd){
+	background-color:#fff;
+}
+.sesmusic_manage_artist_form_list li:nth-child(even) {
+	background-color: #f8f8f8;
+}
+.sesmusic_manage_artist_form_list li > div{
+	padding: 10px;
+	font-size: .9em;
+	float:left;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	vertical-align: top;
+	white-space: normal;
+}
+.sesmusic_artist_popup input[type="text"]{
+	margin-bottom:10px;
+	width:300px;
+}
+/*Category Popup*/
+.sesmusic_category_popup{
+  width: 550px;
+}
+.sesmusic_category_popup div.form-label{
+  width: 110px;
+}
+/*Import Music*/
+button.sesmusic_import_button{
+  background-color: #83b64e;
+  background-image: url(~/application/modules/Sesmusic/externals/images/admin/import.png);
+  background-position: 5px center;
+  background-repeat: no-repeat;
+  border: medium none;
+  border-radius: 0;
+  font-size: 17px;
+  font-weight: normal;
+  padding: 10px 10px 10px 35px;
+  text-shadow: inherit;
+}
+button.sesmusic_import_button:hover{
+  background-color: #78a946;
+}
+.sesmusic_import_msg span{
+  background-position: 5px center;
+  background-repeat: no-repeat;
+  border-radius: 0;
+  color: #fff;
+  display: inline-block;
+  font-size: 17px;
+  padding: 10px 10px 10px 35px;
+}
+.sesmusic_import_loading span{
+  background-color: #6fbbde;
+  background-image: url(~/application/modules/Sesmusic/externals/images/admin/loading.GIF);
+}
+.sesmusic_import_success span{
+  background-color: #83b64e;
+  background-image: url(~/application/modules/Sesmusic/externals/images/admin/success.png);
+}
+.sesmusic_import_error span{
+  background-color: #c12e2a;
+  background-image: url(~/application/modules/Sesmusic/externals/images/admin/error.png);
+}
+/*Add Item of the day Popup*/
+.sesmusic_add_itemoftheday_popup .form-label{
+	float:none !important;
+}
+.sesmusic_add_itemoftheday_popup .event_calendar_container{
+	float:none;
+}

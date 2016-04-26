@@ -1,0 +1,891 @@
+{
+  "type": "module",
+  "name": "ynresponsivemetro",
+  "version": "4.01p2",
+  "revision": null,
+  "path": "application\/modules\/Ynresponsivemetro",
+  "repository": null,
+  "date": "Fri, 25 Sep 2015 08:14:48 +0000",
+  "title": "YN - Responsive Metro Template",
+  "description": "Responsive Metro Template",
+  "thumb": null,
+  "developer": null,
+  "authors": [
+    "<a href=\"http:\/\/socialengine.younetco.com\/\" title=\"YouNet Company\" target=\"_blank\">YouNet Company<\/a>"
+  ],
+  "changeLog": null,
+  "meta": {
+    "date": "Fri, 25 Sep 2015 08:14:48 +0000",
+    "title": "YN - Responsive Metro Template",
+    "description": "Responsive Metro Template",
+    "developer": null,
+    "authors": [
+      "<a href=\"http:\/\/socialengine.younetco.com\/\" title=\"YouNet Company\" target=\"_blank\">YouNet Company<\/a>"
+    ],
+    "changeLog": null
+  },
+  "actions": [
+    "install",
+    "upgrade",
+    "refresh",
+    "enable",
+    "disable"
+  ],
+  "callback": {
+    "path": null,
+    "class": "Engine_Package_Installer_Module",
+    "priority": 100
+  },
+  "dependencies": {
+    "module-younet-core": {
+      "type": "module",
+      "name": "younet-core",
+      "guid": "module-younet-core",
+      "minVersion": "4.02p7",
+      "maxVersion": null,
+      "excludeExcept": null
+    }
+  },
+  "tests": [
+    
+  ],
+  "permissions": [
+    
+  ],
+  "structure": {
+    "application\/modules\/Ynresponsivemetro": {
+      "type": "directory",
+      "path": "application\/modules\/Ynresponsivemetro",
+      "structure": [
+        {
+          "path": "Model",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "Model\/Metroblock.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 2713,
+          "sha1": "8abfe30ab74c4dcfed0dfd445e2d2a6f4dffea28"
+        },
+        {
+          "path": "Model\/DbTable",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "Model\/DbTable\/Metroblocks.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 846,
+          "sha1": "ae8cf78a8f399430bf9786abc5a2ab462ef0ba73"
+        },
+        {
+          "path": "Model\/DbTable\/.htempty",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 0,
+          "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+        },
+        {
+          "path": "widgets",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "widgets\/metro-members",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "widgets\/metro-members\/index.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 857,
+          "sha1": "02b969c19f9e6e001f7222b56c24bc174003580b"
+        },
+        {
+          "path": "widgets\/metro-members\/Controller.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 838,
+          "sha1": "c6ee4fcd2036791ff9408b8d5cf01012d51a1209"
+        },
+        {
+          "path": "widgets\/metro-main-menu",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "widgets\/metro-main-menu\/index.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 7759,
+          "sha1": "84f5dac59a1d1c40945f0b6349846988e0f881f7"
+        },
+        {
+          "path": "widgets\/metro-main-menu\/Controller.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1347,
+          "sha1": "49279f3ad755d5aafd51b7e6e397d805d1d12311"
+        },
+        {
+          "path": "widgets\/metro-va-info",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "widgets\/metro-va-info\/index.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 2441,
+          "sha1": "35c1789b53668a523ef36f77e10555ca6ad19abc"
+        },
+        {
+          "path": "widgets\/metro-va-info\/Controller.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1653,
+          "sha1": "91673f83b63b1e49dc26537b13bad61742567098"
+        },
+        {
+          "path": "widgets\/metro-mini-menu",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "widgets\/metro-mini-menu\/index.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 30200,
+          "sha1": "cd40a7bb24c37b6c5bf52ec7e10c4f70db36bb80"
+        },
+        {
+          "path": "widgets\/metro-mini-menu\/Controller.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1620,
+          "sha1": "142b5623834653ebd42efb59c6d0c81320a63c98"
+        },
+        {
+          "path": "widgets\/metro-events",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "widgets\/metro-events\/index.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 2740,
+          "sha1": "df4193c4b2cc5994dbc62d9fe69c076b5b256fcf"
+        },
+        {
+          "path": "widgets\/metro-events\/Controller.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 835,
+          "sha1": "6be52ca39fa79db079a8434f2b188b5676017547"
+        },
+        {
+          "path": "widgets\/metro-blogs",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "widgets\/metro-blogs\/index.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 810,
+          "sha1": "ed1378f1a31e190c74baf542ad9c7fc2e8635358"
+        },
+        {
+          "path": "widgets\/metro-blogs\/Controller.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 863,
+          "sha1": "8f41a282c196d95f28d69cfd8f222534218dc5dc"
+        },
+        {
+          "path": "widgets\/metro-featured-photos",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "widgets\/metro-featured-photos\/index.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1926,
+          "sha1": "9b093bd9ba4c91408f27878da443bdca3cbea278"
+        },
+        {
+          "path": "widgets\/metro-featured-photos\/Controller.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1847,
+          "sha1": "bc18614f14d1067c233e66730aa3e4dbd8fc3928"
+        },
+        {
+          "path": "widgets\/metro-footer-menu",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "widgets\/metro-footer-menu\/index.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1951,
+          "sha1": "732728bce88fe0eaa832118d22825cf71c8c4c40"
+        },
+        {
+          "path": "widgets\/metro-footer-menu\/Controller.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 2495,
+          "sha1": "5aa4e4a35e82d5fb40ae8e32f82a684a1be18795"
+        },
+        {
+          "path": "widgets\/metro-groups",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "widgets\/metro-groups\/index.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1210,
+          "sha1": "71ed1ca0cbd7c3557c7dd0ae8d8d51a7e6cfad65"
+        },
+        {
+          "path": "widgets\/metro-groups\/Controller.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 887,
+          "sha1": "e533c54a49c7bc07988b8a29bc0a14e3c678d9e7"
+        },
+        {
+          "path": "widgets\/metro-blocks",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "widgets\/metro-blocks\/index.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 14200,
+          "sha1": "3aa4b5bc86b45cc268503cb632247121efff6e8d"
+        },
+        {
+          "path": "widgets\/metro-blocks\/Controller.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 2016,
+          "sha1": "fa2adf0047d3985ad3be5d79690a0e07693ca21b"
+        },
+        {
+          "path": "widgets\/metro-introduction",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "widgets\/metro-introduction\/index.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 4063,
+          "sha1": "45d325eff3cbb2888665a84236e25ae0054e8194"
+        },
+        {
+          "path": "widgets\/metro-introduction\/Controller.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 901,
+          "sha1": "2fe35339774985a02c76f8fec350561f6f8b786f"
+        },
+        {
+          "path": "controllers",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "controllers\/AdminManageFeaturedPhotosController.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 4622,
+          "sha1": "d26c634f5ceedb37c1f9ba32ae819172deaecd0d"
+        },
+        {
+          "path": "controllers\/AdminManageIntroductionController.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 3551,
+          "sha1": "44d35bf99f5b320fcf927e43e86c8788dec25052"
+        },
+        {
+          "path": "controllers\/AdminMenusController.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 4237,
+          "sha1": "7036fb5578c9777a435753569a356fd707dd45c1"
+        },
+        {
+          "path": "controllers\/AdminManageBlocksController.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 6798,
+          "sha1": "840fcf4962f7b1324adc57c5a0f1cae1ef1fab19"
+        },
+        {
+          "path": "Form",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "Form\/.htempty",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 0,
+          "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+        },
+        {
+          "path": "Form\/Admin",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "Form\/Admin\/Metro",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "Form\/Admin\/Metro\/Blocks.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1102,
+          "sha1": "54873e07dd2de84adf06813a03e6c4cb01acaff2"
+        },
+        {
+          "path": "Form\/Admin\/Metro\/IntroductionEdit.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 3173,
+          "sha1": "8e16923e5d0c227cf082aba19bea376033020128"
+        },
+        {
+          "path": "Form\/Admin\/Metro\/LogoMainMenu.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 2029,
+          "sha1": "92b5783b248f74bb4cf44a5f327bbf6ef3ff115e"
+        },
+        {
+          "path": "Form\/Admin\/Metro\/Create.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 3484,
+          "sha1": "2b2290eeccb1dab9b8d7d9037a0db0cff8b118ca"
+        },
+        {
+          "path": "Form\/Admin\/Metro\/Introduction.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 2002,
+          "sha1": "c8165b95d4516ace47a149233c6f079e980bfa77"
+        },
+        {
+          "path": "Form\/Admin\/Metro\/Edit.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 196,
+          "sha1": "b1675eea0d3aa029cd128e46b3d02c8e6914cda4"
+        },
+        {
+          "path": "Form\/Admin\/Metro\/VideoAlbumInfo.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 2185,
+          "sha1": "27ff924e93abcdfc3f7927e1290ef5a7eef712e8"
+        },
+        {
+          "path": "Form\/Admin\/Menu",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "Form\/Admin\/Menu\/ItemEdit.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 2976,
+          "sha1": "e2eec561175e86727c45d01ac72de2f093f5cdbb"
+        },
+        {
+          "path": "externals",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/.htempty",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 0,
+          "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+        },
+        {
+          "path": "externals\/styles",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/styles\/main.css",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 0,
+          "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+        },
+        {
+          "path": "externals\/.htaccess",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 147,
+          "sha1": "9f1638a8edbe1c5d28789e017fb35b2f2465f01e"
+        },
+        {
+          "path": "externals\/images",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/images\/nophoto_metro_4.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1277,
+          "sha1": "fe3363f2d7a5e4b6ffd7eb9152e0604a11de0706"
+        },
+        {
+          "path": "externals\/images\/introduction_default.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 102014,
+          "sha1": "429f8b6003ca1cd0a3989f948e2662584c2bfe7b"
+        },
+        {
+          "path": "externals\/images\/nophoto_metro_8.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 5548,
+          "sha1": "24a53042b6e834d35823dad0619634652165cdd8"
+        },
+        {
+          "path": "externals\/images\/nophoto_metro_1.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1293,
+          "sha1": "ac387d17db40b2386693761d9e803177138ef95c"
+        },
+        {
+          "path": "externals\/images\/nophoto_metro_3.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 4657,
+          "sha1": "71dc6cdddb19ec16b4095d099e2d419cc887228e"
+        },
+        {
+          "path": "externals\/images\/nophoto_metro_5.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1292,
+          "sha1": "b6d460d02c23fd6fc3d56aea3e381da9bf881ef3"
+        },
+        {
+          "path": "externals\/images\/.htempty",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 0,
+          "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+        },
+        {
+          "path": "externals\/images\/nophoto_metro_7.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1289,
+          "sha1": "ff11ac462ce2ae2742677ab04e00b7eee65b7d95"
+        },
+        {
+          "path": "externals\/images\/metro_blocks_default.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 654051,
+          "sha1": "0c3192dbf72963e1dbb5b8e0766c697e4faddfcf"
+        },
+        {
+          "path": "externals\/images\/nophoto_metro_6.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1294,
+          "sha1": "7d625691be50ae00f24d1587be958f1cfa1f8cc2"
+        },
+        {
+          "path": "externals\/images\/nophoto_metro_2.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 5548,
+          "sha1": "24a53042b6e834d35823dad0619634652165cdd8"
+        },
+        {
+          "path": "settings",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "settings\/content.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 5020,
+          "sha1": "e0c9c8897781c691a08873386f572861d43c829a"
+        },
+        {
+          "path": "settings\/manifest.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1086,
+          "sha1": "9ec5a74623a13008425853304d327a27f8b02e28"
+        },
+        {
+          "path": "settings\/my.sql",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 3914,
+          "sha1": "851a123db4aaa1355218f499afae39e456ebcd99"
+        },
+        {
+          "path": "Bootstrap.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 2418,
+          "sha1": "93fbf1e6dfb04dd07028e99cecff808511e8c1fe"
+        },
+        {
+          "path": "Api",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "Api\/Core.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 68,
+          "sha1": "f0e14433a68b38eb23bec0623d692853fe2df73d"
+        },
+        {
+          "path": "views",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "views\/scripts",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "views\/scripts\/admin-manage-featured-photos",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "views\/scripts\/admin-manage-featured-photos\/index.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 4862,
+          "sha1": "129fab0f2f9486ad16007c0874aef21810e54050"
+        },
+        {
+          "path": "views\/scripts\/admin-manage-featured-photos\/delete.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 811,
+          "sha1": "edfecd92b91c541b56b7ae03eb1168e6e1f59ec1"
+        },
+        {
+          "path": "views\/scripts\/admin-manage-featured-photos\/create.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 37,
+          "sha1": "7721ea0dfd00864f0b8ca64f0738ed0b033e3668"
+        },
+        {
+          "path": "views\/scripts\/admin-manage-featured-photos\/edit.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 40,
+          "sha1": "e6510171c4ac79e0cb2ecbf0e1d800de52504110"
+        },
+        {
+          "path": "views\/scripts\/admin-menus",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "views\/scripts\/admin-menus\/index.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 3901,
+          "sha1": "25414f74ecb7431cc2ae7f2392262d5601e1b053"
+        },
+        {
+          "path": "views\/scripts\/admin-menus\/edit.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 819,
+          "sha1": "3e4eb6629eb0ae003b17b84b9df29c88d89581ea"
+        },
+        {
+          "path": "views\/scripts\/admin-manage-blocks",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "views\/scripts\/admin-manage-blocks\/index.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 13272,
+          "sha1": "9c0ebf11331ff2ff48ce06c5467060a6460e7d52"
+        },
+        {
+          "path": "views\/scripts\/admin-manage-blocks\/delete.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 758,
+          "sha1": "95681f1013db113cb4a9e4a516f8cd84b8087def"
+        },
+        {
+          "path": "views\/scripts\/admin-manage-blocks\/edit.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 40,
+          "sha1": "e6510171c4ac79e0cb2ecbf0e1d800de52504110"
+        },
+        {
+          "path": "views\/scripts\/admin-manage-blocks\/delete-photo.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 764,
+          "sha1": "6323984d309ceb350a8ee0eb90d514770a51aa82"
+        },
+        {
+          "path": "views\/scripts\/admin-manage-blocks\/add-photo.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 40,
+          "sha1": "e6510171c4ac79e0cb2ecbf0e1d800de52504110"
+        },
+        {
+          "path": "views\/scripts\/admin-manage-introduction",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "views\/scripts\/admin-manage-introduction\/index.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 8039,
+          "sha1": "dd6e7051ceb0be7bcd4730849cd8e3501888d516"
+        },
+        {
+          "path": "views\/scripts\/admin-manage-introduction\/delete.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 758,
+          "sha1": "95681f1013db113cb4a9e4a516f8cd84b8087def"
+        },
+        {
+          "path": "views\/scripts\/admin-manage-introduction\/edit.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 40,
+          "sha1": "e6510171c4ac79e0cb2ecbf0e1d800de52504110"
+        }
+      ]
+    },
+    "application\/languages\/en\/ynresponsivemetro.csv": {
+      "type": "file",
+      "path": "application\/languages\/en\/ynresponsivemetro.csv",
+      "structure": {
+        "path": "ynresponsivemetro.csv",
+        "dir": false,
+        "file": true,
+        "perms": "0644",
+        "size": 0,
+        "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+      }
+    }
+  }
+}

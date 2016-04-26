@@ -1,0 +1,2 @@
+"_EMAIL_SEND_IMAGE_SUBJECT";"An image is sent to you"
+"_EMAIL_SEND_IMAGE_BODYHTML";"Hello,<br> <br> You have received an image ""[object_title]"" from [sender_title] by our website with message:<br> <br> ""[message]""<br> <br> Please click the following link to view this image:<br> <br> http://[host][object_link]<br> <br> Please click the following link to view your friend profile:<br> <br> http://[host][sender_link]"

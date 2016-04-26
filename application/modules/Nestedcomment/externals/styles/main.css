@@ -1,0 +1,374 @@
+/*Common classes*/
+.mbot5 {margin-bottom: 5px;}
+.mright5 {margin-right: 5px;}
+.nestcomment_icon_cross 						{background-image:url(~/application/modules/Nestedcomment/externals/images/cross.png);}
+/*Nested comment*/
+/*.layout_nestedcomment_comments .seaocore_replies > ul > li.seaocore_replies_list.seaocore_prev_count ,
+.seaocore_replies_list .seaocore_replies_child > ul > li.seaocore_replies_list.seaocore_prev_count {*/
+.layout_nestedcomment_comments li.seaocore_replies_list.seaocore_prev_count {
+	min-height: 10px;
+	padding-left: 10px;
+}
+.seaocore_replies_child > ul > li.seaocore_replies_list .seaocore_replies_list {
+	padding-left: 0 !important;
+	margin-left: 0 !important;
+}
+.seaocore_replies_child > ul > li.seaocore_replies_list .seaocore_replies_list .seaocore_replies_info {
+	padding-left: 40px;
+}
+.seao_advcomment span.comments_body {
+	display: inline-table;
+	margin-bottom: 5px;
+	/*overflow: hidden;*/
+}
+/*Sorting in nested Comemnt*/
+.seaonestcomment_pulldown .seaocore_comment_dropbox, 
+.seaonestcomment_pulldown .seaocore_comment_dropbox:hover									 {border:0; height: 15px; width: 15px; }
+.layout_nestedcomment_comments .seaocore_replies .seaocore_replies_sorting {font-size: $theme_font_size;}
+.layout_nestedcomment_comments .seaocore_dropdown_menu > ul > li.active    {background-color:$theme_pulldown_contents_list_background_color_hover;}
+.layout_nestedcomment_comments .seaocore_dropdown_menu > ul > li > a       {min-width: 100px;}
+/*Reply's and comment options*/
+	.layout_nestedcomment_comments .seaocore_replies .seaocore_replies_options 			{font-weight: normal;}
+	.layout_nestedcomment_comments .seaocore_replies .seaocore_replies_options a 		{font-weight: bold;}
+/*Loading image*/
+.nestedcomment_profile_loading_image{
+	background-image:url(~/application/modules/Seaocore/externals/images/loading.gif);
+	width:100%;
+	height:150px;
+	background-repeat:no-repeat;
+	background-position:center;
+}
+.seaocore_replies_info .seaocore_replies_post_loading{
+	top: 12px;
+	right: 10px;
+}
+.seaocore_replies > form {
+	position: relative;
+	display: inline-block;
+}
+.seaocore_replies_post_loading{
+	overflow: hidden;
+	position: absolute;
+	right: 20px;
+	top: 20px;
+}
+/*Like/Dislike icons*/
+.nstcomment_like {
+	background: url(~/application/modules/Nestedcomment/externals/images/like.png) left center no-repeat;
+	padding: 2px 2px 2px 18px;
+}
+.nstcomment_unlike{
+	background: url(~/application/modules/Nestedcomment/externals/images/dislike.png) left center no-repeat;
+	padding: 2px 2px 7px 18px;
+}
+.seaocore_replies_options img, .seaocore_replies_date img{
+	vertical-align:middle;
+}
+.seaocore_replies_date img{
+	height: 13px;
+}
+.seaocore_replies_date {
+  text-transform: capitalize;
+}
+/*likes Popup*/
+#global_page_nestedcomment-like-likelist .seaocore_members_popup .seaocore_members_search_box,
+#global_page_nestedcomment-like-dislikelist .seaocore_members_popup .seaocore_members_search_box{
+	width: auto;
+}
+/*compose icons inside the input box*/
+.layout_nestedcomment_comments .compose-content{
+	padding-right: 80px;
+	word-wrap: break-word;
+}
+.layout_nestedcomment_comments .seaocore_replies_list .compose-content{
+	max-width:495px;
+	min-width: 300px
+}	
+.layout_nestedcomment_comments .seaocore_replies{
+	display: inherit;
+	/*width: 100%;*/
+}
+.seaocore_replies_child form{
+	max-width: 567px;
+}
+.seaocore_replies .seaocore_replies_options, .seaocore_replies > form {
+	width:98%;
+}
+.layout_nestedcomment_comments .seaocore_replies_info form {
+	display: inline-block !important;
+	position: relative;
+	padding: 5px 0;
+}
+.seaocore_replies .compose-menu {
+	margin-top: 9px;
+	overflow: visible;
+	right: 10px;
+	bottom: 20px;
+	height: 16px;
+}
+.compose-menu.inside-compose-icons{
+	position: absolute;
+	float: none;
+  overflow: visible;
+}
+.seaocore_replies .compose-menu.inside-smile-icon{
+	float: left;
+	right: 38px;
+}
+.seaocore_replies_info .compose-menu.inside-compose-icons{
+	right: 28px;
+  bottom: 15px;
+}
+.seaocore_replies div.compose-menu a.compose-activator{
+	background-position: 0 50%;
+	background-repeat: no-repeat;
+	height: 16px;
+	margin-left: 7px;
+	padding-left: 19px;
+	text-indent: -9999px;
+	width:0;
+}
+#compose-photo-preview-image{
+	max-height: 100px;
+}
+.seaocore_replies_info .inside-compose-icons {
+	right: 5px;
+}
+/*Smile*/
+.layout_nestedcomment_comments {
+	padding-bottom:200px;
+}
+.compose-menu.inside-compose-icons + .compose-tray + seao_emoticons {
+	position: absolute;
+	float: none;
+}
+.seaocore_replies > div + form .seao_inside_smile span.adv_post_smile{
+	margin-top:-5.7%;
+}
+.seaocore_replies > div + form + ul .seao_inside_smile span.adv_post_smile{
+	margin-top:-13%;
+}
+.seaocore_replies .seaocore_replies_child .seao_inside_smile span.adv_post_smile{
+	margin-top: -8.7%;
+}
+.seaocore_replies .seao_emoticons .adv_post_smile{
+	height: 17px;
+  width: 20px;
+	top: auto;
+	bottom: 5px;
+}
+.layout_nestedcomment_comments .seaocore_replies .seao_emoticons .adv_post_smile, 
+.seaocore_replies .adv_post_smile:hover{
+	background-position: center -18px;
+}
+/*edit-delete dropbox of comment*/
+.seaocore_comment_dropbox{
+	background-image:url(~/application/modules/Nestedcomment/externals/images/more.png);
+	background-position: center;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	display: block;
+	float: right;
+	height: 13px;
+	width: 13px;
+	padding: 1px;
+	border: 1px solid transparent;
+}
+.seaocore_comment_dropbox:hover{
+	border: 1px solid $theme_border_medium_color;
+}
+.seaocore_cmntbox_menu_wrapper{
+	bottom: auto;
+	box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.3);
+	display: block;
+	left: auto;
+	margin: -1px 0 30px;
+	max-width: 340px;
+	min-width: 100%;
+	position: absolute;
+	right: 0;
+	top: 100%;
+	z-index: 99;
+	border: 1px solid $theme_border_medium_color;
+}
+.seaocore_cmntbox_menu{
+	background-color: #fff;
+	overflow-y: auto;
+}
+.seaocore_cmntbox_menu > ul{
+	margin: 0;
+	max-height: 400px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	padding: 0;
+}
+.seaocore_cmntbox_menu > ul > li > a {
+	background-position: 5px center;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	display: block;
+	font-size: 11px;
+	font-weight: normal;
+	min-width: 100px;
+	padding: 5px 10px;
+	text-decoration: none;
+	color: $theme_font_color;
+}
+/*Select file link*/
+	#nested-compose-photo-body .swiff-uploader-box{
+		top:0 !important;
+		bottom:0 !important;
+		left:0 !important;
+		right:0 !important;
+		margin-top: 80px;
+		margin-left: 16px;
+	}
+	.layout_nestedcomment_comments .seaocore_replies form > ul{
+		padding-bottom:10px;
+	}
+	.layout_nestedcomment_comments .seaocore_replies_child > ul li.seaocore_replies_list{
+		display:block;
+		margin-top: 10px;
+		margin-left: 10px;
+		padding-bottom: 0;
+		padding-top: 10px;
+		border-top: 1px solid $theme_border_medium_color;
+	}
+	.layout_nestedcomment_comments .seaocore_replies_child > ul > li + li{
+		margin-top: 10px;
+		padding: 10px 0 0 32px !important;
+	}
+	.layout_nestedcomment_comments .seaocore_replies > ul > li + li{
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+	#nested-compose-link-body #compose-link-preview-images img{
+		width: auto;
+		max-width: 110px;
+	}
+/*Tip*/
+	.seaocore_replies_comment_likes .tip{
+		background-color: $theme_body_background_color;
+		padding: 1px 5px;
+		border: 1px solid $theme_border_color;
+	}
+/*Nested comment on photo view page*/
+	.albums_viewmedia .layout_nestedcomment_comments{
+	 float: left;
+	 width: 65%;
+	} 
+
+/* Emotions box css start here */
+	.seaocore_comment_embox{
+		background-color: #333333;
+		border: 1px solid #828282;
+		padding: 2px;
+		position: absolute;
+		right: -6px;
+		top: 25px;
+		width: 240px;
+		z-index: 99;
+	}
+	html[dir="rtl"] .seaocore_comment_embox{
+		left:-6px;
+		right:auto;
+	}
+	.seaocore_comment_embox > .seaocore_comment_embox_arrow{
+		display: block;
+		right: 8px;
+		margin-top: -15px;
+		position: absolute;
+	}
+	html[dir="rtl"] .seaocore_comment_embox > .seaocore_comment_embox_arrow{
+		left:8px;
+		right:auto;
+	}
+	.seaocore_comment_embox > .seaocore_comment_embox_title{
+		border-bottom: 1px solid #828282;
+		color: #FFFFFF;
+		float: left;
+		font-size: 11px;
+		height: 13px;
+		line-height: 13px;
+		margin:0 2px;
+		margin-bottom: 2px;
+		overflow: hidden;
+		padding: 3px 0;
+		width: 234px;
+	}
+	html[dir="rtl"] .seaocore_comment_embox > .seaocore_comment_embox_title{
+		float:right;
+	}
+	.seaocore_comment_embox > span.seaocore_comment_embox_icon{
+		margin: 2px;
+		float:left;
+		height:20px;
+		width:20px;
+	}
+	html[dir="rtl"] .seaocore_comment_embox > span.seaocore_comment_embox_icon{
+		float:right;
+	}
+	.seaocore_comment_embox > span.seaocore_comment_embox_icon:hover{
+		border: 1px solid #828282;
+		margin:1px;
+	}
+	.seaocore_comment_embox > span.seaocore_comment_embox_icon img{
+		float:left;
+	}
+	html[dir="rtl"] .seaocore_comment_embox > span.seaocore_comment_embox_icon img{
+		float:right;
+	}
+	.seaocore_comment_embox_open {
+		display:block;
+	}
+	.seaocore_comment_embox_closed {
+		display:none;
+	}
+	.emoticons_comment_active p{
+		display:none !important;
+	}
+	.emotions_use{
+		vertical-align:middle;
+	}   
+/*Nested comment in Advanced activity feed*/
+	ul.seao_reply > li{
+		+foreground;
+		border-top: 1px solid $theme_body_background_color;
+	}
+/*Add photo link in AAF*/
+	.seao_advcomment + form #nested_preview_image,
+	.seao_advcomment #nested_preview_image{
+		border: 1px solid $theme_border_medium_color;
+		margin: 5px -10px 0;
+		padding: 5px;
+	}
+	/*Album-icon in AAF*/
+	.feed_item_body a#compose-photo-form-fancy-file{
+		background-image: url(~/application/modules/Nestedcomment/externals/images/icon/photo-add.png);
+		background-position:left top;
+	}
+	.feed_item_body a#compose-photo-form-fancy-file.hover{
+		background-image: url(~/application/modules/Nestedcomment/externals/images/icon/photo-add.png);
+		background-position:left bottom;
+	}
+/*Smile in AAF*/
+	.adv_post_smile{
+		background-image: url(~/application/modules/Nestedcomment/externals/images/icon/smile-add.png);
+		background-position:top;
+	}
+	.adv-active .adv_post_smile, .adv_post_smile:hover{
+		background-image: url(~/application/modules/Nestedcomment/externals/images/icon/smile-add.png);
+		background-position:bottom;
+	}
+
+	.adv_post_compose_menu_show_tip {
+		top: -30px;
+		right:-2px;
+	}
+	html[dir="rtl"] .adv_post_compose_menu_show_tip{
+		left:-2px;
+		right:auto;
+	}
+	.adv_post_compose_menu span:hover .adv_post_compose_menu_show_tip {
+		display: block;
+	}

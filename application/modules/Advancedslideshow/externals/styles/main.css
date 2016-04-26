@@ -1,0 +1,48 @@
+/* $Id: main.css 2011-10-22 9:40:21Z SocialEngineAddOns Copyright 2010-2011 BigStep Technologies Pvt. Ltd. $ */
+
+.layout_bottom {
+	clear:both;
+}
+.slideshow_slides_filter_widget {
+ +foreground;
+ +rounded;
+	padding: 7px;
+	overflow: hidden;
+	margin-bottom:15px;
+}
+.slideshow {
+	+foreground;
+}
+#blinds-cont,
+#blindsextended1-cont,
+#blindsextended2-cont,
+#blindsextended3-cont,
+#blindsmiddle1-cont,
+#blindsmiddle2-cont,
+#blindsmiddle3-cont,
+#blindsleft1-cont,
+#blindsleft2-cont,
+#blindsleft3-cont,
+#blindsright1-cont,
+#blindsright2-cont,
+#blindsright3-cont,
+#blindsfullwidth1-cont,
+#blindsfullwidth4-cont,
+#blindsfullwidth5-cont,
+#blindsfullwidth2-cont,
+#blindsfullwidth3-cont{
+ +foreground;
+}
+
+
+
+
+
+.noob_slideshow{
+	border: 1px solid #ccc !important;
+	background-color:#eee !important;
+}
+.noob_slidebox_photo img{
+	width:100%;
+	height:100%;
+}

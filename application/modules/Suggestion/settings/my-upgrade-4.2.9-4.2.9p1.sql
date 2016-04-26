@@ -1,0 +1,2 @@
+-- INSERT IGNORE INTO `engine4_core_menuitems` (`name`, `module`, `label`, `plugin`, `params`, `menu`, `submenu`, `enabled`, `custom`, `order`)VALUES (
+-- 'suggestion_invitestatistics', 'suggestion', 'Invite Statistics', NULL , '{"route":"admin_default","module":"suggestion","controller":"settings", "action":"invite-statistics"}', 'sugg_admin_main', NULL , '1', '0', '3');
