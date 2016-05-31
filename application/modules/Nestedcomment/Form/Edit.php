@@ -39,11 +39,6 @@ class Nestedcomment_Form_Edit extends Engine_Form {
             ),
         ));
 
-
-        if (Engine_Api::_()->getApi('settings', 'core')->core_spam_comment) {
-            $this->addElement('captcha', 'captcha', Engine_Api::_()->core()->getCaptchaOptions());
-        }
-
         $this->addElement('Button', 'submit', array(
             'type' => 'submit',
             'ignore' => true,

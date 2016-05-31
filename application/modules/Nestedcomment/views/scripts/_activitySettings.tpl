@@ -86,7 +86,10 @@ $this->headScript()->appendFile($this->layout()->staticBaseUrl . 'application/mo
 $this->headLink()->appendStylesheet($this->layout()->staticBaseUrl
                 . 'application/modules/Seaocore/externals/styles/style_infotooltip.css')
         ->appendStylesheet($this->layout()->staticBaseUrl
-                . 'application/modules/Nestedcomment/externals/styles/style_nestedcomment.css')
-        ->appendStylesheet($this->layout()->staticBaseUrl
+                . 'application/modules/Nestedcomment/externals/styles/style_nestedcomment.css');
+
+if(!$this->isMobile){
+        $this->headLink()->appendStylesheet($this->layout()->staticBaseUrl
                 . 'application/modules/Advancedactivity/externals/styles/style_statusbar.css');
+}
 ?>

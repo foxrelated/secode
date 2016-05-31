@@ -1,0 +1,89 @@
+@include "~/application/modules/Core/externals/styles/constants.css";
+@scan "application/modules" "externals/styles/admin/main.css" "Dbbackup";
+
+.dbbackup_icon_delete{
+    background-image: url("~/application/modules/Dbbackup/externals/images/cross.png");
+}
+
+.dbbackup_white_content 
+{
+	display: none;	
+	position: absolute;
+	left: 40%;
+	width: 30%;
+	top:350px;
+	padding: 16px;
+	border:4px solid #525252;
+	background-color: #fff;	
+	z-index:1002;	
+	overflow: auto;	
+	text-align:center;
+	padding-top:30px;
+	padding-bottom:30px;
+}
+.dbbackup_black_overlay
+{	
+	display: none;
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 1000%;
+	background-color: black;
+	z-index:1001;
+	-moz-opacity: 0.8;
+	opacity:.50;	
+	filter: alpha(opacity=50);
+}
+.dbbackup_create_destination
+{
+	margin-top:10px;
+	float:left;
+}
+.dbbackup_create_destination a
+{
+	padding:0 0 0 20px;
+	float:left;
+	font-weight:bold;
+	background:url(~/application/modules/Dbbackup/externals/images/add.png) no-repeat;
+}
+.dbbackup_destination_list
+{
+	margin-top:10px;
+	float:left;
+	margin-bottom:10px;
+}
+.dbbackup_destination_list a{
+	padding:0 0 0 20px;
+	float:left;
+	font-weight:bold;
+	background:url(~/application/modules/Dbbackup/externals/images/destination_icon.png) no-repeat;
+}
+#dbbackup_includedirectory-element,
+#backup_includedirectory-element
+{
+	max-width:600px;
+}
+.dbbackup_admin_tabs
+{
+  border: none;
+  background-image: none;
+  margin: 5px 0px 15px 0px;
+	float:left;
+}
+.dbbackup_admin_tabs ul
+{
+	padding:0;
+	margin:0;
+	float:left;
+}
+.dbbackup_admin_tabs ul li a:hover
+{
+  background-color: #739eb9;
+	color:#FFFFFF;
+}
+#global_page_dbbackup-admin-backupsettings-index{display:none;}
+.dbbackup_links{
+		clear:both;
+		margin:10px 0;
+}

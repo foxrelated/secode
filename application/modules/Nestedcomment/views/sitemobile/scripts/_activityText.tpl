@@ -313,7 +313,16 @@ if (empty($this->actions)) {
           <?php $commentCount = $action->getComments($this->viewAllComments, true);?> 
           <?php if($showAsLike):?>
           <div class="feed_item_btm" style="text-transform:capitalize;">
-              
+            <?php if($this->hashtag && !empty($this->hashtag[$action->action_id])):?>
+              <ul class="hashtag_activity_item">
+              <?php $url = $this->url(array('controller' => 'index', 'action' => 'index'),"sitehashtag_general")."?search=";
+                for ($i = 0; $i < count($this->hashtag[$action->action_id]); $i++) { ?>
+                <li> 
+                  <a href="<?php echo $url.urlencode($this->hashtag[$action->action_id][$i]);?>"><?php  echo $this->hashtag[$action->action_id][$i]; ?></a>
+                </li>
+                <?php } ?>
+              </ul>
+          <?php endif; ?>
             <?php if ($action->likes()->getLikeCount() > 0 && (count($action->likes()->getAllLikesUsers()) > 0)): ?>
 <!--              <span class="sep">-</span>-->
               <a href="javascript:void(0);" onclick='ActivityAppCommentPopup("<?php echo $this->url(array('module' => 'advancedactivity', 'controller' => 'index', 'action' => 'viewcomment', 'action_id' => $action->getIdentity()), 'default', 'true'); ?>", "feedsharepopup", <?php echo $action->getIdentity();?>)' class="feed_likes">

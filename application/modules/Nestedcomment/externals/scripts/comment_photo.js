@@ -28,8 +28,7 @@ var commentPhoto = new Class({
     this.makeBody();
     this.pluginReady = true;
     
-    var fullUrl = options.fancyUploadOptions.url;
-    
+    var fullUrl = options.requestOptions.url;
     this.elements.form = new Element('form', {
                 'id': 'compose-photo-form',
                 'class': 'compose-form',
@@ -44,13 +43,17 @@ var commentPhoto = new Class({
         'type': 'file',
         'name': 'Filedata',
          'styles' : {
-            'display' : 'none',
-            'visibility' : 'hidden'
+            //'display' : 'none',
+            //'visibility' : 'hidden'
           },
         'events': {
             'change': this.doRequest.bind(this)
         }
     }).inject(this.elements.form);
+    
+    
+    
+    
     this.elements.formFancyContainer = new Element('div', {
       'styles' : {
         'display' : 'none',
@@ -102,7 +105,7 @@ var commentPhoto = new Class({
         policyFile : ('https:' == document.location.protocol ? 'https://' : 'http://')
             + document.location.host
             + en4.core.baseUrl + 'cross-domain',
-        url : fullUrl,
+        url : options.fancyUploadOptions.url,
         appendCookieData: true,
         multiple : false,
         typeFilter: {
@@ -131,6 +134,15 @@ var commentPhoto = new Class({
                   }
           });
         },
+        
+        onFail: function (error) {
+            switch (error) {
+                case 'flash':
+                   self.options.requestOptions.flashEnable = false;
+                   $$('.swiff-uploader-box').destroy();
+                  // break;
+            }
+        },
         onSelectSuccess : function() {
           self.makeLoading('invisible');
           //$('demo-status-overall').setStyle('display', '');
@@ -139,9 +151,15 @@ var commentPhoto = new Class({
         onFileSuccess : function(file, response) {
           var json = new Hash(JSON.decode(response, true) || {});
           self.doProcessResponse(json);
+            $$('div.compose-content').each(function (el, index) {
+                if (index == 0)
+                {
+                    el.set('tabindex', '0');
+                    el.focus();
+                }
+            });
         }
       }, options.fancyUploadOptions);
-
       try {
         this.elements.formFancyUpload = new FancyUpload2(this.elements.formFancyStatus, this.elements.formFancyList, opts);
       } catch( e ) {
@@ -175,7 +193,6 @@ var commentPhoto = new Class({
   },
 
   doProcessResponse : function(responseJSON) {
-  
     // An error occurred
     if( ($type(responseJSON) != 'hash' && $type(responseJSON) != 'object') || $type(responseJSON.src) != 'string' || $type(parseInt(responseJSON.photo_id)) != 'number' ) {
       this.elements.loading.destroy();

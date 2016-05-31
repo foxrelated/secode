@@ -132,15 +132,16 @@
 		right:5px;
 		margin:0 auto -7px;
 	}
-	html[dir="rtl"] .adv_composer_tip img{
-		left:5px;
-		right:auto;
-	}
 	.seao_emoticons .adv_post_smile {
 		background-position: center -2px;
 		right: 5px;
 		top: -21px;
 		position: absolute;
+	}
+	html[dir="rtl"] .adv_composer_tip img,
+	html[dir="rtl"] .seao_emoticons .adv_post_smile{
+		left:5px;
+		right:auto;
 	}
 	.layout_nestedcomment_comments .seao_emoticons .adv_post_smile{
 		background-position: center -1px;
@@ -168,6 +169,11 @@
 		background-position: left top;
 		height: 16px;
 	}
+	html[dir="rtl"] .seao_advcomment + form .compose-body #compose-photo-form-fancy-file,
+	html[dir="rtl"] .seao_advcomment .compose-body #compose-photo-form-fancy-file {
+		right: auto;
+		left: 0;
+	}
 
 /*Add Photo, Add link and Smiley Icons with Post Button*/
 	.seaocore_replies .compose-menu button + div {
@@ -182,6 +188,9 @@
 }
 .seaocore_comments_attachment .seaocore_comments_attachment_photo {
 	float:left;
+}
+html[dir="rtl"] .seaocore_comments_attachment .seaocore_comments_attachment_photo {
+	float:right;
 }
 /*Nested Comment in Photo lightbox*/
 .photo_lightbox_right_content .seaocore_replies_list .compose-content {

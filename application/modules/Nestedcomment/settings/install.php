@@ -17,7 +17,7 @@ class Nestedcomment_Installer extends Engine_Package_Installer_Module {
 
         $PRODUCT_TYPE = 'nestedcomment';
         $PLUGIN_TITLE = 'Nestedcomment';
-        $PLUGIN_VERSION = '4.8.9';
+        $PLUGIN_VERSION = '4.8.10p5';
         $PLUGIN_CATEGORY = 'plugin';
         $PRODUCT_DESCRIPTION = 'Advanced Comments Plugin - Nested Comments, Replies, Voting & Attachments';
         $PRODUCT_TITLE = 'Advanced Comments Plugin - Nested Comments, Replies, Voting & Attachments';

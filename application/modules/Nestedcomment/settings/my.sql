@@ -9,4 +9,4 @@
  * @author     SocialEngineAddOns
  */
 
-INSERT IGNORE INTO `engine4_core_modules` (`name`, `title`, `description`, `version`, `enabled`, `type`) VALUES  ('nestedcomment', 'Advanced Comments Plugin - Nested Comments, Replies, Voting & Attachments', 'Advanced Comments Plugin - Nested Comments, Replies, Voting & Attachments', '4.8.10p3', 1, 'extra') ;
+INSERT IGNORE INTO `engine4_core_modules` (`name`, `title`, `description`, `version`, `enabled`, `type`) VALUES  ('nestedcomment', 'Advanced Comments Plugin - Nested Comments, Replies, Voting & Attachments', 'Advanced Comments Plugin - Nested Comments, Replies, Voting & Attachments', '4.8.10p6', 1, 'extra') ;

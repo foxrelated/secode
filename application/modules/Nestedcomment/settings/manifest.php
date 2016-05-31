@@ -15,7 +15,7 @@ return array(
     array(
         'type' => 'module',
         'name' => 'nestedcomment',
-        'version' => '4.8.10p3',
+        'version' => '4.8.10p6',
         'path' => 'application/modules/Nestedcomment',
         'title' => 'Advanced Comments Plugin - Nested Comments, Replies, Voting & Attachments',
         'description' => 'Advanced Comments Plugin - Nested Comments, Replies, Voting & Attachments',
@@ -45,6 +45,10 @@ return array(
     'hooks' => array(
         array(
             'event' => 'onRenderLayoutDefault',
+            'resource' => 'Nestedcomment_Plugin_Core',
+        ),
+        array(
+            'event' => 'onRenderLayoutDefaultSimple',
             'resource' => 'Nestedcomment_Plugin_Core',
         ),
         array(

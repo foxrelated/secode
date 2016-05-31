@@ -1187,5 +1187,10 @@ endforeach;
 	.seao_advcomment .compose-body #compose-photo-form-fancy-file{
 		right: 23px;
 	}
+	html[dir="rtl"] .seao_advcomment + form .compose-body #compose-photo-form-fancy-file,
+	html[dir="rtl"] .seao_advcomment .compose-body #compose-photo-form-fancy-file {
+		right: auto;
+		left: 23px;
+	}
 </style>
 <?php endif;?>

@@ -1,0 +1,70 @@
+.advancedsearch_content > ul > li > a {
+	float:left;
+}
+ /*for admin side tip placing start*/
+#global_page_siteadvsearch-admin-manage-add-content .form-elements #module-label{
+  display:none;
+ }
+#global_page_siteadvsearch-admin-manage-add-content .form-elements #cancel-label{
+  display:none;
+ }
+#global_page_siteadvsearch-admin-manage-add-content #cancel-wrapper{
+	padding:0;
+}
+#global_page_siteadvsearch-admin-manage-add-content #module-wrapper{
+  padding:0;
+}
+/*for admin side tip placing end*/
+ #dummy_title-element p{
+	 margin:0;
+}
+.icon_siteadvserach_admin_back{
+  background-image:url(~/application/modules/Siteadvsearch/externals/images/admin/back.png);
+}
+#global_page_siteadvsearch-admin-manage-manage-icon .seaocore_admin_order_list li{
+  cursor:default!important;
+}
+#global_page_siteadvsearch-admin-manage-manage-icon .seaocore_admin_order_list li:hover{
+  background-color:transparent!important;
+}
+/*sorting css start*/
+.admin_menus_items{
+  overflow:hidden;"
+}
+.admin_menus_items > li {
+  margin-bottom: 7px;
+  clear: both;
+  overflow: hidden;
+}
+.admin_menus_items .item_wrapper {
+  background-color: #F5F5F5;
+  border: 1px solid #DDDDDD;
+  border-radius: 3px 3px 3px 3px;
+  clear: both;
+  display: block;
+  float: left;
+  overflow: hidden;
+  width: 200px;
+}
+.admin_menus_items .item_options {
+  color: #AAAAAA;
+  display: block;
+  float: right;
+  font-size: 0.8em;
+  overflow: hidden;
+  padding: 7px 10px;
+  text-align: right;
+}
+.admin_menus_items .item_label {
+  display: block;
+  font-size: 0.8em;
+  font-weight: bold;
+  overflow: hidden;
+  padding: 7px 10px;
+}
+/*sorting css end*/
+/*Table on manage page*/
+.seaocore_admin_order_list ul#menu_list{width:auto;}
+.categories-image-preview img {
+	max-width: 48px;
+} 

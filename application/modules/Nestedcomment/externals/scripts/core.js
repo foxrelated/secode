@@ -950,6 +950,8 @@ function makeSmilies(formEle, menuElement) {
     $('emotion_nested_comment_symbol').setAttribute('id','emotion_nested_comment_symbol_' + formEle.get('id'));
     $('emoticons-nested-comment-board').setAttribute('id','emoticons-nested-comment-board_' + formEle.get('id'));
     
+
+    
 }
 
 function tagContentComment() {
@@ -1096,6 +1098,14 @@ function addCommentEmotionIcon(iconCode, obj){
     content=content.replace(/(<br>)$/g, "");
     content =  content +' '+ iconCode; 
     composerObj.setContent(content);
+        $$('div.compose-content').each(function (el, index) {
+                if (index == 0)
+                {
+                    el.set('tabindex', '0');
+                    el.focus();
+                }
+            });
+ 
  }
   //hide on body click
   en4.core.runonce.add(function() {
@@ -1155,6 +1165,14 @@ function addNestedCommentEmotionIcon(iconCode, obj){
         content=content.replace(/(<br>)$/g, "");
         content =  content +' '+ iconCode; 
        composeInstanceComment.setContent(content);
+       
+           $$('div.compose-content').each(function (el, index) {
+                if (index == 0)
+                {
+                    el.set('tabindex', '0');
+                    el.focus();
+                }
+            });
  }
   en4.core.runonce.add(function() {
       $(document.body).addEvent('click',function(e) {
@@ -1181,6 +1199,8 @@ function setNestedCommentEmotionLabelPlate(label,symbol,obj){
     $('emotion_nested_comment_label_'  + formEle.get('id')).innerHTML=label;
     if($('emotion_nested_comment_symbol_' + formEle.get('id')))
     $('emotion_nested_comment_symbol_' + formEle.get('id')).innerHTML=symbol;
+
+
 }
 
 function showCommentBox(comment_box_id, body_box_id) {
@@ -1191,11 +1211,7 @@ function showCommentBox(comment_box_id, body_box_id) {
         var composerObj = $(comment_box_id).retrieve('composer');
         composerObj.focus();
     }
-    if($(comment_box_id).style.display == 'none') {
-       $(comment_box_id).style.display = 'block';
-    } else {
-       $(comment_box_id).style.display = 'none'; 
-    }
+    $(comment_box_id).style.display = 'block';
     $(body_box_id).focus();
 }
 
@@ -1216,11 +1232,7 @@ function showReplyBox(reply_box_id, body_box_id) {
         var composerObj = $(reply_box_id).retrieve('composer');
         composerObj.focus();
     }
-    if($(reply_box_id).style.display == 'none') {
-       $(reply_box_id).style.display = 'block';
-    } else {
-       $(reply_box_id).style.display = 'none'; 
-    }
+    $(reply_box_id).style.display = 'block';
     $(body_box_id).focus();
 }
 

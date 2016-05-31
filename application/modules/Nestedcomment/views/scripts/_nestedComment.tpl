@@ -10,6 +10,27 @@
  * @author     SocialEngineAddOns
  */
 ?>
+
+<?php 
+
+        $this->headLink()->appendStylesheet($this->layout()->staticBaseUrl . 'application/modules/Seaocore/externals/styles/style_comment.css')
+                ->appendStylesheet($this->layout()->staticBaseUrl
+                        . 'application/modules/Nestedcomment/externals/styles/style_nestedcomment.css');
+        $this->headTranslate(array('Write a comment...', 'Write a reply...', 'Attach a Photo', 'Post a comment...', 'Post a reply...'));
+        $this->headScript()
+                ->appendFile($this->layout()->staticBaseUrl . 'application/modules/Nestedcomment/externals/scripts/composernestedcomment.js');
+        $this->headScript()
+                ->appendFile($this->layout()->staticBaseUrl . 'application/modules/Nestedcomment/externals/scripts/composer_nested_comment_tag.js');
+        $this->headScript()
+                ->appendFile($this->layout()->staticBaseUrl . 'application/modules/Nestedcomment/externals/scripts/comment_photo.js');
+        $this->headScript()
+                ->appendFile($this->layout()->staticBaseUrl . 'application/modules/Nestedcomment/externals/scripts/core.js')
+                ->appendFile($this->layout()->staticBaseUrl . 'application/modules/Nestedcomment/externals/scripts/composer.js')
+                ->appendFile($this->layout()->staticBaseUrl . 'application/modules/Nestedcomment/externals/scripts/composer_tag.js')
+                ->appendFile($this->layout()->staticBaseUrl . 'application/modules/Nestedcomment/externals/scripts/like.js')
+                ->appendFile($this->layout()->staticBaseUrl . 'application/modules/Nestedcomment/externals/scripts/composer_photo.js')
+                ->appendFile($this->layout()->staticBaseUrl . 'application/modules/Nestedcomment/externals/scripts/composer_link.js');
+        ?>
 <?php $photoLightboxComment = 0;?>
 <?php $params = Zend_Controller_Front::getInstance()->getRequest()->getParams();?>
 <?php if((isset($params['lightbox_type']) &&  $params['lightbox_type'] == 'photo') || isset($params['action']) && $params['action'] == 'light-box-view'): ?> 

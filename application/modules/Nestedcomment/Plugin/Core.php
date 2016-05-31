@@ -37,4 +37,8 @@ class Nestedcomment_Plugin_Core extends Zend_Controller_Plugin_Abstract {
         return $this->onRenderLayoutDefault($event);
     }
 
+    public function onRenderLayoutDefaultSimple($event) {
+        return $this->onRenderLayoutDefault($event);
+    }
+
 }

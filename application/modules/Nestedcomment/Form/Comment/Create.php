@@ -27,7 +27,7 @@ class Nestedcomment_Form_Comment_Create extends Engine_Form {
         $this->clearDecorators()
                 ->addDecorator('FormElements')
                 ->addDecorator('Form')
-                ->setAttrib('class', null)
+                ->setAttrib('class', 'seaocore_form_comment')
                 ->setAction(Zend_Controller_Front::getInstance()->getRouter()->assemble(array()));
 
         //$allowed_html = Engine_Api::_()->getApi('settings', 'core')->core_general_commenthtml;
@@ -50,10 +50,6 @@ class Nestedcomment_Form_Comment_Create extends Engine_Form {
                 new Engine_Filter_Censor(),
             ),
         ));
-
-        if (Engine_Api::_()->getApi('settings', 'core')->core_spam_comment) {
-            $this->addElement('captcha', 'captcha', Engine_Api::_()->core()->getCaptchaOptions());
-        }
 
         $this->addElement('Button', 'submit', array(
             'type' => 'submit',
