@@ -42,7 +42,6 @@ class Advancedactivity_Model_Helper_Var extends Advancedactivity_Model_Helper_Ab
 
   protected function translateHTML($htmlString)
   {
-	  return $htmlString;
     $dom = new DOMDocument();
     if ($dom) {
       $dom->loadHtml($htmlString);

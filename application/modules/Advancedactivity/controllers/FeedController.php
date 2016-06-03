@@ -39,7 +39,7 @@ class Advancedactivity_FeedController extends Core_Controller_Action_Standard {
         'hide_resource_type' => $type,
         'hide_resource_id' => $id
     ));
-
+echo json_encode(array('id' => $id));
     exit();
   }
 
@@ -144,6 +144,7 @@ class Advancedactivity_FeedController extends Core_Controller_Action_Standard {
     $hideTable->delete(array('user_id = ?' => $viewer_id,
         'hide_resource_type =? ' => $type,
         'hide_resource_id =?' => $id));
+    echo json_encode(array('id' => $id));
     exit(0);
   }
 
@@ -172,45 +173,6 @@ class Advancedactivity_FeedController extends Core_Controller_Action_Standard {
     if (!empty($user_ids)) {
       $users = Engine_Api::_()->getItemMulti('user', $user_ids);
     }
-
-// 		if(Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitetagcheckin')) {
-// 			$addLocationTable = Engine_Api::_()->getDbtable('addlocations', 'sitetagcheckin'); 
-//       $params = array();
-//       $params['action_id'] = $id;
-//       $params['checkowner'] = 0;
-//       $params['owner_id'] = $viewer->getIdentity();
-// 			$existingResults = $addLocationTable->getCheckinsDetails($params);
-//       if(!empty($existingResults)) {
-// 				if(empty($_POST['selected_resources'])) {
-// 					foreach($existingResults as $values ) {
-// 						$addLocationTable->delete(array(
-// 								'owner_id = ?' => $values['owner_id'], 'action_id = ?' => $id ));
-// 					}
-// 				}  
-// 				else {
-// 					foreach($existingResults as $values ) {
-// 						if(!in_array($values['owner_id'], $user_ids)) {
-// 							$addLocationTable->delete(array(
-// 									'owner_id = ?' => $values['owner_id'], 'action_id = ?' => $id ));
-// 						}
-// 					}          
-// 				}
-//       }
-// 
-//       $params['checkowner'] = 1;
-// 			$rowsContent = $addLocationTable->getCheckinsDetails($params);
-// 			foreach($users as $user) {
-// 				unset($rowsContent['addlocation_id']);
-//         $params['owner_id'] = $user->user_id;
-// 				$rowADD = $addLocationTable->getCheckinsDetails($params);
-// 				if(empty($rowADD)){   
-// 					$content = $addLocationTable->createRow();
-// 					$content->setFromArray($rowsContent);
-// 					$content->owner_id = $user->user_id;
-// 					$content->save();
-// 				}
-// 			}
-// 		}
 
     $tagsAdded = $actionTag->setTagMaps($action->getSubject(), $users);
 
@@ -261,11 +223,6 @@ class Advancedactivity_FeedController extends Core_Controller_Action_Standard {
     if (!empty($tagMap))
       $tagMap->delete();
 
-//     if(Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitetagcheckin')) {
-//       //delete the all hide entry belong to user 
-//       Engine_Api::_()->getDbtable('addlocations', 'sitetagcheckin')->delete(array(
-//           'owner_id = ?' => $viewer_id, 'action_id = ?' => $id ));
-//     }
 
     return $this->_forward('success', 'utility', 'core', array(
                 'messages' => array(Zend_Registry::get('Zend_Translate')->_('Your tag has been removed.')),
@@ -362,4 +319,79 @@ class Advancedactivity_FeedController extends Core_Controller_Action_Standard {
     $this->view->count = $paginator->getTotalItemCount();
   }
 
+  /**
+   * Handles HTTP POST request to delete a comment or an activity feed item
+   * @return void
+   */
+  function editAction()
+  {
+    if (!$this->_helper->requireUser()->isValid())
+      return;
+
+    $viewer = Engine_Api::_()->user()->getViewer();
+    $activity_moderate = Engine_Api::_()->getDbtable('permissions', 'authorization')->getAllowed('user', $viewer->level_id, 'activity');
+
+    $this->view->action_id = $action_id = $this->_getParam('action_id', null);
+    $action = Engine_Api::_()->getDbtable('actions', 'advancedactivity')->getActionById($action_id);
+    // Both the author and the person being written about get to delete the action_id
+    if (empty($action_id) || empty($action)) {
+      $this->view->status = false;
+      $this->view->error = Zend_Registry::get('Zend_Translate')->_('Invalid data.');
+      return;
+    }
+    if (!(
+      $activity_moderate ||
+      ('user' == $action->subject_type && $viewer->getIdentity() == $action->subject_id))) {
+      $this->view->status = false;
+      $this->view->error = Zend_Registry::get('Zend_Translate')->_('Not allowded.');
+      return;
+    }
+
+    $form = new Advancedactivity_Form_EditPost();
+    if (!$this->getRequest()->isPost() || !$form->isValid($this->getRequest()->getPost())) {
+      return;
+    }
+    // Process
+    $db = Engine_Db_Table::getDefaultAdapter();
+    $db->beginTransaction();
+    $values = $form->getValues();
+    $body = $values['body'];
+    $body = html_entity_decode($body, ENT_QUOTES, 'UTF-8');
+    $values['body'] = html_entity_decode($body, ENT_QUOTES, 'UTF-8');
+    $composerDatas = $this->getRequest()->getParam('composer', null);
+
+    try {
+      $action->setFromArray($values);
+      $action->save();
+      if ($action && !empty($composerDatas)) {
+        foreach ($composerDatas as $composerDataType => $composerDataValue) {
+          if (empty($composerDataValue)) {
+            continue;
+          }
+          foreach (Zend_Registry::get('Engine_Manifest') as $data) {
+            if (isset($data['composer'][$composerDataType]['plugin']) && !empty($data['composer'][$composerDataType]['plugin'])) {
+              $pluginClass = $data['composer'][$composerDataType]['plugin'];
+              $plugin = Engine_Api::_()->loadClass($pluginClass);
+              $method = 'onAAFComposer' . ucfirst($composerDataType);
+              if (method_exists($plugin, $method))
+                $plugin->$method(array($composerDataType => $composerDataValue), array(
+                  'action' => $action));
+            }
+          }
+        }
+      }
+
+      $db->commit();
+    } catch (Exception $e) {
+      $db->rollBack();
+      throw $e;
+    }
+
+    // Redirect if not json context\\
+    if (null === $this->_helper->contextSwitch->getCurrentContext()) {
+      $this->_helper->redirector->gotoRoute(array(), 'default', true);
+    } else if ('json' === $this->_helper->contextSwitch->getCurrentContext()) {
+      $this->view->body = $this->view->advancedActivity($action, array('noList' => true));
+    }
+  }
 }

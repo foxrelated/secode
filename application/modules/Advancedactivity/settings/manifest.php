@@ -1,21 +1,21 @@
 <?php
- /**
-* SocialEngine
-*
-* @category   Application_Extensions
-* @package    Advancedactivity
-* @copyright  Copyright 2011-2012 BigStep Technologies Pvt. Ltd.
-* @license    http://www.socialengineaddons.com/license/
-* @version    $Id: manifest.php 6590 2012-26-01 00:00:00Z SocialEngineAddOns $
-* @author     SocialEngineAddOns
-*/
 
+/**
+ * SocialEngine
+ *
+ * @category   Application_Extensions
+ * @package    Advancedactivity
+ * @copyright  Copyright 2011-2012 BigStep Technologies Pvt. Ltd.
+ * @license    http://www.socialengineaddons.com/license/
+ * @version    $Id: manifest.php 6590 2012-26-01 00:00:00Z SocialEngineAddOns $
+ * @author     SocialEngineAddOns
+ */
 return array(
     'package' =>
     array(
         'type' => 'module',
         'name' => 'advancedactivity',
-        'version' => '4.8.8p1',
+        'version' => '4.8.10p19',
         'path' => 'application/modules/Advancedactivity',
         'title' => 'Advanced Activity Feeds / Wall Plugin',
         'description' => 'Advanced Activity Feeds / Wall Plugin',
@@ -45,7 +45,7 @@ return array(
     'compose' => array(
         array('_composeFacebook.tpl', 'advancedactivity'),
         array('_composeTwitter.tpl', 'advancedactivity'),
-     //   array('_composeSocialengine.tpl', 'advancedactivity'),
+    //   array('_composeSocialengine.tpl', 'advancedactivity'),
     ),
     'composer' => array(
         'advanced_facebook' => array(
@@ -95,7 +95,7 @@ return array(
         'advancedactivity_list',
         'advancedactivity_report',
         'advancedactivity_list_item',
-	'advancedactivity_customblock',
+        'advancedactivity_customblock',
     ),
     // Routes --------------------------------------------------------------------
     'routes' => array(
@@ -111,7 +111,6 @@ return array(
                 'action' => '\D+',
             )
         ),
-        
     )
 );
 ?>

@@ -13,10 +13,11 @@
 class Advancedactivity_Plugin_Core extends Zend_Controller_Plugin_Abstract {
 
   public function onAlbumPhotoUpdateAfter($event) {
-    // 
+    //
     if (Engine_Api::_()->hasModuleBootstrap('sitealbum')) {
        $sitealbumVersion = Engine_Api::_()->getDbtable('modules', 'core')->getModule('sitealbum')->version;
-       if ($sitealbumVersion >= '4.8.5') {
+       $versionCheck = Engine_Api::_()->advancedactivity()->checkVersion($sitealbumVersion, '4.8.4');
+       if ($versionCheck) {
          return;
        }
     }

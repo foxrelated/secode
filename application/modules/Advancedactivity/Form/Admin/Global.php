@@ -69,8 +69,6 @@ class Advancedactivity_Form_Admin_Global extends Engine_Form {
         'value' => $settings->getSetting('advancedactivity.sitetabtitle', "What's New!"),
     ));
 
-
-
     $this->addElement('Radio', 'advancedactivity_tabtype', array(
         'label' => 'Tab Types',
         'description' => 'Select the design type for the tabs in Advanced Activity Feeds. (These tabs enable users to switch between Welcome tab, feeds from your website and feeds from Facebook, Twitter and LinkedIn. Below, you will be able to choose the icon for your site\'s tab. In the Advanced Activity Feeds widget, for any placement, you can choose the tabs/sections to be available via the Edit Settings popup for the widget. The tabs are visible only if more than 1 sections are selected. On Content Profile/View pages, the Welcome, Facebook, Twitter and LinkedIn tabs will not be shown even if they are enabled and tabs will not appear there.)',
@@ -257,7 +255,7 @@ class Advancedactivity_Form_Admin_Global extends Engine_Form {
     ));
     $this->addElement('Radio', 'advancedactivity_scroll_autoload', array(
         'label' => 'Auto-Loading Activity Feeds On-scroll',
-        'description' => "Do you want to enable auto-loading of old activity feeds when users scroll down to the bottom of Advanced Activity Feeds? (This setting will apply to the site activity feeds as well as those from Facebook, Twitter and LinkedIn.)",
+        'description' => "Do you want to enable auto-loading of old activity feeds when users scroll down to the bottom of Advanced Activity Feeds? (This setting will apply to the site activity feeds as well as those from Twitter.)",
         'multiOptions' => array(
             1 => 'Yes',
             0 => 'No'
@@ -394,7 +392,7 @@ class Advancedactivity_Form_Admin_Global extends Engine_Form {
      */
 
     $this->addElement('Select', 'advancedactivity_update_frequency', array(
-        'label' => 'Update Frequency for Facebook, Twitter and LinkedIn Feeds',
+        'label' => 'Update Frequency for Twitter Feeds',
         'description' => 'This application connects to the respective third-party (using AJAX) after regular intervals to check if there are any new updates to the corresponding activity feed. How often do you want this process to occur? A shorter amount of time will consume more server resources. If your server is experiencing slowdown issues, try lowering the frequency the application checks for updates.',
         'value' => $coreSettingsApi->getSetting('advancedactivity.update.frequency', 120000),
         'multiOptions' => array(

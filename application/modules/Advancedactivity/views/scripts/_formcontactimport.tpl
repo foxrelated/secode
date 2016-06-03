@@ -60,7 +60,7 @@
     <input name="bitly_secretkey" id="bitly_secretkey" value="<?php echo Engine_Api::_()->getApi('settings', 'core')->getSetting('bitly.secretkey'); ?>" type="text">
   </div>
 </div>
-
+<?php if(false): ?>
 <div class="form-sub-heading">
 	<div><?php echo $this->translate("Instagram Integration Settings");?></div>
 	<div><a href="<?php echo $this->url(array('module' => 'seaocore', 'controller' => 'admin-settings', 'action' => 'help-invite'), 'default', true); ?>" target="_blank" ><img src="<?php echo $this->layout()->staticBaseUrl ?>application/modules/Advancedactivity/externals/images/admin/help.gif"></a></div>
@@ -119,5 +119,7 @@
     <input type="text" name="instagram_image_width" id="instagram_image_width" value="<?php echo Engine_Api::_()->getApi('settings', 'core')->getSetting('instagram.image.width', 150); ?>">
   </div>
 </div>
+
+<?php endif; ?>
 
 <div class="form-sub-heading"></div>

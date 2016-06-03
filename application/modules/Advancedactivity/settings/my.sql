@@ -1,4 +1,4 @@
-INSERT IGNORE INTO `engine4_core_modules` (`name`, `title`, `description`, `version`, `enabled`, `type`) VALUES  ('advancedactivity', 'Advanced Activity', 'Advanced Activity', '4.8.8p1', 1, 'extra') ;
+INSERT IGNORE INTO `engine4_core_modules` (`name`, `title`, `description`, `version`, `enabled`, `type`) VALUES  ('advancedactivity', 'Advanced Activity', 'Advanced Activity', '4.8.10p19', 1, 'extra') ;
 
 -- ----------------------------------------------------------
 

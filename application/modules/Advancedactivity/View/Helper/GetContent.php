@@ -41,6 +41,21 @@ class Advancedactivity_View_Helper_GetContent extends Zend_View_Helper_Abstract 
     } else {
       $content = $model->assemble($action->getTypeInfo()->body, $params);
     }
+    
+    if (Engine_Api::_()->hasModuleBootstrap('sitehashtag')) {
+        
+        if (!Zend_Registry::isRegistered('sitehashtag_activity_content')) {
+            $isEnabled = Engine_Api::_()->getDbtable('contents', 'sitehashtag')->getEnable('activity');
+            Zend_Registry::set('sitehashtag_activity_content', $isEnabled);
+        }
+        else {
+            $isEnabled = Zend_Registry::get('sitehashtag_activity_content');
+        }
+        
+        if($isEnabled) {
+            $this->makeHashLink($content, $action);
+        }
+    }
 
     if ($shortView && $content) {
       //rtrim
@@ -261,5 +276,37 @@ class Advancedactivity_View_Helper_GetContent extends Zend_View_Helper_Abstract 
 
     return $content;
   }
+
+  private function makeHashLink(&$body, $action) {
+
+        preg_match_all("/\B#\w*[a-zA-Z]+\w*/", $body, $hashtags);
+        $hashtags = $hashtags[0];
+        if (empty($hashtags) || !$action->body) {
+            return;
+        }
+
+        $request = Zend_Controller_Front::getInstance()->getRequest();
+        $newHashTagStr = '';
+        $convertStr = $body;
+        foreach ($hashtags as $hashtag) {
+            $find = strpos($convertStr, $hashtag);
+            $substr = $find ? substr($convertStr, 0, $find) : '';
+            $newHashTagStr .=$substr . $this->getHashLinkForString($hashtag, $request->getActionName());
+            $convertStr = substr($convertStr, $find + strlen($hashtag));
+        }
+        $newHashTagStr .=$convertStr;
+        $body = $newHashTagStr;
+    }
+
+    private function getHashLinkForString($hashtag, $action){
+
+        $view = Zend_Registry::get('Zend_View');
+        $url = $view->url(array('controller' => 'index', 'action' => 'index'),"sitehashtag_general")."?search=".urlencode($hashtag);
+
+        if ($action == "share-item")
+              return "<a href='$url' target='_blank'>" . urldecode($hashtag) . "</a>";
+        else
+              return "<a href='$url'>" . $hashtag . "</a>";
+    }
 
 }

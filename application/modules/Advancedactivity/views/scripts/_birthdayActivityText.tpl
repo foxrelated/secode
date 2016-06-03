@@ -371,11 +371,11 @@
 	                          <li class="comments_like">
 	                            -
 	                            <?php if( !$isLiked ): ?>
-	                              <a href="javascript:void(0)" onclick="en4.advancedactivity.like(this, <?php echo sprintf("'%d', %d", $action->getIdentity(), $comment->getIdentity()) ?>);" action-title="<?php echo $this->translate('unlike') ?> >
+	                              <a href="javascript:void(0)" onclick="en4.advancedactivity.like(this, <?php echo sprintf("'%d', %d", $action->getIdentity(), $comment->getIdentity()) ?>);" action-title="<?php echo $this->translate('unlike') ?>" >
 	                                <?php echo $this->translate('like') ?>
 	                              </a>
 	                            <?php else: ?>
-	                              <a href="javascript:void(0)" onclick="en4.advancedactivity.unlike(this, <?php echo sprintf("'%d', %d", $action->getIdentity(), $comment->getIdentity()) ?>);" action-title="<?php echo $this->translate('like') ?>>
+	                              <a href="javascript:void(0)" onclick="en4.advancedactivity.unlike(this, <?php echo sprintf("'%d', %d", $action->getIdentity(), $comment->getIdentity()) ?>);" action-title="<?php echo $this->translate('like') ?>">
 	                                <?php echo $this->translate('unlike') ?>
 	                              </a>
 	                            <?php endif ?>

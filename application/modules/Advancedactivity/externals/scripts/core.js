@@ -3,6 +3,55 @@
 
 var adfShare = 0, Share_Translate = en4.core.language.translate('ADVADV_SHARE'), maxAutoScrollAAF = 0, countScrollAAFSocial = 0, countScrollAAFFB = 0, countScrollAAFTweet = 0, countScrollAAFLinkedin = 0, countScrollAAFInstagram = 0;
 en4.advancedactivity = {
+    bindEditFeed: function(action_id, composerOptions) {
+      var editComposeInstance = new Composer('edit-body-'+action_id, {
+        lang: composerOptions.lang,
+        hideSubmitOnBlur: false,
+        allowEmptyWithoutAttachment: composerOptions.allowEmptyWithoutAttachment,
+      });
+
+      document.store('editComposeInstance'+action_id, editComposeInstance);
+
+      $('activity-item-'+action_id).getElement('.feed_item_option_edit').addEvent('click', function(event) {
+
+        var el = $(event.target);
+        var parent = el.getParent('.activity-item');
+        parent.getElement('.feed_item_body_content').setStyle('display', 'none');
+        parent.getElement('.feed_item_body_edit_content').setStyle('display', 'block');
+      });
+
+      $('activity-item-'+action_id).getElement('.feed-edit-cancel').addEvent('click', function(event) {
+        var el = $(event.target);
+        var parent = el.getParent('.activity-item');
+        parent.getElement('.feed_item_body_edit_content').setStyle('display', 'none');
+        parent.getElement('.feed_item_body_content').setStyle('display', 'block');
+      });
+
+      editComposeInstance.getForm().addEvent('submit', function(event) {
+        event.stop();
+        if (!editComposeInstance.options.allowEmptyWithoutAttachment && editComposeInstance.getContent() == '') {
+          return;
+        }
+        this.fireEvent('editorSubmit');
+        var params = editComposeInstance.getForm().toQueryString().parseQueryString();
+        en4.core.request.send(new Request.JSON({
+          url: editComposeInstance.getForm().get('action'),
+          data: $merge({
+            format: 'json',
+            subject: en4.core.subject.guid
+          },params),
+          method: 'POST', //or post
+          onRequest: function() {
+            editComposeInstance.getForm().getElementById('fieldset-buttons').setStyle('display', 'none');
+            en4.core.loader.inject(editComposeInstance.getForm().getElementById('buttons-wrapper'));
+          }
+        }), {
+          'force': true,
+          'element': $('activity-item-'+action_id),
+          'updateHtmlMode': 'comments'
+        });
+      }).bind(editComposeInstance);
+    },
     addfriend: function(action_id, user_id) {
         en4.core.request.send(new Request.JSON({
             url: en4.core.baseUrl + 'advancedactivity/index/add-friend',
@@ -672,7 +721,9 @@ var resetAAFTextarea = function() {
     composeInstance.signalPluginReady(false);
     composeInstance.deactivate();
     composeInstance.setContent('');
-    $('activity-form').removeClass('adv-active');
+    if(showVariousTabs == 0) {
+        $('activity-form').removeClass('adv-active');
+    }
     $$('.overTxtLabel').setStyle('display', 'block');
     var content = composeInstance.elements.body.getParent().getParent().getLast('div');
     content.getElements('span').each(function(el) {
@@ -805,7 +856,7 @@ var resetAAFTextarea = function() {
         checkTwitter();
 
         checkLinkedin();
-        checkInstagram();
+//        checkInstagram();
         //}
 
         if ($('adv_post_container_icons'))
@@ -1555,27 +1606,29 @@ var editPostStatusPrivacy = function(action_id, privacy) {
 // Insert Webcam
 window.addEvent('domready', function() {
     if ((typeof _is_webcam_enable != 'undefined') && (typeof _aaf_webcam_type != 'undefined')) {
+        setTimeout(function() {
         if ((_is_webcam_enable == 1) && $('compose-photo-activator') && (_aaf_webcam_type == 0)) {
             $('compose-photo-activator').addEvent('click', function() {
-                setTimeout("aafWebcam('compose-photo-body', 0)", 100);
-            })
+                setTimeout("aafWebcam('compose-tray', 0)", 100);
+            });
         } else if ((_is_webcam_enable == 1) && $('compose-sitepagephoto-activator') && (_aaf_webcam_type == 1)) {
             $('compose-sitepagephoto-activator').addEvent('click', function() {
                 setTimeout("aafWebcam('compose-sitepagephoto-body', 1)", 100);
-            })
+            });
         } else if ((_is_webcam_enable == 1) && $('compose-sitebusinessphoto-activator') && (_aaf_webcam_type == 2)) {
             $('compose-sitebusinessphoto-activator').addEvent('click', function() {
                 setTimeout("aafWebcam('compose-sitebusinessphoto-body', 2)", 100);
-            })
+            });
         } else if ((_is_webcam_enable == 1) && $('compose-sitegroupphoto-activator') && (_aaf_webcam_type == 3)) {
             $('compose-sitegroupphoto-activator').addEvent('click', function() {
                 setTimeout("aafWebcam('compose-sitegroupphoto-body', 3)", 100);
-            })
+            });
         } else if ((_is_webcam_enable == 1) && $('compose-sitestorephoto-activator') && (_aaf_webcam_type == 4)) {
             $('compose-sitestorephoto-activator').addEvent('click', function() {
                 setTimeout("aafWebcam('compose-sitestorephoto-body', 3)", 100);
-            })
+            });
         }
+        }, 300);
     }
 });
 
@@ -1583,12 +1636,15 @@ window.addEvent('domready', function() {
 function aafWebcam(web_class, type) {
     if (!document.getElementById('compose-webcam-body')) {
         var webcamURL = "'" + en4.core.baseUrl + 'advancedactivity/index/webcamimage?webcam_type=album_photo&aaf_type=' + type + '&subject_id=' + _subject_id + '' + "'";
-        var insertWebcam = new Element('span', {
+        var insertWebcam = new Element('div', {
             'id': 'compose-webcam-body',
             'class': 'compose-webcam-body'
         });
-        insertWebcam.innerHTML = '<span class="aaf_media_sep">' + en4.core.language.translate("OR") + '</span><a class="buttonlink aaf_icon_webcam" href="javascript: void(0);" onClick="uploadImage(' + webcamURL + ')"> ' + en4.core.language.translate("Use Webcam") + ' </a>';
+        insertWebcam.innerHTML = '<span class="aaf_media_sep">' + en4.core.language.translate("OR") + '</span><a class="aaf_icon_webcam" href="javascript: void(0);" onClick="uploadImage(' + webcamURL + ')"> ' + en4.core.language.translate("Use Webcam") + ' </a>';
         insertWebcam.inject($(web_class));
+				if ($('compose-photo-activator')) {
+					$('compose-webcam-body').inject('compose-photo-body', 'before');
+				}
     }
 }
 

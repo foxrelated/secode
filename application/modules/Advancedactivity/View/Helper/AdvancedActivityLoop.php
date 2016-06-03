@@ -16,7 +16,6 @@ class Advancedactivity_View_Helper_AdvancedActivityLoop extends Activity_View_He
         if (null == $actions || (!is_array($actions) && !($actions instanceof Zend_Db_Table_Rowset_Abstract))) {
             return '';
         }
-
         if (isset($data['isShort']) && $data['isShort']) {
             $data = array_merge($data, array(
                 'actions' => $actions,
@@ -82,6 +81,7 @@ class Advancedactivity_View_Helper_AdvancedActivityLoop extends Activity_View_He
                     }
                 }
             }
+            
             $composerOptions = Engine_Api::_()->getApi('settings', 'core')->getSetting('advancedactivity.composer.options', array("emotions", "withtags"));
             $data = array_merge($data, array(
                 'actions' => $actions,

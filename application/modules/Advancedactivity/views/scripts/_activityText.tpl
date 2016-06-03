@@ -10,7 +10,8 @@
  * @author     SocialEngineAddOns
  */
 ?>
-<?php $sharesTable = Engine_Api::_()->getDbtable('shares', 'advancedactivity'); ?>
+<?php 
+$sharesTable = Engine_Api::_()->getDbtable('shares', 'advancedactivity'); ?>
 <?php
 if (empty($this->actions)) {
   echo $this->translate("The action you are looking for does not exist.");
@@ -22,7 +23,9 @@ if (empty($this->actions)) {
 
 <?php
 $this->headScript()->appendFile($this->layout()->staticBaseUrl . 'application/modules/Activity/externals/scripts/core.js')
-        ->appendFile($this->layout()->staticBaseUrl . 'externals/flowplayer/flashembed-1.0.1.pack.js');
+      ;
+
+$this->videoPlayerJs();
 
 $this->headLink()->appendStylesheet($this->layout()->staticBaseUrl
         . 'application/modules/Seaocore/externals/styles/style_infotooltip.css');
@@ -77,7 +80,7 @@ $this->headLink()->appendStylesheet($this->layout()->staticBaseUrl
     });
     // Enable links in comments
     $$('.comments_body').enableLinks();
-    $$('.feed_item_body').enableLinks();
+    $$('.feed_item_body_content').enableLinks();
     if (feedToolTipAAFEnable) {
       // Add hover event to get tool-tip
       var show_tool_tip = false;
@@ -268,6 +271,10 @@ $this->headLink()->appendStylesheet($this->layout()->staticBaseUrl
     if (en4.sitevideoview) {
       en4.sitevideoview.attachClickEvent(Array('feed', 'feed_video_title', 'feed_sitepagevideo_title', 'feed_sitebusinessvideo_title', 'feed_ynvideo_title', 'feed_sitegroupvideo_title', 'feed_sitestorevideo_title'));
     }
+    
+    if (en4.sitevideolightboxview) {
+      en4.sitevideolightboxview.attachClickEvent(Array('feed', 'feed_video_title', 'feed_sitepagevideo_title', 'feed_sitebusinessvideo_title', 'feed_ynvideo_title', 'feed_sitegroupvideo_title', 'feed_sitestorevideo_title', 'sitevideo_thumb_viewer'));
+    }
   });
 </script>
 <?php if (!$this->feedOnly && !$this->onlyactivity): ?>
@@ -304,7 +311,7 @@ $this->headLink()->appendStylesheet($this->layout()->staticBaseUrl
       $item = $itemPhoto = (isset($action->getTypeInfo()->is_object_thumb) && !empty($action->getTypeInfo()->is_object_thumb)) ? $action->getObject() : $action->getSubject();
       $itemPhoto = (isset($action->getTypeInfo()->is_object_thumb) && $action->getTypeInfo()->is_object_thumb === 2) ? $action->getObject()->getParent() : $itemPhoto;
       ?>
-      <?php if (!$this->noList): ?><li class="<?php echo 'Hide_' . $item->getType() . "_" . $item->getIdentity() ?>" id="activity-item-<?php echo $action->action_id ?>"  data-activity-feed-item="<?php echo $action->action_id ?>" <?php if ($this->onViewPage): ?>style="padding-bottom: 30px;" <?php endif; ?> ><?php endif; ?>
+      <?php if (!$this->noList): ?><li class="activity-item <?php echo 'Hide_' . $item->getType() . "_" . $item->getIdentity() ?>" id="activity-item-<?php echo $action->action_id ?>"  data-activity-feed-item="<?php echo $action->action_id ?>" <?php if ($this->onViewPage): ?>style="padding-bottom: 30px;" <?php endif; ?> ><?php endif; ?>
       <?php
       if ($this->onViewPage): $actionBaseId = "view-" . $action->action_id;
       else:$actionBaseId = $action->action_id;
@@ -353,6 +360,7 @@ $this->headLink()->appendStylesheet($this->layout()->staticBaseUrl
         $privacy_titile = null;
         $privacy_titile_array = array();
         ?>
+        <?php $allowEdit = $this->viewer()->getIdentity() && in_array($action->getTypeInfo()->type, array("post", "post_self", "share", "status", 'sitetagcheckin_status', 'sitetagcheckin_post_self', 'sitetagcheckin_post','post_self_photo','post_self_video','post_self_music','post_self_link', 'sitegroup_post', 'sitepage_post', 'sitebusiness_post', 'sitegroup_post_self', 'siteevent_post', 'siteevent_post_parent','sitebusiness_post_self', 'sitepage_post_self'))  && (('user' == $action->subject_type && $this->viewer()->getIdentity() == $action->subject_id)); ?>
         <?php if (!$this->subject() && $this->viewer()->getIdentity() && $action->getTypeInfo()->type != 'birthday_post' && (!$this->viewer()->isSelf($action->getSubject()))): ?>
           <span class="aaf_tabs_feed_tab_closed aaf_pulldown_btn_wrapper" onclick="moreEditOptionsSwitch($(this));">
             <div class="aaf_pulldown_contents_wrapper">
@@ -408,6 +416,11 @@ $this->headLink()->appendStylesheet($this->layout()->staticBaseUrl
                           )):
                     ?>
                     <li class="sep"></li>
+                    <?php if ($allowEdit): ?>
+                    <li class="feed_item_option_edit">
+                        <a href="javascript:void(0);"><?php echo $this->translate('Edit Feed') ?></a>
+                    </li>
+                    <?php endif; ?>
                     <li class="feed_item_option_delete">
                       <a href="javascript:void(0);" title="" onclick="deletefeed('<?php
                       echo
@@ -427,7 +440,7 @@ $this->headLink()->appendStylesheet($this->layout()->staticBaseUrl
                           <?php echo $this->translate(($action->commentable) ? 'Disable Comments' : 'Enable Comments') ?></a>
                       </li>
                     <?php endif; ?>              
-                    <?php if ($action->getTypeInfo()->shareable > 1 || ($action->getTypeInfo()->shareable == 1 && $action->attachment_count == 1 && ($attachment = $action->getFirstAttachment()))): ?>
+                    <?php if ($action->getTypeInfo()->shareable > 1 || ($action->getTypeInfo()->shareable == 1 && $action->attachment_count == 1 && ($attachment = $action->getFirstAttachment()))):  ?>
                       <li class="feed_item_option_delete">            
                         <a href="javascript:void(0);" title="" onclick="en4.advancedactivity.updateShareable('<?php echo $action->action_id ?>')">
                           <?php echo $this->translate(($action->shareable) ? 'Lock this Feed' : 'Unlock this Feed') ?></a>
@@ -503,18 +516,16 @@ $this->headLink()->appendStylesheet($this->layout()->staticBaseUrl
                   </li>
                   <?php if ($this->activity_moderate || $this->allow_delete || $this->is_owner): ?>
                     <li class="sep"></li>
+                    <?php if ($allowEdit): ?>
+                    <li class="feed_item_option_edit">
+                        <a href="javascript:void(0);"><?php echo $this->translate('Edit Feed') ?></a>
+                    </li>
+                    <?php endif; ?>
                     <li class="feed_item_option_delete">
-                      <?php /* echo $this->htmlLink(array(
-                        'route' => 'default',
-                        'module' => 'advancedactivity',
-                        'controller' => 'index',
-                        'action' => 'delete',
-                        'action_id' => $action->action_id
-                        ), $this->translate('Delete Feed'), array('class' => 'smoothbox')) */ ?>
                       <a href="javascript:void(0);" title="" onclick="deletefeed('<?php echo $action->action_id ?>', '0', '<?php echo $this->escape($this->url(array('route' => 'default', 'module' => 'advancedactivity', 'controller' => 'index', 'action' => 'delete'))) ?>')"><?php echo $this->translate('Delete Feed') ?></a>
                     </li>
                     <?php if ($this->allowEditCategory && in_array($action->getTypeInfo()->type, array("post", "post_self", "status")) && $this->viewer()->getIdentity() && (('user' == $action->object_type && $this->viewer()->getIdentity() == $action->object_id))): ?>
-                      <li class="feed_item_option_delete">              
+                      <li class="feed_item_option_delete">
                         <?php
                         echo $this->htmlLink(array(
                             'route' => 'default',
@@ -527,7 +538,7 @@ $this->headLink()->appendStylesheet($this->layout()->staticBaseUrl
                       </li>
                     <?php endif; ?>
                     <?php if ($action->getTypeInfo()->commentable): ?>
-                      <li class="feed_item_option_delete">              
+                      <li class="feed_item_option_delete">
                         <a href="javascript:void(0);" title="" onclick="en4.advancedactivity.updateCommentable('<?php echo $action->action_id ?>')">
                           <?php echo $this->translate(($action->commentable) ? 'Disable Comments' : 'Enable Comments') ?></a>
                       </li>
@@ -569,18 +580,16 @@ $this->headLink()->appendStylesheet($this->layout()->staticBaseUrl
                       <a href="javascript:void(0);" onclick='showLinkPost("<?php echo $action->getSubject()->getHref(array('action_id' => $action->action_id, 'show_comments' => true)) ?>")'><?php echo $this->translate('Feed Link'); ?></a>
                     </li>
                     <li class="sep"></li>
+                    <?php if ($allowEdit): ?>
+                   <li class="feed_item_option_edit">
+                        <a href="javascript:void(0);"><?php echo $this->translate('Edit Feed') ?></a>
+                    </li>
+                    <?php endif; ?>
                     <li class="feed_item_option_delete">
-                      <?php /* echo $this->htmlLink(array(
-                        'route' => 'default',
-                        'module' => 'advancedactivity',
-                        'controller' => 'index',
-                        'action' => 'delete',
-                        'action_id' => $action->action_id
-                        ), $this->translate('Delete Feed'), array('class' => 'smoothbox')) */ ?>
                       <a href="javascript:void(0);" title="" onclick="deletefeed('<?php echo $action->action_id ?>', '0', '<?php echo $this->escape($this->url(array('route' => 'default', 'module' => 'advancedactivity', 'controller' => 'index', 'action' => 'delete'))) ?>')"><?php echo $this->translate('Delete Feed') ?></a>
                     </li>
                     <?php if ($this->allowEditCategory && in_array($action->getTypeInfo()->type, array("post", "post_self", "status")) && $this->viewer()->getIdentity() && (('user' == $action->object_type && $this->viewer()->getIdentity() == $action->object_id))): ?>
-                      <li class="feed_item_option_delete">              
+                      <li class="feed_item_option_delete">
                         <?php
                         echo $this->htmlLink(array(
                             'route' => 'default',
@@ -614,7 +623,7 @@ $this->headLink()->appendStylesheet($this->layout()->staticBaseUrl
         <div class='feed_item_body'>
           <?php // Main Content  ?>
 
-          <span class="<?php echo ( empty($action->getTypeInfo()->is_generated) ? 'feed_item_posted' : 'feed_item_generated' ) ?>">
+          <span class="feed_item_body_content <?php echo ( empty($action->getTypeInfo()->is_generated) ? 'feed_item_posted' : 'feed_item_generated' ) ?>">
 
             <?php
             /* Start Working group feed. */
@@ -640,12 +649,13 @@ $this->headLink()->appendStylesheet($this->layout()->staticBaseUrl
             ?>
             <?php echo $this->getContent($action, false, $groupedFeeds); ?>
           </span>
+          <?php echo $allowEdit ? $this->editPost($action): '';?>
 
           <?php // Attachments ?>
           <?php if ($action->getTypeInfo()->attachable && $action->attachment_count > 0): // Attachments  ?>
             <div class='feed_item_attachments <?php echo (count($action->getAttachments()) != 1 ? 'feed_item_aaf_photo_attachments' : '') ?>'>
               <?php if ($action->attachment_count > 0 && count($action->getAttachments()) > 0): ?>
-                <?php
+                <?php 
                 if (count($action->getAttachments()) == 1 &&
                         null != ( $richContent = $this->getRichContent(current($action->getAttachments())->item))):
                   ?>
@@ -653,8 +663,12 @@ $this->headLink()->appendStylesheet($this->layout()->staticBaseUrl
                 <?php else: ?>
                   <?php $isIncludeFirstAttachment = false; ?>
                   <?php $isIncludeSecondAttachment = 0; ?>
+                    <?php $i = 0;?>
                   <?php foreach ($action->getAttachments() as $attachment): ?>
-
+                      <?php $i++;?>
+                    <?php if($i > 5) :?>
+                    <?php break;?>
+                    <?php endif;?>
                     <span class='feed_attachment_<?php echo $attachment->meta->type ?>'>
                       <?php if ($attachment->meta->mode == 0): // Silence ?>
                       <?php elseif ($attachment->meta->mode == 1): // Thumb/text/title type actions ?>
@@ -692,26 +706,49 @@ $this->headLink()->appendStylesheet($this->layout()->staticBaseUrl
 																		if (!$isIncludeFirstAttachment):
 																			$photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.medium') . ');" class="aaf-feed-photo-3-big" ></span>';
 																		else:
-																			$photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.normal') . ');" class="aaf-feed-photo-3-small" ></span>';
+																			if($attachment->item->getType() == 'album_photo'):
+    $photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.normal') . ');" class="aaf-feed-photo-3-small" ></span>'; 
+else :
+    $photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.medium') . ');" class="aaf-feed-photo-3-small" ></span>';
+ endif;
 																		endif;
 																		break;
 																	case 4:
 																		if (!$isIncludeFirstAttachment):
 																			$photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.medium') . ');" class="aaf-feed-photo-4-big" ></span>';
 																		else:
-																			$photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.normal') . ');" class="aaf-feed-photo-4-small" ></span>';
-																		endif;
+																			if($attachment->item->getType() == 'album_photo'):
+    $photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.normal') . ');" class="aaf-feed-photo-4-small" ></span>'; 
+else :
+    $photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.medium') . ');" class="aaf-feed-photo-4-small" ></span>';
+ endif;										endif;
 																		break;
 																	case 5:
 																		if (!$isIncludeFirstAttachment || $isIncludeSecondAttachment == 2):
 																			$photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.medium') . ');" class="aaf-feed-photo-5-big" ></span>';
 																		elseif ($isIncludeFirstAttachment):
-																			$photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.normal') . ');" class="aaf-feed-photo-5-small" ></span>';
+																			if($attachment->item->getType() == 'album_photo'):
+    $photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.normal') . ');" class="aaf-feed-photo-5-small" ></span>'; 
+else :
+    $photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.medium') . ');" class="aaf-feed-photo-5-small" ></span>';
+ endif;		
 																		endif;
 																		break;
-																	case 6:
-																		$photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.normal') . ');" class="aaf-feed-photo-6-small" ></span>';
-																		break;
+																	case $count > 5:   
+                                if (!$isIncludeFirstAttachment || $isIncludeSecondAttachment == 2):
+                                  $photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.medium') . ');" class="aaf-feed-photo-5-big" ></span>';
+                                elseif ($isIncludeFirstAttachment):
+                                  if($attachment->item->getType() == 'album_photo'):
+    $photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.normal') . ');" class="aaf-feed-photo-5-small" ></span>'; 
+else :
+    $photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.medium') . ');" class="aaf-feed-photo-5-small" ></span>';
+ endif;		
+                                endif;
+                                $remainingPhotos = ($count - 5) + 1;     
+                                if($i == 5) {
+                                    $photoContent .= '<div class="aff_remaining_photo_count">+'.$remainingPhotos.'</div>';
+                                }
+                                break;
 																	default :
 																		$photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.normal') . ');" class="aaf-feed-photo-9"></span>';
 																endswitch;
@@ -775,25 +812,49 @@ $this->headLink()->appendStylesheet($this->layout()->staticBaseUrl
                                 if (!$isIncludeFirstAttachment):
                                   $photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.medium') . ');" class="aaf-feed-photo-3-big" ></span>';
                                 else:
-                                  $photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.normal') . ');" class="aaf-feed-photo-3-small" ></span>';
+                                  if($attachment->item->getType() == 'album_photo'):
+    $photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.normal') . ');" class="aaf-feed-photo-3-small" ></span>'; 
+else :
+    $photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.medium') . ');" class="aaf-feed-photo-3-small" ></span>';
+ endif;		
                                 endif;
                                 break;
                               case 4:
                                 if (!$isIncludeFirstAttachment):
                                   $photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.medium') . ');" class="aaf-feed-photo-4-big" ></span>';
                                 else:
-                                  $photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.normal') . ');" class="aaf-feed-photo-4-small" ></span>';
+                                   if($attachment->item->getType() == 'album_photo'):
+    $photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.normal') . ');" class="aaf-feed-photo-4-small" ></span>'; 
+else :
+    $photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.medium') . ');" class="aaf-feed-photo-4-small" ></span>';
+ endif;		
                                 endif;
                                 break;
                               case 5:
                                 if (!$isIncludeFirstAttachment || $isIncludeSecondAttachment == 2):
                                   $photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.medium') . ');" class="aaf-feed-photo-5-big" ></span>';
                                 elseif ($isIncludeFirstAttachment):
-                                  $photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.normal') . ');" class="aaf-feed-photo-5-small" ></span>';
+                                  if($attachment->item->getType() == 'album_photo'):
+    $photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.normal') . ');" class="aaf-feed-photo-5-small" ></span>'; 
+else :
+    $photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.medium') . ');" class="aaf-feed-photo-5-small" ></span>';
+ endif;		
                                 endif;
                                 break;
-                              case 6:
-                                $photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.normal') . ');" class="aaf-feed-photo-6-small" ></span>';
+                             case $count > 5:   
+                                if (!$isIncludeFirstAttachment || $isIncludeSecondAttachment == 2):
+                                  $photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.medium') . ');" class="aaf-feed-photo-5-big" ></span>';
+                                elseif ($isIncludeFirstAttachment):
+                                   if($attachment->item->getType() == 'album_photo'):
+    $photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.normal') . ');" class="aaf-feed-photo-5-small" ></span>'; 
+else :
+    $photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.medium') . ');" class="aaf-feed-photo-5-small" ></span>';
+ endif;		
+                                endif;
+                                $remainingPhotos = ($count - 5) + 1;     
+                                if($i == 5) {
+                                    $photoContent .= '<div class="aff_remaining_photo_count">+'.$remainingPhotos.'</div>';
+                                }
                                 break;
                               default :
                                 $photoContent = '<span style="background-image: url(' . $attachment->item->getPhotoUrl('thumb.normal') . ');" class="aaf-feed-photo-9"></span>';
@@ -820,6 +881,18 @@ $this->headLink()->appendStylesheet($this->layout()->staticBaseUrl
               <?php endif; ?>
             </div>
           <?php endif; ?>
+          <?php if(!empty($this->hashtag[$action->action_id]) && !empty($this->showHashtags)){?>
+            <div class="hashtag_activity_item">
+                <ul>
+                  <?php $url = $this->url(array('controller' => 'index', 'action' => 'index'),"sitehashtag_general")."?search=";
+                        for ($i = 0; $i < count($this->hashtag[$action->action_id]); $i++) { ?>
+                            <li> 
+                                <a href="<?php echo $url.urlencode($this->hashtag[$action->action_id][$i]);?>"><?php  echo $this->hashtag[$action->action_id][$i]; ?></a>
+                            </li>
+                        <?php } ?>
+                </ul>
+            </div>
+          <?php }?>
           <div id='comment-likes-activity-item-<?php echo $actionBaseId ?>' class='comment-likes-activity-item'>
             <?php // Icon, time since, action links ?>
             <?php
@@ -849,7 +922,7 @@ $this->headLink()->appendStylesheet($this->layout()->staticBaseUrl
             <?php endif; ?>
 
             <div class='feed_item_date feed_item_icon <?php echo $icon_type ?>'>
-              <ul>         
+              <ul>           
                 <?php if ($canComment): ?>
                   <?php if ($action->likes()->isLike($this->viewer())): ?>
                     <li class="feed_item_option_unlike">              
@@ -888,6 +961,9 @@ document.getElementById("' . $this->commentForm->body->getAttrib('id') . '").foc
                     </li>              
                   <?php endif; ?>
                 <?php endif; ?>
+                    
+   
+                    
                 <?php if (in_array($action->getTypeInfo()->type, array('signup', 'friends', 'friends_follow'))): ?>    
                   <?php $userFriendLINK = $this->aafUserFriendshipAjax($action); ?>
                   <?php if ($userFriendLINK): ?>
@@ -995,7 +1071,7 @@ document.getElementById("' . $this->commentForm->body->getAttrib('id') . '").foc
                 </li>
                 <?php if (null != ( $postAgent = $action->postAgent())): ?>
                   <span>&#183;</span>
-                  <?php echo $this->translate("via $postAgent"); ?>
+                  <?php echo $this->translate("via %s", $postAgent); ?>
                 <?php endif; ?>
                 <?php if (!empty($privacy_icon_class) && !empty($privacy_titile)): ?>
                   <li>
@@ -1005,8 +1081,10 @@ document.getElementById("' . $this->commentForm->body->getAttrib('id') . '").foc
                         <img src="<?php echo $this->layout()->staticBaseUrl ?>application/modules/Advancedactivity/externals/images/tooltip-arrow-down.png" alt="" />
                         <?php echo $this->translate("Shared with %s", $this->translate($privacy_titile)) ?>
                       </p>
-                    </span>            
+                    </span> 
+                    
                   </li>
+                  
                 <?php endif; ?>
               </ul>
             </div>
@@ -1156,9 +1234,10 @@ document.getElementById("feed-comment-form-open-li_' . $actionBaseId . '").style
                 <?php if ($canComment) echo $this->commentForm->render(); ?>
               </div>
             <?php endif; ?>
+              
           </div>
         </div>
-        <?php if (!$this->noList): ?></li><?php endif; ?>
+        <?php if (!$this->noList): ?></li>  <?php endif; ?>
 
       <?php
       ob_end_flush();

@@ -83,7 +83,7 @@
           'class' : 'buttonlink',
           'html' : this._lang('Select File')
         }).inject(this.elements.formFancyContainer);
-
+        
         // This is the status
         this.elements.formFancyStatus = new Element('div', {
           'html' : 

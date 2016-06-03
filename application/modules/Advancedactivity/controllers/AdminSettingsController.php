@@ -13,6 +13,7 @@
 class Advancedactivity_AdminSettingsController extends Core_Controller_Action_Admin {
 
   public function indexAction() {
+      
     $onactive_disabled = array('advancedactivity_sitetabtitle', 'advancedactivity_post_canedit', 'advancedactivity_tabtype', 'advancedactivity_maxautoload',
         'advancedactivity_icon', 'logo_photo_preview', 'advancedactivity_info_tooltips',
         'advancedactivity_scroll_autoload', 'advancedactivity_composer_options', 'thirdparty_settings',

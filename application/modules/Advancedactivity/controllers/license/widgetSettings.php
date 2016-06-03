@@ -19,7 +19,7 @@ if ( !empty( $page_id ) ) {
     $results = $select->query()->fetchAll();
 if (!empty($results)) {
 $params =
-'{"title":"","advancedactivity_tabs":["welcome","aaffeed","facebook","twitter", "linkedin","instagram"],"nomobile":"0",
+'{"title":"","advancedactivity_tabs":["welcome","aaffeed","twitter"],"nomobile":"0",
 "name":"advancedactivity.home-feeds"}';
 
 		$db->query('DELETE FROM `engine4_core_content` WHERE `engine4_core_content`.`content_id` =
@@ -54,7 +54,7 @@ if ( !empty( $page_id ) ) {
     $page_id)->limit(1);
     $results = $select->query()->fetchAll();
 if (!empty($results)) {
-$params = '{"title":"What\'s New","advancedactivity_tabs":["aaffeed"],"nomobile":"0","name":"advancedactivity.home-feeds" }';
+$params = '{"title":"What\'s New","advancedactivity_tabs":["aaffeed"],"nomobile":"0","name":"advancedactivity.home-feeds", "showTabs":"1" }';
 
 		$db->query('DELETE FROM `engine4_core_content` WHERE `engine4_core_content`.`content_id` =
 			"'.$results[0]["content_id"].'" LIMIT 1;');
@@ -79,7 +79,7 @@ $params = '{"title":"What\'s New","advancedactivity_tabs":["aaffeed"],"nomobile"
 if (!empty($results)) {
 			foreach($results as $result) {
 			$params =
-'{"title":"Updates","advancedactivity_tabs":["aaffeed"],"nomobile":"0","name":"advancedactivity.home-feeds"}';
+'{"title":"Updates","advancedactivity_tabs":["aaffeed"],"nomobile":"0","name":"advancedactivity.home-feeds", "showTabs":"1"}';
 				$db->query('UPDATE  `engine4_core_content` SET  `name` =  "advancedactivity.home-feeds",
 `params`=\''.$params.'\' WHERE `engine4_core_content`.`name` ="activity.feed";');
 	   }
@@ -91,7 +91,7 @@ if (!empty($results)) {
     $results = $select->query()->fetchAll();
 		if (!empty($results)) {
 			foreach($results as $result) {
-				$params = '{"title":"Updates","advancedactivity_tabs":["aaffeed"],"nomobile":"0","name":"advancedactivity.home-feeds"}';
+				$params = '{"title":"Updates","advancedactivity_tabs":["aaffeed"],"nomobile":"0","name":"advancedactivity.home-feeds", "showTabs":"1"}';
 					$db->query('UPDATE  `engine4_core_content` SET  `name` =  "advancedactivity.home-feeds", `params`=\''.$params.'\' WHERE `engine4_core_content`.`name` ="seaocore.feed";');
 		  }
 		}

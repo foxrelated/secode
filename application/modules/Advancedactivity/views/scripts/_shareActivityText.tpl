@@ -20,8 +20,9 @@
 
 <?php $this->headScript()
         ->appendFile($this->layout()->staticBaseUrl . 'application/modules/Activity/externals/scripts/core.js')
-         ->appendFile($this->layout()->staticBaseUrl . 'application/modules/Advancedactivity/externals/scripts/core.js')
-        ->appendFile($this->layout()->staticBaseUrl . 'externals/flowplayer/flashembed-1.0.1.pack.js');
+         ->appendFile($this->layout()->staticBaseUrl . 'application/modules/Advancedactivity/externals/scripts/core.js');
+
+$this->videoPlayerJs();
 
 $this->headLink()->appendStylesheet($this->layout()->staticBaseUrl
             . 'application/modules/Seaocore/externals/styles/style_infotooltip.css');

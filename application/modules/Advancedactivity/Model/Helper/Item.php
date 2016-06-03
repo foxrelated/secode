@@ -49,9 +49,10 @@ class Advancedactivity_Model_Helper_Item extends Advancedactivity_Model_Helper_A
       $href = $item->getHref();
     }
     $suffix="";
-    if($item->getType()=='activity_action'){
+    if(in_array($item->getType(), array('activity_action', 'siteeventticket_ticket'))){
       $suffix="_no";
     }
+        
     return '<a '
       . 'class="feed_item_username sea_add_tooltip_link'.$suffix.' feed_'.$item->getType().'_title" '
       .'rel="'.$item->getType().' '.$item->getIdentity().'" '

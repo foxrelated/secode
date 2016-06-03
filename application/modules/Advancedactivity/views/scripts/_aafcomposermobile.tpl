@@ -20,7 +20,15 @@ if (array_key_exists('HTTP_USER_AGENT', $_SERVER)) :
   }
 endif;
 ?>
+<script type='text/javascript'>
+    var showVariousTabs = '<?php echo $this->showTabs; ?>';
 
+<?php if (Engine_Api::_()->hasModuleBootstrap('sitealbum') && Engine_Api::_()->getApi('settings', 'core')->getSetting('sitealbum.open.lightbox.upload', 1)): ?>
+        var showAddPhotoInLightbox = "<?php echo Engine_Api::_()->getApi('settings', 'core')->getSetting('sitealbum.open.lightbox.upload', 1); ?>";
+<?php else: ?>
+        var showAddPhotoInLightbox = 0;
+<?php endif; ?>
+</script>
   <style type="text/css"> 
   #compose-photo-activator,
   #compose-sitepagephoto-activator,

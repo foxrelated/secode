@@ -58,7 +58,7 @@ class Advancedactivity_Api_Core extends Core_Api_Abstract {
       $view = Zend_Registry::isRegistered('Zend_View') ? Zend_Registry::get('Zend_View') : null;
       $URL = $view->url(array('module' => 'advancedactivity', 'controller' => 'feed', 'action' =>
           'view-more-results', 'action_id' => $action->getIdentity()), 'default', true);
-      $content = $content . ' and '
+      $content = $content . ' ' . $translate->translate('and') . ' '
               . '<span class="aaf_feed_show_tooltip_wrapper">'
               . '<a href="' . $URL . '" class="smoothbox">'
               . ($count - 1) . ' ' . $translate->translate('others')
@@ -711,15 +711,82 @@ class Advancedactivity_Api_Core extends Core_Api_Abstract {
       $isModEnabled = Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled($key);
       if (!empty($isModEnabled)) {
         $getModVersion = Engine_Api::_()->getDbtable('modules', 'core')->getModule($key);
-        $isModSupport = strcasecmp($getModVersion->version, $value);
-        if ($isModSupport < 0) {
+        $isModSupport = $this->checkVersion($getModVersion->version, $value);
+        if (empty($isModSupport)) {
           $finalModules[] = $getModVersion->title;
         }
       }
     }
     return $finalModules;
   }
+    
+  public function checkVersion($databaseVersion, $checkDependancyVersion) {
+        $f = $databaseVersion;
+        $s = $checkDependancyVersion;
+        if (strcasecmp($f, $s) == 0)
+            return -1;
 
+        $fArr = explode(".", $f);
+        $sArr = explode('.', $s);
+        if (count($fArr) <= count($sArr))
+            $count = count($fArr);
+        else
+            $count = count($sArr);
+
+        for ($i = 0; $i < $count; $i++) {
+            $fValue = $fArr[$i];
+            $sValue = $sArr[$i];
+            if (is_numeric($fValue) && is_numeric($sValue)) {
+                if ($fValue > $sValue)
+                    return 1;
+                elseif ($fValue < $sValue)
+                    return 0;
+                else {
+                    if (($i + 1) == $count) {
+                        return -1;
+                    } else
+                        continue;
+                }
+            }
+            elseif (is_string($fValue) && is_numeric($sValue)) {
+                $fsArr = explode("p", $fValue);
+
+                if ($fsArr[0] > $sValue)
+                    return 1;
+                elseif ($fsArr[0] < $sValue)
+                    return 0;
+                else {
+                    return 1;
+                }
+            } elseif (is_numeric($fValue) && is_string($sValue)) {
+                $ssArr = explode("p", $sValue);
+
+                if ($fValue > $ssArr[0])
+                    return 1;
+                elseif ($fValue < $ssArr[0])
+                    return 0;
+                else {
+                    return 0;
+                }
+            } elseif (is_string($fValue) && is_string($sValue)) {
+                $fsArr = explode("p", $fValue);
+                $ssArr = explode("p", $sValue);
+                if ($fsArr[0] > $ssArr[0])
+                    return 1;
+                elseif ($fsArr[0] < $ssArr[0])
+                    return 0;
+                else {
+                    if ($fsArr[1] > $ssArr[1])
+                        return 1;
+                    elseif ($fsArr[1] < $ssArr[1])
+                        return 0;
+                    else {
+                        return -1;
+                    }
+                }
+            }
+        }
+    }
   public function isMobile() {
     $mobileEnable = false;
     $request = Zend_Controller_Front::getInstance()->getRequest();
@@ -897,18 +964,22 @@ class Advancedactivity_Api_Core extends Core_Api_Abstract {
         continue;
       }
       foreach ($data['composer'] as $type => $config) {
-        if (!isset($config['script'][1]) ||in_array($type , array('facebook','twitter','advanced_facebook','advanced_twitter','advanced_linkedin','tag')))
+        if (!isset($config['script'][1]) ||in_array($type , array('facebook','twitter','advanced_facebook','advanced_twitter','advanced_linkedin','tag', 'hashtag')))
         continue;
         $key = $type . 'XXX' . $config['script'][1];
         $list[$key] = $onlyKey ? $key : $this->getComposerMenuListTitle($type, $config['script'][1]);
         // $key
       }
     }
+    if(in_array('videoXXXvideo', array_keys($list)) && in_array('videoXXXsitevideo', array_keys($list))){
+      unset($list['videoXXXvideo']);
+    }
+    
     return $list;
   }
 
   public function getComposerMenuListTitle($type, $module) {
-    $title = array('photo' => 'Add Photo', 'link' => 'Add Link', 'video' => 'Add Video', 'music' => 'Add Music', 'event' => 'Create Event', 'checkin' => 'Share Location');
+    $title = array('photo' => 'Add Photo', 'link' => 'Add Link', 'video' => 'Add Video', 'music' => 'Add Music', 'event' => 'Create Event', 'checkin' => 'Share Location', 'hashtag' => 'Hashtag');
     $type = str_replace('sitepage','',$type);
     $type = str_replace('sitegroup','',$type);
     $type = str_replace('sitestore','',$type);

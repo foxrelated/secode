@@ -20,7 +20,7 @@ if ( !empty($settingsApi->aaf_composer_value) && (($settingsApi->aaf_list_view_v
    });
 </script>
 <?php  endif; ?>
- <?php if(empty ($this->isAFFWIDGET)): 
+ <?php if(empty ($this->isAFFWIDGET)):
    return;
  endif ?>
 <?php  if(Engine_Api::_()->getApi('settings', 'core')->getSetting('aaf.feed.tagging',true)): ?>
@@ -33,7 +33,7 @@ if ( !empty($settingsApi->aaf_composer_value) && (($settingsApi->aaf_list_view_v
 
 <script type="text/javascript">
   en4.core.runonce.add(function() {
-    composeInstance.addPlugin(new Composer.Plugin.Aaftag({
+      var plugin = new Composer.Plugin.Aaftag({
       enabled:true,
       suggestOptions : {
         'url' : en4.core.baseUrl+'advancedactivity/friends/suggest-tag/includeSelf/1',
@@ -44,8 +44,20 @@ if ( !empty($settingsApi->aaf_composer_value) && (($settingsApi->aaf_list_view_v
         'maxChoices':'<?php echo Engine_Api::_()->getApi('settings', 'core')->getSetting('aaf.feed.suggest.limit',10); ?>'
       },
       'suggestProto' : 'request.json'
-     
-    }));
+    });
+    <?php if($this->forEdit) : ?>
+      <?php $tags = array(); ?>
+      <?php if(!empty($this->action->params['tags'])):?>
+        <?php  foreach($this->action->params['tags'] as $guid => $label): ?>
+        <?php    $tags [] = array('guid' => $guid, 'label' => $label); ?>
+        <?php  endforeach; ?>
+      <?php endif; ?>
+    document.retrieve('editComposeInstance<?php echo $this->forEdit ?>').addPlugin(plugin);
+    plugin.mapTags(<?php echo $this->jsonInline($tags) ?>);
+    document.retrieve('editComposeInstance<?php echo $this->forEdit ?>').setHighlighterContent();
+    <?php else: ?>
+    composeInstance.addPlugin(plugin);
+    <?php endif; ?>
   });
 </script>
 <?php endif; ?>

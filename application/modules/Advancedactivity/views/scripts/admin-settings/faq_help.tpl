@@ -86,12 +86,12 @@ To place the custom list in the More tab, you can set number of default items to
 				<?php echo $this->translate("It is happening so because, Facebook has restricted the feature of displaying Facebook Feeds on other social sites. Please <a href='http://www.socialengineaddons.com/page/facebook-application-submission' target='_blank' >click here</a> to read more details.");?>
 			</div>
     </li>
-    <li>
+<!--    <li>
       <a href="javascript:void(0);" onClick="faq_show('faq_11');"><?php echo $this->translate("Q. I am getting \"Redirect URI does not match registered redirect URI\" error while logging into my instagram account?");?></a>
 			<div class='faq' style='display: none;' id='faq_11'>
 				<?php echo $this->translate("Ans: You might have configured wrong \"REDIRECT URI\" for your Instagram App. Please follow the below steps: </br> 1) Please go to the below URL and edit the Instagram App created by you:</br> <a href='https://instagram.com/developer/clients/manage/' target='_blank' >https://instagram.com/developer/clients/manage/</a> </br> 2) You need to re-enter the \"REDIRECT URI\" details here.</br> 3) Now, please go to \"SocialEngineAddOns Core Plugin\" >> \"Invite Services\" >> \"Instagram Help\", available in the admin panel. </br> 4) Now open 'Step 3' and copy the available \"OAuth redirect_uri\" from here and paste it in the Instagram App created by you (opened by you in step 1 and 2).</br> You can now login to you instagram account.");?>
 			</div>
-    </li>
+    </li>-->
    
 	</ul>
 </div>

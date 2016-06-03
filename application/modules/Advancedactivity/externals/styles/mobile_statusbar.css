@@ -7,14 +7,14 @@
 }
 #compose-addfriendtag-activator{
   background-image:url(../images/icon/user-add.png);
-	background-position:left bottom;
+	background-position:left 2px;
 }
 #compose-checkin-activator{
   background-image:url(../images/icon/map-add.png);
-	background-position:left bottom;
+	background-position:left 2px;
 }
 #compose-photo-activator, #compose-link-activator, #compose-music-activator, #compose-video-activator{
-	background-position:left bottom !important;
+/*	background-position:left 2px !important;*/
 }
 form.activity .buttonlink{
 	line-height:normal;
@@ -25,6 +25,7 @@ form.activity .buttonlink{
 .layout_advancedactivity_home_feeds form textarea{
   width:99% !important;
   padding:2px !important;
+	line-height: 18px;
 }
 .compose-menu button#compose-submit{
   float:none;
@@ -157,3 +158,14 @@ ul.aaf-mobile-aad-tag-autosuggest > li.autocompleter-choices {
   vertical-align:middle;
 }
 /* Emotions box css end here */
+
+/*Responsive work*/
+@media only screen and (max-width: 600px){
+	div.compose-menu a.compose-activator {line-height:18px;}
+	.compose-menu{margin-top:5px;}
+	.compose-menu_before > .adv_post_smile{margin-top:-26px !important;}
+	.compose-menu button#compose-submit{width:49% !important;}
+	.compose-menu select{width:49% !important; float:right; padding-top:7px; padding-bottom:6px;}
+	.stchekin_suggest_container input[type="text"],
+	.add_friend_suggest_container input[type="text"] {margin-bottom:7px;}
+}

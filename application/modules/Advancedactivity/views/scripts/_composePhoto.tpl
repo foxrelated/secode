@@ -37,7 +37,7 @@
 <script type="text/javascript">
   en4.core.runonce.add(function() {
     var type = 'wall';
-    <?php if(Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitealbum') && Engine_Api::_()->getDbtable('modules', 'core')->getModule('sitealbum')->version >= '4.8.5'): ?>
+    <?php if(Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitealbum') && Engine_Api::_()->advancedactivity()->checkVersion(Engine_Api::_()->getDbtable('modules', 'core')->getModule('sitealbum')->version, '4.8.5')): ?>
 			var requestOptionsURL = en4.core.baseUrl + 'sitealbum/album/compose-upload/type/'+type;
 			var fancyUploadOptionsURL = en4.core.baseUrl + 'sitealbum/album/compose-upload/format/json/type/'+type;
     <?php else: ?>

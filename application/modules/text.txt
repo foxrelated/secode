@@ -1,0 +1,3 @@
+./Sitemobile/modules/Advancedactivity/views/scripts/_composer.tpl:179:            <?php echo $this->partial('application/modules/Sitemobile/modules/Advancedactivity/views/scripts/_composerSocialServices.tpl', array()); ?>
+./Sitemobile/modules/Advancedactivity/views/scripts/_composerFacebook.tpl:107:  <?php //echo $this->partial('application/modules/Sitemobile/modules/Advancedactivity/views/scripts/_composerSocialServices.tpl', array()); ?>
+./Sitemobile/modules/Advancedactivity/views/scripts/_composerLinkedin.tpl:107:  <?php //echo $this->partial('application/modules/Sitemobile/modules/Advancedactivity/views/scripts/_composerSocialServices.tpl', array()); ?>
