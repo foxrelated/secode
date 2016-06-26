@@ -1,0 +1,340 @@
+/* $Id: main.css 2014-05-26 00:00:00Z SocialEngineAddOns Copyright 2013-2014 BigStep Technologies Pvt. Ltd. $ */
+*{
+	outline:none;
+}
+/*Minimum height of the Page*/
+	#global_header.fixed + #global_wrapper #global_content{
+		min-height:700px;
+	}
+/*Pulldown arrow*/	
+	#core_menu_mini_menu div.seaocore_pulldown_arrow {
+		border-bottom: 10px solid $theme_pulldown_border_color !important;
+	}
+/*Pulldown Contents*/
+	#core_menu_mini_menu div.seaocore_pulldown_wrapper {
+		background-color: $theme_pulldown_background_color;
+		border: 5px solid $theme_pulldown_border_color;
+	}
+	#core_menu_mini_menu .seocore_pulldown_item_list > ul > li .seocore_message_icon {
+		background-image: url(~/application/modules/Sitemenu/externals/images/message-marks.png);
+	}	
+/*Notifications*/
+	.aaf_update_pulldown .aaf_update_pulldown_content .aaf_update_pulldown_content_stat {
+		color:$theme_font_color_light;
+	}
+/*Friend Request*/
+	#core_menu_mini_menu .seocore-pulldown-header {
+	  border-bottom:1px solid $theme_pulldown_border_color;
+	}
+	#core_menu_mini_menu .seocore-pulldown-heading {
+		color: $theme_font_color;
+	}
+	#core_menu_mini_menu .seocore-pulldown-footer {
+	  border-top:1px solid $theme_pulldown_border_color;
+		background-color:$theme_pulldown_border_color;
+		color:$theme_pulldown_font_color_active;
+	}
+	#core_menu_mini_menu .seocore-pulldown-footer a:link, .seocore-pulldown-footer a:visited{
+		color:$theme_pulldown_font_color_active;
+	}
+	#core_menu_mini_menu div.seaocore_pulldown_wrapper .seaocore_pulldown_contents ul > li + li {
+	 border-top:1px solid $theme_pulldown_border_color;
+	}
+	#core_menu_mini_menu div.seaocore_pulldown_wrapper .seaocore_pulldown_contents ul > li:hover {
+	 background-color:$theme_pulldown_background_color_hover;
+	}
+	#core_menu_mini_menu #core_mini_settings_pulldown_contents ul > li:hover {
+	 background-color:$theme_pulldown_background_color_active;
+	 color:$theme_pulldown_font_color_active;
+	}
+	#core_menu_mini_menu #core_mini_settings_pulldown_contents ul > li:hover a{
+	 color:$theme_pulldown_font_color_active;
+	}
+/*Css End for Mini menu*/
+
+
+/*-----Main Menu Css start-----*/
+/*Main Menu tabs*/
+	.sitemenu_main_menu > li > a.level-top span i {
+    background: url(~/application/modules/Sitemenu/externals/images/bottom-arrow.png) no-repeat;
+  }
+ 
+/*Main Menu Search*/
+	.sitemenu_main_menu_wrapper .form-elements {
+	 	background-color:$theme_input_background_color;
+		border-color: $theme_border_medium_color;
+	}
+	.sitemenu_main_menu_wrapper .form-elements input {
+		color: $theme_font_color_light;
+	}
+	.sitemenu_main_menu_wrapper .sitemenu_search-toggle i{
+		background: url(~/application/modules/Sitemenu/externals/images/search-white.png) center no-repeat;
+	}
+	.sitemenu_main_menu_wrapper .sitestore_quick_search{
+		background-color:$theme_body_background_color;
+		border:1px solid $theme_border_dark_color;
+	}
+	
+/*Main Menu Cart Css start from here*/
+	#global_header #main_menu_cart,
+	#global_header.fixed .sitemenu_main_menu_wrapper #main_menu_cart,
+	.layout_page_header .sitemenu_search-toggle{
+		+rounded();
+	}
+/*-----Css start for Fixed main menu-----*/
+	#global_header.fixed .sitemenu_main_menu_wrapper {
+		width: $theme_topbar_menu_width;
+	}
+	#global_header.fixed .sitemenu_main_menu_search .form-wrapper button {
+	 background-color:$theme_input_background_color;
+	}
+/*Css End for Fixed main menu*/
+
+/*-------------------------------------------css start for each layout of Main menu-----------------------------------------------------*/
+/*Css For Main Menu*/
+	.layout_sitemenu_menu_main{
+		width: $theme_topbar_menu_width;
+	}
+  .sitemenu_main_menu li.level1parent  > a, .sitemenu_main_menu li.level1parent  > a{
+		background-image:url(~/application/modules/Sitemenu/externals/images/bci_po.png);
+		background-repeat:no-repeat;
+		background-position:right center;
+	}	
+/*-------Standard Hierarchical Navigation Menu(1st)Layout Start-------*/
+	.standard_nav ul, 
+	.multi_column ul.level1 {
+		border-color:$theme_border_medium_color;
+	}
+	.standard_nav ul ul{
+		border-top:1px solid $theme_border_medium_color;
+	}
+	.standard_nav ul ul, .standard_nav ul ul li div {
+		border-top-style: solid;
+		border-top-width: 1px;
+	}
+/*--------Standard Hierarchical Navigation Menu layout end----------*/
+  
+/*--------Main Menu with Content Menu(3rd) layout start-----------*/	
+	.main_ContentView a.level-top + div {
+		border-width: 0 1px 1px;
+		border-style: solid;
+  	border-color:$theme_border_medium_color;
+	}
+/*Categories Section*/   
+	.main_ContentView .categories_section {
+		border-top: 1px solid $theme_border_medium_color;
+	}
+	.main_ContentView .categories_section ul li {
+		border: 1px solid $theme_border_medium_color;
+	}
+/*3rd Layout Loading image*/
+	.main_ContentView .menu_loader{
+		background:url(~/application/modules/Sitemenu/externals/images/spinner.gif) no-repeat center;
+	}
+/*-------Main Menu with Content Menu (3rd) layout end--------*/
+ 
+/*----------Mixed Menu (4th) layout css start-----------*/
+/*for full block of content of level1 li*/
+	.mixed_menu .secondlevel_block{
+		border-width: 0 1px 1px;
+		border-style: solid;
+		border-color:$theme_border_medium_color;
+	}
+	.mixed_menu .secondlevel_block ul li
+	{
+		border-bottom:1px solid $theme_border_medium_color;		
+	}
+/*for mainmenu content images*/
+	 .mixed_menu .level1_hoverblock img{
+		border: 1px solid $theme_border_medium_color;
+	}
+/*for submenu li's hover content hide and show*/
+	#mixed_menu_level1block{
+		border-right: 1px solid $theme_border_medium_color;
+	} 
+	#mixed_menu_level1block li.level1 > a.over,
+	#mixed_menu_level1block li.level1parent > a.over,
+  #mixed_menu_level1block li.level1parent > a.mixed_sub_menu_over{
+		color: $theme_link_color_hover;
+	}
+/*categories section*/
+	.mixed_menu .categories_section ul{
+		border-top: 1px solid $theme_border_medium_color;
+	}
+	.mixed_menu .categories_section ul li{
+		border: 1px solid $theme_border_medium_color;
+	}
+/*More tab's Dropdown*/
+	.mixed_menu .sitemenu_main_menu_more{
+		border-width: 0 1px 1px;
+		border-style: solid;
+  	border-color:$theme_border_medium_color;
+	}
+/*4th Layout Loading image*/
+	.mixed_menu .menu_loader{
+		background:url(~/application/modules/Sitemenu/externals/images/spinner.gif) no-repeat center;
+	}
+/*----------------Mixed Menu (4th) layout end-----------------*/
+
+/*--Default colors settings for main menu --*/
+	/* color of menu main menu widget  */
+	.sitemenu_main_menu_wrapper {
+		background-color: $theme_topbar_menu_background_color;
+	}
+	/* color of main menu label  main menu widget  */
+	.sitemenu_main_menu > li > a{
+		color: $theme_topbar_menu_link_color;
+	}
+	/* color of main menu label on hover main menu widget  */
+	.sitemenu_main_menu > li > a.over{
+		color: $theme_topbar_menu_link_hover_color;
+		background-color: $theme_topbar_menu_link_background_color_hover;
+	}
+	/* color of main menu label on hover main menu widget  */
+	.main_ContentView ul li a:hover, 
+	.mixed_menu .categories_section li a:hover{
+		color: $theme_topbar_menu_link_color;
+		background-color: $theme_topbar_menu_background_color; 
+	}
+	.multi_column .shown-sublist li.level1parent > a:hover, 
+	.multi_column .shown-sublist li.level1 > a:hover{
+		border-bottom-width:1px;
+	}
+	/* color of main menu label on hover main menu widget  */
+	.sitemenu_main_menu ul li > a.over{
+		color: $theme_topbar_menu_link_color;
+		background-color: $theme_topbar_menu_background_color; 
+	}	
+/*Main Menu Css end*/
+
+/*-----Footer Menu css start-----*/
+	.layout_sitemenu_menu_footer {
+		color: $theme_link_color;
+	}
+/*Product Search in footer and in header*/
+	.layout_page_footer .sitestoreproduct-search-box .form-elements,
+	.layout_page_header .sitestoreproduct-search-box .form-elements {
+	 +rounded();
+		border-width: 1px;
+		background-color:$theme_input_background_color;
+	}
+	.layout_page_footer .sitestoreproduct-search-box #submitButton-element button,
+	.layout_page_header .sitestoreproduct-search-box #submitButton-element button {
+		background-image: url(~/application/modules/Sitemenu/externals/images/search.png);
+	}
+/*Footer menu css end*/
+
+/*------------Lightbox css start from here-------------*/
+/*css for Login and Signup lightbox start here*/
+	#user_form_default_sea_lightbox .headlinesitemenu{
+		background-color:$theme_topbar_menu_background_color;
+	}
+	#user_form_default_sea_lightbox .navigation li{
+		color:$theme_topbar_menu_link_color;
+	}
+	
+	.sitemenu_lightbox_options a.close{
+		background-image: url(~/application/modules/Sitemenu/externals/images/closebox.png);
+	}
+	.sitemenu_lightbox_content h3{
+	 border-bottom:1px solid $theme_border_medium_color;
+	}
+	.sitemenu_lightbox #user_form_login .form-element input,
+	.sitemenu_lightbox #user_signup_form .form-element input,
+	.sitemenu_lightbox #user_signup_form select{
+	 +rounded();
+	}
+  /*For IE Browsers*/
+	.sitemenu_lightbox #TB_window a:link{
+		color:$theme_link_color !important;
+	}
+	.sitemenu_signup_instead_btn button, .sitemenu_login_instead_btn button{
+		color:$theme_form_label_font_color;
+		border: 1px solid $theme_border_dark_color;
+	}
+	
+/*OVERWRITE FACEBOOK AND TWITTER ICONS*/
+	.sitemenu_lightbox #facebook-element a{
+		background-image:url(~/application/modules/Sitemenu/externals/images/facebook_button.png); 
+	}
+	.sitemenu_lightbox #twitter-element a{
+		background-image:url(~/application/modules/Sitemenu/externals/images/twitter_button.png); 
+	}
+	#user_form_default_sea_lightbox #sitemenu_loginform_sociallinks + div{
+		border-top:1px solid $theme_border_color;
+	}
+/*====================================*/
+
+/*Responsive work*/
+	#sitemenu_mobile_menu_link{display:none;}
+    @media only screen and (max-width:920px){
+	/*Mini Menu*/
+	.layout_core_menu_mini{width:97% !important;}
+	.layout_core_menu_mini > div > ul{float:left !important; margin-left: 2%;}
+	/*Main Menu*/
+	.layout_sitemenu_menu_main, #global_header.fixed .sitemenu_main_menu_wrapper, .layout_page_header .layout_main, .sitemenu_main_menu_wrapper nav{width:100% !important;}
+	.sitemenu_main_menu > li > a.level-top{display:flex;}
+	.layout_page_header .layout_main .sitestore_quick_search{display:none !important;}
+	/*Footer Menu*/
+	.layout_page_footer .layout_main{width:97% !important;}
+	.layout_sitemenu_menu_footer{text-align:center;}
+	.layout_sitemenu_menu_footer a + div, .layout_sitemenu_menu_footer a + div div.fright{float:none !important;}
+	.layout_page_footer .sitestoreproduct-search-box .form-elements, .layout_page_header .sitestoreproduct-search-box .form-elements{float:none;
+width:180px;margin:0 auto;}
+}
+@media only screen and (min-device-width: 600px) and (max-device-width: 890px) {
+	html .sitemenu_main_menu > li > a.level-top {height: 20px;line-height: 20px;}
+	html .sitemenu_main_menu > li + li:before {height: 36px;}
+	html .sitemenu_main_menu + div.fright {margin-top: 0 !important;}
+	.sitemenu_main_menu > li{position:relative;}
+	html .sitemenu_main_menu li.level1parent > a, html .sitemenu_main_menu li.level1parent > a {background-image: none;}
+}
+@media only screen and (max-width:768px){
+	.sitemenu_main_menu{width:100% !important;}
+	.sitemenu_main_menu_wrapper nav ul{max-height:300px;overflow-x: hidden;overflow-y: auto;}
+	.sitemenu_mobile_menu_link + ul.sitemenu_main_menu {display:none;}
+	#sitemenu_mobile_menu_link{display:block; padding:10px 5px;float:left;}
+	#sitemenu_mobile_menu_link > i	{background-image: url(~/application/modules/Sitemenu/externals/images/mobile_menu.png);background-position: 5px center;background-repeat: no-repeat;padding:10px;}
+	.sitemenu_mobile_menu_link > ul	{clear:both; border-top-width:1px;width:100%;}
+	.sitemenu_mobile_menu_link ul.sitemenu_main_menu_more, .sitemenu_mobile_menu_link .apps ul.sitemenu_main_menu_more{margin-left:0;}
+	.sitemenu_mobile_menu_link + div > #main_menu_cart + div{float:left;}
+	.layout_sitemenu_menu_main .layout_sitemenu_searchbox_sitemenu, .layout_sitemenu_menu_main .sitemenu_main_menu + div {display:block;}
+	.sitemenu_main_menu > li{display:block !important;}
+	.sitemenu_main_menu > li + li:before{background-image:none !important;}
+    .sitemenu_main_menu > li > a.level-top{text-align:left !important;}
+	.sitemenu_main_menu > li > a.level-top span:last-child i{float:right;margin-top: 10px;}
+	/*Location search in Main menu*/
+	.sitemenu_mobile_menu_link .layout_seaocore_change_my_location {display:block; float:right;	margin-bottom:3px !important;}
+	.sitemenu_mobile_menu_link .layout_seaocore_change_my_location > div > a + ul {left: auto !important; right:15px; background-color: $theme_body_background_color;}
+	.sitemenu_mobile_menu_link .layout_seaocore_change_my_location > div > a, 
+	.sitemenu_mobile_menu_link .layout_seaocore_change_my_location > div > a:hover {padding: 3px 5px;}
+	.sitemenu_mobile_menu_link .layout_seaocore_change_my_location > div > a .location_arrow {height: 17px;}
+	/*Standard navigation in mobile device*/
+	html .standard_nav ul, html .multi_column ul.level1{position:relative; width: auto;}
+  html .sitemenu_main_menu li.level1parent > a, html .sitemenu_main_menu li.level1parent > a {background-image: none;}
+	.standard_nav a.level-top {width: 90%;}
+	.standard_nav a.level-top + i {background: url(~/application/modules/Sitemenu/externals/images/bci_po.png) no-repeat center;  position: absolute; width: 5%; padding: 8px 0px; right: 0px; margin-top: -37px; height: 20px;}
+	.standard_nav a.level-top + i.isDown {background: url(~/application/modules/Sitemenu/externals/images/bottom-arrow.png) no-repeat center;}	
+}
+@media only screen and (max-width:700px){
+	.sitemenu_main_menu > li{display:inline-block;}
+	#core_menu_mini_menu input#global_search_field{width:90% !important;}
+}
+
+@media only screen and (max-width:600px){
+	/*For mini-menu pulldown*/
+	html .layout_core_menu_mini > div > ul{position:relative;}
+	html #core_menu_mini_menu .verticalScroll{float:none;}
+	 html #core_menu_mini_menu div.seaocore_pulldown_wrapper{width:240px;}
+	 html #core_mini_settings_updates_pulldown div.seaocore_pulldown_wrapper {width: 200px !important;margin-left:-173px;}
+    html #core_menu_mini_menu .seocore_pulldown_item_list .seocore_pulldown_item_list_from{width:195px !important;}
+	#core_menu_mini_menu div.seaocore_pulldown_arrow{display:none;}
+}
+@media screen and (max-width:480px){
+	/*For Signin and Signup buttons in popup*/
+	div.sitemenu_signup_instead_btn,
+	.sitemenu_lightbox #user_form_login #submit-element,
+	.sitemenu_lightbox #user_signup_form #submit-element,
+	div.sitemenu_login_instead_btn,
+	.sitemenu_lightbox #user_form_login #submit-wrapper {display: table; float: none !important; margin: 0 auto 6px; position: static; width:auto !important;}
+}

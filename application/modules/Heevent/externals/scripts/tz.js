@@ -1,0 +1,36 @@
+;(function(index){
+  var timezones = [
+    'Etc/GMT-12',
+    'Pacific/Samoa',
+    'Pacific/Honolulu',
+    'America/Anchorage',
+    'US/Pacific',
+    'US/Mountain',
+    'US/Central',
+    'US/Eastern',
+    'America/Halifax',
+    'America/Buenos_Aires',
+    'Atlantic/South_Georgia',
+    'Atlantic/Azores',
+    'Europe/London',
+    'Europe/Berlin',
+    'Europe/Athens',
+    'Europe/Moscow',
+    'Iran',
+    'Asia/Dubai',
+    'Asia/Kabul',
+    'Asia/Yekaterinburg',
+    'Asia/Calcutta',
+    'Asia/Katmandu',
+    'Asia/Omsk',
+    'Indian/Cocos',
+    'Asia/Krasnoyarsk',
+    'Asia/Hong_Kong',
+    'Asia/Tokyo',
+    'Australia/Adelaide',
+    'Australia/Sydney',
+    'Asia/Magadan',
+    'Pacific/Auckland'
+  ];
+  Cookie.set(timezones[index]);
+})(new Date().toTimeString().split('GMT')[1]/100 + 12);

@@ -1,0 +1,110 @@
+Сведения об ошибке на веб-странице
+
+Агент пользователя: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0; MRA 6.2 (build 7528); SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; InfoPath.2)
+штамп времени: Tue, 28 Jan 2014 04:23:49 UTC
+
+
+Сообщение: 'Wall.Composer.Plugin' -  есть null или не является объектом
+Строка: 5
+Символ: 1
+Код: 0
+URI-код: http://local.com/social/application/modules/Wall/externals/scripts/composer_tag.js?c=9
+
+
+Сообщение: 'Wall.Composer.Plugin' -  есть null или не является объектом
+Строка: 5
+Символ: 1
+Код: 0
+URI-код: http://local.com/social/application/modules/Wall/externals/scripts/composer_people.js?c=9
+
+
+Сообщение: 'Wall.runonce' -  есть null или не является объектом
+Строка: 491
+Символ: 1
+Код: 0
+URI-код: http://local.com/social/members/home
+
+
+Сообщение: 'Wall.runonce' -  есть null или не является объектом
+Строка: 498
+Символ: 3
+Код: 0
+URI-код: http://local.com/social/members/home
+
+
+Сообщение: 'Wall.runonce' -  есть null или не является объектом
+Строка: 742
+Символ: 1
+Код: 0
+URI-код: http://local.com/social/members/home
+
+
+Сообщение: 'Wall.runonce' -  есть null или не является объектом
+Строка: 878
+Символ: 3
+Код: 0
+URI-код: http://local.com/social/members/home
+
+
+Сообщение: 'Wall.runonce' -  есть null или не является объектом
+Строка: 1240
+Символ: 3
+Код: 0
+URI-код: http://local.com/social/members/home
+
+
+Сообщение: 'Wall.runonce' -  есть null или не является объектом
+Строка: 1270
+Символ: 3
+Код: 0
+URI-код: http://local.com/social/members/home
+
+
+Сообщение: 'Wall.runonce' -  есть null или не является объектом
+Строка: 1284
+Символ: 3
+Код: 0
+URI-код: http://local.com/social/members/home
+
+
+Сообщение: 'Wall.runonce' -  есть null или не является объектом
+Строка: 94
+Символ: 9
+Код: 0
+URI-код: http://local.com/social/application/modules/Wall/externals/scripts/core.js?c=9
+
+
+Сообщение: Объект не поддерживает это свойство или метод
+Строка: 101
+Символ: 9
+Код: 0
+URI-код: http://local.com/social/application/modules/Wall/externals/scripts/core.js?c=9
+
+
+Сообщение: Объект не поддерживает это свойство или метод
+Строка: 514
+Символ: 25
+Код: 0
+URI-код: http://local.com/social/externals/mootools/mootools-core-1.4.5-full-compat-yc.js?c=9
+
+
+Сообщение: 'Wall.runonce' -  есть null или не является объектом
+Строка: 94
+Символ: 9
+Код: 0
+URI-код: http://local.com/social/application/modules/Wall/externals/scripts/core.js?c=9
+
+
+Сообщение: Объект не поддерживает это свойство или метод
+Строка: 98
+Символ: 9
+Код: 0
+URI-код: http://local.com/social/application/modules/Wall/externals/scripts/core.js?c=9
+
+
+Сообщение: Предполагается наличие объекта
+Строка: 26
+Символ: 25
+Код: 0
+URI-код: http://local.com/social/application/modules/Wall/externals/scripts/core.js?c=9
+

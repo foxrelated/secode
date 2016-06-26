@@ -1,0 +1,92 @@
+/* $Id: main.css 2014-05-26 00:00:00Z SocialEngineAddOns Copyright 2013-2014 BigStep Technologies Pvt. Ltd. $ */
+
+/*Product Detail Popup*/
+
+.sitemenu_icon_create {
+	background-image: url(~/application/modules/Sitemenu/externals/images/admin/add.png);
+}
+
+.sitemenu_icon_back {
+	background-image: url(~/application/modules/Sitemenu/externals/images/admin/back.png);
+}
+
+.sr_sitemenu_view{
+	width:400px;
+}
+.sr_sitemenu_view .top{
+	padding:10px 0;
+}
+.sr_sitemenu_view .top img{
+	width:35px;
+	margin-right:10px;
+	vertical-align:middle;
+}
+.sr_sitemenu_view .top a{
+	font-weight:bold;
+}
+.sr_sitemenu_view td{
+	padding:3px;
+}
+.sr_sitemenu_view td b{
+	font-weight:bold;
+}
+.admin_menus_items .item_label1
+{
+  display: block;
+  overflow: hidden;
+  font-weight: bold;
+  padding: 7px 10px 7px 10px;
+  font-size: .9em;
+}
+.admin_menus_items .item_label2
+{
+  display: block;
+  overflow: hidden;
+  font-weight: bold;
+  padding: 7px 10px 7px 10px;
+  font-size: .8em;
+}
+.admin_menus_items .item_label3
+{
+  display: block;
+  overflow: hidden;
+  font-weight: bold;
+  padding: 7px 10px 7px 10px;
+  font-size: .7em;
+}
+.mleft5{
+	margin-left:5px;
+}
+.sitemenu_icon_view{
+	background-image: url(~/application/modules/Sitemenu/externals/images/admin/eye.png);
+	display:inline-block;
+	height:16px;
+	vertical-align:bottom;
+	width:16px;
+}
+
+
+
+/*Module-Create*/
+#global_page_sitemenu-admin-modules-settings-module-create .settings form{
+	float:none;
+}
+#global_page_sitemenu-admin-modules-settings-module-create .settings .form-description {
+	max-width: 850px;
+}
+#global_page_sitemenu-admin-modules-settings-module-create .settings .form-element .description {
+	max-width: 600px;
+}
+#global_page_sitemenu-admin-modules-settings-module-create .settings .form-element {
+	width:650px;
+}
+#global_page_sitemenu-admin-modules-settings-module-create input[type="checkbox"]{
+	float:left;
+}
+#global_page_sitemenu-admin-modules-settings-module-create label.optional{
+	float:left;
+	max-width:600px;
+}
+#global_page_sitemenu-admin-modules-settings-module-create #dummy_title-wrapper .form-label{
+	width:600px;
+}
