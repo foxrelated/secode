@@ -834,3 +834,25 @@ Notes:
 	margin:0px;padding:0px;
 	line-height:normal;
 }
+
+/*Responsive work for slideshows(Mobile/Tablets)*/
+@media only screen and (max-width: 920px) {
+	.slideshow-thumbnailsfullwidth1, .slideshow-thumbnailsfullwidth2, .slideshow-thumbnailsfullwidth3, .slideshow-thumbnailsfullwidth4, .slideshow-thumbnailsfullwidth5,
+	.slideshow-thumbnailsmiddle1, .slideshow-thumbnailsmiddle2, .slideshow-thumbnailsmiddle3,
+	.slideshow-thumbnailsextended1, .slideshow-thumbnailsextended2, .slideshow-thumbnailsextended3,
+	.slideshow-thumbnails, .slideshow-thumbnailsleft1, .slideshow-thumbnailsleft2, .slideshow-thumbnailsleft3,
+	.slideshow-thumbnailsright1, .slideshow-thumbnailsright2, .slideshow-thumbnailsright3 {display:none;}
+	.slideshow {width:100% !important; height:300px !important; box-sizing:border-box;}
+	.slideshow-images { height:288px !important; width:100% !important;}
+	.slideshow a img {left:0 !important; width:100% !important; height:100% !important; top:0 !important;}
+	.slideshow-controller {margin-top:-10px;}
+	html .slideshow-captionsfullwidth1 {margin-left:0; margin-right:0; bottom:0;}
+}
+@media only screen and (max-width: 800px) {
+	.slideshow {height:250px !important;}
+	.slideshow-images {height:238px !important;}
+}
+@media only screen and (max-width: 600px) {
+	.slideshow {height:200px !important;}
+	.slideshow-images { height:188px !important;}
+}

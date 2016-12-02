@@ -11,28 +11,29 @@
  */
 ?>
 
-<?php 
+<?php
     include APPLICATION_PATH . '/application/modules/Nestedcomment/views/sitemobile/scripts/_activitySettings.tpl';
-?>
+    ?>
 <script type="text/javascript">
  var contentviewpage_URL = "<?php echo $this->url(array('module' => 'advancedactivity', 'controller' => 'index', 'action' => 'get-all-like-user'), 'default', 'true'); ?>";
  var contentviewdislikepage_URL = "<?php echo $this->url(array('module' => 'advancedactivity', 'controller' => 'index', 'action' => 'get-all-dislike-user'), 'default', 'true'); ?>"
  <?php if (Engine_Api::_()->sitemobile()->isApp()): ?>
  sm4.core.runonce.add(function() {
    sm4.core.comments.preloadComments('<?php echo $this->subject()->getType() ?>', '<?php echo $this->subject()->getIdentity() ?>');
-   
+
  });
  <?php endif;?>
- 
+
  var requestOptions = {
             'photourl'  : sm4.core.baseUrl + 'album/album/compose-upload/type/wall'
             }
             sm4.activity.composer.init(requestOptions);
-            
+
             sm4.core.runonce.add(function() {
-              if ($.type($.mobile.activePage) != 'undefined') {                    
-                 sm4.activity.advfeed_array[$.mobile.activePage.attr('id') + '_attachmentURL'] = requestOptions;   
-                } 
+              if ($.type($.mobile.activePage) != 'undefined') {
+                 sm4.activity.advfeed_array[$.mobile.activePage.attr('id') + '_attachmentURL'] = requestOptions;
+                }
+                sm4.sitereaction.attachCommentReaction();
             });
   var enabledModuleForMobile = 1;
   var showAsLike = '<?php echo $showAsLike;?>';
@@ -40,9 +41,14 @@
   var showLikeWithoutIcon = '<?php echo $showLikeWithoutIcon;?>';
   var showDislikeUsers = '<?php echo $showDislikeUsers;?>';
 </script>
+
+<?php
+ $allowReaction = Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitereaction') && $this->settings('sitereaction.reaction.active', 1);
+ $allowReaction = $allowReaction && ( $showAsLike || ($this->settings('sitereaction.reaction.withdislike.active', 1) && $showLikeWithoutIcon != 3 ));
+ ?>
 <?php $photoLightboxComment = 0;?>
 <?php $params = Zend_Controller_Front::getInstance()->getRequest()->getParams();?>
-<?php if((isset($params['lightbox_type']) &&  $params['lightbox_type'] == 'photo') || isset($params['action']) && $params['action'] == 'light-box-view'): ?> 
+<?php if((isset($params['lightbox_type']) &&  $params['lightbox_type'] == 'photo') || isset($params['action']) && $params['action'] == 'light-box-view'): ?>
   <?php $photoLightboxComment = 1;?>
 <?php endif;?>
 
@@ -55,30 +61,48 @@ $this->headTranslate(array(
 <?php if (!$this->page): ?>
   <div class='comments' id="comments">
   <?php endif; ?>
-  <div class='comments_options feed_item_btm'>   
+  <div class='comments_options feed_item_btm'>
     <?php if (isset($this->form)): ?>
       <div class="fleft" <?php if($showLikeWithoutIcon == 3 && !$showAsLike):?> style="margin-top:5px;"<?php endif;?>><a href='javascript:void(0);' onclick="$.mobile.activePage.find('#comment-form_'+'<?php echo $this->subject()->getGuid();?>').css('display', ''); $.mobile.activePage.find('#comment-form_'+'<?php echo $this->subject()->getGuid();?>').find('#body').focus();"><?php echo $this->translate('Post Comment') ?></a><span class="sep">-</span>
       </div>
     <?php endif; ?>
 
-    <?php if($showAsLike):?>  
+    <?php if($showAsLike):?>
         <?php if ($this->viewer()->getIdentity() && $this->canComment): ?>
-          <?php if ($this->subject()->likes()->isLike($this->viewer())): ?>
-            <div class="fleft"><a href="javascript:void(0);" onclick="sm4.core.comments.unlike('<?php echo $this->subject()->getType() ?>', '<?php echo $this->subject()->getIdentity() ?>')" class="feed_likes"><?php echo $this->translate('Unlike This') ?></a></div>
+          <?php if ($allowReaction): ?>
+            <?php echo $this->nestedCommentReactions($this->subject(), array(
+              'target' => $this->subject()->getIdentity(),
+              'id' => 'like_'.$this->subject()->getGuid(),
+              'target_type' =>  $this->subject()->getType(),
+              'class' => 'nsc_like_toolbar',
+            ), true); ?>
           <?php else: ?>
-             <div class="fleft"><a href="javascript:void(0);" onclick="sm4.core.comments.like('<?php echo $this->subject()->getType() ?>', '<?php echo $this->subject()->getIdentity() ?>')" class="feed_likes"><?php echo $this->translate('Like This') ?></a></div>
+            <?php if ($this->subject()->likes()->isLike($this->viewer())): ?>
+              <div class="fleft"><a href="javascript:void(0);" onclick="sm4.core.comments.unlike('<?php echo $this->subject()->getType() ?>', '<?php echo $this->subject()->getIdentity() ?>')" class="feed_likes"><?php echo $this->translate('Unlike This') ?></a></div>
+            <?php else: ?>
+               <div class="fleft"><a href="javascript:void(0);" onclick="sm4.core.comments.like('<?php echo $this->subject()->getType() ?>', '<?php echo $this->subject()->getIdentity() ?>')" class="feed_likes"><?php echo $this->translate('Like This') ?></a></div>
           <?php endif; ?>
         <?php endif; ?>
+      <?php endif; ?>
     <?php else:?>
-            
+
         <?php if ($this->viewer()->getIdentity() && $this->canComment): ?>
-            
+
             <?php if($showLikeWithoutIcon != 3):?>
-                <?php if (!$this->subject()->likes()->isLike($this->viewer())): ?>
-                    <a href="javascript:void(0);" onclick="sm4.core.comments.like('<?php echo $this->subject()->getType() ?>', '<?php echo $this->subject()->getIdentity() ?>')" class="feed_likes"><?php echo $this->translate('Like') ?></a>
-                <?php else:?>
-                     
-                    <a href="javascript:void(0)" class="feed_likes" onclick="sm4.activity.changeLikeDislikeColor()"><?php echo $this->translate('Like') ?></a>
+                <?php if ($allowReaction): ?>
+                     <?php echo $this->nestedCommentReactions($this->subject(), array(
+                       'target' => $this->subject()->getIdentity(),
+                       'id' => 'like_'.$this->subject()->getGuid(),
+                       'target_type' =>  $this->subject()->getType(),
+                       'unlikeDisable' => true,  
+                       'class' => 'nsc_like_toolbar',
+                     ), true); ?>
+               <?php else: ?>
+                     <?php if (!$this->subject()->likes()->isLike($this->viewer())): ?>
+                         <a href="javascript:void(0);" onclick="sm4.core.comments.like('<?php echo $this->subject()->getType() ?>', '<?php echo $this->subject()->getIdentity() ?>')" class="feed_likes"><?php echo $this->translate('Like') ?></a>
+                     <?php else:?>
+                         <a href="javascript:void(0)" class="feed_likes" onclick="sm4.activity.changeLikeDislikeColor()"><?php echo $this->translate('Like') ?></a>
+                     <?php endif;?>
                 <?php endif;?>
                 <?php $isDisLiked = Engine_Api::_()->getDbtable('dislikes', 'nestedcomment')->isDislike($this->subject(), $this->viewer());?>
                 <?php if (!$isDisLiked): ?>
@@ -88,7 +112,7 @@ $this->headTranslate(array(
                     -
                     <a href="javascript:void(0)" class="feed_dislikes" onclick="sm4.activity.changeLikeDislikeColor()"><?php echo $this->translate('Dislike') ?></a>
                 <?php endif;?>
-            <?php else:?>    
+            <?php else:?>
                 <?php if (!$this->subject()->likes()->isLike($this->viewer())): ?>
                      <div class="comments_likes fleft">
                         <?php if ($this->likes->getTotalItemCount() > 0): // LIKES ------------- ?>
@@ -106,67 +130,45 @@ $this->headTranslate(array(
                      </div>
                 <?php endif;?>
                 <?php $isDisLiked = Engine_Api::_()->getDbtable('dislikes', 'nestedcomment')->isDislike($this->subject(), $this->viewer());?>
-                <?php if (!$isDisLiked): ?>
-                  <div class="comments_dislikes fleft">
-                    <?php if (Engine_Api::_()->getDbtable('dislikes', 'nestedcomment')->getDislikeCount( $this->subject()) > 0): // LIKES ------------- ?>
+                <?php $disLikeCount = Engine_Api::_()->getDbtable('dislikes', 'nestedcomment')->getDislikeCount($this->subject()); ?>
+                <div class="comments_dislikes fleft">
+                    <?php if ($disLikeCount > 0): // LIKES ------------- ?>
                        <?php if($showDislikeUsers):?>
-                        <a href="javascript:void(0);" onclick='sm4.activity.openPopup("<?php echo $this->url(array('module' => 'advancedactivity', 'controller' => 'index', 'action' => 'get-all-dislike-user', 'type' => $this->subject()->getType(), 'id' => $this->subject()->getIdentity()), 'default', 'true'); ?>", "feedsharepopup")' class="comments_dislikes_count"><?php echo Engine_Api::_()->getDbtable('dislikes', 'nestedcomment')->getDislikeCount( $this->subject());?>
+                        <a href="javascript:void(0);" onclick='sm4.activity.openPopup("<?php echo $this->url(array('module' => 'advancedactivity', 'controller' => 'index', 'action' => 'get-all-dislike-user', 'type' => $this->subject()->getType(), 'id' => $this->subject()->getIdentity()), 'default', 'true'); ?>", "feedsharepopup")' class="comments_dislikes_count"><?php echo $disLikeCount;?>
                         </a>
                       <?php else:?>
-                      <a class="comments_dislikes_count"><?php echo Engine_Api::_()->getDbtable('dislikes', 'nestedcomment')->getDislikeCount( $this->subject());?></a>
+                      <a class="comments_dislikes_count"><?php echo $disLikeCount;?></a>
                       <?php endif;?>
                     <?php endif; ?>
-                    <a href="javascript:void(0);" onclick="sm4.core.comments.dislike(<?php echo sprintf("'%s', %d", $this->subject()->getType(), $this->subject()->getIdentity());?>)" class="feed_dislikes ui-icon ui-icon-angle-down"></a></div>
+                <?php if (!$isDisLiked): ?>
+                    <a href="javascript:void(0);" onclick="sm4.core.comments.dislike(<?php echo sprintf("'%s', %d", $this->subject()->getType(), $this->subject()->getIdentity());?>)" class="feed_dislikes ui-icon ui-icon-angle-down"></a>
                 <?php else:?>
-                    <div class="comments_dislikes fleft">
-                        <?php if (Engine_Api::_()->getDbtable('dislikes', 'nestedcomment')->getDislikeCount( $this->subject()) > 0): // LIKES ------------- ?>
-                        <?php if($showDislikeUsers):?>
-                            <a href="javascript:void(0);" onclick='sm4.activity.openPopup("<?php echo $this->url(array('module' => 'advancedactivity', 'controller' => 'index', 'action' => 'get-all-dislike-user', 'type' => $this->subject()->getType(), 'id' => $this->subject()->getIdentity()), 'default', 'true'); ?>", "feedsharepopup")' class="comments_dislikes_count"><?php  echo Engine_Api::_()->getDbtable('dislikes', 'nestedcomment')->getDislikeCount( $this->subject());?></a> 
-                        <?php else:?>
-                            <a class="comments_dislikes_count"><?php  echo Engine_Api::_()->getDbtable('dislikes', 'nestedcomment')->getDislikeCount( $this->subject());?></a>
-                        <?php endif; ?>
-                       <?php endif; ?>
-                       <a href="javascript:void(0)" class="feed_dislikes ui-icon ui-icon-angle-down" onclick="sm4.activity.changeLikeDislikeColor()"></a></div>
+                   <a href="javascript:void(0)" class="feed_dislikes ui-icon ui-icon-angle-down" onclick="sm4.activity.changeLikeDislikeColor()"></a>
                 <?php endif;?>
-            <?php endif;?>     
-         <?php endif;?> 
-    <?php endif;?>
-  </div>
-  
-  <ul class="clr">
-        <li>
-            <div></div>
-            <?php if($showAsLike):?>
-                <div class="comments_likes feed_item_btm">
-                   <?php if ($this->likes->getTotalItemCount() > 0): // LIKES ------------- ?>
-                       <a href="javascript:void(0);" onclick='sm4.activity.openPopup("<?php echo $this->url(array('module' => 'advancedactivity', 'controller' => 'index', 'action' => 'get-all-like-user', 'type' => $this->subject()->getType(), 'id' => $this->subject()->getIdentity()), 'default', 'true'); ?>", "feedsharepopup")' class="comments_likes_count f_normal"><?php echo $this->translate(array('%s likes', '%s like', $this->likes->getTotalItemCount()), $this->locale()->toNumber($this->likes->getTotalItemCount()))?></a><span class="sep">-</span>
-                   <?php endif; ?>
-                   <span><?php echo $this->translate(array('%s comment', '%s comments', $this->comments->getTotalItemCount()), $this->locale()->toNumber($this->comments->getTotalItemCount())) ?></span>
-                </div>
-            <?php else:?>
-            <div class="feed_item_btm">
-                <?php if($showLikeWithoutIcon != 3):?>
-                <div class="comments_likes fleft ">
-                   <?php if ($this->likes->getTotalItemCount() > 0): // LIKES ------------- ?>
-                       <a href="javascript:void(0);" onclick='sm4.activity.openPopup("<?php echo $this->url(array('module' => 'advancedactivity', 'controller' => 'index', 'action' => 'get-all-like-user', 'type' => $this->subject()->getType(), 'id' => $this->subject()->getIdentity()), 'default', 'true'); ?>", "feedsharepopup")' class="comments_likes_count f_normal"><?php echo $this->translate(array('%s likes', '%s like', $this->likes->getTotalItemCount()), $this->locale()->toNumber($this->likes->getTotalItemCount()))?></a><span class="sep">-</span>
-                   <?php endif; ?>
-                </div>
-                <div class="comments_dislikes fleft">
-                   <?php if (Engine_Api::_()->getDbtable('dislikes', 'nestedcomment')->getDislikeCount( $this->subject()) > 0): // LIKES ------------- ?>
-                       <?php if($showDislikeUsers):?>
-                        <a href="javascript:void(0);" onclick='sm4.activity.openPopup("<?php echo $this->url(array('module' => 'advancedactivity', 'controller' => 'index', 'action' => 'get-all-dislike-user', 'type' => $this->subject()->getType(), 'id' => $this->subject()->getIdentity()), 'default', 'true'); ?>", "feedsharepopup")' class="comments_dislikes_count"><?php echo $this->translate(array('%s dislikes', '%s dislike', Engine_Api::_()->getDbtable('dislikes', 'nestedcomment')->getDislikeCount( $this->subject())), $this->locale()->toNumber(Engine_Api::_()->getDbtable('dislikes', 'nestedcomment')->getDislikeCount( $this->subject()))) ?></a>
-                       <?php else:?>
-                        <a class="comments_dislikes_count"><?php echo $this->translate(array('%s dislikes', '%s dislike', Engine_Api::_()->getDbtable('dislikes', 'nestedcomment')->getDislikeCount( $this->subject())), $this->locale()->toNumber(Engine_Api::_()->getDbtable('dislikes', 'nestedcomment')->getDislikeCount( $this->subject()))) ?></a>
-                       <?php endif;?>
-                       <span class="sep">-</span>
-                   <?php endif; ?>
-                </div>
-                <?php endif; ?>
-                <div><span id="comments_count"><?php echo $this->translate(array('%s comment', '%s comments', $this->comments->getTotalItemCount()), $this->locale()->toNumber($this->comments->getTotalItemCount())) ?></span></div>
                 </div>
             <?php endif;?>
+         <?php endif;?>
+    <?php endif;?>
+  </div>
+
+  <ul class="clr">
+    <li>
+            <div></div>
+            <div class="feed_item_btm" id="comments_stats_<?php echo $this->subject()->getGuid(); ?>" data-reaction="<?php echo $allowReaction ?>">
+            <?php echo $this->partial(
+                    'application/modules/Nestedcomment/views/sitemobile/scripts/_comments-stats.tpl',
+                    null,
+                    array(
+                        'showAsLike' => $showAsLike,
+                        'showLikeWithoutIcon' => $showLikeWithoutIcon,
+                        'likes' => $this->likes,
+                        'comments' => $this->comments,
+                        'allowReaction' => $allowReaction,
+                    )
+                ); ?>
+            </div>
         </li>
-       
+
       <?php if ($this->comments->getTotalItemCount() > 0): // COMMENTS ------- ?>
 
         <?php if ($this->page && $this->comments->getCurrentPageNumber() > 1): ?>

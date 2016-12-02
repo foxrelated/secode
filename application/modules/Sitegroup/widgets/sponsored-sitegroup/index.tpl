@@ -153,7 +153,7 @@ $this->headScript()
                 </div>  
                 <?php if($postedBy):?>
                   <div class="seaocore_sponsored_carousel_items_stat seaocore_txt_light">
-                    <?php echo $this->translate('posted by'); ?>
+                    <?php echo $this->translate('created by'); ?>
                     <?php echo $this->htmlLink($sitegroup->getOwner()->getHref(), Engine_Api::_()->sitegroup()->truncation($sitegroup->getOwner()->getTitle(), 100), array('title' => $sitegroup->getOwner()->getTitle())) ?>
                   </div>	
                 <?php endif;?>

@@ -304,33 +304,37 @@ class Sitevideo_Form_Video extends Engine_Form {
             'onchange' => "updateTextFields(this.value)",
             'escape' => false,
         ));
-        $allowedSources = Engine_Api::_()->getApi('settings', 'core')->getSetting('sitevideo.allowed.video', array(1, 2, 3, 4));
-
+        
+        $allowedSources = Engine_Api::_()->getApi('settings', 'core')->getSetting('sitevideo.allowed.video', array(1, 2, 3, 4,5));
+        $permissionsTable = Engine_Api::_()->getDbtable('permissions', 'authorization');
+        $allowedSources_level = $permissionsTable->getAllowed('video', Engine_Api::_()->user()->getViewer()->level_id, 'source');
+        
+        $allowedSources_level = array_flip($allowedSources_level);
         $allowedSources = array_flip($allowedSources);
         //YouTube, Vimeo ,Dailymotion
         $video_options = Array();
         $coreSettings = Engine_Api::_()->getApi('settings', 'core');
         $key = $coreSettings->getSetting('sitevideo.youtube.apikey', $coreSettings->getSetting('video.youtube.apikey'));
-        if (isset($allowedSources[1]) && $key) {
+        if (isset($allowedSources[1]) && $key && isset($allowedSources_level[1])) {
             $video_options[1] = "<i class='sitevideo_icon_youtube' title='YouTube'></i>";
         }
-        if (isset($allowedSources[2]))
+        if (isset($allowedSources[2]) && isset($allowedSources_level[2]))
             $video_options[2] = "<i class='sitevideo_icon_vimeo' title='Vimeo'></i>";
-        if (isset($allowedSources[3]))
+        if (isset($allowedSources[3]) && isset($allowedSources_level[3]))
             $video_options[4] = "<i class='sitevideo_icon_dailymotion' title='Dailymotion'></i>";
 
 
         //My Computer
         $allowed_upload = Engine_Api::_()->authorization()->getAdapter('levels')->getAllowed('video', $user, 'upload');
         $ffmpeg_path = Engine_Api::_()->getApi('settings', 'core')->sitevideo_ffmpeg_path;
-        if (isset($allowedSources[4]) && !empty($ffmpeg_path) && $allowed_upload) {
+        if (isset($allowedSources[4]) && !empty($ffmpeg_path) && $allowed_upload && isset($allowedSources_level[4])) {
             if (Engine_Api::_()->hasModuleBootstrap('mobi') && Engine_Api::_()->mobi()->isMobile()) {
                 $video_options[3] = "<span class='sitevideo_icon_mysystem' title='My Device'>My Device</span>";
             } else {
                 $video_options[3] = "<span class='sitevideo_icon_mysystem' title='My Computer'>My Computer</span>";
             }
         }
-        if (isset($allowedSources[5])) {
+        if (isset($allowedSources[5]) && isset($allowedSources_level[5])) {
             $video_options[5] = "<i class='sitevideo_icon_embed' title='Embed Code'></i><br /><p class='description'>You need to upload a video thumbnail image for the videos which have different video sources other than Vimeo, Dailymotion and Youtube.</p>";
         }
 

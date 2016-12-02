@@ -27,7 +27,7 @@ return array(
     array(
         'type' => 'module',
         'name' => 'sitegroup',
-        'version' => '4.8.10p2',
+        'version' => '4.8.12p3',
         'path' => 'application/modules/Sitegroup',
         'title' => 'Groups / Communities',
         'description' => 'Groups / Communities',

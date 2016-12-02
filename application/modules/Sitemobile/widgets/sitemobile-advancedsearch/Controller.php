@@ -113,6 +113,11 @@ class Sitemobile_Widget_SitemobileAdvancedsearchController extends Seaocore_Cont
       $this->view->action = $action = $zendInstance->getRouter()->assemble(array(), 'sitemobileapp_friends', true);
       $widgetParams['search'] = 1;
       $this->view->searchField = 'displayname';
+    } elseif ($module_controller_action == 'sitehashtag_index_index') {
+      $this->view->action = $action = $zendInstance->getRouter()->assemble(array('controller' => 'index', 'action' => 'index'), 'sitehashtag_general', true);
+      $widgetParams['search'] = 1;
+      $this->view->searchField = 'search';
+      $this->view->search = $request->getParam($this->view->searchField, '');
     } else {
       // check public settings
       $require_check = Engine_Api::_()->getApi('settings', 'core')->core_general_search;
@@ -125,7 +130,7 @@ class Sitemobile_Widget_SitemobileAdvancedsearchController extends Seaocore_Cont
       $this->view->action = $form->getAction();
       $this->view->searchField = 'query';
     }
-
+    
     $this->view->widgetParams = $widgetParams;
 
     $reqview_selected = Zend_Controller_Front::getInstance()->getRequest()->getParam('view_selected');

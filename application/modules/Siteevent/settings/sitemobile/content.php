@@ -731,7 +731,7 @@ $final_array = array(
                     array(
                         'label' => 'Choose the view types that you want to be available for events.',
                         'multiOptions' => array("1" => "List View", "2" => "Grid View"),
-                        'value' => 2,
+                        //'value' => 2,
                     ),
                 ),
                 array(

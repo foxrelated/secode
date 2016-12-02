@@ -33,12 +33,18 @@ $this->headLink()->appendStylesheet($this->layout()->staticBaseUrl . 'externals/
 		showprofileOption(0);
 	});
 
-  function showprofileOption(options) {
+ function showprofileOption(options) {
 		if(options == 0) {
 			$('user_ids-wrapper').style.display='none';
+      $('roles_id-wrapper').style.display='none';
 		}
 		else if(options == 1) {
 			$('user_ids-wrapper').style.display='block';
+      $('roles_id-wrapper').style.display='none';
+		}
+    else if(options == 2) {
+			$('roles_id-wrapper').style.display='block';
+      $('user_ids-wrapper').style.display='none';
 		}
   }
 

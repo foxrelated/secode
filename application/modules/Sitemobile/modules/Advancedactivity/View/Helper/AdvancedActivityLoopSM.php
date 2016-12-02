@@ -13,14 +13,14 @@
 class Advancedactivity_View_Helper_AdvancedActivityLoopSM extends Activity_View_Helper_Activity {
 
   public function advancedActivityLoopSM($actions = null, array $data = array()) {
-      
+
     if (null == $actions || (!is_array($actions) && !($actions instanceof Zend_Db_Table_Rowset_Abstract))) {
       return '';
     }
     $coreSettingsApi = Engine_Api::_()->getApi('settings', 'core');
     $allowEdit = 0;
     $privacyDropdownList = null;
-    $form = new Activity_Form_Comment();
+    $form = new Sitemobile_modules_Activity_Form_Comment();
     $viewer = Engine_Api::_()->user()->getViewer();
     $activity_moderate = "";
     $add_saved_feed = false;
@@ -61,6 +61,7 @@ class Advancedactivity_View_Helper_AdvancedActivityLoopSM extends Activity_View_
       }
     }
     $composerOptions = Engine_Api::_()->getApi('settings', 'core')->getSetting('advancedactivity.composer.options', array("emotions", "withtags"));
+    $allowReaction = Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitereaction') && $coreSettingsApi->getSetting('sitereaction.reaction.active', 1);
     $data = array_merge($data, array(
         'actions' => $actions,
         'commentForm' => $form,
@@ -74,6 +75,7 @@ class Advancedactivity_View_Helper_AdvancedActivityLoopSM extends Activity_View_
         'allowEmotionsIcon' => in_array("emotions", $composerOptions),
         'allowSaveFeed' => $add_saved_feed,
         'is_owner' => $is_owner,
+        'allowReaction' => $allowReaction,
         'showLargePhoto' => $coreSettingsApi->getSetting('aaf.largephoto.enable', 1)
             ));
 
@@ -88,7 +90,7 @@ class Advancedactivity_View_Helper_AdvancedActivityLoopSM extends Activity_View_
                         /*  Customization End */ $data
         );
     }
-    
+
   }
 
   protected function getPrivacyDropdownList() {

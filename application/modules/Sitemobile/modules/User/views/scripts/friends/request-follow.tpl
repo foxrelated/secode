@@ -18,7 +18,7 @@
 ?>
 
 <script type="text/javascript">
-  var userWidgetRequestSend = function(action, user_id, notification_id)
+  var userWidgetRequestSend = function(action, user_id, notification_id, tokenName, token)
   {
     var url;
     if( action == 'confirm' )
@@ -33,16 +33,16 @@
     {
       return false;
     }
-
+ var data = {
+      'user_id' : user_id,
+      'format' : 'json',
+    };
+    data[tokenName] = token;
     sm4.core.request.send({
       type: "POST", 
       dataType: "json", 
       url : url,
-      data: {
-        'token' : '<?php echo $this->token() ?>',
-        'user_id' : user_id,
-        'format':'json'
-      },
+      data: data,
       success: function( responseJSON, textStatus, jqXHR) {
         if( !responseJSON.status )
         {
@@ -68,20 +68,20 @@
     
      <?php if (Engine_Api::_()->sitemobile()->isApp()): ?>
       <p>
-        <a class="request_btn" href="javascript:void(0);" onclick='userWidgetRequestSend("confirm", <?php echo $this->string()->escapeJavascript($this->notification->getSubject()->getIdentity()) ?>, <?php echo $this->notification->notification_id ?>)'>
+        <a class="request_btn" href="javascript:void(0);" onclick='userWidgetRequestSend("confirm", <?php echo $this->string()->escapeJavascript($this->notification->getSubject()->getIdentity()) ?>, <?php echo $this->notification->notification_id ?>, "<?php echo $this->tokenName ?>", "<?php echo $this->tokenValue ?>")'>
           <?php echo $this->translate('Allow'); ?>
         </a>
-        <a class="request_btn ignore_btn" href="javascript:void(0);" onclick='userWidgetRequestSend("reject", <?php echo $this->string()->escapeJavascript($this->notification->getSubject()->getIdentity()) ?>, <?php echo $this->notification->notification_id ?>)'>
+        <a class="request_btn ignore_btn" href="javascript:void(0);" onclick='userWidgetRequestSend("reject", <?php echo $this->string()->escapeJavascript($this->notification->getSubject()->getIdentity()) ?>, <?php echo $this->notification->notification_id ?>, "<?php echo $this->tokenName ?>", "<?php echo $this->tokenValue ?>")'>
           <?php echo $this->translate('ignore request'); ?>
         </a>
       </p>
      <?php else : ?>
       <p class="sm-ui-lists-action">
-       <a href="javascript:void(0);" onclick='userWidgetRequestSend("confirm", <?php echo $this->string()->escapeJavascript($this->notification->getSubject()->getIdentity()) ?>, <?php echo $this->notification->notification_id ?>)'>
+       <a href="javascript:void(0);" onclick='userWidgetRequestSend("confirm", <?php echo $this->string()->escapeJavascript($this->notification->getSubject()->getIdentity()) ?>, <?php echo $this->notification->notification_id ?>, "<?php echo $this->tokenName ?>", "<?php echo $this->tokenValue ?>")'>
          <strong><?php echo $this->translate('Allow'); ?></strong>
        </a>
        <?php echo $this->translate('or'); ?>
-       <a href="javascript:void(0);" onclick='userWidgetRequestSend("reject", <?php echo $this->string()->escapeJavascript($this->notification->getSubject()->getIdentity()) ?>, <?php echo $this->notification->notification_id ?>)'>
+       <a href="javascript:void(0);" onclick='userWidgetRequestSend("reject", <?php echo $this->string()->escapeJavascript($this->notification->getSubject()->getIdentity()) ?>, <?php echo $this->notification->notification_id ?>, "<?php echo $this->tokenName ?>", "<?php echo $this->tokenValue ?>")'>
          <?php echo $this->translate('ignore request'); ?>
        </a>
      </p>

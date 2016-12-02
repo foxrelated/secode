@@ -88,7 +88,7 @@ function InfoBox(opt_opts) {
   //
   this.boxStyle_ = opt_opts.boxStyle || {};
   this.closeBoxMargin_ = opt_opts.closeBoxMargin || "2px";
-  this.closeBoxURL_ = opt_opts.closeBoxURL || "http://www.google.com/intl/en_us/mapfiles/close.gif";
+  this.closeBoxURL_ = opt_opts.closeBoxURL || "https://www.google.com/intl/en_us/mapfiles/close.gif";
 	alert(this.closeBoxURL_);
   if (opt_opts.closeBoxURL === "") {
     this.closeBoxURL_ = "";

@@ -1,1 +1,0 @@
-<?php echo $this->list_idea_html?>

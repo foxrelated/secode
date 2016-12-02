@@ -4,10 +4,10 @@
  * SocialEngine
  *
  * @category   Application_Extensions
- * @package    Siteapi
- * @copyright  Copyright 2015-2016 BigStep Technologies Pvt. Ltd.
+ * @package    Siteevent
+ * @copyright  Copyright 2013-2014 BigStep Technologies Pvt. Ltd.
  * @license    http://www.socialengineaddons.com/license/
- * @version    TopicController.php 2015-09-17 00:00:00Z SocialEngineAddOns $
+ * @version    $Id: DiaryController.php 6590 2014-01-02 00:00:00Z SocialEngineAddOns $
  * @author     SocialEngineAddOns
  */
 class Siteevent_DiaryController extends Siteapi_Controller_Action_Standard {
@@ -62,6 +62,10 @@ class Siteevent_DiaryController extends Siteapi_Controller_Action_Standard {
         if (!empty($totalItemCount)) {
             foreach ($paginator as $dairyObj) {
                 $diary = $dairyObj->toArray();
+
+                if (isset($diary['body']) && !empty($diary['body']))
+                    $diary['body'] = strip_tags($diary['body']);
+
                 $lists = $dairyObj->getDiaryMap(array('orderby' => 'random'));
                 $count = $lists->getTotalItemCount();
                 $tempEvents = array();
@@ -88,7 +92,7 @@ class Siteevent_DiaryController extends Siteapi_Controller_Action_Standard {
             $level_id = Engine_Api::_()->getDbtable('levels', 'authorization')->fetchRow(array('type = ?' => "public"))->level_id;
         }
         $can_create = Engine_Api::_()->authorization()->getPermission($level_id, 'siteevent_diary', "create");
-        $response['can_create'] = $can_create;
+        $response['canCreate'] = $can_create;
         if (!empty($tempResponse))
             $response['response'] = $tempResponse;
         $this->respondWithSuccess($response, true);
@@ -109,12 +113,8 @@ class Siteevent_DiaryController extends Siteapi_Controller_Action_Standard {
             $this->respondWithError('unauthorized');
 
         try {
-            try {
-                $response = Engine_Api::_()->getApi('Siteapi_Core', 'Siteevent')->getDiarySearchForm();
-            } catch (Exception $e) {
-                echo $e;
-                die;
-            }
+            $response = Engine_Api::_()->getApi('Siteapi_Core', 'Siteevent')->getDiarySearchForm();
+
             $this->respondWithSuccess($response, true);
         } catch (Expection $ex) {
             $this->respondWithValidationError('internal_server_error', $ex->getMessage());
@@ -154,6 +154,8 @@ class Siteevent_DiaryController extends Siteapi_Controller_Action_Standard {
 
         // PREPARE RESPONSE ARRAY
         $bodyParams['response'] = $subject->toArray();
+        $contentUrl = Engine_Api::_()->getApi('Core', 'siteapi')->getContentUrl($subject);
+        $bodyParams['response'] = array_merge($bodyParams['response'], $contentUrl);
 
         if (isset($bodyParams['response']['body']) && !empty($bodyParams['response']['body']))
             $bodyParams['response']['body'] = strip_tags($bodyParams['response']['body']);
@@ -204,10 +206,13 @@ class Siteevent_DiaryController extends Siteapi_Controller_Action_Standard {
             $bodyParams['response']['total_events'] = $total_item;
 
             foreach ($paginator as $eventObj) {
+                // continue if Deleted member
+                if (empty($eventObj->host_id))
+                    continue;
 
                 $event['event_id'] = $eventObj->event_id;
                 $event['title'] = $eventObj->title;
-                $event['body'] = $eventObj->body;
+                $event['body'] = strip_tags($eventObj->body);
 
                 //CATEGORY NAME
                 $event['category_name'] = Engine_Api::_()->getItem('siteevent_category', $eventObj->category_id)->category_name;
@@ -218,20 +223,53 @@ class Siteevent_DiaryController extends Siteapi_Controller_Action_Standard {
                 $event['comment_count'] = $eventObj->comment_count;
                 $event['member_count'] = $eventObj->member_count;
 
+
+
+                $occurrence_id = Engine_Api::_()->getDbTable('events', 'siteevent')->getNextOccurID($eventObj->getIdentity());
+
+                //GET DATES OF EVENT
+                $tz = Engine_Api::_()->getApi('settings', 'core')->core_locale_timezone;
+                if (!empty($viewer_id)) {
+                    $tz = $viewer->timezone;
+                }
                 $occurrenceTable = Engine_Api::_()->getDbTable('occurrences', 'siteevent');
-                $dates = $occurrenceTable->getEventDate($eventObj->event_id);
+                $dates = $occurrenceTable->getEventDate($eventObj->getIdentity(), $occurrence_id);
+
+                if (isset($dates['starttime']) && !empty($dates['starttime']) && isset($tz)) {
+                    $startDateObject = new Zend_Date(strtotime($dates['starttime']));
+                    $startDateObject->setTimezone($tz);
+                    $dates['starttime'] = $startDateObject->get('YYYY-MM-dd HH:mm:ss');
+                }
+                if (isset($dates['endtime']) && !empty($dates['endtime']) && isset($tz)) {
+                    $endDateObject = new Zend_Date(strtotime($dates['endtime']));
+                    $endDateObject->setTimezone($tz);
+                    $dates['endtime'] = $endDateObject->get('YYYY-MM-dd HH:mm:ss');
+                }
+
                 $event = array_merge($event, $dates);
+
+                $totalEventOccurrences = Engine_Api::_()->getDbtable('occurrences', 'siteevent')->getOccurrenceCount($eventObj->event_id);
+                if (!empty($eventObj->repeat_params) && $totalEventOccurrences > 1) {
+                    $event['hasMultipleDates'] = 1;
+                } else {
+                    $event['hasMultipleDates'] = 0;
+                }
+
                 //GET EXACT LOCATION
                 if (Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.location', 1) && !$eventObj->is_online) {
                     //GET LOCATION
-                    $value['id'] = $event['event_id'];
+                    $value['id'] = $eventObj->event_id;
                     $location = Engine_Api::_()->getDbtable('locations', 'siteevent')->getLocation($value);
-                    if ($location)
-                        $event['location'] = $location->toArray();
+                    if (isset($location) && isset($location->location)) {
+                        $event['location'] = $location['location'];
+                    }
                 }
                 // Add Image
                 $getContentImages = Engine_Api::_()->getApi('Core', 'siteapi')->getContentImage($eventObj);
                 $event = array_merge($event, $getContentImages);
+
+                if (isset($getContentImages['image']))
+                    $bodyParams['response']['image'] = $getContentImages['image'];
 
                 $event['hosted_by'] = '';
                 if (isset($eventObj->host_type) && !empty($eventObj->host_id) && ($eventObj->host_type == 'siteevent_organizer')) {
@@ -244,6 +282,9 @@ class Siteevent_DiaryController extends Siteapi_Controller_Action_Standard {
                     $event['hosted_by'] = $organizer;
                 } else if (isset($eventObj->host_type) && !empty($eventObj->host_id) && $eventObj->host_type == 'user') {
                     $organizerObj = Engine_Api::_()->getItem('user', $eventObj->host_id);
+                      if(empty($organizerObj->user_id))
+                        continue;
+                    
                     $organizer['host_type'] = 'user';
                     $organizer['host_id'] = $organizerObj->user_id;
                     $organizer['host_title'] = $organizerObj->displayname;
@@ -253,11 +294,12 @@ class Siteevent_DiaryController extends Siteapi_Controller_Action_Standard {
                 }
 
                 $leaders = Engine_Api::_()->getItem('siteevent_event', $event['event_id'])->getLedBys(false);
+                $defaultLedby = array();
                 // Set default ledby.
                 $defaultLedby['title'] = $eventObj->getOwner()->getTitle();
                 $defaultLedby['type'] = $eventObj->getOwner()->getType();
                 $defaultLedby['id'] = $eventObj->getOwner()->getIdentity();
-                $event['ledby'][] = $defaultLedby;
+                $event['ledby'] = $defaultLedby;
 
                 $event['owner_id'] = $eventObj->getOwner()->getIdentity();
                 $event["owner_title"] = $eventObj->getOwner()->getTitle();
@@ -274,13 +316,14 @@ class Siteevent_DiaryController extends Siteapi_Controller_Action_Standard {
             }
 
             if ($viewer_id) {
-                $diaryMenus[] = array(
-                    'name' => 'memberDiaries',
-                    'label' => $this->translate($diary->getOwner()->getTitle() . " Event Diaries"),
-                    'url' => 'advancedevents/diaries',
-                    'urlParams' => array(
-                        "member" => $diary->getOwner()->getTitle())
-                );
+                if (isset($diary->owner_id) && !empty($diary->owner_id))
+                    $diaryMenus[] = array(
+                        'name' => 'memberDiaries',
+                        'label' => $this->translate($diary->getOwner()->getTitle() . " Event Diaries"),
+                        'url' => 'advancedevents/diaries',
+                        'urlParams' => array(
+                            "member" => $diary->getOwner()->getTitle())
+                    );
                 if ($can_create) {
                     $diaryMenus[] = array(
                         'name' => 'create',
@@ -297,6 +340,25 @@ class Siteevent_DiaryController extends Siteapi_Controller_Action_Standard {
                             "diary_id" => $diary->getIdentity())
                     );
                 }
+                $diaryMenus[] = array(
+                    'name' => 'report',
+                    'label' => $this->translate('Report'),
+                    'url' => 'report/create/subject/' . $subject->getGuid(),
+                    'urlParams' => array(
+                        "type" => $diary->getType(),
+                        "id" => $diary->getIdentity()
+                    )
+                );
+
+                $diaryMenus[] = array(
+                    'name' => 'share',
+                    'label' => $this->translate('Share'),
+                    'url' => 'activity/share',
+                    'urlParams' => array(
+                        "type" => $diary->getType(),
+                        "id" => $diary->getIdentity()
+                    )
+                );
 
                 if ($diary->owner_id == $viewer_id || $level_id == 1) {
                     $diaryMenus[] = array(
@@ -497,10 +559,6 @@ class Siteevent_DiaryController extends Siteapi_Controller_Action_Standard {
         if (!$this->_helper->requireUser()->isValid())
             $this->respondWithError('unauthorized');
 
-        //CREATION PRIVACY
-        if (!$this->_helper->requireAuth()->setAuthParams('siteevent_diary', null, "create")->isValid())
-            $this->respondWithError('unauthorized');
-
         //GET VIEWER INFORMATION
         $viewer = Engine_Api::_()->user()->getViewer();
         $viewer_id = $viewer->getIdentity();
@@ -602,7 +660,9 @@ class Siteevent_DiaryController extends Siteapi_Controller_Action_Standard {
 //        }
         //FORM GENERATION
         if ($this->getRequest()->isGet()) {
-            $response = Engine_Api::_()->getApi('Siteapi_Core', 'Siteevent')->getAddToDiaryForm();
+            $response['form'] = Engine_Api::_()->getApi('Siteapi_Core', 'Siteevent')->getAddToDiaryForm();
+            $response['add_diary_description'] = $this->translate('Please select the diaries in which you want to add this Event.');
+            $response['create_diary_descriptions'] = $this->translate('You can also add this Event in a new diary below:');
             $this->respondWithSuccess($response, true);
         } else if ($this->getRequest()->isPost()) {
             $values = $this->_getAllParams();

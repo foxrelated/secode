@@ -108,7 +108,7 @@ $isManageAdmin = Engine_Api::_()->sitegroup()->isManageAdmin($this->sitegroup, '
 	<ul>
     <?php if($postedBy):?>
       <li>
-        <span><?php echo $this->translate('Posted By:'); ?> </span>
+        <span><?php echo $this->translate('Created By:'); ?> </span>
         <span><?php echo $this->htmlLink($this->sitegroup->getParent(), $this->sitegroup->getParent()->getTitle()) ?></span>
       </li>
      <?php endif;?>

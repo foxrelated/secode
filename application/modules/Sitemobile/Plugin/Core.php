@@ -145,7 +145,7 @@ class Sitemobile_Plugin_Core extends Zend_Controller_Plugin_Abstract {
     $reqModule = $module = $request->getModuleName();
     $reqController = $controller = $request->getControllerName();
     $reqAction = $action = $request->getActionName();
-   // echo $module . $controller . $action;die;
+    
     switch ($module) {
       case 'core':
       case 'shoppingtheme':
@@ -251,7 +251,11 @@ class Sitemobile_Plugin_Core extends Zend_Controller_Plugin_Abstract {
         } else if($controller == 'video' && $action == 'create') {
             $action = 'create';
           $controller = 'index';
-        } 
+        }   else if($controller == 'video' && $action == 'view') {
+            $action = 'view';
+          $controller = 'index';
+          $module = 'video';
+        }
         break;
       case 'ynvideo':
         $module = 'video'; // YOUNET ADVANCED VIDEO PLUGIN EQUIVALENT SE VIDEO

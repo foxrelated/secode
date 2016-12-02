@@ -176,9 +176,9 @@
 			</li>
 
 			<li>
-				<a href="javascript:void(0);" onClick="faq_show('faq_34');"><?php echo $this->translate('How can I disbale the Price Field from the "Create New Group" section?');?></a>
+				<a href="javascript:void(0);" onClick="faq_show('faq_34');"><?php echo $this->translate('How can I disable the Price Field from the "Create New Group" section?');?></a>
 				<div class='faq' style='display: none;' id='faq_34'>
-					<?php echo $this->translate('Ans: Go to the "Global Settings" section of this plugin and set the "Price Field" field to "No" and save the settings. This will disable the Price field at the "Cretae New Group" form.');?>
+					<?php echo $this->translate('Ans: Go to the "Global Settings" section of this plugin and set the "Price Field" field to "No" and save the settings. This will disable the Price field at the "Create New Group" form.');?>
 				</div>
 			</li>
 

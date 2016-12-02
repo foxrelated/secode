@@ -22,8 +22,9 @@ $infotooltip = $settings->getSetting('advancedactivity.info.tooltips', 1);
             . 'application/modules/Seaocore/externals/styles/style_infotooltip.css');
 ?>
 <?php $this->headScript()
-        ->appendFile($this->layout()->staticBaseUrl . 'application/modules/Sitetagcheckin/externals/scripts/activity_core.js')
-        ->appendFile($this->layout()->staticBaseUrl . 'externals/flowplayer/flashembed-1.0.1.pack.js') ?>
+        ->appendFile($this->layout()->staticBaseUrl . 'application/modules/Sitetagcheckin/externals/scripts/activity_core.js');
+$this->videoPlayerJs();
+?>
 
 <?php if( empty($this->actions) ) {
   echo $this->translate("The action you are looking for does not exist.");

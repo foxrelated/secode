@@ -43,7 +43,7 @@ $this->headLink()->appendStylesheet($this->layout()->staticBaseUrl . 'applicatio
                         <?php if (!empty($category['file_id'])): ?>
                             <?php
                             $temStorage = $this->storage->get($category['file_id'], '');
-                            if (!empty($temStorage)):
+                            if (!empty($temStorage) && $this->showIcon):
                                 ?>
                                 <img src="<?php echo $temStorage->getPhotoUrl(); ?>" style="width:30px;height:30px;"/>
 

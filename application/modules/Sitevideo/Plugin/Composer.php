@@ -18,9 +18,12 @@ class Sitevideo_Plugin_Composer extends Core_Plugin_Abstract {
         }
 
         $video = Engine_Api::_()->getItem('sitevideo_video', $data['video_id']);
+        $filter = new Zend_Filter();
+        $filter->addFilter(new Engine_Filter_Censor());
+        $filter->addFilter(new Zend_Filter_StripTags());
         // update $video with new title and description
-        $video->title = $data['title'];
-        $video->description = $data['description'];
+        $video->title = $filter->filter($data['title']);
+        $video->description = $filter->filter($data['description']);
 
         // Set parents of the video
         if (Engine_Api::_()->core()->hasSubject()) {

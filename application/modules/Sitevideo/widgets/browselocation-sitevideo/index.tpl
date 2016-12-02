@@ -360,7 +360,7 @@ $this->headLink()->appendStylesheet($baseUrl . 'application/modules/Sitevideo/ex
 <?php
 $apiKey = Engine_Api::_()->seaocore()->getGoogleMapApiKey();
 $this->headScript()
-        ->appendFile("https://maps.googleapis.com/maps/api/js?libraries=places&sensor=true&key=$apiKey");
+        ->appendFile("https://maps.googleapis.com/maps/api/js?libraries=places&key=$apiKey");
 
 $latitude = Engine_Api::_()->getApi('settings', 'core')->getSetting('sitevideo.map.latitude', 0);
 $longitude = Engine_Api::_()->getApi('settings', 'core')->getSetting('sitevideo.map.longitude', 0);
@@ -556,15 +556,9 @@ $longitude = Engine_Api::_()->getApi('settings', 'core')->getSetting('sitevideo.
         }
     </script>
 
-    <script type="text/javascript">
-        var script = '<script type="text/javascript" src="http://google-maps-' +
-                'utility-library-v3.googlecode.com/svn/trunk/infobubble/src/infobubble';
-        if (document.location.search.indexOf('compiled') !== -1) {
-            script += '-compiled';
-        }
-        script += '.js"><' + '/script>';
-        document.write(script);
-    </script>
+<?php
+$this->headScript()->appendFile($this->layout()->staticBaseUrl . "application/modules/Seaocore/externals/scripts/infobubble.js");
+?>
 
     <script type="text/javascript" >
         //<![CDATA[

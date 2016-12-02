@@ -361,6 +361,15 @@ class Sitemobile_Api_Core extends Core_Api_Abstract {
         }
 
         $session = new Zend_Session_Namespace('siteViewModeSM');
+        
+        //Start work to bypass tablet/fullsite view for native apps
+        $sessionDefault = new Zend_Session_Namespace();
+        if (Engine_Api::_()->hasModuleBootstrap('siteapi') && isset($sessionDefault->hideHeaderAndFooter) && !empty($sessionDefault->hideHeaderAndFooter)) {
+            $session->siteViewModeSM = "mobile";
+            return 'mobile-mode';
+        }
+        //end bypass work
+
         $viewMode = $request->getParam("switch-mode");
 
         if ($viewMode === 'standard') {
@@ -954,7 +963,8 @@ class Sitemobile_Api_Core extends Core_Api_Abstract {
 
         return false;
     }
-  public function checkVersion($databaseVersion, $checkDependancyVersion) {
+
+    public function checkVersion($databaseVersion, $checkDependancyVersion) {
         $f = $databaseVersion;
         $s = $checkDependancyVersion;
         if (strcasecmp($f, $s) == 0)
@@ -1021,4 +1031,5 @@ class Sitemobile_Api_Core extends Core_Api_Abstract {
             }
         }
     }
+
 }

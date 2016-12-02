@@ -18,7 +18,7 @@ class Siteevent_Form_Diary_TellAFriend extends Engine_Form {
 
         $this->setTitle('Tell a Friend')
                 ->setDescription("Please fill the form below and then click on 'Tell a Friend' button to let your friends know about this Diary.");
-
+        $this->setAttrib('class', 'global_form seaocore_form_comment');
         $viewer = Engine_Api::_()->user()->getViewer();
         $viewer_id = $viewer->getIdentity();
 
@@ -84,19 +84,23 @@ class Siteevent_Form_Diary_TellAFriend extends Engine_Form {
         ));
 
         if (empty($viewer_id)) {
-            $this->addElement('captcha', 'captcha', array(
-                'description' => 'Please type the characters you see in the image.',
-                'captcha' => 'image',
-                'required' => true,
-                'captchaOptions' => array(
-                    'wordLen' => 6,
-                    'fontSize' => '30',
-                    'timeout' => 300,
-                    'imgDir' => APPLICATION_PATH . '/public/temporary/',
-                    'imgUrl' => $this->getView()->baseUrl() . '/public/temporary',
-                    'font' => APPLICATION_PATH . '/application/modules/Core/externals/fonts/arial.ttf'
-            )));
-            $this->captcha->getDecorator("Description")->setOption("placement", "append");
+            if (Engine_Api::_()->hasModuleBootstrap('siterecaptcha')) {
+                Zend_Registry::get('Zend_View')->recaptcha($this);
+            } else {
+                $this->addElement('captcha', 'captcha', array(
+                    'description' => 'Please type the characters you see in the image.',
+                    'captcha' => 'image',
+                    'required' => true,
+                    'captchaOptions' => array(
+                        'wordLen' => 6,
+                        'fontSize' => '30',
+                        'timeout' => 300,
+                        'imgDir' => APPLICATION_PATH . '/public/temporary/',
+                        'imgUrl' => $this->getView()->baseUrl() . '/public/temporary',
+                        'font' => APPLICATION_PATH . '/application/modules/Core/externals/fonts/arial.ttf'
+                )));
+                $this->captcha->getDecorator("Description")->setOption("placement", "append");
+            }
         }
 
         $this->addElement('Button', 'diary_send', array(

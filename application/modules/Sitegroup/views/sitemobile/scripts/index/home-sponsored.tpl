@@ -23,7 +23,7 @@
         </div>
         <?php if($postedBy):?>
           <div class="seaocore_sponsored_carousel_items_stat seaocore_txt_light">
-            <?php echo $this->translate('posted by'); ?>
+            <?php echo $this->translate('created by'); ?>
             <?php echo $this->htmlLink($sitegroup->getOwner()->getHref(), Engine_Api::_()->sitegroup()->truncation($sitegroup->getOwner()->getTitle(), 10), array('title' => $sitegroup->getOwner()->getTitle())) ?>
           </div>
         <?php endif;?>
@@ -43,7 +43,7 @@
         </div>      
         <?php if($postedBy):?>
           <div class="seaocore_sponsored_carousel_items_stat seaocore_txt_light">
-            <?php echo $this->translate('posted by'); ?>
+            <?php echo $this->translate('created by'); ?>
             <?php echo $this->htmlLink($this->sitegroupsitegroup[$i]->getOwner()->getHref(), Engine_Api::_()->sitegroup()->truncation($this->sitegroupsitegroup[$i]->getOwner()->getTitle(), 10), array('title' => $this->sitegroupsitegroup[$i]->getOwner()->getTitle())) ?>
           </div>
         <?php endif;?>
@@ -61,7 +61,7 @@
         </div> 
         <?php if($postedBy):?>
           <div class="seaocore_sponsored_carousel_items_stat seaocore_txt_light">
-            <?php echo $this->translate('posted by'); ?>
+            <?php echo $this->translate('created by'); ?>
             <?php echo $this->htmlLink($this->sitegroupsitegroup[$i]->getOwner()->getHref(), Engine_Api::_()->sitegroup()->truncation($this->sitegroupsitegroup[$i]->getOwner()->getTitle(), 10), array('title' => $this->sitegroupsitegroup[$i]->getOwner()->getTitle())) ?>
           </div>
         <?php endif;?>

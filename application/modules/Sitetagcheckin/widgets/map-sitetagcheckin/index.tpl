@@ -14,19 +14,27 @@
 <script type="text/javascript">
   var infoBubbles;
 </script>
+
+<script type="text/javascript">
+var ADD_LOCATION_TRANSLATE="<?php echo $this->string()->escapeJavascript($this->translate("Add Location")); ?>";
+var EDIT_LOCATION_TRANSLATE="<?php echo $this->string()->escapeJavascript($this->translate("Edit Location")); ?>";
+var WHERE_WAS_THIS_PHOTO_TAKEN="<?php echo $this->string()->escapeJavascript($this->translate("Where was this photo taken?")); ?>";
+var SAVE="<?php echo $this->string()->escapeJavascript($this->translate("Save")); ?>";
+var CANCEL="<?php echo $this->string()->escapeJavascript($this->translate("Cancel")); ?>";
+</script>
+
 <?php  
 	$this->headTranslate(array('Add Location', 'Edit Location', 'Where was this photo taken?', 'Save', 'Cancel', 'Where have you been?'));
 ?>
 <?php   //GET API KEY
   $apiKey = Engine_Api::_()->seaocore()->getGoogleMapApiKey();
-$infobubbleJS = "https://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobubble/src/infobubble.js";
 ?>
-<?php 
-$markerclustererJS = "https://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js";
+<?php
+$this->headScript()->appendFile($this->layout()->staticBaseUrl . "application/modules/Seaocore/externals/scripts/infobubble.js");
 ?>
-
-<script src="<?php echo $infobubbleJS;?>" type="text/javascript"></script>
-<script src="<?php echo $markerclustererJS;?>" type="text/javascript"></script>
+ <?php
+$this->headScript()->appendFile($this->layout()->staticBaseUrl . "application/modules/Seaocore/externals/scripts/markerclusterer.js");
+?>
 
 
 <?php
@@ -41,7 +49,7 @@ $markerclustererJS = "https://google-maps-utility-library-v3.googlecode.com/svn/
 ?>
 <?php
 
-  $this->headScript()->appendFile("https://maps.googleapis.com/maps/api/js?libraries=places&sensor=true&key=$apiKey")
+  $this->headScript()->appendFile("https://maps.googleapis.com/maps/api/js?libraries=places&key=$apiKey")
     ->appendFile($this->layout()->staticBaseUrl . 'application/modules/Sitetagcheckin/externals/scripts/activity_core.js');
 ?>
 
@@ -74,11 +82,13 @@ $markerclustererJS = "https://google-maps-utility-library-v3.googlecode.com/svn/
 	<div class="stcheckin_profile_header_right">
 		<div onclick="showFeeds();" id="display_feedlinks" class="stcheckin_profile_buttons stcheckin_tip">
 			<div class="stcheckin_tip_content"><?php echo $this->translate("View Feeds");?></div>
-			<img src="./application/modules/Sitetagcheckin/externals/images/list-view.png" alt="" />
+            <span class="seaocore_tab_icon tab_icon_list_view" onclick="switchview(0);" ></span>
+			<!--<img src="./application/modules/Sitetagcheckin/externals/images/list-view.png" alt="" />-->
 		</div>
 		<div onclick="showMap();" id="display_maplinks" class="stcheckin_profile_buttons stcheckin_tip">
 			<div class="stcheckin_tip_content"><?php echo $this->translate("View Map");?></div>
-			<img src="./application/modules/Sitetagcheckin/externals/images/map-view.png" alt="" />
+			<!--<img src="./application/modules/Sitetagcheckin/externals/images/map-view.png" alt="" />-->
+            <span class="seaocore_tab_icon tab_icon_map_view" onclick="switchview(2);" ></span>
 		</div>
 	</div>	
 </div>
@@ -479,6 +489,17 @@ initializeMap();
 //                 setMapCenterZoomPoint(<?php echo json_encode(Engine_Api::_()->seaocore()->getProfileMapBounds($this->locations));?>,mapCheckin);
                 showMap();
             });
+            
+            if($('tab-<?php echo $this->identity?>')) {
+            $('tab-<?php echo $this->identity?>').addEvent('click', function() {
+                showMap();
+                infoBubbles.close();
+                google.maps.event.trigger(mapCheckin, 'resize');
+//                 setMapCenterZoomPoint(<?php echo json_encode(Engine_Api::_()->seaocore()->getProfileMapBounds($this->locations));?>,mapCheckin);
+                showMap();
+            });
+            }
+            
 
             $$('.application').each(function(element) {
                 if (element.href == "javascript:tl_manager.fireTab('<?php echo $this->identity?>')") {

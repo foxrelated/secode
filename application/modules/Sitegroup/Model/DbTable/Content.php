@@ -811,6 +811,10 @@ class Sitegroup_Model_DbTable_Content extends Engine_Db_Table {
         if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitegroupdocument')) {
             $this->setDefaultInfo('sitegroupdocument.profile-sitegroupdocuments', $group_id, 'Documents', 'true', '115');
         }
+        
+        if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('document')) {
+            $this->setDefaultInfo('document.contenttype-documents', $group_id, 'Documents', 'true', '115');
+        }
 
         //INSERTING OFFER WIDGET
         if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitegroupoffer')) {
@@ -1045,6 +1049,10 @@ class Sitegroup_Model_DbTable_Content extends Engine_Db_Table {
             if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitegroupdocument')) {
                 Engine_Api::_()->getDbtable('content', 'sitegroup')->setDefaultInfo('sitegroupdocument.profile-sitegroupdocuments', $group_id, 'Documents', 'true', '115');
             }
+            
+            if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('document')) {
+            Engine_Api::_()->getDbtable('content', 'sitegroup')->setDefaultInfo('document.contenttype-documents', $group_id, 'Documents', 'true', '115');
+        }
 
             //INSERTING OFFER WIDGET
             if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitegroupoffer')) {
@@ -1101,7 +1109,7 @@ class Sitegroup_Model_DbTable_Content extends Engine_Db_Table {
         $selectGroupAdmin = $this->select()
                 ->from($this->info('name'), array('content_id', 'params', 'name'))
                 ->where('contentgroup_id =?', $contentgroup_id)
-                ->where("name IN ('sitegroup.overview-sitegroup', 'sitegroup.photos-sitegroup', 'sitegroup.discussion-sitegroup', 'sitegroupnote.profile-sitegroupnotes', 'sitegrouppoll.profile-sitegrouppolls', 'sitegroupevent.profile-sitegroupevents', 'sitegroupvideo.profile-sitegroupvideos', 'sitegroupoffer.profile-sitegroupoffers', 'sitegroupreview.profile-sitegroupreviews', 'sitegroupdocument.profile-sitegroupdocuments', 'sitegroupform.sitegroup-viewform','sitegroup.info-sitegroup', 'seaocore.feed', 'activity.feed', 'sitegroup.location-sitegroup', 'core.profile-links', 'sitegroupmusic.profile-sitegroupmusic', 'sitegroupintegration.profile-items','sitegrouptwitter.feeds-sitegrouptwitter', 'sitegroupmember.profile-sitegroupmembers', 'siteevent.contenttype-events', 'sitevideo.contenttype-videos')");
+                ->where("name IN ('sitegroup.overview-sitegroup', 'sitegroup.photos-sitegroup', 'sitegroup.discussion-sitegroup', 'sitegroupnote.profile-sitegroupnotes', 'sitegrouppoll.profile-sitegrouppolls', 'sitegroupevent.profile-sitegroupevents', 'sitegroupvideo.profile-sitegroupvideos', 'sitegroupoffer.profile-sitegroupoffers', 'sitegroupreview.profile-sitegroupreviews', 'sitegroupdocument.profile-sitegroupdocuments', 'sitegroupform.sitegroup-viewform','sitegroup.info-sitegroup', 'seaocore.feed', 'activity.feed', 'sitegroup.location-sitegroup', 'core.profile-links', 'sitegroupmusic.profile-sitegroupmusic', 'sitegroupintegration.profile-items','sitegrouptwitter.feeds-sitegrouptwitter', 'sitegroupmember.profile-sitegroupmembers', 'siteevent.contenttype-events', 'sitevideo.contenttype-videos', 'document.contenttype-documents')");
         return $this->fetchAll($selectGroupAdmin);
     }
 
@@ -1582,6 +1590,29 @@ class Sitegroup_Model_DbTable_Content extends Engine_Db_Table {
                             }
                         }
                         break;
+                        
+                    case 'document.contenttype-documents':
+                        if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('document')) {
+                            if (Engine_Api::_()->sitegroup()->hasPackageEnable()) {
+                                if (Engine_Api::_()->sitegroup()->allowPackageContent($sitegroup->package_id, "modules", "sitegroupdocument") == 1) {
+                                    $flag = true;
+                                }
+                            } else {
+                                $isGroupOwnerAllow = Engine_Api::_()->sitegroup()->isGroupOwnerAllow($sitegroup, 'sdcreate');
+                                if (!empty($isGroupOwnerAllow)) {
+                                    $flag = true;
+                                }
+                            }
+                            //TOTAL DOCUMENTS
+                            $documentCount = Engine_Api::_()->sitegroup()->getTotalCount($sitegroup->group_id, 'document', 'documents');
+                            $isManageAdmin = Engine_Api::_()->sitegroup()->isManageAdmin($sitegroup, 'sdcreate');
+                            if (!empty($isManageAdmin) || !empty($documentCount)) {
+                                $flag = true;
+                            } else {
+                                $flag = false;
+                            }
+                        }
+                        break;    
                     case 'sitevideo.contenttype-videos':
                         if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitevideo')) {
                             if (Engine_Api::_()->sitegroup()->hasPackageEnable()) {

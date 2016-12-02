@@ -21,12 +21,12 @@ class Sitevideo_Installer extends Engine_Package_Installer_Module {
 
         $PRODUCT_TYPE = 'sitevideo';
         $PLUGIN_TITLE = 'Sitevideo';
-        $PLUGIN_VERSION = '4.8.10';
+        $PLUGIN_VERSION = '4.8.11p1';
         $PLUGIN_CATEGORY = 'plugin';
         $PRODUCT_DESCRIPTION = 'Advanced Videos / Channels / Playlists Plugin';
         $PRODUCT_TITLE = 'Advanced Videos / Channels / Playlists Plugin';
         $_PRODUCT_FINAL_FILE = 0;
-        $SocialEngineAddOns_version = '4.8.10p5';
+        $SocialEngineAddOns_version = '4.8.11';
         $file_path = APPLICATION_PATH . "/application/modules/$PLUGIN_TITLE/controllers/license/ilicense.php";
         $db = $this->getDb();
         $engine4VideoFieldsMeta = $db->query("SHOW TABLES LIKE 'engine4_video_fields_meta'")->fetch();
@@ -52,6 +52,18 @@ class Sitevideo_Installer extends Engine_Package_Installer_Module {
 
     public function onInstall() {
         $db = $this->getDb();
+
+        $db->query('INSERT IGNORE INTO `engine4_activity_actiontypes` (`type`, `module`, `body`, `enabled`, `displayable`, `attachable`, `commentable`, `shareable`, `is_generated`) VALUES ("sitevideo_channel_video_new", "sitevideo", \'{item:$subject} created a new video in the channel {item:$object}:\', "1", "7", "2", "1", "1", "1");');
+
+        $db->query('INSERT IGNORE INTO `engine4_activity_actiontypes` (`type`, `module`, `body`, `enabled`, `displayable`, `attachable`, `commentable`, `shareable`, `is_generated`) VALUES ("sitevideo_sitepage_video_new", "sitevideo", \'{item:$subject} created a new video in the page {item:$object}:\', "1", "7", "2", "1", "1", "1");');
+        
+        $db->query('INSERT IGNORE INTO `engine4_activity_actiontypes` (`type`, `module`, `body`, `enabled`, `displayable`, `attachable`, `commentable`, `shareable`, `is_generated`) VALUES ("sitevideo_sitebusiness_video_new", "sitevideo", \'{item:$subject} created a new video in the business {item:$object}:\', "1", "7", "2", "1", "1", "1");');
+
+        $db->query('INSERT IGNORE INTO `engine4_activity_actiontypes` (`type`, `module`, `body`, `enabled`, `displayable`, `attachable`, `commentable`, `shareable`, `is_generated`) VALUES ("sitevideo_sitegroup_video_new", "sitevideo", \'{item:$subject} created a new video in the group {item:$object}:\', "1", "7", "2", "1", "1", "1");');
+
+        $db->query('INSERT IGNORE INTO `engine4_activity_actiontypes` (`type`, `module`, `body`, `enabled`, `displayable`, `attachable`, `commentable`, `shareable`, `is_generated`) VALUES ("sitevideo_sitestore_video_new", "sitevideo", \'{item:$subject} created a new video in the store {item:$object}:\', "1", "7", "2", "1", "1", "1");');
+        
+        $db->query('INSERT IGNORE INTO `engine4_activity_actiontypes` (`type`, `module`, `body`, `enabled`, `displayable`, `attachable`, `commentable`, `shareable`, `is_generated`) VALUES ("sitevideo_siteevent_video_new", "sitevideo", \'{item:$subject} created a new video in the event {item:$object}:\', "1", "7", "2", "1", "1", "1");');
 
         $db->query(" INSERT IGNORE INTO `engine4_core_mailtemplates` (`type`, `module`, `vars`) VALUES ('notify_sitevideo_processed', 'sitevideo', '[host],[email],[recipient_title],[recipient_link],[recipient_photo],[sender_title],[sender_link],[sender_photo],[object_title],[object_link],[object_photo],[object_description]'), ('notify_sitevideo_processed_failed', 'sitevideo', '[host],[email],[recipient_title],[recipient_link],[recipient_photo],[sender_title],[sender_link],[sender_photo],[object_title],[object_link],[object_photo],[object_description]');");
 
@@ -190,6 +202,16 @@ class Sitevideo_Installer extends Engine_Package_Installer_Module {
 //                $db->query("UPDATE `engine4_advancedactivity_contents` SET `module_name` = 'sitevideo' AND `filter_type` = 'video' WHERE `engine4_advancedactivity_contents`.`module_name` = 'video';");
 //            }
 //        }
+
+        $params = '["1","2","3","4","5"]';
+        $db->query("INSERT IGNORE INTO `engine4_authorization_permissions`
+            SELECT
+                level_id as `level_id`,
+               'video' as `type`,
+               'source' as `name`,
+                5 as `value`,
+                '$params' as `params`
+            FROM `engine4_authorization_levels` WHERE `type` IN('moderator', 'admin', 'user' , 'public');");
 
         parent::onInstall();
     }

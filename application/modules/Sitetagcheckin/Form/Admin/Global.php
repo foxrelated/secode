@@ -220,6 +220,7 @@ class Sitetagcheckin_Form_Admin_Global extends Engine_Form {
             "16" => "16"
         ),
         'value' => Engine_Api::_()->getApi( 'settings' , 'core' )->getSetting('sitetagcheckin.map.zoom', 1),
+        'disableTranslator' => 'true'
     ));
 
     $this->addElement('Text', 'sitetagcheckin_default_textarea_text', array(

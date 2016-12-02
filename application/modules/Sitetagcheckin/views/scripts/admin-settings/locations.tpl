@@ -18,7 +18,7 @@
     <?php echo $this->navigation()->menu()->setContainer($this->navigation)->render() ?>
   </div>
 <?php endif; ?>
-<?php if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('event') || Engine_Api::_()->getDbtable( 'modules' , 'core' )->isModuleEnabled('ynevent') ) : ?>
+<?php if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('event') || Engine_Api::_()->getDbtable( 'modules' , 'core' )->isModuleEnabled('ynevent') || Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('siteevent')) : ?>
 <div class="seaocore_settings_form">
     <div class="tip">
   <span>  

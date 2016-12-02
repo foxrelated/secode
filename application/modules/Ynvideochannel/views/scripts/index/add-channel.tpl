@@ -1,1 +1,0 @@
-<?php echo $this->partial('_addChannnel.tpl', 'ynvideochannel', array('url' => '', 'keyword' => '', 'exist' => $this->exist,'inValid' => $this->inValid))?>

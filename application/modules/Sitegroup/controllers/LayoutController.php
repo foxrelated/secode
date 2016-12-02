@@ -654,7 +654,7 @@ class Sitegroup_LayoutController extends Core_Controller_Action_Standard {
         $flag = 0;
         $integrated_module = '';
         foreach ($modules as $module => $path) {
-            if ($module == 'sitegroup' || $module == 'core' || $module == 'sitegroupnote' || $module == 'activity' || $module == 'sitegroupdocument' || $module == 'sitegroupevent' || $module == 'sitegroupreview' || $module == 'sitegrouppoll' || $module == 'sitegroupvideo' || $module == 'sitegroupform' || $module == 'sitegroupdiscussion' || $module == 'sitegroupalbum' || $module == 'sitegroupoffer' || $module == 'sitegroupbadge' || $module == 'facebookse' || $module == 'sitelike' || $module == 'suggestion' || $module == 'sitegroupmusic' || $flag || $module == 'sitegrouptwitter' || $module == 'sitegroupmember' || $module == 'sitecontentcoverphoto' || $module == 'siteusercoverphoto' || $module == 'siteevent' || $module == 'sitevideo') {
+            if ($module == 'sitegroup' || $module == 'core' || $module == 'sitegroupnote' || $module == 'activity' || $module == 'sitegroupdocument' || $module == 'sitegroupevent' || $module == 'sitegroupreview' || $module == 'sitegrouppoll' || $module == 'sitegroupvideo' || $module == 'sitegroupform' || $module == 'sitegroupdiscussion' || $module == 'sitegroupalbum' || $module == 'sitegroupoffer' || $module == 'sitegroupbadge' || $module == 'facebookse' || $module == 'sitelike' || $module == 'suggestion' || $module == 'sitegroupmusic' || $flag || $module == 'sitegrouptwitter' || $module == 'sitegroupmember' || $module == 'sitecontentcoverphoto' || $module == 'siteusercoverphoto' || $module == 'siteevent' || $module == 'sitevideo' || $module == 'document') {
                 if ($module == 'activity' || $module == 'core' || $module == 'facebookse' || $module == 'sitelike' || $module == 'suggestion' || $module == 'sitecontentcoverphoto' || $module == 'siteusercoverphoto') {
                     $contentManifestFile = dirname($path) . '/settings/content.php';
                 } else {
@@ -667,6 +667,8 @@ class Sitegroup_LayoutController extends Core_Controller_Action_Standard {
                                 $module = 'sitegroupevent';
                             } else if ($module == 'sitevideo') {
                                 $module = 'sitegroupvideo';
+                            } else if ($module == 'document') {
+                                $module = 'sitegroupdocument';
                             }
                             //PACKAGE BASE PRIYACY START
                             if (Engine_Api::_()->sitegroup()->hasPackageEnable()) {

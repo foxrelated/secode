@@ -4039,7 +4039,8 @@
         action = PhotoSwipe.Toolbar.ToolbarAction.tags;
       } else if (e.target === this.likeEl || Util.DOM.isChildOf(e.target, this.likeEl)) {
         action = PhotoSwipe.Toolbar.ToolbarAction.like;
-      } else if (e.target === this.unlikeEl || Util.DOM.isChildOf(e.target, this.unlikeEl)) {
+      } else if ((!sm4.core.isApp() && enabledModuleForMobile && (showAsLike == 0)) && (e.target === this.unlikeEl || Util.DOM.isChildOf(e.target, this.unlikeEl))) {
+          
         action = PhotoSwipe.Toolbar.ToolbarAction.unlike;
       } else if (e.target === this.fullviewEl || Util.DOM.isChildOf(e.target, this.fullviewEl)) {
         action = PhotoSwipe.Toolbar.ToolbarAction.fullview;

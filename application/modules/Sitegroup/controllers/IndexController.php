@@ -964,7 +964,7 @@ EOF;
                 //END SITEGROUPALBUM PLUGIN WORK
                 //START SITEGROUPDOCUMENT PLUGIN WORK
                 $sitegroupDocumentEnabled = Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitegroupdocument');
-                if ($sitegroupDocumentEnabled) {
+                if ($sitegroupDocumentEnabled || (Engine_Api::_()->hasModuleBootstrap('document') && Engine_Api::_()->getDbtable('modules', 'document')->getIntegratedModules(array('enabled' => 1, 'item_type' => 'sitegroup_group', 'item_module' => 'sitegroup')))) {
                     $sitegroupmemberEnabled = Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitegroupmember');
                     if (!empty($sitegroupmemberEnabled)) {
                         $roles = array('owner', 'like_member', 'member', 'owner_member', 'owner_member_member', 'owner_network', 'registered', 'everyone');
@@ -1652,7 +1652,7 @@ EOF;
             //END PHOTO PRIVACY WORK
             //START SITEGROUPDOCUMENT WORK
             $sitegroupDocumentEnabled = Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitegroupdocument');
-            if ($sitegroupDocumentEnabled) {
+            if ($sitegroupDocumentEnabled || (Engine_Api::_()->hasModuleBootstrap('document') && Engine_Api::_()->getDbtable('modules', 'document')->getIntegratedModules(array('enabled' => 1, 'item_type' => 'sitegroup_group', 'item_module' => 'sitegroup')))) {
 
                 if ($values['sdcreate'])
                     $sdcreate = $values['sdcreate'];

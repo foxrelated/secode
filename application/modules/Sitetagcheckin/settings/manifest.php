@@ -15,7 +15,7 @@ return array(
     array(
         'type' => 'module',
         'name' => 'sitetagcheckin',
-        'version' => '4.8.6p3',
+        'version' => '4.8.11',
         'path' => 'application/modules/Sitetagcheckin',
         'title' => 'Geo-Location, Geo-Tagging, Check-Ins & Proximity Search Plugin',
         'description' => 'Geo-Location, Geo-Tagging, Check-Ins & Proximity Search Plugin',

@@ -66,7 +66,14 @@ class Sitemobile_View_Helper_HeadTranslate extends Zend_View_Helper_Abstract {
 
     return Zend_Json::encode($varsArray);
   }
-
+  public function __toString()
+  {
+    return $this->render();
+  }
+  public function toString()
+  {
+    return $this->render();
+  }
   /**
    * Get the container
    * 

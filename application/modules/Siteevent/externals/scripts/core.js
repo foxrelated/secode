@@ -1524,10 +1524,13 @@ en4.core.runonce.add(function() {
         'subject': en4.core.subject.guid,
       },
       onComplete: function(responseJSON, responseText) {
+        if(typeof responseJSON != 'undefined') {
         seao_dateFormat = responseJSON.dateFormat;
         if($('siteevents_create')) {
 					initializeCalendar();
 				}
+                            }
+      
       }
     }));
   }

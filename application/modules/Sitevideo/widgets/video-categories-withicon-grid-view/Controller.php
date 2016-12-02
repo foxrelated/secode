@@ -23,11 +23,11 @@ class Sitevideo_Widget_VideoCategoriesWithiconGridViewController extends Engine_
         $this->view->columnHeight = $this->_getParam('columnHeight', 260);
         $showAllCategories = $this->_getParam('showAllCategories', 0);
         $orderBy = $this->_getParam('orderBy', 'cat_order');
+        $this->view->showIcon = $this->_getParam('showIcon', 1);
         $this->view->storage = Engine_Api::_()->storage();
-        $havingChannels = !$showAllCategories;
+        $havingVideos = !$showAllCategories;
         // GET ALL CATEGORIES
-        $categories = $tableCategory->getCategories(array('fetchColumns' => array('category_id', 'cat_dependency', 'category_name', 'category_slug', 'cat_order', 'video_id', 'file_id'), 'sponsored' => 0, 'cat_depandancy' => 1, 'havingChannels' => $havingChannels, 'orderBy' => $orderBy));
-
+        $categories = $tableCategory->getCategories(array('fetchColumns' => array('category_id', 'cat_dependency', 'category_name', 'category_slug', 'cat_order', 'video_id', 'file_id'), 'sponsored' => 0, 'cat_depandancy' => 1, 'havingVideos' => $havingVideos, 'orderBy' => $orderBy));
         if (count($categories) == 0)
             return $this->setNoRender();
 

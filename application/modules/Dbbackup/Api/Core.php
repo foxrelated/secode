@@ -152,7 +152,7 @@ class Dbbackup_Api_Core extends Core_Api_Abstract {
 
 //This function return the single sql query at a time.
   public function getSql($file) {
-    $session = new Zend_Session_Namespace('backup');
+    $session = new Zend_Session_Namespace();
     $complete_sql = '';
     $sql_line_status = 0;
     $restoreBackup['filehandle'] = $file;

@@ -4,10 +4,10 @@
  * SocialEngine
  *
  * @category   Application_Extensions
- * @package    Siteapi
- * @copyright  Copyright 2015-2016 BigStep Technologies Pvt. Ltd.
+ * @package    Siteevent
+ * @copyright  Copyright 2013-2014 BigStep Technologies Pvt. Ltd.
  * @license    http://www.socialengineaddons.com/license/
- * @version    TopicController.php 2015-09-17 00:00:00Z SocialEngineAddOns $
+ * @version    $Id: ReviewController.php 6590 2014-01-02 00:00:00Z SocialEngineAddOns $
  * @author     SocialEngineAddOns
  */
 class Siteevent_ReviewController extends Siteapi_Controller_Action_Standard {
@@ -187,8 +187,10 @@ class Siteevent_ReviewController extends Siteapi_Controller_Action_Standard {
                 $ratings['rating_avg'] = $siteevent->rating_avg;
                 $ratings['rating_users'] = $siteevent->rating_users;
                 $ratings['breakdown_ratings_params'] = $ratingCount;
-                $ratings['myRatings'] = $reviewRateMyData;
-                $ratings['review_id'] = $hasPosted;
+                if (isset($reviewRateMyData) && is_array($reviewRateMyData) && !empty($reviewRateMyData))
+                    $ratings['myRatings'] = $reviewRateMyData;
+                if (isset($hasPosted) && !empty($hasPosted))
+                    $ratings['review_id'] = $hasPosted;
                 $ratings['recomended'] = $noReviewCheck[0]['avg_recommend'];
                 $response['ratings'] = $ratings;
             }
@@ -237,7 +239,6 @@ class Siteevent_ReviewController extends Siteapi_Controller_Action_Standard {
                 $metaParams['search'] = $this->_getParam('search', null);
             }
             foreach ($paginator as $review) {
-
                 $params = $review->toArray();
 
                 if (isset($params['body']) && !empty($params['body']))
@@ -250,14 +251,15 @@ class Siteevent_ReviewController extends Siteapi_Controller_Action_Standard {
                 $event_id = $review->resource_id;
                 $siteevent = Engine_Api::_()->getItem('siteevent_event', $event_id);
                 $params['event_title'] = $siteevent->title;
+                $response['content_title'] = $siteevent->title;
                 $user_ratings = Engine_Api::_()->getDbtable('ratings', 'siteevent')->ratingsData($review->review_id, $review->getOwner()->getIdentity(), $review->resource_id, 0);
                 $params['overall_rating'] = $user_ratings[0]['rating'];
                 $params['category_name'] = Engine_Api::_()->getItem('siteevent_category', $siteevent->category_id)->category_name;
                 $helpfulTable = Engine_Api::_()->getDbtable('helpful', 'siteevent');
                 $helpful_entry = $helpfulTable->getHelpful($review->review_id, $viewer_id, 1);
                 $nothelpful_entry = $helpfulTable->getHelpful($review->review_id, $viewer_id, 2);
-                $params['is_helful'] = ($helpful_entry) ? true : false;
-                $params['is_not_helful'] = ($nothelpful_entry) ? true : false;
+                $params['is_helpful'] = ($helpful_entry) ? true : false;
+                $params['is_not_helpful'] = ($nothelpful_entry) ? true : false;
                 $params['helpful_count'] = $review->getCountHelpful(1);
                 $params['nothelpful_count'] = $review->getCountHelpful(2);
 
@@ -328,7 +330,9 @@ class Siteevent_ReviewController extends Siteapi_Controller_Action_Standard {
             );
         }
         if ($this->getRequest()->isGet()) {
-            $response['form'] = Engine_Api::_()->getApi('Siteapi_Core', 'Siteevent')->getReviewCreateForm(array("settingsReview" => array('siteevent_proscons' => $siteevent_proscons, 'siteevent_limit_proscons' => $siteevent_limit_proscons, 'siteevent_recommend' => $siteevent_recommend), 'item' => $siteevent, 'profileTypeReview' => $profileTypeReview));
+            $allowReview = Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.allowreview', 1);
+            if (isset($allowReview) && !empty($allowReview))
+                $response['form'] = Engine_Api::_()->getApi('Siteapi_Core', 'Siteevent')->getReviewCreateForm(array("settingsReview" => array('siteevent_proscons' => $siteevent_proscons, 'siteevent_limit_proscons' => $siteevent_limit_proscons, 'siteevent_recommend' => $siteevent_recommend), 'item' => $siteevent, 'profileTypeReview' => $profileTypeReview));
             $response['ratingParams'] = $ratingParam;
             $this->respondWithSuccess($response, true);
         }
@@ -771,8 +775,8 @@ class Siteevent_ReviewController extends Siteapi_Controller_Action_Standard {
             $helpfulTable = Engine_Api::_()->getDbtable('helpful', 'siteevent');
             $helpful_entry = $helpfulTable->getHelpful($review->review_id, $viewer_id, 1);
             $nothelpful_entry = $helpfulTable->getHelpful($review->review_id, $viewer_id, 2);
-            $params['is_helful'] = $helpful_entry;
-            $params['is_not_helful'] = $nothelpful_entry;
+            $params['is_helpful'] = $helpful_entry;
+            $params['is_not_helpful'] = $nothelpful_entry;
             $params['helpful_count'] = $review->getCountHelpful(1);
             $params['nothelpful_count'] = $review->getCountHelpful(2);
 

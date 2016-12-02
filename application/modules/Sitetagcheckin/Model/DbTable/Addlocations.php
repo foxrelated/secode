@@ -25,7 +25,7 @@ class Sitetagcheckin_Model_DbTable_Addlocations extends Engine_Db_Table {
     $select = $this->select()
             ->from($this->info('name'), array('*'));
     $current_date = date('Y-m-d');
-    if (isset($params['params']['checkin']) && ($params['params']['checkin']['type'] == 'place')) {
+    if (isset($params['params']['checkin']) &&  isset($params['params']['checkin']['type']) && ($params['params']['checkin']['type'] == 'place')) {
       $select = $select
               ->where('location_id =?', $params['location_id']);
       $this->update(array('current_checkin' => 0), array('type=?' => $params['type'], 'owner_id=?' => $params['owner_id'], 'location_id <>?' => $params['location_id'], 'event_date =?' => $current_date));
@@ -128,7 +128,7 @@ class Sitetagcheckin_Model_DbTable_Addlocations extends Engine_Db_Table {
       $geocode_pending = true;
       while ($geocode_pending) {
         $language = $_COOKIE['en4_language'];
-        $request_url = "https://maps.googleapis.com/maps/api/geocode/json?address=$urladdress&sensor=true";
+        $request_url = "https://maps.googleapis.com/maps/api/geocode/json?address=$urladdress";
         $ch = curl_init();
         $timeout = 5;
         curl_setopt($ch, CURLOPT_URL, $request_url);

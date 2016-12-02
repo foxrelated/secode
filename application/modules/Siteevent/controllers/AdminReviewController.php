@@ -167,7 +167,6 @@ class Siteevent_AdminReviewController extends Core_Controller_Action_Admin {
             $values = $this->getRequest()->getPost();
             foreach ($values as $key => $value) {
                 if ($key == 'delete_' . $value) {
-                    //DELETE DOCUMENTS FROM DATABASE AND SCRIBD
                     Engine_Api::_()->getItem('siteevent_review', (int) $value)->delete();
                 }
             }

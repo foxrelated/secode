@@ -58,6 +58,7 @@ class Sitevideo_Model_DbTable_VideoCategories extends Engine_Db_Table {
             $tableVideo = Engine_Api::_()->getDbTable('videos', 'sitevideo');
             $tableVideoName = $tableVideo->info('name');
             $select->join($tableVideoName, "$tableVideoName.category_id = $categoryTableName.category_id", null);
+            $select->group('category_id');
         }
 
         if (isset($params['category_id']) && !empty($params['category_id'])) {

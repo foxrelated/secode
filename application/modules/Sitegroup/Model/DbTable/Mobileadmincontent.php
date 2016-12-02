@@ -484,6 +484,28 @@ class Sitegroup_Model_DbTable_Mobileadmincontent extends Engine_Db_Table {
                             }
                         }
                         break;
+                    case 'document.contenttype-documents':
+                        if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('document')) {
+                            if (Engine_Api::_()->sitegroup()->hasPackageEnable()) {
+                                if (Engine_Api::_()->sitegroup()->allowPackageContent($sitegroup->package_id, "modules", "sitegroupdocument") == 1) {
+                                    $flag = true;
+                                }
+                            } else {
+                                $isGroupOwnerAllow = Engine_Api::_()->sitegroup()->isGroupOwnerAllow($sitegroup, 'sdcreate');
+                                if (!empty($isGroupOwnerAllow)) {
+                                    $flag = true;
+                                }
+                            }
+                            //TOTAL documents
+                            $documentCount = Engine_Api::_()->sitegroup()->getTotalCount($sitegroup->group_id, 'document', 'documents');
+                            $isManageAdmin = Engine_Api::_()->sitegroup()->isManageAdmin($sitegroup, 'sdcreate');
+                            if (!empty($isManageAdmin) || !empty($documentCount)) {
+                                $flag = true;
+                            } else {
+                                $flag = false;
+                            }
+                        }
+                        break;
                     case 'sitevideo.contenttype-videos':
                         if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitevideo')) {
                             if (Engine_Api::_()->sitegroup()->hasPackageEnable()) {

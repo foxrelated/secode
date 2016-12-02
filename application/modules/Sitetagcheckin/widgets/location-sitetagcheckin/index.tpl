@@ -34,7 +34,7 @@ var CANCEL="<?php echo $this->string()->escapeJavascript($this->translate("Cance
 
 <?php
    $apiKey = Engine_Api::_()->seaocore()->getGoogleMapApiKey();
-   $this->headScript()->appendFile("https://maps.googleapis.com/maps/api/js?libraries=places&sensor=true&key=$apiKey");
+   $this->headScript()->appendFile("https://maps.googleapis.com/maps/api/js?libraries=places&key=$apiKey");
 ?>
 
 <?php if($this->resource_type == 'user') :?>

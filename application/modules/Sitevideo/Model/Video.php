@@ -56,6 +56,8 @@ class Sitevideo_Model_Video extends Core_Model_Item_Abstract {
                 $valid_thumb = false;
             }
         }
+        if(empty($fileName))
+            return;
         if (!$fileName) {
             $fileName = basename($file);
         }
@@ -680,7 +682,7 @@ class Sitevideo_Model_Video extends Core_Model_Item_Abstract {
                 } else {
                     $duration = gmdate("i:s", $this->duration);
                 }
-                $duration = ltrim($duration, '0:');
+                //$duration = ltrim($duration, '0:');
 
                 $video_duration = "<span class='video_length'>" . $duration . "</span>";
             }
@@ -808,7 +810,7 @@ class Sitevideo_Model_Video extends Core_Model_Item_Abstract {
         title="Video player"
         id="videoFrame' . $video_id . '"
         class="dailymotion_iframe' . ($view ? "_big" : "_small") . '"' .
-                ' src="' . $code . ($autoplay ? "&amp;autoplay=1" : "") . '"
+                ' src="' . $code . '"
         frameborder="0"
         allowfullscreen=""
         scrolling="no">
@@ -828,7 +830,6 @@ class Sitevideo_Model_Video extends Core_Model_Item_Abstract {
           });
         </script>
         ';
-
         return $embedded;
     }
 

@@ -19,7 +19,7 @@ class Siteevent_Form_Editor_EditorMail extends Engine_Form {
         $this->setTitle('Email Editor')
                 ->setAction(Zend_Controller_Front::getInstance()->getRouter()->assemble(array()))
                 ->setAttrib('name', 'siteevents_editor_mail');
-
+        $this->setAttrib('class', 'global_form seaocore_form_comment');
         $this->addElement('Text', 'sender_name', array(
             'label' => 'Your Name *',
             'allowEmpty' => false,
@@ -64,19 +64,23 @@ class Siteevent_Form_Editor_EditorMail extends Engine_Form {
 
         $viewer_id = Engine_Api::_()->user()->getViewer()->getIdentity();
         if (empty($viewer_id)) {
-            $this->addElement('captcha', 'captcha', array(
-                'description' => 'Please type the characters you see in the image.',
-                'captcha' => 'image',
-                'required' => true,
-                'captchaOptions' => array(
-                    'wordLen' => 6,
-                    'fontSize' => '30',
-                    'timeout' => 300,
-                    'imgDir' => APPLICATION_PATH . '/public/temporary/',
-                    'imgUrl' => $this->getView()->baseUrl() . '/public/temporary',
-                    'font' => APPLICATION_PATH . '/application/modules/Core/externals/fonts/arial.ttf'
-            )));
-            $this->captcha->getDecorator("Description")->setOption("placement", "append");
+            if (Engine_Api::_()->hasModuleBootstrap('siterecaptcha')) {
+                Zend_Registry::get('Zend_View')->recaptcha($this);
+            } else {
+                $this->addElement('captcha', 'captcha', array(
+                    'description' => 'Please type the characters you see in the image.',
+                    'captcha' => 'image',
+                    'required' => true,
+                    'captchaOptions' => array(
+                        'wordLen' => 6,
+                        'fontSize' => '30',
+                        'timeout' => 300,
+                        'imgDir' => APPLICATION_PATH . '/public/temporary/',
+                        'imgUrl' => $this->getView()->baseUrl() . '/public/temporary',
+                        'font' => APPLICATION_PATH . '/application/modules/Core/externals/fonts/arial.ttf'
+                )));
+                $this->captcha->getDecorator("Description")->setOption("placement", "append");
+            }
         }
 
         $this->addElement('Button', 'send', array(

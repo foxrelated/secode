@@ -179,16 +179,23 @@ $this->headScript()->appendFile($this->layout()->staticBaseUrl . 'application/mo
             'id': 'compose-menu'
         }).inject($('submit'), 'after');
 
+            if ( '<?php 
+         $id = Engine_Api::_()->user()->getViewer()->level_id;
+         echo Engine_Api::_()->getDbtable('permissions', 'authorization')->getAllowed('messages', $id, 'editor');
+         ?>' == 'plaintext' ) {
+      if( !Browser.Engine.trident && !DetectMobileQuick() && !DetectIpad() ) {
         composeInstance = new Composer('body', {
-            overText: false,
-            menuElement: mel,
-            trayElement: tel,
-            baseHref: '<?php echo $this->baseUrl() ?>',
-            hideSubmitOnBlur: false,
-            allowEmptyWithAttachment: false,
-            submitElement: 'submit',
-            type: 'message'
+          overText : false,
+          menuElement : mel,
+          trayElement: tel,
+          baseHref : '<?php echo $this->baseUrl() ?>',
+          hideSubmitOnBlur : false,
+          allowEmptyWithAttachment : false,
+          submitElement: 'submit',
+          type: 'message'
         });
+      }
+    }
 
         $('messages_compose').addEvent('submit', function(event) {
             if ($('guests')) {

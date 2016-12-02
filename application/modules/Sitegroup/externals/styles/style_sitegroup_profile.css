@@ -800,7 +800,7 @@ html[dir="rtl"] a.compose-sitegroupmusic-link, html[dir="rtl"] a.compose-sitegro
  */
 /*Video Feed Composer*/
 #compose-video-activator, #compose-video-menu span {
-	display: none;
+	/*display: none;*/
 }
 #compose-sitegroupvideo-body .compose-preview-image{
 	float: left;

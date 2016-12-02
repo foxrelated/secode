@@ -18,7 +18,7 @@
 --
 
 INSERT IGNORE INTO `engine4_core_modules` (`name`, `title`, `description`, `version`, `enabled`, `type`) VALUES
-('sitemobile', 'Mobile / Tablet Plugin', 'Mobile / Tablet Plugin', '4.8.10p3', 1, 'extra');
+('sitemobile', 'Mobile / Tablet Plugin', 'Mobile / Tablet Plugin', '4.8.12p3', 1, 'extra');
 
 -- --------------------------------------------------------
 

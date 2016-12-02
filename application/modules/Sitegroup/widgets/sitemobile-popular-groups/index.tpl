@@ -43,7 +43,7 @@
                   <?php endif; ?>
 
                   <?php if (in_array('owner', $this->contentDisplayArray)): ?>
-                    <?php $contentArray[] = $this->translate('posted by') . '<b> ' . $sitegroup->getOwner()->getTitle() . '</b>'; ?>
+                    <?php $contentArray[] = $this->translate('created by') . '<b> ' . $sitegroup->getOwner()->getTitle() . '</b>'; ?>
                   <?php endif; ?>
                   <?php
                   if (!empty($contentArray)) {
@@ -247,7 +247,7 @@
                     </span>
                     <span class="p_list_grid_stats">
                       <?php if (in_array('owner', $this->contentDisplayArray)): ?>
-                      <?php echo $this->translate('posted by ') . '<b>' .$this->htmlLink($sitegroup->getOwner()->getHref(), $sitegroup->getOwner()->getTitle()) . '</b>'; ?>
+                      <?php echo $this->translate('created by ') . '<b>' .$this->htmlLink($sitegroup->getOwner()->getHref(), $sitegroup->getOwner()->getTitle()) . '</b>'; ?>
                       <?php endif; ?>
                     </span>
                   <?php endif ?>

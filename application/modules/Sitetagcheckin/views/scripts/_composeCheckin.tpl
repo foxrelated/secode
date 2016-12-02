@@ -29,7 +29,7 @@ $this->headScript()
         ->appendFile($this->layout()->staticBaseUrl . 'externals/autocompleter/Autocompleter.Local.js')
         ->appendFile($this->layout()->staticBaseUrl . 'externals/autocompleter/Autocompleter.Request.js')        
 				->appendFile($this->layout()->staticBaseUrl . 'application/modules/Seaocore/externals/scripts/seaomooscroll/SEAOMooVerticalScroll.js')
-        ->appendFile("https://maps.googleapis.com/maps/api/js?libraries=places&sensor=true&key=$apiKey");
+        ->appendFile("https://maps.googleapis.com/maps/api/js?libraries=places&key=$apiKey");
     $this->headScript()
             ->appendFile($this->layout()->staticBaseUrl . 'application/modules/Sitetagcheckin/externals/scripts/composer.js');
     if (empty($this->isAAFWIDGETMobile)):

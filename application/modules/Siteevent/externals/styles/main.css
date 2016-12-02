@@ -393,6 +393,7 @@ a.siteevent_buttonlink:hover{
   background-color:$theme_button_background_color_hover;
   cursor:pointer;
 	text-decoration:none;
+	opacity:.8;
 }
 /*Rich Content*/
 .siteevent_review_rich_content_title{

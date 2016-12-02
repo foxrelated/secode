@@ -138,7 +138,7 @@ include APPLICATION_PATH . '/application/modules/Sitegroup/views/scripts/Adinteg
 				<?php endif; ?>
 			 
 				<?php if (!empty($hasMembers)): ?>
-					<?php echo $this->htmlLink(array('route' => 'default', 'module' => 'sitegroupmember', 'controller' => 'index', 'action' => 'compose', 'resource_id' => $this->sitegroup->group_id), $this->translate("Message Members"), array('class' => 'sitegroup_gutter_messageowner buttonlink smoothbox')); ?>
+					<?php echo $this->htmlLink(array('route' => 'default', 'module' => 'sitegroupmember', 'controller' => 'index', 'action' => 'compose', 'resource_id' => $this->sitegroup->group_id, 'roleParamsArray' => http_build_query($this->roleParamsArray)), $this->translate("Message Members"), array('class' => 'sitegroup_gutter_messageowner buttonlink smoothbox')); ?>
 				<?php endif; ?>
 				
 				<?php //if (count($this->paginator) > 0): ?>
@@ -206,7 +206,7 @@ include APPLICATION_PATH . '/application/modules/Sitegroup/views/scripts/Adinteg
                 <div class="sitegroupmember_profile_list_info">
                   <div class="sitegroupmember_profile_list_title" id="sitegroup_profile_list_title_<?php echo $sitegroupmember->member_id ?>">
                     <?php if ($sitegroupmember->featured == 1): ?>
-											<i class="seaocore_list_featured_label" title="<?php echo $this->translate('Featured') ?>"></i>
+											<span class="seaocore_list_featured_label" title="<?php echo $this->translate('Featured') ?>"><?php echo $this->translate('Featured') ?></span>
                     <?php endif; ?>
                     <?php echo $this->htmlLink($sitegroupmember->getHref(), $sitegroupmember->getTitle(), array('class' => 'item_photo sea_add_tooltip_link', 'title' => $sitegroupmember->getTitle(), 'target' => '_parent', 'rel'=> 'user'.' '.$sitegroupmember->user_id)); ?>
                   </div>

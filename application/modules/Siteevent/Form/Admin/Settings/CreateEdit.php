@@ -290,7 +290,7 @@ class Siteevent_Form_Admin_Settings_CreateEdit extends Engine_Form {
             'videoPrivacy' => 'Video Privacy',
         ));
 
-        if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('siteeventdocument')) {
+        if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('siteeventdocument') || (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('document') && Engine_Api::_()->getDbtable('modules', 'document')->getIntegratedModules(array('enabled' => 1, 'item_type' => "siteevent_event", 'item_module' => 'siteevent')))) {
             $createFormFields = array_merge($createFormFields, array('document' => 'Document Privacy'));
         }
         if (Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.guestconfimation', 0)) {

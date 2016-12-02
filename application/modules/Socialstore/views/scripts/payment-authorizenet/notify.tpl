@@ -1,1 +1,0 @@
-notify from paypal, etc.

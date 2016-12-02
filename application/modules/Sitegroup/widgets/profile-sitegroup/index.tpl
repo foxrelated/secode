@@ -135,7 +135,7 @@ $this->headScript()->appendFile($this->layout()->staticBaseUrl.'application/modu
             <div class='sitegroups_browse_info_date  seaocore_txt_light'>
                 <?php echo $this->timestamp(strtotime($item->creation_date)) ?> 
                 <?php if($postedBy):?>
-                  - <?php echo $this->translate('posted by'); ?>
+                  - <?php echo $this->translate('created by'); ?>
                   <?php echo $this->htmlLink($item->getOwner()->getHref(), $item->getOwner()->getTitle()) ?>,
               <?php endif; ?>
               <?php echo $this->translate(array('%s comment', '%s comments', $item->comment_count), $this->locale()->toNumber($item->comment_count)) ?>,

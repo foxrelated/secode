@@ -17,6 +17,6 @@
 
 
 INSERT IGNORE INTO `engine4_core_modules` (`name`, `title`, `description`, `version`, `enabled`, `type`) VALUES
-('advancedslideshow', 'Advancedslideshow', 'Advancedslideshow', '4.8.6', 1, 'extra');
+('advancedslideshow', 'Advancedslideshow', 'Advancedslideshow', '4.8.9p1', 1, 'extra');
 
 -- --------------------------------------------------------

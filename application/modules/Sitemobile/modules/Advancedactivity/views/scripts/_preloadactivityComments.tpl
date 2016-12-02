@@ -74,7 +74,7 @@ $canComment = $this->canComment;
                         ?>
                     </div>
                     <div class="comments_date">
-                      <?php if ($this->viewer()->getIdentity() && (('user' == $action->subject_type && $this->viewer()->getIdentity() == $action->subject_id) || ($this->viewer()->getIdentity() == $comment->poster_id) || $this->activity_moderate )): ?>
+                      <?php if ($this->viewer()->getIdentity() && ( ($this->viewer()->getIdentity() == $comment->poster_id) )): ?>
                         <a href="javascript:void(0);" data-url="<?php echo $this->url(array('module' => 'advancedactivity', 'controller' => 'index', 'action' => 'delete', 'action_id' => $action->action_id, 'comment_id' => $comment->comment_id), 'default', 'true'); ?>" onclick="javascript:sm4.activity.activityremove(this);" data-message="<?php echo $comment->comment_id ?>-<?php echo $action->action_id ?>"><?php echo $this->translate('delete'); ?></a>
                         -
                       <?php endif; ?>

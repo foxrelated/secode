@@ -42,16 +42,23 @@ class Sitegroupmember_Form_Compose extends Engine_Form {
     ));
     Engine_Form::addDefaultDecorators($this->toValues);
 
-    // Element : restriction
+            // Element : restriction
     $this->addElement('Radio', 'coupon_mail', array(
 			'label' => 'Message Who?',
 			'multiOptions' => array(
 				'0' => 'All Group Members',
+                                '2' => 'All Group Members of selected role',
 				'1' => 'Particular Members (You can enter the members using the auto-suggest below.)',
 			),
 			'value' => 0,
 			'onclick' => 'showprofileOption(this.value)',
     ));
+    
+    $this->addElement('Select', 'roles_id', array(
+                                    'label' => 'ROLE',
+      'description' => 'Select the role from below :',
+
+                            ));
 
     // init to
     $this->addElement('Text', 'user_ids',array(

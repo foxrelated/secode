@@ -57,7 +57,11 @@ $canComment = ( $action->getTypeInfo()->commentable && $action->commentable &&
                                         $('#like-activity-item-' + <?php echo $action->action_id ?>).css('display', 'block');">
                                     <a href="javascript:void(0);"  >
                                         <i class="ui-icon ui-icon-thumbs-up-alt"></i>
-                                        <?php echo $this->translate(array('%s person likes this', '%s people like this', $action->likes()->getLikeCount()), $this->locale()->toNumber($action->likes()->getLikeCount())) ?>                            
+                                        <?php if ($this->allowReaction): ?>
+                                           <?php echo $this->translate(array('%s person reacted on this', '%s people reacted on this', $action->likes()->getLikeCount()), $this->locale()->toNumber($action->likes()->getLikeCount())) ?>
+                                        <?php else: ?>
+                                           <?php echo $this->translate(array('%s person likes this', '%s people like this', $action->likes()->getLikeCount()), $this->locale()->toNumber($action->likes()->getLikeCount())) ?>                            
+                                        <?php endif; ?>
                                     </a>
 
                                     <a href="javascript:void(0);"  class="comment_likes ui-link-inherit fright">												
@@ -88,7 +92,7 @@ $canComment = ( $action->getTypeInfo()->commentable && $action->commentable &&
                                                 ?>
                                             </div>
                                             <div class="comments_date">
-                                                <?php if ($this->viewer()->getIdentity() && (('user' == $action->subject_type && $this->viewer()->getIdentity() == $action->subject_id) || ($this->viewer()->getIdentity() == $comment->poster_id) || $this->activity_moderate )): ?>
+                                                <?php if ($this->viewer()->getIdentity() && (($this->viewer()->getIdentity() == $comment->poster_id) )): ?>
                                                     <a href="javascript:void(0);" data-url="<?php echo $this->url(array('module' => 'advancedactivity', 'controller' => 'index', 'action' => 'delete', 'action_id' => $action->action_id, 'comment_id' => $comment->comment_id), 'default', 'true'); ?>" onclick="javascript:sm4.activity.activityremove(this);" data-message="<?php echo $comment->comment_id ?>-<?php echo $action->action_id ?>"><?php echo $this->translate('Delete'); ?></a>
                                                     -
                                                 <?php endif; ?>

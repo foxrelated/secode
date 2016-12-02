@@ -18,7 +18,7 @@
   $postedBy = Engine_Api::_()->getApi('settings', 'core')->getSetting('sitegroup.postedby', 1);
   $sitegroup = $this->sitegroup;  
   if($postedBy) {
-		$textPostedBy = $this->string()->escapeJavascript($this->translate('posted by'));
+		$textPostedBy = $this->string()->escapeJavascript($this->translate('created by'));
 		$textPostedBy.= " " . $this->htmlLink($sitegroup->getOwner()->getHref(), $this->string()->escapeJavascript($sitegroup->getOwner()->getTitle()));
 	}
 ?>
@@ -446,7 +446,7 @@
 				<?php endif; ?>
         <?php if(Engine_Api::_()->getApi('settings', 'core')->getSetting('sitegroup.postedby', 1)):?>
           '<div class="sitegroups_locationdetails_info_date">'+
-            '<?php echo $this->timestamp(strtotime($sitegroup->creation_date)) ?> - <?php echo $this->string()->escapeJavascript($this->translate('posted by')); ?> '+
+            '<?php echo $this->timestamp(strtotime($sitegroup->creation_date)) ?> - <?php echo $this->string()->escapeJavascript($this->translate('created by')); ?> '+
             '<?php echo $this->htmlLink($sitegroup->getOwner()->getHref(), $this->string()->escapeJavascript($sitegroup->getOwner()->getTitle())) ?>'+
           '</div>'+
         <?php endif; ?>

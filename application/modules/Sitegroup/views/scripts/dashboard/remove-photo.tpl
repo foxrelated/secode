@@ -10,6 +10,8 @@
  * @author     SocialEngineAddOns
  */
 ?>
+<div class="generic_layout_container layout_middle">
+<div class="generic_layout_container layout_core_content">
 <?php include_once APPLICATION_PATH . '/application/modules/Sitegroup/views/scripts/payment_navigation_views.tpl'; ?>
 
 <div class="sitegroup_viewgroups_head">
@@ -34,4 +36,6 @@
       </div>
     </div>
   </form>
+</div>
+</div>
 </div>

@@ -66,7 +66,7 @@ class Siteevent_Form_Review_Create extends Engine_Form {
                 ->setAttrib('name', 'siteevent_create')
                 ->setAttrib('id', 'siteevent_create')
                 ->getDecorator('Description')->setOption('escape', false);
-
+        $this->setAttrib('class', 'seaocore_form_comment');
         if ($widgetSettingsReviews['siteevent_proscons']) {
             if ($widgetSettingsReviews['siteevent_limit_proscons']) {
                 $this->addElement('Textarea', 'pros', array(
@@ -192,19 +192,22 @@ class Siteevent_Form_Review_Create extends Engine_Form {
         }
 
         if (empty($viewer_id) && Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.captcha', 1)) {
-
-            $this->addElement('captcha', 'captcha', array(
-                'description' => 'Please type the characters you see in the image.',
-                'captcha' => 'image',
-                'required' => true,
-                'captchaOptions' => array(
-                    'wordLen' => 6,
-                    'fontSize' => '30',
-                    'timeout' => '30000',
-                    'imgDir' => APPLICATION_PATH . '/public/temporary/',
-                    'imgUrl' => $this->getView()->baseUrl() . '/public/temporary',
-                    'font' => APPLICATION_PATH . '/application/modules/Core/externals/fonts/arial.ttf'
-            )));
+            if (Engine_Api::_()->hasModuleBootstrap('siterecaptcha')) {
+                Zend_Registry::get('Zend_View')->recaptcha($this);
+            } else {
+                $this->addElement('captcha', 'captcha', array(
+                    'description' => 'Please type the characters you see in the image.',
+                    'captcha' => 'image',
+                    'required' => true,
+                    'captchaOptions' => array(
+                        'wordLen' => 6,
+                        'fontSize' => '30',
+                        'timeout' => '30000',
+                        'imgDir' => APPLICATION_PATH . '/public/temporary/',
+                        'imgUrl' => $this->getView()->baseUrl() . '/public/temporary',
+                        'font' => APPLICATION_PATH . '/application/modules/Core/externals/fonts/arial.ttf'
+                )));
+            }
         }
 
         $this->addElement('Button', 'submit', array(

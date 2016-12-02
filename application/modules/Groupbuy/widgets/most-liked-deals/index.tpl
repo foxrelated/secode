@@ -1,1 +1,0 @@
-<?php // base on lasted deals ?>

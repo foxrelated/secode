@@ -21,7 +21,7 @@ class Dbbackup_Installer extends Engine_Package_Installer_Module {
 		$_PRODUCT_FINAL_FILE = 'license4.php';
 		$_BASE_FILE_NAME = 'backupnew';
     $PRODUCT_TITLE = 'Backup and Restore';
-    $SocialEngineAddOns_version = '4.8.5';
+    $SocialEngineAddOns_version = '4.2.3';
     $file_path = APPLICATION_PATH . "/application/modules/$PLUGIN_TITLE/controllers/license/ilicense.php";
     $is_file = file_exists($file_path);
     if (empty($is_file)) {

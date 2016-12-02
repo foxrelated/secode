@@ -15,7 +15,7 @@ return array(
     'package' => array(
         'type' => 'module',
         'name' => 'advancedslideshow',
-        'version' => '4.8.6',
+        'version' => '4.8.9p1',
         'path' => 'application/modules/Advancedslideshow',
         'repository' => 'null',
         'title' => 'Advancedslideshow',

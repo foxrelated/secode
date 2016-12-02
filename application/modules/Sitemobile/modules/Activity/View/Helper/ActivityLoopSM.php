@@ -24,7 +24,7 @@ class Activity_View_Helper_ActivityLoopSM extends Activity_View_Helper_Activity 
       return '';
     }
 
-    $form = new Activity_Form_Comment();
+    $form = new Sitemobile_modules_Activity_Form_Comment();
     $viewer = Engine_Api::_()->user()->getViewer();
     $activity_moderate = "";
     $group_owner = "";

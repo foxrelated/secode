@@ -21,7 +21,7 @@ class Advancedactivity_View_Helper_BirthdayActivityLoopSM extends Zend_View_Help
     if (empty($actions)) {
       return;
     }
-    $form = new Activity_Form_Comment();
+    $form = new Sitemobile_modules_Activity_Form_Comment();
 
     $activity_moderate = "";
     if ($viewer->getIdentity()) {

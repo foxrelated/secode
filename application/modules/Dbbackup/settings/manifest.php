@@ -3,11 +3,11 @@
   array (
     'type' => 'module',
     'name' => 'dbbackup',
-    'version' => '4.8.10',
+    'version' => '4.2.3',
     'path' => 'application/modules/Dbbackup',
 		'title' => 'Backup and Restore',
 		'description' => 'Backup and Restore',
-'author' => '<a href="http://www.socialengineaddons.com" style="text-decoration:underline;" target="_blank">SocialEngineAddOns</a>',
+		'author' => 'SocialEngineAddOns',
     'callback' => 
     array (
       'path' => 'application/modules/Dbbackup/settings/install.php',

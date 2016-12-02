@@ -4,10 +4,10 @@
  * SocialEngine
  *
  * @category   Application_Extensions
- * @package    Siteapi
- * @copyright  Copyright 2015-2016 BigStep Technologies Pvt. Ltd.
+ * @package    Siteevent
+ * @copyright  Copyright 2013-2014 BigStep Technologies Pvt. Ltd.
  * @license    http://www.socialengineaddons.com/license/
- * @version    TopicController.php 2015-09-17 00:00:00Z SocialEngineAddOns $
+ * @version    $Id: MemberController.php 6590 2014-01-02 00:00:00Z SocialEngineAddOns $
  * @author     SocialEngineAddOns
  */
 class Siteevent_MemberController extends Siteapi_Controller_Action_Standard {
@@ -88,10 +88,11 @@ class Siteevent_MemberController extends Siteapi_Controller_Action_Standard {
                 'type' => 'Select',
                 'name' => 'occurrence_id',
                 'Label' => $this->translate('Filter Dates'),
-                'multiOptions' => $multiOptions
+                'multiOptions' => $multiOptions,
+                'value' => 'all'
             );
         }
-
+        $multiOptions = array();
         $multiOptions['-1'] = $this->translate('All');
         $multiOptions['2'] = $this->translate('Attending');
         $multiOptions['1'] = $this->translate('Maybe');
@@ -101,7 +102,8 @@ class Siteevent_MemberController extends Siteapi_Controller_Action_Standard {
             'type' => 'Select',
             'name' => 'rsvp',
             'Label' => $this->translate('RSVP'),
-            'multiOptions' => $multiOptions
+            'multiOptions' => $multiOptions,
+            'value' => '-1'
         );
 
         $this->respondWithSuccess($searchForm, true);
@@ -141,17 +143,22 @@ class Siteevent_MemberController extends Siteapi_Controller_Action_Standard {
         $rsvp = $this->getRequestParam('rsvp', -1);
         $friendsonly = $this->getRequestParam('friendsonly', 0);
         $occurrence_id = $this->getRequestParam('occurrence_id', 'all');
-
-        //  GET WAITING MEMBER OBJECT COUNT.
-        if ($viewer->getIdentity() && ($siteevent->isOwner($viewer))) {
-            $waitingMembers = Zend_Paginator::factory($siteevent->membership()->getMembersSelect(false));
-            $waitingMembers->setCurrentPageNumber($page);
-            $waitingMembers->setItemCountPerPage($limit);
-            $getWaitingMemberCount = $waitingMembers->getTotalItemCount();
+        //SAVE THE OCCURRENCE ID IN THE.
+        if (empty($occurrence_id) || !is_numeric($occurrence_id)) {
+            //GET THE NEXT UPCOMING OCCURRENCE ID
+            $occurr_id = Engine_Api::_()->getDbTable('events', 'siteevent')->getNextOccurID($this->_getParam('event_id'));
         }
 
-        $bodyParams['getWaitingItemCount'] = !empty($getWaitingMemberCount) ? $getWaitingMemberCount : 0;
-
+        $membershipTable = Engine_Api::_()->getDbTable("membership", "siteevent");
+        $membershipTableName = $membershipTable->info('name');
+        //  GET WAITING MEMBER OBJECT COUNT.
+        if ($viewer->getIdentity() && ($siteevent->isOwner($viewer))) {
+            $waitselect = $siteevent->membership()->getMembersSelect(false);
+            if (!empty($occurr_id) && $occurr_id != 'all')
+                $waitselect->where("$membershipTableName.occurrence_id=?", $occurr_id);
+            $waitingMembers = Zend_Paginator::factory($waitselect);
+            $getWaitingMemberCount = $waitingMembers->getTotalItemCount();
+        }
         $select = $siteevent->membership()->getMembersObjectSelect();
 
         if (isset($rsvp) && $rsvp >= 0) {
@@ -187,7 +194,7 @@ class Siteevent_MemberController extends Siteapi_Controller_Action_Standard {
             if (($viewer->getIdentity() && $siteevent->isOwner($viewer)) && ($waiting)) {
                 foreach ($waitingMembers as $value) {
                     $member = Engine_Api::_()->getItem('user', $value->user_id);
-                    if (!empty($member))
+                    if (!empty($member) && !empty($member->user_id))
                         $membersArray[] = $this->_getMemberInfo(array(
                             "member" => $member,
                             "event" => $siteevent,
@@ -201,6 +208,9 @@ class Siteevent_MemberController extends Siteapi_Controller_Action_Standard {
                 //  RETURN THE FULL MEMBERS AS RESPONSE.      
                 $eventOwner = $siteevent->getOwner();
                 foreach ($members as $member) {
+                    if (!$member->user_id)
+                        continue;
+
                     if (!empty($member))
                         $membersArray[] = $this->_getMemberInfo(array(
                             "member" => $member,
@@ -214,17 +224,39 @@ class Siteevent_MemberController extends Siteapi_Controller_Action_Standard {
                     $getTotalItemCount = $members->getTotalItemCount();
                 }
             }
+
+            $isAllowedCreate = Engine_Api::_()->authorization()->isAllowed('siteevent_event', $viewer, 'create');
+            $isAllowedEdit = Engine_Api::_()->authorization()->isAllowed('siteevent_event', $viewer, 'edit');
             $bodyParams['getWaitingItemCount'] = $getWaitingMemberCount;
             $bodyParams['getTotalItemCount'] = !empty($getTotalItemCount) ? $getTotalItemCount : 0;
-            $bodyParams['canEdit'] = $canEdit = !empty($isAllowedView) ? $isAllowedView : 0;
+            $bodyParams['canEdit'] = $canEdit = !empty($isAllowedEdit) ? $isAllowedEdit : 0;
+            $bodyParams['canCreate'] = !empty($isAllowedCreate) ? $isAllowedCreate : 0;
 //@todo paid extension
-//            if (!Engine_Api::_()->siteevent()->isTicketBasedEvent() && ($level_id == 1 || $siteevent->isOwner($viewer) || $canEdit)) {
-            if (($level_id == 1 || $siteevent->isOwner($viewer) || $canEdit)) {
-                $bodyParams['messageGuest'] = array(
-                    'label' => $this->translate('Message Guest'),
-                    'name' => 'messageGuest',
-                    'url' => 'advancedevents/member/compose/' . $siteevent->getIdentity(),
-                );
+            if (!Engine_Api::_()->siteevent()->isTicketBasedEvent() && ($level_id == 1 || $siteevent->isOwner($viewer) || $canEdit)) {
+                if (($level_id == 1 || $siteevent->isOwner($viewer) || $canEdit)) {
+                    $bodyParams['messageGuest'] = array(
+                        'label' => $this->translate('Message Guest'),
+                        'name' => 'messageGuest',
+                        'url' => 'advancedevents/member/compose/' . $siteevent->getIdentity(),
+                    );
+                }
+            }
+
+            if ($siteevent->authorization()->isAllowed($viewer, 'invite')) {
+
+                $occure_id = Engine_Api::_()->getDbTable('occurrences', 'siteevent')->getOccurrence($siteevent->event_id);
+
+                //CHECK IF THE EVENT IS PAST EVENT THEN ALSO DO NOT SHOW THE INVITE AND PROMOTE LINK
+                $endDate = Engine_Api::_()->getDbTable('occurrences', 'siteevent')->getOccurenceEndDate($siteevent->event_id, 'DESC', $occure_id);
+
+                // $currentDate = $this->locale()->toEventDateTime(time());
+                if (strtotime($endDate) > time()) {
+                    $bodyParams['inviteGuest'] = array(
+                        'name' => 'invite',
+                        'label' => $this->translate('Invite Guests'),
+                        'url' => 'advancedevents/member/invite/' . $siteevent->getIdentity() . '/' . $occure_id,
+                    );
+                }
             }
 
             $this->respondWithSuccess($bodyParams, true);
@@ -319,6 +351,11 @@ class Siteevent_MemberController extends Siteapi_Controller_Action_Standard {
         $viewer_id = $viewer->getIdentity();
 
         $occurrence_id = $this->_getParam('occurrence_id', null);
+        //SAVE THE OCCURRENCE ID IN THE.
+        if (empty($occurrence_id) || !is_numeric($occurrence_id)) {
+            //GET THE NEXT UPCOMING OCCURRENCE ID
+            $occurrence_id = Engine_Api::_()->getDbTable('events', 'siteevent')->getNextOccurID($this->_getParam('event_id'));
+        }
         Engine_Api::_()->getApi('Core', 'siteapi')->setView();
 
         if (($waitlist_id = $this->_getParam('waitlist_id', false))) {
@@ -340,7 +377,7 @@ class Siteevent_MemberController extends Siteapi_Controller_Action_Standard {
         }
         try {
 
-            if ($subject->membership()->isResourceApprovalRequired()) {
+            if ($subject->membership()->isResourceApprovalRequired() && !$subject->membership()->isMember($viewer, null)) {
                 $row = $subject->membership()->getReceiver()
                         ->select()
                         ->where('resource_id = ?', $subject->getIdentity())
@@ -362,9 +399,11 @@ class Siteevent_MemberController extends Siteapi_Controller_Action_Standard {
 //            if ($subject->membership()->isMember($viewer, null))
 //                $this->respondWithError('already member');
 
-            $subject->membership()
-                    ->addMember($viewer)
-                    ->setUserApproved($viewer);
+            if (!$subject->membership()->isMember($viewer, null)) {
+                $subject->membership()
+                        ->addMember($viewer)
+                        ->setUserApproved($viewer);
+            }
 
             $oldRow = $row = $subject->membership()
                     ->getRow($viewer);
@@ -457,6 +496,14 @@ class Siteevent_MemberController extends Siteapi_Controller_Action_Standard {
             }
 
             $db->commit();
+
+            if (isset($_REQUEST['getJoinInfo']) && !empty($_REQUEST['getJoinInfo'])) {
+                $this->_forward('index', 'index', 'siteeventrepeat', array(
+                    'event_id' => $subject->getIdentity(),
+                ));
+                return;
+            }
+
             $this->successResponseNoContent('no_content', true);
         } catch (Exception $e) {
             $db->rollBack();
@@ -480,9 +527,12 @@ class Siteevent_MemberController extends Siteapi_Controller_Action_Standard {
         if (empty($event))
             $this->respondWithError('no_record');
         $occurrence_id = $this->_getParam('occurrence_id', null);
+        //SAVE THE OCCURRENCE ID IN THE.
+        if (empty($occurrence_id) || !is_numeric($occurrence_id)) {
+            //GET THE NEXT UPCOMING OCCURRENCE ID
+            $occurrence_id = Engine_Api::_()->getDbTable('events', 'siteevent')->getNextOccurID($this->_getParam('event_id'));
+        }
         Zend_Registry::set('occurrence_id', $occurrence_id);
-
-        $tabId = $this->_getParam('tab', null);
 
         $db = $event->membership()->getReceiver()->getTable()->getAdapter();
         $db->beginTransaction();
@@ -506,6 +556,14 @@ class Siteevent_MemberController extends Siteapi_Controller_Action_Standard {
             $event->save();
             Engine_Api::_()->siteevent()->deleteFeedNotifications('{"occurrence_id":"' . $occurrence_id . '"}', $event);
             $db->commit();
+
+            if (isset($_REQUEST['getJoinInfo']) && !empty($_REQUEST['getJoinInfo'])) {
+                $this->_forward('index', 'index', 'siteeventrepeat', array(
+                    'event_id' => $event->getIdentity(),
+                ));
+                return;
+            }
+
             $this->successResponseNoContent('no_content', true);
         } catch (Exception $e) {
             $db->rollBack();
@@ -642,14 +700,18 @@ class Siteevent_MemberController extends Siteapi_Controller_Action_Standard {
             Engine_Api::_()->getApi('Core', 'siteapi')->setView();
             try {
                 $is_error = 0;
-                if (empty($values['rsvp'])) {
+                if (!isset($values['rsvp'])) {
                     $is_error = 1;
                 }
 
+                $errorMessage = array();
+                $errorMessage[] = "Rsvp field is required";
+
                 //SENDING MESSAGE
                 if ($is_error == 1) {
-                    $this->respondWithValidationError('validation_fail', 'Rsvp field is required');
+                    $this->respondWithValidationError('validation_fail', $errorMessage);
                 }
+
 
                 $db = $subject->membership()->getReceiver()->getTable()->getAdapter();
                 $db->beginTransaction();
@@ -843,7 +905,7 @@ class Siteevent_MemberController extends Siteapi_Controller_Action_Standard {
 //Reject Invite
     public function rejectAction() {
 
-        $this->validateRequestMethod('DELETE');
+        $this->validateRequestMethod('POST');
 
 // Check auth
         if (!$this->_helper->requireUser()->isValid())
@@ -1323,7 +1385,6 @@ class Siteevent_MemberController extends Siteapi_Controller_Action_Standard {
         $multi = 'member';
         $multi_ids = '';
 
-        $tab_selected_id = $this->_getParam('tab');
         $occurrence_id = $this->_getParam('occurrence_id', 'all');
         if (empty($occurrence_id))
             $occurrence_id = 'all';
@@ -1337,7 +1398,7 @@ class Siteevent_MemberController extends Siteapi_Controller_Action_Standard {
             $this->respondWithError('unauthorized');
         }
 
-        $form = Engine_Api::_()->getApi('Siteapi_Core', 'Siteevent')->getMessageComposeForm();
+        $form = Engine_Api::_()->getApi('Siteapi_Core', 'Siteevent')->getMessageComposeForm($event);
 
 
         if ($this->getRequest()->isGet()) {
@@ -1479,6 +1540,14 @@ class Siteevent_MemberController extends Siteapi_Controller_Action_Standard {
                 // limit recipients if it is not a special list of members
                 if (empty($multi))
                     $recipients = array_slice($recipients, 0, 10); // Slice down to 10
+
+
+
+
+
+
+
+
 
                     
 // clean the recipients for repeating ids

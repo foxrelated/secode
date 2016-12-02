@@ -245,7 +245,7 @@ endif;
                           </a>
                         </li>
                       <?php endif; ?>
-                      <?php if (Engine_Api::_()->getApi('settings', 'core')->core_spam_comment): // Comments - likes  ?>
+                      <?php if (0): // Comments - likes  ?>
                         <li>
                           <a href="<?php echo $this->url(array('module' => 'advancedactivity', 'controller' => 'index', 'action' => 'viewcomment', 'action_id' => $action->getIdentity(), 'format' => 'smoothbox'), 'default', 'true'); ?>">
                             <i class="ui-icon ui-icon-comment"></i>

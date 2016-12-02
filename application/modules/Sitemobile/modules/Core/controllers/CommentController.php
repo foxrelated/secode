@@ -621,16 +621,43 @@ class Core_CommentController extends Core_Controller_Action_Standard {
             if (Engine_Api::_()->seaocore()->checkEnabledNestedComment('advancedactivity')) {
                 $this->view->hasViewerDisLike = Engine_Api::_()->getDbtable('dislikes', 'nestedcomment')->isDislike($commentedItem, $viewer);
                 $this->view->dislikeCount = Engine_Api::_()->getDbtable('dislikes', 'nestedcomment')->getDislikeCount($commentedItem);
+                if ($this->view->hasViewerDisLike) {
+                    Engine_Api::_()->getDbtable('dislikes', 'nestedcomment')->removeDislike($commentedItem, $viewer);
+                }
+
             }
 
-            if (Engine_Api::_()->seaocore()->checkEnabledNestedComment('advancedactivity') && Engine_Api::_()->getDbtable('dislikes', 'nestedcomment')->isDislike($commentedItem, $viewer)) {
-                Engine_Api::_()->getDbtable('dislikes', 'nestedcomment')->removeDislike($commentedItem, $viewer);
+            if (!$commentedItem->likes()->isLike($viewer)) {
+                $like = $commentedItem->likes()->addLike($viewer);
+            } else {
+                $like = $commentedItem->likes()->getLike($viewer);
             }
-
-            $commentedItem->likes()->addLike($viewer);
             $this->view->hasViewerLike = $commentedItem->likes()->isLike($viewer);
             $this->view->likeCount = $commentedItem->likes()->getLikeCount();
 
+            $reaction = $this->getParam('reaction');
+            if(!empty($reaction) && empty($comment_id))
+            {
+                $like->reaction = $reaction;
+                $like->save();
+                $attachment = $subject;
+                $attachmentOwner = $attachment->getOwner();
+                // Add activity for owner of activity (if user and not viewer)
+                if ($like->reaction != 'like' && $attachmentOwner->getType() == 'user' && $attachmentOwner->getIdentity() != $viewer->getIdentity()) {
+                    $api = Engine_Api::_()->getDbtable('actions', 'advancedactivity');
+                    $params = array(
+                        'type' => $attachment->getMediaType(),
+                        'owner' => $attachmentOwner->getGuid(),
+                    );
+                    $likeAction = $api->addActivity($viewer, $attachment, 'react', '', '', $params);
+                    if ($likeAction) {
+                        $api->attachActivity($likeAction, $attachment);
+                    }
+                }
+            }
+            if (empty($comment_id)) {
+                $this->getCommentsStats($commentedItem);
+            }
             // Add notification
             $owner = $commentedItem->getOwner();
             $this->view->owner = $owner->getGuid();
@@ -638,7 +665,8 @@ class Core_CommentController extends Core_Controller_Action_Standard {
             if (strpos($subject->getType(), "sitepage_page") != 'sitepage_page' || strpos($subject->getType(), "sitebusiness_business") != 'sitebusiness_business' || strpos($subject->getType(), "sitegroup_group") != 'sitegroup_group') {
                 if ($owner->getType() == 'user' && $owner->getIdentity() != $viewer->getIdentity()) {
                     $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
-                    $notifyApi->addNotification($owner, $viewer, $commentedItem, 'liked', array(
+                    $notificationType = isset($like->reaction) && $like->reaction  !== 'like' ?  'reacted' : 'liked';
+                    $notifyApi->addNotification($owner, $viewer, $commentedItem, $notificationType, array(
                         'label' => $commentedItem->getShortType()
                     ));
                 }
@@ -746,7 +774,9 @@ class Core_CommentController extends Core_Controller_Action_Standard {
                 Engine_Api::_()->getDbtable('dislikes', 'nestedcomment')->addDislike($commentedItem, $viewer);
 
 
-
+            if (empty($comment_id)) {
+                $this->getCommentsStats($commentedItem);
+            }
             //LIKE NOTIFICATION DELETE
             if (empty($comment_id) && Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitelike')) {
                 Engine_Api::_()->getDbtable('notifications', 'activity')->delete(array('type = ?' => 'liked', 'subject_id = ?' => $viewer->getIdentity(), 'subject_type = ?' => $viewer->getType(), 'object_type = ?' => $subject->getType(), 'object_id = ?' => $subject->getIdentity()));
@@ -811,5 +841,50 @@ class Core_CommentController extends Core_Controller_Action_Standard {
         if ($type && $identity)
             return $subject = Engine_Api::_()->getItem($type, $identity);
     }
- 
+
+    private function getCommentsStats($subject)
+    {
+        $settings = Engine_Api::_()->getApi('settings', 'core');
+        $allowReaction = Engine_Api::_()->hasModuleBootstrap('sitereaction') && $settings->getSetting('sitereaction.reaction.active', 1);
+
+        $type = $subject->getType();
+        if (!Engine_Api::_()->seaocore()->checkEnabledNestedComment($type) || !$allowReaction) {
+            return;
+        }
+
+        $type_array = array('album_photo', 'blog', 'video', 'album', 'group', 'poll', 'forum', 'music_playlist');
+        if (in_array($type, $type_array)) {
+            $nested_comment_params = Engine_Api::_()->nestedcomment()->getCommentWidgetParams(array('resource_type' => $type));
+        } else {
+            $nested_comment_params = Engine_Api::_()->nestedcomment()->getParams(array('resource_type' => $type));
+        }
+        $showAsLike = 1;
+        $showDislikeUsers = 0;
+        $showLikeWithoutIcon = 0;
+        if ($nested_comment_params) {
+            $showAsLike = $nested_comment_params['showAsLike'];
+            $showDislikeUsers = $nested_comment_params['showDislikeUsers'];
+            $showLikeWithoutIcon = $nested_comment_params['showLikeWithoutIcon'];
+        }
+        $allowReaction = $allowReaction && ( $showAsLike || ($settings->getSetting('sitereaction.reaction.withdislike.active', 1) && $showLikeWithoutIcon != 3 ));
+        if (!$allowReaction) {
+            returns;
+        }
+        $commentSelect = $subject->comments()->getCommentSelect();
+        $commentSelect->where('parent_comment_id =?', 0);
+        $commentSelect->order('comment_id ASC');
+        $comments = Zend_Paginator::factory($commentSelect);
+        $likes = $likes = $subject->likes()->getLikePaginator();
+        $this->view->like_comments_stats =  $this->view->partial(
+            'application/modules/Nestedcomment/views/sitemobile/scripts/_comments-stats.tpl',
+            null,
+            array(
+                'showAsLike' => $showAsLike,
+                'showLikeWithoutIcon' => $showLikeWithoutIcon,
+                'likes' => $likes,
+                'comments' => $comments,
+                'allowReaction' => $allowReaction,
+            )
+        );
+    }
 }

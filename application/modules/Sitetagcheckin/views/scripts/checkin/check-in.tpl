@@ -435,7 +435,7 @@ $isMobile = Engine_Api::_()->seaocore()->isMobile();
 			      }else{
 			        msg="<div class='aaf_show_popup'><div class='tip'><span>"+
 			          "<?php echo $this->string()->escapeJavascript($this->translate('You have currently created only one list to organize your friends. Create more friend lists from the "Friends" section of ')); ?>"+
-			          "<a href='<?php echo $this->viewer()->getHref() ?>' ><?php echo
+			          "<a target='_parent' href='<?php echo $this->viewer()->getHref() ?>' ><?php echo
 			  $this->string()->escapeJavascript($this->translate("your profile")) ?></a><?php echo
 			  $this->string()->escapeJavascript($this->translate(".")) ?>"+
 			          "</span></div><div><button href=\"javascript:void(0);\" onclick=\"javascript:Smoothbox.close()\"><?php echo $this->translate("Close"); ?></button></div>"+

@@ -136,7 +136,7 @@ $this->headLink()
                             </div>
                         <?php endif; ?>             
 
-                        <?php if (!empty($diary->body)): ?>
+                        <?php if (Engine_Api::_()->authorization()->isAllowed($diary, null, "view") && !empty($diary->body)): ?>
                             <div class='seaocore_browse_list_info_blurb'>
                                 <?php echo $diary->body; ?>
                             </div>

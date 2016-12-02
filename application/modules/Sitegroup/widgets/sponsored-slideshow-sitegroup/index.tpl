@@ -41,7 +41,7 @@ foreach ($this->show_slideshow_object as $type => $item) {
   
   $content_info = $this->timestamp(strtotime($item->creation_date));
   if($postedBy):
-  $content_info.= $this->translate(' - posted by ') . $this->htmlLink($item->getOwner()->getHref(), $item->getOwner()->getTitle());  
+  $content_info.= $this->translate(' - created by ') . $this->htmlLink($item->getOwner()->getHref(), $item->getOwner()->getTitle());  
   endif;
   $content_info.='<p>';
   $content_info.=$this->translate(array('%s comment', '%s comments', $item->comment_count), $this->locale()->toNumber($item->comment_count)) . ', ';

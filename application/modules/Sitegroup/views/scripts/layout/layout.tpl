@@ -1224,9 +1224,10 @@
 
 
 </script>
-
+<div class="generic_layout_container layout_middle">
+<div class="generic_layout_container layout_core_content">
 <?php include_once APPLICATION_PATH . '/application/modules/Sitegroup/views/scripts/payment_navigation_views.tpl'; ?>
-
+<div class="layout_middle">
 <h2>
   <?php echo $this->sitegroup->__toString(); ?>
   <?php echo $this->translate('&raquo; Edit Layout');?>
@@ -1726,7 +1727,9 @@
   	<?php echo $this->translate("Note: Some blocks won't appear if you're not signed-in or if they don't belong on this group."); ?>
   </div>
 </div>
-
+ </div>
+</div>
+    </div> 
 <script type="text/javascript">
 <?php $url = $this->url(array('action' => 'set-user-driven-layout', 'controller' => 'layout', 'module' => 'sitegroup', 'group_id' => $this->sitegroup->group_id), 'default', true)?>
 function OpenSmoothbox(url) {

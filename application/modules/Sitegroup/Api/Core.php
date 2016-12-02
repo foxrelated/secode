@@ -1059,6 +1059,7 @@ class Sitegroup_Api_Core extends Core_Api_Abstract {
                 $coreTable->isModuleEnabled('sitegroupmusic') ||
                 (Engine_Api::_()->hasModuleBootstrap('siteevent') && Engine_Api::_()->getDbtable('modules', 'siteevent')->getIntegratedModules(array('enabled' => 1, 'item_type' => 'sitegroup_group', 'item_module' => 'sitegroup'))) ||
                 (Engine_Api::_()->hasModuleBootstrap('sitevideo') && Engine_Api::_()->getDbtable('modules', 'sitevideo')->getIntegratedModules(array('enabled' => 1, 'item_type' => 'sitegroup_group', 'item_module' => 'sitegroup'))) ||
+                (Engine_Api::_()->hasModuleBootstrap('document') && Engine_Api::_()->getDbtable('modules', 'document')->getIntegratedModules(array('enabled' => 1, 'item_type' => 'sitegroup_group', 'item_module' => 'sitegroup'))) ||
                 !empty($mixSettingsResults)) {
             return $group_redirect = 1;
         } else {
@@ -1076,7 +1077,7 @@ class Sitegroup_Api_Core extends Core_Api_Abstract {
 
         $enableSubModules = array();
 
-        $includeModules = array("sitegroupdocument" => 'Documents', "sitegroupoffer" => 'Offers', "sitegroupform" => "Form", "sitegroupdiscussion" => "Discussions", "sitegroupnote" => "Notes", "sitegroupalbum" => "Photos", "sitegroupvideo" => "Videos", "sitegroupevent" => "Events", "sitegrouppoll" => "Polls", "sitegroupinvite" => "Invite & Promote", "sitegroupbadge" => "Badges", "sitegrouplikebox" => "External Badge", "sitegroupmusic" => "Music", "sitegroupmember" => "Member", "siteevent" => "Events", "sitevideo" => "Videos");
+        $includeModules = array("sitegroupdocument" => 'Documents', "sitegroupoffer" => 'Offers', "sitegroupform" => "Form", "sitegroupdiscussion" => "Discussions", "sitegroupnote" => "Notes", "sitegroupalbum" => "Photos", "sitegroupvideo" => "Videos", "sitegroupevent" => "Events", "sitegrouppoll" => "Polls", "sitegroupinvite" => "Invite & Promote", "sitegroupbadge" => "Badges", "sitegrouplikebox" => "External Badge", "sitegroupmusic" => "Music", "sitegroupmember" => "Member", "siteevent" => "Events", "sitevideo" => "Videos", "document" => "Documents");
 
         $enableAllModules = Engine_Api::_()->getDbtable('modules', 'core')->getEnabledModuleNames();
         $enableModules = array_intersect(array_keys($includeModules), $enableAllModules);
@@ -1092,7 +1093,11 @@ class Sitegroup_Api_Core extends Core_Api_Abstract {
                     if ((Engine_Api::_()->hasModuleBootstrap('sitevideo') && Engine_Api::_()->getDbtable('modules', 'sitevideo')->getIntegratedModules(array('enabled' => 1, 'item_type' => 'sitegroup_group', 'item_module' => 'sitegroup')))) {
                         $enableSubModules['sitegroupvideo'] = $includeModules['sitegroupvideo'];
                     }
-                } else {
+                } elseif ($module == 'document') {
+                    if ((Engine_Api::_()->hasModuleBootstrap('document') && Engine_Api::_()->getDbtable('modules', 'document')->getIntegratedModules(array('enabled' => 1, 'item_type' => 'sitegroup_group', 'item_module' => 'sitegroup')))) {
+                        $enableSubModules['sitegroupdocument'] = $includeModules['sitegroupdocument'];
+                    }
+                }  else {
                     $enableSubModules[$module] = $includeModules[$module];
                 }
             }
@@ -1182,7 +1187,7 @@ class Sitegroup_Api_Core extends Core_Api_Abstract {
                 if (empty($modulesArray))
                     $modulesArray = array();
 
-                if (isset($includeArray[$subModuleName]) && @in_array($subModuleName, $modulesArray)) {
+                if (isset($includeArray[$subModuleName]) && (@in_array($subModuleName, $modulesArray) || $subModuleName == 'sitegroupmember')) {
                     $flage = true;
                 }
                 break;
@@ -1461,6 +1466,7 @@ class Sitegroup_Api_Core extends Core_Api_Abstract {
         $sitegroupeventEnabled = Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitegroupevent');
         $siteeventEnabled = Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('siteevent');
         $sitevideoEnabled = Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitevideo');
+        $documentEnabled = Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('document');
         foreach ($table->fetchAll($select) as $group) {
             $this->sendMail("EXPIRED", $group->group_id);
         }
@@ -1523,7 +1529,6 @@ class Sitegroup_Api_Core extends Core_Api_Abstract {
             }
 
             if ($sitevideoEnabled) {
-                //FETCH Notes CORROSPONDING TO THAT Group ID
                 $sitevideotable = Engine_Api::_()->getItemTable('sitevideo_video');
                 $select = $sitevideotable->select()
                         ->from($sitevideotable->info('name'), 'video_id')
@@ -1538,6 +1543,27 @@ class Sitegroup_Api_Core extends Core_Api_Abstract {
                                 'search' => '0'
                                     ), array(
                                 'video_id =?' => $video_id
+                            ));
+                        }
+                    }
+                }
+            }
+            
+             if ($documentEnabled) {
+                $documenttable = Engine_Api::_()->getItemTable('document');
+                $select = $documenttable->select()
+                        ->from($documenttable->info('name'), 'document_id')
+                        ->where('parent_type = ?', 'sitegroup_group')
+                        ->where('parent_id = ?', $group->group_id);
+                $rows = $documenttable->fetchAll($select)->toArray();
+                if (!empty($rows)) {
+                    foreach ($rows as $key => $document_ids) {
+                        $document_id = $document_ids['document_id'];
+                        if (!empty($document_id)) {
+                            $documenttable->update(array(
+                                'search' => '0'
+                                    ), array(
+                                'document_id =?' => $document_id
                             ));
                         }
                     }
@@ -2012,6 +2038,23 @@ class Sitegroup_Api_Core extends Core_Api_Abstract {
                 }
             }
         }
+        
+        $documentEnabled = Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('document');
+        if ($documentEnabled) {
+            $table = Engine_Api::_()->getItemTable('document');
+            $select = $table->select()
+                    ->from($table->info('name'), 'document_id')
+                    ->where('parent_type = ?', 'sitegroup_group')
+                    ->where('parent_id = ?', $group_id);
+            $rows = $table->fetchAll($select)->toArray();
+            if (!empty($rows)) {
+                foreach ($rows as $key => $document_ids) {
+                    $resource = Engine_Api::_()->getItem('document', $document_ids['document_id']);
+                    if ($resource)
+                        $resource->delete();
+                }
+            }
+        }
         //END ADVANCED-EVENT CODE
         //START GROUP-FORM CODE
         $sitegroupFormEnabled = Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitegroupform');
@@ -2256,6 +2299,7 @@ class Sitegroup_Api_Core extends Core_Api_Abstract {
             'sitegroupintegration' => 'Groups / Communities - Multiple Listings and Products Showcase Extension',
             'siteevent' => 'Advanced Events',
             'sitevideo' => 'Advanced Videos',
+            'document' => 'Documents',
         );
         $notActivatedModArray = array();
         foreach ($groupModArray as $modNameKey => $modNameValue) {
@@ -2465,7 +2509,7 @@ class Sitegroup_Api_Core extends Core_Api_Abstract {
      */
     public function getTotalCount($group_id, $modulename, $tablename) {
 
-        if ($modulename == 'siteevent' || $modulename == 'sitevideo') {
+        if ($modulename == 'siteevent' || $modulename == 'sitevideo' || $modulename == 'document') {
             $table = Engine_Api::_()->getDbtable($tablename, $modulename);
             $count = 0;
             $count = $table

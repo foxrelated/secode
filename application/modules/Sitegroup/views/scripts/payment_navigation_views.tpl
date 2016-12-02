@@ -43,7 +43,7 @@ $headding = "GROUP_NAVIGATION_NAME";
         <?php endforeach; ?>
 
         <?php if (count($this->navigation) > $this->max): ?>
-          <li class="tab_closed more_tab" onclick="moreTabSwitch($(this));">
+          <li class="tab_closed more_tab" onclick="moreTabSwitchSitegroup($(this));">
             <div class="tab_pulldown_contents_wrapper">
               <div class="tab_pulldown_contents">          
                 <ul>
@@ -75,7 +75,7 @@ $headding = "GROUP_NAVIGATION_NAME";
 <script type="text/javascript">
   en4.core.runonce.add(function() {
    
-    var moreTabSwitch = window.moreTabSwitch = function(el) {
+    var moreTabSwitchSitegroup = window.moreTabSwitchSitegroup = function(el) {
       el.toggleClass('seaocore_tab_open active');
       el.toggleClass('tab_closed');
     }

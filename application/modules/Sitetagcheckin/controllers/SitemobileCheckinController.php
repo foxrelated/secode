@@ -272,7 +272,7 @@ class Sitetagcheckin_SitemobileCheckinController extends Core_Controller_Action_
           $location = $checkin_locationparams['label'];
 					if($checkin_locationparams['vicinity']) {
 						if(isset($checkin_locationparams['name']) && $checkin_locationparams['name'] && $checkin_locationparams['name'] != $checkin_locationparams['vicinity']) {
-							$checkin_locationparams['label'] = $checkin_locationparams['name'] . ', ' . $checkin_locationparams['vicinity'];
+							$checkin_locationparams['label'] = $checkin_locationparams['vicinity'];
 						} else {
 							$checkin_locationparams['label'] = $checkin_locationparams['vicinity'];
 						}
@@ -318,7 +318,7 @@ class Sitetagcheckin_SitemobileCheckinController extends Core_Controller_Action_
 					$location = $checkin_locationparams['label'];
 					if($checkin_locationparams['vicinity']) {
 						if(isset($checkin_locationparams['name']) && $checkin_locationparams['name'] && $checkin_locationparams['name'] != $checkin_locationparams['vicinity']) {
-							$checkin_locationparams['label'] = $checkin_locationparams['name'] . ', ' . $checkin_locationparams['vicinity'];
+							$checkin_locationparams['label'] = $checkin_locationparams['vicinity'];
 						} else {
 							$checkin_locationparams['label'] = $checkin_locationparams['vicinity'];
 						}
@@ -383,7 +383,7 @@ class Sitetagcheckin_SitemobileCheckinController extends Core_Controller_Action_
               $locationLink = "<a href='$pageLink'>$pageTitle</a>";
             }
             //SEND NOTIFICATION
-            $actvityNotification->addNotification($tag, $viewer, $action, "sitetagcheckin_tagged", array("location" => $locationLink, "label" => $type_name));
+            $actvityNotification->addNotification($tag, $viewer, $action, "sitetagcheckin_tagged", array("location" => "$locationLink", "label" => "$type_name"));
           }
         }
 

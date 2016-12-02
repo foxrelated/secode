@@ -29,6 +29,11 @@ class Sitemobile_Widget_SitemobileAdvfeedController extends Engine_Content_Widge
     $videoUploadUrl = 'video/index/compose-upload/format/json/c_type/wall';
     $videoDeleteUrl = 'video/index/delete';
     $musicUploadUrl = 'music/playlist/add-song/format/json?ul=1&type=wall';
+    $request = Zend_Controller_Front::getInstance()->getRequest();
+    $this->view->module_name = $module = $request->getModuleName();
+    $this->view->action_name = $action = $request->getActionName();
+    $this->view->controller = $controller = $request->getControllerName();
+    $this->view->isHashTagPage = $isHashTagPage = $module == 'sitehashtag' && $controller == 'index' && $action == 'index';
 
     $this->view->resource_type = '';
     if (Engine_Api::_()->core()->hasSubject()) {
@@ -197,7 +202,7 @@ class Sitemobile_Widget_SitemobileAdvfeedController extends Engine_Content_Widge
     $this->view->settingsApi = $settings = Engine_Api::_()->getApi('settings', 'core');
     $this->view->tabtype = $settings->getSetting('advancedactivity.tabtype', 3);
     $this->view->composerType = $settings->getSetting('advancedactivity.composer.type', 0);
-    if (empty($subject) || $viewer->isSelf($subject)) {
+    if (!$isHashTagPage && (empty($subject) || $viewer->isSelf($subject))) {
       $this->view->showPrivacyDropdown = in_array('userprivacy', $settings->getSetting('advancedactivity.composer.options', array("withtags", "emotions", "userprivacy")));
       if ($this->view->showPrivacyDropdown)
         $this->view->showDefaultInPrivacyDropdown = $userPrivacy = Engine_Api::_()->getDbtable('settings', 'user')->getSetting($viewer, "aaf_post_privacy");
@@ -261,8 +266,6 @@ class Sitemobile_Widget_SitemobileAdvfeedController extends Engine_Content_Widge
 
     $listLimit = 0;
     $composerLimit = 1;
-    $request = Zend_Controller_Front::getInstance()->getRequest();
-
     // Get some options
     $this->view->homefeed = $homefeed = $request->getParam('homefeed', false);
     $this->view->feedOnly = $feedOnly = $request->getParam('feedOnly', false);
@@ -311,7 +314,7 @@ class Sitemobile_Widget_SitemobileAdvfeedController extends Engine_Content_Widge
       }
     }
     $this->view->tabtype = $settings->getSetting('advancedactivity.tabtype', 3);
-    if (empty($subject) || $viewer->isSelf($subject)) {
+    if ((empty($subject) || $viewer->isSelf($subject)) && !$isHashTagPage) {
       $this->view->enableList = $userFriendListEnable = $settings->getSetting('user.friends.lists');
       $viewer_id = $viewer->getIdentity();
       if ($userFriendListEnable && !empty($viewer_id)) {
@@ -324,7 +327,7 @@ class Sitemobile_Widget_SitemobileAdvfeedController extends Engine_Content_Widge
       $this->view->enableList = $userFriendListEnable;
     }
 
-    if (!$feedOnly && empty($subject)) {
+    if (!$feedOnly && empty($subject) && !$isHashTagPage) {
       if (!empty($viewer_id)) {
         $this->view->enableFriendListFilter = $enableFriendListFilter = $userFriendListEnable && $settings->getSetting('advancedactivity.friendlist.filtering', 1);
       } else {
@@ -465,6 +468,13 @@ class Sitemobile_Widget_SitemobileAdvfeedController extends Engine_Content_Widge
     );
 
 
+    $isHashTagEnabled = Engine_Api::_()->getDbtable('modules', 'sitemobile')->isModuleEnabled('sitehashtag');
+    $search = $request->getParam('search');
+    if ($isHashTagEnabled && $search) {
+      $config['hashtag'] = $search;
+      $this->view->search = $search;
+      $this->view->updateSettings = false;
+    }
     // Pre-process feed items
     $selectCount = 0;
     $nextid = null;
@@ -643,6 +653,11 @@ class Sitemobile_Widget_SitemobileAdvfeedController extends Engine_Content_Widge
     $this->view->firstid = $firstid;
     $this->view->endOfFeed = $endOfFeed;
 
+    // Get lists
+    $showHashtags = Engine_Api::_()->getApi('settings', 'core')->getSetting('sitehashtag.showHashtags', 1);
+    if ($showHashtags && $isHashTagEnabled) {
+      $this->view->hashtag = $this->getHashtagNames($activity);
+    }
 
     // Get some other info
     if (!empty($subject)) {
@@ -685,15 +700,14 @@ class Sitemobile_Widget_SitemobileAdvfeedController extends Engine_Content_Widge
       }
     }
 
+    if($isHashTagPage) {
+      $this->view->enableComposer = false;
+    }
+
     if (($getListViewValue + $getPublishValue) != $getComposerValue)
       Engine_Api::_()->getApi('settings', 'core')->setSetting('advancedactivity.post.active', $composerLimit);
     // Get lists if viewing own profile
     // if( $viewer->isSelf($subject) ) {
-    // Get lists
-
-    $front = Zend_Controller_Front::getInstance();
-    $this->view->module_name = $front->getRequest()->getModuleName();
-    $this->view->action_name = $front->getRequest()->getActionName();
 
     // Form token
     $session = new Zend_Session_Namespace('ActivityFormToken');
@@ -717,6 +731,7 @@ class Sitemobile_Widget_SitemobileAdvfeedController extends Engine_Content_Widge
     $allParmas['actionFilter'] = $actionTypeGroup;
     $allParmas['sitemobileadvfeed_length'] = $length;
     $allParmas['countScrollAAFSocial'] = 0;
+    $allParmas['search'] = $this->view->search;
     $allParmas['postURL'] = $this->view->url(array('module' => 'advancedactivity', 'controller' => 'index', 'action' => 'post'), 'default', true);
 
     if (Engine_Api::_()->core()->hasSubject()) {
@@ -724,6 +739,8 @@ class Sitemobile_Widget_SitemobileAdvfeedController extends Engine_Content_Widge
       $subject = Engine_Api::_()->core()->getSubject();
       $allParmas['subject_guid'] = $subject->getGuid();
     }
+    $allParmas['enableHashTagComposer'] = $this->view->enableComposer && $isHashTagEnabled && Engine_Api::_()->getDbtable('contents', 'sitehashtag')->getEnable('activity');
+    
     $this->view->allParams = $allParmas;
     //MAKE AN ARRAY OF ATTACHMENT URLS
     $baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl() . '/';
@@ -732,4 +749,21 @@ class Sitemobile_Widget_SitemobileAdvfeedController extends Engine_Content_Widge
     $this->view->attachmentsURL = $attachmentsURL;
   }
 
+  protected function getHashtagNames($activity) {
+    $hashTagMapTable = Engine_Api::_()->getDbtable('tagmaps', 'sitehashtag');
+    $hashtagNames = array();
+    foreach ($activity as $action) {
+      preg_match_all("/\B#\w*[a-zA-Z]+\w*/", $action->body, $hashtags);
+      $hashtagName = array();
+      $hashtagmaps = $hashTagMapTable->getActionTagMaps($action->action_id);
+      foreach ($hashtagmaps as $hashtagmap) {
+        $tag = Engine_Api::_()->getItem('sitehashtag_tag', $hashtagmap->tag_id);
+        if ($tag && !in_array($tag->text, $hashtags[0])) {
+          $hashtagName[] = $tag->text;
+        }
+      }
+      $hashtagNames[$action['action_id']] = $hashtagName;
+    }
+    return $hashtagNames;
+  }
 }

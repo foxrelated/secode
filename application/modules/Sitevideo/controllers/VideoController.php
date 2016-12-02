@@ -58,6 +58,14 @@ class Sitevideo_VideoController extends Seaocore_Controller_Action_Standard {
             }
         }
 
+        $this->view->tab_selected_id = $this->_getParam('tab');
+        if (strpos($parent_type, "sitereview_listing") !== false) {
+            $this->view->parentTypeItem = $parentTypeItem = Engine_Api::_()->getItem('sitereview_listing', $parent_id);
+        } else {
+            if ($parent_type && $parent_id)
+                $this->view->parentTypeItem = $parentTypeItem = Engine_Api::_()->getItem($parent_type, $parent_id);
+        }
+
         // In smoothbox
         $this->_helper->layout->setLayout('default-simple');
         $this->view->form = $form = new Sitevideo_Form_Video_Delete();
@@ -120,6 +128,15 @@ class Sitevideo_VideoController extends Seaocore_Controller_Action_Standard {
                 return $this->_forward('requireauth', 'error', 'core');
             }
         }
+
+        $this->view->tab_selected_id = $this->_getParam('tab');
+        if (strpos($parent_type, "sitereview_listing") !== false) {
+            $this->view->parentTypeItem = $parentTypeItem = Engine_Api::_()->getItem('sitereview_listing', $parent_id);
+        } else {
+            if ($parent_type && $parent_id)
+                $this->view->parentTypeItem = $parentTypeItem = Engine_Api::_()->getItem($parent_type, $parent_id);
+        }
+
         $this->view->video = $video;
         $this->view->defaultProfileId = $defaultProfileId = Engine_Api::_()->getDbTable('metas', 'sitevideo')->defaultProfileId();
 
@@ -1479,13 +1496,13 @@ class Sitevideo_VideoController extends Seaocore_Controller_Action_Standard {
                     }
                     if (isset($information['url']) && !empty($information['url'])) {
                         $video->code = $information['url'];
-                   }
+                    }
                     $video->save();
                 }
                 // Insert new action item
                 $insert_action = true;
             }
-            if ($values['ignore'] == true) {
+            if ($values['type'] != 3) {
                 $video->status = 1;
                 $video->save();
                 $insert_action = true;
@@ -1526,7 +1543,29 @@ class Sitevideo_VideoController extends Seaocore_Controller_Action_Standard {
         try {
             if ($insert_action && $generateFeed) {
                 $owner = $video->getOwner();
-                $action = Engine_Api::_()->getDbtable('actions', 'activity')->addActivity($owner, $video, 'sitevideo_video_new');
+
+                if (isset($values['channel']) && !empty($values['channel'])) {
+                    $channel = Engine_Api::_()->getItem('sitevideo_channel', $values['channel']);
+                    $action = Engine_Api::_()->getDbtable('actions', 'activity')->addActivity($owner, $channel, 'sitevideo_channel_video_new');
+                } else if ($parent_type == 'sitepage_page') {
+                    $sitepage = Engine_Api::_()->getItem('sitepage_page', $parent_id);
+                    $action = Engine_Api::_()->getDbtable('actions', 'activity')->addActivity($owner, $sitepage, 'sitevideo_sitepage_video_new');
+                } else if ($parent_type == 'sitebusiness_business') {
+                    $sitebusiness = Engine_Api::_()->getItem('sitebusiness_business', $parent_id);
+                    $action = Engine_Api::_()->getDbtable('actions', 'activity')->addActivity($owner, $sitebusiness, 'sitevideo_sitebusiness_video_new');
+                } else if ($parent_type == 'sitegroup_group') {
+                    $sitegroup = Engine_Api::_()->getItem('sitegroup_group', $parent_id);
+                    $action = Engine_Api::_()->getDbtable('actions', 'activity')->addActivity($owner, $sitegroup, 'sitevideo_sitegroup_video_new');
+                } else if ($parent_type == 'sitestore_store') {
+                    $sitestore = Engine_Api::_()->getItem('sitestore_store', $parent_id);
+                    $action = Engine_Api::_()->getDbtable('actions', 'activity')->addActivity($owner, $sitestore, 'sitevideo_sitestore_video_new');
+                }  else if ($parent_type == 'siteevent_event') {
+                    $siteevent = Engine_Api::_()->getItem('siteevent_event', $parent_id);
+                    $action = Engine_Api::_()->getDbtable('actions', 'activity')->addActivity($owner, $siteevent, 'sitevideo_siteevent_video_new');
+                } else {
+                    $action = Engine_Api::_()->getDbtable('actions', 'activity')->addActivity($owner, $video, 'sitevideo_video_new');
+                }
+
                 if ($action != null) {
                     Engine_Api::_()->getDbtable('actions', 'activity')->attachActivity($action, $video);
                 }
@@ -1620,6 +1659,7 @@ class Sitevideo_VideoController extends Seaocore_Controller_Action_Standard {
             $video->description = $pathInfo['filename'];
             $video->owner_id = $viewer->getIdentity();
             $video->type = 3;
+            $video->status = 0;
             $video->save();
             $db->commit();
             return $video->video_id;
@@ -1730,8 +1770,8 @@ class Sitevideo_VideoController extends Seaocore_Controller_Action_Standard {
                 $thumbnailSize = array('maxresdefault', 'sddefault', 'hqdefault', 'mqdefault', 'default');
                 foreach ($thumbnailSize as $size) {
                     $thumbnailUrl = "https://i.ytimg.com/vi/$code/$size.jpg";
-                    $data = @file_get_contents($thumbnailUrl);
-                    if ($data && is_string($data)) {
+                    $file_headers = @get_headers($thumbnailUrl);
+                    if (isset($file_headers[0]) && strpos($file_headers[0], '404 Not Found') == false) {
                         $thumbnail = $thumbnailUrl;
                         break;
                     }

@@ -192,7 +192,7 @@ class Sitetagcheckin_Plugin_Core extends Zend_Controller_Plugin_Abstract {
           }
           $getitem = Engine_Api::_()->getItem($object_type, $object_id);
           //SEND NOTIFICATION
-          Engine_Api::_()->getDbtable('notifications', 'activity')->addNotification($userItem, $viewer, $getitem, "sitetagcheckin_tagged", array("location" => $locationLink, "label" => $type));
+          Engine_Api::_()->getDbtable('notifications', 'activity')->addNotification($userItem, $viewer, $getitem, "sitetagcheckin_tagged", array("location" => "$locationLink", "label" => "$type"));
         }
       }
     }
@@ -275,41 +275,41 @@ class Sitetagcheckin_Plugin_Core extends Zend_Controller_Plugin_Abstract {
 	
   public function onEventCreateAfter($event) {
 
-    $item = $event->getPayload();
-    $front = Zend_Controller_Front::getInstance();
-    $controller = $front->getRequest()->getControllerName();
-    $action = $front->getRequest()->getActionName();
-
-    if ($controller == 'index' && $action == 'create') {
-			//Accrodeing to event  location entry in the seaocore location table.
-			if (!empty($item->location)) {
-				$seao_locationid = Engine_Api::_()->getDbtable('locationitems', 'seaocore')->getLocationItemId($item->location, '', 'event', $item->event_id);
-
-				//event table entry of location id.
-				Engine_Api::_()->getItemTable('event')->update(array('seao_locationid'=>  $seao_locationid), array('event_id =?' => $item->event_id));
-			}
-		}
+//    $item = $event->getPayload();
+//    $front = Zend_Controller_Front::getInstance();
+//    $controller = $front->getRequest()->getControllerName();
+//    $action = $front->getRequest()->getActionName();
+//
+//    if ($controller == 'index' && $action == 'create') {
+//			//Accrodeing to event  location entry in the seaocore location table.
+//			if (!empty($item->location)) {
+//				$seao_locationid = Engine_Api::_()->getDbtable('locationitems', 'seaocore')->getLocationItemId($item->location, '', 'event', $item->event_id);
+//
+//				//event table entry of location id.
+//				Engine_Api::_()->getItemTable('event')->update(array('seao_locationid'=>  $seao_locationid), array('event_id =?' => $item->event_id));
+//			}
+//		}
   }
 
 	public function onEventUpdateAfter($event) {
 
-    $item = $event->getPayload();
-    $front = Zend_Controller_Front::getInstance();
-    $controller = $front->getRequest()->getControllerName();
-    $action = $front->getRequest()->getActionName();
-
-    if ($controller == 'event' && $action == 'edit') {
-			if (!empty($item->location)) {
-			
-				//DELETE THE RESULT FORM THE TABLE.
-				Engine_Api::_()->getDbtable('locationitems', 'seaocore')->delete(array('resource_id =?' => $item->event_id, 'resource_type = ?' => 'event'));
-			
-				$seaoLocation = Engine_Api::_()->getDbtable('locationitems', 'seaocore')->getLocationItemId($item->location, '', 'event', $item->event_id);
-
-				//event table entry of location id.
-				Engine_Api::_()->getItemTable('event')->update(array('seao_locationid'=>  $seaoLocation), array('event_id =?' => $item->event_id));
-			}
-		}
+//    $item = $event->getPayload();
+//    $front = Zend_Controller_Front::getInstance();
+//    $controller = $front->getRequest()->getControllerName();
+//    $action = $front->getRequest()->getActionName();
+//
+//    if ($controller == 'event' && $action == 'edit') {
+//			if (!empty($item->location)) {
+//			
+//				//DELETE THE RESULT FORM THE TABLE.
+//				Engine_Api::_()->getDbtable('locationitems', 'seaocore')->delete(array('resource_id =?' => $item->event_id, 'resource_type = ?' => 'event'));
+//			
+//				$seaoLocation = Engine_Api::_()->getDbtable('locationitems', 'seaocore')->getLocationItemId($item->location, '', 'event', $item->event_id);
+//
+//				//event table entry of location id.
+//				Engine_Api::_()->getItemTable('event')->update(array('seao_locationid'=>  $seaoLocation), array('event_id =?' => $item->event_id));
+//			}
+//		}
 	}
 	
   public function onUserCreateAfter($event) {

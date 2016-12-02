@@ -48,7 +48,7 @@ class Dbbackup_Plugin_Task_Dbbackup extends Core_Plugin_Task_Abstract {
 			$fileAdapterinfo = include $fileAdapter;
 	
 			//Setting the selected table into the session.
-			$session = new Zend_Session_Namespace('backup');
+			$session = new Zend_Session_Namespace();
 	
 			$session->fileadapter = $fileAdapterinfo['adapter']; 
 	    $code_destination = '';
@@ -898,7 +898,7 @@ class Dbbackup_Plugin_Task_Dbbackup extends Core_Plugin_Task_Abstract {
   //This function return the row of the tables start.
   public function fetchrow($sql) {
     try {
-    	$session = new Zend_Session_Namespace('backup');
+    	$session = new Zend_Session_Namespace();
 			$fileAdapterinfo['adapter'] = $session->fileadapter;
       $db = Engine_Db_Table::getDefaultAdapter();
       $export = Engine_Db_Export::factory($db);
@@ -1074,7 +1074,7 @@ class Dbbackup_Plugin_Task_Dbbackup extends Core_Plugin_Task_Abstract {
 
   public function lockDatabse() {
     try {
-    	$session = new Zend_Session_Namespace('backup');
+    	$session = new Zend_Session_Namespace();
 			$fileAdapterinfo['adapter'] = $session->fileadapter;    	
       $table_selected = $this->fetchtables();
       $num_selected_table = count($table_selected);
@@ -1116,7 +1116,7 @@ class Dbbackup_Plugin_Task_Dbbackup extends Core_Plugin_Task_Abstract {
 
   public function unlockDatabse() {
     try {
-    	$session = new Zend_Session_Namespace('backup');
+    	$session = new Zend_Session_Namespace();
 			$fileAdapterinfo['adapter'] = $session->fileadapter; 
       $db = Engine_Db_Table::getDefaultAdapter();
       $export = Engine_Db_Export::factory($db);
@@ -1411,7 +1411,7 @@ class Dbbackup_Plugin_Task_Dbbackup extends Core_Plugin_Task_Abstract {
   //This function return the row of the tables start.
   public function database_fetchrow($sql) {
     try {
-    	$session = new Zend_Session_Namespace('backup');
+    	$session = new Zend_Session_Namespace();
 			$fileAdapterinfo['adapter'] = $session->fileadapter;     	
       $db = Engine_Db_Table::getDefaultAdapter();
       $export = Engine_Db_Export::factory($db);

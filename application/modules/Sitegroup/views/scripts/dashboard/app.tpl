@@ -21,6 +21,8 @@
 </script>
 
 <?php if (empty($this->is_ajax)) : ?>
+<div class="generic_layout_container layout_middle">
+<div class="generic_layout_container layout_core_content">
     <?php include_once APPLICATION_PATH . '/application/modules/Sitegroup/views/scripts/payment_navigation_views.tpl'; ?>
     <div class="layout_middle">
         <?php include_once APPLICATION_PATH . '/application/modules/Sitegroup/views/scripts/edit_tabs.tpl'; ?>
@@ -85,6 +87,7 @@
                 <?php endif; ?>
 
                 <?php if ($this->can_create_doc): ?>
+                    <?php if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitegroupdocument') && !Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('document')): ?>
                     <li> <?php $canShowMessage = false; ?>
                         <div class="sitegroup_getstarted_num">
                             <?php echo $this->htmlLink(array('route' => 'sitegroupdocument_create', 'group_id' => $this->group_id, 'tab' => $this->documenttab_id), '<i class="icon_app_document"></i>') ?>
@@ -97,7 +100,22 @@
                                 <?php echo $this->htmlLink($this->sitegroup->getHref(array('tab' => $this->documenttab_id)), $this->translate('Manage Documents')) ?>
                             </div>
                         </div>
-                    </li>		
+                    </li>
+                    <?php else:?>
+                    <li> <?php $canShowMessage = false; ?>
+                        <div class="sitegroup_getstarted_num">
+                            <?php echo $this->htmlLink(array('route' => 'document_create', 'parent_id' => $this->group_id, 'parent_type' => 'sitegroup_group', 'tab' => $this->documenttab_id), '<i class="icon_app_document"></i>') ?>
+                        </div>	
+                        <div class="sitegroup_getstarted_des">
+                            <b><?php echo $this->translate('Documents'); ?></b>
+                            <p><?php echo $this->translate('Add and showcase documents on your group.'); ?></p>
+                            <div class="sitegroup_getstarted_btn">
+                                <a href='<?php echo $this->url(array('parent_type' => 'sitegroup_group','parent_id' => $this->group_id, 'tab' => $this->documenttab_id), 'document_create', true) ?>'><?php echo $this->translate('Add a Document'); ?></a>
+                                <?php echo $this->htmlLink($this->sitegroup->getHref(array('tab' => $this->documenttab_id)), $this->translate('Manage Documents')) ?>
+                            </div>
+                        </div>
+                    </li>
+                    <?php endif;?>
                 <?php endif; ?>
 
                 <?php if ($this->moduleEnable && !empty($this->can_offer)): ?>
@@ -307,5 +325,7 @@
             <?php if (empty($this->is_ajax)) : ?>
             </div>
         </div>
+    </div>
+      </div>
     </div>
 <?php endif; ?>

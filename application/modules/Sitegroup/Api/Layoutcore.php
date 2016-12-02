@@ -171,9 +171,8 @@ class Sitegroup_Api_LayoutCore extends Core_Api_Abstract {
       $this->setDefaultInfoWithoutTab('sitegroupvideo.profile-sitegroupvideos', $group_id, 'Videos', 'true', '111');
     }
 
-    //INSERTING EVENT WIDGET 
     if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitevideo')) {
-     $this->setDefaultInfoWithoutTab('sitevideo.contenttype-videos', $group_id, 'Videos', 'true', '117');
+     $this->setDefaultInfoWithoutTab('sitevideo.contenttype-videos', $group_id, 'Videos', 'true', '111');
     }    
     
     //INSERTING NOTE WIDGET 
@@ -195,6 +194,10 @@ class Sitegroup_Api_LayoutCore extends Core_Api_Abstract {
     if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitegroupdocument')) {
       $this->setDefaultInfoWithoutTab('sitegroupdocument.profile-sitegroupdocuments', $group_id, 'Documents', 'true', '115');
     }
+    
+    if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('document')) {
+     $this->setDefaultInfoWithoutTab('document.contenttype-documents', $group_id, 'Documents', 'true', '115');
+    }    
 
     //INSERTING OFFER WIDGET 
     if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitegroupoffer')) {
@@ -276,6 +279,10 @@ class Sitegroup_Api_LayoutCore extends Core_Api_Abstract {
       $this->setContentDefaultInfo('sitegroupdocument.profile-sitegroupdocuments', $group_id, 'Documents', 'true', '115');
     }
 
+    if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('document')) {
+     $this->setContentDefaultInfo('document.contenttype-documents', $group_id, 'Documents', 'true', '115');
+    } 
+    
     if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitegroupoffer')) {
       $this->setContentDefaultInfo('sitegroupoffer.profile-sitegroupoffers', $group_id, 'Offers', 'true', '116');
     }

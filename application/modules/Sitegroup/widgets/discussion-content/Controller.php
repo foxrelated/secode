@@ -71,7 +71,12 @@ class Sitegroup_Widget_DiscussionContentController extends Seaocore_Content_Widg
     //MAKE PAGINATOR
     $this->view->paginator = $paginator = Engine_Api::_()->getDbtable('posts', 'sitegroup')->getPost($sitegroup->getIdentity(), $topic->getIdentity(), $order);
     $paginator->setItemCountPerPage(10);
-    $paginator->setCurrentPageNumber(Zend_Controller_Front::getInstance()->getRequest()->getParam('page'));    
+    $page = Zend_Controller_Front::getInstance()->getRequest()->getParam('page');
+    $paginator->setCurrentPageNumber($page);    
+    
+    // set up variables for pages
+    $this->view->page_param = $page;
+    $this->view->total_page = ceil(($paginator->getTotalItemCount() + 1) / 10);
 //     //SKIP TO GROUP OF SPECIFIED POST
 //     if (0 !== ($post_id = (int) $this->_getParam('post_id')) &&
 //             null !== ($post = Engine_Api::_()->getItem('sitegroup_post', $post_id))) {
@@ -87,6 +92,7 @@ class Sitegroup_Widget_DiscussionContentController extends Seaocore_Content_Widg
 
     if ($canPost && !$topic->closed) {
       $this->view->form = $form = new Sitegroup_Form_Post_Create();
+      $form->setAction($topic->getHref(array('action' => 'post', 'page' => $this->view->total_page)));
       $form->populate(array(
           'topic_id' => $topic->getIdentity(),
           'ref' => $topic->getHref(),

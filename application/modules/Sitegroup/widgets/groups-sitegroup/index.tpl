@@ -194,7 +194,7 @@ $currency = Engine_Api::_()->getApi('settings', 'core')->getSetting('payment.cur
 				<li <?php if(Engine_Api::_()->getApi('settings', 'core')->getSetting('sitegroup.fs.markers', 1)):?><?php if($sitegroup->featured):?> class="lists_highlight"<?php endif;?><?php endif;?>>
            <?php if(Engine_Api::_()->getApi('settings', 'core')->getSetting('sitegroup.fs.markers', 1)):?>
              <?php if($sitegroup->featured):?>
-							 <i title="<?php echo $this->translate('Featured')?>" class="seaocore_list_featured_label"></i>
+							 <span title="<?php echo $this->translate('Featured')?>" class="seaocore_list_featured_label"><?php echo $this->translate('Featured') ?></span>
             <?php endif;?>
           <?php endif;?>
 					<div class='seaocore_browse_list_photo'>
@@ -254,7 +254,7 @@ $currency = Engine_Api::_()->getApi('settings', 'core')->getSetting('payment.cur
 						<div class='seaocore_browse_list_info_date'>
                 <?php echo $this->timestamp(strtotime($sitegroup->creation_date)) ?>
                 <?php if($postedBy):?>
-                 - <?php echo $this->translate('posted by'); ?>
+                 - <?php echo $this->translate('created by'); ?>
                  <?php echo $this->htmlLink($sitegroup->getOwner()->getHref(), $sitegroup->getOwner()->getTitle()) ?><?php if (!empty($this->statistics)) : ?>,<?php endif; ?>
                 <?php endif;?>
                 
@@ -453,7 +453,7 @@ $currency = Engine_Api::_()->getApi('settings', 'core')->getSetting('payment.cur
 							</div>
 					<?php endif; ?>
           <?php if (!empty($this->showfeaturedLable) && $sitegroup->featured == 1): ?>
-          	<span class="seaocore_list_featured_label" title="<?php echo $this->translate('Featured')?>"></span>
+          	<span class="seaocore_list_featured_label" title="<?php echo $this->translate('Featured')?>"><?php echo $this->translate('Featured') ?></span>
           <?php endif; ?>
 					
 					<?php if (!empty($this->showlikebutton)):?>
@@ -537,7 +537,7 @@ $currency = Engine_Api::_()->getApi('settings', 'core')->getSetting('payment.cur
 
 					<div class='sitegroup_browse_thumb_stats seaocore_txt_light'>
 						<?php if(!empty($this->showpostedBy) && $postedBy):?>
-						<?php echo $this->translate('posted by'); ?>
+						<?php echo $this->translate('created by'); ?>
 						<?php echo $this->htmlLink($sitegroup->getOwner()->getHref(), $sitegroup->getOwner()->getTitle()) ?>
 						<?php endif; ?>
 					</div>
@@ -811,7 +811,7 @@ $this->headScript()->appendFile("https://maps.googleapis.com/maps/api/js?librari
      <?php if(!empty($this->locations)) :?>
      <?php   foreach ($this->locations as $location) : ?>
        <?php if($postedBy):?>
-        <?php $textPostedBy = $this->string()->escapeJavascript($this->translate('posted by')); ?>
+        <?php $textPostedBy = $this->string()->escapeJavascript($this->translate('created by')); ?>
         <?php $textPostedBy.= " " . $this->htmlLink($this->sitegroup[$location->group_id]->getOwner()->getHref(), $this->string()->escapeJavascript($this->sitegroup[$location->group_id]->getOwner()->getTitle())) ?>
        <?php endif; ?>
          // obtain the attribues of each marker

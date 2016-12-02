@@ -23,12 +23,12 @@ class Sitegroup_Installer extends Engine_Package_Installer_Module {
 
         $PRODUCT_TYPE = 'sitegroup';
         $PLUGIN_TITLE = 'Sitegroup';
-        $PLUGIN_VERSION = '4.8.9p4';
+        $PLUGIN_VERSION = '4.8.12p3';
         $PLUGIN_CATEGORY = 'plugin';
         $PRODUCT_DESCRIPTION = 'Sitegroup Plugin';
         $PRODUCT_TITLE = 'Groups / Communities Plugin';
         $_PRODUCT_FINAL_FILE = 0;
-        $SocialEngineAddOns_version = '4.8.9p12';
+        $SocialEngineAddOns_version = '4.8.11';
         $file_path = APPLICATION_PATH . "/application/modules/$PLUGIN_TITLE/controllers/license/ilicense.php";
         $is_file = file_exists($file_path);
         if (empty($is_file)) {
@@ -1620,6 +1620,19 @@ class Sitegroup_Installer extends Engine_Package_Installer_Module {
                 $db->query("ALTER TABLE `engine4_sitegroup_importfiles` ADD `photo_filename` VARCHAR( 255 ) NOT NULL AFTER `filename`");
             }
         }
+        
+        $select = new Zend_Db_Select($db);
+        $select
+                ->from('engine4_core_modules')
+                ->where('name = ?', 'documentintegration')
+                ->where('enabled = ?', 1);
+        $is_documentintegration_object = $select->query()->fetchObject();
+        if ($is_documentintegration_object) {
+            $db->query("INSERT IGNORE INTO `engine4_document_modules` (`item_type`, `item_id`, `item_module`, `enabled`, `integrated`, `item_title`) VALUES ('sitegroup_group', 'group_id', 'sitegroup', '0', '0', 'Group Documents')");
+            $db->query('INSERT IGNORE INTO `engine4_core_menuitems` ( `name`, `module`, `label`, `plugin`, `params`, `menu`, `submenu`, `enabled`, `custom`, `order`) VALUES("sitegroup_admin_main_managedocument", "documentintegration", "Manage Documents", "", \'{"uri":"admin/document/manage-document/index/contentType/sitegroup_group/contentModule/sitegroup"}\', "sitegroup_admin_main", "", 0, 0, 25);');
+            $db->query('INSERT IGNORE INTO `engine4_core_settings` ( `name`, `value`) VALUES( "document.leader.owner.sitegroup.group", "1");');
+        }
+
         $select = new Zend_Db_Select($db);
         $select
                 ->from('engine4_core_modules')

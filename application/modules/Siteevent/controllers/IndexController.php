@@ -595,6 +595,10 @@ class Siteevent_IndexController extends Seaocore_Controller_Action_Standard {
         }
 
         //WHO CAN VIEW THE EVENTS
+        
+        if(!$siteevent->authorization()->isAllowed($viewer, "view"))
+          return $this->_forwardCustom('requireauth', 'error', 'core');
+        
         $isParentViewPrivacy = Engine_Api::_()->siteevent()->isParentViewPrivacy($siteevent);
 
         if (empty($isParentViewPrivacy))
@@ -1381,7 +1385,7 @@ EOF;
                 $auth->setAllowed($siteevent, $leaderList, 'edit', 1);
                 $auth->setAllowed($siteevent, $leaderList, 'delete', 1);
 
-                if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('siteeventdocument')) {
+                if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('siteeventdocument') || (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('document') &&Engine_Api::_()->getDbtable('modules', 'document')->getIntegratedModules(array('enabled' => 1, 'item_type' => "siteevent_event", 'item_module' => 'siteevent')))) {
 
                     if (empty($values['auth_document'])) {
                         $values['auth_document'] = "member";
@@ -1896,7 +1900,7 @@ EOF;
             }
 
 
-            if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('siteeventdocument')) {
+            if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('siteeventdocument') || (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('document') &&Engine_Api::_()->getDbtable('modules', 'document')->getIntegratedModules(array('enabled' => 1, 'item_type' => "siteevent_event", 'item_module' => 'siteevent')))) {
                 foreach ($roles_photo as $roleString) {
                     $role = $roleString;
                     if ($role === 'leader') {
@@ -2398,7 +2402,7 @@ EOF;
             $auth->setAllowed($siteevent, $leaderList, 'edit', 1);
             $auth->setAllowed($siteevent, $leaderList, 'delete', 1);
 
-            if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('siteeventdocument')) {
+            if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('siteeventdocument') || (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('document') && Engine_Api::_()->getDbtable('modules', 'document')->getIntegratedModules(array('enabled' => 1, 'item_type' => "siteevent_event", 'item_module' => 'siteevent')))) {
                 if (empty($values['auth_document'])) {
                     $values['auth_document'] = "member";
                 }

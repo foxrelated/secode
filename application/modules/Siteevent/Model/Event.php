@@ -1023,6 +1023,23 @@ class Siteevent_Model_Event extends Core_Model_Item_Abstract {
                     Engine_Api::_()->getItem('siteeventdocument_document', $document->document_id)->delete();
                 }
             }
+            
+        $documentEnabled = Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('document');
+        if ($documentEnabled) {
+            $table = Engine_Api::_()->getItemTable('document');
+            $select = $table->select()
+                    ->from($table->info('name'), 'document_id')
+                    ->where('parent_type = ?', 'siteevent_event')
+                    ->where('parent_id = ?', $event_id);
+            $rows = $table->fetchAll($select)->toArray();
+            if (!empty($rows)) {
+                foreach ($rows as $key => $document_ids) {
+                    $resource = Engine_Api::_()->getItem('document', $document_ids['document_id']);
+                    if ($resource)
+                        $resource->delete();
+                }
+            }
+        }
 
             //FETCH EVENT IDS
             $reviewTable = Engine_Api::_()->getDbtable('reviews', 'siteevent');

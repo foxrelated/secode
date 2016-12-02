@@ -304,7 +304,7 @@ class Advancedslideshow_AdminImageController extends Core_Controller_Action_Admi
 </div>';
 
     else if ($slideArg == '3')
-      return'<div style="position: relative; overflow: hidden; background-color: rgb(255, 255, 255); height: 360px; width: 1088px;">
+      return'<div class="commerce-images" style="position: relative; overflow: hidden; background-color: rgb(255, 255, 255); height: 360px; width: 1088px;">
 <div style="width: 272px; top: 0px; left: 0px; overflow: hidden; float: left; position: absolute; height: 360px;"><a href="#"><img alt="" src="https://lh3.googleusercontent.com/-uGWhaaZkceM/Upc5-bNASPI/AAAAAAAAAl8/G9t_RIzTAWQ/w272-h400-no/product1.png" title="" height="200px" width="300px"></a></div>
 <div style="width: 272px; top: 0px; left: 272px; overflow: hidden; float: left; position: absolute; height: 360px;"><a href="#"><img alt="" src="https://lh5.googleusercontent.com/-MVoB-awp1qY/Upc5-_SASMI/AAAAAAAAAmA/NB3BJSq0m5M/w272-h400-no/product2.png" title="" height="200px" width="300px"></a></div>
 <div style="width: 272px; top: 0px; left: 544px; overflow: hidden; float: left; position: absolute; height: 360px;"><a href="#"><img alt="" src="https://lh4.googleusercontent.com/-fx9pyweoev4/Upc5_-qH-VI/AAAAAAAAAmI/iEN3sBFNErc/w272-h400-no/product3.png" title="" height="200px" width="300px"></a></div>

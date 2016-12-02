@@ -116,6 +116,17 @@ if (empty($formatType)):
         $themes = array('default');
       }
 
+      if (APPLICATION_ENV != 'development') {
+        $this->headLinkSM()->prependStylesheet($staticBaseUrl . 'application/modules/Sitemobile/externals/styles/common.css');
+        if ($this->settings('sitemobile.rtl', 0)) {
+            $this->headLinkSM()->prependStylesheet($staticBaseUrl . 'application/modules/Sitemobile/externals/styles/rtl.css');
+        }
+    } else {
+        $this->headLinkSM()->prependStylesheet(rtrim($this->baseUrl(), '/') . '/application/modules/Sitemobile/externals/styles/common.css');
+        if ($this->settings('sitemobile.rtl', 0)) {
+            $this->headLinkSM()->prependStylesheet(rtrim($this->baseUrl(), '/') . '/application/modules/Sitemobile/externals/styles/rtl.css');
+        }
+        }
       foreach ($themes as $theme) {
         if (APPLICATION_ENV != 'development') {
           $this->headLinkSM()->prependStylesheet($staticBaseUrl . 'application/themes/sitemobile_tablet/' . $theme . '/structure.css');
@@ -160,7 +171,7 @@ if (empty($formatType)):
       <?php $this->headTranslate($mobileApi->translateData()); ?>
       <?php // SCRIPTS   ?>
       <?php //CHECK IF SITETAGCHECKIN PLUGIN ENABLED.. ?>
-      <?php if (1): ?>
+      <?php if (Engine_Api::_()->getDbtable('modules', 'sitemobile')->isModuleEnabled('nestedcomment')|| Engine_Api::_()->getDbtable('modules', 'sitemobile')->isModuleEnabled('sitetagcheckin')): ?>
         <?php
         //GET API KEY
         $apiKey = Engine_Api::_()->seaocore()->getGoogleMapApiKey();
@@ -169,11 +180,9 @@ if (empty($formatType)):
       <?php endif; ?>
       <?php if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitetagcheckin') || Engine_Api::_()->getDbtable('modules', 'sitemobile')->isModuleEnabled('siteevent')): ?>
         <?php
-        $this->headScriptSM()
-                ->prependFile("https://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js")
-                ->prependFile("https://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobubble/src/infobubble-compiled.js")
-               ;
-        ?> 
+        $this->headScriptSM()->appendFile($this->layout()->staticBaseUrl . "application/modules/Seaocore/externals/scripts/infobubble.js");
+        $this->headScriptSM()->appendFile($this->layout()->staticBaseUrl . "application/modules/Seaocore/externals/scripts/markerclusterer.js");
+        ?>
       <?php endif; ?>
       
           <?php
@@ -236,7 +245,7 @@ if (empty($formatType)):
               ->prependFile($staticBaseUrl . 'application/modules/Sitemobile/externals/scripts/jquery-ui/jquery.ui.js')
               ->prependFile($staticBaseUrl . 'application/modules/Sitemobile/externals/scripts/player/jquery.jplayer.js');
        ?>
-            <?php if (Engine_Api::_()->getDbtable('modules', 'sitemobile')->isModuleEnabled('nestedcomment')): ?>
+            <?php if (1): ?>
             <?php
                     $this->headScriptSM()->prependFile($staticBaseUrl . 'application/modules/Sitemobile/externals/scripts/photoswipe/code.photoswipe-nestedcomment-3.0.5.js');?>
             <?php else:?>
@@ -335,7 +344,7 @@ if (empty($formatType)):
 <?php else: ?>
   <?php
   $content = $this->layout()->content;
-  $this->responseHTML = ($content) ? $this->partial(
+  $responseHTML = ($content) ? $this->partial(
                   '_pageContent.tpl', 'sitemobile', array_merge($this->getVars(), array(
               'noDomCache' => $this->noDomCache ? true : false,
               'contentType' => $request->getParam('contentType', 'page'),
@@ -353,6 +362,6 @@ if (empty($formatType)):
   $this->requestInfo = array('module' => $request->getModuleName(), 'controller' => $request->getControllerName(), 'action' => $request->getActionName(), 'id' => $identity, 'title' => $title, 'contentType' => $request->getParam('contentType', 'page'));
   $this->responseLanguageData = $this->headTranslate()->render();
   ?>
-  <?php echo $this->jsonInline($this->getVars()) ?>
+  <?php echo $this->jsonInline($this->getVars()) . 'RESPONSE_HTML_SM' . $responseHTML ?>
 
 <?php endif; ?>

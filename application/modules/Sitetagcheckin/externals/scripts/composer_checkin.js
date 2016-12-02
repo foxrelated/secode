@@ -144,15 +144,15 @@
         } catch (e) {}
      
 
-        var data = {
-          'accuracy': 0,
-          'latitude': 0,
-          'longitude': 0,
-          'label': '',
-          'vicinity': ''
-        };
-
-        self.location = data
+//        var data = {
+//          'accuracy': 0,
+//          'latitude': 0,
+//          'longitude': 0,
+//          'label': '',
+//          'vicinity': ''
+//        };
+//
+//        self.location = data;
       }, locationTimeLimit);
 
       try {
@@ -374,8 +374,7 @@
             }         
           },
           'onChoiceSelect' : function(choice) {           
-            var data = choice.retrieve('autocompleteChoice');          
-                  
+            var data = choice.retrieve('autocompleteChoice');  
             if (data.type  ==  'place') {
               var map = new google.maps.Map(new Element('div'), {
                 mapTypeId: google.maps.MapTypeId.ROADMAP, 
@@ -394,7 +393,7 @@
                   data.vicinity = (place.vicinity) ? place.vicinity : place.formatted_address;
                   data.icon = place.icon;
                   data.types = place.types.join(',');
-                  data.prefixadd = data.types.indexOf('establishment') > -1 ? self._lang('at'):self._lang('in');
+                  data.prefixadd = data.types.indexOf('establishment') > -1 ? en4.core.language.translate('at'):en4.core.language.translate('in');
                   choice.store('autocompleteChoice', data);
                 // self.toggleLoader(false);
                    self.location = data;
@@ -446,7 +445,7 @@
     },
     getLocationHTML : function(){     
       var location =this.location;
-      var content  = en4.core.language.translate(this.location.prefixadd)+' '+'<a href = "javascript:void(0)">'+((location.type == 'place' && location.vicinity)? ((location.name && location.name != location.vicinity) ? location.name +', '+ location.vicinity : location.vicinity) : location.label)+'</a>';
+      var content  = en4.core.language.translate(this.location.prefixadd)+' '+'<a href = "javascript:void(0)">'+((location.type == 'place' && location.vicinity)? ((location.name && location.name != location.vicinity) ?  location.vicinity : location.vicinity) : location.label)+'</a>';
       return content;
     },
     setLocation : function(location){
@@ -467,7 +466,7 @@
       var self = this;
       this.elements.locationspan = new Element('span', {        
         'class' : 'tag',
-        'html': (location.type == 'place' && location.vicinity)?  ((location.name && location.name != location.vicinity) ? location.name +', '+ location.vicinity : location.vicinity) : location.label
+        'html': (location.type == 'place' && location.vicinity)?  ((location.name && location.name != location.vicinity) ?  location.vicinity : location.vicinity) : location.label
       });
         
       this.elements.link = new Element('a', {
@@ -523,7 +522,7 @@
     },
     submit : function(){
       var checkinStr = '';
-      if (this.add_location && this.isValidLocation()) {
+      if (this.add_location) {
         var checkinHash = new Hash(this.location);
         checkinStr =  checkinHash.toQueryString();
         if(this.options.allowEmpty)
@@ -563,7 +562,7 @@
             checkin.longitude = place.geometry.location.lng();
             checkin.icon = place.icon;
             checkin.types = place.types.join(',');
-            checkin.prefixadd = checkin.types.indexOf('establishment') > -1 ? self._lang('at'):self._lang('in');
+            checkin.prefixadd = checkin.types.indexOf('establishment') > -1 ? en4.core.language.translate('at'):en4.core.language.translate('in');
             choice.store('autocompleteChoice', checkin);
             self.setMarker(checkin, choice);
           }

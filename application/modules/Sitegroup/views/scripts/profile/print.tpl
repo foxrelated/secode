@@ -48,7 +48,7 @@ $this->headLink()
 				<ul>
           <?php if(Engine_Api::_()->getApi('settings', 'core')->getSetting('sitegroup.postedby', 1)):?>
             <li>
-              <span><?php echo $this->translate('Posted By:'); ?> </span>
+              <span><?php echo $this->translate('Created By:'); ?> </span>
               <span><?php echo $this->translate($this->sitegroup->getParent()->getTitle()) ?></span>
             </li>
           <?php endif;?>

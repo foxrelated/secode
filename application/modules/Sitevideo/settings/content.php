@@ -3010,7 +3010,7 @@ return array(
                     'Radio',
                     'showIcon',
                     array(
-                        'label' => 'Do you want to show categories icons ?',
+                        'label' => 'Do you want to show categories icon ?',
                         'multiOptions' => array(
                             1 => 'Yes',
                             0 => 'No'

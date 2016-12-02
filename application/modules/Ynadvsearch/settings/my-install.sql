@@ -1,1 +1,0 @@
-INSERT IGNORE INTO `engine4_core_modules` (`name`, `title`, `description`, `version`, `enabled`, `type`) VALUES  ('ynadvsearch', 'Adv. Search', 'Younet Advanced Search', '4.03', 1, 'extra') ;

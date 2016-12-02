@@ -2458,3 +2458,15 @@ if ($is_sitevideointegration_object) {
         $db->query("UPDATE `engine4_core_menuitems` SET `enabled` = '0' WHERE `engine4_core_menuitems`.`name` = 'siteevent_admin_submain_general_tab'");
     }
 }
+
+$select = new Zend_Db_Select($db);
+$select
+        ->from('engine4_core_modules')
+        ->where('name = ?', 'documentintegration')
+        ->where('enabled = ?', 1);
+$is_documentintegration_object = $select->query()->fetchObject();
+if ($is_documentintegration_object) {
+    $db->query("INSERT IGNORE INTO `engine4_document_modules` (`item_type`, `item_id`, `item_module`, `enabled`, `integrated`, `item_title`) VALUES ('siteevent_event', 'event_id', 'siteevent', '0', '0', 'Event Documents')");
+    $db->query('INSERT IGNORE INTO `engine4_core_menuitems` ( `name`, `module`, `label`, `plugin`, `params`, `menu`, `submenu`, `enabled`, `custom`, `order`) VALUES("siteevent_admin_main_managedocument", "documentintegration", "Manage Documents", "", \'{"uri":"admin/document/manage-document/index/contentType/siteevent_event/contentModule/siteevent"}\', "siteevent_admin_main", "", 0, 0, 25);');
+    $db->query('INSERT IGNORE INTO `engine4_core_settings` ( `name`, `value`) VALUES( "document.leader.owner.siteevent.event", "1");');
+}

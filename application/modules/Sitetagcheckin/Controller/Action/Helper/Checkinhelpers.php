@@ -60,35 +60,35 @@ class Sitetagcheckin_Controller_Action_Helper_Checkinhelpers extends Zend_Contro
 //     $groupSettings = Engine_Api::_()->getApi('settings', 'core')->getSetting('sitetagcheckin.groupsettings');
 //     if (1) {
     //ADD DOCUMENT PRIVACY FIELDS AT GROUP CREATION AND EDITION
-    if (($module == 'video' || $module == 'advvideo') && ($action == 'create' || $action == 'edit') && ($controller == 'index' || $controller == 'video')) {
-
-      $new_element = $view->form;
-      if (!$new_element)
-        return;
-
-      //COUNT TOTAL ELEMENTS IN GROUP FORM
-      $total_elements = Count($new_element->getElements());
-
-      // LOCATION
-      $new_element->addElement('Text', 'location', array(
-          'label' => 'Location',
-          'description' => 'Eg: Fairview Park, Berkeley, CA',
-          'order' => $total_elements - 7,
-          'filters' => array(
-              'StripTags',
-              new Engine_Filter_Censor(),
-          )
-      ));
-      $new_element->location->getDecorator('Description')->setOption('placement', 'append');
-
-      if ($action == 'edit') {
-        $video_id = $front->getRequest()->getParam('video_id');
-        $video = Engine_Api::_()->getItem('video', $video_id);
-        if (!empty($video['location'])) {
-          $new_element->location->setValue($video['location']);
-        }
-      }
-    }
+//    if (($module == 'video' || $module == 'advvideo') && ($action == 'create' || $action == 'edit') && ($controller == 'index' || $controller == 'video')) {
+//
+//      $new_element = $view->form;
+//      if (!$new_element)
+//        return;
+//
+//      //COUNT TOTAL ELEMENTS IN GROUP FORM
+//      $total_elements = Count($new_element->getElements());
+//
+//      // LOCATION
+//      $new_element->addElement('Text', 'location', array(
+//          'label' => 'Location',
+//          'description' => 'Eg: Fairview Park, Berkeley, CA',
+//          'order' => $total_elements - 7,
+//          'filters' => array(
+//              'StripTags',
+//              new Engine_Filter_Censor(),
+//          )
+//      ));
+//      $new_element->location->getDecorator('Description')->setOption('placement', 'append');
+//
+//      if ($action == 'edit') {
+//        $video_id = $front->getRequest()->getParam('video_id');
+//        $video = Engine_Api::_()->getItem('video', $video_id);
+//        if (!empty($video['location'])) {
+//          $new_element->location->setValue($video['location']);
+//        }
+//      }
+//    }
     //}
     
 //     $groupSettings = Engine_Api::_()->getApi('settings', 'core')->getSetting('sitetagcheckin.groupsettings');

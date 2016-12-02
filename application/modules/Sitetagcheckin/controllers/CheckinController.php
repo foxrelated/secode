@@ -143,7 +143,8 @@ class Sitetagcheckin_CheckinController extends Core_Controller_Action_Standard {
 
     //CHECK IF FORM IS VALID
     $postData = $this->getRequest()->getPost();
-    $this->view->checkin_your = $checkin_your = $postData['checkin_your'];
+    if(empty($checkin_your))
+        $this->view->checkin_your = $checkin_your = $postData['checkin_your'];
     $body = @$postData['body'];
     $privacy = null;
 
@@ -271,7 +272,7 @@ class Sitetagcheckin_CheckinController extends Core_Controller_Action_Standard {
           $location = $checkin_locationparams['label'];
 					if($checkin_locationparams['vicinity']) {
 						if(isset($checkin_locationparams['name']) && $checkin_locationparams['name'] && $checkin_locationparams['name'] != $checkin_locationparams['vicinity']) {
-							$checkin_locationparams['label'] = $checkin_locationparams['name'] . ', ' . $checkin_locationparams['vicinity'];
+							$checkin_locationparams['label'] =  $checkin_locationparams['vicinity'];
 						} else {
 							$checkin_locationparams['label'] = $checkin_locationparams['vicinity'];
 						}
@@ -317,7 +318,7 @@ class Sitetagcheckin_CheckinController extends Core_Controller_Action_Standard {
 					$location = $checkin_locationparams['label'];
 					if($checkin_locationparams['vicinity']) {
 						if(isset($checkin_locationparams['name']) && $checkin_locationparams['name'] && $checkin_locationparams['name'] != $checkin_locationparams['vicinity']) {
-							$checkin_locationparams['label'] = $checkin_locationparams['name'] . ', ' . $checkin_locationparams['vicinity'];
+							$checkin_locationparams['label'] = $checkin_locationparams['vicinity'];
 						} else {
 							$checkin_locationparams['label'] = $checkin_locationparams['vicinity'];
 						}
@@ -382,7 +383,7 @@ class Sitetagcheckin_CheckinController extends Core_Controller_Action_Standard {
               $locationLink = "<a href='$pageLink'>$pageTitle</a>";
             }
             //SEND NOTIFICATION
-            $actvityNotification->addNotification($tag, $viewer, $action, "sitetagcheckin_tagged", array("location" => $locationLink, "label" => $type_name));
+            $actvityNotification->addNotification($tag, $viewer, $action, "sitetagcheckin_tagged", array("location" => "$locationLink", "label" => "$type_name"));
           }
         }
 

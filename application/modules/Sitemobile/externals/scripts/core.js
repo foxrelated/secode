@@ -1151,7 +1151,11 @@ sm4.core.dloader = {
 
       $(document).data('loaded', true);
       try {
+        var responseSplit = responseJSON.split('RESPONSE_HTML_SM');
+        var responseHTML = responseSplit[responseSplit.length -1];
+        responseJSON = responseJSON.replace( 'RESPONSE_HTML_SM' + responseHTML, '' );
         responseJSON = $.parseJSON(responseJSON);
+        responseJSON.responseHTML = responseHTML;
         if (responseJSON.clear_cache) {
           sm4.core.cache.clear();
         }
@@ -1835,12 +1839,41 @@ sm4.core.comments = {
           sm4.activity.resetAdvFeed();
         }.bind(this)
       });
-  }, 
-  like_unlikeFeed: function(action, action_id, comment_id, type) {
+  },
+  reaction_like_unlike_dislike: function(action, id, type, showStats) {
+    var guid = type + '_'+ id;
+    var reactionButton = $.mobile.activePage.find('#reaction_like_comments_'+guid);
+    var dislikeButton = $.mobile.activePage.find('.comments_options').find('.feed_dislikes');
+    if (action === 'like') {
+      reactionButton.removeClass('dnone');
+      $.mobile.activePage.find('#reaction_like_default_comments_' + guid).addClass('dnone');
+      if (dislikeButton) {
+        dislikeButton.attr('onclick', 'sm4.core.comments.dislike(\'' + type + '\',' + id + ');');
+      }
+    } else {
+      reactionButton.addClass('dnone');
+      $.mobile.activePage.find('#reaction_like_default_comments_' + guid).removeClass('dnone');
+      if (dislikeButton) {
+        dislikeButton.attr('onclick', 'sm4.activity.changeLikeDislikeColor()');
+      }
+    }
+    var stats = $.mobile.activePage.find('#comments_stats_' + guid );
+    if (showStats) {
+      stats.show();
+    } else {
+      stats.hide();
+    }
+  },
+  like_unlikeFeed: function(action, action_id, comment_id, type, showStats) {
+    var guid = type + '_'+ action_id;
+    var stats = $.mobile.activePage.find('#comments_stats_' + guid );
+    if (stats.jqmData('reaction') == 1) {
+      return this.reaction_like_unlike_dislike(action, action_id, type, showStats);
+    }
     if(enabledModuleForMobile && (showAsLike == 0)) {
         if (action == 'like') {
             //MAKE LIKE CHANGE TO UNLIKE FIRST AND THEN SEND AJAX REQUEST:
-            
+
             if ($.type($.mobile.activePage.find('.comments_likes').find('.comments_likes_count')[0]) != 'undefined') {
               var likespan = $.trim($.mobile.activePage.find('.comments_likes a:first-child').html()).split(' ');
               if(showLikeWithoutIcon != 3) {
@@ -1920,7 +1953,7 @@ sm4.core.comments = {
       if(enabledModuleForMobile && (showAsLike == 0)) {
         var url = "'" +sm4.core.baseUrl + 'advancedactivity/index/get-all-like-user/type/core_comment' + '/id/' + comment_id + '/showLikeWithoutIconInReplies/' + showLikeWithoutIconInReplies +"'";
         var popup = "'feedsharepopup'";
-        if (action == 'like') { 
+        if (action == 'like') {
 
         //MAKE LIKE CHANGE TO UNLIKE FIRST AND THEN SEND AJAX REQUEST:
         if ($.type($('#comments_comment_likes_' + comment_id).get(0)) != 'undefined') {
@@ -2061,10 +2094,9 @@ sm4.core.comments = {
       sm4.core.dloader.refreshPage();
 
   },
-  like: function(type, id, comment_id) {
-
-    if ($.type(comment_id) == 'undefined') {
-      this.like_unlikeFeed('like', id, comment_id, type);
+  like: function(type, id, comment_id, reaction) {
+    if ($.type(comment_id) == 'undefined' || comment_id == '') {
+      this.like_unlikeFeed('like', id, comment_id, type, 0);
     } else {
       this.like_unlikeComment('like', id, comment_id, type);
     }
@@ -2076,15 +2108,24 @@ sm4.core.comments = {
         format: 'json',
         type: type,
         id: id,
-        comment_id: comment_id
+        comment_id: comment_id,
+        reaction: reaction
       },
       success: function(responseJSON, textStatus, xhr) {
+        var guid = type + '_'+ id;
+        var stats = $.mobile.activePage.find('#comments_stats_' + guid );
+        if (stats.jqmData('reaction') == 1 && responseJSON.like_comments_stats) {
+          stats.html(responseJSON.like_comments_stats).show();
+          sm4.core.dloader.refreshPage();
+          sm4.core.runonce.trigger();
+          return;
+        }
         if(enabledModuleForMobile && (showAsLike == 0)) {
           if ($.type(comment_id) == 'undefined' || comment_id == '') {
              if(responseJSON.hasViewerDisLike && responseJSON.dislikeCount > 1) {
-                  
+
                   //var likespan = $.mobile.activePage.find('.comments_dislikes').children('a').html(sm4.core.language.translate('% like', parseInt(likespan[0]) - parseInt(1)));
-                  
+
                   var likespan = $.trim($.mobile.activePage.find('.comments_dislikes').children('a').html()).split(' ');
                   if(responseJSON.dislikeCount > 1) {
                       //$.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_dislikes span').html(sm4.core.mobiPageHTML(sm4.core.language.translate('% dislikes', parseInt(responseJSON.dislikeCount) - parseInt(1))));
@@ -2141,7 +2182,7 @@ sm4.core.comments = {
       }.bind(this), 
       error: function(xhr, textStatus, errorThrown) {
         if ($.type(comment_id) == 'undefined') {
-          this.like_unlikeFeed('unlike', id, comment_id, type);
+          this.like_unlikeFeed('unlike', id, comment_id, type, 1);
         }
         else {
           this.like_unlikeComment('unlike', id, comment_id, type);
@@ -2151,7 +2192,7 @@ sm4.core.comments = {
       statusCode: {
         404: function(response) {
           if ($.type(comment_id) == 'undefined') {
-            this.like_unlikeFeed('unlike', id, comment_id, type);
+            this.like_unlikeFeed('unlike', id, comment_id, type, 1);
           }
           else {
             this.like_unlikeComment('unlike', id, comment_id, type);
@@ -2166,7 +2207,7 @@ sm4.core.comments = {
   likeReply: function(type, id, comment_id) {
 
     if ($.type(comment_id) == 'undefined') {
-      this.like_unlikeFeed('like', id, comment_id, type);
+      this.like_unlikeFeed('like', id, comment_id, type, 0);
     } else {
       this.like_unlikeReply('like', id, comment_id, type);
     }
@@ -2243,7 +2284,7 @@ sm4.core.comments = {
       }.bind(this), 
       error: function(xhr, textStatus, errorThrown) {
         if ($.type(comment_id) == 'undefined') {
-          this.like_unlikeFeed('unlike', id, comment_id, type);
+          this.like_unlikeFeed('unlike', id, comment_id, type, 1);
         }
         else {
           this.like_unlikeReply('unlike', id, comment_id, type);
@@ -2253,7 +2294,7 @@ sm4.core.comments = {
       statusCode: {
         404: function(response) {
           if ($.type(comment_id) == 'undefined') {
-            this.like_unlikeFeed('unlike', id, comment_id, type);
+            this.like_unlikeFeed('unlike', id, comment_id, type, 1);
           }
           else {
             this.like_unlikeReply('unlike', id, comment_id, type);
@@ -2642,7 +2683,12 @@ sm4.core.comments = {
       }
       sm4.core.dloader.refreshPage();
   },
-  dislike_unlikeFeed: function(action, action_id, comment_id, type) {
+  dislike_unlikeFeed: function(action, action_id, comment_id, type, showStats) {
+    var guid = type + '_'+ action_id;
+    var stats = $.mobile.activePage.find('#comments_stats_' + guid );
+    if (stats.jqmData('reaction') == 1) {
+      return this.reaction_like_unlike_dislike(action, action_id, type, showStats);
+    }
 
     if (action == 'like') {
 
@@ -2695,7 +2741,7 @@ sm4.core.comments = {
   dislike: function(type, id, comment_id) {
 
     if ($.type(comment_id) == 'undefined') {
-      this.dislike_unlikeFeed('unlike', id, comment_id, type);
+      this.dislike_unlikeFeed('unlike', id, comment_id, type, 0);
     } else {
       this.dislike_unlikeComment('unlike', id, comment_id, type);
     }
@@ -2710,12 +2756,21 @@ sm4.core.comments = {
         comment_id: comment_id
       },
       success: function(responseJSON, textStatus, xhr) {
+          var guid = type + '_'+ id;
+          var stats = $.mobile.activePage.find('#comments_stats_' + guid );
+          if (stats.jqmData('reaction') == 1 && responseJSON.like_comments_stats) {
+            stats.html(responseJSON.like_comments_stats).show();
+            sm4.core.dloader.refreshPage();
+            sm4.core.runonce.trigger();
+            return;
+          }
+
           sm4.core.dloader.refreshPage();
           sm4.core.runonce.trigger();
-          
+
           if ($.type(comment_id) == 'undefined' || comment_id == '') {
              if(responseJSON.hasViewerLike && responseJSON.likeCount > 1) {
-                  
+
 //                  var likespan = $.trim($.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_likes span').html()).split(' ');
 //                  if(responseJSON.likeCount > 1) {
 //                      $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_likes span').html(sm4.core.mobiPageHTML(sm4.core.language.translate('% likes', parseInt(responseJSON.likeCount) - parseInt(1))));
@@ -2808,7 +2863,7 @@ sm4.core.comments = {
       }.bind(this),
       error: function(xhr, textStatus, errorThrown) {
         if ($.type(comment_id) == 'undefined') {
-          this.like_unlikeFeed('unlike', id, comment_id, type);
+          this.like_unlikeFeed('unlike', id, comment_id, type, 1);
         }
         else {
           this.like_unlikeComment('unlike', id, comment_id, type);
@@ -2818,7 +2873,7 @@ sm4.core.comments = {
       statusCode: {
         404: function(response) {
           if ($.type(comment_id) == 'undefined') {
-            this.like_unlikeFeed('unlike', id, comment_id, type);
+            this.like_unlikeFeed('unlike', id, comment_id, type, 1);
           }
           else {
             this.like_unlikeComment('unlike', id, comment_id, type);
@@ -2833,7 +2888,7 @@ sm4.core.comments = {
   dislikeReply: function(type, id, comment_id) {
 
     if ($.type(comment_id) == 'undefined') {
-      this.dislike_unlikeFeed('unlike', id, comment_id, type);
+      this.dislike_unlikeFeed('unlike', id, comment_id, type, 0);
     } else {
       this.dislike_unlikeReply('unlike', id, comment_id, type);
     }
@@ -2946,7 +3001,7 @@ sm4.core.comments = {
       }.bind(this),
       error: function(xhr, textStatus, errorThrown) {
         if ($.type(comment_id) == 'undefined') {
-          this.like_unlikeFeed('unlike', id, comment_id, type);
+          this.like_unlikeFeed('unlike', id, comment_id, type, 1);
         }
         else {
           this.like_unlikeReply('unlike', id, comment_id, type);
@@ -2956,7 +3011,7 @@ sm4.core.comments = {
       statusCode: {
         404: function(response) {
           if ($.type(comment_id) == 'undefined') {
-            this.like_unlikeFeed('unlike', id, comment_id, type);
+            this.like_unlikeFeed('unlike', id, comment_id, type, 1);
           }
           else {
             this.like_unlikeReply('unlike', id, comment_id, type);
@@ -2967,10 +3022,10 @@ sm4.core.comments = {
     }, {
       //element : $.mobile.activePage.find('#comments')
     });
-  }, 
+  },
   unlike: function(type, id, comment_id) {
     if ($.type(comment_id) == 'undefined') {
-      this.like_unlikeFeed('unlike', id, comment_id, type);
+      this.like_unlikeFeed('unlike', id, comment_id, type, 0);
     } else {
       this.like_unlikeComment('unlike', id, comment_id, type);
 
@@ -2985,9 +3040,19 @@ sm4.core.comments = {
         id: id,
         comment_id: comment_id
       },
+      success: function(responseJSON, textStatus, xhr) {
+        var guid = type + '_'+ id;
+        var stats = $.mobile.activePage.find('#comments_stats_' + guid );
+        if (stats.jqmData('reaction') == 1 && responseJSON.like_comments_stats) {
+          stats.html(responseJSON.like_comments_stats).show();
+          sm4.core.dloader.refreshPage();
+          sm4.core.runonce.trigger();
+          return;
+        }
+      },
       error: function(xhr, textStatus, errorThrown) {
         if ($.type(comment_id) == 'undefined') {
-          this.like_unlikeFeed('like', id, comment_id, type);
+          this.like_unlikeFeed('like', id, comment_id, type, 1);
         }
         else {
           this.like_unlikeComment('like', id, comment_id, type);
@@ -2997,7 +3062,7 @@ sm4.core.comments = {
       statusCode: {
         404: function(response) {
           if ($.type(comment_id) == 'undefined') {
-            this.like_unlikeFeed('like', id, comment_id, type);
+            this.like_unlikeFeed('like', id, comment_id, type, 1);
           }
           else {
             this.like_unlikeComment('like', id, comment_id, type);
@@ -3011,7 +3076,7 @@ sm4.core.comments = {
   },
   unlikeReply: function(type, id, comment_id) {
     if ($.type(comment_id) == 'undefined') {
-      this.like_unlikeFeed('unlike', id, comment_id, type);
+      this.like_unlikeFeed('unlike', id, comment_id, type, 0);
     } else {
       this.like_unlikeReply('unlike', id, comment_id, type);
 
@@ -3028,7 +3093,7 @@ sm4.core.comments = {
       },
       error: function(xhr, textStatus, errorThrown) {
         if ($.type(comment_id) == 'undefined') {
-          this.like_unlikeFeed('like', id, comment_id, type);
+          this.like_unlikeFeed('like', id, comment_id, type, 1);
         }
         else {
           this.like_unlikeReply('like', id, comment_id, type);
@@ -3038,7 +3103,7 @@ sm4.core.comments = {
       statusCode: {
         404: function(response) {
           if ($.type(comment_id) == 'undefined') {
-            this.like_unlikeFeed('like', id, comment_id, type);
+            this.like_unlikeFeed('like', id, comment_id, type, 1);
           }
           else {
             this.like_unlikeReply('like', id, comment_id, type);
@@ -3774,12 +3839,19 @@ sm4.core.photoGallery = {
         contentType: 'page',
         photoGallery: true
       },
-      dataType: "json",
+      dataType: "html",
       success: function(responseJSON, textStatus, xhr) {
         $(document).data('loaded', true);
         try {
           // Hide loading message
           $.mobile.loading().loader("hide");
+          
+                var responseSplit = responseJSON.split('RESPONSE_HTML_SM');
+        var responseHTML = responseSplit[responseSplit.length -1];
+        responseJSON = responseJSON.replace( 'RESPONSE_HTML_SM' + responseHTML, '' );
+        responseJSON = $.parseJSON(responseJSON);
+        responseJSON.responseHTML = responseHTML;
+        
           var $htmlBody = $("<div id='photoGalleryContener'></div>").html(responseJSON.responseHTML);
           self.gallery = $htmlBody;
           $('body').append($htmlBody);
@@ -5008,7 +5080,7 @@ sm4.core.Module = {
       var inputValue = $this.val();
       //	$this.val(inputValue ? sm4.core.libraries.strToDate(inputValue,'/').toLocaleDateString() : new Date().toLocaleDateString());
       var $aLink = $("<a class='ui-btn ui-btn-icon-left ui-icon-calendar ui-btn-d ui-shadow ui-corner-all'/>").text(inputValue ? sm4.core.libraries.strToDate(inputValue, '/').toLocaleDateString() : sm4.core.language.translate('Select a date')).attr({
-        'href': 'javascript://;',
+        'href': "javascript://;",
         'data-icon': 'calendar'
       }).button();
       $this.after($aLink);
@@ -5389,7 +5461,7 @@ sm4.core.Module = {
           //add icon on input type file field($.mobile
           if ($.type($('span.file-input-button').get(0)) != 'undefined') {
             $('span.file-input-button').each(function() {
-              if ($(this).find('input:file').attr('accept') != 'audio/*')
+              if ($(this).find('input:file').attr('accept') != "audio/*")
                 $(this).addClass('ui-icon-camera');
 
             });
@@ -6798,3 +6870,112 @@ function resetSeaocoreFollowUnfollowSitemobile(resource_id, resource_type, actio
       $('#is_online').val(0);
    }
 }
+
+$.event.special.tap.emitTapOnTaphold = false;
+sm4.sitereaction = {
+  attachReaction: function() {
+    $.mobile.activePage.find('.feed_item_option_reaction > a').on('taphold', function(event) {
+      event.stopPropagation();
+      var $tip = $(this).closest('.feed_item_option_reaction').find('.seao_icons_toolbar_wappper');
+      $tip.show();
+      var hidetip = function(event){
+        if (!$(event.target).closest('.seao_icons_toolbar_wappper').length) {
+          $tip.hide();
+          $.mobile.activePage.off('vmousedown', hidetip);
+        }
+      };
+      $.mobile.activePage.on('vmousedown', hidetip);
+    });
+
+    $.mobile.activePage.find('.feed_item_option_reaction > a').on('tap', function(event) {
+      var actionId = $(this).closest('.activty_ul_li').jqmData('activity-feed-item');
+      if ($(this).jqmData('action') === 'like') {
+        sm4.activity.like(actionId, '', '', 'like');
+        var el = $(this).closest('.feed_item_option_reaction').find('.seao_icons_toolbar_wappper .icons-button-container [data-type="like"]');
+        var $likeEl = $.mobile.activePage.find('#aaf_reaction_' + actionId);
+        $likeEl.jqmData('current-reaction', 'like');
+        var $i = $likeEl.find('i');
+        $likeEl.html(el.jqmData('title'));
+        $i.css('backgroundImage', 'url('+ el.jqmData('icon') +')');
+        $likeEl.prepend($i);
+      }
+      if ($(this).jqmData('action') === 'unlike') {
+        sm4.activity.unlike(actionId);
+      }
+    });
+
+    $.mobile.activePage.find('.aaf_like_toolbar').on('vclick', function(event) {
+      var el = $(event.target);
+      if (!el.hasClass('icon-button-wapper')) {
+        el = el.closest('.icon-button-wapper');
+      }
+      var actionId = el.jqmData('target');
+      var reaction = el.jqmData('type');
+      var $likeEl = $.mobile.activePage.find('#aaf_reaction_' + actionId);
+      if ($likeEl.jqmData('current-reaction') === reaction && !$likeEl.hasClass('dnone')) {
+        return;
+      }
+      $likeEl.jqmData('current-reaction', reaction);
+      var $i = $likeEl.find('i');
+      el.closest('.seao_icons_toolbar_wappper').hide();
+      sm4.activity.like(actionId, '', '', reaction);
+      $likeEl.html(el.jqmData('title'));
+      $i.css('backgroundImage', 'url('+ el.jqmData('icon') +')');
+      $likeEl.prepend($i);
+    });
+  },
+  attachCommentReaction: function() {
+
+    $.mobile.activePage.find('.comment_item_option_reaction > a').on('taphold', function(event) {
+      event.stopPropagation();
+      var $tip = $(this).closest('.comment_item_option_reaction').find('.seao_icons_toolbar_wappper');
+      $tip.show();
+      var hidetip = function(event){
+        if (!$(event.target).closest('.seao_icons_toolbar_wappper').length) {
+          $tip.hide();
+          $.mobile.activePage.off('vmousedown', hidetip);
+        }
+      };
+      $.mobile.activePage.on('vmousedown', hidetip);
+    });
+
+    $.mobile.activePage.find('.comment_item_option_reaction > a').on('tap', function(event) {
+      var subjectType = $(this).closest('.comment_item_option_reaction').jqmData('subject-type');
+      var subjectId = $(this).closest('.comment_item_option_reaction').jqmData('subject-id');
+      if ($(this).jqmData('action') === 'like') {
+        var el = $(this).closest('.comment_item_option_reaction').find('.seao_icons_toolbar_wappper .icons-button-container [data-type="like"]');
+        var $likeEl = $.mobile.activePage.find('#reaction_like_comments_' + subjectType + '_' + subjectId);
+        sm4.core.comments.like(subjectType, subjectId, '', 'like');
+        $likeEl.jqmData('current-reaction', 'like');
+        var $i = $(this).find('i');
+        $likeEl.html(el.jqmData('title'));
+        $i.css('backgroundImage', 'url('+ el.jqmData('icon') +')');
+        $likeEl.prepend($i);
+      }
+      if ($(this).jqmData('action') === 'unlike') {
+        sm4.core.comments.unlike(subjectType, subjectId);
+      }
+    });
+
+    $.mobile.activePage.find('.nsc_like_toolbar').on('vclick', function(event) {
+      var el = $(event.target);
+      if (!el.hasClass('icon-button-wapper')) {
+        el = el.closest('.icon-button-wapper');
+      }
+      var subjectId = el.jqmData('target');
+      var subjectType = el.jqmData('subject');
+      var reaction = el.jqmData('type');
+      var $likeEl = $.mobile.activePage.find('#reaction_like_comments_' + subjectType + '_' + subjectId);
+      if ($likeEl.jqmData('current-reaction') === reaction && !$likeEl.hasClass('dnone')) {
+        return;
+      }
+      $likeEl.jqmData('current-reaction', reaction);
+      var $i = $likeEl.find('i');
+      el.closest('.seao_icons_toolbar_wappper').hide();
+      sm4.core.comments.like(subjectType, subjectId, '', reaction);
+      $likeEl.html(el.jqmData('title'));
+      $i.css('backgroundImage', 'url('+ el.jqmData('icon') +')');
+      $likeEl.prepend($i);
+    });
+  },
+};

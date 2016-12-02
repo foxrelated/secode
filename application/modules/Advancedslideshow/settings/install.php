@@ -15,7 +15,7 @@ class Advancedslideshow_Installer extends Engine_Package_Installer_Module {
   function onPreInstall() {
     $PRODUCT_TYPE = 'advancedslideshow';
     $PLUGIN_TITLE = 'Advancedslideshow';
-    $PLUGIN_VERSION = '4.8.6';
+    $PLUGIN_VERSION = '4.8.9p1';
     $PLUGIN_CATEGORY = 'plugin';
     $PRODUCT_DESCRIPTION = 'Advancedslideshow Plugin';
     $_PRODUCT_FINAL_FILE = 0;

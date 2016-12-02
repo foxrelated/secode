@@ -29,7 +29,7 @@
             <?php echo $this->itemPhoto($sitegroup, 'thumb.icon') ?>
             <h3><?php echo $sitegroup->getTitle(); ?></h3>				
             <p>
-              <?php echo $this->timestamp(strtotime($sitegroup->creation_date)) ?> - <?php echo $this->translate('posted by'); ?>
+              <?php echo $this->timestamp(strtotime($sitegroup->creation_date)) ?> - <?php echo $this->translate('created by'); ?>
               <?php if ($postedBy): ?>
                 <b><?php echo $sitegroup->getOwner()->getTitle() ?></b>
               <?php endif; ?>

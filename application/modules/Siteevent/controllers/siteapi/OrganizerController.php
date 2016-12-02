@@ -48,7 +48,18 @@ class Siteevent_OrganizerController extends Siteapi_Controller_Action_Standard {
             return $this->respondWithError('no_record');
         }
         $response = $organizer->toArray();
-        $contentImages = Engine_Api::_()->getApi('Core', 'siteapi')->getContentImage($organizer, true);
+
+        $suffix = '';
+        if (strpos($response['web_url'], "http") === false)
+            $suffix = "http://";
+        if (isset($response['facebook_url']) && !empty($response['facebook_url']))
+            $response['facebook_url'] = 'https://facebook.com/' . $response['facebook_url'];
+        if (isset($response['twitter_url']) && !empty($response['twitter_url']))
+            $response['twitter_url'] = 'https://twitter.com/' . $response['twitter_url'];
+        if (isset($response['web_url']) && !empty($response['web_url']))
+            $response['web_url'] = $suffix . $response['web_url'];
+
+        $contentImages = Engine_Api::_()->getApi('Core', 'siteapi')->getContentImage($organizer);
         $response = array_merge($response, $contentImages);
         $response['countOrganizedEvent'] = $organizer->countOrganizedEvent();
         $response['addedBy'] = $organizer->getOwner()->displayname;
@@ -60,19 +71,43 @@ class Siteevent_OrganizerController extends Siteapi_Controller_Action_Standard {
             $allowedInfo = Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.hostinfo', array('body', 'sociallinks'));
 
             if (in_array('body', $allowedInfo)) {
-                $getInfoArray['Description'] = $response['description'];
+                if (isset($response['description']) && !empty($response['description']))
+                    $getInfoArray['Description'] = strip_tags($response['description']);
             }
 
             if (in_array('sociallinks', $allowedInfo)) {
-                $getInfoArray['Facebook URL'] = $response['facebook_url'];
-                $getInfoArray['Twitter URL'] = $response['twitter_url'];
-                $getInfoArray['Web URL'] = $response['web_url'];
+                if (isset($response['facebook_url']) && !empty($response['facebook_url']))
+                    $getInfoArray['Facebook URL'] = $response['facebook_url'];
+                if (isset($response['twitter_url']) && !empty($response['twitter_url']))
+                    $getInfoArray['Twitter URL'] = $response['twitter_url'];
+                if (isset($response['web_url']) && !empty($response['web_url']))
+                    $getInfoArray['Web URL'] = $response['web_url'];
             }
 
             $ratingEnable = Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.reviews', 2);
             if ($ratingEnable) {
-                $getInfoArray['Total Rating'] = Engine_Api::_()->getDbtable('events', 'siteevent')->avgTotalRating(
+                $tempRating = Engine_Api::_()->getDbtable('events', 'siteevent')->avgTotalRating(
                         array('host_type' => $organizer->getType(), 'host_id' => $organizer->getIdentity(), 'more_than' => 0));
+
+                // Added variable for rating to show rating bar
+                if (_CLIENT_TYPE && ((_CLIENT_TYPE == 'ios') && _IOS_VERSION && _IOS_VERSION >= '1.5.3') || (_CLIENT_TYPE == 'android') && _ANDROID_VERSION && _ANDROID_VERSION >= '1.7') {
+                    if (isset($tempRating) && !empty($tempRating))
+                        $getInfoArray['total_rating'] = $tempRating;
+                } else {
+                    if (isset($tempRating) && !empty($tempRating))
+                        $getInfoArray['Total Rating'] = $tempRating;
+                }
+            }
+
+            // Added variable for description to show full description
+            if (_CLIENT_TYPE && ((_CLIENT_TYPE == 'ios') && _IOS_VERSION && _IOS_VERSION >= '1.5.3') || (_CLIENT_TYPE == 'android') && _ANDROID_VERSION && _ANDROID_VERSION >= '1.7') {
+                if (in_array('body', $allowedInfo)) {
+                    if (isset($response['description']) && !empty($response['description'])) {
+                        $getInfoArray['description'] = strip_tags($response['description']);
+                        if (isset($getInfoArray['Description']) && !empty($getInfoArray['Description']))
+                            unset($getInfoArray['Description']);
+                    }
+                }
             }
 
             if (isset($getInfoArray) && !empty($getInfoArray))

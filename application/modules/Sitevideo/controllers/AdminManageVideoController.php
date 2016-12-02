@@ -103,7 +103,11 @@ class Sitevideo_AdminManageVideoController extends Core_Controller_Action_Admin 
         }
         if (!empty($_POST['videotype'])) {
             $this->view->videotype = $_POST['videotype'];
-            $select->where($videoTableName . '.type = ? ', $_POST['videotype']);
+            if ($this->view->videotype == 5) {
+                $select->where($videoTableName . '.type in (?) ', array(5, 6, 7, 8));
+            } else {
+                $select->where($videoTableName . '.type = ? ', $_POST['videotype']);
+            }
         }
         if (!empty($_POST['category_id']) && empty($_POST['subcategory_id']) && empty($_POST['subsubcategory_id'])) {
             $this->view->category_id = $_POST['category_id'];

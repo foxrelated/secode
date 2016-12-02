@@ -40,7 +40,7 @@ foreach ($this->show_slideshow_object as $type => $item) {
   $itemPhoto = $this->htmlLink(Engine_Api::_()->sitegroup()->getHref($item->group_id, $item->owner_id, $item->getSlug()), $this->itemPhoto($item, 'thumb.profile'));
   $content_info = $this->timestamp(strtotime($item->creation_date));
   if($postedBy):
-  $content_info.= $this->translate(' - posted by ') . $this->htmlLink($item->getOwner()->getHref(), $item->getOwner()->getTitle()); 
+  $content_info.= $this->translate(' - created by ') . $this->htmlLink($item->getOwner()->getHref(), $item->getOwner()->getTitle()); 
   endif;
   $content_info.='<p>';
   $content_info.=$this->translate(array('%s comment', '%s comments', $item->comment_count), $this->locale()->toNumber($item->comment_count)) . ', ';

@@ -45,17 +45,11 @@ class Siteevent_Api_Siteapi_FormValidators extends Siteapi_Api_Validators {
         $formValidators['starttime'] = array(
             'required' => true,
             'allowEmpty' => false,
-            'validators' => array(
-                array('Int', true)
-            )
         );
 
         $formValidators['endtime'] = array(
             'required' => true,
             'allowEmpty' => false,
-            'validators' => array(
-                array('Int', true)
-            )
         );
 
         $formValidators['price'] = array(

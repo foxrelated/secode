@@ -154,10 +154,9 @@ if (empty($formatType)):
                 $this->headScriptSM()->appendFile("http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&key=$apiKey");
                 ?>
                 <?php
-                $this->headScriptSM()
-                        ->prependFile("https://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js")
-                        ->prependFile("https://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobubble/src/infobubble-compiled.js");
-                ?> 
+                $this->headScriptSM()->appendFile($this->layout()->staticBaseUrl . "application/modules/Seaocore/externals/scripts/infobubble.js");
+                $this->headScriptSM()->appendFile($this->layout()->staticBaseUrl . "application/modules/Seaocore/externals/scripts/markerclusterer.js");
+                ?>
             <?php endif; ?>
             <script type="text/javascript">
     <?php echo $this->headScriptSM()->captureStart(Zend_View_Helper_Placeholder_Container_Abstract::PREPEND) ?>
@@ -255,7 +254,7 @@ if (empty($formatType)):
 <?php else: ?>
     <?php
     $content = $this->layout()->content;
-    $this->responseHTML = ($content) ? $this->partial(
+    $responseHTML = ($content) ? $this->partial(
                     '_pageContent.tpl', 'sitemobile', array_merge($this->getVars(), array(
                 'contentType' => $contentType,
                 'identity' => $identity,
@@ -272,6 +271,6 @@ if (empty($formatType)):
     $this->responseLanguageData = $this->headTranslate()->render();
     $this->requestInfo = array('module' => $request->getModuleName(), 'controller' => $request->getControllerName(), 'action' => $request->getActionName(), 'id' => $identity, 'title' => $title, 'contentType' => $request->getParam('contentType', 'page'));
     ?>
-    <?php echo $this->jsonInline($this->getVars()) ?>
+    <?php echo $this->jsonInline($this->getVars()) . 'RESPONSE_HTML_SM' . $responseHTML ?>
 
 <?php endif; ?>

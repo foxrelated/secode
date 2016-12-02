@@ -24,7 +24,7 @@ if(isset($this->checkin['longitude'])) {
 //GET API KEY
 $siteTitle = Engine_Api::_()->getApi('settings', 'core')->core_general_site_title;
 $apiKey = Engine_Api::_()->seaocore()->getGoogleMapApiKey();
-$this->headScript()->appendFile("https://maps.googleapis.com/maps/api/js?libraries=places&sensor=true&key=$apiKey")
+$this->headScript()->appendFile("https://maps.googleapis.com/maps/api/js?libraries=places&key=$apiKey")
         ->appendFile($this->layout()->staticBaseUrl . 'application/modules/Seaocore/externals/scripts/seaomooscroll/SEAOMooVerticalScroll.js')
 ;
 $lable=isset($this->checkin['vicinity']) ? ((isset($this->checkin['name']) && $this->checkin['name'] != $this->checkin['vicinity']) ? ( $this->checkin['name'] . ", " .$this->checkin['vicinity']) : $this->checkin['vicinity']) : $this->checkin['label'];

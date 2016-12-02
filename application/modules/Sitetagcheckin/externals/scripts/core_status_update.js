@@ -360,7 +360,7 @@ var TagAutoSuggestionMap = new Class({
       return location;
     },
     getLocationHTML:function(){     
-			label = (this.location.type == 'place' && this.location.vicinity)?  ((this.location.name && this.location.name != location.vicinity) ? this.location.name +', '+ this.location.vicinity : this.location.vicinity) : this.location.label;
+			label = (this.location.type == 'place' && this.location.vicinity)?  ((this.location.name && this.location.name != location.vicinity) ?  this.location.vicinity : this.location.vicinity) : this.location.label;
       var content = en4.core.language.translate(this.location.prefixadd)+' '+'<a href="javascript:void(0)">'+label+'</a>';
       return content;
     },
@@ -384,7 +384,7 @@ var TagAutoSuggestionMap = new Class({
 				'id' : 'cross_tag_location',
 				'class': 'tag',
 				'style' : 'display:block',
-				'html': (this.location.type == 'place' && this.location.vicinity)?  ((this.location.name && this.location.name != this.location.vicinity) ? this.location.name +', '+ this.location.vicinity : this.location.vicinity) : this.location.label
+				'html': (this.location.type == 'place' && this.location.vicinity)?  ((this.location.name && this.location.name != this.location.vicinity) ?  this.location.vicinity : this.location.vicinity) : this.location.label
       });
       
       this.elements.crosslink = new Element('a', {

@@ -4,13 +4,12 @@
  * SocialEngine
  *
  * @category   Application_Extensions
- * @package    Siteapi
- * @copyright  Copyright 2015-2016 BigStep Technologies Pvt. Ltd.
+ * @package    Siteevent
+ * @copyright  Copyright 2013-2014 BigStep Technologies Pvt. Ltd.
  * @license    http://www.socialengineaddons.com/license/
- * @version    TopicController.php 2015-09-17 00:00:00Z SocialEngineAddOns $
+ * @version    $Id: PhotoController.php 6590 2014-01-02 00:00:00Z SocialEngineAddOns $
  * @author     SocialEngineAddOns
  */
-
 class Siteevent_PhotoController extends Siteapi_Controller_Action_Standard {
 
     public function init() {
@@ -67,7 +66,25 @@ class Siteevent_PhotoController extends Siteapi_Controller_Action_Standard {
         $subject = Engine_Api::_()->core()->getSubject('siteevent_event');
 
         $bodyResponse = $tempResponse = array();
-        $bodyResponse['canUpload'] = $subject->authorization()->isAllowed(null, 'photo');
+        $allowed_upload_photo = 0;
+        //PACKAGE BASED CHECKS
+        if (Engine_Api::_()->siteevent()->hasPackageEnable()) {
+            $photoCount = Engine_Api::_()->getItem('siteeventpaid_package', $subject->package_id)->photo_count;
+            $paginator = $subject->getSingletonAlbum()->getCollectiblesPaginator();
+            if (Engine_Api::_()->siteeventpaid()->allowPackageContent($subject->package_id, "photo")) {
+                $allowed_upload_photo = 1;
+                if (empty($photoCount))
+                    $allowed_upload_photo = 1;
+                elseif ($photoCount <= $paginator->getTotalItemCount())
+                    $allowed_upload_photo = 0;
+            } else {
+                $allowed_upload_photo = 0;
+            }
+        } else { //GET LEVEL SETTING
+            $allowed_upload_photo = Engine_Api::_()->authorization()->isAllowed($subject, $viewer, "photo");
+        }
+
+        $bodyResponse['canUpload'] = $allowed_upload_photo;
 
         /* RETURN THE LIST OF IMAGES, IF FOLLOWED THE FOLLOWING CASES:   
          * - IF THERE ARE GET METHOD AVAILABLE.
@@ -89,14 +106,17 @@ class Siteevent_PhotoController extends Siteapi_Controller_Action_Standard {
                     $getContentImages = Engine_Api::_()->getApi('Core', 'siteapi')->getContentImage($photo);
                     $tempImages = array_merge($tempImages, $getContentImages);
 
+                    $tempImages["canLike"] = $tempImages["is_like"] = Engine_Api::_()->getApi('Core', 'siteapi')->isLike($photo);
+                    $tempImages["canComment"] = $photo->authorization()->isAllowed($viewer, 'comment');
                     $tempImages['user_title'] = $photo->getOwner()->getTitle();
-                    $tempImages['likes_count'] = $photo->likes()->getLikeCount();
+                    $tempImages['like_count'] = $tempImages['likes_count'] = $photo->likes()->getLikeCount();
                     $tempImages['is_like'] = ($photo->likes()->isLike($viewer)) ? 1 : 0;
 
 
                     if (!empty($viewer) && ($tempMenu = $this->getRequestParam('menu', 1)) && !empty($tempMenu)) {
+                        $menu = array();
+
                         if ($photo->canEdit(Engine_Api::_()->user()->getViewer())) {
-                            $menu = array();
                             $menu[] = array(
                                 'label' => $this->translate('Edit'),
                                 'name' => 'edit',
@@ -121,11 +141,14 @@ class Siteevent_PhotoController extends Siteapi_Controller_Action_Standard {
                         );
 
                         $menu[] = array(
-                            'label' => $this->translate('Report'),
                             'name' => 'report',
-                            'url' => 'report/create/subject/' . $photo->getGuid()
+                            'label' => $this->translate('Report'),
+                            'url' => 'report/create/subject/' . $photo->getGuid(),
+                            'urlParams' => array(
+                                "type" => $photo->getType(),
+                                "id" => $photo->getIdentity()
+                            )
                         );
-
                         $menu[] = array(
                             'label' => $this->translate('Make Profile Photo'),
                             'name' => 'make_profile_photo',
@@ -137,7 +160,7 @@ class Siteevent_PhotoController extends Siteapi_Controller_Action_Standard {
 
                         $tempImages['menu'] = $menu;
                     }
-                    
+
                     if (isset($tempImages) && !empty($tempImages))
                         $bodyResponse['images'][] = $tempImages;
                 }

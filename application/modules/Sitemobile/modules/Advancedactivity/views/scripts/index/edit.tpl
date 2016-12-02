@@ -108,15 +108,14 @@ $canComment = ( $action->getTypeInfo()->commentable && $action->commentable &&
         <div style="display:none;"> 
           <script type="text/javascript">
               sm4.core.runonce.add(function(){
-                $('#activity-edit-body-<?php echo $this->comment_id ?>').autoGrow();          
+                $('#activity-edit-body-<?php echo $this->comment_id ?>').autoGrow();
                 $('.sm-comments-post-comment-<?php echo $this->comment_id ?>').on('click',function(){
-                sm4.activity.toggleEditArea(this, '<?php echo $this->comment_id ?>');
+                    sm4.activity.toggleEditArea(this, '<?php echo $this->comment_id ?>');
+                });
+                sm4.activity.toggleEditArea($('.sm-comments-post-comment-<?php echo $this->comment_id ?>'), '<?php echo $this->comment_id ?>');
+                $('#activity-edit-body-'+<?php echo $this->comment_id ?>).val('<?php echo $this->string()->escapeJavascript($this->body_response);?>');
+                $('#activitypost-container-temp').find('#activity-edit-body-<?php echo $this->comment_id ?>').focus();
               });
-              sm4.activity.toggleEditArea($('.sm-comments-post-comment-<?php echo $this->comment_id ?>'), '<?php echo $this->comment_id ?>');   
-              
-                $('#activity-edit-body-'+<?php echo $this->comment_id ?>).val('<?php echo $this->body_response;?>');
-                $('#activitypost-container-temp').find('#activity-edit-body-'+"<?php echo $this->comment->body?>").focus();
-              });                   
           </script>
         </div>
       </div>

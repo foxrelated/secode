@@ -120,7 +120,7 @@ class Sitetagcheckin_Api_Core extends Core_Api_Abstract {
     if (!empty($params['users']) && isset($params['users'])) {
       $str = (string) ( is_array($params['users']) ? "'" . join("', '", $params['users']) . "'" : $params['users'] );
       $select->where($rName . '.user_id in (?)', new Zend_Db_Expr($str));
-    } elseif (empty($params['users']) && $params['view_view'] == '1' && isset($params['view_view'])) {
+    } elseif (empty($params['users']) &&  isset($params['view_view']) && $params['view_view'] == '1') {
       $select->where($rName . '.user_id = ?', '0');
     }
 
@@ -576,10 +576,11 @@ class Sitetagcheckin_Api_Core extends Core_Api_Abstract {
       $addLocationTable->saveLocation(array_merge($content, $contentArray));
     } else {
       //IF ATTACHMENT IS THERE THEN GET ATTACHMENT RESOURCE TYPE AND RESOURCE ID
+        
       foreach ($action->getAttachments() as $attachment) {
         $attact_resource_type = $attachment->meta->type;
         $attach_resource_id = $attachment->meta->id;
-      }
+      
       $content_array = array(
           'resource_id' => $attach_resource_id,
           'resource_type' => $attact_resource_type,
@@ -587,6 +588,7 @@ class Sitetagcheckin_Api_Core extends Core_Api_Abstract {
           'object_type' => $attact_resource_type
       );
       $addLocationTable->saveLocation(array_merge($content_array, $contentArray));
+      }
     }
   }
 

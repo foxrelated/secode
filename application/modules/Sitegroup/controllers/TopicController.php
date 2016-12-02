@@ -433,8 +433,14 @@ class Sitegroup_TopicController extends Seaocore_Controller_Action_Standard {
       throw $e;
     }
 
+    if($this->_getParam('page'))
+            $redirct_Url = $post->getHref(array('page' => $this->_getParam('page')))."#sitegroup_post_".$post->getIdentity();
+        else
+            $redirct_Url = $post->getHref()."#sitegroup_post_".$post->getIdentity();
+    
+
     //REDIRECT TO THE POST GROUP
-    $this->_redirectCustom($post);
+    $this->_redirectCustom($redirct_Url);
   }
 
   //ACTION FOR STICKY THE TOPIC 

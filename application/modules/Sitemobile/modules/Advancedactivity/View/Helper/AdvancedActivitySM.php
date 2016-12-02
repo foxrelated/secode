@@ -50,13 +50,13 @@ class Advancedactivity_View_Helper_AdvancedActivitySM extends Zend_View_Helper_A
     elseif ($method == 'preloadcomments') {
       $data = array_merge($data,array(
           'actions' => array($action),
-          
+
               ));
       return $this->view->partial(
                       'application/modules/Sitemobile/modules/Advancedactivity/views/scripts/_preloadactivityComments.tpl', 'advancedactivity', $data
       );
     }
-    
+
     if ($viewer->getIdentity()) {
       $activity_moderate = Engine_Api::_()->getDbtable('permissions', 'authorization')->getAllowed('user', $viewer->level_id, 'activity');
       if (Engine_Api::_()->core()->hasSubject() && $viewer->isSelf(Engine_Api::_()->core()->getSubject())) {
@@ -92,8 +92,9 @@ class Advancedactivity_View_Helper_AdvancedActivitySM extends Zend_View_Helper_A
         }
       }
     }
-    $form = new Activity_Form_Comment();
-    $composerOptions = Engine_Api::_()->getApi('settings', 'core')->getSetting('advancedactivity.composer.options', array("emotions", "withtags"));
+    $form = new Sitemobile_modules_Activity_Form_Comment();
+    $composerOptions = $coreSettingsApi->getSetting('advancedactivity.composer.options', array("emotions", "withtags"));
+    $allowReaction = Engine_Api::_()->hasModuleBootstrap('sitereaction') && $coreSettingsApi->getSetting('sitereaction.reaction.active', 1);
     $data = array_merge($data, array(
         'actions' => array($action),
         'commentForm' => $form,
@@ -108,6 +109,7 @@ class Advancedactivity_View_Helper_AdvancedActivitySM extends Zend_View_Helper_A
         'privacyDropdownList' => $privacyDropdownList,
         'allowEmotionsIcon' => in_array("emotions", $composerOptions),
         'allowSaveFeed' => $add_saved_feed,
+        'allowReaction' => $allowReaction,
         'viewAllComments' => $show_all_comments,
         'is_owner' => $is_owner,
         'showLargePhoto' => $coreSettingsApi->getSetting('aaf.largephoto.enable', 1)

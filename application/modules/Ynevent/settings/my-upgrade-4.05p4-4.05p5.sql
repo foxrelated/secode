@@ -1,1 +1,0 @@
-UPDATE `engine4_core_modules` SET `version` = '4.05p5' WHERE `name` = 'ynevent';

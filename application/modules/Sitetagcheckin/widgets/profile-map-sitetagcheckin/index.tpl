@@ -25,7 +25,7 @@
 <?php
 	//GET API KEY
 	$apiKey = Engine_Api::_()->seaocore()->getGoogleMapApiKey();
-  $this->headScript()->appendFile("https://maps.googleapis.com/maps/api/js?libraries=places&sensor=true&key=$apiKey")
+  $this->headScript()->appendFile("https://maps.googleapis.com/maps/api/js?libraries=places&key=$apiKey")
     ->appendFile($this->layout()->staticBaseUrl . 'application/modules/Sitetagcheckin/externals/scripts/activity_core.js');
 ?>
 
@@ -83,11 +83,13 @@
 		<div class="stcheckin_profile_header_right">
 			<div onclick="showFeeds();" id="display_feedlinks" class="stcheckin_profile_buttons stcheckin_tip">
 				<div class="stcheckin_tip_content"><?php echo $this->translate("View Feeds");?></div>
-				<img src="./application/modules/Sitetagcheckin/externals/images/list-view.png" alt="" />
+				<!--<img src="./application/modules/Sitetagcheckin/externals/images/list-view.png" alt="" />-->
+                <span class="seaocore_tab_icon tab_icon_list_view" onclick="switchview(0);" ></span>
 			</div>
 			<div onclick="showMap();" id="display_maplinks" class="stcheckin_profile_buttons stcheckin_tip">
 				<div class="stcheckin_tip_content"><?php echo $this->translate("View Map");?></div>
-				<img src="./application/modules/Sitetagcheckin/externals/images/map-view.png" alt="" />
+				<!--<img src="./application/modules/Sitetagcheckin/externals/images/map-view.png" alt="" />-->
+                <span class="seaocore_tab_icon tab_icon_map_view" onclick="switchview(2);" ></span>
 			</div>
 		</div>
 	</div>

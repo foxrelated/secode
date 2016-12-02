@@ -171,7 +171,7 @@ class Sitegroup_Form_Admin_Settings_Level extends Authorization_Form_Admin_Level
                 'multiOptions' => $privacyArray,
                 'value' => $privacyValueArray
             ));
-        }
+        
 
         if (!$this->isPublic() && empty($isEnabledPackage)) {
 
@@ -374,7 +374,7 @@ class Sitegroup_Form_Admin_Settings_Level extends Authorization_Form_Admin_Level
 
             //START SITEGROUPDOCUMENT PLUGIN WORK
             $sitegroupDocumentEnabled = Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitegroupdocument');
-            if ($sitegroupDocumentEnabled) {
+            if ($sitegroupDocumentEnabled || (Engine_Api::_()->hasModuleBootstrap('document') && Engine_Api::_()->getDbtable('modules', 'document')->getIntegratedModules(array('enabled' => 1, 'item_type' => 'sitegroup_group', 'item_module' => 'sitegroup')))) {
                 $this->addElement('Radio', 'sdcreate', array(
                     'label' => 'Documents in Groups',
                     'description' => 'Do you want Documents to be available to Groups created by members of this level? This setting will also apply to ability of users of this level to create Documents in Groups.',
@@ -683,6 +683,7 @@ class Sitegroup_Form_Admin_Settings_Level extends Authorization_Form_Admin_Level
 //                 )
             ));
         }
+        }
         //END SITEGROUPMUSIC PLUGIN WORK
         //START SITEGROUPINTREGRATION PLUGIN WORK//
         if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitegroupintegration')) {
@@ -725,7 +726,7 @@ class Sitegroup_Form_Admin_Settings_Level extends Authorization_Form_Admin_Level
             ));
         }
         //START SITEGROUPMEMBER PLUGIN WORK
-        }
+        
 
         if (!$this->isPublic()) {
             // Element: style

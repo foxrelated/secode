@@ -91,7 +91,7 @@ $this->headScript()
       <div class="seaocore_board_list b_medium" style="width:<?php echo $this->params['itemWidth'] - 18 ?>px;">
         <div>
           <?php if ($group->featured): ?>
-            <i class="seaocore_list_featured_label" title="<?php echo $this->translate('Featured'); ?>"></i>
+            <span class="seaocore_list_featured_label" title="<?php echo $this->translate('Featured'); ?>"><?php echo $this->translate('Featured') ?></span>
           <?php endif; ?>
           <div class="seaocore_board_list_thumb">
           	<a href="<?php echo $group->getHref() ?>" class="seaocore_thumb">

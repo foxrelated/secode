@@ -25,6 +25,7 @@ sm4.activity.composer = {
   composePlugin: false,
   $this: false,
   elements: {},
+  activator: null,
   options: {
     requestOptions: false,
     allowEmptyWithoutAttachment: false,
@@ -59,7 +60,7 @@ sm4.activity.composer = {
     }
   },
   showCommentPluginForm: function(e, plugin, body_id) {
-    
+    sm4.activity.composer.activator = e;
     sm4.activity.composer.content = $(document);
     this.elements.textarea = $(body_id);
     if (plugin != 'checkin' && plugin != 'addpeople')
@@ -71,7 +72,7 @@ sm4.activity.composer = {
    
   },
   showReplyPluginForm: function(e, plugin, body_id, id) {
-    
+    sm4.activity.composer.activator = e;
     sm4.activity.composer.content = $(document);
     this.elements.textarea = $(body_id);
     if (plugin != 'checkin' && plugin != 'addpeople')
@@ -87,7 +88,7 @@ sm4.activity.composer = {
     }
   },  
   showEditPluginForm: function(e, plugin, body_id, id) { 
-    
+    sm4.activity.composer.activator = e;
     sm4.activity.composer.content = $(document);
     this.elements.textarea = $(body_id);
     if (plugin != 'checkin' && plugin != 'addpeople')
@@ -2664,6 +2665,226 @@ sm4.activity.composer = {
       // alert("An error has occurred: Code = " + error.code);
     }
   },
+
+  sticker: {
+    name: 'sticker',
+    parent: false,
+    shouldAutoSubmit : false,
+    options: {
+      title: sm4.core.language.translate('Post Sticker'),
+      lang: {},
+    },
+    persistentElements: ['activator', 'loadingImage'],
+    stickersLayer: null,
+    showInit: function(layer) {
+        this.stickersLayer = layer;
+        var iScrollArray = [];
+        this.showBox();
+        var tabPerWapper = 1;
+        if(layer.jqmData('sticker_layer_store')) {
+            return;
+        }
+        layer.find('.iscroll_container').not('.iscroller').each(function() {
+        layer.find('.iscroll_wapper').css('width', layer.width() + 'px');
+        var scrollKey = $(this).jqmData('rel') == 'tabs' ? 'tabs' : 'board';
+         var width = 0, height = 0, margin = 0;
+         if (scrollKey === 'board') {
+           $(this).find('.iscroll_item').css('width', $(layer).width()+ 'px');
+         }
+         $(this).find('.iscroll_item').each(function() {
+           if ($(this).jqmData('margin'))
+             margin = $(this).jqmData('margin');
+           width = width + ($(this).outerWidth() + margin);
+           if (height < ($(this).outerHeight()))
+             height = $(this).outerHeight();
+         });
+         var $self = $(this);
+         $self.css('width', width + 'px');
+         $self.css('height', height + 'px');
+         var itemWidth = $(this).find('.iscroll_item').width();
+         if ($(this).find('.iscroll_item').length > 1) {
+           var $this = $self.closest('.iscroll_wapper')[0];
+           setTimeout(function() {
+           var iScroll =  new IScroll($this, {
+               scrollX: true,
+               scrollY: false,
+               preventDefault: false,
+               momentum: false,
+               snap: true,
+               snapSpeed: 400,
+               keyBindings: true
+             });
+
+             if (scrollKey === 'board') {
+                iScroll.on('scrollEnd', function() {
+                    var foundIndex = iScroll.x/iScroll.wrapperWidth;
+                    if(foundIndex < 0 ) {
+                        foundIndex *= -1;
+                    }
+                    var tabIndex = Math.round(foundIndex);
+                    var liActiveEl = layer.find('.stickers_tab_wapper .iscroll_item')[tabIndex];
+                    if (tabPerWapper === 1 || ( tabIndex % tabPerWapper === 0)){
+                        iScrollArray['tabs'].scrollToElement(liActiveEl);
+                    }
+                    layer.find('.stickers_tab_wapper .tab').removeClass('active');
+                    $(liActiveEl).find('.tab').addClass('active');
+                });
+               layer.find('.stickers_tab_wapper .tab').on('click', function () {
+                 var liActiveEl = $self.find('.' + $(this).jqmData('target'))[0];
+                 iScroll.scrollToElement(liActiveEl);
+               });
+             } else {
+               tabPerWapper = Math.round(iScroll.wrapperWidth/itemWidth);
+
+               iScroll.on('scrollEnd', function() {
+                var tabIndex = Math.round(iScroll.x/itemWidth * -1);
+                var liActiveEl = layer.find('.stickers_icon_wapper .iscroll_item')[tabIndex];
+                iScrollArray['board'].scrollToElement(liActiveEl);
+               });
+             }
+             iScrollArray[scrollKey] = iScroll;
+
+           });
+         }
+         $(this).addClass('iscroller');
+       });
+       this.bind();
+       layer.jqmData('sticker_layer_store', true);
+    },
+    showBox: function() {
+        this.stickersLayer.removeClass('dnone');
+        $(sm4.activity.composer.activator).closest('.compose_buttons').hide();
+        this.clearSearch();
+    },
+    bind: function() {
+        this.stickersLayer.find('.str_search_text input').on('keyup', this.searchHandler.bind(this));
+        this.stickersLayer.find('.str_search_button').on('click', this.clickSearchHandler.bind(this));
+        this.stickersLayer.find('.sticker_icons .icon').on('click', this.iconClickHandler.bind(this));
+        this.stickersLayer.find('.stickers_search_clear').on('click', this.clearSearch.bind(this));
+    },
+    iconClickHandler: function(event) {
+      var $icon = $(event.target);
+      if (!$icon.hasClass('icon')) {
+        $icon = $icon.closest('.icon');
+      }
+
+      //this.shouldAutoSubmit = true;
+      this.clickEvent = event;
+      this.doProcessResponse($icon);
+      this.hideBox();
+      if (this.mode === 'reply') {
+        var actionId = $(sm4.activity.composer.activator).jqmData('actionId');
+        sm4.activity.attachReply($('#activity-reply-form-'+comment_reply_id), comment_reply_id, actionId);
+      } else {
+        sm4.activity.attachComment(sm4.activity.composer.elements.textarea.closest('form'));
+      }
+    },
+    hideBox: function(event) {
+        if (event) {
+        var el = $(event.target);
+        if (!el.hasClass('stickers_layer_hide') && el.closest('.stickers_layer').length > 0 || el.hasClass('stickers_wapper_target') || el.closest('.stickers_wapper_target').length > 0) {
+          // if (el.getParent('.stickers_layer') == this.stickersLayer) {
+            return;
+            //  }
+          }
+        }
+        this.stickersLayer.addClass('dnone');
+        $(sm4.activity.composer.activator).closest('.compose_buttons').show();
+        $(sm4.activity.composer.activator).closest('.sm-composer-options').show();
+    },
+    clearSearch: function() {
+        this.stickersLayer.find('.str_search_text input').val('');
+        this.search('');
+    },
+    clickSearchHandler: function(event) {
+      var target = $(event.target);
+      if(!target.hasClass('str_search_button')){
+          target = target.closest('.str_search_button');
+      }
+      this.stickersLayer.find('.str_search_text input').val(target.jqmData('tag'));
+      this.search(target.jqmData('tag'));
+    },
+    searchHandler: function(event) {
+      var target = $(event.target);
+      this.search(target.val());
+    },
+    search:function(text) {
+        text = text.trim();
+        this.stickersLayer.find('.str_search_not_found').addClass('dnone');
+        if (!text) {
+          this.stickersLayer.find('.sticker_search_icons').addClass('dnone');
+          this.stickersLayer.find('.sticker_search_list').removeClass('dnone');
+          this.stickersLayer.find('.stickers_search_clear').addClass('dnone');
+          return;
+        }
+        this.stickersLayer.find('.sticker_search_icons').removeClass('dnone');
+        this.stickersLayer.find('.sticker_search_list').addClass('dnone');
+        this.stickersLayer.find('.stickers_search_clear').removeClass('dnone');
+        this.stickersLayer.find('.sticker_search_icons .icon').addClass('dnone');
+        this.stickersLayer.find('.sticker_search_icons .icon').each(function(key, el) {
+          var title = $(el).jqmData('title');
+          if (title.search(new RegExp(text, "i")) < 0) {
+            return;
+          }
+          $(el).removeClass('dnone');
+        });
+        if (this.stickersLayer.find('.sticker_search_icons .icon.dnone').length === this.stickersLayer.find('.sticker_search_icons .icon').length) {
+          this.stickersLayer.find('.str_search_not_found').removeClass('dnone');
+        }
+    },
+    init: function() {
+      this.elements = {};
+      this.params = {};
+
+    },
+    activate: function(mode) {
+      var parent = $(sm4.activity.composer.activator).closest('.sm-comments-post-comment-form');
+      var layer = parent.find('.compose_sticker_box_cont .stickers_layer');
+      self.makeMenu();
+      self.makeBody();
+      this.showInit(layer);
+      this.mode = mode;
+      $(sm4.activity.composer.composePlugin.elements.menuClose).off('click').on('click', this.deactivate.bind(this));
+    },
+    deactivate: function() {
+      self.deactivate();
+      this.hideBox();
+    },
+    doProcessResponse: function(iconEl) {
+      // Success
+      this.params.stikcer_guid = iconEl.jqmData('guid');
+      this.params.type = 'sticker';
+//      if (this.shouldAutoSubmit) {
+//        this.makeFormInputs();
+//        this.getComposer().getForm().fireEvent('submit',  new Event(this.clickEvent));
+//      }
+      this.makeFormInputs();
+      this.elements.preview = $('<img />');
+      this.elements.preview.attr({
+        'src': iconEl.jqmData('img'),
+        'id': 'compose-photo-preview-image',
+        'class': 'compose-preview-image',
+        'onload': this.doImageLoaded.bind(this)
+      });
+      sm4.activity.options.allowEmptyWithoutAttachment = true;
+    },
+    doImageLoaded: function() {
+      if (this.elements.loading)
+        this.elements.loading.remove();
+      //if( this.elements.formFancyContainer ) this.elements.formFancyContainer.destroy();
+      this.elements.preview.removeAttr('width');
+      this.elements.preview.removeAttr('height');
+      this.elements.body.append(this.elements.preview);
+    },
+    makeFormInputs: function() {
+      var data = {
+        'attachment_guid': this.params.stikcer_guid,
+        'type': this.params.type
+      };
+      self.makeFormInputs(data);
+    }
+  },
+  
   //music 
   music: {
     name: 'music',

@@ -293,6 +293,10 @@ class Sitegroup_AdminDefaultlayoutController extends Core_Controller_Action_Admi
             if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitegroupdocument')) {
               Engine_Api::_()->getDbtable('admincontent', 'sitegroup')->setAdminDefaultInfo('sitegroupdocument.profile-sitegroupdocuments', $group_id, 'Documents', 'true', '115');
             }
+            
+            if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('document')) {
+                Engine_Api::_()->getDbtable('admincontent', 'sitegroup')->setAdminDefaultInfo('document.contenttype-documents', $group_id, 'Documents', 'true', '115');
+            }
 
             //INSERTING OFFER WIDGET 
             if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitegroupoffer')) {
@@ -527,6 +531,10 @@ class Sitegroup_AdminDefaultlayoutController extends Core_Controller_Action_Admi
           if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitegroupdocument')) {
             Engine_Api::_()->getDbtable('admincontent', 'sitegroup')->setAdminContentDefaultInfoWithoutTab('sitegroupdocument.profile-sitegroupdocuments', $group_id, 'Documents', 'true', '115');
           }
+          
+          if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('document')) {
+                Engine_Api::_()->getDbtable('admincontent', 'sitegroup')->setAdminContentDefaultInfoWithoutTab('document.contenttype-documents', $group_id, 'Documents', 'true', '115');
+            }
 
           //INSERTING OFFER WIDGET 
           if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitegroupoffer')) {

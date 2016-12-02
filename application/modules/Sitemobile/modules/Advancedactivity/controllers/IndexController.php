@@ -885,31 +885,76 @@ class Advancedactivity_IndexController extends Seaocore_Controller_Action_Standa
 
             // Action
             if (!$comment_id) {
-
-                if (Engine_Api::_()->seaocore()->checkEnabledNestedComment('advancedactivity')) {
-                    $this->view->hasViewerDisLike = $action->dislikes()->isDislike($viewer);
-                    $this->view->dislikeCount = $action->dislikes()->getDisLikeCount();
-                }
-
-                if (Engine_Api::_()->seaocore()->checkEnabledNestedComment('advancedactivity') && $action->dislikes()->isDislike($viewer))
-                    $action->dislikes()->removeDislike($viewer);
-
                 // Check authorization
                 if ($action && !Engine_Api::_()->authorization()->isAllowed($action->getCommentObject(), null, 'comment')) {
                     throw new Engine_Exception('This user is not allowed to like this item');
                 }
 
-                $action->likes()->addLike($viewer);
+                if (Engine_Api::_()->seaocore()->checkEnabledNestedComment('advancedactivity')) {
+                    $this->view->hasViewerDisLike = $action->dislikes()->isDislike($viewer);
+                    $this->view->dislikeCount = $action->dislikes()->getDisLikeCount();
+                    if ($this->view->hasViewerDisLike) {
+                        $action->dislikes()->removeDislike($viewer);
+                    }
+                }
+
+                $reaction = $this->_getParam('reaction');
+                $like = $reaction ? $action->likes()->getLike($viewer) : null;
+                $sendNotification = false;
+                $shouldAddActivity = false;
+                if (empty($like)) {
+                  $sendNotification = true;
+                  $like = $action->likes()->addLike($viewer);
+                  $shouldAddActivity = $reaction &&  $reaction !== 'like';
+                }
+
+                if ($reaction) {
+                  $like->reaction = $reaction;
+                  $like->save();
+                }
+
                 $this->view->hasViewerLike = $action->likes()->isLike($viewer);
                 $this->view->likeCount = $action->likes()->getLikeCount();
+                // Add activity
+                if ($shouldAddActivity) {
+                    $api = Engine_Api::_()->getDbtable('actions', 'advancedactivity');
+                    if ($action->getTypeInfoCommentable() < 2) {
+                        $shouldAddActivity = in_array($action->type, array('status'));
+                        $attachment = $action;
+                        $attachmentOwner = Engine_Api::_()->getItemByGuid($action->subject_type . "_" . $action->subject_id);
+                    } else {
+                        $attachment = $action->getCommentObject();
+                        $attachmentOwner = $attachment->getOwner();
+                    }
+                    // Add activity for owner of activity (if user and not viewer)
+                    if ($shouldAddActivity && $attachmentOwner->getType() == 'user' && $attachmentOwner->getIdentity() != $viewer->getIdentity()) {
+                        $params = array(
+                            'type' => $attachment->getMediaType(),
+                            'owner' => $attachmentOwner->getGuid(),
+                        );
+                        $likeAction = $api->addActivity($viewer, $attachment, 'react', '', '', $params);
+                        if ($likeAction) {
+                            $api->attachActivity($likeAction, $attachment);
+                        }
+                    }
+                }
+
                 // Add notification for owner of activity (if user and not viewer)
                 if ($action->subject_type == 'user' && $action->subject_id != $viewer->getIdentity()) {
                     $actionOwner = Engine_Api::_()->getItemByGuid($action->subject_type . "_" . $action->subject_id);
-
-                    Engine_Api::_()->getDbtable('notifications', 'activity')->addNotification($actionOwner, $viewer, $action, 'liked', array(
+                    $notificationType = isset($like->reaction) && $like->reaction  !== 'like' ?  'reacted' : 'liked';
+                    Engine_Api::_()->getDbtable('notifications', 'activity')->addNotification($actionOwner, $viewer, $action, $notificationType, array(
                         'label' => 'post'
                     ));
                 }
+                $this->view->like_comments_stats = $this->view->partial(
+                    'application/modules/Sitemobile/modules/Advancedactivity/views/scripts/_activityStats.tpl',
+                    null,
+                    array(
+                        'action' => $action,
+                        'allowReaction' => $this->allowReaction(),
+                    )
+                );
             }
             // Comment
             else {
@@ -1046,10 +1091,18 @@ class Advancedactivity_IndexController extends Seaocore_Controller_Action_Standa
                 if (Engine_Api::_()->seaocore()->checkEnabledNestedComment('advancedactivity')) {
                     $this->view->hasViewerDisLike = $action->dislikes()->isDislike($viewer);
                     $this->view->dislikeCount = $action->dislikes()->getDislikeCount();
+                    if (!$action->dislikes()->isDislike($viewer))
+                        $action->dislikes()->addDislike($viewer);
                 }
 
-                if (!$action->dislikes()->isDislike($viewer))
-                    $action->dislikes()->addDislike($viewer);
+                $this->view->like_comments_stats = $this->view->partial(
+                    'application/modules/Sitemobile/modules/Advancedactivity/views/scripts/_activityStats.tpl',
+                    null,
+                    array(
+                        'action' => $action,
+                        'allowReaction' => $this->allowReaction(),
+                    )
+                );
             }
 
             // Comment
@@ -1137,6 +1190,8 @@ class Advancedactivity_IndexController extends Seaocore_Controller_Action_Standa
         $this->view->showLikeWithoutIcon = $this->_getParam('showLikeWithoutIcon');
         $this->view->action = $action = Engine_Api::_()->getDbtable('actions', 'advancedactivity')->getActionById($action_id);
         $form = $this->view->commentForm = new Sitemobile_modules_Activity_Form_Comment();
+        $this->view->allowReaction = $this->allowReaction();
+
     }
 
     /**
@@ -1236,7 +1291,22 @@ class Advancedactivity_IndexController extends Seaocore_Controller_Action_Standa
         $likes->setItemCountPerPage(10);
         $this->view->showLikeWithoutIcon = $this->_getParam('showLikeWithoutIcon', 1);
         $this->view->showLikeWithoutIconReplies = $this->_getParam('showLikeWithoutIconReplies', 1);
-        
+        $reactionIconsData = array();
+        $this->view->allowReaction = $this->allowReaction();
+        if ($this->view->allowReaction) {
+            $reactionIconsTable = Engine_Api::_()->getDbTable('reactionicons', 'sitereaction');
+            // get all reaction icons
+            $reactionIcons = $reactionIconsTable->getReactions(array('orderby' => 'order'));
+            foreach ($reactionIcons as $reactionIcon) {
+              $reactionIconsData[$reactionIcon->type] = array(
+                'caption' => $reactionIcon->title,
+                'type' => $reactionIcon->type,
+                'icon' => $reactionIcon->getPhotoUrl(),
+              );
+            }
+            $likes->setItemCountPerPage(1000);
+        }
+        $this->view->reactionIcons = $reactionIconsData;
     }
 
     public function getAllDislikeUserAction() {
@@ -1272,7 +1342,7 @@ class Advancedactivity_IndexController extends Seaocore_Controller_Action_Standa
             return;
 
         // Make form
-        $this->view->form = $form = new Activity_Form_Comment();
+        $this->view->form = $form = new Sitemobile_modules_Activity_Form_Comment();
         $isShare = $this->_getParam('isShare');
         // Not post
         if (!$this->getRequest()->isPost()) {
@@ -1475,17 +1545,17 @@ class Advancedactivity_IndexController extends Seaocore_Controller_Action_Standa
             $attachment = null;
             $attachmentPhotoValue = $this->_getParam('photo_id');
             $attachmentType = $this->_getParam('type');
-
+            $attachmentGuid = $this->_getParam('attachmentGuid');
             if ($attachmentPhotoValue && $attachmentType) {
                 $attachment = Engine_Api::_()->getItem('album_photo', $attachmentPhotoValue);
-                if (isset($row->attachment_type))
-                    $row->attachment_type = ( $attachment ? $attachment->getType() : '' );
-                if (isset($row->attachment_id))
-                    $row->attachment_id = ( $attachment ? $attachment->getIdentity() : 0 );
+            } else if ($attachmentType && $attachmentGuid) {
+                $attachment = Engine_Api::_()->getItemByGuid($attachmentGuid);
+            }
+            if ($attachment && isset($row->attachment_type) && isset($row->attachment_id)) {
+                $row->attachment_type = $attachment->getType();
+                $row->attachment_id = $attachment->getIdentity();
                 $row->save();
             }
-
-
             // Stats
             Engine_Api::_()->getDbtable('statistics', 'core')->increment('core.comments');
 
@@ -2641,7 +2711,7 @@ has been removed.');
             return;
 
         // Make form
-        $this->view->form = $form = new Activity_Form_Comment();
+        $this->view->form = $form = new Sitemobile_modules_Activity_Form_Comment();
         $isShare = $this->_getParam('isShare');
         // Not post
         if (!$this->getRequest()->isPost()) {
@@ -2760,13 +2830,15 @@ has been removed.');
             $attachment = null;
             $attachmentPhotoValue = $this->_getParam('photo_id');
             $attachmentType = $this->_getParam('type');
-
+            $attachmentGuid = $this->_getParam('attachmentGuid');
             if ($attachmentPhotoValue && $attachmentType) {
                 $attachment = Engine_Api::_()->getItem('album_photo', $attachmentPhotoValue);
-                if (isset($row->attachment_type))
-                    $row->attachment_type = ( $attachment ? $attachment->getType() : '' );
-                if (isset($row->attachment_id))
-                    $row->attachment_id = ( $attachment ? $attachment->getIdentity() : 0 );
+            } else if ($attachmentType && $attachmentGuid) {
+                $attachment = Engine_Api::_()->getItemByGuid($attachmentGuid);
+            }
+            if ($attachment && isset($row->attachment_type) && isset($row->attachment_id)) {
+                $row->attachment_type = $attachment->getType();
+                $row->attachment_id = $attachment->getIdentity();
                 $row->save();
             }
 
@@ -3180,5 +3252,8 @@ has been removed.');
         $this->view->body = $content;
         $this->view->body_response = $comment->body;
     }
-
+    
+    private function allowReaction() {
+        return Engine_Api::_()->hasModuleBootstrap('sitereaction') && Engine_Api::_()->getApi('settings', 'core')->getSetting('sitereaction.reaction.active', 1);
+    }
 }

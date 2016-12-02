@@ -80,7 +80,7 @@ if (!isset($_COOKIE[$moduleName . '_dismiss'])):
             </div>
         </div>
     <?php else: ?>
-<?php if(Engine_Api::_()->hasModuleBootstrap('sitevideo') && Engine_Api::_()->getDbtable('modules', 'sitevideo')->getIntegratedModules(array('enabled' => 1, 'item_type' => 'sitegroup_group', 'item_module' => 'sitegroup'))):?>
+<?php if(Engine_Api::_()->hasModuleBootstrap('sitevideo') && !Engine_Api::_()->getDbtable('modules', 'sitevideo')->getIntegratedModules(array('enabled' => 1, 'item_type' => 'sitegroup_group', 'item_module' => 'sitegroup'))):?>
         <div id="dismissintegration_modules">
             <div class="seaocore-notice">
                 <div class="seaocore-notice-icon">
@@ -98,6 +98,45 @@ if (!isset($_COOKIE[$moduleName . '_dismiss'])):
     <?php endif; ?>
 
 <?php endif; ?>
+
+<?php
+$moduleName = 'documentintegration';
+if (!isset($_COOKIE[$moduleName . '_dismiss'])):
+    ?>
+    <?php if (!Engine_Api::_()->hasModuleBootstrap('documentintegration')): ?>
+        <div id="dismissintegration_modules">
+            <div class="seaocore-notice">
+                <div class="seaocore-notice-icon">
+                    <img src="<?php echo $this->layout()->staticBaseUrl ?>application/modules/Seaocore/externals/images/notice.png" alt="Notice" />
+                </div>
+                <div style="float:right;">
+                    <button onclick="dismissintegration('<?php echo $moduleName; ?>');"><?php echo $this->translate('Dismiss'); ?></button>
+                </div>
+                <div class="seaocore-notice-text ">
+                    <?php echo 'To set up a robust Documents System with <a href="https://www.socialengineaddons.com/socialengine-directory-pages-plugin">"Groups / Communities plugin"</a>, you can purchase our awesome <a  target="_blank" href="https://www.socialengineaddons.com/socialengine-videos-product-kit">"Documents Sharing - Product Kit"</a>.'; ?>
+                </div>	
+            </div>
+        </div>
+    <?php else: ?>
+<?php if(Engine_Api::_()->hasModuleBootstrap('document') && !Engine_Api::_()->getDbtable('modules', 'document')->getIntegratedModules(array('enabled' => 1, 'item_type' => 'sitegroup_group', 'item_module' => 'sitegroup'))):?>
+        <div id="dismissintegration_modules">
+            <div class="seaocore-notice">
+                <div class="seaocore-notice-icon">
+                    <img src="<?php echo $this->layout()->staticBaseUrl ?>application/modules/Seaocore/externals/images/notice.png" alt="Notice" />
+                </div>
+                <div style="float:right;">
+                    <button onclick="dismissintegration('<?php echo $moduleName; ?>');"><?php echo $this->translate('Dismiss'); ?></button>
+                </div>
+                <div class="seaocore-notice-text ">
+                    <?php echo 'You have installed <a href="https://www.socialengineaddons.com/documentextensions/socialengine-documents-sharing-pages-businesses-groups-listings-events-stores-extension" target="_blank">Documents Sharing - Pages, Businesses, Groups, Multiple Listing Types, Events, Stores, etc Extension</a> installed on your website. If you want to display documemts using the Documents Plugin on your website so that all documents can be place all together then please <a  target="_blank" href="admin/documentintegration/modules">click here</a> to integrate it.'; ?>
+                </div>	
+            </div>
+        </div>
+ <?php endif; ?>
+    <?php endif; ?>
+
+<?php endif; ?>
+
 <div>
 
 <?php if (!$coreSettings->getSetting('seaocore.google.map.key')):  ?>

@@ -734,10 +734,18 @@ class Sitegroupmember_IndexController extends Seaocore_Controller_Action_Standar
         $tab_selected_id = $this->_getParam('tab');
 
         $this->view->resource_id = $resource_id = $this->_getParam("resource_id");
+        
+        $temproleParamsArray = $this->_getParam("roleParamsArray");
+        
+        parse_str($temproleParamsArray , $roleParamsArray);
+        
+        $this->view->roleParamsArray = $roleParamsArray;
 
         $viewer = Engine_Api::_()->user()->getViewer();
 
         $this->view->form = $form = new Sitegroupmember_Form_Compose();
+        
+        $form->roles_id->addMultiOptions($roleParamsArray);
 
         $form->removeElement('to');
         $form->setDescription('Create your new message with the form below.');
@@ -795,6 +803,13 @@ class Sitegroupmember_IndexController extends Seaocore_Controller_Action_Standar
                         ->where($tableMemberName . '.user_approved = ?', 1)
                         ->where($tableMemberName . '.user_id != ?', $user_id)
                         ->where($tableMemberName . '.group_id = ?', $resource_id);
+                
+                if($values['coupon_mail'] == 2) {
+                      if (isset($values['roles_id']) && $values['roles_id']) {
+                    			$select = $select->where($tableMemberName . '.role_id LIKE ?', '%' . $values['roles_id'] . '%');
+                  }
+                }
+                
                 $members_ids = $select->query()->fetchAll();
             }
         }
@@ -876,7 +891,7 @@ class Sitegroupmember_IndexController extends Seaocore_Controller_Action_Standar
 
             return $this->_forwardCustom('success', 'utility', 'core', array(
                         'smoothboxClose' => true,
-                        'parentRedirect' => $this->_helper->url->url(array('group_url' => Engine_Api::_()->sitegroup()->getGroupUrl($resource_id), 'tab' => $tab_selected_id), 'sitegroup_entry_view', true),
+                         'parentRedirect' => $this->_helper->url->url(array('group_url' => Engine_Api::_()->sitegroup()->getGroupUrl($resource_id), 'tab' => $tab_selected_id), 'sitegroup_entry_view', true),
                         'parentRefresh' => true,
                         'messages' => array(Zend_Registry::get('Zend_Translate')->_('Your message has been sent successfully.'))
             ));

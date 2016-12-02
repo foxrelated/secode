@@ -520,9 +520,7 @@ class Advancedslideshow_Form_Admin_Slideshows_Create extends Engine_Form {
           'description' => 'Enter the opacity for the background of thumbnails area.',
           'validators' => array(
               array('NotEmpty', true),
-              array('Float', true),
-              array('Between', false, array('min' => '0', 'max' => '1', 'inclusive' => false)),
-          ),
+              ),
           'value' => 0.75,
       ));
     }

@@ -55,7 +55,7 @@
             </div>
 						<?php if(Engine_Api::_()->getApi('settings', 'core')->getSetting('sitevideo.gotovideo', 1)): ?>
                 <div style="position:absolute;bottom:20px;right:10px;">
-                  <a style="text-decoration:none;" target="_blank" href="<?php echo $this->url(array('videofeed_id'=>$video->getVideoId()), 'videofeed_profile', true)?>">
+                  <a style="text-decoration:none;"  href="<?php echo $this->url(array('videofeed_id'=>$video->getVideoId()), 'videofeed_profile', true)?>">
                     <span class="lightbox_btm_bl_btn_video"> 
                       <i></i><?php echo $this->translate("Go to Video") ?>
                     </span>

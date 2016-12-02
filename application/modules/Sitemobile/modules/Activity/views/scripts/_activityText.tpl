@@ -155,7 +155,7 @@ if (empty($this->actions)) {
 											<?php else: ?>
 												<a href="javascript:void(0);" data-role="button" data-inline="true" data-mini="true" onclick="javascript:sm4.activity.like('<?php echo $action->action_id ?>');"><?php echo $this->translate('Like') ?></a>
 											<?php endif; ?>
-											<?php if (Engine_Api::_()->getApi('settings', 'core')->core_spam_comment): // Comments - likes  ?>
+											<?php if (0): // Comments - likes  ?>
 												<li data-role="button" data-inline="true" data-mini="true">
 													<a href="<?php echo $this->url(array('module' => 'activity', 'controller' => 'index', 'action' => 'viewcomment', 'action_id' => $action->getIdentity(), 'format' => 'smoothbox'), 'default', 'true'); ?>" data-role="button" data-inline="true" data-mini="true"><?php echo $this->translate('Comment'); ?></a>
 												</li>
@@ -243,7 +243,7 @@ include APPLICATION_PATH . '/application/modules/Seaocore/views/scripts/_comment
 															<ul class="comments_date">
 															<div data-role="controlgroup" data-type="horizontal" >
 																<?php echo $this->timestamp($comment->creation_date); ?>
-																	<?php if ($this->viewer()->getIdentity() && (('user' == $action->subject_type && $this->viewer()->getIdentity() == $action->subject_id) || ($this->viewer()->getIdentity() == $comment->poster_id) || $this->activity_moderate )): ?>
+																	<?php if ($this->viewer()->getIdentity() && ( ($this->viewer()->getIdentity() == $comment->poster_id))): ?>
 																		<a data-role="button" data-inline="true" data-mini="true"  href="javascript:void(0);" data-url="<?php echo $this->url(array('module' => 'activity', 'controller' => 'index', 'action' => 'delete', 'action_id' => $action->action_id, 'comment_id' => $comment->comment_id), 'default', 'true'); ?>" onclick="javascript:sm4.activity.activityremove(this, '<?php echo $comment->comment_id ?>', '<?php echo $action->action_id ?>');" data-message="Are you sure that you want to delete this comment? This action cannot be undone."><?php echo $this->translate('delete'); ?></a>
 																	<?php endif; ?>
 																	<?php if ($canComment):

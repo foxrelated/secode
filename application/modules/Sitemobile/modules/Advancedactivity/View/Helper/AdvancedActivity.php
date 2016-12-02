@@ -61,7 +61,7 @@ class Advancedactivity_View_Helper_AdvancedActivity extends Zend_View_Helper_Abs
         }
       }
     }
-    $form = new Activity_Form_Comment();
+    $form = new Sitemobile_modules_Activity_Form_Comment();
     $composerOptions = Engine_Api::_()->getApi('settings', 'core')->getSetting('advancedactivity.composer.options', array("emotions", "withtags"));
     $data = array_merge($data, array(
         'actions' => array($action),

@@ -1,1 +1,0 @@
-<?php echo $this->partial('_playlists_grid.tpl', 'ynvideochannel', array('playlists' => $this->paginator)); ?>

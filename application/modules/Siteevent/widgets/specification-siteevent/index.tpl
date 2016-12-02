@@ -16,7 +16,7 @@
         var params = {
             requestParams:<?php echo json_encode($this->params) ?>,
             responseContainer: $$('.layout_siteevent_specification_siteevent')
-        }
+        };
         en4.siteevent.ajaxTab.attachEvent('<?php echo $this->identity ?>', params);
     </script>
 <?php endif; ?>

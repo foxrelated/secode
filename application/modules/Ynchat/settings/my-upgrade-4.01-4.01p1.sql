@@ -1,1 +1,0 @@
-ALTER TABLE  `engine4_ynchat_messages` CHANGE  `message_type`  `message_type` ENUM(  'text',  'photo',  'video', 'emoticon',  'sticker',  'link',  'file',  'deleted' ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT  'text';

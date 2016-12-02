@@ -16,11 +16,11 @@ class Sitetagcheckin_Installer extends Engine_Package_Installer_Module {
     $db = $this->getDb();
     $PRODUCT_TYPE = 'sitetagcheckin';
     $PLUGIN_TITLE = 'Sitetagcheckin';
-    $PLUGIN_VERSION = '4.8.6';
+    $PLUGIN_VERSION = '4.8.10p1';
     $PLUGIN_CATEGORY = 'plugin';
     $PRODUCT_DESCRIPTION = 'Geo-Location, Geo-Tagging, Check-Ins & Proximity Search Plugin';
     $_PRODUCT_FINAL_FILE = 0;
-    $SocialEngineAddOns_version = '4.8.7p14';
+    $SocialEngineAddOns_version = '4.8.11';
     $PRODUCT_TITLE = 'Geo-Location, Geo-Tagging, Check-Ins & Proximity Search Plugin';
     $getErrorMsg = $this->getVersion();
     if (!empty($getErrorMsg)) {
@@ -63,6 +63,16 @@ class Sitetagcheckin_Installer extends Engine_Package_Installer_Module {
   function onInstall() {
     $db = $this->getDb();
 		
+    $select = new Zend_Db_Select($db);
+    $select
+            ->from('engine4_core_modules')
+            ->where('name = ?', 'sitemember')
+            ->where('enabled = ?', 1);
+    $is_sitemember_object = $select->query()->fetchObject();
+    if(!empty($is_sitemember_object)) {
+        $db->query("UPDATE  `engine4_core_menuitems` SET  `enabled` =  '0' WHERE  `engine4_core_menuitems`.`name` = 'sitetagcheckin_admin_main_userlocations' LIMIT 1 ;");
+    }
+    
     //START ALBUM LOCATION WORK
     $select = new Zend_Db_Select($db);
     $select
@@ -1142,8 +1152,8 @@ class Sitetagcheckin_Installer extends Engine_Package_Installer_Module {
     foreach ($modArray as $key => $value) {
       $isMod = $db->query("SELECT * FROM  `engine4_core_modules` WHERE  `name` LIKE  '" . $key . "'")->fetch();
       if (!empty($isMod) && !empty($isMod['version'])) {
-        $isModSupport = strcasecmp($isMod['version'], $value);
-        if ($isModSupport < 0) {
+        $isModSupport = $this->checkVersion($isMod['version'], $value);
+        if (empty($isModSupport)) {
           $finalModules['modName'] = $key;
           $finalModules['title'] = $isMod['title'];
           $finalModules['versionRequired'] = $value;
@@ -1159,7 +1169,73 @@ class Sitetagcheckin_Installer extends Engine_Package_Installer_Module {
 
     return $errorMsg;
   }
-  
+      private function checkVersion($databaseVersion, $checkDependancyVersion) {
+        $f = $databaseVersion;
+        $s = $checkDependancyVersion;
+        if (strcasecmp($f, $s) == 0)
+            return -1;
+
+        $fArr = explode(".", $f);
+        $sArr = explode('.', $s);
+        if (count($fArr) <= count($sArr))
+            $count = count($fArr);
+        else
+            $count = count($sArr);
+
+        for ($i = 0; $i < $count; $i++) {
+            $fValue = $fArr[$i];
+            $sValue = $sArr[$i];
+            if (is_numeric($fValue) && is_numeric($sValue)) {
+                if ($fValue > $sValue)
+                    return 1;
+                elseif ($fValue < $sValue)
+                    return 0;
+                else {
+                    if (($i + 1) == $count) {
+                        return -1;
+                    } else
+                        continue;
+                }
+            }
+            elseif (is_string($fValue) && is_numeric($sValue)) {
+                $fsArr = explode("p", $fValue);
+
+                if ($fsArr[0] > $sValue)
+                    return 1;
+                elseif ($fsArr[0] < $sValue)
+                    return 0;
+                else {
+                    return 1;
+                }
+            } elseif (is_numeric($fValue) && is_string($sValue)) {
+                $ssArr = explode("p", $sValue);
+
+                if ($fValue > $ssArr[0])
+                    return 1;
+                elseif ($fValue < $ssArr[0])
+                    return 0;
+                else {
+                    return 0;
+                }
+            } elseif (is_string($fValue) && is_string($sValue)) {
+                $fsArr = explode("p", $fValue);
+                $ssArr = explode("p", $sValue);
+                if ($fsArr[0] > $ssArr[0])
+                    return 1;
+                elseif ($fsArr[0] < $ssArr[0])
+                    return 0;
+                else {
+                    if ($fsArr[1] > $ssArr[1])
+                        return 1;
+                    elseif ($fsArr[1] < $ssArr[1])
+                        return 0;
+                    else {
+                        return -1;
+                    }
+                }
+            }
+        }
+    }
   public function onPostInstall() {
 
     $db = $this->getDb();

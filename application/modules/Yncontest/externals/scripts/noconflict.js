@@ -1,1 +1,0 @@
-var mp3jQuery = jQuery.noConflict();

@@ -632,8 +632,8 @@ if(!Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitemenu'))
     ));
 
     $this->addElement('Radio', 'sitegroup_postedby', array(
-        'label' => 'Posted By',
-        'description' => "Do you want to enable Posted by option for the Groups on your site? (Selecting Yes here will display the member's name who has created the group.)",
+        'label' => 'Created By',
+        'description' => "Do you want to enable Created by option for the Groups on your site? (Selecting Yes here will display the member's name who has created the group.)",
         'multiOptions' => array(
             1 => 'Yes',
             0 => 'No'

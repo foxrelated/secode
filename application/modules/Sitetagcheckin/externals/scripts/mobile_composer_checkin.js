@@ -226,7 +226,7 @@
       }).inject(this.elements.stchekinlocationdiv);
       this.elements.stchekinlocationspan = new Element('span', {        
         'class' : 'tag',
-        'html': (location.type == 'place' && location.vicinity)?  ((location.name && location.name != location.vicinity) ? location.name +', '+ location.vicinity : location.vicinity) : location.label
+        'html': (location.type == 'place' && location.vicinity)?  ((location.name && location.name != location.vicinity) ?  location.vicinity : location.vicinity) : location.label
       });
         
       this.elements.stchekinremovelink = new Element('a', {
@@ -266,7 +266,7 @@
               location.longitude = place.geometry.location.lng();
               location.icon = place.icon;
               location.types = place.types.join(',');
-              location.prefixadd=location.types.indexOf('establishment') > -1 ? self._lang('at'):self._lang('in'); 
+              location.prefixadd=location.types.indexOf('establishment') > -1 ? en4.core.language.translate('at'):en4.core.language.translate('in');
               self.location=location;
             }
           });

@@ -14,7 +14,7 @@
 -- Dumping data for table `engine4_core_modules` 
 --
 
-INSERT IGNORE INTO `engine4_core_modules` (`name`, `title`, `description`, `version`, `enabled`, `type`) VALUES ('sitetagcheckin', 'Geo-Location, Geo-Tagging, Check-Ins & Proximity Search Plugin', 'Geo-Location, Geo-Tagging, Check-Ins & Proximity Search Plugin', '4.8.6p3', 1, 'extra');
+INSERT IGNORE INTO `engine4_core_modules` (`name`, `title`, `description`, `version`, `enabled`, `type`) VALUES ('sitetagcheckin', 'Geo-Location, Geo-Tagging, Check-Ins & Proximity Search Plugin', 'Geo-Location, Geo-Tagging, Check-Ins & Proximity Search Plugin', '4.8.11', 1, 'extra');
 
 INSERT IGNORE INTO `engine4_core_menuitems` (`name`, `module`, `label`, `plugin`, `params`, `menu`, `submenu`, `enabled`, `custom`, `order`) VALUES
 ('sitetagcheckin_main_location', 'sitetagcheckin', 'By Locations', '', '{"route":"sitetagcheckin_bylocation"}', 'event_main', '', 1, 0, 3);

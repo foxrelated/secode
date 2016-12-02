@@ -122,7 +122,7 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
 
     //CHECK VIDEO PLUGIN ENABLE / DISABLE
     public function enableVideoPlugin() {
-        
+
         $sitevideoEnabled = Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitevideo');
         if ($sitevideoEnabled && (Engine_Api::_()->getDbtable('modules', 'sitevideo')->getIntegratedModules(array('enabled' => 1, 'item_type' => "siteevent_event", 'item_module' => 'siteevent')))) {
             return true;
@@ -132,6 +132,17 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
             } else {
                 return 1;
             }
+        }
+    }
+
+    //CHECK DOCUMENT PLUGIN ENABLE / DISABLE
+    public function enableDocumentPlugin() {
+
+        $documentEnabled = Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('document');
+        if ($documentEnabled && (Engine_Api::_()->getDbtable('modules', 'document')->getIntegratedModules(array('enabled' => 1, 'item_type' => "siteevent_event", 'item_module' => 'siteevent')))) {
+            return true;
+        } else {
+            return 1;
         }
     }
 
@@ -226,7 +237,7 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
     }
 
     public function allowVideo($subject_siteevent, $viewer, $counter = 0, $uploadVideo = 0) {
-  
+
         $allowed_upload_videoEnable = $this->enableVideoPlugin();
         if (empty($allowed_upload_videoEnable))
             return false;
@@ -249,18 +260,17 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
 
         $allowed_upload_video = Engine_Api::_()->authorization()->isAllowed($subject_siteevent, $viewer, "video");
         if (Engine_Api::_()->siteevent()->hasPackageEnable()) {
-          if (Engine_Api::_()->siteeventpaid()->allowPackageContent($subject_siteevent->package_id, "video")) {
-            $videoCount = Engine_Api::_()->getDbTable('packages', 'siteeventpaid')->getPackageOption($subject_siteevent->package_id, 'video_count');
-            if (empty($videoCount))
-              $allowed_upload_video = 1;
-            elseif ($videoCount > $counter)
-              $allowed_upload_video = 1;
-            else
-              $allowed_upload_video = 0;
-          }
-          else
-            $allowed_upload_video = 0;
-       }
+            if (Engine_Api::_()->siteeventpaid()->allowPackageContent($subject_siteevent->package_id, "video")) {
+                $videoCount = Engine_Api::_()->getDbTable('packages', 'siteeventpaid')->getPackageOption($subject_siteevent->package_id, 'video_count');
+                if (empty($videoCount))
+                    $allowed_upload_video = 1;
+                elseif ($videoCount > $counter)
+                    $allowed_upload_video = 1;
+                else
+                    $allowed_upload_video = 0;
+            } else
+                $allowed_upload_video = 0;
+        }
         if (empty($allowed_upload_video))
             return false;
 
@@ -487,6 +497,7 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
         }
         return $finalModules;
     }
+
     public function checkVersion($databaseVersion, $checkDependancyVersion) {
         $f = $databaseVersion;
         $s = $checkDependancyVersion;
@@ -554,6 +565,7 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
             }
         }
     }
+
     /**
      * Return array for prefield star's and rectangles
      *
@@ -927,7 +939,7 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
                 $pageTable = Engine_Api::_()->getDbtable('tabletpages', $modulename);
                 $tableContent = Engine_Api::_()->getDbtable('tabletcontent', $modulename);
             }
-          
+
             $tableContentName = $tableContent->info('name');
             $pageSelect = $pageTable->select()->where('name = ?', "siteevent_index_view");
             $page_id = $pageTable->fetchRow($pageSelect)->page_id;
@@ -1504,22 +1516,20 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
                         $days_in_month = date('t', strtotime($repeatMonthStartDate));
                         //GET THE LAST DATE OF MONTH
                         //$lastDateofMonth = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m", strtotime($repeatMonthStartDate)), $days_in_month, date("Y", strtotime($repeatMonthStartDate))));
-                        
                         //GET THE LAST DATE OF MONTH
                         $getRepeatTime = explode(" ", $repeatMonthStartDate);
                         $getTimeString = explode(":", $getRepeatTime[1]);
-                        
+
                         //GET THE LAST DATE OF MONTH
                         $lastDateofMonth = date("Y-m-d H:i:s", mktime($getTimeString[0], $getTimeString[1], $getTimeString[2], date("m", strtotime($repeatMonthStartDate)), $days_in_month, date("Y", strtotime($repeatMonthStartDate))));
-                        
+
                         $lastday_Weekday = date("N", strtotime($lastDateofMonth));
                         $totalnoofWeeks = ceil(date('j', strtotime($lastDateofMonth)) / 7);
                         if ($lastday_Weekday < array_search($_POST['id_monthly-day_of_week'], $dayOfWeeks)) {
                             $day_decrease = -((7 - array_search($_POST['id_monthly-day_of_week'], $dayOfWeeks)) + $lastday_Weekday);
                         } else if ($lastday_Weekday > array_search($_POST['id_monthly-day_of_week'], $dayOfWeeks)) {
                             $day_decrease = -( $lastday_Weekday - array_search($_POST['id_monthly-day_of_week'], $dayOfWeeks));
-                        }
-                        else
+                        } else
                             $day_decrease = 0;
 
                         if ($day_decrease != 0)
@@ -1601,7 +1611,7 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
         foreach ($siteevents as $key => $siteevent) {
             $currentDay = $view->locale()->toDateTime($siteevent['starttime'], array('format' => 'd'));
             if (isset($eventCount_DayofMonth[$currentDay]))
-                $eventCount_DayofMonth[$currentDay]++;
+                $eventCount_DayofMonth[$currentDay] ++;
             else
                 $eventCount_DayofMonth[$currentDay] = 1;
         }
@@ -1660,10 +1670,10 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
 
     public function deleteFeedNotifications($params, $siteevent, $viewer = null) {
 
-        if(empty($viewer)) {
+        if (empty($viewer)) {
             $viewer = Engine_Api::_()->user()->getViewer();
         }
-        
+
         $viewer_id = $viewer->getIdentity();
         $actionActivity = Engine_Api::_()->getDbtable('actions', 'activity');
         //JOIN NOTIFICATION DELETE
@@ -1684,7 +1694,7 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
                 $action->delete();
             }
         }
-        
+
 
         //LEAVE NOTIFICATION DELETE
         $actionRow = $actionActivity->fetchRow(array('type = ?' => 'siteevent_leave', 'subject_type = ?' => $viewer->getType(), 'subject_id = ?' => $viewer_id, 'object_id = ?' => $siteevent->getIdentity(), 'params like(?)' => $params));
@@ -1694,7 +1704,7 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
                 $action->delete();
             }
         }
-        
+
         //LEAVE NOTIFICATION DELETE
         $actionRow = $actionActivity->fetchRow(array('type = ?' => 'siteevent_leave', 'subject_type = ?' => $viewer->getType(), 'subject_id = ?' => $viewer_id, 'object_id = ?' => $siteevent->getIdentity(), 'params like(?)' => $paramss));
         if ($actionRow) {
@@ -1712,8 +1722,8 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
                 $action->delete();
             }
         }
-        
-                //MAY BE JOIN NOTIFICATION DELETE
+
+        //MAY BE JOIN NOTIFICATION DELETE
         $actionRow = $actionActivity->fetchRow(array('type = ?' => 'siteevent_maybe_join', 'subject_type = ?' => $viewer->getType(), 'subject_id = ?' => $viewer_id, 'object_id = ?' => $siteevent->getIdentity(), 'params like(?)' => $paramss));
         if ($actionRow) {
             $action = Engine_Api::_()->getItem('activity_action', $actionRow->action_id);
@@ -1731,7 +1741,7 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
             }
         }
 
-                //MID JOIN NOTIFICATION DELETE
+        //MID JOIN NOTIFICATION DELETE
         $actionRow = $actionActivity->fetchRow(array('type = ?' => 'siteevent_mid_join', 'subject_type = ?' => $viewer->getType(), 'subject_id = ?' => $viewer_id, 'object_id = ?' => $siteevent->getIdentity(), 'params like(?)' => $paramss));
         if ($actionRow) {
             $action = Engine_Api::_()->getItem('activity_action', $actionRow->action_id);
@@ -1739,7 +1749,7 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
                 $action->delete();
             }
         }
-        
+
         //MID LEAVE NOTIFICATION DELETE
         $actionRow = $actionActivity->fetchRow(array('type = ?' => 'siteevent_mid_leave', 'subject_type = ?' => $viewer->getType(), 'subject_id = ?' => $viewer_id, 'object_id = ?' => $siteevent->getIdentity(), 'params like(?)' => $params));
         if ($actionRow) {
@@ -1749,7 +1759,7 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
             }
         }
 
-                //MID LEAVE NOTIFICATION DELETE
+        //MID LEAVE NOTIFICATION DELETE
         $actionRow = $actionActivity->fetchRow(array('type = ?' => 'siteevent_mid_leave', 'subject_type = ?' => $viewer->getType(), 'subject_id = ?' => $viewer_id, 'object_id = ?' => $siteevent->getIdentity(), 'params like(?)' => $paramss));
         if ($actionRow) {
             $action = Engine_Api::_()->getItem('activity_action', $actionRow->action_id);
@@ -1757,7 +1767,7 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
                 $action->delete();
             }
         }
-        
+
         //MID MAY BE NOTIFICATION DELETE
         $actionRow = $actionActivity->fetchRow(array('type = ?' => 'siteevent_mid_maybe', 'subject_type = ?' => $viewer->getType(), 'subject_id = ?' => $viewer_id, 'object_id = ?' => $siteevent->getIdentity(), 'params like(?)' => $params));
         if ($actionRow) {
@@ -1766,8 +1776,8 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
                 $action->delete();
             }
         }
-        
-                //MID MAY BE NOTIFICATION DELETE
+
+        //MID MAY BE NOTIFICATION DELETE
         $actionRow = $actionActivity->fetchRow(array('type = ?' => 'siteevent_mid_maybe', 'subject_type = ?' => $viewer->getType(), 'subject_id = ?' => $viewer_id, 'object_id = ?' => $siteevent->getIdentity(), 'params like(?)' => $paramss));
         if ($actionRow) {
             $action = Engine_Api::_()->getItem('activity_action', $actionRow->action_id);
@@ -1791,7 +1801,7 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
         if ($notification) {
             $notification->delete();
         }
-                //REMOVE THE NOTIFICATION.
+        //REMOVE THE NOTIFICATION.
         $activityNotification = Engine_Api::_()->getDbtable('notifications', 'activity');
         $select = $activityNotification->select()
                 ->where('user_id = ?', $siteevent->getOwner()->getIdentity())
@@ -1806,7 +1816,6 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
         if ($notification) {
             $notification->delete();
         }
-        
     }
 
     public function allowReviewCreate($siteevent) {
@@ -1831,10 +1840,10 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
             }
         }
 
-        if(!Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.reviewbeforeeventend', 1)) {
+        if (!Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.reviewbeforeeventend', 1)) {
             return 1;
         }
-        
+
         $view = Zend_Registry::isRegistered('Zend_View') ? Zend_Registry::get('Zend_View') : null;
         $endDate = Engine_Api::_()->getDbTable('occurrences', 'siteevent')->getOccurenceEndDate($siteevent->event_id);
 
@@ -1885,8 +1894,7 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
             if (!empty($user_ids_Joined))
                 $select->where('user_id NOT IN (?)', (array) $user_ids_Joined);
             $userids_ContentMember = $select->query()->fetchAll(Zend_Db::FETCH_COLUMN);
-        }
-        else
+        } else
             $userids_ContentMember = array();
 
         //NOW IF THE USER IDS ARE LESS THEN THE 40 THEN WE WILL FETCH THE REMAINING FROM PAGE LIKE MEMBERS
@@ -2004,7 +2012,8 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
                 //check for weekdays either changed or still same.
                 foreach ($repeatEventInfo['repeat_weekday'] as $weekday) {
                     if (!in_array($weekday, $eventparams->repeat_weekday))
-                        return true; break;
+                        return true;
+                    break;
                 }
             } elseif ($eventparams->eventrepeat_type == 'monthly') {
 
@@ -2309,12 +2318,12 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
     }
 
     public function sendNotificationEmail($siteevent, $actionObject, $notificationType = null, $emailType = null, $params = null, $occurrence_id = null, $check_in_array = null, $item = null, $rsvp = 3, $viewer = null) {
-        if(empty($item))
-          return; 
-        
+        if (empty($item))
+            return;
+
         $view = Zend_Registry::isRegistered('Zend_View') ? Zend_Registry::get('Zend_View') : null;
         $notificationsTable = Engine_Api::_()->getDbtable('notifications', 'activity');
-        if(empty($viewer)) {
+        if (empty($viewer)) {
             $viewer = Engine_Api::_()->user()->getViewer();
         }
         $viewer_id = $viewer->getIdentity();
@@ -2373,53 +2382,53 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
             $user_subject = Engine_Api::_()->user()->getUser($value);
 
             $row = Engine_Api::_()->getDbTable('membership', 'siteevent')->getRow($siteevent, $user_subject);
-            
-            if ($row && ($row->rsvp == 3 || $row->active == 0 || $row->user_approved == 0)) 
-            continue;
-                        
+
+            if ($row && ($row->rsvp == 3 || $row->active == 0 || $row->user_approved == 0))
+                continue;
+
             $decoded_notification_param = array();
             if (isset($row->notification))
                 $decoded_notification_param = $row->notification;
-            
-            
-             //GET THE LEADERS LIST AND CHECK IF THE VIEWER IS LEADER OR NORMAL USER.
-             if ($siteevent->owner_id == $row->user_id) {
-                 $isLeader = 1;
-             } else {
-                 $list = $siteevent->getLeaderList();
-                 $listItem = $list->get(Engine_Api::_()->user()->getUser($row->user_id));
-                 $isLeader = ( null !== $listItem );
-             }
-             $fields = array();
-             if(!$isLeader) {
-                 if (isset($decoded_notification_param) && !empty($decoded_notification_param['notification']) && in_array('like', $decoded_notification_param['action_notification'])) {
-                     $fields = array_flip($decoded_notification_param['action_notification']);
-                     unset($decoded_notification_param['action_notification'][$fields['like']]);
-                 }
-                 if (isset($decoded_notification_param) && !empty($decoded_notification_param['notification']) && in_array('follow', $decoded_notification_param['action_notification'])) {
-                     $fields = array_flip($decoded_notification_param['action_notification']);
-                     unset($decoded_notification_param['action_notification'][$fields['follow']]);
-                 }
-                  if (isset($decoded_notification_param) && !empty($decoded_notification_param['notification']) && in_array('joined', $decoded_notification_param['action_notification'])) {
-                     $fields = array_flip($decoded_notification_param['action_notification']);
-                     unset($decoded_notification_param['action_notification'][$fields['joined']]);
-                 }
-                 
-                  if (isset($decoded_notification_param) && !empty($decoded_notification_param['notification']) && in_array('rsvp', $decoded_notification_param['action_notification'])) {
-                     $fields = array_flip($decoded_notification_param['action_notification']);
-                     unset($decoded_notification_param['action_notification'][$fields['rsvp']]);
-                 }
-                 
-                 if (isset($decoded_notification_param) && !empty($decoded_notification_param['email']) && in_array('joined', $decoded_notification_param['action_email'])) {
-                     $fields = array_flip($decoded_notification_param['action_email']);
-                     unset($decoded_notification_param['action_email'][$fields['joined']]);
-                 }
-                 if (isset($decoded_notification_param) && !empty($decoded_notification_param['notification']) && in_array('rsvp', $decoded_notification_param['action_email'])) {
-                     $fields = array_flip($decoded_notification_param['action_email']);
-                     unset($decoded_notification_param['action_email'][$fields['rsvp']]);
-                 }
-             }
-            
+
+
+            //GET THE LEADERS LIST AND CHECK IF THE VIEWER IS LEADER OR NORMAL USER.
+            if ($siteevent->owner_id == $row->user_id) {
+                $isLeader = 1;
+            } else {
+                $list = $siteevent->getLeaderList();
+                $listItem = $list->get(Engine_Api::_()->user()->getUser($row->user_id));
+                $isLeader = ( null !== $listItem );
+            }
+            $fields = array();
+            if (!$isLeader) {
+                if (isset($decoded_notification_param) && !empty($decoded_notification_param['notification']) && in_array('like', $decoded_notification_param['action_notification'])) {
+                    $fields = array_flip($decoded_notification_param['action_notification']);
+                    unset($decoded_notification_param['action_notification'][$fields['like']]);
+                }
+                if (isset($decoded_notification_param) && !empty($decoded_notification_param['notification']) && in_array('follow', $decoded_notification_param['action_notification'])) {
+                    $fields = array_flip($decoded_notification_param['action_notification']);
+                    unset($decoded_notification_param['action_notification'][$fields['follow']]);
+                }
+                if (isset($decoded_notification_param) && !empty($decoded_notification_param['notification']) && in_array('joined', $decoded_notification_param['action_notification'])) {
+                    $fields = array_flip($decoded_notification_param['action_notification']);
+                    unset($decoded_notification_param['action_notification'][$fields['joined']]);
+                }
+
+                if (isset($decoded_notification_param) && !empty($decoded_notification_param['notification']) && in_array('rsvp', $decoded_notification_param['action_notification'])) {
+                    $fields = array_flip($decoded_notification_param['action_notification']);
+                    unset($decoded_notification_param['action_notification'][$fields['rsvp']]);
+                }
+
+                if (isset($decoded_notification_param) && !empty($decoded_notification_param['email']) && in_array('joined', $decoded_notification_param['action_email'])) {
+                    $fields = array_flip($decoded_notification_param['action_email']);
+                    unset($decoded_notification_param['action_email'][$fields['joined']]);
+                }
+                if (isset($decoded_notification_param) && !empty($decoded_notification_param['notification']) && in_array('rsvp', $decoded_notification_param['action_email'])) {
+                    $fields = array_flip($decoded_notification_param['action_email']);
+                    unset($decoded_notification_param['action_email'][$fields['rsvp']]);
+                }
+            }
+
             if (isset($decoded_notification_param) && !empty($decoded_notification_param['notification']) && in_array($check_in_array, $decoded_notification_param['action_notification'])) {
 
                 if ($notificationType == 'siteevent_activitylike' || $notificationType == 'siteevent_activitycomment') {
@@ -2438,7 +2447,7 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
             } elseif ($row && $row->rsvp == 0) {
                 $status = 'Not Attending';
             }
-    
+
             if (isset($decoded_notification_param) && !empty($decoded_notification_param['email']) && in_array($check_in_array, $decoded_notification_param['action_email'])) {
                 Engine_Api::_()->getApi('mail', 'core')->sendSystem($user_subject->email, "$emailType", array(
                     'event_title' => $eventtitle,
@@ -2469,14 +2478,14 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
         } elseif ($notificationType == 'siteevent_rsvp_change') {
             $paramss = '{"status":"' . $view->translate($status) . '", "occurrence_id":"' . $occurrence_id . '"}';
         }
-        $active =1;
+        $active = 1;
         $db = Zend_Db_Table_Abstract::getDefaultAdapter();
         $friendIds = Engine_Api::_()->user()->getViewer()->membership()->getMembershipsOfIds();
         $idsStr = '(' . (string) ( is_array($usersVariousContentCreatedArray) ? "'" . join("', '", $usersVariousContentCreatedArray) . "'" : $usersVariousContentCreatedArray ) . ')';
         if (!empty($friendId)) {
             $db->query("INSERT IGNORE INTO `engine4_activity_notifications` (`user_id`, `subject_type`, `subject_id`, `object_type`, `object_id`, `type`,`params`, `date`) SELECT `engine4_siteevent_membership`.`user_id` as `user_id` ,	'" . $subject_type . "' as `subject_type`, " . $subject_id . " as `subject_id`, '" . $object_type . "' as `object_type`, " . $object_id . " as `object_id`, '" . $notificationType . "' as `type`, '" . $paramss . "' as `params`, '" . date('Y-m-d H:i:s') . "' as ` date `  FROM `engine4_siteevent_membership` WHERE (engine4_siteevent_membership.active = " . $active . ") AND (engine4_siteevent_membership.resource_id = " . $siteevent->event_id . ") AND (engine4_siteevent_membership.user_id <> " . $viewer->getIdentity() . ") AND (engine4_siteevent_membership.user_id IN " . $idsStr . ") AND (engine4_siteevent_membership.user_id IN (" . join(",", $friendIds) . ")) group by engine4_siteevent_membership.user_id");
         } else {
-           $db->query("INSERT IGNORE INTO `engine4_activity_notifications` (`user_id`, `subject_type`, `subject_id`, `object_type`, `object_id`, `type`,`params`, `date`) SELECT `engine4_siteevent_membership`.`user_id` as `user_id` ,	'" . $subject_type . "' as `subject_type`, " . $subject_id . " as `subject_id`, '" . $object_type . "' as `object_type`, " . $object_id . " as `object_id`, '" . $notificationType . "' as `type`, '" . $paramss . "' as `params`, '" . date('Y-m-d H:i:s') . "' as ` date `  FROM `engine4_siteevent_membership` WHERE  (engine4_siteevent_membership.active = " . $active . ") AND (engine4_siteevent_membership.resource_id = " . $siteevent->event_id . ") AND (engine4_siteevent_membership.user_id <> " . $viewer->getIdentity() . ")  AND (engine4_siteevent_membership.user_id IN " . $idsStr . ") group by engine4_siteevent_membership.user_id");
+            $db->query("INSERT IGNORE INTO `engine4_activity_notifications` (`user_id`, `subject_type`, `subject_id`, `object_type`, `object_id`, `type`,`params`, `date`) SELECT `engine4_siteevent_membership`.`user_id` as `user_id` ,	'" . $subject_type . "' as `subject_type`, " . $subject_id . " as `subject_id`, '" . $object_type . "' as `object_type`, " . $object_id . " as `object_id`, '" . $notificationType . "' as `type`, '" . $paramss . "' as `params`, '" . date('Y-m-d H:i:s') . "' as ` date `  FROM `engine4_siteevent_membership` WHERE  (engine4_siteevent_membership.active = " . $active . ") AND (engine4_siteevent_membership.resource_id = " . $siteevent->event_id . ") AND (engine4_siteevent_membership.user_id <> " . $viewer->getIdentity() . ")  AND (engine4_siteevent_membership.user_id IN " . $idsStr . ") group by engine4_siteevent_membership.user_id");
         }
 
 // 		if(!empty($siteevent->host) && is_numeric($siteevent->host) && ($siteevent->host != $siteevent->owner_id) ) {
@@ -2533,8 +2542,8 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
         $viewer_id = $viewer->getIdentity();
         $select = $subject->membership()->getMembersObjectSelect();
         $select->where('engine4_siteevent_membership.active =?', 1)
-               ->where('engine4_siteevent_membership.user_approved =?', 1)
-               ->where('engine4_siteevent_membership.rsvp !=?', 3);
+                ->where('engine4_siteevent_membership.user_approved =?', 1)
+                ->where('engine4_siteevent_membership.rsvp !=?', 3);
         $select->group('engine4_users.user_id');
 
         $members = array();
@@ -2549,7 +2558,7 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
 
     public function sendNotificationToFollowers($object, $notificationType, $viewer = null) {
 
-        if(empty($viewer)) {
+        if (empty($viewer)) {
             $viewer = Engine_Api::_()->user()->getViewer();
         }
         $event_id = $object->event_id;
@@ -3107,18 +3116,17 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
                         //GET THE LAST DATE OF MONTH
                         $getRepeatTime = explode(" ", $repeatMonthStartDate);
                         $getTimeString = explode(":", $getRepeatTime[1]);
-                        
+
                         //GET THE LAST DATE OF MONTH
                         $lastDateofMonth = date("Y-m-d H:i:s", mktime($getTimeString[0], $getTimeString[1], $getTimeString[2], date("m", strtotime($repeatMonthStartDate)), $days_in_month, date("Y", strtotime($repeatMonthStartDate))));
-                                
+
                         $lastday_Weekday = date("N", strtotime($lastDateofMonth));
                         $totalnoofWeeks = ceil(date('j', strtotime($lastDateofMonth)) / 7);
                         if ($lastday_Weekday < array_search($_POST['id_monthly-day_of_week'], $dayOfWeeks)) {
                             $day_decrease = -((7 - array_search($_POST['id_monthly-day_of_week'], $dayOfWeeks)) + $lastday_Weekday);
                         } else if ($lastday_Weekday > array_search($_POST['id_monthly-day_of_week'], $dayOfWeeks)) {
                             $day_decrease = -( $lastday_Weekday - array_search($_POST['id_monthly-day_of_week'], $dayOfWeeks));
-                        }
-                        else
+                        } else
                             $day_decrease = 0;
 
                         if ($day_decrease != 0)
@@ -3194,9 +3202,9 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
     public function getAllOccurrenceDate($datesInfo, $noAllOccurrencesField = false) {
         $view = Zend_Registry::isRegistered('Zend_View') ? Zend_Registry::get('Zend_View') : null;
         $datetimeFormat = Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.datetime.format', 'medium');
-        if(!$noAllOccurrencesField){
-         $filter_dates['all'] = $view->translate('All occurrences of this event');          
-        }        
+        if (!$noAllOccurrencesField) {
+            $filter_dates['all'] = $view->translate('All occurrences of this event');
+        }
         $datesInfo = $datesInfo->toarray();
         foreach ($datesInfo as $date):
             $startDateObject = new Zend_Date(strtotime($date['starttime']));
@@ -3257,8 +3265,7 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
             $date = explode("/", $date);
             if (count($date) == 3) {
                 $date = $date[1] . '/' . $date[0] . '/' . $date[2];
-            }
-            else
+            } else
                 $date = str_replace("/", "-", $date_orig);
         }
         //CHECK IF THE COVERTTED DATE RETURNS TRUE OR FALSE.
@@ -3321,148 +3328,146 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
         $resultMenuitems = $menuitemsTable->fetchRow($selectMenuitemsTable);
         return $resultMenuitems;
     }
-    
-      /**
-      * Check package is enable or not for site
-      * @return bool
-      */
-      public function hasPackageEnable() {
-        
-        if (!Zend_Registry::isRegistered('hasPackageEnable')) {          
-          $hasPackageEnable = (Engine_Api::_()->hasModuleBootstrap('siteeventpaid') && Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.package.setting', 1)) ? true : false;
-              Zend_Registry::set('hasPackageEnable', $hasPackageEnable);
+
+    /**
+     * Check package is enable or not for site
+     * @return bool
+     */
+    public function hasPackageEnable() {
+
+        if (!Zend_Registry::isRegistered('hasPackageEnable')) {
+            $hasPackageEnable = (Engine_Api::_()->hasModuleBootstrap('siteeventpaid') && Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.package.setting', 1)) ? true : false;
+            Zend_Registry::set('hasPackageEnable', $hasPackageEnable);
         }
 
-        return Zend_Registry::get('hasPackageEnable');  
-      
-      }
-      
-      public function sendNotificationToHost($event_id){
-      if(empty($event_id)){
-        return;
-      }
-      $siteevent = Engine_Api::_()->getItem('siteevent_event', $event_id);
-      
-      $viewer = Engine_Api::_()->user()->getViewer();
-      $viewer_id = $viewer->getIdentity();
-      $httpHost = _ENGINE_SSL ? 'https://' : 'http://';
-      $viewerGetTitle = $viewer->getTitle();
-      $event_title_with_link = '<a href = ' . $httpHost . $_SERVER['HTTP_HOST'] . Zend_Controller_Front::getInstance()->getRouter()->assemble(array('event_id' => $siteevent->event_id, 'slug' => $siteevent->getSlug()), 'siteevent_entry_view') . ">$siteevent->title</a>";
+        return Zend_Registry::get('hasPackageEnable');
+    }
 
-      $sender_link = '<a href = ' . $httpHost . $_SERVER['HTTP_HOST'] . $viewer->getHref() . ">$viewerGetTitle</a>";
+    public function sendNotificationToHost($event_id) {
+        if (empty($event_id)) {
+            return;
+        }
+        $siteevent = Engine_Api::_()->getItem('siteevent_event', $event_id);
 
-      $event_url = $_SERVER['HTTP_HOST'] . Zend_Controller_Front::getInstance()->getRouter()->assemble(array('event_id' => $siteevent->event_id, 'slug' => $siteevent->getSlug()), 'siteevent_entry_view');
+        $viewer = Engine_Api::_()->user()->getViewer();
+        $viewer_id = $viewer->getIdentity();
+        $httpHost = _ENGINE_SSL ? 'https://' : 'http://';
+        $viewerGetTitle = $viewer->getTitle();
+        $event_title_with_link = '<a href = ' . $httpHost . $_SERVER['HTTP_HOST'] . Zend_Controller_Front::getInstance()->getRouter()->assemble(array('event_id' => $siteevent->event_id, 'slug' => $siteevent->getSlug()), 'siteevent_entry_view') . ">$siteevent->title</a>";
 
-              if (Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.host', 1) && $siteevent->host_type == 'user' && is_numeric($siteevent->host_id) && $viewer_id != $siteevent->host_id) {
-                  $newHost = $siteevent->getHost();
+        $sender_link = '<a href = ' . $httpHost . $_SERVER['HTTP_HOST'] . $viewer->getHref() . ">$viewerGetTitle</a>";
 
-                  if ($newHost) {
+        $event_url = $_SERVER['HTTP_HOST'] . Zend_Controller_Front::getInstance()->getRouter()->assemble(array('event_id' => $siteevent->event_id, 'slug' => $siteevent->getSlug()), 'siteevent_entry_view');
 
-                      if(!$siteevent->membership()->getRow($newHost)) {
-                        $siteevent->membership()->addMember($newHost)->setUserApproved($newHost);
-                        $row = $siteevent->membership()->getRow($newHost);
-                        $row->rsvp = 2;
-                        $row->save();
+        if (Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.host', 1) && $siteevent->host_type == 'user' && is_numeric($siteevent->host_id) && $viewer_id != $siteevent->host_id) {
+            $newHost = $siteevent->getHost();
 
-                        //UPDATE THE MEMBER COUNT IN EVENT TABLE
-                        $siteevent->member_count = $siteevent->membership()->getMemberCount();
-                        $siteevent->save();
-                        
-                      }
-                        Engine_Api::_()->getApi('mail', 'core')->sendSystem($newHost->email, 'SITEEVENT_HOST_EMAIL', array(
-                            'event_title_with_link' => $event_title_with_link,
-                            'sender' => $sender_link,
-                            'event_url' => $event_url,
-                            'queue' => true
-                        ));
+            if ($newHost) {
 
-                        $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
-                        $occurrence_id = Engine_Api::_()->getDbtable('occurrences', 'siteevent')->getAllOccurrenceDates($siteevent->event_id, 1);
-                        $notifyApi->addNotification($newHost, $viewer, $siteevent, 'siteevent_host', array('occurrence_id' => $occurrence_id));
-                        $notifyApi->addNotification($newHost, $viewer, $siteevent, 'siteevent_member', array('occurrence_id' => $occurrence_id));
-                  }
-              } elseif ($siteevent->host_type == 'sitepage_page') {
-                  $occurrence_id = Engine_Api::_()->getDbtable('occurrences', 'siteevent')->getAllOccurrenceDates($siteevent->event_id, 1);
-                  $manageAdmins = Engine_Api::_()->getDbtable('manageadmins', 'sitepage')->getManageAdmin($siteevent->host_id, $viewer_id);
-                  $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
+                if (!$siteevent->membership()->getRow($newHost)) {
+                    $siteevent->membership()->addMember($newHost)->setUserApproved($newHost);
+                    $row = $siteevent->membership()->getRow($newHost);
+                    $row->rsvp = 2;
+                    $row->save();
 
-                  foreach ($manageAdmins as $admins) {
-                      $newHost = Engine_Api::_()->getItem('user', $admins['user_id']);
-                      $sitepage = Engine_Api::_()->getItem('sitepage_page', $admins['page_id']);
-                      $item_title_baseurl = 'http://' . $_SERVER['HTTP_HOST'] . $sitepage->getHref();
-                      $item_title_link = "<a href='$item_title_baseurl'>" . $sitepage->getTitle() . "</a>";
-                      $notifyApi->addNotification($newHost, $viewer, $siteevent, 'siteevent_page_host', array('occurrence_id' => $occurrence_id, 'page' => $item_title_link));
-                      Engine_Api::_()->getApi('mail', 'core')->sendSystem($newHost->email, 'SITEEVENT_PAGE_HOST', array(
-                          'page_title_with_link' => $item_title_link,
-                          'event_title_with_link' => $event_title_with_link,
-                          'sender' => $sender_link,
-                          'event_url' => $event_url,
-                          'queue' => true
-                      ));
-                  }
-              } elseif ($siteevent->host_type == 'sitebusiness_business') {
-                  $occurrence_id = Engine_Api::_()->getDbtable('occurrences', 'siteevent')->getAllOccurrenceDates($siteevent->event_id, 1);
-                  $manageAdmins = Engine_Api::_()->getDbtable('manageadmins', 'sitebusiness')->getManageAdmin($siteevent->host_id, $viewer_id);
-                  $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
+                    //UPDATE THE MEMBER COUNT IN EVENT TABLE
+                    $siteevent->member_count = $siteevent->membership()->getMemberCount();
+                    $siteevent->save();
+                }
+                Engine_Api::_()->getApi('mail', 'core')->sendSystem($newHost->email, 'SITEEVENT_HOST_EMAIL', array(
+                    'event_title_with_link' => $event_title_with_link,
+                    'sender' => $sender_link,
+                    'event_url' => $event_url,
+                    'queue' => true
+                ));
 
-                  foreach ($manageAdmins as $admins) {
-                      $newHost = Engine_Api::_()->getItem('user', $admins['user_id']);
-                      $sitebusiness = Engine_Api::_()->getItem('sitebusiness_business', $admins['business_id']);
-                      $item_title_baseurl = 'http://' . $_SERVER['HTTP_HOST'] . $sitebusiness->getHref();
-                      $item_title_link = "<a href='$item_title_baseurl'>" . $sitebusiness->getTitle() . "</a>";
-                      $notifyApi->addNotification($newHost, $viewer, $siteevent, 'siteevent_business_host', array('occurrence_id' => $occurrence_id, 'business' => $item_title_link));
+                $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
+                $occurrence_id = Engine_Api::_()->getDbtable('occurrences', 'siteevent')->getAllOccurrenceDates($siteevent->event_id, 1);
+                $notifyApi->addNotification($newHost, $viewer, $siteevent, 'siteevent_host', array('occurrence_id' => $occurrence_id));
+                $notifyApi->addNotification($newHost, $viewer, $siteevent, 'siteevent_member', array('occurrence_id' => $occurrence_id));
+            }
+        } elseif ($siteevent->host_type == 'sitepage_page') {
+            $occurrence_id = Engine_Api::_()->getDbtable('occurrences', 'siteevent')->getAllOccurrenceDates($siteevent->event_id, 1);
+            $manageAdmins = Engine_Api::_()->getDbtable('manageadmins', 'sitepage')->getManageAdmin($siteevent->host_id, $viewer_id);
+            $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
 
-                      Engine_Api::_()->getApi('mail', 'core')->sendSystem($newHost->email, 'SITEEVENT_BUSINESS_HOST', array(
-                          'business_title_with_link' => $item_title_link,
-                          'event_title_with_link' => $event_title_with_link,
-                          'sender' => $sender_link,
-                          'event_url' => $event_url,
-                          'queue' => true
-                      ));
-                  }
-              } elseif ($siteevent->host_type == 'sitegroup_group') {
-                  $occurrence_id = Engine_Api::_()->getDbtable('occurrences', 'siteevent')->getAllOccurrenceDates($siteevent->event_id, 1);
-                  $manageAdmins = Engine_Api::_()->getDbtable('manageadmins', 'sitegroup')->getManageAdmin($siteevent->host_id, $viewer_id);
-                  $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
+            foreach ($manageAdmins as $admins) {
+                $newHost = Engine_Api::_()->getItem('user', $admins['user_id']);
+                $sitepage = Engine_Api::_()->getItem('sitepage_page', $admins['page_id']);
+                $item_title_baseurl = 'http://' . $_SERVER['HTTP_HOST'] . $sitepage->getHref();
+                $item_title_link = "<a href='$item_title_baseurl'>" . $sitepage->getTitle() . "</a>";
+                $notifyApi->addNotification($newHost, $viewer, $siteevent, 'siteevent_page_host', array('occurrence_id' => $occurrence_id, 'page' => $item_title_link));
+                Engine_Api::_()->getApi('mail', 'core')->sendSystem($newHost->email, 'SITEEVENT_PAGE_HOST', array(
+                    'page_title_with_link' => $item_title_link,
+                    'event_title_with_link' => $event_title_with_link,
+                    'sender' => $sender_link,
+                    'event_url' => $event_url,
+                    'queue' => true
+                ));
+            }
+        } elseif ($siteevent->host_type == 'sitebusiness_business') {
+            $occurrence_id = Engine_Api::_()->getDbtable('occurrences', 'siteevent')->getAllOccurrenceDates($siteevent->event_id, 1);
+            $manageAdmins = Engine_Api::_()->getDbtable('manageadmins', 'sitebusiness')->getManageAdmin($siteevent->host_id, $viewer_id);
+            $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
 
-                  foreach ($manageAdmins as $admins) {
-                      $newHost = Engine_Api::_()->getItem('user', $admins['user_id']);
-                      $sitegroup = Engine_Api::_()->getItem('sitegroup_group', $admins['group_id']);
-                      $item_title_baseurl = 'http://' . $_SERVER['HTTP_HOST'] . $sitegroup->getHref();
-                      $item_title_link = "<a href='$item_title_baseurl'>" . $sitegroup->getTitle() . "</a>";
-                      $notifyApi->addNotification($newHost, $viewer, $siteevent, 'siteevent_group_host', array('occurrence_id' => $occurrence_id, 'group' => $item_title_link));
-                      Engine_Api::_()->getApi('mail', 'core')->sendSystem($newHost->email, 'SITEEVENT_GROUP_HOST', array(
-                          'group_title_with_link' => $item_title_link,
-                          'event_title_with_link' => $event_title_with_link,
-                          'sender' => $sender_link,
-                          'event_url' => $event_url,
-                          'queue' => true
-                      ));
-                  }
-              } elseif ($siteevent->host_type == 'sitestore_store') {
-                  $occurrence_id = Engine_Api::_()->getDbtable('occurrences', 'siteevent')->getAllOccurrenceDates($siteevent->event_id, 1);
-                  $manageAdmins = Engine_Api::_()->getDbtable('manageadmins', 'sitestore')->getManageAdmin($siteevent->host_id, $viewer_id);
-                  $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
+            foreach ($manageAdmins as $admins) {
+                $newHost = Engine_Api::_()->getItem('user', $admins['user_id']);
+                $sitebusiness = Engine_Api::_()->getItem('sitebusiness_business', $admins['business_id']);
+                $item_title_baseurl = 'http://' . $_SERVER['HTTP_HOST'] . $sitebusiness->getHref();
+                $item_title_link = "<a href='$item_title_baseurl'>" . $sitebusiness->getTitle() . "</a>";
+                $notifyApi->addNotification($newHost, $viewer, $siteevent, 'siteevent_business_host', array('occurrence_id' => $occurrence_id, 'business' => $item_title_link));
 
-                  foreach ($manageAdmins as $admins) {
-                      $newHost = Engine_Api::_()->getItem('user', $admins['user_id']);
-                      $sitestore = Engine_Api::_()->getItem('sitestore_store', $admins['store_id']);
-                      $item_title_baseurl = 'http://' . $_SERVER['HTTP_HOST'] . $sitestore->getHref();
-                      $item_title_link = "<a href='$item_title_baseurl'>" . $sitestore->getTitle() . "</a>";
-                      $notifyApi->addNotification($newHost, $viewer, $siteevent, 'siteevent_store_host', array('occurrence_id' => $occurrence_id, 'store' => $item_title_link));
+                Engine_Api::_()->getApi('mail', 'core')->sendSystem($newHost->email, 'SITEEVENT_BUSINESS_HOST', array(
+                    'business_title_with_link' => $item_title_link,
+                    'event_title_with_link' => $event_title_with_link,
+                    'sender' => $sender_link,
+                    'event_url' => $event_url,
+                    'queue' => true
+                ));
+            }
+        } elseif ($siteevent->host_type == 'sitegroup_group') {
+            $occurrence_id = Engine_Api::_()->getDbtable('occurrences', 'siteevent')->getAllOccurrenceDates($siteevent->event_id, 1);
+            $manageAdmins = Engine_Api::_()->getDbtable('manageadmins', 'sitegroup')->getManageAdmin($siteevent->host_id, $viewer_id);
+            $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
 
-                      Engine_Api::_()->getApi('mail', 'core')->sendSystem($newHost->email, 'SITEEVENT_STORE_HOST', array(
-                          'store_title_with_link' => $item_title_link,
-                          'event_title_with_link' => $event_title_with_link,
-                          'sender' => $sender_link,
-                          'event_url' => $event_url,
-                          'queue' => true
-                      ));
-                  }
-              }
-  }
-    
-      /**
+            foreach ($manageAdmins as $admins) {
+                $newHost = Engine_Api::_()->getItem('user', $admins['user_id']);
+                $sitegroup = Engine_Api::_()->getItem('sitegroup_group', $admins['group_id']);
+                $item_title_baseurl = 'http://' . $_SERVER['HTTP_HOST'] . $sitegroup->getHref();
+                $item_title_link = "<a href='$item_title_baseurl'>" . $sitegroup->getTitle() . "</a>";
+                $notifyApi->addNotification($newHost, $viewer, $siteevent, 'siteevent_group_host', array('occurrence_id' => $occurrence_id, 'group' => $item_title_link));
+                Engine_Api::_()->getApi('mail', 'core')->sendSystem($newHost->email, 'SITEEVENT_GROUP_HOST', array(
+                    'group_title_with_link' => $item_title_link,
+                    'event_title_with_link' => $event_title_with_link,
+                    'sender' => $sender_link,
+                    'event_url' => $event_url,
+                    'queue' => true
+                ));
+            }
+        } elseif ($siteevent->host_type == 'sitestore_store') {
+            $occurrence_id = Engine_Api::_()->getDbtable('occurrences', 'siteevent')->getAllOccurrenceDates($siteevent->event_id, 1);
+            $manageAdmins = Engine_Api::_()->getDbtable('manageadmins', 'sitestore')->getManageAdmin($siteevent->host_id, $viewer_id);
+            $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
+
+            foreach ($manageAdmins as $admins) {
+                $newHost = Engine_Api::_()->getItem('user', $admins['user_id']);
+                $sitestore = Engine_Api::_()->getItem('sitestore_store', $admins['store_id']);
+                $item_title_baseurl = 'http://' . $_SERVER['HTTP_HOST'] . $sitestore->getHref();
+                $item_title_link = "<a href='$item_title_baseurl'>" . $sitestore->getTitle() . "</a>";
+                $notifyApi->addNotification($newHost, $viewer, $siteevent, 'siteevent_store_host', array('occurrence_id' => $occurrence_id, 'store' => $item_title_link));
+
+                Engine_Api::_()->getApi('mail', 'core')->sendSystem($newHost->email, 'SITEEVENT_STORE_HOST', array(
+                    'store_title_with_link' => $item_title_link,
+                    'event_title_with_link' => $event_title_with_link,
+                    'sender' => $sender_link,
+                    'event_url' => $event_url,
+                    'queue' => true
+                ));
+            }
+        }
+    }
+
+    /**
      * Send emails for perticuler event
      * @params $type : which mail send
      * $params $eventId : Id of event
@@ -3529,21 +3534,21 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
             ));
         }
     }
-    
+
     /**
-    * Check ticket is enable or not for site
-    * @return bool
-    */
+     * Check ticket is enable or not for site
+     * @return bool
+     */
     public function hasTicketEnable() {
 
-      if (!Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('siteeventticket'))
-        return (bool) 0;
+        if (!Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('siteeventticket'))
+            return (bool) 0;
 
-      $ticket = Engine_Api::_()->getApi('settings', 'core')->getSetting('siteeventticket.ticket.enabled', 1);
-      if (!empty($ticket))
-        return (bool) 1;
-      else
-        return (bool) 0;
+        $ticket = Engine_Api::_()->getApi('settings', 'core')->getSetting('siteeventticket.ticket.enabled', 1);
+        if (!empty($ticket))
+            return (bool) 1;
+        else
+            return (bool) 0;
     }
 
     public function getGoogleCalenderLink($obj) {
@@ -3566,7 +3571,7 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
             'anchorTitle' => $view->translate("Add to Google Calendar"),
             'target' => '_blank'
         );
-        return '<a title="'. $params['anchorTitle'] .'" class="addtogooglecalendar" target="' . $params['target'] . '" href="' . $params['url'] . 'action=TEMPLATE&text=' . $params['title'] . '&dates=' . $params['datetime']['start'] . '/' . $params['datetime']['end'] . '&location=' . $params['location'] . '&details=' . $params['description'] . '&trp=true&sprop=website:http://www.gothamvolleyball.org&sprop=name:Gotham Volleyball"><span class="seao_icon_google">&nbsp;</span>' . $params['linkText'] . '</a>';
+        return '<a title="' . $params['anchorTitle'] . '" class="addtogooglecalendar" target="' . $params['target'] . '" href="' . $params['url'] . 'action=TEMPLATE&text=' . $params['title'] . '&dates=' . $params['datetime']['start'] . '/' . $params['datetime']['end'] . '&location=' . $params['location'] . '&details=' . $params['description'] . '&trp=true&sprop=website:http://www.gothamvolleyball.org&sprop=name:Gotham Volleyball"><span class="seao_icon_google">&nbsp;</span>' . $params['linkText'] . '</a>';
     }
 
     public function getYahooCalenderLink($obj) {
@@ -3590,41 +3595,42 @@ class Siteevent_Api_Core extends Core_Api_Abstract {
             'target' => '_blank'
         );
         $link = "http://calendar.yahoo.com/?v=60&ST=" . $params['datetime']['start'] . "&ET=" . $params['datetime']['end'] . "&REM1=01d&TITLE=" . urlencode($siteevent->getTitle()) . "&VIEW=d&in_loc=" . $params['location'];
-        return '<a title="'. $params['anchorTitle'] .'" target="' . $params['target'] . '" href="' . $link . '"><span class="seao_icon_yahoo">&nbsp;</span>' . $params['linkText'] . '</a>';
+        return '<a title="' . $params['anchorTitle'] . '" target="' . $params['target'] . '" href="' . $link . '"><span class="seao_icon_yahoo">&nbsp;</span>' . $params['linkText'] . '</a>';
     }
 
     public function isTicketBasedEvent() {
-          
+
         if (!Zend_Registry::isRegistered('ticketCreationAllowed')) {
-            
+
             $ticketCreationAllowed = (Engine_Api::_()->hasModuleBootstrap('siteeventticket') && Engine_Api::_()->getApi('settings', 'core')->getSetting('siteeventticket.ticket.enabled', 1)) ? true : false;
             Zend_Registry::set('ticketCreationAllowed', $ticketCreationAllowed);
         }
 
-        return Zend_Registry::get('ticketCreationAllowed');  
-    }    
-    
-  /**
-   * Return count
-   *
-   * @param string $tablename
-   * @param string $modulename
-   * @param int $page_id
-   * @param int $title_count
-   * @return paginator
-   */
-  public function getTotalCount($event_id, $modulename, $tablename) {
+        return Zend_Registry::get('ticketCreationAllowed');
+    }
 
-    $table = Engine_Api::_()->getDbtable($tablename, $modulename);
-    $count = 0;
-    $count = $table
-            ->select()
-            ->from($table->info('name'), array('count(*) as count'))
-            ->where("parent_type = ?", 'siteevent_event')
-            ->where("parent_id =?", $event_id)
-            ->query()
-            ->fetchColumn();
-    
-    return $count;
-  }    
+    /**
+     * Return count
+     *
+     * @param string $tablename
+     * @param string $modulename
+     * @param int $page_id
+     * @param int $title_count
+     * @return paginator
+     */
+    public function getTotalCount($event_id, $modulename, $tablename) {
+
+        $table = Engine_Api::_()->getDbtable($tablename, $modulename);
+        $count = 0;
+        $count = $table
+                ->select()
+                ->from($table->info('name'), array('count(*) as count'))
+                ->where("parent_type = ?", 'siteevent_event')
+                ->where("parent_id =?", $event_id)
+                ->query()
+                ->fetchColumn();
+
+        return $count;
+    }
+
 }

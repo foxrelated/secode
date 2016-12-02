@@ -116,17 +116,22 @@ class Siteevent_WaitlistController extends Core_Controller_Action_Standard {
 
         $siteevent = $occurrence->getParent();
 
-        $host = $siteevent->getHost()->getType();
-        $host_id = 0;
-        if ($host == 'user') {
-            $host_id = $siteevent->getHost()->getIdentity();
-        }
-
         $this->view->isHost = false;
-        if ($host_id == $viewer_id) {
-            $this->view->isHost = true;
-        }
+        
+        if(Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.host', 1) && $siteevent->getHost()){
+            
+            $host = $siteevent->getHost()->getType();
+            $host_id = 0;
+            if ($host == 'user') {
+                $host_id = $siteevent->getHost()->getIdentity();
+            }
 
+            $this->view->isHost = false;
+            if ($host_id == $viewer_id) {
+                $this->view->isHost = true;
+            }
+        }
+        
         if ($siteevent->owner_id == $viewer_id) {
             $this->view->isLeader = $isLeader = 1;
         } else {

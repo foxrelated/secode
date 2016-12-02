@@ -4,10 +4,10 @@
  * SocialEngine
  *
  * @category   Application_Extensions
- * @package    Siteapi
- * @copyright  Copyright 2015-2016 BigStep Technologies Pvt. Ltd.
+ * @package    Siteevent
+ * @copyright  Copyright 2013-2014 BigStep Technologies Pvt. Ltd.
  * @license    http://www.socialengineaddons.com/license/
- * @version    TopicController.php 2015-09-17 00:00:00Z SocialEngineAddOns $
+ * @version    $Id: IndexController.php 2013-03-18 00:00:00Z SocialEngineAddOns $
  * @author     SocialEngineAddOns
  */
 class Siteevent_AnnouncementController extends Siteapi_Controller_Action_Standard {
@@ -59,7 +59,6 @@ class Siteevent_AnnouncementController extends Siteapi_Controller_Action_Standar
 
         $response['canDelete'] = $this->_helper->requireAuth()->setAuthParams($siteevent, $viewer, "delete")->isValid();
         foreach ($announcements as $item) {
-            $tempresponse[] = $item->toArray();
             $announcement = $item->toArray();
             if (isset($announcement['body']) && !empty($announcement['body']))
                 $announcement['body'] = strip_tags($announcement['body']);

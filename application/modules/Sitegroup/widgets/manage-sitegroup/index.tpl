@@ -24,7 +24,7 @@
         <li <?php if(Engine_Api::_()->getApi('settings', 'core')->getSetting('sitegroup.fs.markers', 1)):?><?php if($item->featured):?> class="lists_highlight"<?php endif;?><?php endif;?>>
           <?php if(Engine_Api::_()->getApi('settings', 'core')->getSetting('sitegroup.fs.markers', 1)):?>
            <?php if($item->featured):?>
-             <i title="<?php echo $this->translate('Featured')?>" class="seaocore_list_featured_label"></i>
+             <span title="<?php echo $this->translate('Featured')?>" class="seaocore_list_featured_label"><?php echo $this->translate('Featured') ?></span>
           <?php endif;?>
         <?php endif;?>
           <div class='seaocore_browse_list_photo'>

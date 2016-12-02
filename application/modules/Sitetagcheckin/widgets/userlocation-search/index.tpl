@@ -16,7 +16,7 @@ $this->headLink()->appendStylesheet($this->layout()->staticBaseUrl . 'applicatio
 
   $language = $_COOKIE['en4_language'];
   $apiKey = Engine_Api::_()->seaocore()->getGoogleMapApiKey();
-   $this->headScript()->appendFile("https://maps.googleapis.com/maps/api/js?libraries=places&sensor=true&key=$apiKey");
+   $this->headScript()->appendFile("https://maps.googleapis.com/maps/api/js?libraries=places&key=$apiKey");
 ?>
 <?php
   /* Include the common user-end field switching javascript */
@@ -246,7 +246,7 @@ $this->headLink()->appendStylesheet($this->layout()->staticBaseUrl . 'applicatio
 // 			$('category_id').value = 0;
 // 		}
 
-    var mapShow = '<?php echo $this->mapShow; ?>';
+    var mapShow = '<?php echo Engine_Api::_()->getApi('settings', 'core')->getSetting('sitetagcheckin.mapshow', 1); ?>';
 		var  formElements = document.getElementById('filter_form');
 		var url = en4.core.baseUrl + 'widget/index/mod/sitetagcheckin/name/bylocation-user';
 		var parms = formElements.toQueryString(); 
@@ -284,14 +284,26 @@ $this->headLink()->appendStylesheet($this->layout()->staticBaseUrl . 'applicatio
 
 	function locationPage() {
 		var  sitepage_location = document.getElementById('sitepage_location');
+var autocomplete = new google.maps.places.Autocomplete(document.getElementById('sitepage_location'));
+                google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                    var place = autocomplete.getPlace();
+                    if (!place.geometry) {
+                        return;
+                    }
 
-		if (document.getElementById('Latitude').value) {
-			document.getElementById('Latitude').value = 0;
-		}
-		
-		if(document.getElementById('Longitude').value) {
-			document.getElementById('Longitude').value = 0;
-		}
+                    document.getElementById('Latitude').value = place.geometry.location.lat();
+                    document.getElementById('Longitude').value = place.geometry.location.lng();
+                    
+                });
+                
+                
+//		if (document.getElementById('Latitude').value) {
+//			document.getElementById('Latitude').value = 0;
+//		}
+//		
+//		if(document.getElementById('Longitude').value) {
+//			document.getElementById('Longitude').value = 0;
+//		}
 	}
 	
 	function locationSearch() {

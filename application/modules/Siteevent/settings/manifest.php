@@ -430,7 +430,7 @@ return array(
     array(
         'type' => 'module',
         'name' => 'siteevent',
-        'version' => '4.8.10p4',
+        'version' => '4.8.12p3',
         'path' => 'application/modules/Siteevent',
         'title' => 'Advanced Events',
         'description' => 'Advanced Events Plugin',

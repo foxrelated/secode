@@ -282,15 +282,9 @@ if ($this->ratingType == 'rating_editor') {
         }
     </script>
 
-    <script type="text/javascript">
-        var script = '<script type="text/javascript" src="http://google-maps-' +
-                'utility-library-v3.googlecode.com/svn/trunk/infobubble/src/infobubble';
-        if (document.location.search.indexOf('compiled') !== -1) {
-            script += '-compiled';
-        }
-        script += '.js"><' + '/script>';
-        document.write(script);
-    </script>
+<?php
+$this->headScript()->appendFile($this->layout()->staticBaseUrl . "application/modules/Seaocore/externals/scripts/infobubble.js");
+?>
 
     <script type="text/javascript" >
         //<![CDATA[

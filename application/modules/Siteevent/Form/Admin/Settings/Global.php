@@ -30,7 +30,7 @@ class Siteevent_Form_Admin_Settings_Global extends Engine_Form {
             'description' => "Please enter your license key that was provided to you when you purchased this plugin. If you do not know your license key, please contact the Support Team of SocialEngineAddOns from the Support section of your Account Area.(Key Format: XXXXXX-XXXXXX-XXXXXX )",
             'value' => $coreSettings->getSetting('siteevent.lsettings'),
         ));
-        
+
         $isSiteeventrepeatEnabled = Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('siteeventticket');
         if (!empty($isSiteeventrepeatEnabled)) {
             $this->addElement('Text', 'siteeventticket_lsettings', array(
@@ -50,7 +50,8 @@ class Siteevent_Form_Admin_Settings_Global extends Engine_Form {
         }
 
         $isSiteeventdocumentEnabled = Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('siteeventdocument');
-        if (!empty($isSiteeventdocumentEnabled)) {
+        $documentEnabled = Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('document');
+        if ($isSiteeventdocumentEnabled || ($documentEnabled && Engine_Api::_()->getDbtable('modules', 'document')->getIntegratedModules(array('enabled' => 1, 'item_type' => "siteevent_event", 'item_module' => 'siteevent')))) {
             $this->addElement('Text', 'siteeventdocument_lsettings', array(
                 'label' => 'Enter License key For Advanced Events - Documents Extension',
                 'description' => "Please enter your license key that was provided to you when you purchased this plugin. If you do not know your license key, please contact the Support Team of SocialEngineAddOns from the Support section of your Account Area.(Key Format: XXXXXX-XXXXXX-XXXXXX )",
@@ -155,7 +156,7 @@ class Siteevent_Form_Admin_Settings_Global extends Engine_Form {
             ),
             'value' => $coreSettings->getSetting('siteevent.slugplural', 'event-items'),
         ));
-        
+
         $this->addElement('Radio', 'siteevent_redirection', array(
             'label' => 'Redirection of Events link',
             'description' => 'Please select the redirection page for Events, when user click on "Events" link at Main Navigation Menu.',
@@ -164,7 +165,7 @@ class Siteevent_Form_Admin_Settings_Global extends Engine_Form {
                 'index' => 'Events Browse Page'
             ),
             'value' => $coreSettings->getSetting('siteevent.redirection', 'home'),
-        ));        
+        ));
 
         $this->addElement('Radio', 'siteevent_cat_widgets', array(
             'label' => 'Category Home Page Link',
@@ -195,7 +196,7 @@ class Siteevent_Form_Admin_Settings_Global extends Engine_Form {
             ),
             'value' => $coreSettings->getSetting('siteevent.diary', 1),
         ));
-        
+
         $this->addElement('Radio', 'siteevent_waitlist', array(
             'label' => 'Enable "Capacity & Waitlist" feature',
             'description' => 'Do you want to enable "Capacity & Waitlist" feature of events ?',
@@ -204,8 +205,8 @@ class Siteevent_Form_Admin_Settings_Global extends Engine_Form {
                 0 => 'No'
             ),
             'value' => $coreSettings->getSetting('siteevent.waitlist', 1),
-        ));         
-        
+        ));
+
         if (!Engine_Api::_()->siteevent()->isTicketBasedEvent()) {
             $this->addElement('Radio', 'siteevent_guestconfimation', array(
                 'label' => 'Allow Event Owners to Confirm Guests',
@@ -215,9 +216,9 @@ class Siteevent_Form_Admin_Settings_Global extends Engine_Form {
                     0 => 'No'
                 ),
                 'value' => $coreSettings->getSetting('siteevent.guestconfimation', 0),
-            ));        
+            ));
         }
-        
+
         $this->addElement('Radio', 'siteevent_privacybase', array(
             'label' => 'Events Visible on Browse pages & in Widgets',
             'description' => "With respect to Events Privacy, do you want all events to be shown to users on the Browse pages (Browse Events, Locations, Pinboard, etc.) and in widgets, or do you want only those events to appear in these for which the user has view privacy. If you choose ‘Yes’, then whenever a user clicks on an event for which he does not have view privacy, then he will be shown a “Private Page” message. If you choose ‘No’, then strict privacy checks will be applied on these Browse pages & widgets which might slightly affect their loading speeds (To minimize such delays, we are using caching based displays.).",
@@ -297,14 +298,14 @@ class Siteevent_Form_Admin_Settings_Global extends Engine_Form {
             ),
             'value' => $coreSettings->getSetting('siteevent.veneuname', 1)
         ));
-        
+
         $view = Zend_Registry::isRegistered('Zend_View') ? Zend_Registry::get('Zend_View') : null;
         $this->addElement('Dummy', "siteevent_seaocore", array(
             'label' => 'Default Location for Searching Events',
-            'description' => "We have transferred some location related settings to other section. Please <a target='_blank' href='". $view->url(array('module' => 'seaocore', 'controller' => 'settings', 'action' => 'map'), 'admin_default', true) ."'>click here</a> to change the settings.",
+            'description' => "We have transferred some location related settings to other section. Please <a target='_blank' href='" . $view->url(array('module' => 'seaocore', 'controller' => 'settings', 'action' => 'map'), 'admin_default', true) . "'>click here</a> to change the settings.",
             'ignore' => true,
         ));
-        $this->siteevent_seaocore->addDecorator('Description', array('placement' => 'PREPEND', 'class' => 'description', 'escape' => false));        
+        $this->siteevent_seaocore->addDecorator('Description', array('placement' => 'PREPEND', 'class' => 'description', 'escape' => false));
 
         $this->addElement('Radio', 'siteevent_proximity_search_kilometer', array(
             'label' => 'Proximity Search',
@@ -438,7 +439,7 @@ class Siteevent_Form_Admin_Settings_Global extends Engine_Form {
             'onchange' => 'showTimezoneSetting(this.value)',
             'value' => $coreSettings->getSetting('siteevent.datetime.format', 'medium'),
         ));
-        
+
         $this->addElement('Radio', 'siteevent_timezone', array(
             'label' => 'Display Timezone',
             'description' => 'Do you want to display Timezone along with the date and time?',
@@ -466,7 +467,7 @@ class Siteevent_Form_Admin_Settings_Global extends Engine_Form {
         $field = 'siteevent_code_share';
         $this->addElement('Dummy', "$field", array(
             'label' => 'Social Share Widget Code',
-            'description' => "<a class='smoothbox' href='". $view->url(array('module' => 'seaocore', 'controller' => 'settings', 'action' => 'social-share', 'field' => "$field"), 'admin_default', true) ."'>Click here</a> to add your social share code.",
+            'description' => "<a class='smoothbox' href='" . $view->url(array('module' => 'seaocore', 'controller' => 'settings', 'action' => 'social-share', 'field' => "$field"), 'admin_default', true) . "'>Click here</a> to add your social share code.",
             'ignore' => true,
         ));
         $this->$field->addDecorator('Description', array('placement' => 'PREPEND', 'class' => 'description', 'escape' => false));

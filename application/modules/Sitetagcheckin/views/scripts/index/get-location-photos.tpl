@@ -109,7 +109,7 @@
 										<div class="feed_item_body">
                       <?php $username = $this->htmlLink($item->getHref(), $item->getTitle());?>
 											<?php $starttime = date("F j, Y", strtotime($action['starttime']));?>
-											<?php echo $this->translate("%1$s has attended this event on %2$s.", $username, $starttime);?>  
+											<?php echo $this->translate('%1$s has attended this event on %2$s.', $username, $starttime);?>  
 										</div>	
 									</li>
 								</ul>		

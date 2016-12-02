@@ -1928,7 +1928,12 @@ sitestoreform" => "Form", "sitestorediscussion" => "Discussions", "sitestorenote
 
         if (empty($sitevideo->parent_type) && empty($sitevideo->parent_id))
             return true;
-        $parent = Engine_Api::_()->getItem($sitevideo->parent_type, $sitevideo->parent_id);
+        if ($sitevideo->parent_type == 'event' && !Engine_Api::_()->hasItemType('event')){
+            $parent = false;
+        }
+        else {
+            $parent = Engine_Api::_()->getItem($sitevideo->parent_type, $sitevideo->parent_id);
+        }
         if (!empty($parent)) {
             $parent_type = $parent->getType();
             $parent_id = $parent->getIdentity();

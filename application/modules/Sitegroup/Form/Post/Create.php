@@ -20,7 +20,7 @@ class Sitegroup_Form_Post_Create extends Engine_Form {
             ->setDescription('Post your reply to this topic below.')
             ->setAction(
                     Zend_Controller_Front::getInstance()->getRouter()
-                    ->assemble(array('action' => 'post', 'controller' => 'topic', 'tab' => Zend_Controller_Front::getInstance()->getRequest()->getParam('tab', null)), 'sitegroup_extended', true)
+                    ->assemble(array())
     );
 
     if (!Engine_Api::_()->getApi('settings', 'core')->getSetting('sitegroup.tinymceditor', 1)) {

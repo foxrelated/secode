@@ -68,7 +68,7 @@ class Sitevideo_View_Helper_GetRichContent extends Advancedactivity_View_Helper_
                 } else {
                     $duration = gmdate("i:s", $item->duration);
                 }
-                $duration = ltrim($duration, '0:');
+                //$duration = ltrim($duration, '0:');
 
                 $video_duration = "<span class='video_length'>" . $duration . "</span>";
             }

@@ -27,7 +27,7 @@ class Sitevideo_Widget_VideoCategoriesGridViewController extends Engine_Content_
         $showAllCategories = $this->_getParam('showAllCategories', 0);
         $orderBy = $this->_getParam('orderBy', 'cat_order');
         $this->view->storage = Engine_Api::_()->storage();
-        $havingChannels = !$showAllCategories;
+        $havingVideos = !$showAllCategories;
         $this->view->category_id = $category_id = $request->getParam('category_id');
         $sitevideo_getview = Zend_Registry::isRegistered('sitevideo_getview') ? Zend_Registry::get('sitevideo_getview') : null;
         if(empty($sitevideo_getview))
@@ -35,9 +35,9 @@ class Sitevideo_Widget_VideoCategoriesGridViewController extends Engine_Content_
 
         // GET ALL CATEGORIES
         if (empty($category_id))
-            $categories = $tableCategory->getCategories(array('fetchColumns' => array('category_id', 'cat_dependency', 'category_name', 'category_slug', 'cat_order', 'video_id'), 'sponsored' => 0, 'cat_depandancy' => 1, 'havingChannels' => $havingChannels, 'orderBy' => $orderBy));
+            $categories = $tableCategory->getCategories(array('fetchColumns' => array('category_id', 'cat_dependency', 'category_name', 'category_slug', 'cat_order', 'video_id'), 'sponsored' => 0, 'cat_depandancy' => 1, 'havingVideos' => $havingVideos, 'orderBy' => $orderBy));
         else {
-            $categories = $tableCategory->getSubcategories(array('category_id' => $category_id, 'havingChannels' => $havingChannels, 'fetchColumns' => array('category_id', 'cat_dependency', 'category_name', 'cat_order', 'video_id')));
+            $categories = $tableCategory->getSubcategories(array('category_id' => $category_id, 'havingVideos' => $havingVideos, 'fetchColumns' => array('category_id', 'cat_dependency', 'category_name', 'cat_order', 'video_id')));
         }
 
         if (count($categories) == 0)
@@ -47,7 +47,7 @@ class Sitevideo_Widget_VideoCategoriesGridViewController extends Engine_Content_
 
         foreach ($categories as $category) {
 
-            $subcategory_info2 = $tableCategory->getSubcategories(array('category_id' => $category->category_id, 'havingChannels' => $havingChannels, 'fetchColumns' => array('category_id', 'category_name', 'cat_order')));
+            $subcategory_info2 = $tableCategory->getSubcategories(array('category_id' => $category->category_id, 'havingVideos' => $havingVideos, 'fetchColumns' => array('category_id', 'category_name', 'cat_order')));
             $SubCategoryArray = $tempSubCategoryArray = array();
 
             if (!empty($subcategory_info2)) {

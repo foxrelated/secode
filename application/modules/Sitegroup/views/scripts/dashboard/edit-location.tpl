@@ -10,6 +10,8 @@
  * @author     SocialEngineAddOns
  */
 ?>
+<div class="generic_layout_container layout_middle">
+<div class="generic_layout_container layout_core_content">
 <?php include_once APPLICATION_PATH . '/application/modules/Sitegroup/views/scripts/payment_navigation_views.tpl'; ?>
 
 <div class='layout_middle'>
@@ -85,8 +87,10 @@
 		</div>
   </div>
   </div>
+     </div>
+  </div>
 <?php if (!empty($this->location)): ?>
-<?php $this->headScript()->appendFile("https://maps.google.com/maps/api/js?sensor=false"); ?>
+<?php $apiKey = Engine_Api::_()->seaocore()->getGoogleMapApiKey(); $this->headScript()->appendFile("https://maps.googleapis.com/maps/api/js?libraries=places&key=$apiKey"); ?>
 <script type="text/javascript">
   var map;
   var geocoder = new google.maps.Geocoder();

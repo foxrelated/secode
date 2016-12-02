@@ -21,11 +21,11 @@ class Siteevent_Installer extends Engine_Package_Installer_Module {
         $db = $this->getDb();
         $PRODUCT_TYPE = 'siteevent';
         $PLUGIN_TITLE = 'Siteevent';
-        $PLUGIN_VERSION = '4.8.10p4';
+        $PLUGIN_VERSION = '4.8.12p3';
         $PLUGIN_CATEGORY = 'plugin';
         $PRODUCT_DESCRIPTION = 'Advanced Events Plugin';
         $_PRODUCT_FINAL_FILE = 0;
-        $SocialEngineAddOns_version = '4.8.9p15';
+        $SocialEngineAddOns_version = '4.8.11';
         $PRODUCT_TITLE = 'Advanced Events Plugin';
         $file_path = APPLICATION_PATH . "/application/modules/$PLUGIN_TITLE/controllers/license/ilicense.php";
         $is_file = @file_exists($file_path);
@@ -46,22 +46,7 @@ class Siteevent_Installer extends Engine_Package_Installer_Module {
     function onInstall() {
 
         $db = $this->getDb();
-        $select = new Zend_Db_Select($db);
-        $select
-                ->from('engine4_core_modules')
-                ->where('name = ?', 'siteevent')
-                ->where('version <= ?', '4.8.9');
-        $version_check = $select->query()->fetchObject();
-        if (!empty($version_check)) {
-            $select = new Zend_Db_Select($db);
-            $calendarValue = $select
-                    ->from('engine4_core_settings', array('value'))
-                    ->where('name =?', 'siteevent.calendar.daystart')
-                    ->query()
-                    ->fetchColumn();
 
-            $db->query("UPDATE  `engine4_core_settings` SET  `value` =  '$calendarValue' WHERE  `engine4_core_settings`.`name` =  'seaocore.calendar.daystart' LIMIT 1 ;");
-        }
         $db->update('engine4_core_menuitems', array('label' => 'Announcements'), array('name = ?' => 'siteevent_dashboard_announcements'));
         $db->update('engine4_core_menuitems', array('menu' => 'siteevent_dashboard_content', 'order' => 95), array('name = ?' => 'siteevent_dashboard_editmetakeyword'));
             
@@ -901,7 +886,17 @@ class Siteevent_Installer extends Engine_Package_Installer_Module {
         //END: UPGRADE QUERY TO ORDER CHANGE OF DASHBOARD MENUS
         
         $db->update('engine4_core_pages', array('custom' => 0), array('name = ?' => 'siteevent_topic_view'));
-          
+        $select = new Zend_Db_Select($db);
+        $select
+                ->from('engine4_core_modules')
+                ->where('name = ?', 'documentintegration')
+                ->where('enabled = ?', 1);
+        $is_documentintegration_object = $select->query()->fetchObject();
+        if ($is_documentintegration_object) {
+            $db->query("INSERT IGNORE INTO `engine4_document_modules` (`item_type`, `item_id`, `item_module`, `enabled`, `integrated`, `item_title`) VALUES ('siteevent_event', 'event_id', 'siteevent', '0', '0', 'Event Documents')");
+            $db->query('INSERT IGNORE INTO `engine4_core_menuitems` ( `name`, `module`, `label`, `plugin`, `params`, `menu`, `submenu`, `enabled`, `custom`, `order`) VALUES("siteevent_admin_main_managedocument", "documentintegration", "Manage Documents", "", \'{"uri":"admin/document/manage-document/index/contentType/siteevent_event/contentModule/siteevent"}\', "siteevent_admin_main", "", 0, 0, 25);');
+            $db->query('INSERT IGNORE INTO `engine4_core_settings` ( `name`, `value`) VALUES( "document.leader.owner.siteevent.event", "1");');
+        }    
         $select = new Zend_Db_Select($db);
         $select
                 ->from('engine4_core_modules')

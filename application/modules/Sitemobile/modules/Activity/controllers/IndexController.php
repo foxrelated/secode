@@ -535,7 +535,7 @@ class Activity_IndexController extends Core_Controller_Action_Standard {
     $viewer = Engine_Api::_()->user()->getViewer();
 
     $action = Engine_Api::_()->getDbtable('actions', 'activity')->getActionById($action_id);
-    $form = $this->view->form = new Activity_Form_Comment();
+    $form = $this->view->form = new Sitemobile_modules_Activity_Form_Comment();
     $form->setActionIdentity($action_id);
 
 
@@ -562,7 +562,7 @@ class Activity_IndexController extends Core_Controller_Action_Standard {
       return;
 
     // Make form
-    $this->view->form = $form = new Activity_Form_Comment();
+    $this->view->form = $form = new Sitemobile_modules_Activity_Form_Comment();
 
     // Not post
     if (!$this->getRequest()->isPost()) {

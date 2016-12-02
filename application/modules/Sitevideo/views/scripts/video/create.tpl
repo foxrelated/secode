@@ -12,7 +12,7 @@
 ?>
 <?php
 $apiKey = Engine_Api::_()->seaocore()->getGoogleMapApiKey();
-$this->headScript()->appendFile("https://maps.googleapis.com/maps/api/js?libraries=places&sensor=true&key=$apiKey");
+$this->headScript()->appendFile("https://maps.googleapis.com/maps/api/js?libraries=places&key=$apiKey");
 ?>
 
 <?php $this->headLink()->prependStylesheet($this->layout()->staticBaseUrl . 'application/modules/Sitevideo/externals/styles/style_sitevideo.css'); ?>
@@ -102,11 +102,13 @@ echo $this->partial('_jsSwitch.tpl', 'fields', array(
             }
             var tagsUrl = '<?php echo $this->url(array('controller' => 'tag', 'action' => 'suggest'), 'default', true) ?>';
             var validationUrl = '<?php echo $this->url(array('action' => 'validation'), 'sitevideo_video_general', true) ?>';
+
             var validationErrorMessage = "<?php echo $this->string()->escapeJavascript($this->translate("We could not find a video there - please check the URL and try again. If you are sure that the URL is valid, please click %s to continue.", "<a href='javascript:void(0);' onclick='javascript:ignoreValidation();'>" . $this->translate("here") . "</a>")); ?>";
             var checkingUrlMessage = '<?php echo $this->string()->escapeJavascript($this->translate('Checking URL...')) ?>';
             var current_code;
             var ignoreValidation = window.ignoreValidation = function () {
                 $('upload-wrapper').style.display = "block";
+                $('upload').style.display = "block";
                 $('validation').style.display = "none";
                 $('code').value = current_code;
                 $('ignore').value = true;
@@ -245,7 +247,11 @@ echo $this->partial('_jsSwitch.tpl', 'fields', array(
                         }
 
                         // Check for link
-                        var m = body.value.match(/https?:\/\/([-\w\.]+)+(:\d+)?(\/([-#:\w/_\.]*(\?\S+)?)?)?/);
+                        if (video_element.value == 5) {
+                            var m = body.value.match(/(https?:\/\/|\/\/)([-\w\.]+)+(:\d+)?(\/([-#:\w/_\.]*(\?\S+)?)?)?/);
+                        } else {
+                            var m = body.value.match(/https?:\/\/([-\w\.]+)+(:\d+)?(\/([-#:\w/_\.]*(\?\S+)?)?)?/);
+                        }
                         if ($type(m) && $type(m[0]) && lastMatch != m[0]) {
                             if (video_element.value == 1) {
                                 video.youtube(body.value);
@@ -523,8 +529,8 @@ echo $this->partial('_jsSwitch.tpl', 'fields', array(
             var type = '<?php echo Zend_Controller_Front::getInstance()->getRequest()->getParam('type', null); ?>';
             // Run stuff
             if (type) {
-                updateTextFields(3);
-                document.getElementById('type-3').checked = true;
+                updateTextFields(type);
+                document.getElementById('type-' + type).checked = true;
             } else {
                 updateTextFields();
             }

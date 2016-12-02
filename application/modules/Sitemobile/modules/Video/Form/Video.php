@@ -159,16 +159,20 @@ class Sitemobile_modules_Video_Form_Video extends Engine_Form {
     
     //YouTube, Vimeo
     $video_options = Array();
-    if (Engine_Api::_()->getApi('settings', 'core')->getSetting('video.youtube.apikey')) {
+    if (Engine_Api::_()->getApi('settings', 'core')->getSetting('video.youtube.apikey') || Engine_Api::_()->getApi('settings', 'core')->getSetting('sitevideo.youtube.apikey')) {
       $video_options[1] = "YouTube";
     }
     $video_options[2] = "Vimeo";
 
     //My Computer
     $allowed_upload = Engine_Api::_()->authorization()->getAdapter('levels')->getAllowed('video', $user, 'upload');
+    
     $ffmpeg_path = Engine_Api::_()->getApi('settings', 'core')->video_ffmpeg_path;
+    if(!$ffmpeg_path) {
+        $ffmpeg_path = Engine_Api::_()->getApi('settings', 'core')->sitevideo_ffmpeg_path;
+    }
     if( !empty($ffmpeg_path) && $allowed_upload ) {
-      if(Engine_Api::_()->hasModuleBootstrap('mobi') && Engine_Api::_()->mobi()->isMobile()){
+      if(Engine_Api::_()->seaocore()->isMobile() || Engine_Api::_()->seaocore()->isSiteMobileModeEnabled()){
         $video_options[3] = "My Device";
       }
       else{

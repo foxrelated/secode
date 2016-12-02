@@ -223,7 +223,7 @@ class Sitegroup_Model_DbTable_Albums extends Engine_Db_Table {
 			$select ->limit($params['limit']);
     }
  
-    if($widgetType == 'browsealbum' || (!Engine_API::_()->seaocore()->checkSitemobileMode('fullsite-mode'))) {
+    if($widgetType == 'browsealbum' || (!Engine_API::_()->seaocore()->checkSitemobileMode('fullsite-mode'))  || $params['cover']) {
       return Zend_Paginator::factory($select);
     }
     else {

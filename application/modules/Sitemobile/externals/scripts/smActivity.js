@@ -158,6 +158,40 @@ var feedElement,
         if (sm4.core.isApp()) {
           $('#activitypost-container-temp').find('textarea').autoGrow();
         }
+        if($.mobile.activePage.advfeed_array.enableHashTagComposer) {
+          var highlighter = $('<div />', {
+            'class': 'activity-post-highlighter-wapper',
+            'html': '<div class="activity-post-highlighter" id="highlighter" />'
+          });
+          $('#activitypost-container-temp').find('textarea').before( highlighter );
+          $('#activitypost-container-temp').find('textarea').css('position', 'relative');
+          $('#activitypost-container-temp').find('textarea').on('keydown, keyup', function() {
+            var hashRegExp = /\B#\w*[a-zA-Z]+\w*/g;
+            var content = $(this).val().replace(/\<span\>\<\/span\>/ig, '');
+            var matches = content.match(hashRegExp);
+            var newcontent = '';
+            if (matches) {
+              var hashSplit = content.split(hashRegExp);
+
+              var i = 0;
+              for (i; i < matches.length; i++) {
+                var subset = hashSplit[i] || '';
+                if (subset === matches[i]) {
+                  newcontent += subset;
+                  continue;
+                }
+                newcontent += subset + '<span class="hashtag">'+ matches[i]+ '</span>';
+              }
+
+              for (i; i < hashSplit.length; i++) {
+                newcontent += hashSplit[i] || '';
+              }
+            } else {
+               newcontent = $(this).val();
+            }
+            $('#highlighter').html(newcontent);
+          });
+        }
         $("#activitypost-container-temp").unbind('click').bind('click', function(event) {
           hideEmotionIconClickEvent();
           hidePrivacyIconClickEvent();
@@ -560,12 +594,13 @@ var feedElement,
       }
     },           
     like_unlikeFeed: function(action, action_id, comment_id, self) {
-
+ 
      if(enabledModuleForMobile && (showAsLike == 0)) {
         if (action == 'like') {
             //MAKE LIKE CHANGE TO UNLIKE FIRST AND THEN SEND AJAX REQUEST:
             if ($.type($.mobile.activePage.find('#activity-item-' + action_id).find('.feed_item_btm a.feed_likes').get(0)) != 'undefined') {
-              var likespan = $.trim($.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_likes span').html()).split(' ');
+            var likespan = $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_likes span');
+            likespan = likespan.jqmData('total-like') ? [likespan.jqmData('total-like')]: $.trim(likespan.html()).split(' ');
               if(showLikeWithoutIcon != 3) {
                  $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_likes span').html(sm4.core.language.translate('% likes', parseInt(likespan[0]) + parseInt(1)));
               } else {
@@ -573,9 +608,9 @@ var feedElement,
               }
               if (typeof like_commentURL != 'undefined') {
                   $.mobile.activePage.find('#main-feed-' + action_id + ' .feed_item_option .ui-block-b a').attr('href', "javascript:void(0);");
-                $.mobile.activePage.find('#main-feed-' + action_id + ' .feed_item_option .ui-block-b a').attr('onclick','sm4.activity.changeLikeDislikeColor()');
-                 $.mobile.activePage.find('#main-feed-' + action_id + ' .feed_item_option .ui-block-a a').attr('href', 'javascript:void(0);');
-                 $.mobile.activePage.find('#main-feed-' + action_id + ' .feed_item_option .ui-block-a a').attr('onclick', "javascript:sm4.activity.dislike(\'" + action_id + "\')");
+                  $.mobile.activePage.find('#main-feed-' + action_id + ' .feed_item_option .ui-block-b a').attr('onclick','sm4.activity.changeLikeDislikeColor()');
+                  $.mobile.activePage.find('#main-feed-' + action_id + ' .feed_item_option .ui-block-a a').attr('href', 'javascript:void(0);');
+                  $.mobile.activePage.find('#main-feed-' + action_id + ' .feed_item_option .ui-block-a a').attr('onclick', "javascript:sm4.activity.dislike(\'" + action_id + "\')");
               }
             }
             else {
@@ -620,7 +655,8 @@ var feedElement,
             
         }
         else {
-          var likespan = $.trim($.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_likes span').html()).split(' ');
+          var likespan = $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_likes span');  
+            likespan = likespan.jqmData('total-like') ? [likespan.jqmData('total-like')]: $.trim(likespan.html()).split(' ');
           if ((parseInt(likespan[0]) - parseInt(1)) > 0) {
             if(showLikeWithoutIcon != 3) {   
                 var likestring = (parseInt(likespan[0]) - parseInt(1)) > 1 ? 'likes' : 'like';
@@ -647,7 +683,8 @@ var feedElement,
 
         //MAKE LIKE CHANGE TO UNLIKE FIRST AND THEN SEND AJAX REQUEST:
         if ($.type($.mobile.activePage.find('#activity-item-' + action_id).find('.feed_item_btm a.feed_likes').get(0)) != 'undefined') {
-          var likespan = $.trim($.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_likes span').html()).split(' ');
+          var likespan = $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_likes span');  
+            likespan = likespan.jqmData('total-like') ? [likespan.jqmData('total-like')]: $.trim(likespan.html()).split(' ');
           $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_likes span').html(sm4.core.language.translate('% likes', parseInt(likespan[0]) + parseInt(1)));
           if (typeof like_commentURL != 'undefined') {
             $.mobile.activePage.find('#main-feed-' + action_id + ' .feed_item_option .ui-block-a a').attr('onclick', 'javascript:sm4.activity.unlike(' + action_id + ');');
@@ -678,7 +715,8 @@ var feedElement,
          }
       }
       else {
-        var likespan = $.trim($.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_likes span').html()).split(' ');
+        var likespan = $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_likes span');  
+        likespan = likespan.jqmData('total-like') ? [likespan.jqmData('total-like')]: $.trim(likespan.html()).split(' ');
         if ((parseInt(likespan[0]) - parseInt(1)) > 0) {
           var likestring = (parseInt(likespan[0]) - parseInt(1)) > 1 ? 'likes' : 'like';
           $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_likes span').html(sm4.core.language.translate('% ' + likestring, (parseInt(likespan[0]) - parseInt(1))));
@@ -844,19 +882,49 @@ var feedElement,
       sm4.core.dloader.refreshPage();
 
     },
-    like: function(action_id, comment_id, self) {
+    reaction_like_unlike_dislike: function (type, action_id) {
+      var enableDislike = enabledModuleForMobile && (showAsLike == 0);
+      if (type === 'like') {
+        $.mobile.activePage.find('#aaf_reaction_' + action_id).removeClass('dnone');
+        $.mobile.activePage.find('#aaf_default_reaction_' + action_id).addClass('dnone');
+        if (enableDislike) {
+          var dislikeLink = $.mobile.activePage.find('#main-feed-' + action_id + ' .feed_item_option .ui-block-b a');
+          dislikeLink.attr('href', "javascript:void(0);");
+          dislikeLink.attr('onclick', "javascript:sm4.activity.dislike(\'" + action_id + "\')");
+          dislikeLink.find('i').removeClass('feed-unliked-icon');
+        }
+      }
+      if (type === 'unlike' || type === 'dislike') {
+        $.mobile.activePage.find('#aaf_reaction_' + action_id).addClass('dnone');
+        $.mobile.activePage.find('#aaf_default_reaction_' + action_id).removeClass('dnone');
+        if (enableDislike && type === 'dislike') {
+          var dislikeLink = $.mobile.activePage.find('#main-feed-' + action_id + ' .feed_item_option .ui-block-b a');
+          dislikeLink.attr('href', "javascript:void(0);");
+          dislikeLink.attr('onclick', "sm.activity.changeLikeDislikeColor()");
+          dislikeLink.find('i').addClass('feed-unliked-icon');
+        }
+      }
+    },
+    like: function(action_id, comment_id, self, reaction) {
+      var stats = $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm .like_comments_stats');
       if ($.type(comment_id) == 'undefined' || comment_id == '') {
-        this.like_unlikeFeed('like', action_id, comment_id, self);
+        if (stats.jqmData('reaction') != 1) {
+          this.like_unlikeFeed('like', action_id, comment_id, self);
+        } else {
+          stats.hide();
+          this.reaction_like_unlike_dislike('like', action_id);
+        }
       } else {
         this.like_unlikeComment('like', action_id, comment_id);
       }
 
-      if ($.type(self) == 'undefined') {
+      if ($.type(self) == 'undefined' || reaction) {
         postVar = {
           'action_id': action_id,
           'comment_id': comment_id,
           'subject': $.mobile.activePage.advfeed_array.subject_guid,
-          'format': 'json'
+          'format': 'json',
+           reaction: reaction
         }
         target = sm4.core.baseUrl + 'advancedactivity/index/like';
       }
@@ -874,26 +942,32 @@ var feedElement,
         url: target,
         data: postVar,
         success: function(responseJSON, textStatus, xhr) {
+          if (responseJSON.like_comments_stats) {
+            stats.html(responseJSON.like_comments_stats).show();
+          }
            if(enabledModuleForMobile && (showAsLike == 0)) {
           if ($.type(comment_id) == 'undefined' || comment_id == '') {
-             if(responseJSON.hasViewerDisLike && responseJSON.dislikeCount > 1) {
-                  
-                  var likespan = $.trim($.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_dislikes span').html()).split(' ');
-                  if(responseJSON.dislikeCount > 1) {
-                      if(showLikeWithoutIconInReplies != 3) {
-                        $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_dislikes span').html(sm4.core.mobiPageHTML(sm4.core.language.translate('% dislikes', parseInt(responseJSON.dislikeCount) - parseInt(1))));
-                        } else {
-                            $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_dislikes span').html(sm4.core.mobiPageHTML(sm4.core.language.translate('% vote downs', parseInt(responseJSON.dislikeCount) - parseInt(1))));
-                        }
-                      
-                  } else {
-                      $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_dislikes').prev().remove();
-                      $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_dislikes').remove();
-                  }
-              }  else if(responseJSON.hasViewerDisLike && responseJSON.dislikeCount == 1) {
-                    $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_dislikes').prev().remove();
-                   $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_dislikes').remove();
-              }
+             if (responseJSON.like_comments_stats) {
+              stats.html(responseJSON.like_comments_stats).show();
+             } else {
+              if(responseJSON.hasViewerDisLike && responseJSON.dislikeCount > 1) {
+                   var likespan = $.trim($.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_dislikes span').html()).split(' ');
+                   if(responseJSON.dislikeCount > 1) {
+                       if(showLikeWithoutIconInReplies != 3) {
+                         $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_dislikes span').html(sm4.core.mobiPageHTML(sm4.core.language.translate('% dislikes', parseInt(responseJSON.dislikeCount) - parseInt(1))));
+                         } else {
+                             $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_dislikes span').html(sm4.core.mobiPageHTML(sm4.core.language.translate('% vote downs', parseInt(responseJSON.dislikeCount) - parseInt(1))));
+                         }
+
+                   } else {
+                       $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_dislikes').prev().remove();
+                       $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_dislikes').remove();
+                   }
+               }  else if(responseJSON.hasViewerDisLike && responseJSON.dislikeCount == 1) {
+                     $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_dislikes').prev().remove();
+                    $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_dislikes').remove();
+               }
+            }
           } else {
                 if(responseJSON.hasViewerDisLike && responseJSON.dislikeCount > 1) {
 
@@ -903,27 +977,32 @@ var feedElement,
                         $('#comments_comment_dislikes_' + comment_id).html("<span class='ui-icon ui-icon-thumbs-down-alt'>" + (parseInt(responseJSON.dislikeCount) - parseInt(1)) + "</span>");
                       } else {
                           $('#comments_comment_dislikes_' + comment_id).html("<span>" + (parseInt(responseJSON.dislikeCount) - parseInt(1)) + "</span>");
-                      } 
+                      }
                   } else {
-                      if(showLikeWithoutIconInReplies != 3) {  
+                      if(showLikeWithoutIconInReplies != 3) {
                         $('#comments_comment_dislikes_' + comment_id).prev().remove();
                       }
                       $('#comments_comment_dislikes_' + comment_id).remove();
                   }
                 }  else if(responseJSON.hasViewerDisLike && responseJSON.dislikeCount == 1) {
-                   if(showLikeWithoutIconInReplies != 3) {  
-                      $('#comments_comment_dislikes_' + comment_id).prev().remove();   
+                   if(showLikeWithoutIconInReplies != 3) {
+                      $('#comments_comment_dislikes_' + comment_id).prev().remove();
                    }
                    $('#comments_comment_dislikes_' + comment_id).remove();
                 }
             }
-          }  
+          }
           sm4.core.dloader.refreshPage();
           sm4.core.runonce.trigger();
         }.bind(this),
         error: function(xhr, textStatus, errorThrown) {
           if ($.type(comment_id) == 'undefined') {
-            this.like_unlikeFeed('unlike', action_id, comment_id);
+            if (stats.jqmData('reaction') != 1) {
+              this.like_unlikeFeed('unlike', action_id, comment_id, self);
+            } else {
+              stats.show();
+              this.reaction_like_unlike_dislike('unlike', action_id);
+            }
           }
           else {
             this.like_unlikeComment('unlike', action_id, comment_id);
@@ -933,7 +1012,12 @@ var feedElement,
         statusCode: {
           404: function(response) {
             if ($.type(comment_id) == 'undefined') {
-              this.like_unlikeFeed('unlike', action_id, comment_id);
+              if (stats.jqmData('reaction') != 1) {
+                this.like_unlikeFeed('unlike', action_id, comment_id, self);
+              } else {
+                stats.show();
+                this.reaction_like_unlike_dislike('unlike', action_id);
+              }
             }
             else {
               this.like_unlikeComment('unlike', action_id, comment_id);
@@ -945,12 +1029,16 @@ var feedElement,
     },
     unlike: function(action_id, comment_id, self) {
       //MAKE LIKE CHANGE TO UNLIKE FIRST AND THEN SEND AJAX REQUEST:
+      var stats = $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm .like_comments_stats');
       if ($.type(comment_id) == 'undefined' || comment_id == '') {
-        this.like_unlikeFeed('unlike', action_id, comment_id);
-      }
-      else {
+        if (stats.jqmData('reaction') != 1) {
+          this.like_unlikeFeed('unlike', action_id, comment_id);
+        } else {
+          stats.hide();
+          this.reaction_like_unlike_dislike('unlike', action_id);
+        }
+      } else {
         this.like_unlikeComment('unlike', action_id, comment_id);
-
       }
 
       if ($.type(self) == 'undefined') {
@@ -976,12 +1064,20 @@ var feedElement,
         url: target,
         data: postVar,
         success: function(responseJSON, textStatus, xhr) {
+          if (responseJSON.like_comments_stats) {
+            stats.html(responseJSON.like_comments_stats).show();
+          }
           sm4.core.dloader.refreshPage();
           sm4.core.runonce.trigger();
         }.bind(this),
         error: function(xhr, textStatus, errorThrown) {
           if ($.type(comment_id) == 'undefined') {
-            this.like_unlikeFeed('like', action_id, comment_id);
+            if (stats.jqmData('reaction') != 1) {
+              this.like_unlikeFeed('like', action_id, comment_id, self);
+            } else {
+              stats.show();
+              this.reaction_like_unlike_dislike('like', action_id);
+            }
           }
           else {
             this.like_unlikeComment('like', action_id, comment_id);
@@ -991,7 +1087,12 @@ var feedElement,
         statusCode: {
           404: function(response) {
             if ($.type(comment_id) == 'undefined') {
-              this.like_unlikeFeed('like', action_id, comment_id);
+              if (stats.jqmData('reaction') != 1) {
+                this.like_unlikeFeed('like', action_id, comment_id, self);
+              } else {
+                stats.show();
+                this.reaction_like_unlike_dislike('like', action_id);
+              }
             }
             else {
               this.like_unlikeComment('like', action_id, comment_id);
@@ -1004,12 +1105,16 @@ var feedElement,
     },
     dislike: function(action_id, comment_id, self) {
       //MAKE LIKE CHANGE TO UNLIKE FIRST AND THEN SEND AJAX REQUEST:
+      var stats = $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm .like_comments_stats');
       if ($.type(comment_id) == 'undefined' || comment_id == '') {
-        this.dislike_unlikeFeed('unlike', action_id, comment_id);
-      }
-      else {
+        if (stats.jqmData('reaction') != 1) {
+          this.dislike_unlikeFeed('unlike', action_id, comment_id);
+        } else {
+          stats.hide();
+          this.reaction_like_unlike_dislike('dislike', action_id);
+        }
+      } else {
         this.dislike_unlikeComment('unlike', action_id, comment_id);
-
       }
 
       if ($.type(self) == 'undefined') {
@@ -1036,26 +1141,32 @@ var feedElement,
         data: postVar,
         success: function(responseJSON, textStatus, xhr) {
           sm4.core.dloader.refreshPage();
-          sm4.core.runonce.trigger();
-          
+
+
           if ($.type(comment_id) == 'undefined' || comment_id == '') {
-             if(responseJSON.hasViewerLike && responseJSON.likeCount > 1) {
-                  
-                  var likespan = $.trim($.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_likes span').html()).split(' ');
-                  if(responseJSON.likeCount > 1) {
-                      if(showLikeWithoutIcon != 3) {
-                        $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_likes span').html(sm4.core.mobiPageHTML(sm4.core.language.translate('% likes', parseInt(responseJSON.likeCount) - parseInt(1))));
-                    } else {
-                        $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_likes span').html(sm4.core.mobiPageHTML(sm4.core.language.translate('% vote ups', parseInt(responseJSON.likeCount) - parseInt(1))));
-                    }
+              if (responseJSON.like_comments_stats) {
+                stats.html(responseJSON.like_comments_stats).show();
+            } else {
+              if (responseJSON.hasViewerLike && responseJSON.likeCount > 1) {
+
+                var likespan = $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_likes span');
+                likespan = likespan.jqmData('total-like') ? [likespan.jqmData('total-like')] : $.trim(likespan.html()).split(' ');
+                if (responseJSON.likeCount > 1) {
+                  if (showLikeWithoutIcon != 3) {
+                    $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_likes span').html(sm4.core.mobiPageHTML(sm4.core.language.translate('% likes', parseInt(responseJSON.likeCount) - parseInt(1))));
                   } else {
-                    $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_likes').next().remove();
-                      $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_likes').remove();
+                    $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_likes span').html(sm4.core.mobiPageHTML(sm4.core.language.translate('% vote ups', parseInt(responseJSON.likeCount) - parseInt(1))));
                   }
-              }  else if(responseJSON.hasViewerLike && responseJSON.likeCount == 1) {
-                    $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_likes').next().remove();
-                   $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_likes').remove();
+                } else {
+                  $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_likes').next().remove();
+                  $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_likes').remove();
+                }
+              } else if (responseJSON.hasViewerLike && responseJSON.likeCount == 1) {
+                $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_likes').next().remove();
+                $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_likes').remove();
               }
+            }
+            sm4.core.runonce.trigger();
           } else {
               if(responseJSON.hasViewerLike && responseJSON.likeCount > 1) {
                     //var likespan = $.trim($('#comments_comment_likes_' + comment_id).html()).split(' ');
@@ -1083,7 +1194,12 @@ var feedElement,
         }.bind(this),
         error: function(xhr, textStatus, errorThrown) {
           if ($.type(comment_id) == 'undefined') {
-            this.dislike_unlikeFeed('like', action_id, comment_id);
+            if (stats.jqmData('reaction') != 1) {
+              this.dislike_unlikeFeed('like', action_id, comment_id);
+            } else {
+              stats.show();
+              this.reaction_like_unlike_dislike('dislike', action_id);
+            }
           }
           else {
             this.dislike_unlikeComment('like', action_id, comment_id);
@@ -1093,7 +1209,12 @@ var feedElement,
         statusCode: {
           404: function(response) {
             if ($.type(comment_id) == 'undefined') {
+            if (stats.jqmData('reaction') != 1) {
               this.dislike_unlikeFeed('like', action_id, comment_id);
+            } else {
+              stats.show();
+              this.reaction_like_unlike_dislike('dislike', action_id);
+              }
             }
             else {
               this.dislike_unlikeComment('like', action_id, comment_id);
@@ -1167,7 +1288,8 @@ var feedElement,
       if (action == 'unlike') {
         //MAKE LIKE CHANGE TO UNLIKE FIRST AND THEN SEND AJAX REQUEST:
         if ($.type($.mobile.activePage.find('#activity-item-' + action_id).find('.feed_item_btm a.feed_dislikes').get(0)) != 'undefined') {
-          var likespan = $.trim($.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_dislikes span').html()).split(' ');
+          var likespan = $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_likes span');  
+           likespan = likespan.jqmData('total-like') ? [likespan.jqmData('total-like')]: $.trim(likespan.html()).split(' ');
           if(showLikeWithoutIcon != 3) {
             $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_dislikes span').html(sm4.core.language.translate('% dislikes', parseInt(likespan[0]) + parseInt(1)));
           } else {
@@ -1228,8 +1350,9 @@ var feedElement,
         }
       }
       else {
-        var likespan = $.trim($.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_likes span').html()).split(' ');
-        
+        var likespan = $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_likes span');  
+        likespan = likespan.jqmData('total-like') ? [likespan.jqmData('total-like')]: $.trim(likespan.html()).split(' ');
+       
         if ((parseInt(likespan[0]) - parseInt(1)) > 0) {
           if(showLikeWithoutIcon != 3) {  
              var likestring = (parseInt(likespan[0]) - parseInt(1)) > 1 ? 'dislikes' : 'dislike';
@@ -1658,7 +1781,8 @@ var feedElement,
           if ($.type(comment_id) == 'undefined' || comment_id == '') {
              if(responseJSON.hasViewerLike && responseJSON.likeCount > 1) {
                   
-                  var likespan = $.trim($.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_likes span').html()).split(' ');
+                  var likespan = $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_likes span');  
+                    likespan = likespan.jqmData('total-like') ? [likespan.jqmData('total-like')]: $.trim(likespan.html()).split(' ');
                   if(responseJSON.likeCount > 1) {
                       if(showLikeWithoutIcon != 3) {
                         $.mobile.activePage.find('#activity-item-' + action_id + ' .feed_item_btm a.feed_likes span').html(sm4.core.mobiPageHTML(sm4.core.language.translate('% likes', parseInt(responseJSON.likeCount) - parseInt(1))));
@@ -1844,9 +1968,9 @@ var feedElement,
       sm4.core.dloader.refreshPage();
 
     },
-    comment: function(action_id, body, photo_id, type, tag) {
-        
-      if (body.trim() == '' && photo_id  == 0 && tag == 0) {
+    comment: function(action_id, body, photo_id, type, tag, attachment_guid) {
+
+      if (body.trim() == '' && photo_id  == 0 && tag == 0 && attachment_guid == '') {
         return;
       }
       $.mobile.loading().loader("show");
@@ -1861,7 +1985,8 @@ var feedElement,
           'toValues' : tag,
           'type': type,
           'subject': $.mobile.activePage.advfeed_array.subject_guid,
-          'format': 'json'
+          'format': 'json',
+          'attachmentGuid' : attachment_guid
         },
         success: function(responseJSON, textStatus, xhr) {
           var li = $('<li />', {
@@ -2001,7 +2126,7 @@ var feedElement,
       $('.cm-icon-emoticons').removeClass('active');
       formElement.attr('data-ajax', 'false');
       formElement.css('display', 'block');
-      var photo_id, type;
+      var photo_id, type, attachment_guid = '';
       
       if($.type($("[name='attachment[photo_id]']", formElement).val()) == 'undefined') {
           photo_id = 0;
@@ -2013,18 +2138,20 @@ var feedElement,
       } else {
           type = $("[name='attachment[type]']", formElement).val();
       }
-     
+      if($.type($("[name='attachment[attachment_guid]']", formElement).val()) != 'undefined') {
+        attachment_guid = $("[name='attachment[attachment_guid]']", formElement).val();
+      }
       var tagfriends = 0;
       if($.type($('#toReplyValues_'+$("[name='comment_id']", formElement).val())) != 'undefined' && $('#toReplyValues_'+$("[name='comment_id']", formElement).val()).val()) {
           tagfriends = $('#toReplyValues_'+$("[name='comment_id']", formElement).val()).val();
       }
-      bind.reply(comment_id, $("[name='body']", formElement).val(), action_id, photo_id, type, tagfriends);
+      bind.reply(comment_id, $("[name='body']", formElement).val(), action_id, photo_id, type, tagfriends, attachment_guid);
       $("[name='body']", formElement).val('');
       $("[name='body']", formElement).attr('placeholder', sm4.core.language.translate('Write a reply...'));
 
     },
-    reply: function(comment_id, body, action_id, photo_id, type, tag) {
-      if (body.trim() == '' && photo_id == 0 && tag == 0)  {
+    reply: function(comment_id, body, action_id, photo_id, type, tag, attachment_guid) {
+      if (body.trim() == '' && photo_id == 0 && tag == 0 && attachment_guid === '')  {
         return;
       }
       $.mobile.loading().loader("show");
@@ -2040,7 +2167,8 @@ var feedElement,
 	  'toValues': tag,
           'type': type,
           'subject': $.mobile.activePage.advfeed_array.subject_guid,
-          'format': 'json'
+          'format': 'json',
+          'attachmentGuid' : attachment_guid
         },
         success: function(responseJSON, textStatus, xhr) {
           var li = $('<li />', {
@@ -2271,8 +2399,7 @@ var feedElement,
       $('.cm-icon-emoticons').removeClass('active');
       formElement.attr('data-ajax', 'false');
       formElement.css('display', 'block');
-      var photo_id, type;
-      
+      var photo_id, type, attachment_guid = '';
       if($.type($("[name='attachment[photo_id]']", formElement).val()) == 'undefined') {
           photo_id = 0;
       } else {
@@ -2283,12 +2410,15 @@ var feedElement,
       } else {
           type = $("[name='attachment[type]']", formElement).val();
       }
+      if($.type($("[name='attachment[attachment_guid]']", formElement).val()) != 'undefined') {
+          attachment_guid = $("[name='attachment[attachment_guid]']", formElement).val();
+      }
       var tagfriends = 0;
       if($.type($('#toCommentValues').val()) != 'undefined' && $('#toCommentValues').val()) {
           tagfriends = $('#toCommentValues').val();
       }
      
-      bind.comment($("[name='action_id']", formElement).val(), $("[name='body']", formElement).val(), photo_id, type, tagfriends);
+      bind.comment($("[name='action_id']", formElement).val(), $("[name='body']", formElement).val(), photo_id, type, tagfriends, attachment_guid);
       $("[name='body']", formElement).val('');
       $("[name='body']", formElement).attr('placeholder', sm4.core.language.translate('Write a comment...'));
 
@@ -3535,6 +3665,11 @@ sm4.activity.statusbox = {
   toggleEmotions: function(self) {
     $('#activitypost-container-temp').find('#emoticons-board').toggle();
     hideEmotionIconClickEnable = true;
+  },
+  toggleStickersBoard: function(self, id) {
+    var parent = self.closest('.sm-comments-post-comment-form');
+    var layer = parent.find('.compose_sticker_box_cont .stickers_layer');
+    smSticker.init(layer);
   },
   toggleReplyEmotions: function(self, id) {
     $('#reply_options_box_'+ id).find('#emoticons-reply-board_'+id).toggle();

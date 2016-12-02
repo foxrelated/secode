@@ -42,11 +42,11 @@ class Sitemobile_Installer extends Engine_Package_Installer_Module {
         if (!empty($isAAFInstalled) && !empty($flagAAFActivate)) {
             $PRODUCT_TYPE = 'sitemobile';
             $PLUGIN_TITLE = 'Sitemobile';
-            $PLUGIN_VERSION = '4.8.9p4';
+            $PLUGIN_VERSION = '4.8.12p3';
             $PLUGIN_CATEGORY = 'plugin';
             $PRODUCT_DESCRIPTION = 'Mobile / Tablet Plugin';
             $_PRODUCT_FINAL_FILE = 0;
-            $SocialEngineAddOns_version = '4.8.9p3';
+            $SocialEngineAddOns_version = '4.8.11';
             $PRODUCT_TITLE = 'Mobile / Tablet Plugin';
 
             $file_path = APPLICATION_PATH . "/application/modules/$PLUGIN_TITLE/controllers/license/ilicense.php";
@@ -90,6 +90,9 @@ class Sitemobile_Installer extends Engine_Package_Installer_Module {
         $db->query("UPDATE  `engine4_seaocores` SET  `is_activate` =  '1' WHERE  `engine4_seaocores`.`module_name` ='sitemobile';");
 
         $db->query("UPDATE `engine4_core_settings` SET `name` = 'sitemobile.homescreen.fileId' WHERE `engine4_core_settings`.`name` = 'sitemobile.photo'");
+
+        $db->query("UPDATE `engine4_core_modules` SET `enabled` = '0' WHERE `engine4_core_modules`.`name` = 'mobi';");
+
 
         $db->query("UPDATE `engine4_sitemobile_menuitems` SET `plugin` = 'Sitemobile_Plugin_UserMenus' WHERE `engine4_sitemobile_menuitems`.`name` ='core_main_home'");
         $db->query("UPDATE `engine4_core_settings` SET `name` = 'sitemobile.homescreen.fileId' WHERE `engine4_core_settings`.`name` = 'sitemobile.photo'");
@@ -168,6 +171,30 @@ class Sitemobile_Installer extends Engine_Package_Installer_Module {
             $this->addGenericPage('forum_topic_view', 'Forum Topic View', 'Forum Topic View Page', 'This is the forum topic view page.');
 
             $this->addGenericPage('forum_forum_topic-create', 'Post Topic', 'Forum Topic Create Page', 'This is the forum topic create page.');
+        }
+
+        $select = new Zend_Db_Select($db);
+        $select
+                ->from('engine4_core_modules')
+                ->where('name = ?', 'siterecaptcha')
+                ->where('enabled = ?', 1);
+        $is_siterecaptcha_object = $select->query()->fetchObject();
+        if (!empty($is_siterecaptcha_object)) {
+            $db->query("INSERT IGNORE INTO `engine4_sitemobile_modules` (`name`, `visibility`, `integrated`, `enable_mobile`, `enable_tablet`) VALUES ('siterecaptcha', '1', '1', '1', '1')");
+        }
+
+        $mobileModuleTable = $db->query('SHOW TABLES LIKE \'engine4_sitemobile_modules\'')->fetch();
+        if (!empty($mobileModuleTable)) {
+            $siteGatewayModuleExist = $db->select()
+                    ->from('engine4_core_modules')
+                    ->where('name = ?', 'sitegateway')
+                    ->where('enabled = ?', 1)
+                    ->limit(1)
+                    ->query()
+                    ->fetchColumn();
+            if ($siteGatewayModuleExist) {
+                $db->query("INSERT IGNORE INTO `engine4_sitemobile_modules` (`name`, `visibility`, `integrated`, `enable_mobile`, `enable_tablet`) VALUES ('sitegateway',1,1,1,1);");
+            }
         }
         parent::onInstall();
     }
@@ -295,7 +322,7 @@ class Sitemobile_Installer extends Engine_Package_Installer_Module {
             }
         }
     }
-    
+
     public function addGenericPage($page, $title, $displayname, $description) {
         $db = Engine_Db_Table::getDefaultAdapter();
 

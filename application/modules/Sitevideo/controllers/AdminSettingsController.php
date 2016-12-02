@@ -41,7 +41,7 @@ class Sitevideo_AdminSettingsController extends Core_Controller_Action_Admin {
         // If not post or form not valid, return
         if (!$this->getRequest()->isPost()) {
             $formValues = $form->getValues();
-            $form->getElement('sitevideo_allowed_video')->setDescription('Select type of video source that you want to be available for members while uploading new video.');
+            $form->getElement('sitevideo_allowed_video')->setDescription('Select type of video source that you want to be available for members while uploading new video. [ Note: You can apply this setting on per member level basis from ‘Member Level Settings’. ]');
             $form->getElement('sitevideo_allowed_video')->getDecorator('Description')->setOptions(array('placement' => Zend_Form_Decorator_Abstract::PREPEND, 'escape' => false));
             $is_ffmpeg_installed = false;
             if (function_exists('exec')) {
@@ -55,7 +55,7 @@ class Sitevideo_AdminSettingsController extends Core_Controller_Action_Admin {
                 }
             }
             if ($is_ffmpeg_installed == false) {
-                $form->getElement('sitevideo_allowed_video')->setDescription('Select type of video source that you want to be available for members while uploading new video.<br /><span style="color:red;" >Please install FFMPEG on your server and configure its path to show "My Computer" option on "Post New Video" page to upload my computer\'s video on your site.</span>');
+                $form->getElement('sitevideo_allowed_video')->setDescription('Select type of video source that you want to be available for members while uploading new video. [ Note: You can apply this setting on per member level basis from ‘Member Level Settings’. ]<br /><span style="color:red;" >Please install FFMPEG on your server and configure its path to show "My Computer" option on "Post New Video" page to upload my computer\'s video on your site.</span>');
             }
 
             return;
@@ -78,7 +78,7 @@ class Sitevideo_AdminSettingsController extends Core_Controller_Action_Admin {
                 return $form->sitevideo_youtube_apikey->addErrors($error_message);
             }
         }
-        $form->getElement('sitevideo_allowed_video')->setDescription('Select type of video source that you want to be available for members while uploading new video.');
+        $form->getElement('sitevideo_allowed_video')->setDescription('Select type of video source that you want to be available for members while uploading new video. [ Note: You can apply this setting on per member level basis from ‘Member Level Settings’. ]');
         $form->getElement('sitevideo_allowed_video')->getDecorator('Description')->setOptions(array('placement' => Zend_Form_Decorator_Abstract::PREPEND, 'escape' => false));
         // Check ffmpeg path
         if (!empty($values['sitevideo_ffmpeg_path'])) {
@@ -90,12 +90,12 @@ class Sitevideo_AdminSettingsController extends Core_Controller_Action_Admin {
                 if (empty($output) || ($output != NULL && is_array($output) && count($output) == 0)) {
                     $form->sitevideo_ffmpeg_path->addError('FFMPEG path is not valid or does not exist');
                     $values['sitevideo_ffmpeg_path'] = '';
-                    $form->getElement('sitevideo_allowed_video')->setDescription('Select type of video source that you want to be available for members while uploading new video.<br /><span style="color:red;" >Please install FFMPEG on your server and configure its path to show "My Computer" option on "Post New Video" page to upload my computer\'s video on your site.</span>');
+                    $form->getElement('sitevideo_allowed_video')->setDescription('Select type of video source that you want to be available for members while uploading new video. [ Note: You can apply this setting on per member level basis from ‘Member Level Settings’. ]<br /><span style="color:red;" >Please install FFMPEG on your server and configure its path to show "My Computer" option on "Post New Video" page to upload my computer\'s video on your site.</span>');
                 }
             } else {
                 $form->sitevideo_ffmpeg_path->addError('The exec() function is not available. The ffmpeg path has not been saved.');
                 $values['sitevideo_ffmpeg_path'] = '';
-                $form->getElement('sitevideo_allowed_video')->setDescription('Select type of video source that you want to be available for members while uploading new video. <br /><span style="color:red;">Please install FFMPEG on your server and configure its path to show "My Computer" option on "Post New Video" page to upload my computer\'s video on your site.</span>');
+                $form->getElement('sitevideo_allowed_video')->setDescription('Select type of video source that you want to be available for members while uploading new video. [ Note: You can apply this setting on per member level basis from ‘Member Level Settings’. ]<br /><span style="color:red;">Please install FFMPEG on your server and configure its path to show "My Computer" option on "Post New Video" page to upload my computer\'s video on your site.</span>');
             }
         }
 
@@ -1768,8 +1768,8 @@ class Sitevideo_AdminSettingsController extends Core_Controller_Action_Admin {
                 $thumbnailSize = array('maxresdefault', 'sddefault', 'hqdefault', 'mqdefault', 'default');
                 foreach ($thumbnailSize as $size) {
                     $thumbnailUrl = "https://i.ytimg.com/vi/$code/$size.jpg";
-                    $data = @file_get_contents($thumbnailUrl);
-                    if ($data && is_string($data)) {
+                    $file_headers = @get_headers($thumbnailUrl);
+                    if (isset($file_headers[0]) && strpos($file_headers[0], '404 Not Found') == false) {
                         $thumbnail = $thumbnailUrl;
                         break;
                     }

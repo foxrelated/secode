@@ -117,7 +117,9 @@ class Sitegroup_Model_DbTable_Photos extends Engine_Db_Table {
       }
       $select = $select->limit($params['start'], $params['end']);
     }
-
+if(isset($params['cover'])) {
+        return Zend_Paginator::factory($select);
+    }
 		if (!(isset($params['albumviewGroup'])) && !Engine_API::_()->seaocore()->checkSitemobileMode('fullsite-mode')) {
       return Zend_Paginator::factory($select);
     }

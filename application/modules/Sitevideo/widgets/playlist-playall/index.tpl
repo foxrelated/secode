@@ -23,8 +23,8 @@ if ($this->isEmbedVideo && $this->isVideo) {
     $list2Height = $this->height - 104;
 }
 ?>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script src="http://api.dmcdn.net/all.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="//api.dmcdn.net/all.js"></script>
 <style type="text/css">
     .sitevideo_playall_container {
         min-height:<?php echo $this->height;
@@ -209,7 +209,7 @@ $this->headScript()
                 }
             }
             var tag = document.createElement('script');
-            tag.src = "http://www.youtube.com/player_api";
+            tag.src = "//www.youtube.com/player_api";
             var firstScriptTag = document.getElementsByTagName('script')[0];
             firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
@@ -226,7 +226,9 @@ $this->headScript()
                 return false;
             }
             video = player.currentVideo = player.videos[player.currentPosition];
-            vText = (player.totalVideos == 1) ? " Video" : " Videos";
+            video.url = video.url.replace("http://", "//"); 
+            video.url = video.url.replace("https://", "//"); 
+        vText = (player.totalVideos == 1) ? " Video" : " Videos";
             $("#video_counter").html((player.currentPosition + 1) + "/" + player.totalVideos + vText);
             $$('ul.playlist_details > li').each(function (el) {
                 el.removeClass('active');

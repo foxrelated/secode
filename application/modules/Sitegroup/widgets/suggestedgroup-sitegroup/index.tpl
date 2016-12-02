@@ -63,7 +63,7 @@ $this->headLink()->appendStylesheet($this->layout()->staticBaseUrl . 'applicatio
 							<div class='suggestsitegroups_tooltip_info_date clr'>
 								<?php echo $this->timestamp(strtotime($sitegroup->creation_date)) ?> 
 								<?php if($postedBy):?>
-									- <?php echo $this->translate('posted by'); ?>
+									- <?php echo $this->translate('created by'); ?>
 									<?php echo $this->htmlLink($sitegroup->getOwner()->getHref(), $sitegroup->getOwner()->getTitle()) ?>
 								<?php endif;?>
 							</div>

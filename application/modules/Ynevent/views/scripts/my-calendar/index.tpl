@@ -1,1 +1,0 @@
-<b>Jay Chou</b>

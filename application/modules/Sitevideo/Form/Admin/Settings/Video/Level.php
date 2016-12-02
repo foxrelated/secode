@@ -34,6 +34,34 @@ class Sitevideo_Form_Admin_Settings_Video_Level extends Authorization_Form_Admin
         if (!$this->isModerator()) {
             unset($this->view->options[2]);
         }
+        
+                $temp_multioption = array(
+                4 => 'My Computer',
+                1 => 'YouTube',
+                2 => 'Vimeo',
+                3 => 'Dailymotion',
+                5 => 'Embed Code'
+            );
+   
+        $allowedSources = array_flip(Engine_Api::_()->getApi('settings', 'core')->getSetting('sitevideo.allowed.video', array(1, 2, 3,4)));
+        
+        foreach ($temp_multioption as $k => $v) {
+            if (array_key_exists($k, $allowedSources)) {
+                $multioption[$k] = $v;
+            }
+        }
+
+        if(!empty($multioption)){
+
+          $this->addElement('MultiCheckbox', 'source', array(
+            'label' => 'Allowed Video Sources',
+            'description' => "Select type of video source that you want to be available for members while uploading new video.",
+            'multiOptions' => $multioption,
+            
+        ));
+
+        }
+    
 
         if (!$this->isPublic()) {
 

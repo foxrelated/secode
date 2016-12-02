@@ -428,7 +428,7 @@ class Sitetagcheckin_SitemobileIndexController extends Core_Controller_Action_St
     foreach ($existingTagMaps as $tagmap) {
       if ($tagmap->tag_id != $viewer_id) {
         $ownerObj = Engine_Api::_()->getItem('user', $tagmap->tag_id);
-        $notificationTable->addNotification($ownerObj, $viewer, $getItem, "sitetagcheckin_tagged_location", array("location" => $notification_location, "label" => "photo"));
+        $notificationTable->addNotification($ownerObj, $viewer, $getItem, "sitetagcheckin_tagged_location", array("location" => "$notification_location", "label" => "photo"));
       }
     }
 

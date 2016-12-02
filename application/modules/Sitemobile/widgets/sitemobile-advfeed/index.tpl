@@ -32,7 +32,8 @@ if (!empty($this->feedOnly) && empty($this->checkUpdate)): // Simple feed only f
       'viewAllLikes' => $this->viewAllLikes,
       'feedOnly' => $this->feedOnly,
       'groupedFeeds' => $this->groupedFeeds,
-       'getUpdate' => $this->getUpdate,
+      'getUpdate' => $this->getUpdate,
+      'hashtag' => $this->hashtag
   ));
   return; // Do no render the rest of the script in this mode
 endif;
@@ -98,7 +99,8 @@ endif; ?>
      ?>
       <div class="tip">
         <span>
-    <?php echo $this->translate("Nothing has been posted here yet - be the first!") ?>
+    <?php $message = $this->search ? 'No results found!' : "Nothing has been posted here yet - be the first!"; ?>
+    <?php echo $this->translate($message) ?>
         </span>
       </div>
     <?php //delete feed popup work.  ?>
@@ -161,7 +163,8 @@ endif; ?>
       'viewAllComments' => $this->viewAllComments,
       'viewAllLikes' => $this->viewAllLikes,
       'feedOnly' => $this->feedOnly,
-      'groupedFeeds' => $this->groupedFeeds
+      'groupedFeeds' => $this->groupedFeeds,
+      'hashtag' => $this->hashtag
   ));
   ?>
 
@@ -180,7 +183,7 @@ echo $this->htmlLink('javascript:void(0);', $this->translate('View More'), array
 
   <div class="feeds_no_more tip" id="feed_no_more-sitefeed" style="display: <?php echo ( (!$this->endOfFeed || !empty($this->action_id)) || $nofeed_group) ? 'none':''?>;">
     <span>
-<?php echo $this->translate("There are no more posts to show.") ?>
+<?php echo $this->translate($this->search ? "There are no more results to show." :"There are no more posts to show.") ?>
     </span>  
   </div>
 </div>

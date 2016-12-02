@@ -234,17 +234,19 @@ class Sitevideo_Model_Playlist extends Core_Model_Item_Abstract {
         $videoTableName = $videoTable->info('name');
         $select = $videoTable->select()
                 ->from($videoTableName, array("$videoTableName.*", "$playlistmapTable.*"));
+        
+        $select->setIntegrityCheck(false)
+                    ->joinLeft($playlistmapTable, "$playlistmapTable.video_id=$videoTableName.video_id", null);
+        
         if (isset($params['orderby']) && $params['orderby'] == 'video_type') {
-            $select->setIntegrityCheck(false)
-                    ->joinLeft($playlistmapTable, "$playlistmapTable.video_id=$videoTableName.video_id", null)
-                    ->order("FIELD(type,5,6,7,8)");
+            $select->order("FIELD(type,5,6,7,8)");
         }
+        
         $select->where('playlist_id = ?', $this->playlist_id);
         $select->order("$playlistmapTable.creation_date asc");
 
         //FIND THE PLAYLIST MAP OF A GIVEN PLAYLIST
         $playlistmapModel = $playlistmap->fetchAll($select);
-
         //IF NO RECORDS FOUND THE RETURN BLANK ARRAY
         if (!$playlistmapModel)
             return array();

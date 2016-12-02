@@ -396,15 +396,14 @@ class Sitegroup_Form_Create extends Engine_Form {
         }
 
 
-        //START SITEGROUPMEMBER PLUGIN WORK
+       //START SITEGROUPMEMBER PLUGIN WORK
         $allowMemberInLevel = Engine_Api::_()->authorization()->getPermission($userlevel_id, 'sitegroup_group', 'smecreate');
         $allowMemberInthisPackage = false;
         $allowMemberInthisPackage = Engine_Api::_()->sitegroup()->allowPackageContent($this->getPackageId(), "modules", "sitegroupmember");
         if (!empty($createFormFields) && (in_array('memberTitle', $createFormFields) || in_array('memberInvite', $createFormFields) || in_array('memberApproval', $createFormFields))) {
             $member_approval = Engine_Api::_()->getApi('settings', 'core')->getSetting('groupmember.member.approval.option', 1);
             if ($sitegroupMemberEnabled && in_array('memberApproval', $createFormFields) && !empty($member_approval)) {
-                if (Engine_Api::_()->sitegroup()->hasPackageEnable()) {
-                    if ($allowMemberInthisPackage) {
+                
                         $this->addElement('Radio', 'member_approval', array(
                             'label' => 'Approve members?',
                             'description' => 'When people try to join this group, should they be allowed ' .
@@ -415,20 +414,7 @@ class Sitegroup_Form_Create extends Engine_Form {
                             ),
                             'value' => '1',
                         ));
-                    }
-                } else if (!empty($allowMemberInLevel)) {
-
-                    $this->addElement('Radio', 'member_approval', array(
-                        'label' => 'Approve members?',
-                        'description' => ' When people try to join this group, should they be allowed ' .
-                        'to join immediately, or should they be forced to wait for approval?',
-                        'multiOptions' => array(
-                            '1' => 'New members can join immediately.',
-                            '0' => 'New members must be approved.',
-                        ),
-                        'value' => '1',
-                    ));
-                }
+                    
             }
         }
 
@@ -551,17 +537,14 @@ class Sitegroup_Form_Create extends Engine_Form {
             ));
             $this->all_post->getDecorator('Description')->setOption('placement', 'append');
         }
-        //END GROUP MEMBER WORK
+//END GROUP MEMBER WORK
         //START SITEGROUPMEMBER PLUGIN WORK
         $allowMemberInLevel = Engine_Api::_()->authorization()->getPermission($userlevel_id, 'sitegroup_group', 'smecreate');
         $allowMemberInthisPackage = false;
         $allowMemberInthisPackage = Engine_Api::_()->sitegroup()->allowPackageContent($this->getPackageId(), "modules", "sitegroupmember");
         if (!empty($createFormFields) && (in_array('memberTitle', $createFormFields) || in_array('memberInvite', $createFormFields) || in_array('memberApproval', $createFormFields))) {
             if ($sitegroupMemberEnabled) {
-                if (Engine_Api::_()->sitegroup()->hasPackageEnable()) {
-                    if ($allowMemberInthisPackage) {
-
-                        $memberTitle = Engine_Api::_()->getApi('settings', 'core')->getSetting('groupmember.member.title', 1);
+                $memberTitle = Engine_Api::_()->getApi('settings', 'core')->getSetting('groupmember.member.title', 1);
                         if (in_array('memberTitle', $createFormFields) && !empty($memberTitle)) {
                             $this->addElement('Text', 'member_title', array(
                                 'label' => 'What will members be called?',
@@ -586,33 +569,7 @@ class Sitegroup_Form_Create extends Engine_Form {
                                 'attribs' => array('class' => 'sg_quick_advanced')
                             ));
                         }
-                    }
-                } else if (!empty($allowMemberInLevel)) {
-
-                    $memberTitle = Engine_Api::_()->getApi('settings', 'core')->getSetting('groupmember.member.title', 1);
-                    if (in_array('memberTitle', $createFormFields) && !empty($memberTitle)) {
-                        $this->addElement('Text', 'member_title', array(
-                            'label' => 'What will members be called?',
-                            'description' => 'Ex: Dance Lovers, Hikers, Innovators, Music Lovers, etc.',
-                            'filters' => array(
-                                'StripTags',
-                                new Engine_Filter_Censor(),
-                        )));
-                        $this->member_title->getDecorator('Description')->setOption('placement', 'append');
-                    }
-
-                    if (in_array('memberInvite', $createFormFields)) {
-                        $this->addElement('Radio', 'member_invite', array(
-                            'label' => 'Invite member',
-                            'multiOptions' => array(
-                                '0' => 'Yes, members can invite other people.',
-                                '1' => 'No, only group admins can invite other people.',
-                            ),
-                            'value' => '1',
-                            'attribs' => array('class' => 'sg_quick_advanced')
-                        ));
-                    }
-                }
+                   
             }
         }
 
@@ -816,7 +773,7 @@ class Sitegroup_Form_Create extends Engine_Form {
         //START SITEGROUPDOCUMENT PLUGIN WORK
         if (!empty($createFormFields) && in_array('documentPrivacy', $createFormFields)) {
             $sitegroupDocumentEnabled = Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitegroupdocument');
-            if ($sitegroupDocumentEnabled) {
+            if ($sitegroupDocumentEnabled || (Engine_Api::_()->hasModuleBootstrap('document') && Engine_Api::_()->getDbtable('modules', 'document')->getIntegratedModules(array('enabled' => 1, 'item_type' => 'sitegroup_group', 'item_module' => 'sitegroup')))) {
                 $availableLabels = array(
                     'registered' => 'All Registered Members',
                     'owner_network' => 'Friends and Networks',

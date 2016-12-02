@@ -28,7 +28,7 @@ class Activity_View_Helper_ActivitySM extends Zend_View_Helper_Abstract {
     $activity_moderate = Engine_Api::_()->getDbtable('permissions', 'authorization')
             ->getAllowed('user', $viewer->level_id, 'activity');
 
-    $form = new Activity_Form_Comment();
+    $form = new Sitemobile_modules_Activity_Form_Comment();
     $data = array_merge($data, array(
         'actions' => array($action),
         'commentForm' => $form,

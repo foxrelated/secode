@@ -390,6 +390,7 @@ html[dir="rtl"] .subtab_siteevent_editor_comments > li{
 }
 .siteevent_browse_banner img{
   max-width:100%;	
+  width:100%;
 }
 /*Browse Events*/
 .siteevent_browse_cat_cont{
@@ -2224,8 +2225,8 @@ i.arrow_btm{
 }
 /*Popup*/
 .siteevent_form_popup {
-  margin:15px 0 0 15px;
-  padding: 0;
+	/*margin:15px 0 0 15px;*/ 
+	 padding: 0 15px;
 }
 .siteevent_form_popup .global_form > div > div {
   width:470px;

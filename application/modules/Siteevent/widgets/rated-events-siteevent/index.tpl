@@ -688,7 +688,7 @@ $this->headScript()->appendFile("https://maps.googleapis.com/maps/api/js?librari
                                     <span style="background-image: url(<?php echo $url; ?>);"></span>
                                 </a>
                                 <?php if ($siteevent->featured == 1): ?>
-                                    <span title="<?php echo $this->translate('Featured') ?>" class="seaocore_list_featured_label"></span>
+                                    <span title="<?php echo $this->translate('Featured') ?>" class="seaocore_list_featured_label"><?php echo $this->translate('Featured'); ?></span>
                 <?php endif; ?>
 
                                 <div class="siteevent_grid_title">

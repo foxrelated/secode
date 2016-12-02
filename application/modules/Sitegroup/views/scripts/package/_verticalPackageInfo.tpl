@@ -25,7 +25,7 @@ $action = $request->getActionName();
             <div class="contentblock_left_text"><b><?php echo $this->translate("Billing Cycle"); ?></b></div>
         <?php endif; ?>
         <?php if (in_array('duration', $packageInfoArray)): ?>
-            <div class="contentblock_left_text"><b><?php echo ($item->price > 0 && $item->recurrence > 0 && $item->recurrence_type != 'forever' ) ? $this->translate("Billing Duration") : $this->translate("Duration"); ?></b></div>
+            <div class="contentblock_left_text"><b><?php echo $this->translate("Duration"); ?></b></div>
         <?php endif; ?>
         <?php if (in_array('featured', $packageInfoArray)): ?>
             <div class="contentblock_left_text"><b><?php echo $this->translate("Featured"); ?></b></div>
@@ -72,6 +72,7 @@ $action = $request->getActionName();
         <?php if (in_array('description', $packageInfoArray)): ?>
             <div class="contentblock_left_text"><b><?php echo $this->translate("Description"); ?></b></div>
         <?php endif; ?>
+        <div class="contentblock_left_text"><b><?php echo $this->translate("Package"); ?></b></div>
         <?php if (in_array('price', $packageInfoArray)): ?>
             <div class="contentblock_left_text highlightleft"><b><?php echo $this->translate("Price"); ?></b></div>
         <?php endif; ?>

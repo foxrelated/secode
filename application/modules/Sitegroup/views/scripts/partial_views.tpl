@@ -63,7 +63,7 @@
     
 		  <?php echo $this->timestamp(strtotime($item->creation_date)) ?> 
       <?php if($postedBy):?>
-        - <?php echo $this->translate('posted by'); ?>
+        - <?php echo $this->translate('created by'); ?>
 		    <?php echo $this->htmlLink($item->getOwner()->getHref(), $item->getOwner()->getTitle()) ?>,
       <?php endif;?>
     <?php if(!$postedBy):?>

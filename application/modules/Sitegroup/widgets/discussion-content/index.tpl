@@ -59,7 +59,7 @@
 	    'class' => 'buttonlink icon_back'
 	  )) ?>
 	  <?php if( ($this->canPost)  && (!$this->topic->closed)): ?>
-	    <?php echo $this->htmlLink($this->url(array()) . '#reply', $this->translate('Post Reply'), array(
+	    <?php echo $this->htmlLink($this->topic->getHref(array('action' => 'post', 'page' =>$this->total_page)), $this->translate('Post Reply'), array(
 	      'class' => 'buttonlink icon_sitegroup_post_reply'
 	    )) ?>
 	  <?php endif; ?>
@@ -133,7 +133,7 @@
 
 	<ul class='sitegroup_sitegroups_thread'>
 	  <?php foreach( $this->paginator as $post ): ?>
-	  <li>
+	  <li id="sitegroup_post_<?php echo $post->post_id ?>">
 	    <div class="sitegroup_sitegroups_thread_photo">
 	      <?php
 	        $user = $this->item('user', $post->user_id);
@@ -151,6 +151,7 @@
                 'controller' => 'topic',
                 'topic_id'=>$this->topic->getIdentity(),
                 'quote_id'=>$post->getIdentity(),
+                'page' =>$this->total_page,
               ), $this->translate('Quote'), array(
                 'class' => 'buttonlink icon_sitegroup_post_quote',
               )) ?>

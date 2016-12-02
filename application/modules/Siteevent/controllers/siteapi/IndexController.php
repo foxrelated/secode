@@ -4,10 +4,10 @@
  * SocialEngine
  *
  * @category   Application_Extensions
- * @package    Siteapi
- * @copyright  Copyright 2015-2016 BigStep Technologies Pvt. Ltd.
+ * @package    Siteevent
+ * @copyright  Copyright 2013-2014 BigStep Technologies Pvt. Ltd.
  * @license    http://www.socialengineaddons.com/license/
- * @version    TopicController.php 2015-09-17 00:00:00Z SocialEngineAddOns $
+ * @version    $Id: IndexController.php 6590 2014-01-02 00:00:00Z SocialEngineAddOns $
  * @author     SocialEngineAddOns
  */
 class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
@@ -22,9 +22,11 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                 null !== ($siteevent = Engine_Api::_()->getItem('siteevent_event', $event_id))))
             Engine_Api::_()->core()->setSubject($siteevent);
 
-        //@todo bypass siteapid package will enable when we will do the work for this extension
-//        $this->_hasPackageEnable = Engine_Api::_()->siteevent()->hasPackageEnable();
-        $this->_hasPackageEnable = 0;
+        $this->_hasPackageEnable = Engine_Api::_()->siteevent()->hasPackageEnable();
+
+        // Set the translations for zend library.
+        if (!Zend_Registry::isRegistered('Zend_Translate'))
+            Engine_Api::_()->getApi('Core', 'siteapi')->setTranslate();
     }
 
     /**
@@ -39,6 +41,8 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
 
         //GET VIEWER
         $viewer = Engine_Api::_()->user()->getViewer();
+        $viewer_id = $viewer->getIdentity();
+
 
         //AUTHORIZATION CHECK
         if (!$this->_helper->requireAuth()->setAuthParams('siteevent_event', null, "view")->isValid())
@@ -82,13 +86,21 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
         $values['type'] = 'browse';
 
         // upcoming(ongoing + upcoming), onlyupcoming(upcoming), onlyOngoing(ongoing), past, all
-        $values['action'] = $request->getParam('showEventType', 'upcoming');
+        $values['action'] = $this->getRequestParam('showEventType', 'upcoming');
 
-        $values['ratingType'] = $this->_getParam('ratingType', 'rating_both');
+        $values['ratingType'] = $this->getRequestParam('ratingType', 'rating_both');
+
+        $getLocation = $this->getRequestParam('getLocation', '1');
+
+        $searchLocation = $this->getRequestParam('location', null);
 
         //TO GET OR NOT THE EXACT LOCATION OF EVENT
-        if (empty($values['restapilocation']) && !isset($values['restapilocation']))
-            $values['location'] = $this->_getParam('restapilocation', null);
+        if (isset($values['restapilocation']) && !empty($values['restapilocation']))
+            $values['location'] = $this->getRequestParam('restapilocation', null);
+
+        //TO GET OR NOT THE EXACT LOCATION OF EVENT
+        if (!empty($searchLocation) && isset($searchLocation))
+            $values['location'] = $this->getRequestParam('location', null);
 
 //        $profileFeilds = $this->_getParam('profileFeilds', null);
 //        $detactLocation = $values['detactLocation'] = $params['detactLocation'] = $this->_getParam('detactLocation', 0);
@@ -126,26 +138,74 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
 
         try {
             //GET EVENTS PAGINATOR
-            $paginator = Engine_Api::_()->getDbTable('events', 'siteevent')->getSiteeventsPaginator($values, $customProfileFields);
+            // seperate paginator for featured & sponsored events 
+            if (isset($values['event_time']) && !empty($values['event_time']) && ($values['event_time'] == 'featured' || $values['event_time'] == 'sponsored')) {
+                if ($values['event_time'] == 'featured') {
+                    $values['featured'] = 1;
+                } elseif ($values['event_time'] == 'sponsored') {
+                    $values['sponsored'] = 1;
+                }
+                $paginator = Engine_Api::_()->getDbTable('events', 'siteevent')->getEvent('', $values);
+            } else {
+                $paginator = Engine_Api::_()->getDbTable('events', 'siteevent')->getSiteeventsPaginator($values, $customProfileFields);
+            }
             $paginator->setItemCountPerPage($this->getRequestParam("limit", 20));
             $paginator->setCurrentPageNumber($this->getRequestParam("page", 1));
 
             //SET VIEW
             Engine_Api::_()->getApi('Core', 'siteapi')->setView();
             $response['canCreate'] = Engine_Api::_()->authorization()->isAllowed('siteevent_event', $viewer, 'create');
+            $response['packagesEnabled'] = $this->_packagesEnabled();
+
             $response["getTotalItemCount"] = $getTotalItemCount = $paginator->getTotalItemCount();
 
             if (!empty($getTotalItemCount)) {
                 foreach ($paginator as $eventObj) {
+                    // continue if Deleted member
+                    if (empty($eventObj->host_id))
+                        continue;
                     $event = $eventObj->toArray();
+
+                    if (!$event['location'])
+                        $event['location'] = '';
+
                     //CATEGORY NAME
                     $event['category_name'] = Engine_Api::_()->getItem('siteevent_category', $event['category_id'])->category_name;
 
-                    //DATES OF EVENT
+                    $occurrence_id = Engine_Api::_()->getDbTable('events', 'siteevent')->getNextOccurID($eventObj->getIdentity());
+
+                    //GET DATES OF EVENT
+                    $tz = Engine_Api::_()->getApi('settings', 'core')->core_locale_timezone;
+                    if (!empty($viewer_id)) {
+                        $tz = $viewer->timezone;
+                    }
                     $occurrenceTable = Engine_Api::_()->getDbTable('occurrences', 'siteevent');
-                    $dates = $occurrenceTable->getEventDate($event['event_id']);
+                    $dates = $occurrenceTable->getEventDate($eventObj->getIdentity(), $occurrence_id);
+
+                    if (isset($dates['starttime']) && !empty($dates['starttime']) && isset($tz)) {
+                        $startDateObject = new Zend_Date(strtotime($dates['starttime']));
+                        $startDateObject->setTimezone($tz);
+                        $dates['starttime'] = $startDateObject->get('YYYY-MM-dd HH:mm:ss');
+                    }
+                    if (isset($dates['endtime']) && !empty($dates['endtime']) && isset($tz)) {
+                        $endDateObject = new Zend_Date(strtotime($dates['endtime']));
+                        $endDateObject->setTimezone($tz);
+                        $dates['endtime'] = $endDateObject->get('YYYY-MM-dd HH:mm:ss');
+                    }
+
                     $event['isRepeatEvent'] = ($eventObj->isRepeatEvent()) ? 1 : 0;
+
+                    if (!isset($dates) || empty($dates))
+                        continue;
+
                     $event = array_merge($event, $dates);
+
+                    $totalEventOccurrences = Engine_Api::_()->getDbtable('occurrences', 'siteevent')->getOccurrenceCount($eventObj->event_id);
+                    if (!empty($eventObj->repeat_params) && $totalEventOccurrences > 1) {
+                        $event['hasMultipleDates'] = 1;
+                    } else {
+                        $event['hasMultipleDates'] = 0;
+                    }
 
                     // ADD OWNER IMAGES
                     $getContentImages = Engine_Api::_()->getApi('Core', 'siteapi')->getContentImage($eventObj, true);
@@ -161,25 +221,17 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                         //GET LOCATION
                         $value['id'] = $event['event_id'];
                         $location = Engine_Api::_()->getDbtable('locations', 'siteevent')->getLocation($value);
-                        if ($location)
-                            $event['location'] = $location->toArray();
+                        if (isset($location) && is_array($location))
+                            $event['location'] = $location->location;
                     }
 
                     $event['hosted_by'] = '';
-                    if (isset($eventObj->host_type) && !empty($eventObj->host_id) && ($eventObj->host_type == 'siteevent_organizer')) {
-                        $organizerObj = Engine_Api::_()->getItem('siteevent_organizer', $eventObj->host_id);
-                        $organizer['host_type'] = 'siteevent_organizer';
-                        $organizer['host_id'] = $organizerObj->organizer_id;
-                        $organizer['host_title'] = $organizerObj->title;
-                        $getContentImages = Engine_Api::_()->getApi('Core', 'siteapi')->getContentImage($organizerObj);
-                        $organizer = array_merge($organizer, $getContentImages);
-                        $event['hosted_by'] = $organizer;
-                    } else if (isset($eventObj->host_type) && !empty($eventObj->host_id) && $eventObj->host_type == 'user') {
-                        $organizerObj = Engine_Api::_()->getItem('user', $eventObj->host_id);
-                        $organizer['host_type'] = 'user';
-                        $organizer['host_id'] = (isset($organizerObj->user_id)) ? $organizerObj->user_id : 0;
-                        $organizer['host_title'] = (isset($organizerObj->displayname)) ? $organizerObj->displayname : null;
-                        $getContentImages = Engine_Api::_()->getApi('Core', 'siteapi')->getContentImage($organizerObj);
+                    if (isset($eventObj->host_type) && !empty($eventObj->host_id)) {
+                        $organizerObj = Engine_Api::_()->getItem($eventObj->host_type, $eventObj->host_id);
+                        $organizer['host_type'] = $eventObj->host_type;
+                        $organizer['host_id'] = $organizerObj->getIdentity();
+                        $organizer['host_title'] = $organizerObj->getTitle();
+                        $getContentImages = Engine_Api::_()->getApi('Core', 'siteapi')->getContentImage($organizerObj, false);
                         $organizer = array_merge($organizer, $getContentImages);
                         $event['hosted_by'] = $organizer;
                     }
@@ -233,6 +285,8 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
         $this->validateRequestMethod();
         $response = array();
         $viewer = Engine_Api::_()->user()->getViewer();
+        $viewer_id = $viewer->getIdentity();
+
         if (!Engine_Api::_()->authorization()->isAllowed('siteevent_event', $viewer, 'view'))
             $this->respondWithError('unauthorized');
 
@@ -257,12 +311,19 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
 
         //GET VIEWER
         $viewer = Engine_Api::_()->user()->getViewer();
+        $viewer_id = $viewer->getIdentity();
+
         if (!$this->_helper->requireAuth()->setAuthParams('siteevent_event', null, "create")->isValid())
             $this->respondWithError('unauthorized');
         $request = Zend_Controller_Front::getInstance()->getRequest();
 
         $viewer_id = $viewer->getIdentity();
         $values = $response = array();
+
+        $isEnabledPackage = Engine_Api::_()->siteevent()->hasPackageEnable();
+        $getHost = Engine_Api::_()->getApi('core', 'siteapi')->getHost();
+        $baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
+        $baseUrl = @trim($baseUrl, "/");
 
         //GET ALL PARAMETERS
         $values = $this->_getAllParams();
@@ -284,6 +345,17 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
         //TO GET OR NOT THE EXACT LOCATION OF EVENT
         $getLocation = $this->_getParam('getLocation', null);
 
+        if (isset($values['host_type']) && !empty($values['host_type']) && !empty($values['host_id']) && !empty($values['host_type'])) {
+            $this->setRequestMethod();
+            $this->_forward('index', 'index', 'siteevent', array(
+                'host_type' => $values['host_type'],
+                'host_id' => $values['host_id'],
+                'showEventType' => 'all',
+                'viewtype' => '',
+            ));
+            return;
+        }
+
         // Only mine
         if (@$values['view'] == 2) {
             $select = $table->select()
@@ -297,6 +369,7 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
         }
 
         $viewType = $values['viewtype'] = $this->getRequestParam('viewType', 'upcoming');
+
 
         try {
             //GET PAGINATOR
@@ -340,7 +413,8 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
 
             $response['invite_count'] = $invite_count;
 
-            $values['viewtype'] = $viewType;
+            $values['viewtype'] = '';
+            $values['showEventType'] = 'all';
 
             //GET PAGINATOR
             $paginator = Engine_Api::_()->getDbTable('events', 'siteevent')->getSiteeventsPaginator($values);
@@ -351,13 +425,74 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
 
             if (!empty($getTotalItemCount)) {
                 foreach ($paginator as $eventObj) {
+                    // continue if Deleted member
+                    if (empty($eventObj->host_id))
+                        continue;
                     $event = $eventObj->toArray();
+
+                    if (!$event['location'])
+                        $event['location'] = '';
+
                     $event['category_name'] = Engine_Api::_()->getItem('siteevent_category', $event['category_id'])->category_name;
+                    $occurrence_id = Engine_Api::_()->getDbTable('events', 'siteevent')->getNextOccurID($eventObj->getIdentity());
+
+                    //GET DATES OF EVENT
+                    $tz = Engine_Api::_()->getApi('settings', 'core')->core_locale_timezone;
+                    if (!empty($viewer_id)) {
+                        $tz = $viewer->timezone;
+                    }
                     $occurrenceTable = Engine_Api::_()->getDbTable('occurrences', 'siteevent');
-                    $dates = $occurrenceTable->getEventDate($event['event_id']);
+                    $dates = $occurrenceTable->getEventDate($eventObj->getIdentity(), $occurrence_id);
+
+                    if (isset($dates['starttime']) && !empty($dates['starttime']) && isset($tz)) {
+                        $startDateObject = new Zend_Date(strtotime($dates['starttime']));
+                        $startDateObject->setTimezone($tz);
+                        $dates['starttime'] = $startDateObject->get('YYYY-MM-dd HH:mm:ss');
+                    }
+                    if (isset($dates['endtime']) && !empty($dates['endtime']) && isset($tz)) {
+                        $endDateObject = new Zend_Date(strtotime($dates['endtime']));
+                        $endDateObject->setTimezone($tz);
+                        $dates['endtime'] = $endDateObject->get('YYYY-MM-dd HH:mm:ss');
+                    }
+
+                    if (!isset($dates) || empty($dates))
+                        continue;
+
+                    // Text for multiple date
                     $event = array_merge($event, $dates);
                     $event['isRepeatEvent'] = ($eventObj->isRepeatEvent()) ? 1 : 0;
-                    $item = Engine_Api::_()->getItem('siteevent_event', $event['event_id']);
+                    $totalEventOccurrences = Engine_Api::_()->getDbtable('occurrences', 'siteevent')->getOccurrenceCount($eventObj->event_id);
+                    if (!empty($eventObj->repeat_params) && $totalEventOccurrences > 1) {
+                        $event['hasMultipleDates'] = 1;
+                    } else {
+                        $event['hasMultipleDates'] = 0;
+                    }
+
+                    // Text for Payment Status
+                    if (Engine_Api::_()->siteevent()->hasPackageEnable()) {
+                        if (!$eventObj->getPackage()->isFree()) {
+                            $event['paymentStatus'] = $event['paymentStatus'] . $this->translate('Payment: ');
+                            if ($eventObj->status == "initial")
+                                $event['paymentStatus'] = $this->translate("Not made");
+                            elseif ($eventObj->status == "active")
+                                $event['paymentStatus'] = $this->translate("Yes");
+                            else
+                                $event['paymentStatus'] = $this->translate(ucfirst($eventObj->status));
+                        }
+
+                        // Text for Expiration Date
+                        if (!empty($eventObj->approved_date)) {
+                            $event['approveStatus'] = $this->translate('First Approved on ') . $eventObj->approved_date;
+                        }
+
+                        $expiry = $eventObj->getExpiryDate();
+                        if ($expiry !== "Expired" && $expiry !== $this->translate('Never Expires'))
+                            $event['expiryStatus'] = $this->translate("Expiration Date: ") . $expiry;
+                        else {
+                            $event['expiryStatus'] = $expiry;
+                        }
+                    }
+
                     $leaders = Engine_Api::_()->getItem('siteevent_event', $event['event_id'])->getLedBys(false);
                     // Set default ledby.
                     $defaultLedby['title'] = $eventObj->getOwner()->getTitle();
@@ -374,20 +509,12 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                     }
 
                     $event['hosted_by'] = '';
-                    if (isset($eventObj->host_type) && !empty($eventObj->host_id) && ($eventObj->host_type == 'siteevent_organizer')) {
-                        $organizerObj = Engine_Api::_()->getItem('siteevent_organizer', $eventObj->host_id);
-                        $organizer['host_type'] = 'siteevent_organizer';
-                        $organizer['host_id'] = $organizerObj->organizer_id;
-                        $organizer['host_title'] = $organizerObj->title;
-                        $getContentImages = Engine_Api::_()->getApi('Core', 'siteapi')->getContentImage($organizerObj);
-                        $organizer = array_merge($organizer, $getContentImages);
-                        $event['hosted_by'] = $organizer;
-                    } else if (isset($eventObj->host_type) && !empty($eventObj->host_id) && $eventObj->host_type == 'user') {
-                        $organizerObj = Engine_Api::_()->getItem('user', $eventObj->host_id);
-                        $organizer['host_type'] = 'user';
-                        $organizer['host_id'] = $organizerObj->user_id;
-                        $organizer['host_title'] = $organizerObj->displayname;
-                        $getContentImages = Engine_Api::_()->getApi('Core', 'siteapi')->getContentImage($organizerObj);
+                    if (isset($eventObj->host_type) && !empty($eventObj->host_id)) {
+                        $organizerObj = Engine_Api::_()->getItem($eventObj->host_type, $eventObj->host_id);
+                        $organizer['host_type'] = $eventObj->host_type;
+                        $organizer['host_id'] = $organizerObj->getIdentity();
+                        $organizer['host_title'] = $organizerObj->getTitle();
+                        $getContentImages = Engine_Api::_()->getApi('Core', 'siteapi')->getContentImage($organizerObj, false);
                         $organizer = array_merge($organizer, $getContentImages);
                         $event['hosted_by'] = $organizer;
                     }
@@ -409,8 +536,8 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                         $value['id'] = $event['event_id'];
                         // $siteeventLocationEvents = Zend_Registry::isRegistered('siteeventLocationEvents') ? Zend_Registry::get('siteeventLocationEvents') : null;
                         $location = Engine_Api::_()->getDbtable('locations', 'siteevent')->getLocation($value);
-                        if ($location)
-                            $event['location'] = $location->toArray();
+                        if (isset($location) && is_array($location))
+                            $event['location'] = $location->location;
                     }
 
                     $row = $eventObj->membership()->getRow($viewer);
@@ -463,6 +590,17 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                             );
                         }
 
+                        if (_CLIENT_TYPE && ((_CLIENT_TYPE == 'android' && _ANDROID_VERSION >= '1.6.3') || _CLIENT_TYPE == 'ios' && _IOS_VERSION >= '1.5.1')) {
+                            if ($isEnabledPackage && Engine_Api::_()->siteeventpaid()->canShowPaymentLink($eventObj->event_id)) {
+                                $getOauthToken = Engine_Api::_()->getApi('oauth', 'siteapi')->getAccessOauthToken($viewer);
+                                $tempMenu[] = array(
+                                    'label' => $this->translate('Make Payment'),
+                                    'name' => 'package_payment',
+                                    'url' => $getHost . '/' . $baseUrl . "/advancedevents/payment?token=" . $getOauthToken['token'] . "&event_id=" . $eventObj->event_id . "&disableHeaderAndFooter=1"
+                                );
+                            }
+                        }
+
                         if (empty($eventObj->draft)) {
                             if (!$eventObj->closed && $isAllowedEdit) {
                                 $tempMenu[] = array(
@@ -502,13 +640,13 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                     } elseif (!$eventObj->membership()->isMember($viewer, null)) {
                         $tempMenu[] = array(
                             'label' => $this->translate('Join Event'),
-                            'name' => 'join_event',
+                            'name' => 'join',
                             'url' => 'advancedevents/member/join/' . $eventObj->getIdentity(),
                         );
                     } else if ($eventObj->membership()->isMember($viewer, true)) {
                         $tempMenu[] = array(
                             'label' => $this->translate('Leave Event'),
-                            'name' => 'leave_event',
+                            'name' => 'leave',
                             'url' => 'advancedevents/member/leave/' . $eventObj->getIdentity(),
                         );
                     }
@@ -522,8 +660,9 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
         } catch (Exception $ex) {
             $this->respondWithValidationError('internal_server_error', $ex->getMessage());
         }
-
         //RESPONSE
+        $response['canCreate'] = Engine_Api::_()->authorization()->isAllowed('siteevent_event', $viewer, 'create');
+        $response['packagesEnabled'] = $this->_packagesEnabled();
         $this->respondWithSuccess($response, true);
     }
 
@@ -543,11 +682,13 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
         $event_id = $subject['event_id'];
 
         $viewer = Engine_Api::_()->user()->getViewer();
+        $viewer_id = $viewer->getIdentity();
+
         $isAllowedView = $subject->authorization()->isAllowed($viewer, 'view');
 
         $occurrence_id = $this->_getParam('occurrence_id', null);
 
-        $rsvp_form = $this->getRequestParam('rsvp_form', false);
+        $rsvp_form = $this->getRequestParam('rsvp_form', true);
 
         //GET SETTING
         $showContent = $this->_getParam('showContent', array("memberCount", "viewCount", "likeCount", "commentCount", "tags", "category", "ownerName", "rsvp", "price", "startDate", "endDate", "location"));
@@ -560,22 +701,6 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
         if (empty($isAllowedView))
             $this->respondWithError('unauthorized');
 
-        // GETTING THE RSVP.
-        if ($this->getRequestParam('rsvp_form', null)) {
-            if ($subject->membership()->isMember($viewer, true)) {
-                $getRSVP = $this->getRequestParam('rsvp', 2);
-                if ($this->getRequest()->isPost() && isset($getRSVP)) {
-                    $subject->membership()
-                            ->getMemberInfo($viewer)
-                            ->setFromArray(array('rsvp' => $getRSVP))
-                            ->save();
-
-                    $this->successResponseNoContent('no_content');
-                } else {
-                    $bodyParams['profile_rsvp_form'] = $this->_getProfileRSVP($subject);
-                }
-            }
-        }
 
         //PREPARE RESPONSE
         $bodyParams = array();
@@ -750,6 +875,13 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
         Engine_Api::_()->getApi('Core', 'siteapi')->setView();
         // PREPARE RESPONSE ARRAY
         $bodyParams['response'] = $subject->toArray();
+
+        if (isset($bodyParams['response']['body']) && !empty($bodyParams['response']['body']))
+            $bodyParams['response']['body'] = strip_tags($bodyParams['response']['body']);
+
+        if (!$bodyParams['response']['location'])
+            $bodyParams['response']['location'] = '';
+
         $bodyParams['response']['guid'] = $subject->getGuid();
         $bodyParams['response']['isowner'] = $subject->isOwner($viewer);
 
@@ -764,103 +896,139 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
             //GET THE NEXT UPCOMING OCCURRENCE ID
             $occurrence_id = Engine_Api::_()->getDbTable('events', 'siteevent')->getNextOccurID($this->_getParam('event_id'));
         }
+
+        $bodyParams['response']['occurrence_id'] = $occurrence_id;
         try {
             //GET DATES OF EVENT
             $occurrenceTable = Engine_Api::_()->getDbTable('occurrences', 'siteevent');
             $dates = $occurrenceTable->getEventDate($event_id, $occurrence_id);
             $bodyParams['response'] = array_merge($bodyParams['response'], $dates);
             $bodyParams['response']['isRepeatEvent'] = ($siteevent->isRepeatEvent()) ? 1 : 0;
-
+            $totalEventOccurrences = Engine_Api::_()->getDbtable('occurrences', 'siteevent')->getOccurrenceCount($siteevent->event_id);
+            if (!empty($siteevent->repeat_params) && $totalEventOccurrences > 1) {
+                $bodyParams['response']['hasMultipleDates'] = 1;
+            } else {
+                $bodyParams['response']['hasMultipleDates'] = 0;
+            }
 
             //get Event status 
             $endDate = strtotime($dates['endtime']);
             $startDate = strtotime($dates['starttime']);
             $currentDate = time();
 
-
+            $status = $color = '';
             //@todo work for event status.
             $lastOccurrenceEndDate = $occurrenceTable->getOccurenceEndDate($siteevent->event_id, 'DESC');
-//            $lastOccurrenceEndDate = strtotime($view->locale()->toEventDateTime($lastOccurrenceEndDate, array('format' => 'M/d/yy h:mm a')));
-//            $isLastOccurrenceEnd = 1;
-//            if ($lastOccurrenceEndDate > $currentDate) {
-//                $isLastOccurrenceEnd = 0;
-//            }
-//
-//            $firstOccurrenceStartDate = $occurrenceTable->getOccurenceStartDate($siteevent->event_id, 'ASC');
-////            $firstOccurrenceStartDate = strtotime($view->locale()->toEventDateTime($firstOccurrenceStartDate));
-//
-//            $isFirstOccurrenceStart = 1;
-//            if ($firstOccurrenceStartDate > $currentDate) {
-//                $isFirstOccurrenceStart = 0;
-//            }
-//
-//            $isEventFinished = 0;
-//            $leftOccurrences = 0;
-//            if ($endDate < $currentDate) {
-//                $isEventFinished = 1;
-//
-//                $next_occurrence_id = Engine_Api::_()->getDbTable('events', 'siteevent')->getNextOccurID($siteevent->event_id);
-//                $nextOccurrenceDate = $occurrenceTable->getEventDate($siteevent->event_id, $next_occurrence_id);
-//
-//                $leftOccurrences = $occurrenceTable->getOccurrenceCount($siteevent->event_id, array('upcomingOccurrences' => 1));
-//            }
-//
-//            $futureEvent = 0;
-//            if ($startDate > $currentDate) {
-//                $futureEvent = 1;
-//            }
-//
-//            if ($siteevent->closed) {
-//                $status = $this->translate("Event has cancelled.");
-//            }
-//
-//            if ($isEventFinished) {
-//                if ($isLastOccurrenceEnd || empty($siteevent->repeat_params))
-//                    $status = $this->translate("Event has ended.");
-//                elseif ($this->siteevent->repeat_params)
-//                    $this->translate("This occurrence has ended.");
-//            }
-//            if ($siteevent->repeat_params && $nextOccurrenceDate['starttime'] && !$isLastOccurrenceEnd) {
-//                $datetimeFormat = Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.datetime.format', 'medium');
-//                $date = $this->locale()->toEventDateTime($this->nextOccurrenceDate['starttime'], array('size' => $datetimeFormat));
-//                $status = $this->translate("Next Occurrence:");
-//            }
-//
-//            if ($futureEvent) {
-//                if (!$isFirstOccurrenceStart || empty($siteevent->repeat_params))
-//                    $status = $this->translate("Event has not started.");
-//                else
-//                    $status = $this->translate("This occurrence has not started.");
-//            }
-//
-//            else {
-//                if ($siteevent->repeat_params)
-//                    $status = $this->translate("This occurrence is ongoing.");
-//                else
-//                    $status = $this->translate("Event is ongoing.");
-//            }
-//
-//            if ($isEventFull && $showEventFullStatus) {
-//                $status = $this->translate("Event is Full");
-//            }
-//
-//
-//
-//            if ($viewer_id) {
-//                if (!$waitlist_id && $viewer_id != $siteevent->owner_id) {
-//                    $status = $this->translate("Add me to waitlist");
-//                } elseif ($this->inWaitlist)
-//                    $status = "";
-//            }
-//
-//
-//            if ($isEventFull && $showEventFullStatus) {
-//                $occurrence = Engine_Api::_()->getItem('siteevent_occurrence', $this->occurrence_id);
-//                if (Engine_Api::_()->siteevent()->isTicketBasedEvent()) {
-//                    
-//                } elseif (!Engine_Api::_()->siteevent()->isTicketBasedEvent() && $viewer_id && empty($occurrence->waitlist_flag))
-//                    $endDate = Engine_Api::_()->getDbTable('occurrences', 'siteevent')->getOccurenceEndDate($this->siteevent->event_id, 'DESC', $this->occurrence_id);
-//            }
+            $lastOccurrenceEndDate = strtotime($lastOccurrenceEndDate, array('format' => 'M/d/yy h:mm a'));
+            $isLastOccurrenceEnd = 1;
+            if ($lastOccurrenceEndDate > $currentDate) {
+                $isLastOccurrenceEnd = 0;
+            }
+
+            $firstOccurrenceStartDate = $occurrenceTable->getOccurenceStartDate($siteevent->event_id, 'ASC');
+            $firstOccurrenceStartDate = strtotime($firstOccurrenceStartDate, array('format' => 'M/d/yy h:mm a'));
+            $isFirstOccurrenceStart = 1;
+            if ($firstOccurrenceStartDate > $currentDate) {
+                $isFirstOccurrenceStart = 0;
+            }
+
+            $isEventFinished = 0;
+            $leftOccurrences = 0;
+            if ($endDate < $currentDate) {
+                $isEventFinished = 1;
+
+                $next_occurrence_id = Engine_Api::_()->getDbTable('events', 'siteevent')->getNextOccurID($siteevent->event_id);
+                $nextOccurrenceDate = $occurrenceTable->getEventDate($siteevent->event_id, $next_occurrence_id);
+
+                $leftOccurrences = $occurrenceTable->getOccurrenceCount($siteevent->event_id, array('upcomingOccurrences' => 1));
+            }
+
+            $futureEvent = 0;
+            if ($startDate > $currentDate) {
+                $futureEvent = 1;
+            }
+
+            if ($siteevent->closed) {
+                $status = $this->translate("Event has cancelled");
+                $color = 'R';
+            }
+            if ($isEventFinished && empty($siteevent->closed)) {
+                if ($isLastOccurrenceEnd || empty($siteevent->repeat_params)) {
+                    $status = $this->translate("Event has ended");
+                    $color = 'R';
+                } elseif ($siteevent->repeat_params) {
+                    $this->translate("This occurrence has ended");
+                    $color = 'R';
+                }
+            }
+            if ($siteevent->repeat_params && $nextOccurrenceDate['starttime'] && !$isLastOccurrenceEnd && empty($siteevent->closed)) {
+                $datetimeFormat = Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.datetime.format', 'medium');
+                $date = $this->locale()->toEventDateTime($this->nextOccurrenceDate['starttime'], array('size' => $datetimeFormat));
+                $status = $this->translate("Next Occurrence:" . $date);
+                $color = 'B';
+            }
+
+            if ($futureEvent && empty($siteevent->closed)) {
+                if (!$isFirstOccurrenceStart || empty($siteevent->repeat_params)) {
+                    $status = $this->translate("Event has not started");
+                    $color = 'B';
+                } else {
+                    $status = $this->translate("This occurrence has not started");
+                    $color = 'B';
+                }
+            } else if (empty($siteevent->closed)) {
+                if ($siteevent->repeat_params && empty($isEventFinished) && empty($siteevent->closed)) {
+                    $color = 'G';
+                    $status = $this->translate("This occurrence is ongoing");
+                } else if (empty($isEventFinished)) {
+                    $color = 'G';
+                    $status = $this->translate("Event is ongoing");
+                }
+            }
+
+            if ($isEventFull && empty($siteevent->closed)) {
+                $color = 'R';
+                $status = $this->translate("Event is Full");
+            }
+
+            if ($isEventFull && empty($siteevent->closed)) {
+                $occurrence = Engine_Api::_()->getItem('siteevent_occurrence', $occurrence_id);
+                if (Engine_Api::_()->siteevent()->isTicketBasedEvent()) {
+                    
+                } elseif (!Engine_Api::_()->siteevent()->isTicketBasedEvent() && $viewer_id && empty($occurrence->waitlist_flag))
+                    $endDate = Engine_Api::_()->getDbTable('occurrences', 'siteevent')->getOccurenceEndDate($siteevent->event_id, 'DESC', $occurrence_id);
+                if (null === $siteevent->membership()->getRow($viewer) && strtotime($endDate) > time()) {
+                    if ($siteevent->membership()->isResourceApprovalRequired()) {
+                        $color = 'G';
+                        $status = $this->translate("Request Invite");
+                    } else if (strtotime($endDate) > time()) {
+                        $color = 'G';
+                        $status = $this->translate("Join Event");
+                    }
+                }
+            }
+
+            $isEventFull = $siteevent->isEventFull();
+            if (!empty($isEventFull) && _CLIENT_TYPE && ((_CLIENT_TYPE == 'android' && _ANDROID_VERSION >= '1.7.4') || _CLIENT_TYPE == 'ios' && _IOS_VERSION >= '1.5.9')) {
+                $status = $this->translate("Event is Full");
+                if (!empty($viewer_id)) {
+                    $params = array();
+                    $params['occurrence_id'] = $occurrence_id;
+                    $params['user_id'] = $viewer_id;
+                    $params['columnName'] = 'waitlist_id';
+                    $inWaitlist = Engine_Api::_()->getDbTable('waitlists', 'siteevent')->getColumnValue($params);
+                    if (!empty($inWaitlist)) {
+                        $status = $this->translate("You are added to the waitlist.");
+                    }
+                }
+            }
+
+            //end event status work
+            if (isset($status) && !empty($status))
+                $bodyParams['response']['status'] = $status;
+
+            if (isset($color) && !empty($color))
+                $bodyParams['response']['status_color'] = $color;
 
             if ($viewer->getIdentity()) {
                 $is_member = $subject->membership()->isMember($viewer, null);
@@ -873,54 +1041,61 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
             $category_id = $siteevent->category_id;
             if (!empty($category_id)) {
 
-                $bodyparams['categoryname'] = Engine_Api::_()->getItem('siteevent_category', $category_id)->getCategorySlug();
+                $bodyparams['categoryname'] = Engine_Api::_()->getItem('siteevent_category', $category_id)->getTitle();
 
                 $subcategory_id = $siteevent->subcategory_id;
 
                 if (!empty($subcategory_id)) {
 
-                    $bodyparams['subcategoryname'] = ucfirst(Engine_Api::_()->getItem('siteevent_category', $subcategory_id)->getCategorySlug());
+                    $bodyparams['subcategoryname'] = ucfirst(Engine_Api::_()->getItem('siteevent_category', $subcategory_id)->getTitle());
 
                     $subsubcategory_id = $siteevent->subsubcategory_id;
 
                     if (!empty($subsubcategory_id)) {
 
-                        $bodyparams['subsubcategoryname'] = Engine_Api::_()->getItem('siteevent_category', $subsubcategory_id)->getCategorySlug();
+                        $bodyparams['subsubcategoryname'] = Engine_Api::_()->getItem('siteevent_category', $subsubcategory_id)->getTitle();
                     }
                 }
             }
 
             //GET DATES OF EVENT
-            $occurrenceTable = Engine_Api::_()->getDbTable('occurrences', 'siteevent');
-            $dates = $occurrenceTable->getEventDate($event_id);
-            $bodyParams['response'] = array_merge($bodyParams['response'], $dates);
+            $tz = Engine_Api::_()->getApi('settings', 'core')->core_locale_timezone;
+            if (!empty($viewer_id)) {
+                $tz = $viewer->timezone;
+            } $occurrenceTable = Engine_Api::_()->getDbTable('occurrences', 'siteevent');
+            $dates = $occurrenceTable->getEventDate($event_id, $occurrence_id);
+
+            if (isset($dates['starttime']) && !empty($dates['starttime']) && isset($tz)) {
+                $startDateObject = new Zend_Date(strtotime($dates['starttime']));
+                $startDateObject->setTimezone($tz);
+                $bodyParams['response']['starttime'] = $startDateObject->get('YYYY-MM-dd HH:mm:ss');
+            }
+            if (isset($dates['endtime']) && !empty($dates['endtime']) && isset($tz)) {
+                $endDateObject = new Zend_Date(strtotime($dates['endtime']));
+                $endDateObject->setTimezone($tz);
+                $bodyParams['response']['endtime'] = $endDateObject->get('YYYY-MM-dd HH:mm:ss');
+            }
 
             $host = $siteevent->getHost();
 
             if (isset($host)) {
-                $host_icons = Engine_Api::_()->getApi('Core', 'siteapi')->getContentImage($host);
-
-                if ($subject->host_type == 'siteevent_organizer') {
-                    $organizer['host_type'] = 'siteevent_organizer';
-                    $organizer['host_id'] = $host->organizer_id;
-                    $organizer['host_title'] = $host->title;
-                    $organizer['image_icon'] = $host_icons;
-                } else if ($subject->host_type == 'user') {
-                    $organizer['host_type'] = 'user';
-                    $organizer['host_id'] = $host->user_id;
-                    $organizer['host_title'] = $host->displayname;
-                    $organizer['image_icon'] = $host_icons;
-                }
+                $host_icons = Engine_Api::_()->getApi('Core', 'siteapi')->getContentImage($host, false);
+                $organizer['host_type'] = $host->getType();
+                $organizer['host_id'] = $host->getIdentity();
+                $organizer['host_title'] = $host->getTitle();
+                $organizer['image_icon'] = $host_icons;
 
                 $userEvents = Engine_Api::_()->getDbTable('events', 'siteevent')->userEvent($organizer);
                 $organizer['event_hosted'] = count($userEvents);
+                $bodyParams['response']['host'] = $organizer;
             }
-
-            $bodyParams['response']['host'] = $organizer;
 
             $item = Engine_Api::_()->getItem('siteevent_event', $subject->event_id);
             $bodyParams['response']['ledby'] = Engine_Api::_()->getItem('siteevent_event', $subject['event_id'])->getLedBys();
 
+            // Get the rsvp value according to the occurence_id
+            $occurrence_id = Engine_Api::_()->getDbTable('occurrences', 'siteevent')->getOccurrence($subject->event_id);
+            Zend_Registry::set('occurrence_id', $occurrence_id);
             $row = $subject->membership()->getRow($viewer);
             $currentRsvp = $bodyParams['response']['rsvp'] = $row->rsvp;
 
@@ -937,13 +1112,48 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
             $bodyParams['response']['get_not_attending_count'] = $subject->getNotAttendingCount();
             $bodyParams['response']['get_awaiting_reply_count'] = $subject->getAwaitingReplyCount();
 
-            //profile rsvp form
-            if ($rsvp_form == 1 && isset($currentRsvp))
-                $bodyParams['profile_rsvp_form'] = $this->_getProfileRSVP($subject);
+//            //profile rsvp form
+            $row = $subject->membership()->getRow($viewer);
+            // GETTING THE RSVP.
+            if ($this->getRequestParam('rsvp_form', null)) {
+                if ($row->active) {
+                    $getRSVP = $this->getRequestParam('rsvp', 2);
+                    if ($this->getRequest()->isPost() && isset($getRSVP)) {
+                        $subject->membership()
+                                ->getMemberInfo($viewer)
+                                ->setFromArray(array('rsvp' => $getRSVP))
+                                ->save();
 
+                        $this->successResponseNoContent('no_content');
+                    } else {
+                        $bodyParams['profile_rsvp_form'] = $this->_getProfileRSVP($subject);
+                    }
+                }
+            }
             //GET THE GUTTER-MENUS.
             if ($this->getRequestParam('gutter_menu', true))
                 $bodyParams['gutterMenu'] = $this->_gutterMenus($subject);
+
+            // SET THE ANNOUNCEMENT IN RESPONSE
+            if ($this->getRequestParam('announcement', false) && Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.announcement', 1)) {
+                $announcementArray = array();
+                $announcementLimit = 3;
+                $fetchColumns = array('announcement_id', 'title', 'body');
+                $announcements = Engine_Api::_()->getDbtable('announcements', 'siteevent')->announcements($siteevent->event_id, 0, $announcementLimit, $fetchColumns);
+                if (COUNT($announcements)) {
+                    $announcementArray['announcementCount'] = COUNT($announcements);
+                    $announcementArray['announcementCreate'] = $this->_helper->requireAuth()->setAuthParams($siteevent, $viewer, "edit")->isValid();
+                    $announcementArray['canDelete'] = $this->_helper->requireAuth()->setAuthParams($siteevent, $viewer, "delete")->isValid();
+                    foreach ($announcements as $item) {
+                        $announcement = $item->toArray();
+                        if (isset($announcement['body']) && !empty($announcement['body']))
+                            $announcement['body'] = strip_tags($announcement['body']);
+                        $announcementArray['announcements'][] = $announcement;
+                    }
+                }
+
+                $bodyParams['announcement'] = $announcementArray;
+            }
 
             //GET THE EVENT PROFILE TABS.
             if ($this->getRequestParam('profile_tabs', true))
@@ -978,20 +1188,24 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
     private function _gutterMenus($subject) {
 
         $viewer = Engine_Api::_()->user()->getViewer();
+        $viewer_id = $viewer->getIdentity();
 
         $owner = $subject->getOwner();
-
         $menus = array();
 
-        $viewer_id = Engine_Api::_()->user()->getViewer()->getIdentity();
-        $level_id = $viewer->level_id;
+        //GET USER LEVEL ID
+        if ($viewer->getIdentity()) {
+            $level_id = $viewer->level_id;
+            $viewer_id = $viewer->getIdentity();
+        } else {
+            $level_id = Engine_Api::_()->getDbtable('levels', 'authorization')->fetchRow(array('type = ?' => "public"))->level_id;
+        }
 
         $siteevent = $subject;
 
         if ($subject->authorization()->isAllowed($viewer, 'invite')) {
 
             $occure_id = Engine_Api::_()->getDbTable('occurrences', 'siteevent')->getOccurrence($subject->event_id);
-
 
             //CHECK IF THE EVENT IS PAST EVENT THEN ALSO DO NOT SHOW THE INVITE AND PROMOTE LINK
             $endDate = Engine_Api::_()->getDbTable('occurrences', 'siteevent')->getOccurenceEndDate($subject->event_id, 'DESC', $occure_id);
@@ -1013,6 +1227,14 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                 'label' => $this->translate('Edit Event Details'),
                 'url' => 'advancedevents/edit/' . $subject->getIdentity(),
             );
+
+            if (_CLIENT_TYPE && ((_CLIENT_TYPE == 'android' && _ANDROID_VERSION >= '1.7.4') || (_CLIENT_TYPE == 'ios' && _IOS_VERSION >= '1.5.9')) && Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.waitlist', 1)) {
+                $menus[] = array(
+                    'name' => 'capacity_waitlist',
+                    'label' => $this->translate('Capacity & Waitlist'),
+                    'url' => 'advancedevents/capacity-and-waitlist/' . $subject->getIdentity(),
+                );
+            }
         }
 
         if (!empty($viewer_id)) {
@@ -1027,9 +1249,11 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
             );
         }
 
-        $canCreateVideo = $this->_helper->requireAuth()->setAuthParams('video', null, 'create')->checkRequire();
-
-        if ($canCreateVideo) {
+        $videoTable = Engine_Api::_()->getDbtable('videos', 'siteevent');
+        //TOTAL VIDEO COUNT FOR THIS EVENT
+        $counter = $videoTable->getEventVideoCount($subject->getIdentity());
+        $allowed_upload_video = Engine_Api::_()->siteevent()->allowVideo($subject, $viewer, $counter);
+        if ($allowed_upload_video) {
             $menus[] = array(
                 'name' => 'videoCreate',
                 'label' => $this->translate('Add Video'),
@@ -1067,16 +1291,6 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
             'url' => 'advancedevents/tellafriend/' . $subject->getIdentity()
         );
 
-
-//        //PRINT EVENT
-//        $menus[] = array(
-//            'name' => 'print',
-//            'label' => 'Print This Event',
-//            'params' => array(
-//                'event_id' => $siteevent->getIdentity(),
-//                'occurrence_id' => $occurrence_id,
-//            ),
-//        );
         //PUBLISH EVENT
         if ($siteevent->draft == 1 && ($viewer_id == $siteevent->owner_id)) {
             $menus[] = array(
@@ -1085,7 +1299,6 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                 'url' => 'advancedevents/publish/' . $subject->getIdentity(),
             );
         }
-
 
         //SHOW IF AUTHORIZED
         if ($viewer_id == $siteevent->owner_id && empty($siteevent->draft)) {
@@ -1133,8 +1346,27 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
             );
         }
 
+        $isEnabledPackage = Engine_Api::_()->siteevent()->hasPackageEnable();
+        $getHost = Engine_Api::_()->getApi('core', 'siteapi')->getHost();
+        $baseUrl = Zend_Controller_Front::getInstance()->getBaseUrl();
+        $baseUrl = @trim($baseUrl, "/");
+
+        if (_CLIENT_TYPE && ((_CLIENT_TYPE == 'android' && _ANDROID_VERSION >= '1.6.3') || _CLIENT_TYPE == 'ios' && _IOS_VERSION >= '1.5.1')) {
+            if (isset($viewer_id) && !empty($viewer_id) && isset($subject->owner_id) && !empty($subject->owner_id) && $viewer_id == $subject->owner_id) {
+                if ($isEnabledPackage && Engine_Api::_()->siteeventpaid()->canShowPaymentLink($subject->event_id)) {
+                    $getOauthToken = Engine_Api::_()->getApi('oauth', 'siteapi')->getAccessOauthToken($viewer);
+                    $menus[] = array(
+                        'label' => $this->translate('Make Payment'),
+                        'name' => 'package_payment',
+                        'url' => $getHost . '/' . $baseUrl . "/advancedevents/payment?token=" . $getOauthToken['token'] . "&event_id=" . $subject->event_id . "&disableHeaderAndFooter=1"
+                    );
+                }
+            }
+        }
+
+        $enabledDiary = Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.diary', 1);
         //AUTHORIZATION CHECK
-        if (empty($siteevent->draft) && !empty($siteevent->search) && !empty($siteevent->approved)) {
+        if ($viewer->getIdentity() && empty($siteevent->draft) && !empty($siteevent->search) && !empty($siteevent->approved) && $enabledDiary) {
 
             //GET USER LEVEL ID
             if (!empty($viewer_id)) {
@@ -1161,57 +1393,66 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                 }
             }
 
-            if (Engine_Api::_()->siteevent()->allowReviewCreate($siteevent)) {
-                //Check event is end or not
-                $endDate = Engine_Api::_()->getDbTable('occurrences', 'siteevent')->getOccurenceEndDate($siteevent->event_id);
-                $currentDate = date('Y-m-d H:i:s');
-                $endDate = strtotime($endDate);
-                $currentDate = strtotime($currentDate);
-                $ratingTable = Engine_Api::_()->getDbtable('ratings', 'siteevent');
-                $reviewTable = Engine_Api::_()->getDbTable('reviews', 'siteevent');
-                $authorizationApi = Engine_Api::_()->authorization();
-                $create_level_allow = $authorizationApi->getPermission($level_id, 'siteevent_event', "review_create");
-                //SET HAS POSTED
-                if (empty($viewer_id)) {
-                    $hasPosted = $hasPosted = 0;
-                } else {
-                    $params = array();
-                    $params['resource_id'] = $siteevent->event_id;
-                    $params['resource_type'] = $siteevent->getType();
-                    $params['viewer_id'] = $viewer_id;
-                    $params['type'] = 'user';
-                    $hasPosted = $reviewTable->canPostReview($params);
-                }
-                $can_reply = Engine_Api::_()->authorization()->getPermission($level_id, 'siteevent_event', "review_reply");
-                $can_update = Engine_Api::_()->authorization()->getPermission($level_id, 'siteevent_event', "review_update");
-                $rateuser = Engine_Api::_()->getDbTable("categories", "siteevent")->isGuestReviewAllowed($siteevent->category_id);
-                if (!empty($hasPosted) && !empty($can_update)) {
-                    $menus[] = array(
-                        'name' => 'updateReview',
-                        'label' => $this->translate('Update Review'),
-                        'url' => 'advancedevents/review/update/' . $siteevent->getIdentity(),
-                        'urlParams' => array(
-                            "review_id" => $hasPosted
-                        )
-                    );
-                }
-                if (empty($hasPosted) && !empty($create_level_allow)) {
-                    if ($endDate < $currentDate && empty($rateuser)) {
-                        $menus[] = array(
-                            'name' => 'review',
-                            'label' => $this->translate('Create Review'),
-                            'url' => 'advancedevents/review/create/' . $subject->getIdentity(),
-                        );
+            if (Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.reviews', 2) && Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.reviews', 2) != 1) {
+
+                //GET VIEWER   
+                $viewer_id = $viewer->getIdentity();
+                $create_review = ($siteevent->owner_id == $viewer_id) ? Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.allowownerreview', 1) : 1;
+                if (!empty($create_review)) {
+                    if (Engine_Api::_()->siteevent()->allowReviewCreate($siteevent)) {
+                        //Check event is end or not
+                        $endDate = Engine_Api::_()->getDbTable('occurrences', 'siteevent')->getOccurenceEndDate($siteevent->event_id);
+                        $currentDate = date('Y-m-d H:i:s');
+                        $endDate = strtotime($endDate);
+                        $currentDate = strtotime($currentDate);
+                        $ratingTable = Engine_Api::_()->getDbtable('ratings', 'siteevent');
+                        $reviewTable = Engine_Api::_()->getDbTable('reviews', 'siteevent');
+                        $authorizationApi = Engine_Api::_()->authorization();
+                        $create_level_allow = $authorizationApi->getPermission($level_id, 'siteevent_event', "review_create");
+                        //SET HAS POSTED
+                        if (empty($viewer_id)) {
+                            $hasPosted = $hasPosted = 0;
+                        } else {
+                            $params = array();
+                            $params['resource_id'] = $siteevent->event_id;
+                            $params['resource_type'] = $siteevent->getType();
+                            $params['viewer_id'] = $viewer_id;
+                            $params['type'] = 'user';
+                            $hasPosted = $reviewTable->canPostReview($params);
+                        }
+                        $can_reply = Engine_Api::_()->authorization()->getPermission($level_id, 'siteevent_event', "review_reply");
+                        $can_update = Engine_Api::_()->authorization()->getPermission($level_id, 'siteevent_event', "review_update");
+                        $rateuser = Engine_Api::_()->getDbTable("categories", "siteevent")->isGuestReviewAllowed($siteevent->category_id);
+
+                        if (!empty($hasPosted) && !empty($can_update)) {
+                            $menus[] = array(
+                                'name' => 'updateReview',
+                                'label' => $this->translate('Update Review'),
+                                'url' => 'advancedevents/review/update/' . $siteevent->getIdentity(),
+                                'urlParams' => array(
+                                    "review_id" => $hasPosted
+                                )
+                            );
+                        } else if (empty($hasPosted) && !empty($create_level_allow)) {
+                            if ($endDate < $currentDate && empty($rateuser)) {
+                                $menus[] = array(
+                                    'name' => 'createReview',
+                                    'label' => $this->translate('Write Review'),
+                                    'url' => 'advancedevents/review/create/' . $subject->getIdentity(),
+                                );
+                            }
+                        }
                     }
                 }
             }
         }
         if ($viewer->getIdentity()) {
-
-            $row = $subject->membership()->getRow($viewer);
             $occurrence_id = Engine_Api::_()->getDbTable('occurrences', 'siteevent')->getOccurrence($subject->event_id);
+            Zend_Registry::set('occurrence_id', $occurrence_id);
+            $row = $subject->membership()->getRow($viewer);
+
             //CHECK IF THE EVENT IS PAST EVENT THEN WE WILL NOT SHOW JOIN OR REQUEST INVITE LINK EVENT LINK.
-            $endDate = Engine_Api::_()->getDbTable('occurrences', 'siteevent')->getOccurenceEndDate($subject->event_id, 'DESC', $occure_id);
+            $endDate = Engine_Api::_()->getDbTable('occurrences', 'siteevent')->getOccurenceEndDate($subject->event_id, 'DESC', $occurrence_id);
             $isEventFull = $subject->isEventFull(array('occurrence_id' => $occure_id));
 //        TODO TICKET BASED EVENT
 //        if(Engine_Api::_()->siteevent()->isTicketBasedEvent() && Engine_Api::_()->siteeventticket()->bookNowButton($subject) && ($subject->isRepeatEvent() || (!$subject->isRepeatEvent() && !$isEventFull))){
@@ -1231,7 +1472,24 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
             //@todo paid extension advanced event
             //if (!Engine_Api::_()->siteevent()->isTicketBasedEvent()) {
             // Not yet associated at all
-            if (null === $row && !$isEventFull && empty($occurrence->waitlist_flag)) {
+            $isEventFull = $siteevent->isEventFull();
+            if (!empty($isEventFull) && _CLIENT_TYPE && ((_CLIENT_TYPE == 'android' && _ANDROID_VERSION >= '1.7.4') || _CLIENT_TYPE == 'ios' && _IOS_VERSION >= '1.5.9')) {
+                $status = $this->translate("Event is Full");
+                if (!empty($viewer_id)) {
+                    $params = array();
+                    $params['occurrence_id'] = $occurrence_id;
+                    $params['user_id'] = $viewer_id;
+                    $params['columnName'] = 'waitlist_id';
+                    $inWaitlist = Engine_Api::_()->getDbTable('waitlists', 'siteevent')->getColumnValue($params);
+                    if (empty($inWaitlist) && ($viewer_id != $siteevent->owner_id)) {
+                        $menus[] = array(
+                            'name' => 'join-waitlist',
+                            'label' => $this->translate('Add me to waitlist'),
+                            'url' => 'advancedevents/waitlist/join/' . $subject->getIdentity(),
+                        );
+                    }
+                }
+            } else if (null === $row && !$isEventFull && empty($occurrence->waitlist_flag)) {
                 if (strtotime($endDate) > time()) {
                     if ($subject->membership()->isResourceApprovalRequired()) {
                         $menus[] = array(
@@ -1301,7 +1559,26 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
             'label' => $this->translate('Updates'),
         );
 
+        $hasOverview = true;
+        if (Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.overview', 1)) {
+            $tableOtherinfo = Engine_Api::_()->getDbTable('otherinfo', 'siteevent');
+            $overview = $tableOtherinfo->getColumnValue($subject->getIdentity(), 'overview');
+            $hasOverview = !empty($overview);
+        }
+        if ($hasOverview) {
 
+            $response[] = array(
+                'label' => $this->translate('Overview'),
+                'name' => 'overview',
+                'url' => 'advancedevents/description/' . $subject->getIdentity()
+            );
+        } else if (isset($subject->body) && !empty($subject->body)) {
+            $response[] = array(
+                'label' => $this->translate('Description'),
+                'name' => 'description',
+                'url' => 'advancedevents/description/' . $subject->getIdentity()
+            );
+        }
         if ($subject->member_count > 0) {
             $response[] = array(
                 'name' => 'members',
@@ -1313,6 +1590,16 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
             );
         }
 
+        if (isset($subject->profile_type) && !empty($subject->profile_type)) {
+            $getProfileInfo = Engine_Api::_()->getApi('Siteapi_Core', 'siteevent')->getInformation($subject);
+            if (count($getProfileInfo) > 0) {
+                $response[] = array(
+                    'name' => 'information',
+                    'label' => $this->translate('Information'),
+                    'url' => 'advancedevents/information/' . $subject->getIdentity()
+                );
+            }
+        }
         if ($subject->getSingletonAlbum()->getCollectiblesPaginator()->getTotalItemCount() > 0) {
             $response[] = array(
                 'name' => 'photos',
@@ -1348,26 +1635,7 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                 'url' => 'advancedevents/videos/' . $subject->getIdentity()
             );
         }
-        $hasOverview = true;
-        if (Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.overview', 1)) {
-            $tableOtherinfo = Engine_Api::_()->getDbTable('otherinfo', 'siteevent');
-            $overview = $tableOtherinfo->getColumnValue($subject->getIdentity(), 'overview');
-            $hasOverview = !empty($overview);
-        }
-        if ($hasOverview) {
 
-            $response[] = array(
-                'label' => $this->translate('Overview'),
-                'name' => 'description',
-                'url' => 'advancedevents/description/' . $subject->getIdentity()
-            );
-        } else if (isset($subject->body) && !empty($subject->body)) {
-            $response[] = array(
-                'label' => $this->translate('Description'),
-                'name' => 'description',
-                'url' => 'advancedevents/description/' . $subject->getIdentity()
-            );
-        }
 
         $params['resource_type'] = 'siteevent_event';
         $params['event_id'] = $subject->event_id;
@@ -1387,14 +1655,7 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
             );
         }
 
-        $getProfileInfo = Engine_Api::_()->getApi('Siteapi_Core', 'siteevent')->getInformation($subject);
-        if (count($getProfileInfo) > 0) {
-            $response[] = array(
-                'name' => 'information',
-                'label' => $this->translate('Information'),
-                'url' => 'advancedevents/information/' . $subject->getIdentity()
-            );
-        }
+
 //        $response[] = array(
 //            'name' => 'map',
 //            'label' => 'Map',
@@ -1643,7 +1904,6 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                 $this->successResponseNoContent('no_content', true);
             } catch (Exception $e) {
                 $db->rollback();
-                throw $e;
                 $this->respondWithError('internal_server_error', $e->getMessage());
             }
         } else {
@@ -1701,18 +1961,22 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                 $this->respondWithError('no_record');
             //GET FORM VALUES
             $values = $this->_getAllParams();
+            $errorMessage = array();
 
             if (empty($values['sender_email']) && !isset($values['sender_email']))
-                $this->respondWithValidationError('validation_fail', "Your Email field is required");
+                $errorMessage[] = $this->translate("Your Email field is required");
 
             if (empty($values['sender_name']) && !isset($values['sender_name']))
-                $this->respondWithValidationError('validation_fail', "Your Name field is required");
+                $errorMessage[] = $this->translate("Your Name field is required");
 
             if (empty($values['message']) && !isset($values['message']))
-                $this->respondWithValidationError('validation_fail', "Message field is required");
+                $errorMessage[] = $this->translate("Message field is required");
 
             if (empty($values['receiver_emails']) && !isset($values['receiver_emails']))
-                $this->respondWithValidationError('validation_fail', "To field is required");
+                $errorMessage[] = $this->translate("To field is required");
+
+            if (isset($errorMessage) && count($errorMessage) > 0)
+                $this->respondWithValidationError('validation_fail', $errorMessage);
 
             //EXPLODE EMAIL IDS
             $reciver_ids = explode(',', $values['receiver_emails']);
@@ -1725,17 +1989,23 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
             //CHECK VALID EMAIL ID FORMAT
             $validator = new Zend_Validate_EmailAddress();
             $validator->getHostnameValidator()->setValidateTld(false);
+            $errorMessage = array();
 
             if (!$validator->isValid($sender_email)) {
-                $this->respondWithValidationError('validation_fail', 'Invalid sender email address value');
+                $errorMessage[] = $this->translate('Invalid sender email address value');
+                $this->respondWithValidationError('validation_fail', $errorMessage);
             }
+            $errorMessage = array();
             foreach ($reciver_ids as $receiver_id) {
                 $receiver_id = trim($receiver_id, ' ');
                 ($reciver_ids);
                 if (!$validator->isValid($receiver_id)) {
-                    $this->respondWithValidationError('validation_fail', 'Please enter correct email address of the receiver(s).');
+                    $errorMessage[] = $this->translate('Please enter correct email address of the receiver(s).');
+                    $this->respondWithValidationError('validation_fail', $errorMessage);
                 }
             }
+            $slug_singular = Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.slugsingular', 'event-item');
+            $objectLink = "/" . $slug_singular . '/view/' . $event_id . '/' . $siteevent->getSlug();
             $sender = $values['sender_name'];
             $message = $values['message'];
             try {
@@ -1744,7 +2014,7 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                     'sender' => $sender,
                     'heading' => $heading,
                     'message' => '<div>' . $message . '</div>',
-                    'object_link' => $siteevent->getHref(),
+                    'object_link' => $objectLink,
                     'email' => $sender_email,
                     'queue' => true
                 ));
@@ -1828,7 +2098,7 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                 $event_title = $event->title;
                 $http = _ENGINE_SSL ? 'https://' : 'http://';
                 $event_title_with_link = '<a href =' . $http . $_SERVER['HTTP_HOST'] . Zend_Controller_Front::getInstance()->getRouter()->assemble(array('event_id' => $event_id, 'slug' => $event->getSlug()), "siteevent_entry_view") . ">$event_title</a>";
-                $conversation = Engine_Api::_()->getItemTable('messages_conversation')->send($viewer, $recipients, $values['title'], $values['body'] . "<br><br>" . $this->translate('This message corresponds to the Event: %s', $event_title_with_link));
+                $conversation = Engine_Api::_()->getItemTable('messages_conversation')->send($viewer, $recipients, $values['title'], $values['body'] . "<br><br>" . $this->translate('This message corresponds to the Event: ' . $event_title_with_link));
 
                 try {
                     Engine_Api::_()->getDbtable('notifications', 'activity')->addNotification($user, $viewer, $conversation, 'message_new');
@@ -1845,7 +2115,6 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                 $this->successResponseNoContent('no_content', true);
             } catch (Exception $e) {
                 $db->rollBack();
-                throw $e;
                 $this->respondWithError('internal_server_error', $e->getMessage());
             }
         }
@@ -1856,6 +2125,7 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
         $this->validateRequestMethod();
         //GET VIEWER
         $viewer = Engine_Api::_()->user()->getViewer();
+        $viewer_id = $viewer->getIdentity();
 
         //GET EVENT ID AND OBJECT
         $event_id = $this->_getParam('event_id');
@@ -1876,6 +2146,8 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
 
         //GET VIEWER
         $viewer = Engine_Api::_()->user()->getViewer();
+        $viewer_id = $viewer->getIdentity();
+
 
         //GET EVENT ID AND OBJECT
         $event_id = $this->_getParam('event_id');
@@ -1906,6 +2178,8 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
 
         //GET VIEWER
         $viewer = Engine_Api::_()->user()->getViewer();
+        $viewer_id = $viewer->getIdentity();
+
 
         //GET EVENT ID AND OBJECT
         $event_id = $this->_getParam('event_id');
@@ -1982,7 +2256,8 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
 
         //SET FORM
         if ($this->getRequest()->isGet()) {
-            $response = Engine_Api::_()->getApi('Siteapi_Core', 'Siteevent')->getNotificationForm($isLeader);
+            $response['form'] = Engine_Api::_()->getApi('Siteapi_Core', 'Siteevent')->getNotificationForm($isLeader);
+            $response['formValues'] = $row->notification;
             $this->respondWithSuccess($response, true);
         }
 
@@ -2026,6 +2301,8 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
 
         //GET VIEWER
         $viewer = Engine_Api::_()->user()->getViewer();
+        $viewer_id = $viewer->getIdentity();
+
         try {
             //AUTHORIZATION CHECK
 //            if (!$this->_helper->requireAuth()->setAuthParams($siteevent, $viewer, "edit")->isValid) {
@@ -2082,7 +2359,6 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                 $this->successResponseNoContent('no_content', true);
             }
         } catch (Exception $e) {
-            throw $e;
             $this->respondWithError('internal_server_error', $e->getMessage());
         }
     }
@@ -2099,6 +2375,8 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
 
         //GET VIEWER
         $viewer = Engine_Api::_()->user()->getViewer();
+        $viewer_id = $viewer->getIdentity();
+
 
         // PREPARE RESPONSE
         $values = $response = array();
@@ -2130,7 +2408,7 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
 
             if ($showAllCategories) {
 
-                $category_info = $tableCategory->getCategories(array('category_id', 'category_name', 'cat_order'), null, 0, 0, 1, 0, $orderBy, 1);
+                $category_info = $tableCategory->getCategories(array('category_id', 'category_name', 'cat_order', 'photo_id'), null, 0, 0, 1, 0, $orderBy, 1);
                 $categoriesCount = count($category_info);
                 foreach ($category_info as $value) {
 
@@ -2152,7 +2430,7 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                     }
                 }
             } else {
-                $category_info = $tableCategory->getCategorieshasevents(0, 'category_id', null, array(), array('category_id', 'category_name', 'cat_order'));
+                $category_info = $tableCategory->getCategorieshasevents(0, 'category_id', null, array(), array('category_id', 'category_name', 'cat_order', 'photo_id'));
                 $categoriesCount = count($category_info);
                 foreach ($category_info as $value) {
                     if ($showCount) {
@@ -2177,7 +2455,7 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
             if (!empty($category_id)) {
 
                 if ($showAllCategories) {
-                    $category_info2 = $tableCategory->getSubcategories($category_id, array('category_id', 'category_name', 'cat_order'));
+                    $category_info2 = $tableCategory->getSubcategories($category_id, array('category_id', 'category_name', 'cat_order', 'photo_id'));
 
                     foreach ($category_info2 as $subresults) {
                         if ($showCount) {
@@ -2192,7 +2470,7 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                         }
                     }
                 } else {
-                    $category_info2 = $tableCategory->getCategorieshasevents($category_id, 'subcategory_id', null, array(), array('category_id', 'category_name', 'cat_order'));
+                    $category_info2 = $tableCategory->getCategorieshasevents($category_id, 'subcategory_id', null, array(), array('category_id', 'category_name', 'cat_order', 'photo_id'));
                     foreach ($category_info2 as $subresults) {
                         if ($showCount) {
                             $sub_cat_array[] = $tmp_array = array('sub_cat_id' => $subresults->category_id,
@@ -2212,7 +2490,7 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
 
             if (!empty($subCategory_id)) {
                 if ($showAllCategories) {
-                    $subcategory_info2 = $tableCategory->getSubcategories($subCategory_id, array('category_id', 'category_name', 'cat_order'));
+                    $subcategory_info2 = $tableCategory->getSubcategories($subCategory_id, array('category_id', 'category_name', 'cat_order', 'photo_id'));
                     $treesubarrays = array();
                     foreach ($subcategory_info2 as $subvalues) {
                         if ($showCount) {
@@ -2229,7 +2507,7 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                         }
                     }
                 } else {
-                    $subcategory_info2 = $tableCategory->getCategorieshasevents($subCategory_id, 'subsubcategory_id', null, array(), array('category_id', 'category_name', 'cat_order'));
+                    $subcategory_info2 = $tableCategory->getCategorieshasevents($subCategory_id, 'subsubcategory_id', null, array(), array('category_id', 'category_name', 'cat_order', 'photo_id'));
                     $treesubarrays = array();
                     foreach ($subcategory_info2 as $subvalues) {
                         if ($showCount) {
@@ -2279,7 +2557,38 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
             //GET PAGE RESULTS
             $category_events_info = $category_events_info = Engine_Api::_()->getDbtable('events', 'siteevent')->eventsBySettings($params);
             foreach ($category_events_info as $result_info) {
-                $eventdateinfo = Engine_Api::_()->getDbTable('occurrences', 'siteevent')->getEventDate($result_info->event_id, 0);
+                // continue if Deleted member
+                if (empty($result_info->host_id))
+                    continue;
+                $occurrence_id = Engine_Api::_()->getDbTable('events', 'siteevent')->getNextOccurID($result_info->getIdentity());
+
+                //GET DATES OF EVENT
+                $tz = Engine_Api::_()->getApi('settings', 'core')->core_locale_timezone;
+                if (!empty($viewer_id)) {
+                    $tz = $viewer->timezone;
+                }
+                $occurrenceTable = Engine_Api::_()->getDbTable('occurrences', 'siteevent');
+                $dates = $occurrenceTable->getEventDate($result_info->getIdentity(), $occurrence_id);
+
+                if (isset($dates['starttime']) && !empty($dates['starttime']) && isset($tz)) {
+                    $startDateObject = new Zend_Date(strtotime($dates['starttime']));
+                    $startDateObject->setTimezone($tz);
+                    $eventdateinfo['starttime'] = $startDateObject->get('YYYY-MM-dd HH:mm:ss');
+                }
+                if (isset($dates['endtime']) && !empty($dates['endtime']) && isset($tz)) {
+                    $endDateObject = new Zend_Date(strtotime($dates['endtime']));
+                    $endDateObject->setTimezone($tz);
+                    $eventdateinfo['endtime'] = $endDateObject->get('YYYY-MM-dd HH:mm:ss');
+                }
+
+                $totalEventOccurrences = Engine_Api::_()->getDbtable('occurrences', 'siteevent')->getOccurrenceCount($result_info->event_id);
+                if (!empty($result_info->repeat_params) && $totalEventOccurrences > 1) {
+                    $hasMultipleDates = 1;
+                } else {
+                    $hasMultipleDates = 0;
+                }
+
+
                 $tmp_array = array('event_id' => $result_info->event_id,
                     'imageSrc' => Engine_Api::_()->getApi('Core', 'siteapi')->getContentImage($result_info),
                     'event_title' => $result_info->title,
@@ -2287,29 +2596,32 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                     'popularityCount' => $result_info->$popularity,
                     'slug' => $result_info->getSlug(),
                     'starttime' => $eventdateinfo['starttime'],
-                    'endtime' => $eventdateinfo['endtime']
+                    'endtime' => $eventdateinfo['endtime'],
+                    'hasMultipleDates' => $hasMultipleDates
                 );
-                $host = $result_info->getHost();
-                if (isset($host)) {
-                    $host_icons = Engine_Api::_()->getApi('Core', 'siteapi')->getContentImage($host);
 
-                    if ($result_info->host_type == 'siteevent_organizer') {
-                        $organizer['host_type'] = 'siteevent_organizer';
-                        $organizer['host_id'] = $host->organizer_id;
-                        $organizer['host_title'] = $host->title;
-                        $organizer['image_icon'] = $host_icons;
-                    } else if ($result_info->host_type == 'user') {
-                        $organizer['host_type'] = 'user';
-                        $organizer['host_id'] = $host->user_id;
-                        $organizer['host_title'] = $host->displayname;
-                        $organizer['image_icon'] = $host_icons;
-                    }
+                if (Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.location', 1) && !$result_info->is_online) {
 
-                    $userEvents = Engine_Api::_()->getDbTable('events', 'siteevent')->userEvent($organizer);
-                    $organizer['event_hosted'] = count($userEvents);
+                    //GET LOCATION
+                    $locationParams['id'] = $result_info->event_id;
+
+                    $location = Engine_Api::_()->getDbtable('locations', 'siteevent')->getLocation($locationParams);
+                    if (isset($location) && isset($location->location))
+                        $tmp_array['location'] = $location->location;
                 }
 
-                $tmp_array['host'] = $organizer;
+                $host = $result_info->getHost();
+                if (isset($host) && !empty($host)) {
+                    $host_icons = Engine_Api::_()->getApi('Core', 'siteapi')->getContentImage($host);
+                    $organizer['host_type'] = $host->getType();
+                    $organizer['host_id'] = $host->getIdentity();
+                    $organizer['host_title'] = $host->getTitle();
+                    $organizer['image_icon'] = $host_icons;
+
+                    $userEvents = Engine_Api::_()->getDbTable('events', 'siteevent')->userEvent($host);
+                    $organizer['event_hosted'] = count($userEvents);
+                    $tmp_array['host'] = $organizer;
+                }
                 $category_events_array[] = $tmp_array;
             }
 
@@ -2318,6 +2630,7 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
         if (isset($categoriesCount) && !empty($categoriesCount))
             $response['totalItemCount'] = $categoriesCount;
         $response['canCreate'] = Engine_Api::_()->authorization()->isAllowed('siteevent_event', $viewer, 'create');
+        $response['packagesEnabled'] = $this->_packagesEnabled();
 
         $this->respondWithSuccess($response, true);
     }
@@ -2338,13 +2651,8 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
         $viewer = Engine_Api::_()->user()->getViewer();
         $viewer_id = $viewer->getIdentity();
 
-//        $siteeventGetEditType = Engine_Api::_()->getApi('settings', 'core')->getSetting('siteeventgetedit.type', 1);
-
         $siteevent = Engine_Api::_()->getItem('siteevent_event', $event_id);
 
-//        if (empty($siteevent) || empty($siteeventGetEditType)) {
-//            $this->respondWithError('no_record');
-//        }
 
         if (empty($siteevent)) {
             $this->respondWithError('no_record');
@@ -2431,14 +2739,14 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
             $this->respondWithError('unauthorized');
 
 
-        $host = $viewer;
+        // $host = $viewer;
 
         $previousHost = $siteevent->getHost();
 
         if (isset($previousHost))
             $host_icons = Engine_Api::_()->getApi('Core', 'siteapi')->getContentImage($previousHost);
 
-        $form = Engine_Api::_()->getApi('Siteapi_Core', 'Siteevent')->getForm($siteevent, $parent_type, $parent_id, $previousHost, $host_icons);
+        $form = Engine_Api::_()->getApi('Siteapi_Core', 'Siteevent')->getForm($siteevent, $parent_type, $parent_id, $previousHost, $host_icons, $previous_profile_type);
 
         //Privacy formValues
         $auth = Engine_Api::_()->authorization()->context;
@@ -2607,7 +2915,7 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
 
         //GET EVENT CREATE FORM
         if ($this->getRequest()->isGet()) {
-            if (!empty($siteevent))
+            if (!empty($siteevent) && !empty($siteevent->profile_type))
                 $getProfileInfo = Engine_Api::_()->getApi('Siteapi_Core', 'siteevent')->getProfileInfo($siteevent, true);
             $form['formValues'] = $siteevent->toArray();
 
@@ -2618,8 +2926,20 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
             if (isset($repeat_params['endtime']['date']) && !empty($repeat_params['endtime']['date']))
                 $repeat_params['date'] = $repeat_params['endtime']['date'];
 
-            if (isset($repeat_params) && !empty($repeat_params))
+            if (isset($repeat_params) && !empty($repeat_params)) {
+                unset($form['formValues']['repeat_params']);
+                if ($repeat_params['eventrepeat_type'] == 'daily' && isset($repeat_params['repeat_interval'])) {
+                    $repeat_params['repeat_interval'] = $repeat_params['repeat_interval'] / (24 * 60 * 60);
+                }
+
+                if (isset($repeat_params['eventrepeat_type']) && $repeat_params['eventrepeat_type'] == 'monthly' && isset($repeat_params['repeat_day']) && !empty($repeat_params['repeat_day'])) {
+                    $repeat_params['monthlyType'] = 1;
+                } else {
+                    $repeat_params['monthlyType'] = 0;
+                }
+
                 $form['formValues'] = array_merge($form['formValues'], $repeat_params);
+            }
 
             if (isset($authValues) && !empty($authValues))
                 $form['formValues'] = array_merge($form['formValues'], $authValues);
@@ -2637,6 +2957,20 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
             if (isset($getProfileInfo) && !empty($getProfileInfo))
                 $form['formValues'] = array_merge($form['formValues'], $getProfileInfo);
 
+            if ($siteevent->host_type == 'siteevent_organizer') {
+                $organizerObj = Engine_Api::_()->getItem($siteevent->host_type, $siteevent->host_id);
+                $content = Engine_Api::_()->getApi('Core', 'siteapi')->getContentImage($organizerObj, false);
+                $content_photo = $content['image_icon'];
+                $link = $content['content_url'];
+                $form['hostCreateForm'][0]['value'] = $form['formValues']['host_title'] = $organizerObj->title;
+                $form['hostCreateForm'][1]['value'] = $form['formValues']['host_description'] = $organizerObj->description;
+                $form['hostCreateForm'][3]['value'] = $form['formValues']['host_link'] = ($organizerObj->facebook_url || $organizerObj->twitter_url || $organizerObj->web_url) ? 1 : 0;
+                $form['hostCreateFormSocial'][0]['value'] = $form['formValues']['host_facebook'] = ($organizerObj->facebook_url) ? $organizerObj->facebook_url : "";
+                $form['hostCreateFormSocial'][1]['value'] = $form['formValues']['host_twitter'] = ($organizerObj->twitter_url) ? $organizerObj->twitter_url : "";
+                $form['hostCreateFormSocial'][2]['value'] = $form['formValues']['host_website'] = ($organizerObj->web_url) ? $organizerObj->web_url : "";
+                $form['hostCreateForm'][2]['value'] = $form['formValues']['host_icon'] = $content_photo;
+            }
+
             $this->respondWithSuccess($form);
         }
 
@@ -2650,14 +2984,20 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
         $leaderList = $siteevent->getLeaderList();
 
         if ($this->getRequest()->isPost() || $this->getRequest()->isPut()) {
-            $getForm = Engine_Api::_()->getApi('Siteapi_Core', 'Siteevent')->getForm(null, $parent_type, $parent_id, $host_icons);
-            $values = $data = $_REQUEST;
+            $getForm = Engine_Api::_()->getApi('Siteapi_Core', 'Siteevent')->getForm(null, $parent_type, $parent_id, $host_icons, $previous_profile_type);
+            $_POST = $values = $data = $_REQUEST;
             $values = $siteevent->toArray();
+            $params = $this->_getAllParams();
             foreach ($getForm['form'] as $element) {
                 if (isset($_REQUEST[$element['name']])) {
                     $values[$element['name']] = $_REQUEST[$element['name']];
                 }
             }
+
+            $values['subcategory_id'] = (!empty($_REQUEST['subcategory_id'])) ? $_REQUEST['subcategory_id'] : 0;
+            $values['subsubcategory_id'] = (!empty($_REQUEST['subsubcategory_id'])) ? $_REQUEST['subsubcategory_id'] : 0;
+
+
             // START FORM VALIDATION
             $eventValidators = Engine_Api::_()->getApi('Siteapi_FormValidators', 'siteevent')->getFormValidators($values);
             $values['validators'] = $eventValidators;
@@ -2697,8 +3037,8 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
             }
 
             $values['is_online'] = empty($values['is_online']) ? 0 : $values['is_online'];
-            $values['host_type'] = $parent_type;
-            $values['host_id'] = $parent_id;
+            // $values['host_type'] = $parent_type;
+            // $values['host_id'] = $parent_id;
 
             $table = Engine_Api::_()->getItemTable('siteevent_event');
             $db = $table->getAdapter();
@@ -2723,15 +3063,8 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                         'sponsored' => $siteevent->sponsored
                     ));
 
-                    if ($siteevent->isFree()) {
-                        $values['approved'] = $siteevent->approved;
-                    } else
-                        $values['approved'] = 0;
+                    $values['approved'] = $siteevent->approved;
                 }
-                $getEventFlag = (int) $getEventFlag;
-                $getEventFlag = $getEventFlag * ($this->_maximumEventOccurrences + $tempMaximumEventOccurrences);
-                $getEventFlag = $getEventFlag + ($tempEventViewCount + $this->_eventViewCount);
-                $getEventKeyStr = (string) $getEventFlag;
 
                 if (empty($values['subcategory_id'])) {
                     $values['subcategory_id'] = 0;
@@ -2749,9 +3082,6 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                 if (!isset($values['auth_invite']))
                     $values['auth_invite'] = Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.invite.other.automatically', 1);
 
-                foreach ($getInfoArray as $value) {
-                    $getEventStr .= $getItemTypeInfo[$value];
-                }
 
                 if (Engine_Api::_()->siteevent()->listBaseNetworkEnable()) {
                     if (isset($values['networks_privacy']) && !empty($values['networks_privacy'])) {
@@ -2761,18 +3091,14 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                     }
                 }
 
-//                $values['starttime'] = empty($values['starttime']) ? date(time()) : $values['starttime'];
-//                $values['endtime'] = empty($values['endtime']) ? date(time() + 4 * 3600) : $values['starttime'];
-//                $values['starttime'] = date('Y-d-m H:i:s', $values['starttime']);
-//                $values['endtime'] = date('Y-d-m H:i:s', $values['endtime']);
                 $values['draft'] = empty($values['draft']) ? 0 : $values['draft'];
-                $values['approved'] = empty($values['approved']) ? 1 : $values['approved'];
+                $values['approved'] = empty($values['approved']) ? 0 : $values['approved'];
                 $values['closed'] = empty($values['closed']) ? 0 : $values['closed'];
 
                 //check if event creater has added any host details there.
                 $values['parent_type'] = $parent_type;
                 $values['parent_id'] = $parent_id;
-                
+
                 //IF EVENT IS ONLY THEN LOCATION FIELD SHOULD BE EMPTY
                 if (!empty($values['is_online'])) {
                     $values['location'] = '';
@@ -2781,42 +3107,91 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                 }
                 $siteevent->setFromArray($values);
 
-                if ($siteevent->approved) {
-                    $siteevent->approved_date = date('Y-m-d H:i:s');
-                    //START PACKAGE WORK
-                    if (isset($siteevent->pending)) {
-                        $siteevent->pending = 0;
-                    }
-                    if ($this->_hasPackageEnable) {
-                        $expirationDate = $package->getExpirationDate();
-                        if (!empty($expirationDate))
-                            $siteevent->expiration_date = date('Y-m-d H:i:s', $expirationDate);
-                        else
-                            $siteevent->expiration_date = '2250-01-01 00:00:00';
-                    }
-                    //END PACKAGE WORK
-                }
                 $siteevent->setFromArray($values);
                 $siteevent->modified_date = date('Y-m-d H:i:s');
                 if ($tags)
                     $siteevent->tags()->setTagMaps($viewer, $tags);
 
-                $siteevent->save();
-                if (isset($siteevent->package_id)) {
-                    $siteevent->package_id = $package_id;
-                }
-
                 try {
                     //@todo Local error on upgrade
                     Engine_Api::_()->getApi('Core', 'siteapi')->setView();
                     Engine_Api::_()->getApi('Core', 'siteapi')->setLocal();
+                    if ((isset($_POST['eventrepeat_id'])) && ($_POST['eventrepeat_id'] == 'weekly' || $_POST['eventrepeat_id'] == 'monthly') || ($_POST['eventrepeat_id'] == 'daily')) {
 
+                        if ($_POST['eventrepeat_id'] == 'weekly') {
+                            $_POST['id_weekly-repeat_interval'] = $data['repeat_week'];
+                            if (isset($_POST['repeat_weekday'])) {
+                                $weekdays = array(1 => 'monday', 2 => 'tuesday', 3 => 'wednesday', 4 => 'thursday', 5 => 'friday', 6 => 'saturday', 7 => 'sunday');
+
+                                $_POST['repeat_weekday'] = array_map('intval', explode(',', $_POST['repeat_weekday']));
+                                foreach ($_POST['repeat_weekday'] as $weekday) {
+                                    $_POST['weekly-repeat_on_' . $weekdays[$weekday]] = $weekdays[$weekday];
+                                }
+                            }
+                            if (isset($_POST['date']) && !empty($_POST['date'])) {
+                                $_POST['weekly_repeat_time'] = array(
+                                    'date' => $_POST['date']
+                                );
+                            }
+                            $isValidOccurrences = Engine_Api::_()->siteevent()->checkValidOccurrences($_POST);
+                            if (!$isValidOccurrences) {
+                                $errorMessage = array();
+                                $errorMessage[] = $this->translate('Please make sure you have selected the correct time interval - it is required');
+                                $this->respondWithValidationError('validation_fail', $errorMessage);
+                            } else {
+                                $repeatEventInfo['repeat_interval'] = 0;
+                                $repeatEventInfo['repeat_week'] = $_POST['repeat_week'];
+                                $repeatEventInfo['repeat_weekday'] = $_POST['repeat_weekday'];
+                                $repeatEventInfo['eventrepeat_type'] = $_POST['eventrepeat_id'];
+                                $repeatEventInfo['endtime']['date'] = $_POST['date'];
+                            }
+                        }
+                        if ($_POST['eventrepeat_id'] == 'monthly') {
+
+                            $repeatEventInfo['repeat_interval'] = 0;
+
+                            if (isset($_REQUEST['monthlyType']) && !empty($_REQUEST['monthlyType'])) {
+                                if (isset($_POST['repeat_day']) && !empty($_POST['repeat_day']))
+                                    $repeatEventInfo['repeat_day'] = $_POST['repeat_day'];
+                            }else {
+
+                                if (isset($_POST['repeat_week']) && !empty($_POST['repeat_week']))
+                                    $repeatEventInfo['repeat_week'] = $_POST['repeat_week'];
+
+                                if (isset($_POST['repeat_weekday']) && !empty($_POST['repeat_weekday']))
+                                    $repeatEventInfo['repeat_weekday'] = $_POST['repeat_weekday'];
+                            }
+                            $repeatEventInfo['eventrepeat_type'] = $_POST['eventrepeat_id'];
+                            $repeatEventInfo['endtime']['date'] = $_POST['date'];
+                            $repeatEventInfo['repeat_month'] = $_POST['repeat_month'];
+                            $_POST['monthly_repeat_time']['date'] = $_POST['date'];
+                            $completeEventInfo = Engine_Api::_()->getApi('Siteapi_Core', 'Siteevent')->getRepeatEventCompleteInfo($_POST, $repeatEventInfo, 0);
+                            $_POST = $completeEventInfo;
+                            $isValidOccurrences = Engine_Api::_()->siteevent()->checkValidOccurrences($_POST);
+                        }
+                        if ($_POST['eventrepeat_id'] == 'daily') {
+                            $repeatEventInfo['repeat_interval'] = $_POST['repeat_interval'] * (24 * 3600);
+                            $repeatEventInfo['eventrepeat_type'] = $_POST['eventrepeat_id'];
+                            $repeatEventInfo['endtime']['date'] = $_POST['date'];
+                            $isValidOccurrences = true;
+                        }
+                        if (!$isValidOccurrences) {
+                            $errorMessage = array();
+                            $errorMessage[] = $this->translate('Please make sure you have selected the correct time interval - it is required');
+                            $this->respondWithValidationError('validation_fail', $errorMessage);
+                        }
+                    } elseif (isset($_POST['eventrepeat_id']) && $_POST['eventrepeat_id'] == 'custom') {
+                        $repeatEventInfo['eventrepeat_type'] = $_POST['eventrepeat_id'];
+//                        $_POST['countcustom_dates'] = 2;
+                        Engine_Api::_()->siteevent()->reorderCustomDates();
+                        $siteevent->repeat_params = json_encode($repeatEventInfo);
+                        $siteevent->save();
+                    }
                     //CHECK EITHER USER HAS EDITED THE DATE OR NOT.IF NOT EDITED THEN WE WILL NOT UPDATE THE OCCURRENCE TABLE.
-                    $isupdate = Engine_Api::_()->siteevent()->editDateMatch($data, $eventdateinfo, $repeatEventInfo, $siteevent);
+                    $isupdate = Engine_Api::_()->siteevent()->editDateMatch($_POST, $eventdateinfo, $repeatEventInfo, $siteevent);
                 } catch (Exception $ex) {
                     // Blank Exception
                 }
-                $repeatEventInfo = Engine_Api::_()->siteevent()->getRepeatEventInfo($values, $event_id, $editFullEventDate, 'save');
                 if (!empty($repeatEventInfo)) {
                     //SET THE PREVIOUS EVENT TYPE FOR SPECIAL CASE OF CUSTOM EVENT.
                     $eventparams = json_decode($siteevent->repeat_params);
@@ -2824,15 +3199,36 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                         $values['previous_eventtype'] = $eventparams->eventrepeat_type;
                     //CONVERT TO CORRECT DATE FORMAT
                     if (isset($repeatEventInfo['endtime']))
-                        $repeatEventInfo['endtime']['date'] = Engine_Api::_()->siteevent()->convertDateFormat($repeatEventInfo['endtime']['date']);
+                        $repeatEventInfo['endtime']['date'] = $repeatEventInfo['endtime']['date'];
                     $siteevent->repeat_params = json_encode($repeatEventInfo);
                 } else
                     $siteevent->repeat_params = '';
                 // }
 
-                $siteevent->save();
+
+                if ($editFullEventDate && $isupdate) {
+                    //CHECK IF SITEREPEAT EVENT IS NOT ENABLED THEN WE WILL DO NOT DELETE OCCURRENCE.We will just update that
+                    if (!Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('siteeventrepeat')) {
+                        //SELECT THE ALL OCCURRENCES OF THIS EVENT.
+                        $tableOccurence = Engine_Api::_()->getDbtable('occurrences', 'siteevent');
+                        try {
+
+                            $dateInfo = Engine_Api::_()->siteevent()->userToDbDateTime(array('starttime' => $values['starttime'], 'endtime' => $values['endtime']));
+                            $values['starttime'] = $dateInfo['starttime'];
+                            $values['endtime'] = $dateInfo['endtime'];
+                            $tableOccurence->update(array('starttime' => $values['starttime'], 'endtime' => $values['endtime']), array('event_id =?' => $event_id));
+                        } catch (Exception $E) {
+                            //silence
+                        }
+                    } else {
+                        $occure_id = $this->addorEditDates($_POST, $values, $event_id, 'edit');
+                    }
+                } else if (!$editFullEventDate && $isupdate) {
+                    $this->editDates($_POST, $values, $event_id, 'edit');
+                }
 
                 $siteevent->save();
+
                 $actionTable = Engine_Api::_()->getDbtable('actions', 'seaocore');
                 //NOTIFICATION AND ACTIVITY FEED WORK WHEN EDIT THE EVENT TITLE
                 if ($siteevent->title !== $oldEventTitle) {
@@ -2854,30 +3250,6 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                     }
                 }
 
-//            $dateInfo = Engine_Api::_()->siteevent()->dbToUserDateTime($eventdateinfo, 'time');
-//            $oldstart = $dateInfo['starttime'];
-//            $oldend = $dateInfo['endtime'];
-//            $datetimeFormat = Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.datetime.format', 'medium');
-//            $actionTable = Engine_Api::_()->getDbtable('actions', 'seaocore');
-//            $newStartTime = $values['starttime'];
-//            
-//            $newEndTime = Engine_Api::_()->siteevent()->convertDateFormat($values['endtime']);
-//      
-//            if (!$editFullEventDate && ($oldend != strtotime($newStartTime)) && $siteevent->repeat_params) {
-//                $dateInfo = Engine_Api::_()->siteevent()->userToDbDateTime(array('endtime' => $newEndTime));
-//                $action = $actionTable->addActivity($viewer, $siteevent, Engine_Api::_()->siteevent()->getActivtyFeedType($siteevent, 'siteevent_date_time_extended'), null, array('newtime' => $view->locale()->toDateTime($dateInfo['endtime'], array('size' => $datetimeFormat))));
-//                if ($action != null) {
-//                    //START NOTIFICATION AND EMAIL WORK
-//                    Engine_Api::_()->siteevent()->sendNotificationEmail($siteevent, $action, 'siteevent_date_time_updated', null, null, null, 'time', $siteevent);
-//                }
-//            } else if (!$siteevent->repeat_params && ($oldstart != strtotime($newStartTime) || ($oldend != strtotime($newEndTime)))) {
-//                $dateInfo = Engine_Api::_()->siteevent()->userToDbDateTime(array('starttime' => $newStartTime, 'endtime' => $newEndTime));
-//                $action = $actionTable->addActivity($viewer, $siteevent, Engine_Api::_()->siteevent()->getActivtyFeedType($siteevent, 'siteevent_date_time_updated'), null, array('starttime' => $view->locale()->toDateTime($dateInfo['starttime'], array('size' => $datetimeFormat)), 'endtime' => $view->locale()->toDateTime($dateInfo['endtime'], array('size' => $datetimeFormat))));
-//                if ($action != null) {
-//                    //START NOTIFICATION AND EMAIL WORK
-//                    Engine_Api::_()->siteevent()->sendNotificationEmail($siteevent, $action, 'siteevent_date_time_updated', null, null, null, 'time', $siteevent);
-//                }
-//            }
                 // Profile Fields: start work to save profile fields.
                 $profileTypeField = null;
                 $topStructure = Engine_Api::_()->fields()->getFieldStructureTop('siteevent_event');
@@ -2886,7 +3258,6 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                 }
 
                 $profileTypeValue = $siteevent->profile_type;
-
                 Engine_Api::_()->getApi('Siteapi_Core', 'siteevent')->setProfileFields($siteevent, $data);
 
 
@@ -2896,94 +3267,10 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                     $siteevent->save();
                 }
 
-                Engine_Api::_()->getApi('Core', 'siteapi')->setLocal();
-                Engine_Api::_()->getApi('Core', 'siteapi')->setView();
-                if ((isset($_POST['eventrepeat_id'])) && ($_POST['eventrepeat_id'] == 'weekly' || $_POST['eventrepeat_id'] == 'monthly') || ($_POST['eventrepeat_id'] == 'daily')) {
-
-                    if ($_POST['eventrepeat_id'] == 'weekly') {
-                        $_POST['id_weekly-repeat_interval'] = $values['repeat_week'];
-                        if (isset($values['repeat_weekday'])) {
-                            $weekdays = array(1 => 'monday', 2 => 'tuesday', 3 => 'wednesday', 4 => 'thursday', 5 => 'friday', 6 => 'saturday', 7 => 'sunday');
-
-                            $values['repeat_weekday'] = array_map('intval', explode(',', $values['repeat_weekday']));
-                            foreach ($values['repeat_weekday'] as $weekday) {
-                                $_POST['weekly-repeat_on_' . $weekdays[$weekday]] = $weekdays[$weekday];
-                            }
-                        }
-
-                        if (isset($_POST['date']) && !empty($_POST['date'])) {
-                            $_POST['weekly_repeat_time'] = array(
-                                'date' => $_POST['date']
-                            );
-                        }
-                        $isValidOccurrences = Engine_Api::_()->siteevent()->checkValidOccurrences($values);
-
-                        if (!$isValidOccurrences) {
-                            $this->respondWithValidationError('validation_fail', 'Please make sure you have selected the correct time interval - it is required');
-                        } else {
-                            $repeatEventInfo['repeat_interval'] = 0;
-                            $repeatEventInfo['repeat_week'] = $values['repeat_week'];
-                            $repeatEventInfo['repeat_weekday'] = $values['repeat_weekday'];
-                            $repeatEventInfo['eventrepeat_type'] = $values['eventrepeat_id'];
-                            $repeatEventInfo['endtime']['date'] = $values['date'];
-                        }
-                    }
-                    if ($_POST['eventrepeat_id'] == 'monthly') {
-                        $repeatEventInfo['repeat_interval'] = 0;
-                        $repeatEventInfo['repeat_week'] = $values['repeat_week'];
-                        $repeatEventInfo['repeat_weekday'] = $values['repeat_weekday'];
-                        $repeatEventInfo['eventrepeat_type'] = $values['eventrepeat_id'];
-                        $repeatEventInfo['endtime']['date'] = $values['date'];
-                        $repeatEventInfo['repeat_month'] = $values['repeat_month'];
-                        $_POST['monthly_repeat_time']['date'] = $values['date'];
-                        $completeEventInfo = Engine_Api::_()->getApi('Siteapi_Core', 'Siteevent')->getRepeatEventCompleteInfo($_POST, $repeatEventInfo, 0);
-                        $_POST = $completeEventInfo;
-                        $isValidOccurrences = Engine_Api::_()->siteevent()->checkValidOccurrences($values);
-                    }
-                    if ($_POST['eventrepeat_id'] == 'daily') {
-                        $repeatEventInfo['repeat_interval'] = $values['repeat_interval'] * (24 * 3600);
-                        $repeatEventInfo['eventrepeat_type'] = $values['eventrepeat_id'];
-                        $repeatEventInfo['endtime']['date'] = $values['date'];
-                        $isValidOccurrences = true;
-                    }
-                    if (!$isValidOccurrences) {
-                        $this->respondWithValidationError('validation_fail', 'Please make sure you have selected the correct time interval - it is required');
-                    } else {
-                        $siteevent->repeat_params = json_encode($repeatEventInfo);
-                        $siteevent->save();
-                    }
-                } elseif (isset($_POST['eventrepeat_id']) && $_POST['eventrepeat_id'] == 'custom') {
-                    $repeatEventInfo['eventrepeat_type'] = $values['eventrepeat_id'];
-//                        $_POST['countcustom_dates'] = 2;
-                    Engine_Api::_()->siteevent()->reorderCustomDates();
-                    $siteevent->repeat_params = json_encode($repeatEventInfo);
-                    $siteevent->save();
-                }
-
                 //NOW MAKE THE ENTRY OF REPEAT INFO IF IT IS  ENABLED
                 $event_id = $siteevent->event_id;
 
                 //NOW MAKE THE ENTRY OF REPEAT INFO IF IT IS  ENABLED
-                if ($editFullEventDate && $isupdate) {
-                    //CHECK IF SITEREPEAT EVENT IS NOT ENABLED THEN WE WILL DO NOT DELETE OCCURRENCE.We will just update that
-                    if (!Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('siteeventrepeat')) {
-                        //SELECT THE ALL OCCURRENCES OF THIS EVENT.
-                        $tableOccurence = Engine_Api::_()->getDbtable('occurrences', 'siteevent');
-                        try {
-
-                            $dateInfo = Engine_Api::_()->siteevent()->userToDbDateTime(array('starttime' => $values['starttime'], 'endtime' => $values['endtime']));
-                            $values['starttime'] = $dateInfo['starttime'];
-                            $values['endtime'] = $dateInfo['endtime'];
-                            $tableOccurence->update(array('starttime' => $values['starttime'], 'endtime' => $values['endtime']), array('event_id =?' => $event_id));
-                        } catch (Exception $E) {
-                            //silence
-                        }
-                    } else {
-                        $occure_id = $this->addorEditDates($_POST, $values, $event_id, 'edit');
-                    }
-                } else if (!$editFullEventDate && $isupdate) {
-                    $this->editDates($_POST, $values, $event_id, 'edit');
-                }
 
                 if ($siteevent->draft == 0 && $siteevent->search && $inDraft) {
                     //INSERT ACTIVITY IF EVENT IS SEARCHABLE
@@ -3015,7 +3302,7 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                             Engine_Api::_()->facebooksefeed()->sendFacebookFeed($event_array);
                         }
                     } else {
-                        $action = Engine_Api::_()->getDbtable('actions', 'activity')->addActivity($siteevent->getOwner(), $siteevent, 'siteevent_new');
+//                        $action = Engine_Api::_()->getDbtable('actions', 'activity')->addActivity($siteevent->getOwner(), $siteevent, 'siteevent_new');
                         if ($action != null) {
                             Engine_Api::_()->getDbtable('actions', 'seaocore')->attachActivity($action, $siteevent);
                         }
@@ -3032,7 +3319,7 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
 
                 //CREATE AUTH STUFF HERE
                 $auth = Engine_Api::_()->authorization()->context;
-
+                $auth->setAllowed($siteevent, 'member', 'invite', $values['auth_invite']);
                 $roles = array('leader', 'member', 'owner_member', 'owner_member_member', 'owner_network', 'registered', 'everyone');
                 $explodeParentType = explode('_', $parent_type);
                 if (!empty($explodeParentType) && isset($explodeParentType[0]) && isset($explodeParentType[1])) {
@@ -3188,10 +3475,14 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                                 'queue' => true
                             ));
 
-                            $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
-                            $occurrence_id = Engine_Api::_()->getDbtable('occurrences', 'siteevent')->getAllOccurrenceDates($siteevent->event_id, 1);
-                            $notifyApi->addNotification($newHost, $viewer, $siteevent, 'siteevent_host', array('occurrence_id' => $occurrence_id));
-                            $notifyApi->addNotification($newHost, $viewer, $siteevent, 'siteevent_member', array('occurrence_id' => $occurrence_id));
+                            try {
+                                $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
+                                $occurrence_id = Engine_Api::_()->getDbtable('occurrences', 'siteevent')->getAllOccurrenceDates($siteevent->event_id, 1);
+                                $notifyApi->addNotification($newHost, $viewer, $siteevent, 'siteevent_host', array('occurrence_id' => $occurrence_id));
+                                $notifyApi->addNotification($newHost, $viewer, $siteevent, 'siteevent_member', array('occurrence_id' => $occurrence_id));
+                            } catch (Exception $ex) {
+                                
+                            }
 
                             //INCREMENT MESSAGE COUNTER.
                             Engine_Api::_()->getDbtable('statistics', 'core')->increment('messages.creations');
@@ -3216,7 +3507,6 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                             $editFullEventDate = $editFullEventDate = !$totalEventsInWaiting;
                         }
 
-                        $form->setEditFullEventDate($editFullEventDate);
                         //IF EVENT IS NOT FULLY EDITABLE THEN REMOVE THE FORM STARTTIME ELEMENT.
                     } elseif ($siteevent->host_type == 'sitepage_page' && $newHost && (empty($previousHost) || $previousHost->getType() != $newHost->getType() || $previousHost->getIdentity() != $newHost->getIdentity())) {
                         $occurrence_id = Engine_Api::_()->getDbtable('occurrences', 'siteevent')->getAllOccurrenceDates($siteevent->event_id, 1);
@@ -3299,6 +3589,66 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                         }
                     }
                 }//end - pending check
+                // Work for changing host start 
+                if (_CLIENT_TYPE && ((_CLIENT_TYPE == 'android' && _ANDROID_VERSION >= '1.8') || (_CLIENT_TYPE == 'ios' && _IOS_VERSION >= '1.5.8'))) {
+
+                    if ($params['host_type'] == 'siteevent_organizer' && (!isset($params['host_id']) || empty($params['host_id'])) && (!isset($params['host_title']) || empty($params['host_title'])))
+                        $this->respondWithValidationError('validation_fail', 'Host title missing');
+
+                    if (isset($params['host_id']) && isset($params['host_type'])) {
+                        $siteevent->host_id = $params['host_id'];
+                        $siteevent->host_type = $params['host_type'];
+                        if ($params['host_type'] == 'siteevent_organizer') {
+                            $host = Engine_Api::_()->getItem('siteevent_organizer', $params['host_id']);
+                            if (isset($params['host_title']) && !empty($params['host_title']))
+                                $host->title = $params['host_title'];
+
+                            if (isset($params['host_description']) && !empty($params['host_description']))
+                                $host->description = $params['host_description'];
+
+                            if (isset($params['host_facebook']) && !empty($params['host_facebook']))
+                                $host->facebook_url = $params['host_facebook'];
+
+                            if (isset($params['host_twitter']) && !empty($params['host_twitter']))
+                                $host->twitter_url = $params['host_twitter'];
+
+                            if (isset($params['host_website']) && !empty($params['host_website']))
+                                $host->web_url = $params['host_website'];
+
+                            $host->save();
+
+                            if (isset($_FILES['host_photo']) && !empty($_FILES['host_photo']))
+                                $host = Engine_Api::_()->getApi('Siteapi_Core', 'siteevent')->setPhotoForOrganizer($_FILES['host_photo'], $host);
+
+                            $host->save();
+                        }
+                        $siteevent->save();
+                    }
+                    else if (isset($params['host_title']) && $params['host_title']) {
+                        $table = Engine_Api::_()->getItemTable('siteevent_organizer');
+                        $db = $table->getAdapter();
+                        $db->beginTransaction();
+                        $host = $table->createRow();
+                        $hostInfo = array(
+                            'title' => $params['host_title'],
+                            'description' => isset($params['host_description']) && $params['host_description'] ? $params['host_description'] : null,
+                            'creator_id' => $viewer_id,
+                            'facebook_url' => isset($params['host_facebook']) && $params['host_facebook'] ? $params['host_facebook'] : "",
+                            'twitter_url' => isset($params['host_twitter']) && $params['host_twitter'] ? $params['host_twitter'] : "",
+                            'web_url' => isset($params['host_website']) && $params['host_website'] ? $params['host_website'] : "",
+                        );
+                        $host->setFromArray($hostInfo);
+                        $host->save();
+
+                        if (isset($_FILES['host_photo']) && !empty($_FILES['host_photo']))
+                            $host = Engine_Api::_()->getApi('Siteapi_Core', 'siteevent')->setPhotoForOrganizer($_FILES['host_photo'], $host);
+
+                        $siteevent->host_type = $host->getType();
+                        $siteevent->host_id = $host->getIdentity();
+                        $siteevent->save();
+                    }
+                }
+                // work for changing host ends
                 //EDIT THE TICKETS SELL ENDTIME
                 if (Engine_Api::_()->siteevent()->hasTicketEnable()) {
                     Engine_Api::_()->siteeventticket()->updateTicketsSellEndTime($siteevent);
@@ -3307,7 +3657,6 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                 $db->commit();
             } catch (Exception $e) {
                 $db->rollBack();
-                throw $e;
             }
 
             $siteevent->setLocation();
@@ -3321,9 +3670,489 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                 $this->successResponseNoContent('no_content', true);
             } catch (Exception $e) {
                 $db->rollBack();
-                throw $e;
             }
         }
+    }
+
+    public function packagesAction() {
+        //ONLY LOGGED IN USER CAN VIEW THIS PAGE
+        if (!$this->_helper->requireUser()->isValid())
+            $this->respondWithError('unauthorized');
+
+        // CHECK FOR PERMISSION OF CREATE EVENT
+        if (!$this->_helper->requireAuth()->setAuthParams('siteevent_event', null, "create")->isValid())
+            $this->respondWithError('unauthorized');
+        Engine_Api::_()->getApi('Core', 'siteapi')->setView();
+        Engine_Api::_()->getApi('Core', 'siteapi')->setLocal();
+
+        //GET VIEWER
+        $viewer = Engine_Api::_()->user()->getViewer();
+
+        $viewer_id = $viewer->getIdentity();
+
+        $overview = Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.overview', 0);
+
+
+        //GET USER LEVEL ID
+        if (!empty($viewer_id)) {
+            $level_id = $viewer->level_id;
+        } else {
+            $level_id = Engine_Api::_()->getDbtable('levels', 'authorization')->fetchRow(array('type = ?' => "public"))->level_id;
+        }
+
+        $bodyParams = array();
+        $packageInfoArray = Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.package.information', array("price", "billing_cycle", "duration", "featured", "sponsored", "rich_overview", "videos", "photos", "description", "ticket_type"));
+        $package_id = $this->getRequestParam('package_id', 0);
+//        if (isset($package_id) && !empty($package_id)) {
+//            $package = Engine_Api::_()->getItemTable('siteeventpaid_package')->fetchRow(array('package_id = ?' => $package_id));
+//
+//            if (!isset($package) && empty($package))
+//                $this->respondWithError('no_record');
+//
+//            if (in_array('price', $packageInfoArray)) {
+//                if ($package->price > 0.00) {
+//                    $packageShowArray['price']['label'] = $this->translate('Price');
+//                    $packageShowArray['price']['value'] = $package->price;
+//                    $packageShowArray['price']['currency'] = Engine_Api::_()->getApi('settings', 'core')->getSetting('payment.currency', 'USD');
+//                } else {
+//                    $packageShowArray['price']['label'] = $this->translate('Price');
+//                    $packageShowArray['price']['value'] = $this->translate('FREE');
+//                }
+//            }
+//
+//            if (Engine_Api::_()->siteevent()->hasTicketEnable() && in_array('ticket_type', $packageInfoArray)) {
+//                if ($package->ticket_type) {
+//                    $packageShowArray['ticket_type']['label'] = $this->translate('Ticket Types');
+//                    $packageShowArray['ticket_type']['value'] = $this->translate("PAID & FREE");
+//                } else {
+//                    $packageShowArray['ticket_type']['label'] = $this->translate('Ticket Types');
+//                    $packageShowArray['ticket_type']['value'] = $this->translate('FREE');
+//                }
+//            }
+//
+//            if (in_array('billing_cycle', $packageInfoArray)) {
+//                $packageShowArray['billing_cycle']['label'] = $this->translate('Billing Cycle');
+//                $packageShowArray['billing_cycle']['value'] = $package->getBillingCycle();
+//            }
+//            if (in_array('duration', $packageInfoArray)) {
+//                $packageShowArray['duration']['label'] = $this->translate("Duration");
+//                $packageShowArray['duration']['value'] = $package->getPackageQuantity();
+//            }
+//
+//            if (in_array('featured', $packageInfoArray)) {
+//                if ($package->featured == 1) {
+//                    $packageShowArray['featured']['label'] = $this->translate('Featured');
+//                    $packageShowArray['featured']['value'] = $this->translate('Yes');
+//                } else {
+//                    $packageShowArray['featured']['label'] = $this->translate('Featured');
+//                    $packageShowArray['featured']['value'] = $this->translate('No');
+//                }
+//            }
+//
+//            if (in_array('sponsored', $packageInfoArray)) {
+//                if ($package->sponsored == 1) {
+//                    $packageShowArray['sponsored']['label'] = $this->translate('Sponsored');
+//                    $packageShowArray['sponsored']['value'] = $this->translate('Yes');
+//                } else {
+//                    $packageShowArray['sponsored']['label'] = $this->translate('Sponsored');
+//                    $packageShowArray['sponsored']['value'] = $this->translate('No');
+//                }
+//            }
+//
+//            if (in_array('rich_overview', $packageInfoArray) && ($overview && (empty($level_id) || Engine_Api::_()->authorization()->getPermission($level_id, 'siteevent_event', "overview")))) {
+//                if ($package->overview == 1) {
+//                    $packageShowArray['rich_overview']['label'] = $this->translate('Rich Overview');
+//                    $packageShowArray['rich_overview']['value'] = $this->translate('Yes');
+//                } else {
+//                    $packageShowArray['rich_overview']['label'] = $this->translate('Rich Overview');
+//                    $packageShowArray['rich_overview']['value'] = $this->translate('No');
+//                }
+//            }
+//
+//            if (in_array('videos', $packageInfoArray) && (empty($level_id) || Engine_Api::_()->authorization()->getPermission($level_id, 'siteevent_event', "video"))) {
+//                if ($package->video == 1) {
+//                    if ($package->video_count) {
+//                        $packageShowArray['videos']['label'] = $this->translate('Videos');
+//                        $packageShowArray['videos']['value'] = $package->video_count;
+//                    } else {
+//                        $packageShowArray['videos']['label'] = $this->translate('Videos');
+//                        $packageShowArray['videos']['value'] = $this->translate("Unlimited");
+//                    }
+//                } else {
+//                    $packageShowArray['videos']['label'] = $this->translate('Videos');
+//                    $packageShowArray['videos']['value'] = $this->translate('No');
+//                }
+//            }
+//
+//            if (in_array('photos', $packageInfoArray) && (empty($level_id) || Engine_Api::_()->authorization()->getPermission($level_id, 'siteevent_event', "photo"))) {
+//                if ($package->photo == 1) {
+//                    if ($packagem->photo_count) {
+//                        $packageShowArray['photos']['label'] = $this->translate('Photos');
+//                        $packageShowArray['photos']['value'] = $package->photo_count;
+//                    } else {
+//                        $packageShowArray['photos']['label'] = $this->translate('Photos');
+//                        $packageShowArray['photos']['value'] = $this->translate("Unlimited");
+//                    }
+//                } else {
+//                    $packageShowArray['photos']['label'] = $this->translate('Photos');
+//                    $packageShowArray['photos']['value'] = $this->translate('No');
+//                }
+//            }
+//
+//            if (Engine_Api::_()->siteevent()->hasTicketEnable() && in_array('commission', $packageInfoArray)) {
+//                if (!empty($package->ticket_settings)) {
+//                    $siteeventticketInfo = @unserialize($package->ticket_settings);
+//                    $commissionType = $siteeventticketInfo['commission_handling'];
+//                    $commissionFee = $siteeventticketInfo['commission_fee'];
+//                    $commissionRate = $siteeventticketInfo['commission_rate'];
+//                }
+//                if (!empty($package->ticket_settings) && isset($commissionType)) {
+//                    if (empty($commissionType)) {
+//                        $packageShowArray['commission']['label'] = $this->translate('Commission');
+//                        $packageShowArray['commission']['value'] = $commissionFee;
+//                        $packageShowArray['commission']['value'] = Engine_Api::_()->getApi('settings', 'core')->getSetting('payment.currency', 'USD');
+//                    } else {
+//                        $packageShowArray['commission']['label'] = $this->translate('Commission');
+//                        $packageShowArray['commission']['value'] = $commissionRate . '%';
+//                    }
+//                } else {
+//                    $packageShowArray['commission']['label'] = $this->translate('Commission');
+//                    $packageShowArray['commission']['value'] = $this->translate("N/A");
+//                }
+//            }
+//            if (in_array('description', $packageInfoArray)) {
+//                $packageShowArray['description']['label'] = $this->translate("Description");
+//                $packageShowArray['description']['value'] = $this->translate($package->description);
+//            }
+//
+//            if (isset($packageShowArray) && !empty($packageShowArray))
+//                $response['package'] = array_merge($response, $packageShowArray);
+//
+//            if (isset($response) && !empty($response))
+//                $this->respondWithSuccess($response);
+//        }
+
+
+        if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('siteeventpaid') && $this->_hasPackageEnable) {
+            $packageCount = Engine_Api::_()->getDbTable('packages', 'siteeventpaid')->getPackageCount();
+            if ($packageCount == 1) {
+                $package = Engine_Api::_()->getDbTable('packages', 'siteeventpaid')->getEnabledPackage();
+                if (($package->price == '0.00')) {
+                    $bodyParams['getTotalItemCount'] = 0;
+                    $this->respondWithSuccess($bodyParams);
+                }
+                $bodyParams["getTotalItemCount"] = 1;
+
+                if (isset($package->package_id) && !empty($package->package_id))
+                    $packageShowArray['package_id'] = $package->package_id;
+
+                if (isset($package->title) && !empty($package->title)) {
+                    $packageShowArray['title']['label'] = $this->translate('Title');
+                    $packageShowArray['title']['value'] = $this->translate($package->title);
+                }
+
+
+                if (in_array('price', $packageInfoArray)) {
+                    if ($package->price > 0.00) {
+                        $packageShowArray['price']['label'] = $this->translate('Price');
+                        $packageShowArray['price']['value'] = $package->price;
+                        $packageShowArray['price']['currency'] = Engine_Api::_()->getApi('settings', 'core')->getSetting('payment.currency', 'USD');
+                    } else {
+                        $packageShowArray['price']['label'] = $this->translate('Price');
+                        $packageShowArray['price']['value'] = $this->translate('FREE');
+                    }
+                }
+
+                if (Engine_Api::_()->siteevent()->hasTicketEnable() && in_array('ticket_type', $packageInfoArray)) {
+                    if ($package->ticket_type) {
+                        $packageShowArray['ticket_type']['label'] = $this->translate('Ticket Types');
+                        $packageShowArray['ticket_type']['value'] = $this->translate("PAID & FREE");
+                    } else {
+                        $packageShowArray['ticket_type']['label'] = $this->translate('Ticket Types');
+                        $packageShowArray['ticket_type']['value'] = $this->translate('FREE');
+                    }
+                }
+
+                if (in_array('billing_cycle', $packageInfoArray)) {
+                    $packageShowArray['billing_cycle']['label'] = $this->translate('Billing Cycle');
+                    $packageShowArray['billing_cycle']['value'] = $package->getBillingCycle();
+                }
+                if (in_array('duration', $packageInfoArray)) {
+                    $packageShowArray['duration']['label'] = $this->translate("Duration");
+                    $packageShowArray['duration']['value'] = $package->getPackageQuantity();
+                }
+
+                if (in_array('featured', $packageInfoArray)) {
+                    if ($package->featured == 1) {
+                        $packageShowArray['featured']['label'] = $this->translate('Featured');
+                        $packageShowArray['featured']['value'] = $this->translate('Yes');
+                    } else {
+                        $packageShowArray['featured']['label'] = $this->translate('Featured');
+                        $packageShowArray['featured']['value'] = $this->translate('No');
+                    }
+                }
+
+                if (in_array('sponsored', $packageInfoArray)) {
+                    if ($package->sponsored == 1) {
+                        $packageShowArray['Sponsored']['label'] = $this->translate('Sponsored');
+                        $packageShowArray['Sponsored']['value'] = $this->translate('Yes');
+                    } else {
+                        $packageShowArray['Sponsored']['label'] = $this->translate('Sponsored');
+                        $packageShowArray['Sponsored']['value'] = $this->translate('No');
+                    }
+                }
+
+                if (in_array('rich_overview', $packageInfoArray) && ($overview && (empty($level_id) || Engine_Api::_()->authorization()->getPermission($level_id, 'siteevent_event', "overview")))) {
+                    if ($package->overview == 1) {
+                        $packageShowArray['rich_overview']['label'] = $this->translate('Rich Overview');
+                        $packageShowArray['rich_overview']['value'] = $this->translate('Yes');
+                    } else {
+                        $packageShowArray['rich_overview']['label'] = $this->translate('Rich Overview');
+                        $packageShowArray['rich_overview']['value'] = $this->translate('No');
+                    }
+                }
+
+                if (in_array('videos', $packageInfoArray) && (empty($level_id) || Engine_Api::_()->authorization()->getPermission($level_id, 'siteevent_event', "video"))) {
+                    if ($package->video == 1) {
+                        if ($package->video_count) {
+                            $packageShowArray['videos']['label'] = $this->translate('Videos');
+                            $packageShowArray['videos']['value'] = $package->video_count;
+                        } else {
+                            $packageShowArray['videos']['label'] = $this->translate('Videos');
+                            $packageShowArray['videos']['value'] = $this->translate("Unlimited");
+                        }
+                    } else {
+                        $packageShowArray['videos']['label'] = $this->translate('Videos');
+                        $packageShowArray['videos']['value'] = $this->translate('No');
+                    }
+                }
+
+                if (in_array('photos', $packageInfoArray) && (empty($level_id) || Engine_Api::_()->authorization()->getPermission($level_id, 'siteevent_event', "photo"))) {
+                    if ($package->photo == 1) {
+                        if ($packagem->photo_count) {
+                            $packageShowArray['photos']['label'] = $this->translate('Photos');
+                            $packageShowArray['photos']['value'] = $package->photo_count;
+                        } else {
+                            $packageShowArray['photos']['label'] = $this->translate('Photos');
+                            $packageShowArray['photos']['value'] = $this->translate("Unlimited");
+                        }
+                    } else {
+                        $packageShowArray['photos']['label'] = $this->translate('Photos');
+                        $packageShowArray['photos']['value'] = $this->translate('No');
+                    }
+                }
+
+                if (Engine_Api::_()->siteevent()->hasTicketEnable() && in_array('commission', $packageInfoArray)) {
+                    if (!empty($package->ticket_settings)) {
+                        $siteeventticketInfo = @unserialize($package->ticket_settings);
+                        $commissionType = $siteeventticketInfo['commission_handling'];
+                        $commissionFee = $siteeventticketInfo['commission_fee'];
+                        $commissionRate = $siteeventticketInfo['commission_rate'];
+                    }
+                    if (!empty($package->ticket_settings) && isset($commissionType)) {
+                        if (empty($commissionType)) {
+                            $packageShowArray['commission']['label'] = $this->translate('Commission');
+                            $packageShowArray['commission']['value'] = $commissionFee;
+                            $packageShowArray['commission']['value'] = Engine_Api::_()->getApi('settings', 'core')->getSetting('payment.currency', 'USD');
+                        } else {
+                            $packageShowArray['commission']['label'] = $this->translate('Commission');
+                            $packageShowArray['commission']['value'] = $commissionRate . '%';
+                        }
+                    } else {
+                        $packageShowArray['commission']['label'] = $this->translate('Commission');
+                        $packageShowArray['commission']['value'] = $this->translate("N/A");
+                    }
+                }
+                if (in_array('description', $packageInfoArray)) {
+                    $packageShowArray['description']['label'] = $this->translate("Description");
+                    $packageShowArray['description']['value'] = $this->translate($package->description);
+                }
+
+                $packageArray['response']['package'] = $packageShowArray;
+                $tempMenu = array();
+                $tempMenu[] = array(
+                    'label' => $this->translate('Create Event'),
+                    'name' => 'create',
+                    'url' => 'advancedevents/create',
+                    'urlParams' => array(
+                        'package_id' => $package->package_id
+                    )
+                );
+                $tempMenu[] = array(
+                    'label' => $this->translate('Package Info'),
+                    'name' => 'package_info',
+                    'url' => 'advancedevents/packages',
+                    'urlParams' => array(
+                        'package_id' => $package->package_id
+                    )
+                );
+
+                $packageArray['response']['menu'] = $tempMenu;
+
+                if (isset($packageArray) && !empty($packageArray))
+                    $this->respondWithSuccess($packageArray);
+            } else {
+                $overview = Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.overview', 1);
+                $package_description = Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.package.description', 1);
+                $paginator = Engine_Api::_()->getDbtable('packages', 'siteeventpaid')->getPackagesSql($viewer_id);
+                $bodyParams["getTotalItemCount"] = $paginator->getTotalItemCount();
+                foreach ($paginator as $package) {
+                    $packageShowArray = array();
+
+                    if (isset($package->package_id) && !empty($package->package_id))
+                        $packageShowArray['package_id'] = $package->package_id;
+
+                    if (isset($package->title) && !empty($package->title)) {
+                        $packageShowArray['title']['label'] = $this->translate('Title');
+                        $packageShowArray['title']['value'] = $this->translate($package->title);
+                    }
+
+                    if (in_array('price', $packageInfoArray)) {
+                        if ($package->price > 0.00) {
+                            $packageShowArray['price']['label'] = $this->translate('Price');
+                            $packageShowArray['price']['value'] = $package->price;
+                            $packageShowArray['price']['currency'] = Engine_Api::_()->getApi('settings', 'core')->getSetting('payment.currency', 'USD');
+                        } else {
+                            $packageShowArray['price']['label'] = $this->translate('Price');
+                            $packageShowArray['price']['value'] = $this->translate('FREE');
+                        }
+                    }
+
+                    if (Engine_Api::_()->siteevent()->hasTicketEnable() && in_array('ticket_type', $packageInfoArray)) {
+                        if ($package->ticket_type) {
+                            $packageShowArray['ticket_type']['label'] = $this->translate('Ticket Types');
+                            $packageShowArray['ticket_type']['value'] = $this->translate("PAID & FREE");
+                        } else {
+                            $packageShowArray['ticket_type']['label'] = $this->translate('Ticket Types');
+                            $packageShowArray['ticket_type']['value'] = $this->translate('FREE');
+                        }
+                    }
+
+                    if (in_array('billing_cycle', $packageInfoArray)) {
+                        $packageShowArray['billing_cycle']['label'] = $this->translate('Billing Cycle');
+                        $packageShowArray['billing_cycle']['value'] = $package->getBillingCycle();
+                    }
+                    if (in_array('duration', $packageInfoArray)) {
+                        $packageShowArray['duration']['label'] = $this->translate("Duration");
+                        $packageShowArray['duration']['value'] = $package->getPackageQuantity();
+                    }
+
+                    if (in_array('featured', $packageInfoArray)) {
+                        if ($package->featured == 1) {
+                            $packageShowArray['featured']['label'] = $this->translate('Featured');
+                            $packageShowArray['featured']['value'] = $this->translate('Yes');
+                        } else {
+                            $packageShowArray['featured']['label'] = $this->translate('Featured');
+                            $packageShowArray['featured']['value'] = $this->translate('No');
+                        }
+                    }
+
+                    if (in_array('sponsored', $packageInfoArray)) {
+                        if ($package->sponsored == 1) {
+                            $packageShowArray['Sponsored']['label'] = $this->translate('Sponsored');
+                            $packageShowArray['Sponsored']['value'] = $this->translate('Yes');
+                        } else {
+                            $packageShowArray['Sponsored']['label'] = $this->translate('Sponsored');
+                            $packageShowArray['Sponsored']['value'] = $this->translate('No');
+                        }
+                    }
+
+                    if (in_array('rich_overview', $packageInfoArray) && ($overview && (empty($level_id) || Engine_Api::_()->authorization()->getPermission($level_id, 'siteevent_event', "overview")))) {
+                        if ($package->overview == 1) {
+                            $packageShowArray['rich_overview']['label'] = $this->translate('Rich Overview');
+                            $packageShowArray['rich_overview']['value'] = $this->translate('Yes');
+                        } else {
+                            $packageShowArray['rich_overview']['label'] = $this->translate('Rich Overview');
+                            $packageShowArray['rich_overview']['value'] = $this->translate('No');
+                        }
+                    }
+
+                    if (in_array('videos', $packageInfoArray) && (empty($level_id) || Engine_Api::_()->authorization()->getPermission($level_id, 'siteevent_event', "video"))) {
+                        if ($package->video == 1) {
+                            if ($package->video_count) {
+                                $packageShowArray['videos']['label'] = $this->translate('Videos');
+                                $packageShowArray['videos']['value'] = $package->video_count;
+                            } else {
+                                $packageShowArray['videos']['label'] = $this->translate('Videos');
+                                $packageShowArray['videos']['value'] = $this->translate("Unlimited");
+                            }
+                        } else {
+                            $packageShowArray['videos']['label'] = $this->translate('Videos');
+                            $packageShowArray['videos']['value'] = $this->translate('No');
+                        }
+                    }
+
+                    if (in_array('photos', $packageInfoArray) && (empty($level_id) || Engine_Api::_()->authorization()->getPermission($level_id, 'siteevent_event', "photo"))) {
+                        if ($package->photo == 1) {
+                            if ($packagem->photo_count) {
+                                $packageShowArray['photos']['label'] = $this->translate('Photos');
+                                $packageShowArray['photos']['value'] = $package->photo_count;
+                            } else {
+                                $packageShowArray['photos']['label'] = $this->translate('Photos');
+                                $packageShowArray['photos']['value'] = $this->translate("Unlimited");
+                            }
+                        } else {
+                            $packageShowArray['photos']['label'] = $this->translate('Photos');
+                            $packageShowArray['photos']['value'] = $this->translate('No');
+                        }
+                    }
+
+                    if (Engine_Api::_()->siteevent()->hasTicketEnable() && in_array('commission', $packageInfoArray)) {
+                        if (!empty($package->ticket_settings)) {
+                            $siteeventticketInfo = @unserialize($package->ticket_settings);
+                            $commissionType = $siteeventticketInfo['commission_handling'];
+                            $commissionFee = $siteeventticketInfo['commission_fee'];
+                            $commissionRate = $siteeventticketInfo['commission_rate'];
+                        }
+                        if (!empty($package->ticket_settings) && isset($commissionType)) {
+                            if (empty($commissionType)) {
+                                $packageShowArray['commission']['label'] = $this->translate('Commission');
+                                $packageShowArray['commission']['value'] = $commissionFee;
+                                $packageShowArray['commission']['value'] = Engine_Api::_()->getApi('settings', 'core')->getSetting('payment.currency', 'USD');
+                            } else {
+                                $packageShowArray['commission']['label'] = $this->translate('Commission');
+                                $packageShowArray['commission']['value'] = $commissionRate . '%';
+                            }
+                        } else {
+                            $packageShowArray['commission']['label'] = $this->translate('Commission');
+                            $packageShowArray['commission']['value'] = $this->translate("N/A");
+                        }
+                    }
+                    if (in_array('description', $packageInfoArray)) {
+                        $packageShowArray['description']['label'] = $this->translate("Description");
+                        $packageShowArray['description']['value'] = $this->translate($package->description);
+                    }
+
+                    $packageArray["package"] = $packageShowArray;
+                    $tempMenu = array();
+                    $tempMenu[] = array(
+                        'label' => $this->translate('Create Event'),
+                        'name' => 'create',
+                        'url' => 'advancedevents/create',
+                        'urlParams' => array(
+                            'package_id' => $package->package_id
+                        )
+                    );
+                    $tempMenu[] = array(
+                        'label' => $this->translate('Package Info'),
+                        'name' => 'package_info',
+                        'url' => 'advancedevents/packages',
+                        'urlParams' => array(
+                            'package_id' => $package->package_id
+                        )
+                    );
+
+                    $packageArray['menu'] = $tempMenu;
+                    $bodyParams['response'][] = $packageArray;
+                }
+
+                if (isset($bodyParams) && !empty($bodyParams))
+                    $this->respondWithSuccess($bodyParams);
+            }
+        }
+
+        $bodyParams['getTotalItemCount'] = 0;
+        $this->respondWithSuccess($bodyParams);
     }
 
     public function createAction() {
@@ -3368,51 +4197,57 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
 
             $host_icons = Engine_Api::_()->getApi('Core', 'siteapi')->getContentImage($host);
 
-            //GET EVENT CREATE FORM
+            //PACKAGE BASED CHECKS
+            if (_CLIENT_TYPE && ((_CLIENT_TYPE == 'android' && _ANDROID_VERSION >= '1.6.3') || _CLIENT_TYPE == 'ios' && _IOS_VERSION >= '1.5.1')) {
+                if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('siteeventpaid') && $this->_hasPackageEnable) {
+                    $packageCount = Engine_Api::_()->getDbTable('packages', 'siteeventpaid')->getPackageCount();
+                    if ($packageCount == 1) {
+                        $package = Engine_Api::_()->getDbTable('packages', 'siteeventpaid')->getEnabledPackage();
+                        if (($package->price == '0.00')) {
+                            $package_id = $package->package_id;
+                        } else {
+                            $package_id = $this->getRequestParam('package_id', 0);
+                            $package = Engine_Api::_()->getItemTable('siteeventpaid_package')->fetchRow(array('package_id = ?' => $package_id));
+
+                            if (!isset($package) && empty($package))
+                                $this->respondWithError('siteevent_package_error');
+                        }
+                    } else {
+                        $package_id = $this->getRequestParam('package_id', 0);
+                        $package = Engine_Api::_()->getItemTable('siteeventpaid_package')->fetchRow(array('package_id = ?' => $package_id));
+
+                        if (!isset($package) && empty($package))
+                            $this->respondWithError('siteevent_package_error');
+                    }
+                } else if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('siteeventpaid')) {
+                    $package_id = 1;
+                    $package = Engine_Api::_()->getItemTable('siteeventpaid_package')->fetchRow(array('package_id = ?' => $package_id));
+                } else {
+                    $package_id = 0;
+                }
+            } else {
+                if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('siteeventpaid') && $this->_hasPackageEnable) {
+                    $this->respondWithError('siteevent_package_error');
+                } else if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('siteeventpaid')) {
+                    $package_id = 1;
+                    $package = Engine_Api::_()->getItemTable('siteeventpaid_package')->fetchRow(array('package_id = ?' => $package_id));
+                } else {
+                    $package_id = 0;
+                }
+            }
+
+//GET EVENT CREATE FORM
             if ($this->getRequest()->isGet()) {
                 $response = Engine_Api::_()->getApi('Siteapi_Core', 'Siteevent')->getForm(null, $parent_type, $parent_id, $host, $host_icons);
                 $this->respondWithSuccess($response, true);
             }
 
-            //PACKAGE BASED CHECKS
-            if ($this->_hasPackageEnable) {
-                $overview = Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.overview', 0);
-                $package_description = Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.package.description', 0);
-                $viewer = Engine_Api::_()->user()->getViewer();
-
-                //REDIRECT
-                $package_id = $this->_getParam('id');
-                if (empty($package_id)) {
-                    $this->respondWithError('no_record');
-                }
-                $package = Engine_Api::_()->getItemTable('siteeventpaid_package')->fetchRow(array('package_id = ?' => $package_id, 'enabled = ?' => '1'));
-                if (empty($package)) {
-                    $this->respondWithError('no_record');
-                }
-
-                if (!empty($package->level_id) && !in_array($viewer->level_id, explode(",", $package->level_id))) {
-                    $this->respondWithError('no_record');
-                }
-            } elseif (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('siteeventpaid')) {
-                //CONDITION - WHEN PAID PLUGIN INSTALLAED BUT GLOBAL PACKAGE SETTING DISABLED - THEN ASSIGN DEFAULT PACKAGE ID
-                $package_id = Engine_Api::_()->getItemtable('siteeventpaid_package')->fetchRow(array('defaultpackage = ?' => 1))->package_id;
-            }
 
             $listValues = array();
 
-            //COUNT SITEEVENT CREATED BY THIS USER AND GET ALLOWED COUNT SETTINGS
+//COUNT SITEEVENT CREATED BY THIS USER AND GET ALLOWED COUNT SETTINGS
             $values['user_id'] = $viewer_id;
-            $eventAttemptBy = str_replace('www.', '', strtolower($_SERVER['HTTP_HOST']));
-            $siteeventViewItemType = Engine_Api::_()->getApi('settings', 'core')->getSetting('siteeventview.itemtype', 1);
             $paginator = Engine_Api::_()->getDbTable('events', 'siteevent')->getSiteeventsPaginator($values);
-            $getInfoArray = Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.getinfo.type', false);
-            $getItemTypeInfo = (string) Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.itemtype.info', false);
-            $getAttribName = (string) Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.attribs.name', false);
-            $siteeventShowViewTypeSettings = Engine_Api::_()->getApi('settings', 'core')->getSetting($getAttribName . '.getshow.viewtype', false);
-            $getPositionType = (string) Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.getposition.type', false);
-
-            $getInfoArray = @unserialize($getInfoArray);
-            $getPositionType = @unserialize($getPositionType);
 
             $siteeventOccurrenceEmailViewType = Engine_Api::_()->siteevent()->isEnabled();
             $current_count = $paginator->getTotalItemCount();
@@ -3422,7 +4257,7 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
 
             if ($this->getRequest()->isPost()) {
 
-                if ($current_count >= $quota)
+                if ($current_count > $quota)
                     $this->respondWithError('unauthorized');
 
                 $getForm = Engine_Api::_()->getApi('Siteapi_Core', 'Siteevent')->getForm(null, $parent_type, $parent_id, $host_icons);
@@ -3432,7 +4267,7 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                         $values[$element['name']] = $_REQUEST[$element['name']];
                 }
 
-                // START FORM VALIDATION
+// START FORM VALIDATION
                 $eventValidators = Engine_Api::_()->getApi('Siteapi_FormValidators', 'siteevent')->getFormValidators($values);
                 $values['validators'] = $eventValidators;
 
@@ -3444,8 +4279,11 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                     $categoryIds[] = $values['subcategory_id'];
                     $categoryIds[] = $values['subsubcategory_id'];
 
-                    $values['profile_type'] = Engine_Api::_()->getDbTable('categories', 'siteevent')->getProfileType($categoryIds, 0, 'profile_type');
-
+                    try {
+                        $values['profile_type'] = Engine_Api::_()->getDbTable('categories', 'siteevent')->getProfileType($categoryIds, 0, 'profile_type');
+                    } catch (Exception $ex) {
+                        $values['profile_type'] = 0;
+                    }
                     if (isset($values['profile_type']) && !empty($values['profile_type'])) {
 
                         // START FORM VALIDATION
@@ -3456,7 +4294,6 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                 }
                 if (is_array($eventValidationMessage) && is_array($profileFieldsValidationMessage))
                     $validationMessage = array_merge($eventValidationMessage, $profileFieldsValidationMessage);
-
                 else if (is_array($eventValidationMessage))
                     $validationMessage = $eventValidationMessage;
                 else if (is_array($profileFieldsValidationMessage))
@@ -3479,19 +4316,13 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                     $values['endtime'] = date('Y-m-d H:i:s', time() + 4 * 3600);
                 }
 
-                //CHECK EITHER THE EVENT STARTTIME AND ENDTIME EXIST FOR THIS EVENT OR NOT. IF NOT THEN SHOW THE ERROR.               
-                if (!empty($eventAttemptBy))
-                    $getFlagStr = $eventAttemptBy . $getAttribName;
-
-                for ($flagNum = 0; $flagNum < strlen($getFlagStr); $flagNum++) {
-                    $getEventFlag += ord($getFlagStr[$flagNum]);
-                }
+//CHECK EITHER THE EVENT STARTTIME AND ENDTIME EXIST FOR THIS EVENT OR NOT. IF NOT THEN SHOW THE ERROR.
                 $table = Engine_Api::_()->getItemTable('siteevent_event');
                 $db = $table->getAdapter();
                 $db->beginTransaction();
                 $user_level = $viewer->level_id;
                 try {
-                    //Create siteevent
+//Create siteevent
                     if (!$this->_hasPackageEnable) {
                         //Create siteevent
                         $values = array_merge($values, array(
@@ -3502,7 +4333,7 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                             'approved' => Engine_Api::_()->authorization()->getPermission($user_level, 'siteevent_event', "approved")
                         ));
                     } else {
-                        $values = array_merge($form->getValues(), array(
+                        $values = array_merge($values, array(
                             'owner_type' => $viewer->getType(),
                             'owner_id' => $viewer_id,
                             'featured' => $package->featured,
@@ -3514,10 +4345,6 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                         } else
                             $values['approved'] = 0;
                     }
-                    $getEventFlag = (int) $getEventFlag;
-                    $getEventFlag = $getEventFlag * ($this->_maximumEventOccurrences + $tempMaximumEventOccurrences);
-                    $getEventFlag = $getEventFlag + ($tempEventViewCount + $this->_eventViewCount);
-                    $getEventKeyStr = (string) $getEventFlag;
 
                     if (empty($values['subcategory_id'])) {
                         $values['subcategory_id'] = 0;
@@ -3527,18 +4354,13 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                         $values['subsubcategory_id'] = 0;
                     }
 
-                    //check if admin has disabled "approval" for RSVP to be invited.
+//check if admin has disabled "approval" for RSVP to be invited.
                     if (!isset($values['approval']))
                         $values['approval'] = Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.invite.rsvp.automatically', 1);
 
-                    //check if admin has disabled "auth_invite" for event members to invite other people
+//check if admin has disabled "auth_invite" for event members to invite other people
                     if (!isset($values['auth_invite']))
                         $values['auth_invite'] = Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.invite.other.automatically', 1);
-
-                    foreach ($getInfoArray as $value) {
-                        $getEventStr .= $getItemTypeInfo[$value];
-                    }
-
                     if (Engine_Api::_()->siteevent()->listBaseNetworkEnable()) {
                         if (isset($values['networks_privacy']) && !empty($values['networks_privacy'])) {
                             if (in_array(0, $values['networks_privacy'])) {
@@ -3547,7 +4369,7 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                         }
                     }
 
-                    // Convert times
+// Convert times
                     $oldTz = date_default_timezone_get();
                     date_default_timezone_set($viewer->timezone);
                     date_default_timezone_set($oldTz);
@@ -3560,15 +4382,15 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                         $values['endtime'] = date('Y-m-d H:i:s', $end);
                     }
                     $values['draft'] = empty($values['draft']) ? 0 : $values['draft'];
-                    $values['approved'] = empty($values['approved']) ? 1 : $values['approved'];
+                    $values['approved'] = empty($values['approved']) ? 0 : $values['approved'];
                     $values['closed'] = empty($values['closed']) ? 0 : $values['closed'];
                     $values['search'] = empty($values['search']) ? 1 : $values['search'];
 
-                    //check if event creater has added any host details there.
+//check if event creater has added any host details there.
                     $siteevent = $table->createRow();
                     $values['parent_type'] = $parent_type;
                     $values['parent_id'] = $parent_id;
-                    //IF EVENT IS ONLY THEN LOCATION FIELD SHOULD BE EMPTY
+//IF EVENT IS ONLY THEN LOCATION FIELD SHOULD BE EMPTY
                     if (!empty($values['is_online'])) {
                         $values['location'] = '';
                     } else {
@@ -3593,10 +4415,11 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                     }
 
                     $siteevent->save();
+
                     if (isset($siteevent->package_id)) {
                         $siteevent->package_id = $package_id;
                     }
-                    //MAKE THE SERIALIZE ARRAY OF REPEAT DATE INFO:
+//MAKE THE SERIALIZE ARRAY OF REPEAT DATE INFO:
 //                    $repeatEventInfo = Engine_Api::_()->siteevent()->getRepeatEventInfo($_POST, 0);
 //                    if (!empty($repeatEventInfo)) {
 //                        //CONVERT TO CORRECT DATE FORMAT
@@ -3607,14 +4430,14 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
 //                        $siteevent->repeat_params = '';
 //                    $siteevent->save();
 //                    $event_id = $siteevent->event_id;
-                    //SET PHOTO
+//SET PHOTO
                     if (!empty($_FILES)) {
                         Engine_Api::_()->getApi('Siteapi_Core', 'siteevent')->setPhoto($_FILES['photo'], $siteevent);
                         $albumTable = Engine_Api::_()->getDbtable('albums', 'siteevent');
                         $album_id = $albumTable->update(array('photo_id' => $siteevent->photo_id), array('event_id = ?' => $siteevent->event_id));
                     }
 
-                    //ADDING TAGS
+//ADDING TAGS
                     $keywords = '';
                     if (isset($values['tags']) && !empty($values['tags'])) {
                         $tags = preg_split('/[,]+/', $values['tags']);
@@ -3626,24 +4449,9 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                         }
                     }
 
-                    if (!empty($siteeventOccurrenceEmailViewType) && empty($siteeventShowViewTypeSettings) && !strstr($getEventKeyStr, $getEventStr)) {
-                        foreach ($tempEventFlag as $key => $value) {
-                            $siteevent->$key = $value;
-                        }
-
-                        foreach ($getPositionType as $value) {
-                            Engine_Api::_()->getApi('settings', 'core')->setSetting($value, 0);
-                        }
-                    }
-
-                    //NOT SEARCHABLE IF SAVED IN DRAFT MODE
+//NOT SEARCHABLE IF SAVED IN DRAFT MODE
                     if (!empty($siteevent->draft)) {
                         $siteevent->search = 0;
-                    }
-                    if (empty($siteeventViewItemType)) {
-                        foreach ($tempEventFlag as $key => $value) {
-                            $siteevent->$key = $value;
-                        }
                     }
 
                     $siteevent->save();
@@ -3671,7 +4479,9 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                             $isValidOccurrences = Engine_Api::_()->siteevent()->checkValidOccurrences($values);
 
                             if (!$isValidOccurrences) {
-                                $this->respondWithValidationError('validation_fail', 'Please make sure you have selected the correct time interval - it is required');
+                                $errorMessage = array();
+                                $errorMessage[] = $this->translate('Please make sure you have selected the correct time interval - it is required');
+                                $this->respondWithValidationError('validation_fail', $errorMessage);
                             } else {
                                 $repeatEventInfo['repeat_interval'] = 0;
                                 $repeatEventInfo['repeat_week'] = $values['repeat_week'];
@@ -3699,7 +4509,9 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                             $isValidOccurrences = true;
                         }
                         if (!$isValidOccurrences) {
-                            $this->respondWithValidationError('validation_fail', 'Please make sure you have selected the correct time interval - it is required');
+                            $errorMessage = array();
+                            $errorMessage[] = $this->translate('Please make sure you have selected the correct time interval - it is required');
+                            $this->respondWithValidationError('validation_fail', $errorMessage);
                         } else {
                             $siteevent->repeat_params = json_encode($repeatEventInfo);
                             $siteevent->save();
@@ -3711,11 +4523,44 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                         $siteevent->repeat_params = json_encode($repeatEventInfo);
                         $siteevent->save();
                     }
+                    if (_CLIENT_TYPE && ((_CLIENT_TYPE == 'android' && _ANDROID_VERSION >= '1.8') || (_CLIENT_TYPE == 'ios' && _IOS_VERSION >= '1.5.8'))) {
+                        if ($values['host_type'] == 'siteevent_organizer' && (!isset($values['host_id']) || empty($values['host_id'])) && (!isset($values['host_title']) || empty($values['host_title'])))
+                            $this->respondWithValidationError('validation_fail', 'Host title missing');
 
-                    //NOW MAKE THE ENTRY OF REPEAT INFO IF IT IS  ENABLED
+                        if (isset($values['host_title']) && $values['host_title']) {
+                            $table = Engine_Api::_()->getItemTable('siteevent_organizer');
+                            $db = $table->getAdapter();
+                            $db->beginTransaction();
+                            $host = $table->createRow();
+                            $hostInfo = array(
+                                'title' => $_REQUEST['host_title'],
+                                'description' => isset($_REQUEST['host_description']) && $_REQUEST['host_description'] ? $_REQUEST['host_description'] : null,
+                                'creator_id' => $viewer_id,
+                                'facebook_url' => isset($_REQUEST['host_facebook']) && $_REQUEST['host_facebook'] ? $_REQUEST['host_facebook'] : "",
+                                'twitter_url' => isset($_REQUEST['host_twitter']) && $_REQUEST['host_twitter'] ? $_REQUEST['host_twitter'] : "",
+                                'web_url' => isset($_REQUEST['host_website']) && $_REQUEST['host_website'] ? $_REQUEST['host_website'] : "",
+                            );
+                            $host->setFromArray($hostInfo);
+                            $host->save();
+
+                            if (isset($_FILES['host_photo']) && !empty($_FILES['host_photo']))
+                                $host = Engine_Api::_()->getApi('Siteapi_Core', 'siteevent')->setPhotoForOrganizer($_FILES['host_photo'], $host);
+
+                            $siteevent->host_type = $host->getType();
+                            $siteevent->host_id = $host->getIdentity();
+                            $siteevent->save();
+                        }
+                        else if (isset($_REQUEST['host_id']) && isset($_REQUEST['host_type'])) {
+                            $siteevent->host_id = $_REQUEST['host_id'];
+                            $siteevent->host_type = $_REQUEST['host_type'];
+                            $siteevent->save();
+                        }
+                    }
+
+//NOW MAKE THE ENTRY OF REPEAT INFO IF IT IS  ENABLED
                     $event_id = $siteevent->event_id;
                     $occure_id = $this->addorEditDates($_POST, $values, $event_id, 'create');
-                    // Profile Fields: start work to save profile fields.
+// Profile Fields: start work to save profile fields.
                     $profileTypeField = null;
                     $topStructure = Engine_Api::_()->fields()->getFieldStructureTop('siteevent_event');
                     if (count($topStructure) == 1 && $topStructure[0]->getChild()->type == 'profile_type') {
@@ -3753,9 +4598,8 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                         Engine_Api::_()->getApi('Siteapi_Core', 'siteevent')->setProfileFields($siteevent, $data);
                     }
 
-                    //PRIVACY WORK
+//PRIVACY WORK
                     $auth = Engine_Api::_()->authorization()->context;
-
                     $auth->setAllowed($siteevent, 'member', 'invite', $values['auth_invite']);
                     $roles = array('leader', 'member', 'owner_member', 'owner_member_member', 'owner_network', 'registered', 'everyone');
                     $explodeParentType = explode('_', $parent_type);
@@ -3848,7 +4692,7 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                             $auth->setAllowed($siteevent, $role, "post", ($i <= $postMax));
                     }
 
-                    // Create some auth stuff for all leaders
+// Create some auth stuff for all leaders
                     $auth->setAllowed($siteevent, $leaderList, 'photo.edit', 1);
                     $auth->setAllowed($siteevent, $leaderList, 'topic.edit', 1);
                     $auth->setAllowed($siteevent, $leaderList, 'video.edit', 1);
@@ -3889,12 +4733,12 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                         }
                     }
 
-                    //COMMIT
+//COMMIT
                     $db->commit();
                 } catch (Exception $e) {
                     $db->rollBack();
-                    throw $e;
                 }
+
                 $tableOtherinfo = Engine_Api::_()->getDbTable('otherinfo', 'siteevent');
                 $db->beginTransaction();
                 try {
@@ -3916,7 +4760,6 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                     $db->commit();
                 } catch (Exception $e) {
                     $db->rollBack();
-                    throw $e;
                 }
 
                 if (!empty($event_id)) {
@@ -3925,7 +4768,8 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
 
                 $db->beginTransaction();
                 try {
-                    //PACKAGE BASED CHECKS
+//PACKAGE BASED CHECKS
+
                     $siteevent_pending = Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('siteeventpaid') ? $siteevent->pending : 0;
 
                     $actionTable = Engine_Api::_()->getDbtable('actions', 'activity');
@@ -3991,8 +4835,29 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                             ));
                         }
                     }
+
+//SEND NOTIFICATION & EMAIL TO HOST - IF PAYMENT NOT PENDING
+                    if (empty($siteevent_pending)) {
+                        Engine_Api::_()->siteevent()->sendNotificationToHost($siteevent->event_id);
+                    }
+
+//UPDATE KEYWORDS IN SEARCH TABLE
+                    if (!empty($keywords)) {
+                        Engine_Api::_()->getDbTable('search', 'core')->update(array('keywords' => $keywords), array('type = ?' => 'siteevent_event', 'id = ?' => $siteevent->event_id));
+                    }
+
+//SENDING ACTIVITY FEED TO FACEBOOK.
+                    $enable_Facebooksefeed = $enable_fboldversion = Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('facebooksefeed');
+                    if (!empty($enable_Facebooksefeed)) {
+
+                        $sitepage_array = array();
+                        $sitepage_array['type'] = 'siteevent_new';
+                        $sitepage_array['object'] = $siteevent;
+
+                        Engine_Api::_()->facebooksefeed()->sendFacebookFeed($sitepage_array);
+                    }
                     $db->commit();
-                    // Change request method POST to GET
+// Change request method POST to GET
                     $this->setRequestMethod();
                     $this->_forward('view', 'index', 'siteevent', array(
                         'event_id' => $siteevent->getIdentity()
@@ -4000,33 +4865,10 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                     return;
                 } catch (Exception $e) {
                     $db->rollBack();
-                    throw $e;
                 }
-
-                //SEND NOTIFICATION & EMAIL TO HOST - IF PAYMENT NOT PENDING
-                if (empty($siteevent_pending)) {
-                    Engine_Api::_()->siteevent()->sendNotificationToHost($siteevent->event_id);
-                }
-
-                //UPDATE KEYWORDS IN SEARCH TABLE
-                if (!empty($keywords)) {
-                    Engine_Api::_()->getDbTable('search', 'core')->update(array('keywords' => $keywords), array('type = ?' => 'siteevent_event', 'id = ?' => $siteevent->event_id));
-                }
-
-                //SENDING ACTIVITY FEED TO FACEBOOK.
-                $enable_Facebooksefeed = $enable_fboldversion = Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('facebooksefeed');
-                if (!empty($enable_Facebooksefeed)) {
-
-                    $sitepage_array = array();
-                    $sitepage_array['type'] = 'siteevent_new';
-                    $sitepage_array['object'] = $siteevent;
-
-                    Engine_Api::_()->facebooksefeed()->sendFacebookFeed($sitepage_array);
-                }
-                $this->successResponseNoContent('no_content', true);
             }
         } catch (Expection $ex) {
-            echo $ex;
+            
         }
     }
 
@@ -4036,7 +4878,7 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
         $viewer = Engine_Api::_()->user()->getViewer();
         Engine_Api::_()->getApi('Core', 'siteapi')->setView();
 
-        //GET USER LEVEL ID
+//GET USER LEVEL ID
         if ($viewer->getIdentity()) {
             $level_id = $viewer->level_id;
             $viewer_id = $viewer->getIdentity();
@@ -4048,7 +4890,7 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
         $categoryIds = Engine_Api::_()->getDbTable('categories', 'siteevent')->getParentCategories();
         $siteeventCalenderViewType = Engine_Api::_()->getApi('settings', 'core')->getSetting('siteeventcalender.viewtype', 1);
 
-        // GET CATEGORY
+// GET CATEGORY
         $category_id = $this->_getParam('category_id', null);
         $params = $this->_getAllParams();
 
@@ -4063,8 +4905,8 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
             $params['limit'] = $this->_getParam('itemCount', 10);
 
         $params['siteevent_calendar_event_count'] = $this->_getParam('siteevent_calendar_event_count', 1);
-        $params['postedby'] = $this->_getParam('postedby', 1);
-        $params['user_id'] = $this->_getParam('user_id', $viewer_id);
+//        $params['postedby'] = $this->_getParam('postedby', 1);
+//        $params['user_id'] = $this->_getParam('user_id', $viewer_id);
         $params['ismanage'] = $this->_getParam('ismanage', 1);
         $params['statistics'] = $this->_getParam('statistics', array("viewCount", "likeCount", "commentCount", "memberCount", "reviewCount"));
         $params['showContent'] = $this->_getParam('showContent', array("price", "location"));
@@ -4078,27 +4920,22 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
 
 //        if (empty($siteeventCalenderViewType))
 //            $this->respondWithError('unauthorized');
-        //CASE:1 SHOW THE CALENDAR VIEW
+//CASE:1 SHOW THE CALENDAR VIEW
         if ($params['viewtype'] == 'calendar') {
-            $params['sql'] = 'sidecalendar';
             $params = $params;
-            //if($display_action == 3) {
             $param['display_today_birthday'] = "M";
-            $param['limit'] = 0;
-            $param['active_month'] = time();
-
-            // GET THE MONTH FROM URL IF PRESENT OTHERWISE SET IT TO THE CURRENT MONTH
+// GET THE MONTH FROM URL IF PRESENT OTHERWISE SET IT TO THE CURRENT MONTH
             $date = strtotime($this->_getParam('date_current', null));
             if (empty($date)) {
                 $date = time();
             }
-            // GET THIS, LAST AND NEXT MONTHS
+// GET THIS, LAST AND NEXT MONTHS
             $date = mktime(23, 59, 59, date("m", $date), 1, date("Y", $date));
             $date_next = mktime(0, 0, 0, date("m", $date) + 1, 1, date("Y", $date));
             $date_last = mktime(0, 0, 0, date("m", $date) - 1, 1, date("Y", $date));
 
             $days_in_month = date('t', $date);
-            //GET THE LAST DATE OF MONTH      
+//GET THE LAST DATE OF MONTH      
             $startdate = date("Y", $date) . '-' . date("m", $date) . '-' . 01;
             $lastDateofMonth = date("Y", $date) . '-' . date("m", $date) . '-' . $days_in_month . ' 23:59:59';
             $params['calendarlist'] = 1;
@@ -4110,15 +4947,28 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                 $params['endtime'] = $lastDateofMonth;
                 $params['sql'] = 'count';
                 $paramsContentType = '';
-                $params['location'] = $this->_getParam('restapilocation', 0);
+                $params['location'] = $this->_getParam('restapilocation', '');
 
-                $params['eventType'] = $this->_getParam('eventType', 'All');
-//            $monthEventResults = Engine_Api::_()->siteevent()->getEventDayCount($monthEventResults, $date, $lastDateofMonth);
 
                 $monthEventResults = Engine_Api::_()->getDbTable('events', 'siteevent')->getEvent($paramsContentType, $params);
 
-                //GET THE NUMBER OF DAYS IN THE MONTH
-                //GET THE FIRST DAY OF THE MONTH
+                foreach ($monthEventResults as $results) {
+                    //GET DATES OF EVENT
+                    $tz = Engine_Api::_()->getApi('settings', 'core')->core_locale_timezone;
+                    if (!empty($viewer_id)) {
+                        $tz = $viewer->timezone;
+                    }
+
+                    if (isset($results['starttime']) && !empty($results['starttime']) && isset($tz)) {
+                        $startDateObject = new Zend_Date(strtotime($results['starttime']));
+                        $startDateObject->setTimezone($tz);
+                        $results['starttime'] = $startDateObject->get('YYYY-MM-dd HH:mm:ss');
+                    }
+                    $finalResults[] = $results;
+                }
+
+//GET THE NUMBER OF DAYS IN THE MONTH
+//GET THE FIRST DAY OF THE MONTH
                 $date = $date_current;
                 $first_day_of_month = date("w", $date);
                 if ($first_day_of_month == 0) {
@@ -4126,27 +4976,27 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                 }
                 $first_day_of_month = $first_day_of_month;
 
-                //GET THE LAST DAY OF THE MONTH
+//GET THE LAST DAY OF THE MONTH
                 $last_day_of_month = $last_day_of_month = ($first_day_of_month - 1) + $days_in_month;
 
-                //GET THE TOTAL NUMBER OF CELLS TO BE DISPLAYED IN THE CALENDER TABLE
+//GET THE TOTAL NUMBER OF CELLS TO BE DISPLAYED IN THE CALENDER TABLE
                 $total_cells = $total_cells = (floor($last_day_of_month / 7) + 1) * 7;
 
-                //GET CURRENT MONTH THAT HAS TO BE DISPLAYED
+//GET CURRENT MONTH THAT HAS TO BE DISPLAYED
                 $current_month = date("m", $date);
 
-                //GET THE TEXT OF THE CURRENT MONTH
+//GET THE TEXT OF THE CURRENT MONTH
                 $current_month_text = date($date, array('format' => 'MMMM'));
 
-                //GET THE YEAR OF THE CURRENT MONTHS		
+//GET THE YEAR OF THE CURRENT MONTHS		
                 $current_year = date("Y", $date);
             } catch (Exception $e) {
                 $this->respondWithValidationError('internal_server_error', $ex->getMessage());
             }
-            $this->respondWithSuccess($monthEventResults, true);
+            $this->respondWithSuccess($finalResults, true);
         }
         if ($params['viewtype'] == 'list') {
-            //CASE:2 SHOW THE CALENDAR LISTING
+//CASE:2 SHOW THE CALENDAR LISTING
             $date = strtotime($this->_getParam('date_current', null));
 //            $date = ($this->_getParam('date_current', null));
 
@@ -4157,37 +5007,30 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
             $starttime = date("Y-m-d H:i:s", $date);
             $endtime = date("Y-m-d H:i:s", $date + (24 * 3600 - 1));
 
-//            $dateInfo = Engine_Api::_()->siteevent()->userToDbDateTime(array('starttime' => $starttime, 'endtime' => $endtime));
+            $dateInfo = Engine_Api::_()->siteevent()->userToDbDateTime(array('starttime' => $starttime, 'endtime' => $endtime));
             $timezone = Engine_Api::_()->getApi('settings', 'core')->core_locale_timezone;
             if ($viewer->getIdentity()) {
                 $timezone = $viewer->timezone;
             }
-            //$starttime = date("Y-m-d", $date);
+//$starttime = date("Y-m-d", $date);
             $todaysDate = date("Y-m-d", time());
             $oldTz = date_default_timezone_get();
             date_default_timezone_set($timezone);
-            //$starttime = strtotime($starttime);
-            // $starttime = date("Y-m-d H:i:s", $starttime);echo $timezone;die;
             $todaysDate = strtotime($todaysDate);
-            //$endtime = $starttime + (24 * 3600 - 1);
             date_default_timezone_set($oldTz);
-//      $starttime = date("Y-m-d H:i:s", $starttime);
-//      $endtime = date("Y-m-d H:i:s", $endtime);
+
             $todaysDate = $todaysDate;
             $currentDate = Engine_Api::_()->siteevent()->userToDbDateTime(array('starttime' => $starttime));
             $current_date = $currentDate['starttime'];
 
 
-            //NOW FIND THE START TIME AND END TIME OF THE DATE
-            //$starttime = $datetime;
+//NOW FIND THE START TIME AND END TIME OF THE DATE
+//$starttime = $datetime;
             $paramsContentType = '';
-            //$params['date_current'] = $datetime;
+//$params['date_current'] = $datetime;
             $params['calendarlist'] = 1;
-//            $params['starttime'] = $dateInfo['starttime'];
-//            $params['endtime'] = $dateInfo['endtime'];
-            $params['starttime'] = $starttime;
-            $params['endtime'] = $endtime;
-
+            $params['starttime'] = $dateInfo['starttime'];
+            $params['endtime'] = $dateInfo['endtime'];
 
             if ($this->_getParam('sql', sidecalendar) == 'sidecalendar')
                 $params['siteevent_calendar_event_count_type'] = $this->_getParam('siteevent_calendar_event_count_type', null);
@@ -4210,14 +5053,35 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
 
                 if ($totalCount > 0) {
                     foreach ($paginator as $eventObj) {
+                        // continue if Deleted member
+                        if (empty($eventObj->host_id))
+                            continue;
                         $event = $eventObj->toArray();
 
                         //CATEGORY NAME
                         $event['category_name'] = Engine_Api::_()->getItem('siteevent_category', $event['category_id'])->category_name;
 
-                        //DATES OF EVENT
+                        //GET DATES OF EVENT
+                        $tz = Engine_Api::_()->getApi('settings', 'core')->core_locale_timezone;
+                        if (!empty($viewer_id)) {
+                            $tz = $viewer->timezone;
+                        }
+
+                        $occurrence_id = Engine_Api::_()->getDbTable('events', 'siteevent')->getNextOccurID($eventObj->getIdentity());
                         $occurrenceTable = Engine_Api::_()->getDbTable('occurrences', 'siteevent');
-                        $dates = $occurrenceTable->getEventDate($event['event_id']);
+                        $dates = $occurrenceTable->getEventDate($eventObj->getIdentity(), $occurrence_id);
+
+                        if (isset($dates['starttime']) && !empty($dates['starttime']) && isset($tz)) {
+                            $startDateObject = new Zend_Date(strtotime($dates['starttime']));
+                            $startDateObject->setTimezone($tz);
+                            $dates['starttime'] = $startDateObject->get('YYYY-MM-dd HH:mm:ss');
+                        }
+                        if (isset($dates['endtime']) && !empty($dates['endtime']) && isset($tz)) {
+                            $endDateObject = new Zend_Date(strtotime($dates['endtime']));
+                            $endDateObject->setTimezone($tz);
+                            $dates['endtime'] = $endDateObject->get('YYYY-MM-dd HH:mm:ss');
+                        }
+
                         $event['isRepeatEvent'] = ($eventObj->isRepeatEvent()) ? 1 : 0;
                         $event = array_merge($event, $dates);
 
@@ -4244,23 +5108,13 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                                 $event['location'] = $location->toArray();
                         }
                         $event['hosted_by'] = '';
-                        if (isset($eventObj->host_type) && !empty($eventObj->host_id) && ($eventObj->host_type == 'siteevent_organizer')) {
-                            $organizerObj = Engine_Api::_()->getItem('siteevent_organizer', $eventObj->host_id);
-                            $organizer['host_type'] = 'siteevent_organizer';
-                            $organizer['host_id'] = $organizerObj->organizer_id;
-                            $organizer['host_title'] = $organizerObj->title;
-                            $getContentImages = Engine_Api::_()->getApi('Core', 'siteapi')->getContentImage($organizerObj);
-                            $organizer = array_merge($organizer, $getContentImages);
-                            $event['hosted_by'] = $organizer;
-                        } else if (isset($eventObj->host_type) && !empty($eventObj->host_id) && $eventObj->host_type == 'user') {
-                            $organizerObj = Engine_Api::_()->getItem('user', $eventObj->host_id);
-                            $organizer['host_type'] = 'user';
-                            $organizer['host_id'] = (isset($organizerObj->user_id)) ? $organizerObj->user_id : 0;
-                            $organizer['host_title'] = (isset($organizerObj->displayname)) ? $organizerObj->displayname : null;
-                            $getContentImages = Engine_Api::_()->getApi('Core', 'siteapi')->getContentImage($organizerObj);
-                            $organizer = array_merge($organizer, $getContentImages);
-                            $event['hosted_by'] = $organizer;
-                        }
+                        $organizerObj = Engine_Api::_()->getItem($eventObj->host_type, $eventObj->host_id);
+                        $organizer['host_type'] = $organizerObj->getType();
+                        $organizer['host_id'] = $organizerObj->getIdentity();
+                        $organizer['host_title'] = $organizerObj->getTitle();
+                        $getContentImages = Engine_Api::_()->getApi('Core', 'siteapi')->getContentImage($organizerObj);
+                        $organizer = array_merge($organizer, $getContentImages);
+                        $event['hosted_by'] = $organizer;
 
                         $leaders = Engine_Api::_()->getItem('siteevent_event', $event['event_id'])->getLedBys(false);
                         // Set default ledby.
@@ -4295,17 +5149,53 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
             } catch (Exception $ex) {
                 $this->respondWithError('internal_server_error', $ex->getMessage());
             }
-            //RESPONSE
-            $response['totalItemCount'] = $totalCount;
+//RESPONSE
+            $response['getTotalItemCount'] = $response['totalItemCount'] = $totalCount;
             $response['canCreate'] = Engine_Api::_()->authorization()->isAllowed('siteevent_event', $viewer, 'create');
+            $response['packagesEnabled'] = $this->_packagesEnabled();
+
             $this->respondWithSuccess($response, true);
         }
+    }
+
+    /*
+     * search Hosts
+     */
+
+    public function getHostsAction() {
+        $values = $this->_getAllParams();
+
+        if (!isset($values['host_type_select']) || empty($values['host_type_select']))
+            $this->respondWithValidationError('parameter_missing', 'host_type_select missing');
+
+        if (!isset($values['host_auto']) || empty($values['host_auto']))
+            $this->respondWithValidationError('parameter_missing', 'host_auto missing');
+
+        $subject_type = $values['host_type_select'];
+        $searchText = $values['host_auto'];
+        $limit = $this->_getParam('limit', 40);
+
+        //FETCH USER LIST
+        $items = Engine_Api::_()->getDbTable('events', 'siteevent')->getHostsSuggest($subject_type, $searchText, $limit);
+
+        //MAKING DATA
+        $data = array();
+        $mode = $this->_getParam('struct');
+
+        foreach ($items as $item) {
+            $content = Engine_Api::_()->getApi('Core', 'siteapi')->getContentImage($item, false);
+            $content_photo = $content['image_icon'];
+            $link = $content['content_url'];
+            $data[] = array('type' => 'host', 'host_id' => $item->getIdentity(), 'host_title' => $item->getTitle(), 'image_icon' => $content_photo, 'host_link' => $link);
+        }
+
+        $this->respondWithSuccess($data, true);
     }
 
     public function addorEditDates($postedValues, $values, $event_id, $action = 'create') {
         try {
 
-            //SPECIAL CASE: IF THIS FUNCTION IS CALLED BY ADDMOREOCCURRENCE FUNCTION FOR ADDING MORE OCCURRENCES THEN WE WILL NOT SET USER TIME ZONE WHEN INSERTING THE DATE ENTRY IN DATABASE.
+//SPECIAL CASE: IF THIS FUNCTION IS CALLED BY ADDMOREOCCURRENCE FUNCTION FOR ADDING MORE OCCURRENCES THEN WE WILL NOT SET USER TIME ZONE WHEN INSERTING THE DATE ENTRY IN DATABASE.
             $useTimezone = true;
             if (isset($postedValues['useTimezone']))
                 $useTimezone = $postedValues['useTimezone'];
@@ -4315,13 +5205,15 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                 $values['starttime'] = Engine_Api::_()->getApi('Siteapi_Core', 'Siteevent')->convertDateFormat($postedValues['starttime']);
 
             $viewer = Engine_Api::_()->user()->getViewer();
+            $viewer_id = $viewer->getIdentity();
+
             if (!empty($event_id))
                 $siteevent = Engine_Api::_()->getItem('siteevent_event', $event_id);
             $isEventMember = false;
             if (isset($postedValues['action']) && $postedValues['action'] == 'editdates')
                 $isEventMember = true;
             if ($action == 'edit') {
-                //FIRST WE WILL CHECK THAT EITHER EVENT OWNER WAS JOINED ANY EVENT OCCURRENCE THEN WE WILL JOIN OWNER AGAIN FOR NEW FIRST EVENT OCCURRENCE ELSE WE WILL NOT JOIN AGAIN.
+//FIRST WE WILL CHECK THAT EITHER EVENT OWNER WAS JOINED ANY EVENT OCCURRENCE THEN WE WILL JOIN OWNER AGAIN FOR NEW FIRST EVENT OCCURRENCE ELSE WE WILL NOT JOIN AGAIN.
                 $user = Engine_Api::_()->getItem('user', $siteevent->owner_id);
                 if (!$siteevent->membership()->isEventMember($user, true)) {
                     $isEventMember = true;
@@ -4369,7 +5261,7 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
 //            $repeat_endtime = $nextyearendtime;
 //          }
                 }
-                //date_default_timezone_set($oldTz);
+//date_default_timezone_set($oldTz);
                 if (isset($postedValues[$values['eventrepeat_id'] . '_repeat_time']['date']) && !empty($postedValues[$values['eventrepeat_id'] . '_repeat_time']['date']))
                     $postedValues[$values['eventrepeat_id'] . '_repeat_time'] = date('Y-m-d H:i:s', $repeat_endtime);
                 if ($values['eventrepeat_id'] != 'custom') {
@@ -4393,7 +5285,7 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                         $this->setEventInfo($params, $useTimezone);
                     }
                 }
-                //CASE:2 WEEKLY
+//CASE:2 WEEKLY
                 elseif ($values['eventrepeat_id'] === 'weekly') {
                     $weekdays = array(1 => 'monday', 2 => 'tuesday', 3 => 'wednesday', 4 => 'thursday', 5 => 'friday', 6 => 'saturday', 7 => 'sunday');
                     $weekdays_Temp = $weekdays;
@@ -4463,7 +5355,7 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                         $skip_firstweekdays = true;
                     }
                 }
-                //CASE:3 MONTHLY
+//CASE:3 MONTHLY
                 elseif ($values['eventrepeat_id'] === 'monthly') {
                     $params = array();
                     //CHECK FOR EITHER ABSOLUTE MONTH DAY OR RELATIVE DAY
@@ -4611,7 +5503,7 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                         }
                     }
                 }
-                //CASE:4 CUSTOM
+//CASE:4 CUSTOM
                 elseif ($values['eventrepeat_id'] === 'custom') {
 
 
@@ -4652,6 +5544,8 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
         if ($this->_occurrencesCount <= Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.occurrencecount', 15) || (isset($_POST['eventrepeat_id']) && $_POST['eventrepeat_id'] == 'custom')) {
             try {
                 $viewer = Engine_Api::_()->user()->getViewer();
+                $viewer_id = $viewer->getIdentity();
+
                 $tableOccurence = Engine_Api::_()->getDbtable('occurrences', 'siteevent');
 
                 $row_occurrence = $tableOccurence->createRow();
@@ -4659,7 +5553,7 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                 $row_occurrence->event_id = $params['event_id'];
                 $row_occurrence->starttime = $dateInfo['starttime'];
                 $row_occurrence->endtime = $dateInfo['endtime'];
-                //IF TICKET PLUGIN ENABLED
+//IF TICKET PLUGIN ENABLED
                 if (Engine_Api::_()->siteevent()->hasTicketEnable()) {
                     //RESET TICKET_ID_SOLD ARRAY OF NEW OCCURRENCES.
                     $row_occurrence->ticket_id_sold = Engine_Api::_()->getDbtable('tickets', 'siteeventticket')->resetTicketIdSoldArray($params['event_id']);
@@ -4668,8 +5562,8 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                 $row_occurrence->save();
                 $occure_id = $row_occurrence->occurrence_id;
 
-                // Add owner as member
-                //we will join the event owner only for his first event occurrence.
+// Add owner as member
+//we will join the event owner only for his first event occurrence.
                 $siteevent = Engine_Api::_()->getItem('siteevent_event', $params['event_id']);
                 if (isset($params['is_member']) && $siteevent->parent_type == 'user') {
                     $owner = Engine_Api::_()->getItem('user', $siteevent->owner_id);
@@ -4685,19 +5579,20 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                 }
                 return $occure_id;
             } catch (Exception $E) {
-                echo $E;
-                die;
+                
             }
         }
     }
 
     public function memberSuggestAction() {
-        // Validate request methods
+// Validate request methods
         $this->validateRequestMethod();
 
         $data = array();
         $subject_guid = $this->getRequestParam('subject', null);
         $viewer = Engine_Api::_()->user()->getViewer();
+        $viewer_id = $viewer->getIdentity();
+
         if ($subject_guid) {
             $subject = Engine_Api::_()->getItemByGuid($subject_guid);
         } else {
@@ -4725,7 +5620,7 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
                 $tempData['guid'] = $friend->getGuid();
                 $tempData['label'] = $friend->getTitle();
 
-                // Add images
+// Add images
                 $getContentImages = Engine_Api::_()->getApi('Core', 'siteapi')->getContentImage($friend);
                 $tempData = array_merge($tempData, $getContentImages);
 
@@ -4733,6 +5628,151 @@ class Siteevent_IndexController extends Siteapi_Controller_Action_Standard {
             }
         }
         $this->respondWithSuccess($data);
+    }
+
+//Execute when an event is being edited. here we will only edit the event occurrences and add new if there are any.
+    public function editDates($postedValues, $values, $event_id, $action = 'edit') {
+
+//IF EVENT TYPE IF CUSTOM THEN WE WILL CALL ADDOREDIT FUNCTION TO CREATE NEW ROWS ONLY.
+        if ($values['eventrepeat_id'] == 'custom') {
+            $postedValues['action'] = 'editdates';
+            $this->addorEditDates($postedValues, $values, $event_id, 'append');
+            return;
+        }
+        $values['starttime'] = Engine_Api::_()->siteevent()->convertDateFormat($postedValues['starttime']);
+//CASE 1: WHEN END DATE DURATION IS CHANGED.
+        $starttime = strtotime($values['starttime']);
+        $endtime = strtotime($values['endtime']);
+
+        $durationDiff = $endtime - $starttime;
+//SELECT THE ALL OCCURRENCES OF THIS EVENT.
+        $tableOccurence = Engine_Api::_()->getDbtable('occurrences', 'siteevent');
+        $getALLOccurrences = $tableOccurence->getAllOccurrenceDates($event_id, 0);
+
+        $params = array();
+//NOW UPDATE THE ENDDATE OF EACH OCCURRENCE ACCORDING TO THE CURRENT DURATION.
+        foreach ($getALLOccurrences as $occurrence) {
+
+            $nextEndDate = date("Y-m-d H:i:s", strtotime($occurrence->starttime) + $durationDiff);
+            try {
+                $viewer = Engine_Api::_()->user()->getViewer();
+                $viewer_id = $viewer->getIdentity();
+
+                $tableOccurence = Engine_Api::_()->getDbtable('occurrences', 'siteevent');
+
+                $endtime = strtotime($occurrence->starttime) + $durationDiff;
+                $oldTz = date_default_timezone_get();
+                date_default_timezone_set($viewer->timezone);
+                date_default_timezone_set($oldTz);
+                $nextEndDate = date("Y-m-d H:i:s", $endtime);
+                $tableOccurence->update(array('endtime' => $nextEndDate), array('occurrence_id =?' => $occurrence->occurrence_id));
+                $occurrenceEndStartDate = $occurrence->starttime;
+                $occurrenceEndDate = $nextEndDate;
+            } catch (Exception $E) {
+                
+            }
+        }
+
+//NOW CHECK IF THE END REPEAT TIME IS ALSO INCREASED. IF YES THEN WE WILL ALSO ADD NEW ROWS TO THE TABLE.
+
+        $dateInfo = Engine_Api::_()->siteevent()->dbToUserDateTime(array('starttime' => $occurrenceEndStartDate, 'endtime' => $occurrenceEndDate));
+
+
+        $values['starttime'] = $dateInfo['starttime'];
+        $values['endtime'] = $dateInfo['endtime'];
+        $postedValues['action'] = 'editdates';
+
+        $this->addorEditDates($postedValues, $values, $event_id, 'create');
+    }
+
+    private function _packagesEnabled() {
+        $viewer = Engine_Api::_()->user()->getViewer();
+        $viewer_id = $viewer->getIdentity();
+        if (_CLIENT_TYPE && ((_CLIENT_TYPE == 'android' && _ANDROID_VERSION >= '1.6.3') || _CLIENT_TYPE == 'ios' && _IOS_VERSION >= '1.5.1')) {
+            if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('siteeventpaid') && $this->_hasPackageEnable) {
+                $packageCount = Engine_Api::_()->getDbTable('packages', 'siteeventpaid')->getPackageCount();
+                if ($packageCount == 1) {
+                    $package = Engine_Api::_()->getDbTable('packages', 'siteeventpaid')->getEnabledPackage();
+                    if (($package->price == '0.00')) {
+                        return 0;
+                    } else
+                        return 1;
+                } else {
+                    $overview = Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.overview', 1);
+                    $package_description = Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.package.description', 1);
+                    $paginator = Engine_Api::_()->getDbtable('packages', 'siteeventpaid')->getPackagesSql($viewer_id);
+                    $getTotalItemCount = $paginator->getTotalItemCount();
+
+                    if ($getTotalItemCount > 0) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                }
+            }
+        }
+        return 0;
+    }
+
+    /*
+     * Add capacity and waitlist
+     */
+
+    public function capacityAndWaitlistAction() {
+        $event_id = $this->_getParam('event_id');
+        $occurence_id = $this->_getParam('occurence_id');
+        $viewer = Engine_Api::_()->user()->getViewer();
+        $viewer_id = $viewer->getIdentity();
+
+        $siteevent = Engine_Api::_()->getItem('siteevent_event', $event_id);
+
+        if (empty($siteevent)) {
+            $this->respondWithError('no_record');
+        }
+
+        if (!$siteevent->authorization()->isAllowed($viewer, 'edit')) {
+            $this->respondWithError('no_record');
+        }
+
+        if ($this->getRequest()->isGet()) {
+            $waitListForm = array();
+            $waitListForm[] = array(
+                'type' => 'Text',
+                'name' => 'capacity',
+                'label' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('Capacity'),
+                'description' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('Enter the value of maximum members who can join this event. After this capacity is reached, members will be able to apply for the waitlist of this event.'),
+            );
+
+            $waitListForm[] = array(
+                'type' => 'Submit',
+                'name' => 'submit',
+                'label' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('Save')
+            );
+
+            $this->respondWithSuccess($waitListForm);
+        } else if ($this->getRequest()->isPost()) {
+            $params = array();
+            $occurrenceTable = Engine_Api::_()->getDbtable('occurrences', 'siteevent');
+            if (Engine_Api::_()->siteevent()->isTicketBasedEvent()) {
+                $currentCapacity = $occurrenceTable->maxSoldTickets(array('event_id' => $event_id));
+            } else {
+                $currentCapacity = $occurrenceTable->maxMembers(array('event_id' => $event_id, 'rsvp' => 2));
+            }
+
+            if (!empty($_POST['capacity']) && $currentCapacity > $_POST['capacity']) {
+                $capacityMessage = 'Capacity value can not be less than ' . $currentCapacity . ' as ' . $currentCapacity . ' members are already joined this event.';
+                $this->respondWithValidationError('validation_fail', $capacityMessage);
+            }
+
+            $siteevent->capacity = empty($_POST['capacity']) ? NULL : $_POST['capacity'];
+
+            if (empty($siteevent->capacity)) {
+                Engine_Api::_()->getDbTable('occurrences', 'siteevent')->update(array('waitlist_flag' => 0), array('event_id = ?' => $siteevent->event_id));
+            }
+            $siteevent->save();
+
+            $this->successResponseNoContent('no_content', true);
+        }
     }
 
 }

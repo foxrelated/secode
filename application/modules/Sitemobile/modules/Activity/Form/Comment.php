@@ -90,7 +90,7 @@ class Sitemobile_modules_Activity_Form_Comment extends Engine_Form {
     }
 
     public function setActionIdentity($action_id) {
-        if (Engine_Api::_()->getApi('settings', 'core')->core_spam_comment) {
+        if (0) {
             $this
                     ->setAttrib('style', 'display: none;');
         } else {

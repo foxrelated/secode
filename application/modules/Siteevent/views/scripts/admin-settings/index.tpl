@@ -10,18 +10,18 @@
  * @author     SocialEngineAddOns
  */
 ?>
- <?php
+<?php
 //GET API KEY
 $apiKey = Engine_Api::_()->seaocore()->getGoogleMapApiKey();
 $this->headScript()->appendFile("https://maps.googleapis.com/maps/api/js?libraries=places&key=$apiKey");
 ?>
 
 <script type="text/javascript">
-if(document.getElementById('siteevent_map_city')) {
-	window.addEvent('domready', function() {
-		new google.maps.places.Autocomplete(document.getElementById('siteevent_map_city'));
-	});
-}
+    if (document.getElementById('siteevent_map_city')) {
+        window.addEvent('domready', function () {
+            new google.maps.places.Autocomplete(document.getElementById('siteevent_map_city'));
+        });
+    }
 </script>
 
 <?php
@@ -100,7 +100,30 @@ if (!isset($_COOKIE[$moduleName . '_dismiss'])):
             </div>
         </div>
     <?php else: ?>
-<?php if(Engine_Api::_()->hasModuleBootstrap('sitevideo') && !Engine_Api::_()->getDbtable('modules', 'sitevideo')->getIntegratedModules(array('enabled' => 1, 'item_type' => 'siteevent_event', 'item_module' => 'siteevent'))):?>
+        <?php if (Engine_Api::_()->hasModuleBootstrap('sitevideo') && !Engine_Api::_()->getDbtable('modules', 'sitevideo')->getIntegratedModules(array('enabled' => 1, 'item_type' => 'siteevent_event', 'item_module' => 'siteevent'))): ?>
+            <div id="dismissintegration_modules">
+                <div class="seaocore-notice">
+                    <div class="seaocore-notice-icon">
+                        <img src="<?php echo $this->layout()->staticBaseUrl ?>application/modules/Seaocore/externals/images/notice.png" alt="Notice" />
+                    </div>
+                    <div style="float:right;">
+                        <button onclick="dismissintegration('<?php echo $moduleName; ?>');"><?php echo $this->translate('Dismiss'); ?></button>
+                    </div>
+                    <div class="seaocore-notice-text ">
+                        <?php echo 'You have installed <a href="https://www.socialengineaddons.com/videoextensions/socialengine-advanced-videos-pages-businesses-groups-listings-events-stores-extension" target="_blank">Advanced Videos - Pages, Businesses, Groups, Multiple Listing Types, Events, Stores, etc Extension</a> installed on your website. If you want to display videos using the Advanced Videos Plugin on your website so that all videos can be place all together then please <a  target="_blank" href="admin/sitevideointegration/modules">click here</a> to integrate it.'; ?>
+                    </div>	
+                </div>
+            </div>
+        <?php endif; ?>
+    <?php endif; ?>
+<?php endif; ?>
+
+
+<?php
+$moduleName = 'documentintegration';
+if (!isset($_COOKIE[$moduleName . '_dismiss'])):
+    ?>
+    <?php if (!Engine_Api::_()->hasModuleBootstrap('documentintegration')): ?>
         <div id="dismissintegration_modules">
             <div class="seaocore-notice">
                 <div class="seaocore-notice-icon">
@@ -110,12 +133,27 @@ if (!isset($_COOKIE[$moduleName . '_dismiss'])):
                     <button onclick="dismissintegration('<?php echo $moduleName; ?>');"><?php echo $this->translate('Dismiss'); ?></button>
                 </div>
                 <div class="seaocore-notice-text ">
-                    <?php echo 'You have installed <a href="https://www.socialengineaddons.com/videoextensions/socialengine-advanced-videos-pages-businesses-groups-listings-events-stores-extension" target="_blank">Advanced Videos - Pages, Businesses, Groups, Multiple Listing Types, Events, Stores, etc Extension</a> installed on your website. If you want to display videos using the Advanced Videos Plugin on your website so that all videos can be place all together then please <a  target="_blank" href="admin/sitevideointegration/modules">click here</a> to integrate it.'; ?>
+                    <?php echo 'To set up a robust Documents System with <a href="https://www.socialengineaddons.com/socialengine-advanced-events-plugin">"Advanced Events Plugin"</a>, you can purchase our awesome <a  target="_blank" href="https://www.socialengineaddons.com/socialengine-documents-product-kit">"Documents Sharing - Product Kit"</a>.'; ?>
                 </div>	
             </div>
         </div>
+    <?php else: ?>
+        <?php if (Engine_Api::_()->hasModuleBootstrap('document') && !Engine_Api::_()->getDbtable('modules', 'document')->getIntegratedModules(array('enabled' => 1, 'item_type' => 'siteevent_event', 'item_module' => 'siteevent'))): ?>
+            <div id="dismissintegration_modules">
+                <div class="seaocore-notice">
+                    <div class="seaocore-notice-icon">
+                        <img src="<?php echo $this->layout()->staticBaseUrl ?>application/modules/Seaocore/externals/images/notice.png" alt="Notice" />
+                    </div>
+                    <div style="float:right;">
+                        <button onclick="dismissintegration('<?php echo $moduleName; ?>');"><?php echo $this->translate('Dismiss'); ?></button>
+                    </div>
+                    <div class="seaocore-notice-text ">
+                         <?php echo 'You have installed <a href="https://www.socialengineaddons.com/documentextensions/socialengine-documents-sharing-pages-businesses-groups-listings-events-stores-extension" target="_blank">Documents- Pages, Businesses, Groups, Events, Stores, etc Extension</a> installed on your website. If you want to display documents using the Documents Plugin on your website so that all documents can be place all together then please <a  target="_blank" href="admin/documentintegration/modules">click here</a> to integrate it.'; ?>
+                    </div>	
+                </div>
+            </div>
+        <?php endif; ?>
     <?php endif; ?>
- <?php endif; ?>
 <?php endif; ?>
 
 <div class='seaocore_settings_form siteevent_global_settings'>
@@ -133,20 +171,20 @@ if (!isset($_COOKIE[$moduleName . '_dismiss'])):
         $('review_global').submit();
     }
 
-    window.addEvent('domready', function() {
+    window.addEvent('domready', function () {
         showDefaultNetwork('<?php echo $settings->getSetting('siteevent.network', 0) ?>');
-        
+
         showTimezoneSetting('<?php echo $settings->getSetting('siteevent.datetime.format', 'medium') ?>');
 
         showLocationSettings('<?php echo Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.location', 1) ?>');
     });
-    
+
     function showTimezoneSetting(value) {
-      if( value == 'full' || value == 'long' ) {
-        $('siteevent_timezone-wrapper').style.display = 'block';
-      } else {
-        $('siteevent_timezone-wrapper').style.display = 'none';
-      }
+        if (value == 'full' || value == 'long') {
+            $('siteevent_timezone-wrapper').style.display = 'block';
+        } else {
+            $('siteevent_timezone-wrapper').style.display = 'none';
+        }
     }
 
     function showDefaultNetwork(option) {
@@ -155,8 +193,7 @@ if (!isset($_COOKIE[$moduleName . '_dismiss'])):
                 $('siteevent_default_show-wrapper').style.display = 'block';
                 showDefaultNetworkType($('siteevent_default_show-1').checked);
                 $('siteevent_networkprofile_privacy-wrapper').style.display = 'none';
-            }
-            else {
+            } else {
                 showDefaultNetworkType(1);
                 $('siteevent_default_show-wrapper').style.display = 'none';
                 $('siteevent_networkprofile_privacy-wrapper').style.display = 'block';

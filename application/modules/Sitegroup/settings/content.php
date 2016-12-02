@@ -891,7 +891,7 @@ $final_array = array(
                     'Radio',
                     'postedby',
                     array(
-                        'label' => 'Show posted by option. (Selecting "Yes" here will display the member\'s name who has created the group.)',
+                        'label' => 'Show created by option. (Selecting "Yes" here will display the member\'s name who has created the group.)',
                         'multiOptions' => array(
                             1 => 'Yes',
                             0 => 'No'
@@ -1251,7 +1251,7 @@ $final_array = array(
                     'Radio',
                     'showpostedBy',
                     array(
-                        'label' => 'Do you want “Posted By” of the Groups to be displayed in grid view?',
+                        'label' => 'Do you want “Created By” of the Groups to be displayed in grid view?',
                         'multiOptions' => array(
                             1 => 'Yes',
                             0 => 'No'
@@ -2662,7 +2662,7 @@ $final_array = array(
                     'Radio',
                     'postedby',
                     array(
-                        'label' => 'Show posted by option. (Selecting "Yes" here will display the member\'s name who has created the group.)',
+                        'label' => 'Show created by option. (Selecting "Yes" here will display the member\'s name who has created the group.)',
                         'multiOptions' => array(
                             1 => 'Yes',
                             0 => 'No'
@@ -2795,7 +2795,7 @@ $final_array = array(
 //                    'Radio',
 //                    'postedby',
 //                    array(
-//                        'label' => 'Show posted by option. (Selecting "Yes" here will display the member\'s name who has created the listing.)',
+//                        'label' => 'Show created by option. (Selecting "Yes" here will display the member\'s name who has created the listing.)',
 //                        'multiOptions' => array(
 //                            1 => 'Yes',
 //                            0 => 'No')
@@ -3190,7 +3190,7 @@ array(
                     'Radio',
                     'showpostedBy',
                     array(
-                        'label' => 'Do you want “Posted By” of the Groups to be displayed in grid view?',
+                        'label' => 'Do you want “Created By” of the Groups to be displayed in grid view?',
                         'multiOptions' => array(
                             1 => 'Yes',
                             0 => 'No'

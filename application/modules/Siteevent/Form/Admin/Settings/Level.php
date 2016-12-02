@@ -278,7 +278,7 @@ class Siteevent_Form_Admin_Settings_Level extends Authorization_Form_Admin_Level
                 'value' => $roles
             ));
 
-            if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('siteeventdocument')) {
+            if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('siteeventdocument') || (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('document') && Engine_Api::_()->getDbtable('modules', 'document')->getIntegratedModules(array('enabled' => 1, 'item_type' => "siteevent_event", 'item_module' => 'siteevent')))) {
                 $document_element = "document";
                 $this->addElement('Radio', "$document_element", array(
                     'label' => 'Allow Creation of Documents in Events?',

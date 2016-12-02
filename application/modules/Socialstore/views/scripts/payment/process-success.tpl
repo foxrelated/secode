@@ -1,1 +1,0 @@
-Your purchase has been completed.

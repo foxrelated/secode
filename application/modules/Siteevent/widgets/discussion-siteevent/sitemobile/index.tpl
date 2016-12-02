@@ -21,7 +21,7 @@
           'event_id' => $this->subject()->getIdentity(),
           'content_id' => $this->identity
         ), $this->translate('Post New Topic'), array(
-					'class' => 'buttonlink icon_sitereview_post_new','data-role' => "button", 'data-icon' => "plus", "data-iconpos" => "left", "data-inset" => 'false', 'data-mini' => "true", 'data-corners' => "true", 'data-shadow' => "true")) ?>
+					'class' => 'buttonlink icon_siteevent_post_new','data-role' => "button", 'data-icon' => "plus", "data-iconpos" => "left", "data-inset" => 'false', 'data-mini' => "true", 'data-corners' => "true", 'data-shadow' => "true")) ?>
     </div>
   <?php endif; ?>
 

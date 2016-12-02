@@ -113,7 +113,7 @@ $RESOURCE_TYPE = 'sitegroup_group';
                     <li <?php if (Engine_Api::_()->getApi('settings', 'core')->getSetting('sitegroup.fs.markers', 1)): ?><?php if ($sitegroup->featured): ?> class="lists_highlight"<?php endif; ?><?php endif; ?>>
                         <?php if (Engine_Api::_()->getApi('settings', 'core')->getSetting('sitegroup.fs.markers', 1)): ?>
                                 <?php if ($sitegroup->featured): ?>
-                                <i title="<?php echo $this->translate('Featured') ?>" class="seaocore_list_featured_label"><?php echo $this->translate('Featured') ?></i>
+                                <span title="<?php echo $this->translate('Featured') ?>" class="seaocore_list_featured_label"><?php echo $this->translate('Featured') ?></span>
                                 <?php endif; ?>
                             <?php endif; ?>
                         <div class='seaocore_browse_list_photo'>
@@ -178,7 +178,7 @@ $RESOURCE_TYPE = 'sitegroup_group';
                             <div class='seaocore_browse_list_info_date'>
                                 <?php echo $this->timestamp(strtotime($sitegroup->creation_date)) ?>
                                 <?php if (!empty($this->showpostedBy) && $postedBy): ?>
-                                    - <?php echo $this->translate('posted by'); ?>
+                                    - <?php echo $this->translate('created by'); ?>
                                     <?php echo $this->htmlLink($sitegroup->getOwner()->getHref(), $sitegroup->getOwner()->getTitle()) ?>
                                 <?php endif; ?>
                             </div>
@@ -291,7 +291,11 @@ $RESOURCE_TYPE = 'sitegroup_group';
                                         <?php // end like Work on the browse group ?>
 
                                         <?php if (!empty($this->showlikebutton)) : ?>
-                                    <a href="javascript:void(0);">
+                                   <?php if($this->viewer()->getIdentity()):?>
+                                <a href="javascript:void(0);">
+                                    <?php else:?>
+                                    <a href="<?php echo $sitegroup->getHref();?>">
+                                        <?php endif;?>
             <?php else : ?>
                                         <a href="<?php echo Engine_Api::_()->sitegroup()->getHref($sitegroup->group_id, $sitegroup->owner_id, $sitegroup->getSlug()) ?>">
                                         <?php endif; ?>
@@ -364,7 +368,7 @@ $RESOURCE_TYPE = 'sitegroup_group';
                             <?php // end like Work on the browse group ?>
 
                                 <?php if ($sitegroup->featured == 1 && !empty($this->showfeaturedLable)): ?>
-                                        <span class="seaocore_list_featured_label" title="<?php echo $this->translate('Featured') ?>"></span>
+                                        <span class="seaocore_list_featured_label" title="<?php echo $this->translate('Featured') ?>"><?php echo $this->translate('Featured') ?></span>
                             <?php endif; ?>
 
             <?php if (!empty($this->showlikebutton)): ?>
@@ -454,7 +458,7 @@ $RESOURCE_TYPE = 'sitegroup_group';
                                 <?php endif; ?>
                                 <?php if (!empty($this->showpostedBy) && $postedBy): ?>
                                     <div class='seaocore_browse_list_info_date'>
-                                    <?php echo $this->translate('posted by'); ?>
+                                    <?php echo $this->translate('created by'); ?>
                                     <?php echo $this->htmlLink($sitegroup->getOwner()->getHref(), $sitegroup->getOwner()->getTitle()) ?>
                                     </div>
                                 <?php endif; ?>
@@ -580,7 +584,7 @@ $RESOURCE_TYPE = 'sitegroup_group';
     <?php $textPostedBy = ''; ?>
     <?php foreach ($this->locations as $location) : ?>
         <?php if ($postedBy): ?>
-            <?php $textPostedBy = $this->string()->escapeJavascript($this->translate('posted by')); ?>
+            <?php $textPostedBy = $this->string()->escapeJavascript($this->translate('created by')); ?>
             <?php $textPostedBy.= " " . $this->htmlLink($this->sitegroup[$location->group_id]->getOwner()->getHref(), $this->string()->escapeJavascript($this->sitegroup[$location->group_id]->getOwner()->getTitle())) ?>
         <?php endif; ?>
         // obtain the attribues of each marker

@@ -1,2098 +1,1064 @@
 
-
 /*Icons*/
-
 .stcheckin_icon_map_edit{background-image:url(../images/icon/map-edit.png);}
-
 .stckeckin_icon_checkin{background-image:url(../images/icon/checkin.png);}
-
 .sitetagcheckin_icon_photo{background-image:url(../images/icon/album.png);}
-
 /* checkin status box css start here*/
-
 #global_page_sitetagcheckin-checkin-check-in{
-
 	width:100%;
-
 }
-
 #global_page_sitetagcheckin-checkin-check-in #global_content_simple{
-
 	float: left;
-
 	overflow: hidden;
-
 	width: 100%;
-
 	display:block;
-
 }
-
 .stcheckin_checkin_box{
-
 	margin:15px 0 0 15px;
-
 	width:560px;
-
 }
-
 .stcheckin_checkin_box_cont{
-
 	padding:10px;
-
 	width:550px;
-
 	height:280px;
-
 	overflow-y:auto;
-
 	margin-bottom:10px;
-
+	box-sizing:border-box;
 }
-
 .stcheckin_checkin_box h3{
-
 	margin-bottom:5px;
-
 }
-
 .stcheckin_compose_container{
-
 	position:relative;
-
 	margin-bottom:5px;
-
 	clear:both;
-
 }
-
 .stcheckin_checkin_box_cont .sitetagcheckin_autosuggest_location{
-
 	margin-bottom:10px;
-
 }
-
 .stcheckin_checkin_box_cont .sitetagcheckin_autosuggest_location .seaocheckinshowlocation{
-
 	overflow:hidden;
-
 }
-
 .stcheckin_compose_container .compose-content {
-
 	min-height:6em;
-
 	padding:5px 5px 30px 5px !important;
-
 	border:0px;
-
 	background:none;
-
 }
-
 #stcheckin-checkin-compose-menu{
-
 	bottom:0;
-
 	right:0;
-
 	position:absolute;
-
 }
-
 .stcheckin_checkin_box .compose-tray{
-
 	clear:both;
-
 	margin-bottom:5px;
-
 }
-
 #stcheckin-checkin-compose-menu #compose-photo-activator{
-
 	background-position:bottom !important;
-
 }
-
 .stcheckin_post_options{
-
 	clear:both;
-
 	float:left;
-
 	margin:0px 0 10px;
-
 	width:100%;
-
 }
-
 .stcheckin_current_date,
-
 .stcheckin_post_date{
-
 	clear:both;
-
 	padding-top:5px;
-
 	overflow:hidden;
-
 	float:left;
-
 }
-
 .stcheckin_current_date span{
-
 	float:left;
-
 	cursor:pointer;
-
 }
-
 .stcheckin_current_date .stcheckin_post_edit_date{
-
 	background: url(../images/edit.png) no-repeat top;
-
 	height:18px;
-
 	width:18px;
-
 	float:left;
-
 	margin-left:5px;
-
 }
-
 .stcheckin_current_date .stcheckin_post_edit_date:hover{
-
 	background: url(../images/edit.png) no-repeat bottom;
-
 }
-
 .stcheckin_post_date a, .stcheckin_post_date select{
-
 	float:left;
-
 	margin-right:5px;
-
 }
-
 .stcheckin_post_date a{
-
 	margin-top:3px;
-
 }
-
 .sitetag_checkin_post_privacy{
-
 	float:right;
-
 	margin-top:5px;
-
 }
-
 .sitetag_checkin_post_composer_button{
-
 	background-repeat:no-repeat;
-
 	cursor:pointer;
-
 	height:18px;
-
 	margin:7px 5px;
-
 	width:18px;
-
 	cursor:pointer;
-
 	float:right;
-
 	position:relative;
-
 	padding:0px !important;
-
 }
-
 .seaocheckin_composer_tip {
-
 	background:none repeat scroll 0 0 #333333;
-
 	color:#FFFFFF;
-
 	display:none;
-
 	font-size:11px !important;
-
 	font-weight:normal;
-
 	left:auto;
-
 	opacity:0.8;
-
 	padding:5px;
-
 	position:absolute;
-
 	right:-2px;
-
 	top:-29px;
-
 	white-space:nowrap;
-
 }
-
 html[dir="rtl"] .seaocheckin_composer_tip{
-
 	right:auto;
-
 	left:0px;
-
 }
-
 .seaocheckin_composer_tip img {
-
 	clear:both;
-
 	bottom:0;
-
 	position:absolute;
-
 	right:5px;
-
 	margin:0 auto -7px;
-
 }
-
 html[dir="rtl"] .seaocheckin_composer_tip img{
-
 	left:5px;
-
 	right:auto;
-
 }
-
 .sitetag_checkin_post_composer_button:hover .seaocheckin_composer_tip {
-
 	display:block;
-
 }
-
 .sitetag_checkin_post .compose-tray{
-
 	border-width:1px;
-
 	clear:both;
-
 	margin:0 0 10px;
-
 }
-
 .sitetag_checkin_post_buttons{
-
 	clear:both;
-
 	margin-bottom:5px;
-
 }
-
-
 
 /*Checkin Feeds*/
-
 .stcheckin_comment_remove{
-
 	background:url(../images/delete.png) no-repeat right;
-
 	float:right;
-
 	height:11px;
-
 	width:11px;
-
 	cursor:pointer;
-
 	display:none;
-
 }
-
 html[dir="rtl"] .stcheckin_comment_remove{
-
 	float:left;
-
 }
-
 .stcheckin_comment_remove:hover{
-
 	background:#577BC6 url(../images/delete.png) no-repeat left;
-
 }
-
 .comments > ul > li:hover .stcheckin_comment_remove{
-
 	display:block;
-
 }
-
-
 
 /*Show Location*/
-
 .seaotagcheckinshowlocation{
-
 	overflow:hidden;
-
 }
-
 #sitetaglocation_link{
-
 	clear:both;
-
 }
-
 input[type="text"].seaotagcheckinlocationfeild{
-
 	background-position:4px center;
-
 	background-repeat:no-repeat;
-
 	border-radius:0;
-
 	padding:3px 20px 3px 20px;
-
 	margin-top:5px;
-
 	width:235px;
-
 }
-
 .seaocheckinshowlocation{
-
 	clear:both;
-
 }
-
 .seaocheckinshowlocation #cross_location a{
-
 	background: url(../images/close.png) no-repeat top;
-
 	height:14px;
-
 	margin-left: 258px;
-
 	margin-top:5px;
-
 	position:absolute;
-
 	width:15px;
-
 }
-
 .seaocheckinshowlocation #cross_location a:hover{
-
 	background-position:bottom;
-
 }
-
 .seaocheckinshowlocation > span{
-
 	float:left;
-
 	margin:5px 0 0;
-
 }
-
 .seaocheckinshowlocation > span a{
-
 	margin:0px;
-
 }
-
 #sitetagcheckin_edit_location_link a{
-
 	background: url(../images/edit.png) no-repeat top;
-
 	height:18px;
-
 	width:18px;
-
 	float:left;
-
 	margin-left:5px;
-
 }
-
 #sitetagcheckin_edit_location_link a:hover{
-
 	background: url(../images/edit.png) no-repeat bottom;
-
 }
-
 #autosuggest_save_cancel_button{
-
 	margin-top:5px;
-
 }
-
 #autosuggest_save_cancel_button button{
-
 	margin-right:5px;
-
 	padding:3px !important;
-
 }
-
-
 
 /*Side Widgets*/
-
 .layout_sitetagcheckin_checkinuser_sitetagcheckin{
-
 	margin-bottom:15px;
-
 	clear:both;
-
 }
-
 /*Checkin Button*/
-
 .layout_sitetagcheckin_checkinbutton_sitetagcheckin{
-
 	margin:10px 0;
-
 }
-
 .stchecckin_button{
-
 	background:#79B4D4 url(../images/button/button-stripe.png) repeat left top;
-
 	border-radius:5px;
-
 	border:0px;
-
 	box-shadow:0 1px 2px rgba(0, 0, 0, 0.4);
-
 	color:#FFFFFF;
-
 	cursor:pointer;
-
 	display: inline-block;
-
 	text-shadow:0 -1px 1px rgba(0, 0, 0, 0.2);
-
 	width:100%;
-
 }
-
 .stchecckin_button > div{
-
 	background-image:url(../images/button/button-shader-dark.png);
-
 	background-position:left bottom;
-
 	background-repeat:repeat;
-
 	border-radius:5px;
-
 	width:100%;
-
 	padding:0;
-
 	line-height:30px;
-
 }
-
 .stchecckin_button > div:hover{
-
 	background-image:url(../images/button/button-shader-light.png);
-
 }
-
 .stcheckin_counts{
-
 	background:url(../images/button/button-divider.png) repeat-y left;
-
 	padding:0 8px;
-
 	font-size:12px;
-
 	float:right;
-
 }	
-
 .stcheckin_check{
-
 	background:url(../images/button/button-divider.png) repeat-y left;
-
 	color:#FFFFFF;
-
 	padding:0 8px;
-
 	font-weight:bold;
-
 	overflow:hidden;
-
 	text-align:left;
-
 }
-
 .stchackin_button_icon{
-
 	float:left;
-
 	height:30px;
-
 	width:30px;
-
 }
-
 .stchackin_button_icon.stchackin_button_icon_pin{
-
 	background:url(../images/button/pin.png) no-repeat 50% 50%;
-
 }
-
 .stchackin_button_icon.stchackin_button_icon_tick{
-
 	background:url(../images/button/tick.png) no-repeat 50% 50%;
-
 }
-
 .stcheck_button_narrow{
-
 	overflow:hidden;
-
 }
-
 .stcheck_button_wide > div{
-
 	margin-right:15px;
-
 }
-
 .stcheckin_checkin_link{
-
 	margin-top:6px;
-
 }
-
 .stcheck_ckeckin_stat{
-
 	display: block;
-
 	float: left;
-
 	line-height: 1.7em;
-
 	margin-top:5px;
-
 	font-size:11px;
-
 }
-
 .stchackin_icon_tick{
-
 	background:url(../images/tick.png) no-repeat 50% 50%;
-
 }
-
 /*View Map*/
-
 #global_page_sitetagcheckin-index-view-map{
-
 	padding:0px;
-
 	margin:0px;
-
 }
-
 #global_page_sitetagcheckin-index-view-map #global_content_simple{
-
 	overflow:visible;
-
 }
-
 /*Profile Map*/
-
 .stcheckin_profile_header{
-
 	border-bottom-width:1px;
-
 	overflow:hidden;
-
 	margin-bottom:10px;
-
 	padding:5px;
-
 }
-
 .stcheckin_profile_header_left{
-
 	float:left;
-
 }
-
 .stcheckin_profile_header_left a{
-
 	float:left;
-
 	margin-right:10px;
-
 }
-
 .stcheckin_profile_header_right{
-
 	float:right;
-
 }
-
 .stcheckin_profile_buttons{
-
 	cursor:pointer;
-
 	float:right;
-
 	margin:0 3px;
-
 }
-
 .seaocheckinmaparea{
-
 	border-radius: 3px 3px 3px 3px;
-
 	clear:both;
-
 	overflow:hidden;
-
 	padding:5px;
-
 }
-
 .seaocheckinmap{
-
 	height:550px;
-
 	margin-bottom:2px;
-
 }
-
 .seaocheckinmapfiltersbox{
-
 	clear:both;
-
 	overflow:hidden;
-
 }
-
 .seaocheckinmapfilters{
-
 	cursor:pointer;
-
 	padding:10px;
-
 	font-size:13px;
-
 	width:20%;
-
 }
-
 .seaocheckinmapfilterscount{
-
 	font-size:20px;
-
 }
-
 .stcheckin_photo_tooltip_wrapper{
-
 	position:absolute;
-
 }
-
 .stcheckin_photo_tooltip_arrow{
-
 	border-color: transparent transparent #000;
-
 	border-style:solid;
-
 	border-width:0 8px 8px;
-
 	left:85px;
-
 	top:-7px;
-
 	position:absolute;
-
 }
-
 .stcheckin_photo_tooltip{
-
 	box-shadow:0 1px 2px rgba(0, 0, 0, 0.4);
-
 	background:#FFFFFF;
-
 	border:1px solid #000;
-
 	padding:5px;
-
 	z-index:100;
-
 }
-
 .stcheckin_photo_tooltip input.seaotagcheckinlocationfeild{
-
 	margin:0px;
-
 	width:130px;
-
 }
-
 .stcheckin_photo_tooltip  .seaocheckinshowlocation #cross_location a{
-
 	margin-left:153px;
-
 }
-
 /*Map Tip*/
-
 .sitetag_checkin_map_tip{
-
 	overflow:hidden;
-
 }
-
 .sitetag_checkin_map_tip_loading, .sitetag_checkin_map_tip_content{
-
 	width:390px;
-
 	padding:5px;
-
 }
-
 .sitetag_checkin_map_tip_content .scroll_content{
-
 	width:383px;
-
 }
-
 .stcheckin_map_tip_top_links{
-
 	font-size:11px;
-
 	padding:0px 5px 5px;
-
 	overflow:hidden;
-
 }
-
 .stcheckin_map_tip_top_links a{
-
 	margin-right:10px;
-
 	font-weight:bold;
-
 	margin:0 5px;
-
 	text-decoration:underline;
-
 }
-
 .stcheckin_map_tip_top_links a.active{
-
 	text-decoration:none;
-
 }
-
 .stcheckin_map_tip_header{
-
 	padding:5px 5px 10px;
-
 	overflow:hidden;
-
 }
-
 .stcheckin_map_tip_header_img{
-
 	float:left;
-
 	margin-right:10px;
-
 }
-
 .stcheckin_map_tip_header_info{
-
 	overflow:hidden;
-
 }
-
 .stcheckin_map_tip_header_title{
-
 	font-size:17px;
-
 	font-weight:bold;
-
 }
-
 .stcheckin_map_tip_header_stat{
-
 	font-size:.8em;
-
 	margin-bottom:2px;
-
 }
-
 .sitetag_checkin_map_link{
-
 	padding:10px 10px 5px;
-
 	margin-top:0px;
-
 }
-
 .sitetag_checkin_map_tip_paging{
-
 	padding:10px;
-
 	clear:both;
-
 	border-top-width:1px;
-
 	overflow:hidden;
-
 }
-
 .sitetag_checkin_map_tip_content ul.feed .feed_item_attachments object, 
-
 .sitetag_checkin_map_tip_content ul.feed .feed_item_attachments object embed{
-
 	height:290px;
-
 	width:290px;
-
 }
-
 .sitetag_checkin_map_tip .stcheckin_checkin_box_cont{
-
 	height:250px;
-
 	width:350px;
-
 }
-
 /* Content Map Tip */
-
 .stcheckin_map_location{
-
 	clear:both;
-
 	width:300px;
-
 	margin:0 10px 10px;
-
 }
-
 .stcheckin_map_location_title{
-
 	font-weight:bold;
-
 	width:100%;
-
 	margin-bottom:5px;
-
 	color:#5F93B4;
-
 }
-
 .stcheckin_map_location_title > a{
-
 	float:left;
-
 	max-width:250px;
-
 	color:#5F93B4;
-
 }
-
 .stcheckin_map_location_title > a:hover{
-
 	color:#4e81a1;
-
 }
-
 .stcheckin_map_location_title span{
-
 	float:right;
-
 	margin-right:5px;
-
 }
-
 .stcheckin_map_location_title span.rating_star span{
-
 	float:left;
-
 }
-
 .stcheckin_map_location_photo{
-
 	float:left;
-
 	overflow:hidden;
-
 	margin-right:8px;
-
 }
-
 .stcheckin_map_location_photo img{
-
 	max-width:100px;
-
 	max-height:120px;
-
 }
-
 .stcheckin_map_location_info{
-
 	overflow:hidden;
-
 }
-
 .stcheckin_map_location_stat{
-
 	font-size:.8em;
-
 	color:#aaa;
-
 }
-
-
 
 /*Black Tip*/
-
 .stcheckin_tip_content{
-
 	border-radius:3px;
-
 	display:none;
-
 	position:absolute;
-
 	background:#222;
-
 	opacity:.9;
-
 	color:#fff;
-
 	text-align:center;
-
 	padding:5px;
-
 	width:90px;
-
 	font-size:.8em;
-
 	margin-top:-25px;
-
 	margin-left:-35px;
-
 	font-weight:normal;
-
 }
-
 .stcheckin_tip:hover .stcheckin_tip_content{display: block;}
 
 
-
-
-
 /*Feeds*/
-
 .stcheckin_feeds{
-
 	clear:both;
-
 }
-
 .stcheckin_feeds ul.feed {
-
 	clear: both;
-
 	margin: 0;
-
 	overflow: inherit !important;
-
 	padding: 0 !important;
-
 }
-
 .stcheckin_feeds ul.feed:after{
-
   clear:both;
-
   content: '';
-
   display: block;
-
 }
-
 .stcheckin_feeds ul.feed > li {
-
 	float: left;
-
 	overflow: visible;
-
 	padding-top: 10px;
-
 	position: relative;
-
 	width: 100%;
-
 }
-
 .stcheckin_feeds ul.feed > li .feed_item_body{
-
 	display: table-cell !important;
-
 	overflow: visible;
-
 	padding-right: 10px;
-
 	vertical-align: top;
-
 	width: 10000px;
-
 }
-
 .stcheckin_feed_delete_btn a{
-
 	background-image: url(../images/feed-close-icon.png);
-
 	background-repeat:no-repeat;
-
 	background-position:top;
-
 	height:15px;
-
 	width:15px;
-
 	cursor:pointer;
-
 	display:none;
-
 	position:absolute;
-
 	right:0;
-
 	top:10px;
-
 	text-indent:-100px;
-
 	overflow:hidden;
-
 }
-
 ul.feed > li:hover .stcheckin_feed_delete_btn a{
-
 	display:block;
-
 }
-
 /*Location Suggestion*/
-
 .stcheckin_suggest_location{
-
 	padding:5px;
-
 	margin-bottom:15px;
-
 	overflow:hidden;
-
 }
-
 .stcheckin_suggest_location_title{
-
 	font-weight:bold;
-
 	margin-bottom:5px;
-
 }
-
 .stcheckin_suggest_location_photo{
-
 	float:left;
-
 	width:72px;
-
 	margin-right:6px;
-
 }
-
 .stcheckin_suggest_location_photo img{
-
 	width:70px;
-
 }
-
 .stcheckin_suggest_location_cont{
-
 	overflow:hidden;
-
 }
-
 .stcheckin_suggest_location_cont > div{
-
 	margin-bottom:5px;
-
 	font-size:11px;
-
 }
-
 .stcheckin_suggest_location_cont > div button{
-
 	padding:3px !important;
-
 }
-
 .stcheckin_suggest_location input.seaotagcheckinlocationfeild[type="text"]{
-
 	width:134px;
-
 }
-
 .stcheckin_suggest_location .seaocheckinshowlocation #cross_location a{
-
 	margin-left:158px;
-
 }
-
-
 
 /*Browse Location Page*/
-
 .stcheckin_advanced_search{
-
 	margin-bottom:15px;
-
 	padding:0px;
-
 	clear:both;
-
 }
-
 .stcheckin_advanced_search > form{
-
 	border-radius:3px;
-
 	overflow:hidden;
-
 	padding: 10px !important;
-
 }
-
 .stcheckin_advanced_search .grp_field{
-
 	width:100%;
-
 	display:inherit !important;
-
 	margin:0px;
-
 }
-
 .stcheckin_advanced_search  .form-wrapper + .form-wrapper{
-
 	margin:0px !important;
-
 }
-
 .stcheckin_advanced_search #fieldset-grp3 .form-wrapper{
-
 	width:20%;
-
 	float:left;
-
 }
-
 .stcheckin_advanced_search #fieldset-grp3 #proximity-wrapper,
-
 .stcheckin_advanced_search #fieldset-grp3 #locationmiles_miles-wrapper, 
-
 .stcheckin_advanced_search #fieldset-grp3 #locationmiles_km-wrapper{
-
 	width:10%;
-
 }
-
 .stcheckin_advanced_search #fieldset-grp3 #category_id-wrapper{
-
 	width:20%;
-
 }
-
 .stcheckin_advanced_search #fieldset-grp3 #locationmiles-wrapper{
-
 	float:left;
-
 	width:15%;
-
 }
-
 .stcheckin_advanced_search #advances_search{
-
 	float: left;
-
 	font-size: 11px;
-
 	margin-top: 24px;
-
 }
-
 html[dir="rtl"] .stcheckin_advanced_search #fieldset-grp3 .form-wrapper,
-
 html[dir="rtl"] .stcheckin_advanced_search #fieldset-grp3 #locationmiles-wrapper,
-
 html[dir="rtl"] .stcheckin_advanced_search #advances_search{
-
 	float:right;
-
 }
-
 .stcheckin_advanced_search #fieldset-grp3 .form-label{
-
 	font-weight:bold;
-
 }
-
 .stcheckin_advanced_search form div > ul > li > span label, 
-
 .stcheckin_advanced_search form div > ul > li > span{
-
 	display:block;
-
 	font-size:11px;
-
 	margin-bottom:2px;
-
 }
-
 .stcheckin_advanced_search .form-elements{
-
  padding:0;
-
 }
-
 .stcheckin_advanced_search #fieldset-grp3 .form-element input[type="text"],
-
 .stcheckin_advanced_search #fieldset-grp3 .form-element select{
-
 	font-size:16px;
-
 	width:90%;
-
 }
-
 .stcheckin_advanced_search #fieldset-grp3 .description{
-
 	font-size:10px;
-
 	padding-top:5px;
-
 }
-
 .stcheckin_advanced_search #fieldset-grp1, 
-
 .stcheckin_advanced_search #fieldset-grp2{
-
 	border-width:1px;
-
 	border-style:solid;
-
 	clear:both;
-
 	margin:5px 0 0;
-
 	padding:10px 5px 10px 0;
-
 	display:none;
-
 }
-
 .stcheckin_advanced_search #fieldset-grp1 .form-wrapper,
-
 .stcheckin_advanced_search #fieldset-grp2 .form-wrapper{
-
 	margin-left:10px !important;
-
 	display:inline-block;
-
 }
-
 html[dir="rtl"] .stcheckin_advanced_search #fieldset-grp1 .form-wrapper, 
-
 html[dir="rtl"] .stcheckin_advanced_search #fieldset-grp2 .form-wrapper{
-
 	margin-left:0px;
-
 	margin-right:10px;
-
 }
-
 .stcheckin_advanced_search button.event_calendar{
-
 	padding:0px;
-
 }
-
 .stcheckin_advanced_search #fieldset-grp1 .form-wrapper input[type="checkbox"] + label,
-
 .stcheckin_advanced_search form div > ul > li input[type="checkbox"] + label,
-
 .stcheckin_advanced_search form div > ul > li input[type="radio"] + label {
-
 	display:inline-block;
-
 }
-
 .stcheckin_advanced_search #fieldset-grp2 #or-wrapper{
-
 	display:block;
-
 }
-
 .stcheckin_advanced_search #fieldset-grp2 #or-wrapper .form-label{
-
 	border-top-width: 1px;
-
 	float: left;
-
 	margin:10px 0 5px;
-
 	position: relative;
-
 	width: 100%;
-
 }
-
 html[dir="rtl"] .stcheckin_advanced_search #fieldset-grp2 #or-wrapper .form-label{
-
 	float:right;
-
 }
-
 .stcheckin_advanced_search #fieldset-grp2 #or-wrapper .form-label label{
-
 	font-size: 13px;
-
 	font-weight: bold;
-
 	left: 50%;
-
 	position: absolute;
-
 	top: -10px;
-
 }
-
 .stcheckin_advanced_search ul > li .form-options-wrapper li{
-
 	display: inline-block;
-
 	margin: 0 2px 3px;
-
 }
-
 .stcheckin_advanced_search ul > li .form-options-wrapper li label{
-
 	display:inline;
-
 }
-
 .stcheckin_advanced_search #done-wrapper{
-
 	padding-top:15px;
-
 	width:90px !important;
-
 }
-
 .stcheckin_advanced_search #done-wrapper > div{
-
 	display:inline;
-
 }
-
 .stcheckin_advanced_search #done-wrapper .form-label{
-
 	display:none !Important;
-
 }
-
 .stcheckin_advanced_search #done-wrapper button{
-
 	padding:5px 10px;
-
 	font-size:12px;
-
 }
-
 .stcheckin_advanced_search  .browse-separator-wrapper{
-
 	display:none;
-
 }
-
 .stcheckin_advanced_search .seaocore-autosuggest > li{
-
   display:block;
-
   margin:0;
-
 }
-
 /*Member Search*/
-
 .stcheckin_advanced_member_search  .form-wrapper + .form-wrapper{
-
 	margin:0px !important;
-
 }
-
 .stcheckin_advanced_member_search #fieldset-grp3 .form-wrapper{
-
 	width:20%;
-
 	float:left;
-
 	margin:0 !important;
-
 }
-
 .stcheckin_advanced_member_search #fieldset-grp3 #proximity-wrapper,
-
 .stcheckin_advanced_member_search #fieldset-grp3 #locationmiles_miles-wrapper{
-
 	width:10%;
-
 }
-
 .stcheckin_advanced_member_search #fieldset-grp3 #locationmiles-wrapper{
-
 	float:left;
-
 	width:15%;
-
 }
-
 .stcheckin_advanced_search form div > ul > li{
-
 	display:inline-block;
-
 	margin:10px 10px 0 0;
-
 }
-
-
 
 /*Map*/
-
 .eventlocation_browse_location{
-
 	clear:both;
-
 	margin-bottom:15px;
-
 	position:relative;
-
 	width:100%;
-
 }
-
 .stcheckin_adseresult_list{
-
 	overflow:hidden;
-
 	padding-right:10px;
-
 }
-
 .stcheckin_adseresult_list_top{
-
 	display: block;
-
 	float: left;
-
 	padding-bottom: 5px;
-
 	width: 100%;
-
 }
-
 .stcheckin_adseresult_list .stcheckin_adseresult_user_photo{
-
 	float:left;
-
 	margin-right:8px;
-
 }
-
 .stcheckin_adseresult_list ul.seaocore_browse_list{
-
 	margin-right:5px;
-
 }
-
 .stcheckin_adseresult_list_options{
-
 	margin-top:5px;
-
 }
-
 .stcheckin_adseresult_list_options a{
-
 	font-size: 11px;
-
 	line-height: 18px;
-
 	margin-right: 10px;
-
 }
-
 .stcheckin_adseresult_list ul.seaocore_browse_list li{
-
 	border-top-width:1px;
-
 	padding-top:10px;
-
 }
-
 .eventlocation_browse_location_paging{
-
 	overflow:hidden;
-
 }
-
 .eventlocation_browse_location_paging > div{
-
 	display:inline;
-
 	float:left;
-
 	margin:0px;
-
 }
-
 .eventlocation_browse_location_paging > div .pages{
-
 	margin:0px !important;
-
 }
-
 .eventlocation_map_container_right{
-
 	width:40%;
-
 	padding:1px;
-
 	float:right;
-
 	min-height:600px;
-
 }
-
 .eventlocation_map_container{
-
 	border-width:1px;
-
 	border-style:solid;
-
 	width:40%;
-
 }
-
 .eventlocation_map_container.absolute{
-
 	position:absolute;
-
-	right:0px;
-
+	right:0px !important;
 	top:0;
-
 }
-
 .eventlocation_map_container.fixed{
-
 	position:fixed;
-
 	top:0px;
-
 }
-
 .eventlocation_map_container.bottom{
-
 	bottom:0px;
-
 	position:absolute;
-
 	right:0px !important
-
 }
-
 .eventlocation_map_container.eventlocation_map_container_exp{
-
 	width:600px !important;
-
 }
-
 .eventlocation_map_container.eventlocation_map_container_exp #eventlocationlocation_browse_map_canvas{
-
 	height:500px !important;
-
 }
-
 .eventlocation_map_container_topbar{
-
 	padding:5px;
-
 	overflow:hidden;
-
 }
-
 .eventlocation_map_container_map_area{
-
 	border-style:solid none none none;
-
 	border-width:1px;
-
 	width:100%;
-
 }
-
 .sitetagcheckin_show_popup{
-
 	width:450px;
-
 	padding:0px;
-
 }
-
 .sitetagcheckin_show_popup p{
-
 	margin-bottom:10px;
-
 }
-
 .stcheck_grid_view{
-
 	clear:both;
-
 	border-top-width: 1px;
-
 	padding-top: 10px;
-
 }
-
 .stcheck_grid_view li.item_thumb_wrapper{
-
 	display:inline-block;
-
 	margin: 0 15px 20px 0;
-
 	vertical-align:top;
-
 	width: 167px;
-
 }
-
 .stcheck_grid_view li .item_thumb{
-
 	border-width:1px;
-
 	border-radius: 4px;
-
 	display: block;
-
 	height:150px;
-
 	margin-bottom:5px;
-
 	overflow:hidden;
-
 	width: 165px;
-
 }
-
 .stcheck_grid_view li .item_thumb table{
-
 	width:100%;
-
 	height:100%;
-
 }
-
 .stcheck_grid_view li .item_thumb table td{
-
 	text-align:center;
-
 }
-
 .stcheck_grid_view li .item_thumb img{
-
 	border:none;
-
 	max-height:150px;
-
 	max-width:165px;
-
 }
-
 .stcheck_grid_view li .item_title a{
-
 	overflow:hidden;
-
 	font-weight:bold;
-
 }
-
 .stcheck_grid_view li .item_title span{
-
 	margin-left:5px;
-
 	font-size:11px;
-
 }
-
 /*css for all modules view page*/
-
 .stchecking_pages_breadcrumbs{
-
 	padding-bottom:5px;
-
 	overflow:auto;
-
 	margin-bottom:10px;
-
 }
-
 .stchecking_pages_breadcrumbs h2{
-
 	font-size: 17px;
-
 	letter-spacing: normal;
-
 	overflow: hidden;
-
 	margin-bottom:3px;
-
 }
-
 .stchecking_pages_breadcrumbs > a{
-
 	float:left;
-
 }
-
 .stchecking_pages_breadcrumbs img{
-
 	float:left;
-
 	margin-right:5px;
-
 }
-
 /*sitetagcheckin Profile search start here*/
 
-
-
 /*Edit Location Page starts here*/
-
 #global_page_sitetagcheckin-location-edit-address div.form-label{width:80px;}
-
 .sitetagcheckin_edit_content .global_form > div {
-
 	float: none !important;
-
 }
-
 .sitetagcheckin_editlocation_wrapper{
-
 	border-top-width:1px;
-
 	padding-top:10px;
-
 }
-
 .sitetagcheckin_editlocation_wrapper h4{
-
 	border:0px;
-
 	padding:0px;
-
 	margin:0 0 5px;
-
 }
-
 #global_page_sitetagcheckin-index-editlocation .layout_middle {
-
 	margin:0px;
-
 	padding:5px;
-
 }
-
 .edit_form {
-
 	clear:both;
-
 	margin-bottom:15px;
-
 }
-
 .edit_form .global_form_box {
-
 	display:block;
-
 	overflow:auto;
-
 	-moz-border-radius: 10px;
-
 	-webkit-border-radius: 10px;
-
 	border-radius: 10px;
-
 	padding:10px;
-
 	border:none;
-
 }
-
 .edit_form .global_form_box > div {
-
 	padding:10px;
-
 	overflow:auto;
-
 }
-
 .edit_form .global_form_box > div .formlocation_edit_label {
-
 	font-weight:bold;
-
 	float:left;
-
 	margin-right:5px;
-
 }
-
 html[dir="rtl"] .edit_form .global_form_box > div .formlocation_edit_label{
-
 	float:right;
-
 	margin-left:5px;
-
 	margin-left:0;
-
 }
-
 .edit_form .global_form_box > div .formlocation_add {
-
 	overflow:hidden;
-
 }
-
 .edit_form .global_form_box > div .form-elements {
-
 	overflow:auto;
-
 }
-
 .edit_form .global_form_box > div .form-elements > div {
-
 	float:left;
-
 	overflow:hidden;
-
 	margin-right:10px;
-
 	margin-bottom:10px;
-
 }
-
 html[dir="rtl"] .edit_form .global_form_box > div .form-elements > div{
-
 	float:right;
-
 }
-
 .edit_form .global_form_box > div .form-elements > div + div + div + div {
-
 	clear:both;
-
 }
-
 .edit_form .global_form_box > div .form-elements > div + div + div + div + div {
-
 	clear:none;
-
 }
-
 .edit_form .global_form_box > div .form-elements #submit-wrapper {
-
 	clear:both;
-
 }
-
 .edit_form .global_form_box > div .form-elements div label {
-
 	font-size:8pt;
-
 	font-weight:bold;
-
 	display:block;
-
 }
-
 .edit_form .global_form_box > div .form-elements #submit-wrapper .form-label {
-
 	height:0px;
-
 }
-
 .sitetagcheckin_editlocation_wrapper #mapCanvas{
-
 	width:auto;
-
 	padding:0px;
-
 	height:425px;
-
 }
-
 /*Edit Location Page ends here*/
 
-
-
 /* Checkin Feed Photos start here*/
-
 .feed_item_checkin_photo_attachments{
-
   width:420px;
-
 }
-
 .feed_item_checkin_photo_attachments > span{
-
 	float:left;
-
 }
-
 .feed_attachment_photo{
-
 	margin:0px !important;
-
 	padding:0px !important;
-
 }
-
 .feed_attachment_album_photo {
-
   float: left;
-
 }
-
 html[dir="rtl"] .feed_attachment_album_photo {
-
   float: right;
-
 }
-
 .checkin-feed-photo{
-
 	padding:2px;
-
 	float:left;
-
 	margin:2px;
-
 }
-
 .checkin-feed-photo > img{
-
 	padding:0px !important;
-
 	margin:0px !important;
-
 	border:none !important;
-
 	float:left;
-
   max-width: 450px;
-
 }
-
 html[dir="rtl"] .checkin-feed-photo,
-
 html[dir="rtl"] .checkin-feed-photo > img{
-
 	float:right;
-
 }
-
 .checkin-feed-photo span{
-
   display: block;
-
   background-position: 50% 50%;
-
   background-repeat: no-repeat;
-
 }
-
 .checkin-feed-photo + div{
-
 	clear:both;
-
 	margin-top:5px;
-
 	float:left;
-
 }
-
 html[dir="rtl"] .checkin-feed-photo + div{
-
 	float:right;
-
 }
-
 .checkin-feed-photo-2{
-
   width: 200px !important;
-
   height: 130px !important;
-
 }
-
 .checkin-feed-photo-3-big{
-
 	height: 190px !important;
-
 	width: 260px !important;
-
 }
-
 .checkin-feed-photo-3-small{
-
 	height: 90px !important;
-
 	width: 140px !important;
-
 }
-
 .checkin-feed-photo-4{
-
 	height: 90px !important;
-
 	width: 120px !important;
-
 }
-
 /* Feed Photos end here*/
 
+/*===================-------------------------- Responsive css -----------------==========================*/
 
+@media only screen and (max-width:920px){
+/* Read this document button on the page document profile page */
+.stcheckin_check {font-size: 12px !important;padding: 0 4px;}
+	
+}
+
+@media only screen and (max-device-width:768px){
+/* view this listing button - pop up - Publish an Update for your Action  */	
+.stcheckin_checkin_box, .stcheckin_checkin_box_cont{width:100%;margin:0;}
+#global_page_sitetagcheckin-checkin-check-in #global_content_simple{width:100% !important;}
+}
 

@@ -106,7 +106,7 @@ $this->headScript()
                 <div class="seaocore_board_list b_medium" style="width:<?php echo $this->params['itemWidth'] - 18 ?>px;">
                     <div>
                         <?php if (!empty($this->statistics) && in_array('featuredLabel', $this->statistics) && $siteevent->featured): ?>
-                            <i class="seaocore_list_featured_label" title="<?php echo $this->translate('Featured'); ?>"></i>
+                            <span class="seaocore_list_featured_label" title="<?php echo $this->translate('Featured'); ?>"><?php echo $this->translate('Featured'); ?></span>
                         <?php endif; ?>
                         <?php if (!empty($this->statistics) && in_array('newLabel', $this->statistics) && $siteevent->newlabel): ?>
                             <i class="seaocore_list_new_label" title="<?php echo $this->translate('New'); ?>"></i>

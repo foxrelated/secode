@@ -1057,6 +1057,15 @@ class Siteevent_AdminSettingsController extends Core_Controller_Action_Admin {
             $this->view->totalDocuments = $select->query()->fetchColumn();
         }
         
+        if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('document')) {
+            $documentTable = Engine_Api::_()->getDbtable('documents', 'document');
+            $documentTableName = $documentTable->info('name');
+            $select = $documentTable->select()->setIntegrityCheck(false)
+                    ->from($documentTableName, 'count(*) AS totaldocument')
+                    ->where('parent_type =?', 'siteevent_event');
+            $this->view->totalDocuments = $select->query()->fetchColumn();
+        }
+        
         //TICKETS STATISTICS
         if (Engine_Api::_()->hasModuleBootstrap('siteeventticket')) {
           //GET THE TOTAL TICKETS

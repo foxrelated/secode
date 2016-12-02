@@ -15,7 +15,7 @@ return array(
     'package' => array( 
         'type' => 'module',
         'name' => 'sitemobile',
-        'version' => '4.8.10p3',
+        'version' => '4.8.12p3',
         'path' => 'application/modules/Sitemobile',
         'title' => 'Mobile / Tablet Plugin',
         'description' => 'Mobile / Tablet Plugin',
@@ -44,6 +44,7 @@ return array(
         ),
         'files' => array(
             'application/languages/en/sitemobile.csv',
+            'application/libraries/Zend/View/Abstract.php'
         ),
     ),
     // Hooks ---------------------------------------------------------------------

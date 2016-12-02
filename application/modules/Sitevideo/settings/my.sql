@@ -13,4 +13,5 @@
 -- Dumping data for table `engine4_core_modules`
 --
 
-INSERT IGNORE INTO `engine4_core_modules` (`name`, `title`, `description`, `version`, `enabled`, `type`) VALUES  ('sitevideo', 'Advanced Videos', 'Advanced Videos / Channels / Playlists Plugin', '4.8.10p12', 1, 'extra') ;
+INSERT IGNORE INTO `engine4_core_modules` (`name`, `title`, `description`, `version`, `enabled`, `type`) VALUES  ('sitevideo', 'Advanced Videos', 'Advanced Videos / Channels / Playlists Plugin', '4.8.12', 1, 'extra') ;
+

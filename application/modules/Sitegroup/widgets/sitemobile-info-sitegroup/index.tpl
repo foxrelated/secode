@@ -43,7 +43,7 @@ $isManageAdmin = Engine_Api::_()->sitegroup()->isManageAdmin($this->sitegroup, '
 		<tbody>
     <?php if($postedBy):?>
      <tr valign="top">
-        <td class="label"><div><?php echo $this->translate('Posted By:'); ?> </div></td>
+        <td class="label"><div><?php echo $this->translate('Created By:'); ?> </div></td>
         <td><?php echo $this->htmlLink($this->sitegroup->getParent(), $this->sitegroup->getParent()->getTitle()) ?></td>
       </tr>
      <?php endif;?>
@@ -191,12 +191,13 @@ $isManageAdmin = Engine_Api::_()->sitegroup()->isManageAdmin($this->sitegroup, '
     <?php endif; ?>
   <?php endif; ?>
  	<?php if(!empty ($profileTypePrivacy)):
-    $str =  $this->groupProfileFieldValueLoop($this->sitegroup, $this->fieldStructure)?>
+            $params = array('custom_field_heading' => 1, 'custom_field_title' => 1, 'customFieldCount' => 1000, 'widgetName' => 'infoProfile');
+    $str =  $this->groupProfileFieldValueLoop($this->sitegroup, $this->fieldStructure, $params)?>
 		<?php if($str): ?>
 			<h4 >
 				<span><?php  echo $this->translate('Profile Information');  ?></span>
 			</h4>
-			<?php echo $this->groupProfileFieldValueLoop($this->sitegroup, $this->fieldStructure) ?>
+			<?php echo $this->groupProfileFieldValueLoop($this->sitegroup, $this->fieldStructure, $params) ?>
 		<?php endif; ?>
 	<?php endif; ?>
 	<?php echo $this->content()->renderWidget("sitemobile.comments", array('type' => $this->sitegroup->getType(), 'id' => $this->sitegroup->getIdentity())); ?>

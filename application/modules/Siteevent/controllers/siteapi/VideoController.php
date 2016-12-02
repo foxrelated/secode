@@ -4,10 +4,10 @@
  * SocialEngine
  *
  * @category   Application_Extensions
- * @package    Siteapi
- * @copyright  Copyright 2015-2016 BigStep Technologies Pvt. Ltd.
+ * @package    Siteevent
+ * @copyright  Copyright 2013-2014 BigStep Technologies Pvt. Ltd.
  * @license    http://www.socialengineaddons.com/license/
- * @version    TopicController.php 2015-09-17 00:00:00Z SocialEngineAddOns $
+ * @version    $Id: VideoController.php 6590 2014-01-02 00:00:00Z SocialEngineAddOns $
  * @author     SocialEngineAddOns
  */
 class Siteevent_VideoController extends Siteapi_Controller_Action_Standard {
@@ -200,11 +200,6 @@ class Siteevent_VideoController extends Siteapi_Controller_Action_Standard {
         //CHECK USER VALIDATION
         if (!$this->_helper->requireUser()->isValid())
             $this->respondWithError('unauthorized');
-
-        // Upload video
-        if (isset($_GET['ul']) || (isset($_FILES['filedata']) && !empty($_FILES['filedata']['name']))) {
-            return $this->_forwardCustom('upload-review-video', null, null, array('format' => 'json'));
-        }
 
 
         //GET EVENT ID

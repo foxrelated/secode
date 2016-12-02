@@ -12,9 +12,9 @@
 ?>
 <style>
     div.sitevideo_video_view_top .video_embed .vimeo_iframe_big, .video_embed iframe, .video_embed > span  {
-		<?php if(!in_array($this->video->type,array(7,6))): ?>
-      	  height: <?php echo $this->height; ?>px !important;
-		<?php endif; ?>
+        <?php if (!in_array($this->video->type, array(7, 6))): ?>
+            height: <?php echo $this->height; ?>px !important;
+        <?php endif; ?>
         width: <?php echo ($this->width > 0) ? $this->width . "px" : '100%' ?> !important;
     }
 </style>
@@ -130,7 +130,7 @@ if ($this->video->type == 3 && $this->video_extension == 'flv'):
                     <?php echo $this->content()->renderWidget("sitevideo.user-ratings"); ?>
                 <?php endif; ?>
             </div>
-            <?php if (Engine_API::_()->seaocore()->checkSitemobileMode('fullsite-mode') && in_array('lightbox', $this->viewOptions)) : ?>
+            <?php if (Engine_API::_()->seaocore()->checkSitemobileMode('fullsite-mode') && in_array('lightbox', $this->viewOptions) && (!Engine_API::_()->seaocore()->isMobile() && !Engine_API::_()->seaocore()->isTabletDevice())) : ?>
                 <div class="sitevideo_view_open_in_lightbox">
                     <span>
                         <a href="<?php echo $this->video->getHref(); ?>" class="item_photo_video"><?php echo $this->translate('Open in lightbox') ?></a>    
@@ -345,7 +345,9 @@ if ($this->video->type == 3 && $this->video_extension == 'flv'):
     <div class="sitevideo_view_hashtags">
         <?php if (in_array('hashtags', $this->viewOptions) && count($this->videoTags) > 0 && Engine_Api::_()->getApi('settings', 'core')->getSetting('sitevideo.video.tags.enabled', 1)): ?>
             <?php foreach ($this->videoTags as $tag): ?>
-                <a href='javascript:void(0);' onclick='javascript:tagAction(<?php echo $tag->getTag()->tag_id; ?>);'>#<?php echo $tag->getTag()->text ?></a>&nbsp;
+                
+                <a href='<?php echo $this->url(array('action' => 'browse'), "sitevideo_video_general"); ?>?tag=<?php echo urlencode($tag->getTag()->text) ?>&tag_id=<?php echo $tag->getTag()->tag_id ?>'>#<?php echo $tag->getTag()->text ?></a>&nbsp;
+                
             <?php endforeach; ?>
         <?php endif; ?> 
     </div>  
@@ -390,8 +392,7 @@ if ($this->video->type == 3 && $this->video_extension == 'flv'):
         {
             $('comment-form').style.display = '';
             $('comment-form').body.focus();
-        }
-        else
+        } else
         {
             $$('div.compose-content').each(function (el, index) {
                 if (index == 0)

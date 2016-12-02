@@ -20,8 +20,10 @@ $packageInfoArray = Engine_Api::_()->getApi('settings', 'core')->getSetting('sit
 <?php endif;?>
 
 <?php if (empty($this->is_ajax)) : ?>
+<div class="generic_layout_container layout_middle">
+<div class="generic_layout_container layout_core_content">
 <?php include_once APPLICATION_PATH . '/application/modules/Sitegroup/views/scripts/payment_navigation_views.tpl'; ?>
-
+<div class="layout_middle">
  <?php $currency = Engine_Api::_()->getApi('settings', 'core')->getSetting('payment.currency', 'USD'); ?>
   <?php include_once APPLICATION_PATH . '/application/modules/Sitegroup/views/scripts/edit_tabs.tpl'; ?>
   <div class="sitegroup_edit_content">
@@ -137,6 +139,9 @@ $packageInfoArray = Engine_Api::_()->getApi('settings', 'core')->getSetting('sit
     <?php if (empty($this->is_ajax)) : ?>		
 	</div>
 </div>
+    </div>
+</div>
+    </div>
 <?php endif; ?>
 <script type="text/javascript">
     

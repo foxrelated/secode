@@ -32,6 +32,8 @@
     }
 </script>
 <?php if (empty($this->is_ajax)) : ?>
+<div class="generic_layout_container layout_middle">
+<div class="generic_layout_container layout_core_content">
     <?php include_once APPLICATION_PATH . '/application/modules/Sitegroup/views/scripts/payment_navigation_views.tpl'; ?>
 
     <div class="layout_middle">
@@ -257,6 +259,8 @@
             </div>
 <?php if (empty($this->is_ajax)) : ?>
             </div>
-        </div>
-    </div>
+	  </div>
+  </div>
+</div>
+  </div>
 <?php endif; ?>

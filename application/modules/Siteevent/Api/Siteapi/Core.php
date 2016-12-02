@@ -1,13 +1,13 @@
-2<?php
+<?php
 
 /**
  * SocialEngine
  *
  * @category   Application_Extensions
- * @package    Siteapi
- * @copyright  Copyright 2015-2016 BigStep Technologies Pvt. Ltd.
+ * @package    Siteeventsiteevent.recently-popular-random-siteevent
+ * @copyright  Copyright 2013-2014 BigStep Technologies Pvt. Ltd.
  * @license    http://www.socialengineaddons.com/license/
- * @version    TopicController.php 2015-09-17 00:00:00Z SocialEngineAddOns $
+ * @version    $Id: Core.php 6590 2014-01-02 00:00:00Z SocialEngineAddOns $
  * @author     SocialEngineAddOns
  */
 class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
@@ -43,10 +43,7 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
             $show_multiOptions["1"] = Engine_Api::_()->getApi('Core', 'siteapi')->translate("Everyone's Events");
             $show_multiOptions["2"] = Engine_Api::_()->getApi('Core', 'siteapi')->translate("Only My Friends' Events");
             $show_multiOptions["4"] = Engine_Api::_()->getApi('Core', 'siteapi')->translate("Events I Like");
-//            $show_multiOptions["5"] = "This Month Events";
-//            $show_multiOptions["6"] = "This Week Events";
-//            $show_multiOptions["7"] = "This Weekend Events";
-//            $show_multiOptions["8"] = "Today Events";
+
             $value_deault = 1;
             $enableNetwork = $settings->getSetting('siteevent.network', 0);
             if (empty($enableNetwork)) {
@@ -57,13 +54,19 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
                 if (!empty($viewerNetwork)) {
                     $show_multiOptions["3"] = Engine_Api::_()->getApi('Core', 'siteapi')->translate('Only My Networks');
                     $browseDefaulNetwork = $settings->getSetting('siteevent.default.show', 0);
+                    if (!isset($_GET['show']) && !empty($browseDefaulNetwork)) {
+                        $value_deault = 3;
+                    } elseif (isset($_GET['show'])) {
+                        $value_deault = $_GET['show'];
+                    }
                 }
             }
             $searchForm[] = array(
                 'type' => 'Select',
                 'name' => 'show',
                 'label' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('Show'),
-                'multiOptions' => $show_multiOptions
+                'multiOptions' => $show_multiOptions,
+                'value' => $value_deault
             );
         }
 
@@ -75,6 +78,7 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
                 'label' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('View'),
                 'name' => 'showEventType',
                 'multiOptions' => array('upcoming' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('Upcoming & Ongoing'), 'onlyUpcoming' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('Upcoming'), 'onlyOngoing' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('Ongoing'), 'past' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('Past')),
+                'value' => 'upcoming',
             );
         }
 
@@ -330,7 +334,8 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
                 'type' => 'Select',
                 'name' => 'has_review',
                 'Label' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('Event Having'),
-                'multioptions' => "$multiOptions"
+                'multiOptions' => "$multiOptions",
+                'value' => '',
             );
         }
 
@@ -669,8 +674,9 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
                 'type' => 'Select',
                 'name' => 'status',
                 'label' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('Status'),
-                'multiOptions' => array("1" => Engine_Api::_()->getApi('Core', 'siteapi')->translate("Published"), "0" => Engine_Api::_()->getApi('Core', 'siteapi')->translate("Saved As Draft")),
-                'description' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('If this entry is published, it cannot be switched back to draft mode.')
+                'multiOptions' => array("0" => Engine_Api::_()->getApi('Core', 'siteapi')->translate("Published"), "1" => Engine_Api::_()->getApi('Core', 'siteapi')->translate("Saved As Draft")),
+                'description' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('If this entry is published, it cannot be switched back to draft mode.'),
+                'value' => 0
             );
         }
         if ($params['item']) {
@@ -820,6 +826,92 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
         return $subject;
     }
 
+    public function setPhotoForOrganizer($photo, $subject, $needToUplode = false) {
+        try {
+
+            if ($photo instanceof Zend_Form_Element_File) {
+                $file = $photo->getFileName();
+            } else if (is_array($photo) && !empty($photo['tmp_name'])) {
+                $file = $photo['tmp_name'];
+            } else if (is_string($photo) && file_exists($photo)) {
+                $file = $photo;
+            } else {
+                throw new Group_Model_Exception('invalid argument passed to setPhoto');
+            }
+        } catch (Exception $e) {
+            //  BLANK EXCEPTION
+        }
+
+        $imageName = $photo['name'];
+        $name = basename($file);
+        $path = APPLICATION_PATH . DIRECTORY_SEPARATOR . 'temporary';
+
+        $params = array(
+            'parent_type' => $subject->getType(),
+            'parent_id' => $subject->getIdentity(),
+        );
+
+        // Save
+        $storage = Engine_Api::_()->storage();
+
+        // Resize image (main)
+        $image = Engine_Image::factory();
+        $image->open($file)
+                ->resize(720, 720)
+                ->write($path . '/m_' . $imageName)
+                ->destroy();
+
+        // Resize image (profile)
+        $image = Engine_Image::factory();
+        $image->open($file)
+                ->resize(200, 400)
+                ->write($path . '/p_' . $imageName)
+                ->destroy();
+
+        // Resize image (normal)
+        $image = Engine_Image::factory();
+        $image->open($file)
+                ->resize(140, 160)
+                ->write($path . '/in_' . $imageName)
+                ->destroy();
+
+        // Resize image (icon)
+        $image = Engine_Image::factory();
+        $image->open($file);
+
+        $size = min($image->height, $image->width);
+        $x = ($image->width - $size) / 2;
+        $y = ($image->height - $size) / 2;
+
+        $image->resample($x, $y, $size, $size, 48, 48)
+                ->write($path . '/is_' . $imageName)
+                ->destroy();
+
+        // Store
+        $iMain = $storage->create($path . '/m_' . $imageName, $params);
+        $iProfile = $storage->create($path . '/p_' . $imageName, $params);
+        $iIconNormal = $storage->create($path . '/in_' . $imageName, $params);
+        $iSquare = $storage->create($path . '/is_' . $imageName, $params);
+
+        $iMain->bridge($iProfile, 'thumb.profile');
+        $iMain->bridge($iIconNormal, 'thumb.normal');
+        $iMain->bridge($iSquare, 'thumb.icon');
+
+        // Remove temp files
+        @unlink($path . '/p_' . $imageName);
+        @unlink($path . '/m_' . $imageName);
+        @unlink($path . '/in_' . $imageName);
+        @unlink($path . '/is_' . $imageName);
+
+        // Update row
+        if (empty($needToUplode)) {
+            $subject->photo_id = $iMain->file_id;
+            $subject->save();
+        }
+
+        return $subject;
+    }
+
     public function getDiarySearchForm() {
 
         $diarySearch[] = array(
@@ -905,13 +997,14 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
                 'label' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('View Privacy'),
                 'description' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('Who may see this diary?'),
                 'multiOptions' => $viewOptions,
+                'value' => key($viewOptionsReverse),
             );
         }
 
         $add[] = array(
             'type' => 'Submit',
             'name' => 'submit',
-            'label' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('Save'),
+            'label' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('Create'),
         );
         return $add;
     }
@@ -996,13 +1089,14 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
                 'label' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('View Privacy'),
                 'description' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('Who may see this diary?'),
                 'multiOptions' => $viewOptions,
+                'value' => key($viewOptionsReverse),
             );
         }
 
         $add[] = array(
             'type' => 'Submit',
             'name' => 'submit',
-            'label' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('Save'),
+            'label' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('Create'),
         );
         return $add;
     }
@@ -1413,7 +1507,7 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
         $viewer_id = $user->getIdentity();
         $createForm = array();
         //PACKAGE ID
-        $package_id = Zend_Controller_Front::getInstance()->getRequest()->getParam('id', null);
+        $package_id = Zend_Controller_Front::getInstance()->getRequest()->getParam('package_id', null);
 
         $note = '';
         $seaocoreCalenderDayStart = Engine_Api::_()->getApi('settings', 'core')->getSetting('seaocore.calendar.daystart', 1);
@@ -1495,11 +1589,19 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
 
 
             if (!empty($createFormFields) && in_array('venue', $createFormFields) && Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.location', 1) && Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.veneuname', 1)) {
+//                if (!isset($subject)) {
+//                    $createForm[] = array(
+//                        'type' => 'Text',
+//                        'name' => 'venue_name',
+//                        'label' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('Venue Name'),
+//                    );
+//                } else if (isset($subject) && !$subject->is_online) {
                 $createForm[] = array(
                     'type' => 'Text',
                     'name' => 'venue_name',
                     'label' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('Venue Name'),
                 );
+//                }
             }
 
 
@@ -1508,6 +1610,7 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
                 $locationDefault = $settings->getSetting('seaocore.locationdefault', '');
                 $seaocore_locationspecific = $settings->getSetting('seaocore.locationspecific', '');
                 $seaocore_locationspecificcontent = $settings->getSetting('seaocore.locationspecificcontent', '');
+//                if (!isset($subject)) {
 
                 if ($seaocore_locationspecific && $seaocore_locationspecificcontent) {
                     $locations = Engine_Api::_()->getDbTable('locationcontents', 'seaocore')->getLocations(array('status' => 1));
@@ -1580,7 +1683,7 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
                 foreach ($subCategoriesObj as $subcategory) {
                     $getSubCategories[$subcategory->category_id] = $subcategory->category_name;
                 }
-                if (isset($getSubCategories) && !empty($getSubCategories)) {
+                if (isset($getSubCategories) && !empty($getSubCategories) && !isset($_REQUEST['getEditForm'])) {
                     $createForm[] = array(
                         'type' => 'Select',
                         'name' => 'subcategory_id',
@@ -1592,7 +1695,7 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
                 foreach ($subsubCategoriesObj as $subsubcategory) {
                     $getSubSubCategories[$subsubcategory->category_id] = $subsubcategory->category_name;
                 }
-                if (isset($getSubSubCategories) && !empty($getSubSubCategories)) {
+                if (isset($getSubSubCategories) && !empty($getSubSubCategories) && !isset($_REQUEST['getEditForm'])) {
                     $createForm[] = array(
                         'type' => 'Select',
                         'name' => 'subsubcategory_id',
@@ -1601,13 +1704,17 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
                     );
                 }
             }
-            $categories = Engine_Api::_()->getDbTable('categories', 'siteevent')->getCategories(array('category_id', 'category_name'), null, 0, 0, 1);
+            $categoryProfileTypeMapping = array();
+            $categories = Engine_Api::_()->getDbTable('categories', 'siteevent')->getCategories(array('category_id', 'category_name', 'profile_type'), null, 0, 0, 1);
 
             if (count($categories) != 0) {
                 foreach ($categories as $category) {
                     $subCategories = array();
                     $subCategoriesObj = Engine_Api::_()->getDbTable('categories', 'siteevent')->getSubCategories($category->category_id);
                     $getCategories[$category->category_id] = $category->category_name;
+
+                    if (isset($category->profile_type) && !empty($category->profile_type))
+                        $categoryProfileTypeMapping[$category->category_id] = $category->profile_type;
 
                     $getsubCategories = array();
 
@@ -1631,13 +1738,16 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
                         }
                         $getsubCategories[$subcategory->category_id] = $subcategory->category_name;
                     }
-                    $subcategoriesForm = array(
-                        'type' => 'Select',
-                        'name' => 'subcategory_id',
-                        'label' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('Sub-Category'),
-                        'multiOptions' => $getsubCategories,
-                    );
-                    $form[$category->category_id]['form'] = $subcategoriesForm;
+                    if (isset($getSubCategories) && !empty($getSubCategories) && count($getSubCategories) > 0) {
+                        $subcategoriesForm = array(
+                            'type' => 'Select',
+                            'name' => 'subcategory_id',
+                            'label' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('Sub-Category'),
+                            'multiOptions' => $getsubCategories,
+                        );
+                    }
+                    if (isset($subcategoriesForm) && !empty($subcategoriesForm))
+                        $form[$category->category_id]['form'] = $subcategoriesForm;
                     if (isset($subsubCategoriesForm) && count($subsubCategoriesForm) > 0)
                         $form[$category->category_id]['subsubcategories'] = $subsubCategoriesForm;
                     $subsubCategoriesForm = array();
@@ -1678,28 +1788,28 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
 
             //CHECK IF SITEEVENT REPEAT MODULE EXIST AND ENABLE ON THE SITE ONLY THEN WE WILL ACTIVATE THE REPEATING EVENT FEATURE.
             if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('siteeventrepeat') && (!empty($siteeventRepeatGetShowViewType) || empty($siteeventRepeatEventsTypeInfo) || ($siteeventRepeatEventsTypeInfo == $tempEventRepeatTypeInfo))) {
-                $eventrepeat_prepared = array('never' => 'Never', 'daily' => 'Daily', 'weekly' => 'Weekly', 'monthly' => 'Monthly', 'custom' => 'Other (be specific)');
-                if ($subject && (!Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.repeat', 1) && empty($subject->repeat_params) || !$editFullEventDate)) {
-                    if (!empty($subject->repeat_params)) {
-                        $repeatEventInfo = json_decode($subject->repeat_params, true);
-                        $eventrepeat_prepared = array($repeatEventInfo['eventrepeat_type'] => $repeatEventInfo['eventrepeat_type']);
-                    } else {
-                        $eventrepeat_prepared = array('never' => 'Never');
-                    }
+
+                if (isset($subject) && !empty($subject) && isset($subject->repeat_params) && !empty($subject->repeat_params)) {
+                    $repeat_params = json_decode($subject->repeat_params, true);
+                    $value = $repeat_params['eventrepeat_type'];
+                } else {
+                    $value = 'never';
                 }
+
+                $eventrepeat_prepared = array('never' => 'Never', 'daily' => 'Daily', 'weekly' => 'Weekly', 'monthly' => 'Monthly');
                 $createForm[] = array(
                     'type' => 'Select',
                     'name' => 'eventrepeat_id',
                     'label' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('Event Repeats'),
                     'multiOptions' => $eventrepeat_prepared,
-                    'value' => 'never',
+                    'value' => $value,
                 );
 
                 $tempForm[] = array(
                     'type' => 'Date',
                     'name' => 'start_date',
                     'label' => Zend_Registry::get('Zend_Translate')->_("Start Date:"),
-                    'multioptions' => $daily_dates
+                    'multiOptions' => $daily_dates
                 );
 
                 $tempForm[] = array(
@@ -1717,6 +1827,7 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
                 );
 
                 $repeatForm['custom'] = $tempForm;
+                $tempForm = array();
 
                 $selectedDay = 1;
                 $daily_disabled = '';
@@ -1726,22 +1837,22 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
                     $daily_disabled = 'disabled';
                 for ($i = 1; $i <= 31; $i++) {
                     if ($selectedDay == $i)
-                        $daily_dates_value[$i] = $i;
+                        $daily_dates_value[$i] = (string) $i;
                     else
-                        $daily_dates[$i] = $i;
+                        $daily_dates[$i] = (string) $i;
                 }
 
                 $tempForm[] = array(
                     'type' => 'Select',
                     'name' => 'repeat_interval',
                     'label' => Zend_Registry::get('Zend_Translate')->_("Repeat every:"),
-                    'multioptions' => $daily_dates
+                    'multiOptions' => $daily_dates
                 );
 
                 $tempForm[] = array(
                     'type' => 'Date',
                     'name' => 'date',
-                    'label' => Zend_Registry::get('Zend_Translate')->_("End Time"),
+                    'label' => Zend_Registry::get('Zend_Translate')->_("End this Event"),
                     'hasValidator' => true
                 );
                 $repeatForm['daily'] = $tempForm;
@@ -1759,27 +1870,27 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
                 for ($i = 1; $i <= 12; $i++) {
 
                     if ($selectedWeekDay == $i)
-                        $weekly_days_value[$i] = $i;
+                        $weekly_days_value[$i] = (string) $i;
                     else
-                        $weekly_days[$i] = $i;
+                        $weekly_days[$i] = (string) $i;
                 }
                 $tempForm[] = array(
                     'type' => 'Select',
                     'name' => 'repeat_week',
                     'label' => Zend_Registry::get('Zend_Translate')->_("Repeat every:"),
-                    'multioptions' => $weekly_days
+                    'multiOptions' => $weekly_days
                 );
 
                 $tempForm[] = array(
                     'type' => 'MultiCheckbox',
                     'name' => 'repeat_weekday',
-                    'label' => Zend_Registry::get('Zend_Translate')->_(""),
-                    'multioptions' => $weekdays
+                    'label' => Zend_Registry::get('Zend_Translate')->_("Day"),
+                    'multiOptions' => $weekdays
                 );
                 $tempForm[] = array(
                     'type' => 'Date',
                     'name' => 'date',
-                    'label' => Zend_Registry::get('Zend_Translate')->_("End Time"),
+                    'label' => Zend_Registry::get('Zend_Translate')->_("End this Event on"),
                     'hasValidator' => true
                 );
                 $repeatForm['weekly'] = $tempForm;
@@ -1791,7 +1902,7 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
                 $repeat_weekday = 'monday';
                 $monthly_absoluteday = 1;
                 $monthly_repeatinterval = 1;
-                $relative_day = array('first' => 'First', 'second' => 'Second', 'third' => 'Third', 'fourth' => 'Fourth', 'fifth' => 'Fifth', 'last' => 'Last');
+                $relative_day = array('1' => 'First', '2' => 'Second', '3' => 'Third', '4' => 'Fourth', '5' => 'Fifth', '6' => 'Last');
                 $i = 0;
                 foreach ($relative_day as $key => $day) {
                     $i++;
@@ -1801,11 +1912,18 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
                     } else
                         $week_monthly[$key] = $day;
                 }
+
+                $tempForm[] = array(
+                    'type' => 'Checkbox',
+                    'name' => 'monthlyType',
+                    'label' => Zend_Registry::get('Zend_Translate')->_("Repeat Event on a date of month:"),
+                );
+
                 $tempForm[] = array(
                     'type' => 'Select',
                     'name' => 'repeat_week',
-                    'label' => Zend_Registry::get('Zend_Translate')->_("Repeat every:"),
-                    'multioptions' => $weekly_days
+                    'label' => Zend_Registry::get('Zend_Translate')->_("Repeat Event on the"),
+                    'multiOptions' => $relative_day
                 );
                 $weekdays = array(1 => 'monday', 2 => 'tuesday', 3 => 'wednesday', 4 => 'thursday', 5 => 'friday', 6 => 'saturday', 7 => 'sunday');
 
@@ -1813,36 +1931,115 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
                 $tempForm[] = array(
                     'type' => 'Select',
                     'name' => 'repeat_weekday',
-                    'label' => Zend_Registry::get('Zend_Translate')->_(""),
-                    'multioptions' => $weekdays
+                    'label' => Zend_Registry::get('Zend_Translate')->_("Day"),
+                    'multiOptions' => $weekdays
                 );
-                for ($i = 1; $i <= 12; $i++) {
 
-                    if ($selectedWeekDay == $i)
-                        $weekly_days_value[$i] = $i;
+                $selectedDay = 1;
+                $daily_disabled = '';
+                $daily_dates = array();
+                $selectedDay = ($repeatEventInfo['repeat_interval'] / (24 * 3600));
+                if (!$editFullEventDate)
+                    $daily_disabled = 'disabled';
+                for ($i = 1; $i <= 31; $i++) {
+                    if ($selectedDay == $i)
+                        $daily_dates_value[$i] = (string) $i . " day";
                     else
-                        $weekly_days[$i] = $i;
+                        $daily_dates[$i] = (string) $i . " day";
                 }
                 $tempForm[] = array(
                     'type' => 'Select',
-                    'name' => 'repeat_month',
-                    'label' => Zend_Registry::get('Zend_Translate')->_("Repeat every:"),
-                    'multioptions' => $weekly_days
+                    'name' => 'repeat_day',
+                    'label' => Zend_Registry::get('Zend_Translate')->_("Repeat on every:"),
+                    'multiOptions' => $daily_dates
                 );
+
+                for ($i = 1; $i <= 12; $i++) {
+                    if ($selectedWeekDay == $i)
+                        $weekly_days_value[$i] = (string) $i . " month";
+                    else
+                        $weekly_days[$i] = (string) $i . " month";
+                }
+
+                $tempForm[] = array(
+                    'type' => 'Select',
+                    'name' => 'repeat_month',
+                    'label' => Zend_Registry::get('Zend_Translate')->_("Repeat Event in every:"),
+                    'multiOptions' => $weekly_days
+                );
+
                 $tempForm[] = array(
                     'type' => 'Date',
                     'name' => 'date',
-                    'label' => Zend_Registry::get('Zend_Translate')->_("End Time"),
+                    'label' => Zend_Registry::get('Zend_Translate')->_("End this Event on"),
                     'hasValidator' => true
                 );
 
                 $repeatForm['monthly'] = $tempForm;
 
-                if (isset($subject) && isset($subject->repeat_params)) {
+
+//                $tempForm = array();
+//                $monthly_disabled = '';
+//                $repeat_week = 'first';
+//                $repeat_weekday = 'monday';
+//                $monthly_absoluteday = 1;
+//                $monthly_repeatinterval = 1;
+//                $relative_day = array('1' => 'First', '2' => 'Second', '3' => 'Third', '4' => 'Fourth', '5' => 'Fifth', '6' => 'Last');
+//                $i = 0;
+//                foreach ($relative_day as $key => $day) {
+//                    $i++;
+//                    if ($eventtype == 'monthly' && isset($repeatEventInfo['repeat_week']) && $repeatEventInfo['repeat_week'] == $i) {
+//                        $repeat_week = $key;
+//                        $week_monthly_value[$key] = $day;
+//                    } else
+//                        $week_monthly[$key] = $day;
+//                }
+//
+//                $tempForm[] = array(
+//                    'type' => 'Select',
+//                    'name' => 'repeat_week',
+//                    'label' => Zend_Registry::get('Zend_Translate')->_("Repeat Event on:"),
+//                    'multiOptions' => $relative_day
+//                );
+//                $weekdays = array(1 => 'monday', 2 => 'tuesday', 3 => 'wednesday', 4 => 'thursday', 5 => 'friday', 6 => 'saturday', 7 => 'sunday');
+//
+//
+//                $tempForm[] = array(
+//                    'type' => 'Select',
+//                    'name' => 'repeat_weekday',
+//                    'label' => Zend_Registry::get('Zend_Translate')->_("Day"),
+//                    'multiOptions' => $weekdays
+//                );
+//                for ($i = 1; $i <= 12; $i++) {
+//
+//                    if ($selectedWeekDay == $i)
+//                        $weekly_days_value[$i] = (string) $i;
+//                    else
+//                        $weekly_days[$i] = (string) $i;
+//                }
+//
+//                $tempForm[] = array(
+//                    'type' => 'Select',
+//                    'name' => 'repeat_month',
+//                    'label' => Zend_Registry::get('Zend_Translate')->_("Repeat Event in every:"),
+//                    'multiOptions' => $weekly_days
+//                );
+//
+//                $tempForm[] = array(
+//                    'type' => 'Date',
+//                    'name' => 'date',
+//                    'label' => Zend_Registry::get('Zend_Translate')->_("End this event on:"),
+//                    'hasValidator' => true
+//                );
+//
+//                $repeatForm['monthly'] = $tempForm;
+
+                if (isset($subject) && isset($subject->repeat_params) && !isset($_REQUEST['getEditForm'])) {
 
                     $repeat_params = json_decode($subject->repeat_params, true);
                     if (isset($repeat_params) && ($repeat_params['eventrepeat_type'] == 'daily' || $repeat_params['eventrepeat_type'] == 'weekly' || $repeat_params['eventrepeat_type'] == 'monthly' )) {
-                        $createForm[] = $repeatForm[$repeat_params['eventrepeat_type']];
+                        if (isset($repeatForm[$repeat_params['eventrepeat_type']]) && is_array($repeatForm[$repeat_params['eventrepeat_type']]))
+                            $createForm = @array_merge($createForm, $repeatForm[$repeat_params['eventrepeat_type']]);
                     }
                 }
             }
@@ -1871,9 +2068,9 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
             $allowEdit = Engine_Api::_()->authorization()->getPermission($user->level_id, 'siteevent_event', "edit");
 
             if (Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.overview', 1) && (!empty($createFormFields) && in_array('overview', $createFormFields)) && $allowOverview && $allowEdit) {
-                $description = 'Short Description';
+                $description = Engine_Api::_()->getApi('Core', 'siteapi')->translate('Short Description');
             } else {
-                $description = 'Description';
+                $description = Engine_Api::_()->getApi('Core', 'siteapi')->translate('Description');
             }
 
             if ((Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.bodyallow', 1) && Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.bodyrequired', 1)) || (!empty($createFormFields) && in_array('description', $createFormFields) && Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.bodyallow', 1))) {
@@ -1897,8 +2094,104 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
                     'type' => 'Textarea',
                     'name' => 'overview',
                     'label' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('Overview'),
-                    'description' => 'Create a rich, attractive overview for your event. Switch the editor to Fullscreen mode by clicking on its icon below to comfortably create the overview.',
+                    'description' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('Create a rich, attractive overview for your event. Switch the editor to Fullscreen mode by clicking on its icon below to comfortably create the overview.'),
                 );
+            }
+            if (!empty($createFormFields) && in_array('host', $createFormFields) && Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.host', 1)) {
+                $hostOptionsAlow = Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.hostOptions', array('sitepage_page', 'sitebusiness_business', 'user', 'sitegroup_group', 'sitestore_store', 'siteevent_organizer'));
+
+                $hostOptionsAlow = array_flip($hostOptionsAlow);
+
+                $hostValueArray = array();
+                $hostValueArray['user'] = $this->translate("Member");
+                $hostValueArray['sitepage_page'] = $this->translate("Page");
+                $hostValueArray['sitebusiness_business'] = $this->translate('Business');
+                $hostValueArray['sitegroup_group'] = $this->translate('Group');
+                $hostValueArray['sitestore_store'] = $this->translate('Store');
+                $hostValueArray['siteevent_organizer'] = $this->translate('Other Individual or Organization');
+
+                $hostSelectionForm = array();
+                $hostSelectionForm[] = array(
+                    'name' => 'host_type_select',
+                    'type' => 'select',
+                    'label' => $this->translate("Host type select"),
+                    'multiOptions' => array_intersect_key($hostValueArray, $hostOptionsAlow),
+                );
+
+                $hostSelectionForm[] = array(
+                    'name' => 'host_auto',
+                    'type' => 'text',
+                    'label' => $this->translate("start typing host's name..."),
+                );
+
+                $hostCreateForm = array();
+                $hostCreateForm[] = array(
+                    'name' => 'host_title',
+                    'label' => $this->translate('Host Name'),
+                    'type' => 'text',
+                );
+                $hostCreateForm[] = array(
+                    'name' => 'host_description',
+                    'label' => $this->translate("Description"),
+                    'type' => "Textarea"
+                );
+                $hostCreateForm[] = array(
+                    'name' => 'host_photo',
+                    'label' => $this->translate("Host Photo"),
+                    'type' => "File"
+                );
+                $hostCreateForm[] = array(
+                    'name' => 'host_link',
+                    'label' => $this->translate("Host's Social Links"),
+                    'type' => 'checkbox'
+                );
+
+                $hostCreateFormSocial = array();
+                $hostCreateFormSocial[] = array(
+                    'name' => 'host_facebook',
+                    'type' => 'text',
+                    'label' => $this->translate("https://facebook.com/"),
+                );
+                $hostCreateFormSocial[] = array(
+                    'name' => 'host_twitter',
+                    'type' => 'text',
+                    'label' => $this->translate("https://twitter.com/"),
+                );
+                $hostCreateFormSocial[] = array(
+                    'name' => 'host_website',
+                    'type' => 'text',
+                    'label' => $this->translate("Website: "),
+                );
+                if (_CLIENT_TYPE && ((_CLIENT_TYPE == 'android' && _ANDROID_VERSION >= '1.8') || _CLIENT_TYPE == 'ios' && _IOS_VERSION >= '1.5.8')) {
+                    $responseForm['hostSelectionForm'] = $hostSelectionForm;
+                    $responseForm['hostCreateForm'] = $hostCreateForm;
+                    $responseForm['hostCreateFormSocial'] = $hostCreateFormSocial;
+                }
+
+                if ($subject) {
+                    $organizerObj = Engine_Api::_()->getItem($subject->host_type, $subject->host_id);
+                    $organizer['host_type'] = $organizerObj->getType();
+                    $organizer['type'] = "host";
+                    $organizer['host_id'] = $organizerObj->getIdentity();
+                    $organizer['host_title'] = $organizerObj->getTitle();
+                    $getContentImages = Engine_Api::_()->getApi('Core', 'siteapi')->getContentImage($organizerObj, false);
+                    $organizer['image_icon'] = $getContentImages['image_icon'];
+                } else {
+                    $organizer['host_type'] = $viewer->getType();
+                    $organizer['host_id'] = $viewer_id;
+                    $organizer['type'] = 'host';
+                    $organizer['host_title'] = $viewer->getTitle();
+                    $getContentImages = Engine_Api::_()->getApi('Core', 'siteapi')->getContentImage($viewer, false);
+                    $organizer['image_icon'] = $getContentImages['image_icon'];
+                }
+
+                if ((_ANDROID_VERSION && _ANDROID_VERSION >= '1.7.4'))
+                    $createForm[] = $organizer;
+
+                if ($subject && ($organizerObj->getType() == 'siteevent_organizer')) {
+                    $createForm = array_merge($createForm, $hostCreateForm);
+                    $createForm = array_merge($createForm, $hostCreateFormSocial);
+                }
             }
             if (!empty($createFormFields) && in_array('price', $createFormFields) && Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.price', 0)) {
                 //   $localeObject = Zend_Registry::get('Locale');
@@ -1964,6 +2257,7 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
                     'label' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('View Privacy'),
                     'description' => Zend_Registry::get('Zend_Translate')->_("Who may see this event?"),
                     'multiOptions' => $view_options,
+                    'value' => key($view_options),
                 );
             }
             $comment_options = (array) Engine_Api::_()->authorization()->getAdapter('levels')->getAllowed('siteevent_event', $user, "auth_comment");
@@ -2029,18 +2323,7 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
                         'label' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('Posting Updates Privacy'),
                         'description' => Zend_Registry::get('Zend_Translate')->_("Who may post updates on this event?"),
                         'multiOptions' => $post_options,
-                    );
-                } elseif (count($post_options) == 1) {
-                    $createForm[] = array(
-                        'type' => 'Select',
-                        'name' => 'auth_post',
                         'value' => key($post_options),
-                    );
-                } else {
-                    $createForm[] = array(
-                        'type' => 'Select',
-                        'name' => 'auth_post',
-                        'value' => 'member',
                     );
                 }
             }
@@ -2056,19 +2339,7 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
                     'label' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('Discussion Topic Privacy'),
                     'description' => Zend_Registry::get('Zend_Translate')->_("Who may post discussion topics for this event?"),
                     'multiOptions' => $topic_options,
-                );
-            } elseif (count($topic_options) == 1) {
-
-                $createForm[] = array(
-                    'type' => 'Select',
-                    'name' => 'auth_topic',
-                    'value' => $topic_options,
-                );
-            } else {
-                $createForm[] = array(
-                    'type' => 'Select',
-                    'name' => 'auth_topic',
-                    'value' => 'member',
+                    'value' => 'registered',
                 );
             }
 
@@ -2087,20 +2358,21 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
                     'label' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('Photo Privacy'),
                     'description' => Zend_Registry::get('Zend_Translate')->_("Who may upload photos for this event?"),
                     'multiOptions' => $photo_options,
+                    'value' => 'registered',
                 );
             } elseif (count($photo_options) == 1 && $can_show_photo_list) {
                 $createForm[] = array(
                     'type' => 'Select',
                     'name' => 'auth_photo',
                     'label' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('Photo Privacy'),
-                    'value' => $photo_options
+                    'value' => 'registered',
                 );
             } else {
                 $createForm[] = array(
                     'type' => 'Select',
                     'name' => 'auth_photo',
                     'label' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('Photo Privacy'),
-                    'value' => 'member',
+                    'value' => 'registered',
                 );
             }
 //                START SITEEVENTDOCUMENT PLUGIN WORK
@@ -2129,7 +2401,6 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
 //            }
 //        }
 //        //END SITEEVENTDOCUMENT PLUGIN WORK    
-//
             $videoEnable = $this->enableVideoPlugin();
             if ($videoEnable) {
 
@@ -2146,7 +2417,7 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
                         'type' => 'Select',
                         'name' => 'auth_video',
                         'label' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('Video Privacy'),
-                        'value' => 'member',
+                        'value' => 'registered',
                         'description' => Zend_Registry::get('Zend_Translate')->_("Who may add videos for this event?"),
                         'multiOptions' => $video_options,
                     );
@@ -2181,13 +2452,14 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
                 }
             }
 //
-            if (empty($subject) && !empty($createFormFields) && in_array('status', $createFormFields)) {
+            if ((empty($subject) || !empty($subject->draft)) && !empty($createFormFields) && in_array('status', $createFormFields)) {
                 $createForm[] = array(
                     'type' => 'Select',
                     'name' => 'draft',
                     'label' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('Status'),
-                    'multiOptions' => array("1" => Engine_Api::_()->getApi('Core', 'siteapi')->translate("Published"), "0" => Engine_Api::_()->getApi('Core', 'siteapi')->translate("Saved As Draft")),
+                    'multiOptions' => array("0" => Engine_Api::_()->getApi('Core', 'siteapi')->translate("Published"), "1" => Engine_Api::_()->getApi('Core', 'siteapi')->translate("Saved As Draft")),
                     'description' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('If this event is published, it cannot be switched back to draft mode.'),
+                    'value' => '0',
                 );
             }
 
@@ -2239,7 +2511,7 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
                     $createForm[] = array(
                         'type' => 'Checkbox',
                         'name' => 'auth_invite',
-                        'value' => True,
+                        'value' => '1',
                         'label' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('Invited guests can invite other people as well.')
                     );
                 } elseif (!empty($select)) {
@@ -2247,7 +2519,7 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
                         'type' => 'Checkbox',
                         'name' => 'all_members',
                         'label' => Engine_Api::_()->getApi('Core', 'siteapi')->translate($label),
-                        'value' => True,
+                        'value' => '1',
                     );
                 }
             }
@@ -2285,32 +2557,6 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
 
             $responseForm['form'] = $createForm;
 
-            if (!empty($createFormFields) && in_array('host', $createFormFields) && Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.host', 1)) {
-                $hostOptionsAlow = Engine_Api::_()->getApi('settings', 'core')->getSetting('siteevent.hostOptions', array('sitepage_page', 'sitebusiness_business', 'user', 'sitegroup_group', 'sitestore_store', 'siteevent_organizer'));
-
-                if (isset($subject) && !empty($subject)) {
-
-                    if ($subject->host_type == 'siteevent_organizer') {
-                        $organizer['host_type'] = 'siteevent_organizer';
-                        $organizer['host_id'] = $host->organizer_id;
-                        $organizer['host_title'] = $host->title;
-                        $organizer['image_icon'] = $host_icons;
-                    } else if ($subject->host_type == 'user') {
-                        $organizer['host_type'] = 'user';
-                        $organizer['host_id'] = $host->user_id;
-                        $organizer['host_title'] = $host->displayname;
-                        $organizer['image_icon'] = $host_icons;
-                    }
-                } else {
-
-                    $organizer['host_type'] = 'user';
-                    $organizer['host_id'] = $viewer->user_id;
-                    $organizer['host_title'] = $viewer->displayname;
-                    $organizer['image_icon'] = $host_icons;
-                }
-                $responseForm['host'] = $organizer;
-            }
-
             if (isset($form) && !empty($form))
                 $responseForm['subcategories'] = $form;
 
@@ -2319,11 +2565,38 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
                 $this->_profileFieldsArray = $profileFields;
             }
             $this->_create = 1;
-            $responseForm['fields'] = $this->_getProfileFields();
+            $createFormFields = $this->_getProfileFields();
+
+            //START PACKAGE WORK
+            $profileField_level = 1;
+            if ($hasPackageEnable) {
+                $packageId = Zend_Controller_Front::getInstance()->getRequest()->getParam('package_id');
+                $packageObject = Engine_Api::_()->getItem('siteeventpaid_package', $packageId);
+                if (!empty($packageObject))
+                    $profileField_level = $packageObject->profile;
+                else
+                    $profileField_level = 1;
+            }
+
+            if (isset($profileField_level) && !empty($profileField_level)) {
+                if (is_array($createFormFields) && is_array($categoryProfileTypeMapping)) {
+                    foreach ($categoryProfileTypeMapping as $key => $value) {
+                        if (isset($createFormFields[$value]) && !empty($createFormFields[$value])) {
+                            $createFormFieldsForm[$key] = $createFormFields[$value];
+                        }
+                    }
+                    if (isset($createFormFieldsForm) && !empty($createFormFieldsForm))
+                        $responseForm['fields'] = $createFormFieldsForm;
+                }
+            }
+
 //            $createForm = array_merge($createForm, $getProfileFeilds);
 
             if (isset($repeatForm) && !empty($repeatForm))
                 $responseForm['repeatOccurences'] = $repeatForm;
+
+            if (isset($MonthlyTypeForm) && !empty($MonthlyTypeForm))
+                $responseForm['MonthlyTypeForm'] = $MonthlyTypeForm;
 
             return $responseForm;
         } catch (Exception $ex) {
@@ -2461,9 +2734,9 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
 
                                 if (isset($this->_create) && !empty($this->_create) && $this->_create == 1) {
                                     $optionCategoryName = Engine_Api::_()->getDbtable('options', 'siteevent')->getProfileTypeLabel($option_id);
-                                    $fieldsForm[$optionCategoryName][] = $fieldForm;
-                                } else {
                                     $fieldsForm[$option_id][] = $fieldForm;
+                                } else {
+                                    $fieldsForm[$option_id] = $fieldForm;
                                 }
                             } else
                                 $fieldsForm[] = $fieldForm;
@@ -2490,7 +2763,7 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
                             if (COUNT($this->_profileFieldsArray) > 1) {
                                 if (isset($this->_create) && !empty($this->_create) && $this->_create == 1) {
                                     $optionCategoryName = Engine_Api::_()->getDbtable('options', 'siteevent')->getProfileTypeLabel($option_id);
-                                    $fieldsForm[$optionCategoryName][] = $fieldForm;
+                                    $fieldsForm[$option_id][] = $fieldForm;
                                 } else {
                                     $fieldsForm[$option_id][] = $fieldForm;
                                 }
@@ -2582,7 +2855,8 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
                     }
                     $valueRow->delete();
                 }
-
+                if ($field_id == 0)
+                    continue;
                 // Insert all
                 $indexIndex = 0;
                 if (is_array($value) || !empty($value)) {
@@ -2613,6 +2887,16 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
                     'item_id' => $siteevent->getIdentity(),
                     'index' => 0
                 ));
+                // Remove value row if empty
+                if (empty($value)) {
+                    if ($valueRow) {
+                        $valueRow->delete();
+                    }
+                    continue;
+                }
+
+                if ($field_id == 0)
+                    continue;
 
                 // Create if missing
                 $isNew = false;
@@ -2667,7 +2951,9 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
                             if (isset($value['multiOptions']) && !empty($value['multiOptions']) && isset($value['multiOptions'][$fieldRow->value]))
                                 $tempValue = $value['multiOptions'][$fieldRow->value];
                             $tempKey = !empty($setKeyAsResponse) ? $key : $label;
-                            $fieldValues[$tempKey] = $tempValue;
+
+                            if (isset($tempValue) && !empty($tempValue))
+                                $fieldValues[$tempKey] = $tempValue;
                         }
                     }
                 }
@@ -2695,7 +2981,8 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
                     foreach ($valueRows as $fieldRow) {
                         if (!empty($fieldRow->value)) {
                             $tempKey = !empty($setKeyAsResponse) ? $key : $label;
-                            $fieldValues[$tempKey] = $fieldRow->value;
+                            if (isset($fieldRow->value) && !empty($fieldRow->value))
+                                $fieldValues[$tempKey] = $fieldRow->value;
                         }
                     }
                 }
@@ -2719,7 +3006,7 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
         return $getFieldId;
     }
 
-    public function getMessageComposeForm() {
+    public function getMessageComposeForm($siteevent) {
 
         // Element : restriction
         if (Engine_Api::_()->siteevent()->isTicketBasedEvent()) {
@@ -2731,6 +3018,24 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
                 'hasValidator' => 'true',
             );
         } else {
+
+            if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('siteeventrepeat')) {
+
+                $datesInfo = Engine_Api::_()->getDbtable('occurrences', 'siteevent')->getAllOccurrenceDates($siteevent->event_id);
+                if (count($datesInfo) > 1) {
+                    $multiOptions['all'] = Engine_Api::_()->getApi('Core', 'siteapi')->translate('All occurrences of this event');
+                    foreach ($datesInfo as $key => $date) {
+                        $multiOptions[$date['occurrence_id']] = $date['starttime'] . " - " . $date['endtime'];
+                    }
+
+                    $composeForm[] = array(
+                        'type' => 'Select',
+                        'name' => 'occurrence_id',
+                        'Label' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('Select Event Occurrence Dates'),
+                        'multiOptions' => $multiOptions
+                    );
+                }
+            }
             $composeForm[] = array(
                 'label' => Engine_Api::_()->getApi('Core', 'siteapi')->translate('Select Member'),
                 'type' => 'Select',
@@ -2868,6 +3173,14 @@ class Siteevent_Api_Siteapi_Core extends Core_Api_Abstract {
 
 
         return $postedValues;
+    }
+
+    /*
+     * translate function
+     */
+
+    public function translate($subject) {
+        return Engine_Api::_()->getApi('Core', 'siteapi')->translate($subject);
     }
 
 }

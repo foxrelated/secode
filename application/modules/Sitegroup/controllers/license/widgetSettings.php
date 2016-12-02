@@ -1131,4 +1131,16 @@ if (empty($info)) {
     ));
     //  }
 }
+
+$select = new Zend_Db_Select($db);
+$select
+        ->from('engine4_core_modules')
+        ->where('name = ?', 'documentintegration')
+        ->where('enabled = ?', 1);
+$is_documentintegration_object = $select->query()->fetchObject();
+if ($is_documentintegration_object) {
+    $db->query("INSERT IGNORE INTO `engine4_document_modules` (`item_type`, `item_id`, `item_module`, `enabled`, `integrated`, `item_title`) VALUES ('sitegroup_group', 'group_id', 'sitegroup', '0', '0', 'Group Documents')");
+    $db->query('INSERT IGNORE INTO `engine4_core_menuitems` ( `name`, `module`, `label`, `plugin`, `params`, `menu`, `submenu`, `enabled`, `custom`, `order`) VALUES("sitegroup_admin_main_managedocument", "documentintegration", "Manage Documents", "", \'{"uri":"admin/document/manage-document/index/contentType/sitegroup_group/contentModule/sitegroup"}\', "sitegroup_admin_main", "", 0, 0, 25);');
+    $db->query('INSERT IGNORE INTO `engine4_core_settings` ( `name`, `value`) VALUES( "document.leader.owner.sitegroup.group", "1");');
+}
 ?>

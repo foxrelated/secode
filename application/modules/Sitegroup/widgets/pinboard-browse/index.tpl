@@ -173,7 +173,7 @@ $this->headScript()->appendFile("https://maps.googleapis.com/maps/api/js?librari
           <div>
             <?php if (!empty($this->showfeaturedLable)): ?>
 							<?php if ($group->featured): ?>
-								<i class="seaocore_list_featured_label" title="<?php echo $this->translate('Featured'); ?>"></i>
+								<span class="seaocore_list_featured_label" title="<?php echo $this->translate('Featured'); ?>"><?php echo $this->translate('Featured') ?></span>
 							<?php endif; ?>
             <?php endif; ?>
             <div class="seaocore_board_list_thumb">

@@ -20,7 +20,8 @@ var TagAutoSuggestion = new Class({
       this.elements = new Hash(this.elements);
       this.params = new Hash(this.params);
 			this.setOptions(options);
-			if($('autosuggest_location_'+this.options.checkInOptions.locationDiv))
+                        
+			if($('autosuggest_location_'+this.options.checkInOptions.locationDiv).length > 0)
 			$('autosuggest_location_'+this.options.checkInOptions.locationDiv).destroy();		
 			
 			this.elements.locationdiv = new Element('div', {
@@ -479,7 +480,7 @@ var TagAutoSuggestion = new Class({
       return location;
     },
     getLocationHTML:function(){     
-			label = (this.location.type == 'place' && this.location.vicinity)?  ((this.location.name && this.location.name != location.vicinity) ? this.location.name +', '+ this.location.vicinity : this.location.vicinity) : this.location.label;
+			label = (this.location.type == 'place' && this.location.vicinity)?  ((this.location.name && this.location.name != location.vicinity) ?  this.location.vicinity : this.location.vicinity) : this.location.label;
       var content = en4.core.language.translate(this.location.prefixadd)+' '+'<a href="javascript:void(0)">'+label+'</a>';
       return content;
     },

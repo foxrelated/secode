@@ -29,6 +29,9 @@ if (empty($this->actions)) {
 <script type="text/javascript">
   sm4.core.runonce.add(function(){
     sm4.activity.setPhotoScroll(0);
+    <?php if ($this->allowReaction): ?>
+      sm4.sitereaction.attachReaction();
+    <?php endif; ?>
   });
   var like_commentURL = "<?php echo $this->url(array('module' => 'advancedactivity', 'controller' => 'index', 'action' => 'viewcomment'), 'default', 'true'); ?>"
 </script>
@@ -296,26 +299,29 @@ if (empty($this->actions)) {
 
           <div class="feed_item_btm">
 
-            <?php if ($action->likes()->getLikeCount() > 0 && (count($action->likes()->getAllLikesUsers()) > 0)): ?>
-<!--              <span class="sep">-</span>-->
-              <a href="javascript:void(0);" onclick='ActivityAppCommentPopup("<?php echo $this->url(array('module' => 'advancedactivity', 'controller' => 'index', 'action' => 'viewcomment', 'action_id' => $action->getIdentity()), 'default', 'true'); ?>", "feedsharepopup", <?php echo $action->getIdentity();?>)' class="feed_likes">
-
-                <span><?php echo $this->translate(array('%s like', '%s likes', $action->likes()->getLikeCount()), $this->locale()->toNumber($action->likes()->getLikeCount())); ?></span>
-              </a>	
-              <?php if ($action->comments()->getCommentCount() > 0) : echo '<span class="sep">-</span>' ?> 
-                <a href="javascript:void(0);" onclick='ActivityAppCommentPopup("<?php echo $this->url(array('module' => 'advancedactivity', 'controller' => 'index', 'action' => 'viewcomment', 'action_id' => $action->getIdentity()), 'default', 'true'); ?>", "feedsharepopup", <?php echo $action->getIdentity();?>)' class="feed_comments">
-
-                  <span><?php echo $this->translate(array('%s comment', '%s comments', $action->comments()->getCommentCount()), $this->locale()->toNumber($action->comments()->getCommentCount()));
-      endif; ?></span>
-              </a>
-            <?php elseif ($action->comments()->getCommentCount() > 0) : ?>
-<!--              <span class="sep">-</span>-->
-              <a href="javascript:void(0);" onclick='ActivityAppCommentPopup("<?php echo $this->url(array('module' => 'advancedactivity', 'controller' => 'index', 'action' => 'viewcomment', 'action_id' => $action->getIdentity()), 'default', 'true'); ?>", "feedsharepopup", <?php echo $action->getIdentity();?>)' class="feed_comments">
-
-                <span><?php echo $this->translate(array('%s comment', '%s comments', $action->comments()->getCommentCount()), $this->locale()->toNumber($action->comments()->getCommentCount())); ?></span>
-              </a>
-            <?php endif; ?>
-          </div>	
+            <?php if($this->hashtag && !empty($this->hashtag[$action->action_id])):?>
+              <ul class="hashtag_activity_item">
+              <?php $url = $this->url(array('controller' => 'index', 'action' => 'index'),"sitehashtag_general")."?search=";
+                for ($i = 0; $i < count($this->hashtag[$action->action_id]); $i++) { ?>
+                <li> 
+                  <a href="<?php echo $url.urlencode($this->hashtag[$action->action_id][$i]);?>"><?php  echo $this->hashtag[$action->action_id][$i]; ?></a>
+                </li>
+                <?php } ?>
+              </ul>
+          <?php endif; ?>
+            <div class="like_comments_stats" data-reaction="<?php echo $this->allowReaction ?>">
+              <?php echo $this->partial(
+                    'application/modules/Sitemobile/modules/Advancedactivity/views/scripts/_activityStats.tpl',
+                    null,
+                    array(
+                        'action' => $action,
+                        'allowReaction' => $this->allowReaction,
+                        'showAsLike' => 1,
+                        'showLikeWithoutIcon' => 0
+                    )
+                );?>
+            </div>
+          </div>
 
 
           <div class="feed_item_option">
@@ -323,22 +329,34 @@ if (empty($this->actions)) {
               <div data-role="navbar" data-inset="false">
                 <ul>
                   <?php if ($canComment): ?>
-                    <?php if ($action->likes()->isLike($this->viewer())): ?>
-                      <li>
-                        <a href="javascript:void(0);" onclick="javascript:sm4.activity.unlike('<?php echo $action->action_id ?>');">
-                          <i class="ui-icon ui-icon-thumbs-up-alt feed-unlike-icon feed-unliked-icon"></i>
-                          <span><?php echo $this->translate('Like') ?></span>
-                        </a>
-                      </li>
-                    <?php else: ?>
-                      <li>
-                        <a href="javascript:void(0);" onclick="javascript:sm4.activity.like('<?php echo $action->action_id ?>');">
-                          <i class="ui-icon ui-icon-thumbs-up-alt feed-like-icon"></i>
-                          <span><?php echo $this->translate('Like') ?></span>
-                        </a>
-                      </li>
+                    <?php if ($this->allowReaction): ?>
+                        <li class="feed_item_option_reaction seao_icons_toolbar_attach">
+                            <?php
+                              echo $this->reactions($action, array(
+                                'target' => $action->action_id,
+                                'id' => 'like_'.$action->action_id,
+                                'class' => 'aaf_like_toolbar',
+                                ), true);
+                            ?>
+                        </li>
+                        <?php else: ?>
+                        <?php if ($action->likes()->isLike($this->viewer())): ?>
+                          <li>
+                            <a href="javascript:void(0);" onclick="javascript:sm4.activity.unlike('<?php echo $action->action_id ?>');">
+                              <i class="ui-icon ui-icon-thumbs-up-alt feed-unlike-icon feed-unliked-icon"></i>
+                              <span><?php echo $this->translate('Like') ?></span>
+                            </a>
+                          </li>
+                        <?php else: ?>
+                          <li>
+                            <a href="javascript:void(0);" onclick="javascript:sm4.activity.like('<?php echo $action->action_id ?>');">
+                              <i class="ui-icon ui-icon-thumbs-up-alt feed-like-icon"></i>
+                              <span><?php echo $this->translate('Like') ?></span>
+                            </a>
+                          </li>
+                        <?php endif; ?>
                     <?php endif; ?>
-                    <?php if (Engine_Api::_()->getApi('settings', 'core')->core_spam_comment): // Comments - likes   ?>
+                    <?php if (0): // Comments - likes   ?>
                       <li>
                         <a href="<?php echo $this->url(array('module' => 'advancedactivity', 'controller' => 'index', 'action' => 'viewcomment', 'action_id' => $action->getIdentity(), 'format' => 'smoothbox'), 'default', 'true'); ?>">
                           <i class="ui-icon ui-icon-comment"></i>

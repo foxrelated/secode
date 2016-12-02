@@ -533,7 +533,7 @@
 					array('route' => 'admin_default', 'module' => 'siteeventpaid', 'controller' => 'package', 'action' => 'packge-detail', 'id' => $item->package_id), $this->translate(ucfirst(Engine_Api::_()->seaocore()->seaocoreTruncateText($item->getPackage()->title, 10))), array('class' => 'smoothbox','title'=>ucfirst($item->getPackage()->title)));  ?></td>
                 <td align="left"><?php echo $item->getEventStatus(); ?></td>
                 <td align="center" class="admin_table_centered">
-                    <?php if(!$item->getPackage()->isFree()):  ?>
+                    <?php if($item->getPackage() && !$item->getPackage()->isFree()):  ?>
                       <?php if($item->status=="initial"):
                           echo $this->translate("No");
                       elseif($item->status=="active"):

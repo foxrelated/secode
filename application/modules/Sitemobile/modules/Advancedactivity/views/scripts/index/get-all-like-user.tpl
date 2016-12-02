@@ -28,7 +28,7 @@
     }
     endif;
 ?>
-
+<?php $allowReaction = $this->allowReaction && $showLikeWithoutIcon != 3; ?>
 <div class="ps-carousel-comments sm-ui-popup sm-ui-popup-container-wrapper">
   <?php $this->addHelperPath(APPLICATION_PATH . '/application/modules/Sitemobile/modules/User/View/Helper', 'User_View_Helper'); ?>
   <?php if ($this->likes->getTotalItemCount() > 0): // COMMENTS -------  ?>
@@ -43,14 +43,24 @@
           <?php $this->headScriptSM()->appendFile($this->layout()->staticBaseUrl . 'application/modules/Sitemobile/externals/scripts/smActivity.js'); ?>
     <?php endif; ?>
         <a href="javascript:void(0);" data-iconpos="notext" data-role="button" data-icon="remove" data-corners="true" data-shadow="true" data-iconshadow="true" class="ps-close-popup close-feedsharepopup ui-btn-right" ></a>
-        
-       <?php if(isset($showLikeWithoutIcon) && $showLikeWithoutIcon != 3):?>
-            <h2 class="ui-title"><?php echo $this->translate('People who like this'); ?></h2>
+        <h2 class="ui-title">
+        <?php if ($this->allowReaction && $showLikeWithoutIcon != 3): ?>
+           <?php echo $this->translate('People who reacted on this'); ?>
+        <?php else: ?>
+        <?php if(isset($showLikeWithoutIcon) && $showLikeWithoutIcon != 3):?>
+            <?php echo $this->translate('People who like this'); ?>
         <?php else:?>
-            <h2 class="ui-title"><?php echo $this->translate('People who voted this'); ?></h2>
+            <?php echo $this->translate('People who voted this'); ?>
         <?php endif;?>
+        <?php endif;?>
+        </h2>
       </div>
-
+      <?php if ($allowReaction): ?>
+        <?php
+          $subjectItem = $this->action ? : $this->subject;
+          echo $this->likeReactionsLink($subjectItem, true);
+        ?>
+      <?php endif;?>
       <div class="sm-ui-popup-likes sm-content-list">
         <ul id="likemembers_ul" class="ui-member-list" data-role="listview" data-icon="none">
         <?php endif; ?>
@@ -64,22 +74,28 @@
                   ->limit(1);
           $row = $table->fetchRow($select);
           ?>
-          <li>
+          <li class="like_member_list">
               <?php if ($row == NULL && $this->viewer()->getIdentity() && $this->userFriendshipSM($user)): ?>
               <div class="ui-item-member-action">
               <?php echo $this->userFriendshipSM($user) ?>
               </div>
               <?php endif; ?>
             <a href="<?php echo $user->getHref() ?>">
-    <?php echo $this->itemPhoto($user, 'thumb.icon') ?>
+              <?php echo $this->itemPhoto($user, 'thumb.icon') ?>
               <div class="ui-list-content">
                 <h3><?php echo $user->getTitle() ?></h3>
+                <?php if ($allowReaction && isset($this->reactionIcons[$like->reaction])): ?>
+                <span class="reacted_user" style="position: absolute; bottom: 0; left: 40px;" data-reaction="<?php echo $like->reaction ?>">
+                 <i style="width:16px; height: 16px; display: inline-block; background-size: cover; background-image: url(<?php echo $this->reactionIcons[$like->reaction]['icon'] ?>)" ></i>
+                </span>
+                <?php endif; ?>
               </div>
             </a>
           </li>
         <?php endforeach; ?>
   <?php if ($this->page == 1): ?>
         </ul>
+
         <div class="like_viewmore" id="like_viewmore" style="display: none;">
           <?php
           echo $this->htmlLink('javascript:void(0);', $this->translate('View More'), array(
@@ -89,13 +105,36 @@
           ))
           ?>
         </div>
-      </div>	
+      </div>
     <?php endif; ?>
 <?php endif; ?>
 </div>
 <div style="display:none;">
   <script type="text/javascript">
       sm4.core.runonce.add(function() {
+        <?php if ($allowReaction) : ?>
+        $('.aff_reaction_tab').off('click').on('click', function(event) {
+            event.preventDefault();
+            var el = $(event.target);
+            if (!el.hasClass('aff_reaction_tab')) {
+              el = $(event.target).closest('.aff_reaction_tab');
+            }
+            el.closest('.reaction_tabs').find('li').removeClass('active');
+            el.closest('li').addClass('active');
+            var reaction = el.jqmData('target');
+            if (reaction == 'all') {
+                $('#likemembers_ul').find('.like_member_list').removeClass('dnone');
+            }else {
+                $('#likemembers_ul').find('.like_member_list').addClass('dnone');
+                $('#likemembers_ul').find('.like_member_list').each(function() {
+                     var el = $(this);
+                    if(el.find('.reacted_user').jqmData('reaction')===reaction){
+                        el.removeClass('dnone');
+                    }
+                });
+            }
+        });
+        <?php endif; ?>
         $('.ps-close-popup').on('click', function() {
           <?php if($RemoveClassDone):?>   
               $('.ui-page-active').removeClass('dnone');

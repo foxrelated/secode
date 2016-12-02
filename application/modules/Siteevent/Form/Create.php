@@ -133,7 +133,7 @@ class Siteevent_Form_Create extends Engine_Form {
             'guestLists'
         );
 
-        if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('siteeventdocument')) {
+        if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('siteeventdocument') || (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('document') && Engine_Api::_()->getDbtable('modules', 'document')->getIntegratedModules(array('enabled' => 1, 'item_type' => "siteevent_event", 'item_module' => 'siteevent')))) {
             $createFormFields = array_merge($createFormFields, array('document'));
         }
 
@@ -848,7 +848,7 @@ class Siteevent_Form_Create extends Engine_Form {
         }
 
         //START SITEEVENTDOCUMENT PLUGIN WORK
-        if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('siteeventdocument')) {
+        if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('siteeventdocument') || (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('document') &&Engine_Api::_()->getDbtable('modules', 'document')->getIntegratedModules(array('enabled' => 1, 'item_type' => "siteevent_event", 'item_module' => 'siteevent')))) {
 
             $document_options = (array) Engine_Api::_()->authorization()->getAdapter('levels')->getAllowed('siteevent_event', $user, 'auth_document');
             $document_options = array_intersect_key($availableLabels, array_flip($document_options));

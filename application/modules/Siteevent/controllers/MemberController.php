@@ -393,16 +393,18 @@ class Siteevent_MemberController extends Core_Controller_Action_Standard {
 
         // Make form
         $this->view->form = $form = new Siteevent_Form_Member_Join();
-
-        // Process form
-        if (!$this->getRequest()->isPost()) {
-            $this->view->status = false;
-            $this->view->error = true;
-            $this->view->message = Zend_Registry::get('Zend_Translate')->_('Invalid Method');
-            return;
+        $formValid = false;
+        $isAjax = (int) $this->_getParam('isAjax');
+        if ($isAjax) {
+            $formValid = true;
+        } else {
+            if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
+                $formValid = true;
+            }
         }
 
-        if (!$form->isValid($this->getRequest()->getPost())) {
+
+        if (!$formValid) {
             $this->view->status = false;
             $this->view->error = true;
             $this->view->message = Zend_Registry::get('Zend_Translate')->_('Invalid Data');
@@ -529,15 +531,18 @@ class Siteevent_MemberController extends Core_Controller_Action_Standard {
         // Make form
         $this->view->form = $form = new Siteevent_Form_Member_Reject();
 
-        // Process form
-        if (!$this->getRequest()->isPost()) {
-            $this->view->status = false;
-            $this->view->error = true;
-            $this->view->message = Zend_Registry::get('Zend_Translate')->_('Invalid Method');
-            return;
+        $formValid = false;
+        $isAjax = (int) $this->_getParam('isAjax');
+        if ($isAjax) {
+            $formValid = true;
+        } else {
+            if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
+                $formValid = true;
+            }
         }
 
-        if (!$form->isValid($this->getRequest()->getPost())) {
+
+        if (!$formValid) {
             $this->view->status = false;
             $this->view->error = true;
             $this->view->message = Zend_Registry::get('Zend_Translate')->_('Invalid Data');
@@ -625,9 +630,25 @@ class Siteevent_MemberController extends Core_Controller_Action_Standard {
         $tabId = $this->_getParam('tab', null);
         // Make form
         $this->view->form = $form = new Siteevent_Form_Member_Remove();
+        $formValid = false;
+        $isAjax = (int) $this->_getParam('isAjax');
+        if ($isAjax) {
+            $formValid = true;
+        } else {
+            if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
+                $formValid = true;
+            }
+        }
+
+        if (!$formValid) {
+            $this->view->status = false;
+            $this->view->error = true;
+            $this->view->message = Zend_Registry::get('Zend_Translate')->_('Invalid Data');
+            return;
+        }
 
         // Process form
-        if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
+        if ($formValid) {
             $db = $event->membership()->getReceiver()->getTable()->getAdapter();
             $db->beginTransaction();
 
@@ -829,8 +850,25 @@ class Siteevent_MemberController extends Core_Controller_Action_Standard {
         $event_id = Zend_Controller_Front::getInstance()->getRequest()->getParam('event_id');
 
         Zend_Registry::set('occurrence_id', $occurrence_id);
+        $formValid = false;
+        $isAjax = (int) $this->_getParam('isAjax');
+        if ($isAjax) {
+            $formValid = true;
+        } else {
+            if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
+                $formValid = true;
+            }
+        }
+
+        if (!$formValid) {
+            $this->view->status = false;
+            $this->view->error = true;
+            $this->view->message = Zend_Registry::get('Zend_Translate')->_('Invalid Data');
+            return;
+        }
+
         // Process form
-        if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
+        if ($formValid) {
             $viewer = Engine_Api::_()->user()->getViewer();
             $subject = Engine_Api::_()->getItem('siteevent_event', $event_id);
             $db = $subject->membership()->getReceiver()->getTable()->getAdapter();
@@ -1190,6 +1228,9 @@ class Siteevent_MemberController extends Core_Controller_Action_Standard {
 
 
 
+
+
+
                 
 // clean the recipients for repeating ids
             // this can happen if recipient is selected and then a friend list is selected
@@ -1350,9 +1391,9 @@ class Siteevent_MemberController extends Core_Controller_Action_Standard {
         $siteevent = Engine_Api::_()->core()->getSubject();
         $list = $siteevent->getLeaderList();
 
-        if (!$siteevent->membership()->isMember($user)) {
-            throw new Siteevent_Model_Exception('Cannot remove a non-member as a leader');
-        }
+//        if (!$siteevent->membership()->isMember($user)) {
+//            throw new Siteevent_Model_Exception('Cannot remove a non-member as a leader');
+//        }
 
         $this->view->form = $form = new Siteevent_Form_Member_Demote();
 

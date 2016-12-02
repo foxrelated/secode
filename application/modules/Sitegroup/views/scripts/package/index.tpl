@@ -22,6 +22,8 @@ $packageInfoArray = Engine_Api::_()->getApi('settings', 'core')->getSetting('sit
 	$baseUrl = $this->layout()->staticBaseUrl;
 
 	?>
+<div class="generic_layout_container layout_middle">
+<div class="generic_layout_container layout_core_content">
 <?php include_once APPLICATION_PATH . '/application/modules/Sitegroup/views/scripts/payment_navigation_views.tpl'; ?>
 <div class="layout_middle sitegroup_create_wrapper clr">
 	<h3><?php echo $this->translate("Create New Group") ?></h3>
@@ -104,7 +106,9 @@ $packageInfoArray = Engine_Api::_()->getApi('settings', 'core')->getSetting('sit
 		<?php endif; ?>
   </div>
 </div>
-	
+ </div>
+</div>
+		
 <script type="text/javascript" >
   function owner(thisobj) {
     var Obj_Url = thisobj.href;

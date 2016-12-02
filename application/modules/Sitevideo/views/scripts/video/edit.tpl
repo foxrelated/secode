@@ -23,6 +23,17 @@ $cateDependencyArray = Engine_Api::_()->getDbTable('videoCategories', 'sitevideo
 $subCateDependencyArray = Engine_Api::_()->getDbTable('videoCategories', 'sitevideo')->getSubCatDependancyArray();
 ?>
 
+<?php if ($this->parentTypeItem): ?>
+    <div class="sitevideo_view_head">
+        <?php echo $this->htmlLink($this->parentTypeItem->getHref(), $this->itemPhoto($this->parentTypeItem, 'thumb.icon', '', array('align' => 'left'))) ?>
+        <h2>	
+            <?php echo $this->parentTypeItem->__toString(); ?>	
+            <?php echo $this->translate('&raquo; '); ?>
+            <?php echo $this->htmlLink($this->parentTypeItem->getHref(array('tab' => $this->tab_selected_id)), $this->translate('Videos')) ?>
+        </h2>
+    </div>
+<?php endif; ?>
+
 <div class="generic_layout_container layout_middle">
 	<div class="generic_layout_container">
 		<?php echo $this->form->render($this); ?>
@@ -334,3 +345,23 @@ foreach ($this->form->getSubForms() as $subForm) {
 </script>
 
 
+<style type="text/css">
+    .sitevideo_view_head{
+        padding-bottom:5px;
+        overflow:auto;
+        margin-bottom:10px;
+    }
+    .sitevideo_view_head h2{
+        font-size: 17px;
+        letter-spacing: normal;
+        overflow: hidden;
+        margin-bottom:3px;
+    }
+    .sitevideo_view_head > a{
+        float:left;
+    }
+    .sitevideo_view_head img{
+        float:left;
+        margin-right:5px;
+    }
+</style>

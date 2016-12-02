@@ -716,7 +716,7 @@ en4.core.runonce.add(function () {
                 </span>
             <?php endif; ?>
             <?php if (Engine_Api::_()->getApi('settings', 'core')->getSetting('sitevideo.gotovideo', 1)): ?>  
-                <a href="<?php echo $this->subject()->getHref() ?>" target="_blank" style="text-decoration:none;">
+                <a href="<?php echo $this->subject()->getHref() ?>"  style="text-decoration:none;">
                     <span class="lightbox_btm_bl_btn lightbox_btm_bl_btn_video"> 
                         <i></i>
                         <?php echo $this->translate("Go to Video") ?>

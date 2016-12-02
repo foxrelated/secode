@@ -169,7 +169,7 @@
 							<h3><?php  echo $this->htmlLink(Engine_Api::_()->sitegroup()->getHref($sitegroup->group_id, $sitegroup->owner_id,$sitegroup->getSlug()), $sitegroup->getTitle()); ?></h3>
 						</div>
 						<div class='seaocore_browse_list_info_date'>
-							<?php echo $this->timestamp(strtotime($sitegroup->creation_date)) ?> - <?php echo $this->translate('posted by'); ?>
+							<?php echo $this->timestamp(strtotime($sitegroup->creation_date)) ?> - <?php echo $this->translate('created by'); ?>
 							<?php echo $this->htmlLink($sitegroup->getOwner()->getHref(), $sitegroup->getOwner()->getTitle()) ?>,
 							<?php echo $this->translate(array('%s like', '%s likes', $sitegroup->like_count), $this->locale()->toNumber($sitegroup->like_count)) ?>,
 						    <?php if ($this->ratngShow): ?>
@@ -283,7 +283,7 @@
 							</div>
 					<?php endif; ?>
 					<?php if ($sitegroup->featured == 1): ?>
-						<span class="seaocore_list_featured_label" title="<?php echo $this->translate('Featured')?>"></span>
+						<span class="seaocore_list_featured_label" title="<?php echo $this->translate('Featured')?>"><?php echo $this->translate('Featured') ?></span>
 					<?php endif; ?>
 					<div class="sitegroup_browse_title">
           	<?php echo $this->htmlLink(Engine_Api::_()->sitegroup()->getHref($sitegroup->group_id, $sitegroup->owner_id,$sitegroup->getSlug()), Engine_Api::_()->sitegroup()->truncation($sitegroup->getTitle(),15)); ?>
@@ -311,7 +311,7 @@
 
 
 					<div class='sitegroup_browse_thumb_stats seaocore_txt_light'>
-							<?php echo $this->timestamp(strtotime($sitegroup->creation_date)) ?> - <?php echo $this->translate('posted by'); ?>
+							<?php echo $this->timestamp(strtotime($sitegroup->creation_date)) ?> - <?php echo $this->translate('created by'); ?>
 							<?php echo $this->htmlLink($sitegroup->getOwner()->getHref(), $sitegroup->getOwner()->getTitle()) ?>
 					</div>
 
@@ -555,7 +555,7 @@
 				<?php endif; ?>
 
             '<div class="sitegroups_locationdetails_info_date">'+
-              '<?php echo $this->timestamp(strtotime($this->sitegroup[$location->group_id]->creation_date)) ?> - <?php echo  $this->string()->escapeJavascript($this->translate('posted by123')); ?> '+
+              '<?php echo $this->timestamp(strtotime($this->sitegroup[$location->group_id]->creation_date)) ?> - <?php echo  $this->string()->escapeJavascript($this->translate('created by123')); ?> '+
               '<?php echo $this->htmlLink($this->sitegroup[$location->group_id]->getOwner()->getHref(),  $this->string()->escapeJavascript($this->sitegroup[$location->group_id]->getOwner()->getTitle())) ?>'+
               '</div>'+
 

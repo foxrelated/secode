@@ -133,7 +133,7 @@ $is_cache= false;
                <?php 
                // Disable widget in case of REST ANDROID APP calling
                $session = new Zend_Session_Namespace();
-               if(!isset($session->hideHeaderAndFooter)):
+               if(!isset($session->hideHeaderAndFooter) || (isset($session->hideHeaderAndFooter) && empty($session->hideHeaderAndFooter))):
                    ?>
               <a href="<?php echo in_array($dashboardContentType,  array('panel_overlay_list','panel_reveal_list','panel_overlay_icon','panel_reveal_icon')) ? '#'.$dashBoardPanelId : $this->url(array(), 'sitemobile_dashboard', true); ?>"  data-role="button" <?php echo $this->dataHtmlAttribs("dashboard_menu_button", array('data-icon' => "reorder")); ?> id="header-dashboard-menuButton" ><?php //echo $this->translate('Menu') ?></a>
               <?php endif; ?>

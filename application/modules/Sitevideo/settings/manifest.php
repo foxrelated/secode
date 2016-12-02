@@ -31,7 +31,7 @@ return array(
     array(
         'type' => 'module',
         'name' => 'sitevideo',
-        'version' => '4.8.10p12',
+        'version' => '4.8.12',
         'path' => 'application/modules/Sitevideo',
         'title' => 'Advanced Videos / Channels / Playlists Plugin',
         'description' => 'Advanced Videos / Channels / Playlists plugin enables users to post videos from their local computers, YouTube, Vimeo and Dailymotion, create channels and create playlists.',

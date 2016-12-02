@@ -18,7 +18,7 @@ $this->headLink()->appendStylesheet($this->layout()->staticBaseUrl . 'applicatio
 if($this->mapshow) {
   $language = $_COOKIE['en4_language'];
   $apiKey = Engine_Api::_()->seaocore()->getGoogleMapApiKey();
-   $this->headScript()->appendFile("https://maps.googleapis.com/maps/api/js?libraries=places&sensor=true&key=$apiKey");
+   $this->headScript()->appendFile("https://maps.googleapis.com/maps/api/js?libraries=places&key=$apiKey");
 }
 ?>
 
@@ -397,17 +397,12 @@ if($this->mapshow) {
 		Smoothbox.open(Obj_Url);
 	}
 </script>
-<script type="text/javascript">
-  if(mapShow) {
-		var script = '<script type="text/javascript" src="https://google-maps-' +
-				'utility-library-v3.googlecode.com/svn/trunk/infobubble/src/infobubble';
-		if (document.location.search.indexOf('compiled') !== -1) {
-			script += '-compiled';
-		}
-		script += '.js"><' + '/script>';
-		document.write(script);
-	}
-</script>
+
+
+
+<?php
+$this->headScript()->appendFile($this->layout()->staticBaseUrl . "application/modules/Seaocore/externals/scripts/infobubble.js");
+?>
 <script type="text/javascript" >
   var mapShow = '<?php echo $this->mapshow; ?>';
   if (mapShow) {

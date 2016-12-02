@@ -1,1 +1,0 @@
-You have successfully subscribed to our website! We will inform you new deals everyday!

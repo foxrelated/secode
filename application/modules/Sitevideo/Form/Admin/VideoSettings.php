@@ -26,7 +26,7 @@ class Sitevideo_Form_Admin_VideoSettings extends Engine_Form {
 
         $this->addElement('MultiCheckbox', 'sitevideo_allowed_video', array(
             'label' => 'Allowed Video Sources',
-            'description' => "Select type of video source that you want to be available for members while uploading new video.",
+            'description' => "Select type of video source that you want to be available for members while uploading new video. [ Note: You can apply this setting on per member level basis from ‘Member Level Settings’. ]",
             'multiOptions' => array(
                 4 => 'My Computer',
                 1 => 'YouTube',
@@ -34,7 +34,7 @@ class Sitevideo_Form_Admin_VideoSettings extends Engine_Form {
                 3 => 'Dailymotion',
                 5 => 'Embed Code'
             ),
-            'value' => $coreSettings->getSetting('sitevideo.allowed.video', array(0, 1, 2, 3))
+            'value' => $coreSettings->getSetting('sitevideo.allowed.video', array(0, 1, 2, 3,4,5))
         ));
         $this->addElement('Radio', 'sitevideo_video_category_enabled', array(
             'label' => 'Allow Category',

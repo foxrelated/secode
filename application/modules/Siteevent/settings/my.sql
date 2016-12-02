@@ -14,7 +14,7 @@
 --
 
 INSERT IGNORE INTO `engine4_core_modules` (`name`, `title`, `description`, `version`, `enabled`, `type`) VALUES
-('siteevent', 'Advanced Events', 'Advanced Events', '4.8.10p4', 1, 'extra');
+('siteevent', 'Advanced Events', 'Advanced Events', '4.8.12p3', 1, 'extra');
 
 -- --------------------------------------------------------
 

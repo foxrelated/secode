@@ -12,7 +12,7 @@
 ?>
 <?php
 $apiKey = Engine_Api::_()->seaocore()->getGoogleMapApiKey();
-$this->headScript()->appendFile("https://maps.googleapis.com/maps/api/js?libraries=places&sensor=true&key=$apiKey");
+$this->headScript()->appendFile("https://maps.googleapis.com/maps/api/js?libraries=places&key=$apiKey");
 ?>
 <?php
 $this->headLink()->appendStylesheet($this->layout()->staticBaseUrl . 'application/modules/Sitevideo/externals/styles/style_sitevideo.css');

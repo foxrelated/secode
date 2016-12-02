@@ -53,12 +53,7 @@ class Sitegroup_DashboardController extends Core_Controller_Action_Standard {
         //GET NAVIGATION
         $this->view->navigation = Engine_Api::_()->getApi('menus', 'core')
                 ->getNavigation('sitegroup_main');
-        //START MANAGE-ADMIN CHECK
-        $isManageAdmin = Engine_Api::_()->sitegroup()->isManageAdmin($subject, 'edit');
-        if (empty($isManageAdmin)) {
-            return $this->_forward('requireauth', 'error', 'core');
-        }
-        //END MANAGE-ADMIN CHECK
+
         //VERSION CHECK APPLIED FOR - PACKAGE WORK
         $this->view->siteeventVersion = false;
         if (Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('siteevent')) {
@@ -142,7 +137,7 @@ class Sitegroup_DashboardController extends Core_Controller_Action_Standard {
         //END THE GROUP POLL WORK
         //START THE GROUP DOCUMENT WORK
         $sitegroupDocumentEnabled = Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitegroupdocument');
-        if ($sitegroupDocumentEnabled) {
+        if ($sitegroupDocumentEnabled || (Engine_Api::_()->hasModuleBootstrap('document') && Engine_Api::_()->getDbtable('modules', 'document')->getIntegratedModules(array('enabled' => 1, 'item_type' => 'sitegroup_group', 'item_module' => 'sitegroup')))) {
 
             //PACKAGE BASE PRIYACY START
             if (Engine_Api::_()->sitegroup()->hasPackageEnable()) {
@@ -157,7 +152,11 @@ class Sitegroup_DashboardController extends Core_Controller_Action_Standard {
             }
             //PACKAGE BASE PRIYACY END
 
-            $this->view->documenttab_id = Engine_Api::_()->sitegroup()->GetTabIdinfo('sitegroupdocument.profile-sitegroupdocuments', $group_id, $layout);
+            if ($sitegroupDocumentEnabled) {
+                $this->view->documenttab_id = Engine_Api::_()->sitegroup()->GetTabIdinfo('sitegroupdocument.profile-sitegroupdocuments', $group_id, $layout);
+            } else {
+                $this->view->documenttab_id = Engine_Api::_()->sitegroup()->GetTabIdinfo('document.contenttype-documents', $group_id, $layout);
+            }
         }
         //END THE GROUP DOCUMENT WORK
         //START THE GROUP INVITE WORK
@@ -1102,7 +1101,7 @@ class Sitegroup_DashboardController extends Core_Controller_Action_Standard {
         $group_id = $sitegroup->group_id;
 
         //CALLING THE FUNCTION AND PASS THE VALUES OF GROUP ID AND USER ID.
-        $this->view->userListings = Engine_Api::_()->getDbtable('group', 'sitegroup')->getGroups($group_id, $viewer_id);
+        $this->view->userListings = Engine_Api::_()->getDbtable('groups', 'sitegroup')->getGroups($group_id, $viewer_id);
 
         //CHECK POST.
         if ($this->getRequest()->isPost()) {
@@ -1210,7 +1209,7 @@ class Sitegroup_DashboardController extends Core_Controller_Action_Standard {
 
         //SAVE THE FOURSQUARE CODE IN DATABASE
         if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
-            $db = Engine_Api::_()->getDbtable('group', 'sitegroup')->getAdapter();
+            $db = Engine_Api::_()->getDbtable('groups', 'sitegroup')->getAdapter();
             $db->beginTransaction();
             try {
                 $siteagroup->foursquare_text = $_POST['foursquare_text'];
@@ -1324,7 +1323,7 @@ class Sitegroup_DashboardController extends Core_Controller_Action_Standard {
         //END THE GROUP POLL WORK
         //START THE GROUP DOCUMENT WORK
         $sitegroupDocumentEnabled = Engine_Api::_()->getDbtable('modules', 'core')->isModuleEnabled('sitegroupdocument');
-        if ($sitegroupDocumentEnabled) {
+        if ($sitegroupDocumentEnabled || (Engine_Api::_()->hasModuleBootstrap('document') && Engine_Api::_()->getDbtable('modules', 'document')->getIntegratedModules(array('enabled' => 1, 'item_type' => 'sitegroup_group', 'item_module' => 'sitegroup')))) {
 
             //PACKAGE BASE PRIYACY START
             if (Engine_Api::_()->sitegroup()->hasPackageEnable()) {
@@ -1339,7 +1338,11 @@ class Sitegroup_DashboardController extends Core_Controller_Action_Standard {
             }
             //PACKAGE BASE PRIYACY END
 
-            $this->view->documenttab_id = Engine_Api::_()->sitegroup()->GetTabIdinfo('sitegroupdocument.profile-sitegroupdocuments', $group_id, $layout);
+            if ($sitegroupDocumentEnabled) {
+                $this->view->documenttab_id = Engine_Api::_()->sitegroup()->GetTabIdinfo('sitegroupdocument.profile-sitegroupdocuments', $group_id, $layout);
+            } else {
+                $this->view->documenttab_id = Engine_Api::_()->sitegroup()->GetTabIdinfo('document.contenttype-documents', $group_id, $layout);
+            }
         }
         //END THE GROUP DOCUMENT WORK
         //START THE GROUP INVITE WORK
@@ -2123,7 +2126,7 @@ class Sitegroup_DashboardController extends Core_Controller_Action_Standard {
 
         //SAVE THE Twitter CODE IN DATABASE
         if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
-            $db = Engine_Api::_()->getDbtable('group', 'sitegroup')->getAdapter();
+            $db = Engine_Api::_()->getDbtable('groups', 'sitegroup')->getAdapter();
             $db->beginTransaction();
             try {
                 $siteagroup->twitter_user_name = $_POST['twitter_user_name'];
@@ -2170,7 +2173,7 @@ class Sitegroup_DashboardController extends Core_Controller_Action_Standard {
 
         //SAVE THE Twitter CODE IN DATABASE
         if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
-            $db = Engine_Api::_()->getDbtable('group', 'sitegroup')->getAdapter();
+            $db = Engine_Api::_()->getDbtable('groups', 'sitegroup')->getAdapter();
             $db->beginTransaction();
             try {
                 $siteagroup->fbpage_url = $_POST['fbpage_url'];

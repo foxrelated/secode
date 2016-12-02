@@ -17,6 +17,8 @@ $this->headScript()
         ->appendFile($this->layout()->staticBaseUrl . 'externals/autocompleter/Autocompleter.Local.js')
         ->appendFile($this->layout()->staticBaseUrl . 'externals/autocompleter/Autocompleter.Request.js');
 ?>
+<div class="generic_layout_container layout_middle">
+<div class="generic_layout_container layout_core_content">
 <?php include_once APPLICATION_PATH . '/application/modules/Sitegroup/views/scripts/payment_navigation_views.tpl'; ?>
 
 <div class="layout_middle">
@@ -40,6 +42,8 @@ $this->headScript()
       </div>	
     </div>
   </div>
+</div>
+     </div>
 </div>
 <script type="text/javascript">
   window.addEvent('domready', function () {

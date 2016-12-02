@@ -143,7 +143,7 @@
                 <a href="javascript:void(0);" data-role="button" data-inline="true" data-mini="true" onclick="javascript:sm4.activity.like('<?php echo $action->action_id ?>');"><?php echo $this->translate('Like') ?></a>
               <!--</li>-->
             <?php endif; ?>
-            <?php if( Engine_Api::_()->getApi('settings', 'core')->core_spam_comment ): // Comments - likes ?>
+            <?php if( 0 ): // Comments - likes ?>
               <li data-role="button" data-inline="true" data-mini="true" class="feed_item_option_comment">
                 <!--<span>-</span>-->
                 <?php echo $this->htmlLink(array('route'=>'default','module'=>'activity','controller'=>'index','action'=>'viewcomment','action_id'=>$action->getIdentity(),'format'=>'smoothbox'), $this->translate('Comment'), array(
@@ -162,9 +162,9 @@
             <?php endif ?>
           <?php endif; ?>
           <?php if( $this->viewer()->getIdentity() && (
-                $this->activity_moderate || (
+               (
                   $this->allow_delete && (
-                    ('user' == $action->subject_type && $this->viewer()->getIdentity() == $action->subject_id) ||
+                   
                     ('user' == $action->object_type && $this->viewer()->getIdentity()  == $action->object_id)
                   )
                 )
@@ -262,9 +262,8 @@
                      <!--</li>-->
                      
                      <?php if ( $this->viewer()->getIdentity() &&
-                               (('user' == $action->subject_type && $this->viewer()->getIdentity() == $action->subject_id) ||
-                                ($this->viewer()->getIdentity() == $comment->poster_id) ||
-                                $this->activity_moderate ) ): ?>
+                               (
+                                ($this->viewer()->getIdentity() == $comment->poster_id)  ) ): ?>
                      <!--<li class="sep">-</li>-->
 											<!--<li class="comments_delete">-->
 												<a data-role="button" data-inline="true" data-mini="true"  href="javascript:void(0);" data-url="<?php echo $this->url(array('module' => 'activity','controller' => 'index','action' => 'delete','action_id' => $action->action_id, 'comment_id'=> $comment->comment_id), 'default', 'true'); ?>" onclick="javascript:sm4.activity.activityremove(this, '<?php echo $comment->comment_id?>', '<?php echo $action->action_id?>');" data-message="Are you sure that you want to delete this comment? This action cannot be undone."><?php echo $this->translate('delete'); ?></a> 

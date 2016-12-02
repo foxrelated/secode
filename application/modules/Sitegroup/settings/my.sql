@@ -16,7 +16,7 @@
 --
 
 INSERT IGNORE INTO `engine4_core_modules` (`name`, `title`, `description`, `version`, `enabled`, `type`) VALUES
-('sitegroup', 'Groups / Communities', 'Groups / Communities', '4.8.10p2', 1, 'extra');
+('sitegroup', 'Groups / Communities', 'Groups / Communities', '4.8.12p3', 1, 'extra');
 
 -- --------------------------------------------------------
 

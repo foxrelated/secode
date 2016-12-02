@@ -1,1 +1,0 @@
-UPDATE `engine4_core_menuitems` SET `params` ='{"route":"video_general", "action":"browse"}' WHERE `name`='video_main_browse' AND `module`='video' AND `menu`='video_main';

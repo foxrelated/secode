@@ -22,6 +22,7 @@ class Sitevideo_Widget_CategoriesWithiconGridViewController extends Engine_Conte
         $this->view->columnHeight = $this->_getParam('columnHeight', 260);
         $showAllCategories = $this->_getParam('showAllCategories', 0);
         $orderBy = $this->_getParam('orderBy', 'cat_order');
+        $this->view->showIcon = $this->_getParam('showIcon', 1);
         $this->view->storage = Engine_Api::_()->storage();
         $havingChannels = !$showAllCategories;
         // GET ALL CATEGORIES

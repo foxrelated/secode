@@ -245,8 +245,10 @@
                     <option value="0" ><?php echo $this->translate("Select") ?></option>
                     <option value="1" <?php if ($this->videotype == 1) echo "selected"; ?> ><?php echo $this->translate("YouTube") ?></option>
                     <option value="2" <?php if ($this->videotype == 2) echo "selected"; ?> ><?php echo $this->translate("Vimeo") ?></option>
-                    <option value="3" <?php if ($this->videotype == 3) echo "selected"; ?> ><?php echo $this->translate("My Computer") ?></option>
                     <option value="4" <?php if ($this->videotype == 4) echo "selected"; ?> ><?php echo $this->translate("Dailymotion") ?></option>
+                    <option value="5" <?php if ($this->videotype == 5) echo "selected"; ?> ><?php echo $this->translate("Embedded Videos") ?></option>
+                    <option value="3" <?php if ($this->videotype == 3) echo "selected"; ?> ><?php echo $this->translate("My Computer") ?></option>
+                    
                 </select>
             </div>
             <div class="clear mtop10">

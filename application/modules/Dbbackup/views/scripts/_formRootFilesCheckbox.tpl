@@ -31,7 +31,7 @@
 			<li><input type='checkbox' value=1 id='rootfiles' name='Uncheck_rootfilesall'  onclick="doCheckAllFiles();" /> <?php echo 'Check all' ?></li>
 			<li>
 				<?php
-					$session = new Zend_Session_Namespace('backup');
+					$session = new Zend_Session_Namespace();
 					$resultsrootfiles = $session->resultsrootfiles;
 					foreach($resultsrootfiles as $values) {
 						$name = explode(" ",$values);

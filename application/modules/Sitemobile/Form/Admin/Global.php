@@ -106,6 +106,16 @@ class Sitemobile_Form_Admin_Global extends Engine_Form {
         'value' => $coreSettingsApi->getSetting('sitemobile.login.ajax', 1)
     ));
 
+    $this->addElement('Radio', 'sitemobile_rtl', array(
+        'label' => 'Enable RTL',
+        'description' => "Do you want to enable RTL on your site for this plugin? (Note: Select No, If your full site is not runing in RTL)",
+        'multiOptions' => array(
+            1 => 'Yes',
+            0 => 'No'
+        ),
+        'value' => $coreSettingsApi->getSetting('sitemobile.rtl', 0)
+    ));
+
     $captcha_options = array(
         1 => 'Yes, make members complete the CAPTCHA form.',
         0 => 'No, do not show a CAPTCHA form.',

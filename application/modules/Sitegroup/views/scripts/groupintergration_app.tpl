@@ -55,7 +55,7 @@ if (!empty($sitegroupintegrationEnabled)) :
                                     <b><?php echo $this->translate($modNameValue["item_title"]); ?></b>
                                 <?php endif; ?>
                                 <p><?php
-                                    $item_title = strtolower($modNameValue["item_title"]);
+                                    $item_title = $this->translate(strtolower($modNameValue["item_title"]));
                                     if ($modNameValue["resource_type"] == 'sitereview_listing') :
                                         echo $this->translate("Post new $titleSinLc listings to this group.");
                                         ?><?php
