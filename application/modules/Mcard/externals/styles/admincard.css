@@ -1,0 +1,66 @@
+
+/* $Id: main.css 2010-10-13 9:40:21Z SocialEngineAddOns Copyright 2009-2010 BigStep Technologies Pvt. Ltd. $ */
+
+
+.mc-card{
+  width:237px;
+  padding:3px;
+  min-height:147px;
+  display:block;
+
+  float:left;
+}
+.mc-card .logo{
+  float:left;
+  height:30px;
+}
+.mc-card .logo img {
+  max-width:100px;
+  max-height:30px;
+}
+.mc-card .head{
+  float:right;
+  color:#FFFFFF;
+  font-weight:bold;
+  font-size:14px;
+  font-family:Arial, Helvetica, sans-serif;
+  line-height:30px;
+}
+.member-details{
+  float:left;
+  width:100%;
+  margin-top:10px;
+}
+.member-photo{
+  float:left;
+  width:55px;
+}
+.member-details .info{
+  float:left;
+  color:#000000;
+  font-size:11px;
+  width:172px;
+  font-family:tahoma, Arial, Helvetica, sans-serif;
+  line-height:14px;
+}
+.member-details .info span{ 
+  font-family:tahoma, Arial, Helvetica, sans-serif !important;
+}
+.member-details .info a{
+  color:#000000;
+}
+.print,
+.print-card{
+  clear:both;
+  padding:5px 10px;
+}
+.print a { 
+  font-weight:bold;
+  background:none;
+}
+
+.print-card input{ 
+  font-weight:bold;
+  background:url(../images/printer.png) no-repeat left;
+  padding-left:20px;
+}

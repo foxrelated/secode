@@ -1,0 +1,406 @@
+/* $Id: style_siteeventticket.css 2015-05-11 00:00:00Z SocialEngineAddOns Copyright 2015-2016 BigStep Technologies Pvt. Ltd. $ */
+.mbot5 {
+	margin-bottom: 5px;
+}
+/*Ticket Table*/
+.siteevent_detail_table{
+	overflow-x:auto;
+	overflow-y: hidden;
+	width:100%;
+	margin:0;
+	border:none;
+}
+.siteevent_detail_table table{
+	width:100%;
+	border-width: 2px;
+	margin-top:1px;
+	overflow:hidden;
+}
+.siteevent_detail_table_head{
+	background:url(../images/bg2.png) repeat;
+}
+.siteevent_detail_table thead tr th{
+	padding: 10px;
+	border-bottom: 1px solid #aaa;
+	font-weight: bold;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	text-align:left;
+  white-space: nowrap;
+}
+.siteevent_detail_table thead tr th a {
+	font-weight: bold;
+}
+.siteevent_detail_table tr td,
+.siteevent_detail_table tr th{
+	padding: 7px 10px;
+	display:table-cell;
+}
+.siteevent_detail_table table tr + tr{
+	border-top-width: 1px;
+}
+.siteevent_detail_table table td + td{
+	border-left-width:1px;
+}
+.siteevent_detail_table table td.event_actlinks a, a.changeticket_icon i{
+	height: 20px;
+	width:20px;
+	display: inline-block;
+	margin: 0 5px;
+	background-image: url(../images/actlinks.png);
+	background-repeat: no-repeat;
+}
+a.siteevent_icon_detail {background-position: 0 0;}
+a.siteevent_icon_edit, a.changeticket_icon i{background-position: -20px 0;}
+a.siteevent_icon_delete {background-position: -41px 0;}
+a.siteevent_icon_message {background-position: -65px 0;}
+a.siteevent_icon_user {background-position: -91px 0;}
+.event_actlinks a.siteevent_icon_message::before {content: "";}
+
+/*Alert box*/
+.siteevent_alert_msg{
+  background-image: url(../images/bg2.png);
+  border-width: 1px;
+  border-style: solid;
+  padding: 10px;
+}
+.siteevent_alert_msg h3{
+  padding:0 0 5px;
+  margin: 0 0 5px;
+}
+
+/*Invoice work*/
+.invoice_wrap{
+	margin:0 auto;
+	width:800px;
+}
+.invoice_head_wrap{
+	background:url(../images/bg2.png) repeat;
+	border-width: 1px;
+	height: 40px;
+	line-height:40px;
+	padding:2px 10px;
+}
+.invoice_head .name{
+	font-size: 13pt;
+}
+.invoice_head .logo{
+	width:300px;
+	height:40px;
+}
+.invoice_head .logo img{
+	max-height:40px;
+}
+.invoice_details_wrap{
+	border-width: 1px;
+	overflow:hidden;
+}
+.invoice_add_details_wrap{
+	border-right-width: 1px;
+	width: 50%;
+  margin-right: -1px;
+}
+.invoice_details_wrap > div + div{
+  border-right-width: 0;
+  border-left-width: 1px;
+}
+.invoice_add_details_wrap
+.invoice_add_details + .invoice_add_details ,
+.siteevent_detail_table table tr + tr{
+	border-top-width: 1px;
+}
+.siteevent_detail_table table tr:last-child{
+  border-bottom-width:1px;
+}
+.invoice_add_details,
+.invoice_order_details_wrap li,
+.invoice_ttlamt_box_wrap,
+.invoice_note_box{
+	padding: 10px;
+}
+.invoice_order_details_wrap{
+	box-sizing: border-box;
+  width: 50%;
+}
+.invoice_order_details_wrap li + li{
+	border-top-width: 1px;
+}
+.invoice_order_details_wrap li > div + div{
+  overflow: hidden;
+}
+.siteevent_detail_table{
+	margin:0;
+	border:none;
+}
+.siteevent_detail_table table{
+	width:100%;
+	border-width: 2px;
+	margin-top:1px;
+}
+.siteevent_detail_table_head{
+	background:url(../images/bg2.png) repeat;
+}
+.siteevent_detail_table table td + td{
+	border-left-width:1px;
+}
+.invoice_order_info{
+	width:180px;
+}
+.invoice_ttlamt_box_wrap{
+	/*background:url(../images/bg2.png) repeat;*/
+	border-width: 1px 0px;
+	width: 100%;
+	box-sizing: border-box;
+}
+.invoice_ttlamt_box{
+	margin-bottom:5px;
+	width: 100%;
+}
+.invoice_ttlamt_box .fleft {
+	text-align: right;
+	width: 80%;
+}
+.invoice_grand_ttlamt div {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+/*For Print invoice page*/
+#global_page_siteeventticket-order-print-invoice #global_content_simple {
+	display: block;
+}
+/*Ticket Detail Popup*/
+.siteevent_details_view{
+	width:600px;
+}
+.siteevent_details_view td{
+	padding:5px;
+}
+.siteevent_details_view td b{
+	font-weight:bold;
+}
+#smoothbox_window #global_page_siteeventticket-order-detail {
+	width:815px;
+}
+/*Buyer Details*/
+.layout_page_siteeventticket_order_buyer-details .layout_middle .layout_core_content{
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+}
+/*Your Information*/
+section.seao_buyer_details {
+	width:62%;
+}
+.seao_buyer_info {
+	margin-bottom:30px;
+}
+.seao_copy_ticket_info {
+	margin: 20px 0;
+}
+.seao_buyer_details .seao_label {
+	display: block;
+	padding: 16px 0 5px;
+}
+.seao_buyer_details label + input{
+	border: 1px solid rgba(0, 0, 0, 0.26);
+	border-radius: 4px;
+	padding: 6px 12px;
+	transition: all 0.15s ease-in-out 0s;
+	width: 92%;
+}
+.seao_buyer_details_col {
+	width:50%;
+	padding:0 10px 3px; 
+	box-sizing: border-box;
+	float:left;
+}
+.buyer_detail_subform {
+	border-width: 2px;
+	display: block;
+	margin: 0 0 20px;
+	padding: 0 15px 15px;
+	overflow: hidden;
+}
+.seao_ticket_heading {
+	background-color: rgba(0, 0, 0, 0.05);
+	font-size: 15px;
+	line-height: 16px;
+	padding: 15px;
+	overflow: hidden;
+	margin: 0 -15px;
+	font-weight: bold;
+}
+/*Sidebar >> Summary*/
+.seao_order_summary {
+	background-color: rgba(0, 0, 0, 0.015);
+	border-width: 1px;
+	border-radius: 4px;
+	box-sizing: border-box;
+	margin-bottom: 20px;
+	margin-left:15px;
+	min-height: 20px;
+	padding: 19px;
+  top: 36px;
+	width:360px;   
+}
+.position_fixed{
+	clear: left;
+	display: inline-flex;
+	overflow: hidden;
+	position: fixed;
+	top: 20px;
+}
+.seao_order_summary h3 + p {
+	margin-bottom: 10px;
+}
+.seao_order_summary ul {
+	margin: 0;
+	padding: 0;
+}
+.seao_order_summary li {
+	border-top-width: 1px;
+	line-height: 24px;
+	padding: 15px 0;
+	display: inline-block;
+	width: 100%;
+}
+.seao_order_summary li > div {
+	box-sizing: border-box;
+	float: left;
+	padding: 0 10px;
+	font-size: 14px;
+}
+.seao_order_summary li > div > span {
+	display:block;
+}
+.seao_order_summary .seao_info_col_1 {
+	width:10%;
+}
+.seao_order_summary .seao_info_col_2 {
+	width:65%;
+}
+.seao_order_summary .seao_info_col_3 {
+	width:25%;
+	text-align: right;
+}
+.seao_order_summary_total > div {
+	width:50%;
+}
+.seao_order_summary_total > div + div {
+	text-align: right;
+}
+
+/*My tickets Page*/
+.tabs_alt .tab_alt_count {
+	background-color: rgba(0, 0, 0, 0.04);
+	border-radius: 3px;
+	margin-left: 6px;
+	padding: 3px 10px;
+}
+.siteevent_order_list {
+	display:block;
+	border-width:1px;
+	padding:10px 0;
+	margin-top:10px;
+	overflow: hidden;
+}
+.siteevent_order_list > section {
+	display:inline-block;
+	vertical-align:top;
+}
+.siteevent_order_image > div {
+	padding: 6px 15px;
+}
+.siteevent_order_heading {
+	font-size: 15px;
+	line-height:25px;
+}
+.siteevent_order_info > p{
+	margin-top:5px;
+	line-height:25px;
+}
+.siteevent_order_option {
+	float: right;
+	padding: 0 20px;
+	width: 20%;
+}
+.siteevent_order_option > div {
+	margin: 5px 0;
+}
+.siteevent_order_option > div > a::before {
+	font-family: fontawesome;
+	font-style: normal;
+	margin-right: 7px;
+	text-align: center;
+	font-size: 16px;
+}
+.seaocore_icon_print::before 	{content:"\f02f";}
+.seaocore_icon_view::before 	{content:"\f06e";}
+.siteevent_order_option a.siteevent_icon_send::before  {content:"\f003";}
+.siteevent_order_option > div > a.siteevent_icon_send {background-image:none;}
+/*.seaocore_icon_print{
+	background:url(../images/printer.png) repeat;
+}
+.seaocore_icon_view{
+	background:url(../images/view.png) repeat;
+}*/
+
+/*Buy Tickets for Event page*/
+#buy_tickets_form select#date_filter_occurrence {
+	margin-left: 5px;
+	max-width: 350px;
+}
+/*Dashboard >> Waitlist page*/
+select#occurrence_id {
+	max-width: 350px;
+}
+/*Ticket-buy page*/
+#seticket_detail_table .invoice_ttlamt_box_wrap {
+  width: 300px;
+}
+#seticket_detail_table .invoice_ttlamt_box .fleft {
+	text-align: left;
+	width: 150px;
+}
+
+.siteevent_viewevents_head{
+	padding-bottom:5px;
+	overflow:auto;
+	margin-bottom:10px;
+}
+.siteevent_viewevents_head h2{
+	font-size: 17px;
+	letter-spacing: normal;
+	overflow: hidden;
+	margin-bottom:3px;
+}
+.siteevent_viewevents_head > a{
+	float:left;
+}
+.siteevent_viewevents_head img{
+	float:left;
+	margin-right:5px;
+}
+
+/*Responsive css work start form here*/
+@media only screen and (max-width: 768px) {
+	/*Buyer detail page*/
+	section.seao_buyer_details {width: 100%;}
+	.position_fixed {display:none;}
+	/*Invoice*/
+	div.invoice_head .logo {width: auto;}
+	div.invoice_wrap {width: 100%;}
+	div.invoice_add_details_wrap, div.invoice_order_details_wrap { width: 100%;}
+	/*My Tickets Page*/
+	section.siteevent_order_option { box-sizing: border-box; width: 100%;}
+	section.siteevent_order_option > div { float: left; margin: 5px;}
+	/*Details popup*/
+	div.siteevent_details_view {width: 100%;}
+	.global_form_popup.siteevent_details_view td {width: 50%;}
+}
+
+@media screen and (max-width:480px){ 
+	/*Buyer detail page*/
+	div.seao_buyer_details_col {width: 100%;}
+}

@@ -31,7 +31,7 @@
 			<li><input type='checkbox' value=1 id='files' name='Uncheck_filesall'  onclick="doCheckAlls();" /> <?php echo 'check all' ?></li>
 			<li>
 				<?php
-					$session = new Zend_Session_Namespace();
+					$session = new Zend_Session_Namespace('backup');
 					$resultsfiles = $session->resultsfiles;
 
 					foreach($resultsfiles as $values) {

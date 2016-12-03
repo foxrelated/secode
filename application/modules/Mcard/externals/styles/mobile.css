@@ -1,0 +1,73 @@
+/* $Id: main.css 2010-10-13 9:40:21Z SocialEngineAddOns Copyright 2009-2010 BigStep Technologies Pvt. Ltd. $ */
+
+.mc-card{
+  width:243px;
+  display:block;
+  float:left;
+	-moz-border-radius:6px;
+	border-radius:6px;
+}
+.mc-card-inner{
+	display:block;
+	float:left;
+  background:url(~/application/modules/Mcard/externals/images/default_inner.png) no-repeat bottom;
+	padding:3px;
+	width:237px;
+  min-height:147px;
+}
+.mc-card .logo{
+  float:left;
+  height:30px;
+	margin-left:5px;
+}
+.mc-card .logo img {
+  max-width:100px;
+  max-height:30px;
+}
+.mc-card .head{
+  float:right;
+  color:#FFFFFF;
+  font-weight:bold;
+  font-size:14px;
+  font-family:Arial, Helvetica, sans-serif;
+  line-height:30px;
+}
+.mc-card .member-details{
+  float:left;
+  width:100%;
+  margin-top:10px;
+}
+.mc-card .member-photo{
+  float:left;
+	margin:0 5px;
+}
+.mc-card .member-photo img{
+  float:left;
+  width:60px;
+}
+.mc-card .member-details .info{
+  float:left;
+  color:#000000;
+  font-size:11px;
+  font-family:tahoma, Arial, Helvetica, sans-serif;
+  line-height:14px;
+	width:160px;
+	overflow:hidden;
+}
+.mc-card .member-details .info span{ 
+  font-family:tahoma, Arial, Helvetica, sans-serif ;
+}
+.mc-card .member-details .info a{
+  color:#000000;
+}
+.print{
+  display:none;
+}
+.layout_mcard_print_card h4{
+	text-align:center;
+}
+.layout_mcard_print_card h4 + div{
+	float:none !important;
+	margin:0 auto;
+	overflow:hidden;
+}

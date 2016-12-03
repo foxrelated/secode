@@ -1,0 +1,6 @@
+/* $Id: main.css 2014-01-02 00:00:00Z SocialEngineAddOns $ Copyright 2013-2014 BigStep Technologies Pvt. Ltd. $ */
+#siteevent-siteeventinvite{
+    display: none;
+}
+
+label[for="siteevent-siteeventinvite"] { display: none !important; }

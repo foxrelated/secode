@@ -1,0 +1,66 @@
+<?php
+
+class Store_Model_DbTable_Brequests extends Engine_Db_Table
+{
+	protected $_serializedColumns = array('product_ids');
+	protected $_rowClass = "Store_Model_Brequest";
+	
+	public function getRequestCountByProductId($product_id) {
+		$select = $this->select()->where('product_id = ?',$product_id)->where('status = ?','pending');
+		$result = $this->fetchAll($select);
+		return count($result);
+	}
+	
+	public function getRequestsByProductId($product_id) {
+		$select = $this->select()->where('product_id = ?',$product_id)->where('status = ?','pending')->order('creation_date DESC');
+		$paginator = Zend_Paginator::factory($select);
+		return $paginator;
+	}
+	
+	public function hasSuccessRequest($requester, $owner) {
+		$tblName = $this->info('name');
+		$productTblName = Engine_Api::_()->getDbTable('products', 'store')->info('name');
+		$select = $this->select()
+			->from($tblName)
+			->setIntegrityCheck(false)
+			->joinLeft($productTblName, "`{$productTblName}`.`product_id` = `{$tblName}`.`product_id`", null)
+			->where("$tblName.user_id = ?", $requester->getIdentity())
+			->where("$productTblName.owner_id = ?", $owner->getIdentity())
+			->where("$tblName.status = ?", 'approve');
+		$row = $this->fetchRow($select);
+		return ($row) ? true : false;
+	}
+        
+        public function getSuccessRequests($requester, $owner, $item = false, $options = array()) {
+		$tblName = $this->info('name');
+		$productTblName = Engine_Api::_()->getDbTable('products', 'store')->info('name');
+		$select = $this->select()
+			->from($tblName)
+			->setIntegrityCheck(false)
+			->joinLeft($productTblName, "`{$productTblName}`.`product_id` = `{$tblName}`.`product_id`", null)
+			->where("$tblName.user_id = ?", $requester->getIdentity())
+			->where("$productTblName.owner_id = ?", $owner->getIdentity())
+                        ->group("$tblName.product_id")        
+			->where("$tblName.status = ?", 'approve');
+                        
+		$requests = $this->fetchAll($select);	
+                if($item === true) {
+                    $items = array();
+                    foreach($requests as $r) {
+                        $items[] = Engine_Api::_()->getItem('store_product',$r->product_id);
+                    }
+                    if(!empty($options['assoc']) && $options['assoc'] === true) {
+                        $assoc_items = array();
+                        foreach($items as $item) {
+                            $assoc_items[$item->getIdentity()] = $item->getTitle();
+                        }
+                        return $assoc_items;
+                    }else{
+                        return $items;
+                    }
+                }
+                
+                return $requests;
+                
+	}
+}

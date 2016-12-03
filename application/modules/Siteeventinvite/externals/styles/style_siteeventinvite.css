@@ -1,0 +1,291 @@
+/* $Id: style_siteeventinvites.css 2014-01-02 00:00:00Z SocialEngineAddOns $ Copyright 2013-2014 BigStep Technologies Pvt. Ltd. $ */
+
+.siteevent_viewevents_head{
+	padding-bottom:5px;
+	overflow:auto;
+	margin-bottom:10px;
+}
+.siteevent_viewevents_head h2{
+	font-size: 17px;
+	letter-spacing: normal;
+	overflow: hidden;
+	margin-bottom:3px;
+}
+.siteevent_viewevents_head > a{
+	float:left;
+}
+.siteevent_viewevents_head img{
+	float:left;
+	margin-right:5px;
+}
+/* css for view all friend eventinvites */
+#eventinvite_list_box{
+	width:100%;
+	float:left;
+	display:block;
+	margin:0;
+	padding:0;
+	margin-bottom:15px;
+}
+#eventinvite_list_box .heading{
+	display:block;
+	font-weight:bold;
+	font-size:13px;
+	margin-bottom:10px;
+	border-bottom-width:1px;
+	padding:5px;
+}
+#eventinvite_list_box .list{
+	float:left;
+	margin:10px;
+	width:25%;
+	height:60px;
+}
+#eventinvite_list_box .list .user_photo{
+	width:65px;
+	float:left;
+}
+#eventinvite_list_box .list .user_details{
+	float:left;
+	width:60%;
+}
+#eventinvite_list_box .list .user_details .name{
+	margin-bottom:5px;
+	font-size:12px;
+	font-weight:bold;
+}
+#eventinvite_list_box .list .user_details .buttonlink{
+	font-weight:normal !important;
+	font-size:11px;
+	line-height:16px;
+} 
+.eventinvites-friends{
+	clear:both;
+	float:left;
+	width:100%;
+	padding:10px 0;
+	border-bottom-width:1px;
+}
+.eventinvites-friends .event-heading{
+	font-weight:bold;
+	font-size:14px;
+	padding:5px 0;
+}
+.eventinvites-friends .header{
+	width:100%;
+	float:left;
+}
+.eventinvites-friends .header .title{
+	font-weight:bold;
+	float:left;
+}
+.eventinvites-friends .title img{
+	float:left;
+	margin-right:5px;
+}
+.eventinvites-friends .title .siteevent_buttonlink{
+  clear: both;
+  float: left;
+  margin: 10px 0 0 22px;
+}
+.eventinvites-friends .header .webmail-options{
+	float:right;
+	font-size:11px;
+	width:170px;
+}
+.eventinvites-friends .header .webmail-options .icons{
+	float:left;
+	margin-top:3px;	
+}
+.eventinvites-friends .header .webmail-options .icons a{
+	margin:0 2px;
+	float:left;
+}
+.eventinvites-friends .sub-title{
+	clear:left;
+	margin:10px 0 0 10px;
+	float:left;
+	font-size:11px;
+	font-weight:bold;
+}
+.eventinvites-friends .sub-txt{
+	clear:left;
+	margin:10px 0 0 10px;
+	float:left;
+	line-height:20px;
+	font-size:11px;
+	color:$theme_font_color_light;
+}
+.eventinvites-friends .sub-txt img{
+	float:left;
+	margin-right:5px;
+}
+.eventinvites-friends .webacc-logos {
+	clear:both;
+	margin-top:10px;
+	float:left;
+	width:600px;
+}
+.eventinvites-friends .webacc-logos .webacc-logos-img{
+	width:64px;
+	float:left;
+	margin:5px;
+	height:64px;
+}
+.eventinvites-friends .upload-contact-file{
+	clear:both;
+	margin-top:10px;
+	float:left;
+	margin-left:10px;
+}
+.eventinvites-friends .upload-contact-file .op-cat{
+	float:left;
+	margin-right:10px;
+}
+.eventinvites-friends .upload-contact-file .op-field{
+	float:left;
+}
+.eventinvites-friends .upload-contact-file .op-field span{
+	font-size:11px;
+	color:$theme_font_color_light;
+}
+.eventinvites-friends .event-des {
+	font-size:11px;
+	color:$theme_font_color_light;
+}
+.eventinvites-friends .help-link{
+	float:right;
+	margin-top:10px;
+	font-size:11px;
+	width:170px;
+}
+.eventinvites-friends .help-link img{
+	float:left;
+	margin-right:2px;
+}
+.eventinvites-friends .people-search{
+	float:left;
+	margin:10px 0 0 20px;
+}
+.eventinvites-friends .member-friend-list{
+	float:left;
+	clear:both;
+	width:500px;
+	max-height:300px;
+	overflow:auto;
+	margin-top:10px;	
+}
+.eventinvites-friends .member-friend-list table{
+	border-width:2px;
+
+}
+.eventinvites-friends .member-friend-list td{
+	border-bottom-width:1px;
+	padding:5px;
+}
+.eventinvites-friends .buttons{
+	clear:both;
+	margin:10px 0 0 5px;
+	float:left;
+}
+.eventinvites-friends .buttons form{
+	float:left;
+}
+.siteeventinvite-send-button{
+	margin-right:4px;
+	float:left;
+}
+.siteeventinvite-success-message{
+	float:left;
+	margin:0;
+}
+.siteeventinvite-success-message li{
+	width:680px;
+}
+.eventinvites-friends .buttons button.disabled
+{
+  background-color: #868686;
+}
+.eventinvites-help-popup{
+	height:300px;
+	overflow:auto;
+	width:460px;
+	margin-bottom:15px;
+}
+.eventinvites-help-popup li{
+	padding:5px 0;
+	list-style:none;
+}
+.eventinvites-help-popup li ul{
+	padding:0 10px;
+	list-style:none;
+}
+.eventinvites-help-popup li ul li{
+	font-size:11px;
+	padding:2px 0;
+}
+.eventinvites-help-popup li a{
+	color: $theme_link_color !important;
+	font-weight:bold;
+}
+.eventinvites-mail-supported img{
+	float:left;
+	margin-right:10px;
+	vertical-align:middle;
+	margin-top:5px;
+}
+#global_page_siteeventinvite-index-inviteusers .global_form div.form-label{width:60px;}
+
+/*invite lightbox*/
+.siteeventinvite_popup_heading{
+	font-weight:bold;
+	font-size:14px;
+	margin:15px 0;
+	float:left;
+	width:100%;
+}
+.siteeventinvite_popup_suggestion_preview{
+	border-width:1px;
+	float: left;
+	margin: 0 0 10px;
+	padding: 5px;
+}
+.siteeventinvite_popup_suggestion{
+	border-width:1px;
+	float: left;
+	margin: 10px 0;
+	padding: 5px;
+}
+.siteeventinvite_popup_suggestion span.siteevent_notification{
+	background-image:url(../images/siteevent_sugg.png);
+	background-repeat:no-repeat;
+	display: block;
+	font-size: 11px;
+	font-weight: bold;
+	height: 16px;
+	padding-left: 23px;
+}
+.siteeventinvite_popup_email_preview{
+	margin-top:5px;
+}
+.siteeventinvite_popup_email_preview > table > tbody > tr > td{
+	padding:0px !important;
+}
+#global_page_siteeventinvite-index-invitepreview .buttons{
+	clear:both;
+	width:90%;
+	margin-top:15px;
+}
+.eventinvites-friends .buttons button.disabled:hover {
+	background-color: $theme_button_background_color_hover;
+}
+
+/*Responsive css start from here*/
+@media only screen and (max-width: 920px) {
+	div.siteevent_viewevents_head {padding: 10px;}
+	div.eventinvites-friends {box-sizing: border-box; padding: 10px;}
+	div.eventinvites-friends .webacc-logos { width: 100%;}
+	div.eventinvites-friends .webacc-logos .webacc-logos-img {margin: 10px; width: auto;}
+	div.eventinvites-friends .title .siteevent_buttonlink {float: none;}
+	ul.siteeventinvite-success-message li { box-sizing: border-box; width: 100%;}
+}

@@ -1,0 +1,934 @@
+/* $Id: mobile.css 2011-05-05 9:40:21Z SocialEngineAddOns Copyright 2010-2011 BigStep Technologies Pvt. Ltd. $ */.clear{clear:both !important;}
+.item_icon_sitepage{
+	background-image:url(~/application/modules/Sitepage/externals/images/icons/sitepage.png);
+}
+.fleft{float:left!important;}
+.fright{float:right!important;}
+.mright10{margin-right:10px;!important}
+.mtop10{margin-top:10px!important;}
+.mleft5{margin-top:5px!important;}
+.mtop15{margin-top:15px!important;}
+.mbot15{margin-bottom:15px!important;}
+.ptop10{padding-top:10px!important;}
+.p5{padding:15px!important;}
+.border0{border:none !important}
+.bold{font-weight:bold!important;}
+.widthfull{width:100%!important;}
+
+.navigation .sitepage_main_create,
+.navigation .sitepage_main_claim{
+	display:none;
+}
+.layout_sitepage_recently_popular_random_sitepage #sitepage_home_page_tab5,
+.layout_sitepage_recently_popular_random_sitepage #sitepage_home_page_tab4{
+	display:none;
+}
+/*CSS FOR ALL LISTINGS SATRT HERE*/
+.sitepage_view_grid{
+	display:none !important;
+}
+ul.seaocore_browse_list
+{
+  clear: both;
+}
+ul.seaocore_browse_list > li
+{
+  clear: both;
+  padding: 0px 0px 15px 0px;
+  overflow: hidden;
+}
+ul.seaocore_browse_list > li .lists_highlight{
+	background-color:$theme_foreground_background_color;
+	padding:5px;
+}
+ul.seaocore_browse_list > li + li
+{
+  padding-top: 15px;
+  border-top-width: 1px;
+}
+ul.seaocore_browse_list .seaocore_browse_list_photo
+{
+  float: left;
+  overflow: hidden;
+  margin-right: 8px;
+}
+ul.seaocore_browse_list .seaocore_browse_list_photo img
+{
+  width: 100px;
+}
+ul.seaocore_browse_list .seaocore_browse_list_options
+{
+  float: right;
+  overflow: hidden;
+  padding-left: 20px;
+	width:150px;
+	display:none;
+}
+ul.seaocore_browse_list .seaocore_browse_list_options > a
+{
+  clear: both;
+  display: block;
+  margin: 5px;
+  font-size: .8em;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+ul.seaocore_browse_list .seaocore_browse_list_info
+{
+  overflow: hidden;
+}
+ul.seaocore_browse_list .seaocore_browse_list_info_title
+{
+	font-weight:bold;
+	overflow:hidden;
+}
+ul.seaocore_browse_list .seaocore_browse_list_info_title h3
+{
+  margin: 0px;
+	overflow:hidden;
+}
+ul.seaocore_browse_list .seaocore_browse_list_info_title .seaocore_title
+{
+	overflow:hidden;
+	font-weight:bold;
+}
+ul.seaocore_browse_list .seaocore_browse_list_info_title span{
+	float:right;
+	margin-right:5px;
+	margin-left:5px;
+}
+ul.seaocore_browse_list .seaocore_browse_list_info_title span.list_rating_star span
+{
+	float:left;
+	margin:2px;
+}
+ul.seaocore_browse_list .seaocore_browse_list_info_date
+{
+  font-size: .8em;
+  color: $theme_font_color_light;
+}
+ul.seaocore_browse_list .seaocore_browse_list_info_blurb
+{
+  margin-top: 5px;
+}
+#global_page_sitepage-mobi-index .seaocore_browse_list_info_title span{
+	display:none;
+}
+.seaocore_browse_list_info .sitepageoffer_box{
+	display:none;
+}
+/*CSS FOR ALL LISTINGS END HERE*/
+/*css for all modules view page*/
+.sitepage_viewpages_head {
+	padding-bottom:0 !important;
+	overflow:auto;
+	margin-bottom:5px !important;
+}
+.sitepage_viewpages_head img{
+	display:none;
+}	
+.sitepage_viewpages_head h2 {
+	overflow:hidden;
+	font-size:17px;
+	text-align:center;
+}
+.sitepage_viewpages_head > a {
+	float:left;
+}
+/*sitepage home page and browse page tabs content*/
+.layout_core_container_tabs {
+	clear:both;
+}
+#global_page_sitepage-index-home .layout_core_container_tabs .tabs_alt {
+	margin-bottom:5px !important;
+}
+.sitepage_view_select {
+	clear:both;
+	width:100%;
+	padding:0 0 5px 0;
+	float:left;
+	border-bottom-width:1px;
+	margin-bottom:10px;
+}
+.sitepage_view_select span {
+	cursor:pointer;
+	float:right;
+	margin:3px 10px;
+}
+.layout_sitepage_recently_popular_random_sitepage {
+	margin-bottom:15px;
+}
+.sitepage_img_view {
+	clear:both;
+	width:100%;
+}
+.sitepage_img_view_sitepage {
+	overflow:hidden;
+	width:100%;
+	float:left;
+	clear:both;
+}
+.sitepage_img_view .sitepage_browse_thumb {
+	display: block;
+	height: 190px;
+	margin: 10px auto;
+	padding: 2px;
+	text-align: center;
+	width: 102px;
+}
+.sitepage_img_view .sitepage_browse_thumb > div {
+	float:left;
+	display:block;
+	width:102px;
+	position:relative;
+	margin-bottom:3px;
+}
+.sitepage_img_view .sitepage_browse_thumb > div > a {
+	border-width:1px;
+	border-style:solid;
+	display:inline-block;
+	vertical-align:bottom;
+}
+.sitepage_img_view .sitepage_browse_thumb > div > a:hover {
+	border-width:1px;
+	border-style:solid;
+}
+.sitepage_img_view .sitepage_browse_thumb > div > a > span {
+	width:100px;
+	height:150px;
+	background-position:center 50%;
+	display:block;
+	background-repeat:no-repeat;
+}
+.sitepage_browse_thumb ul, .sitepage_browse_thumb ul li {
+	margin:0px;
+	padding:0px;
+}
+.sitepage_browse_thumb ul li > a {
+	font-size:11px;
+}
+.sitepage_browse_thumb_hover_color {
+	background-color:#000;
+	opacity:0.2;
+	filter:alpha(opacity=20);
+	position: absolute;
+	width:102px;
+	height:152px;
+	top:0;
+	z-index:100;
+}
+.sitepage_browse_thumb_hover_like_button {
+	margin-left:28px;
+	position:absolute;
+	top:64px;
+	z-index:110;
+}
+.sitepage_browse_thumb_hover_unlike_button {
+	margin-left:20px;
+	position:absolute;
+	top:66px;
+	z-index:110;
+}
+.sitepage_browse_thumb_hover_loader {
+	margin-left: 35px;
+	position: absolute;
+	top: 65px;
+	z-index: 110;
+}
+.sitepage_browse_liked,
+.sitepage_browse_liked ul li > a{
+	background-color:$theme_buttontabs_background_color_active;
+	color:$theme_buttontabs_font_color_active;
+}
+/* like button start here */
+.layout_sitepage_title_sitepage #profile_status > h2 {
+	letter-spacing:0px;
+}
+.layout_sitepage_profile_status {
+	float:left;
+}
+.layout_sitepage_page_like_button {
+	float:left;
+	margin-bottom:5px;
+}
+/*sitepage profile page*/
+#global_page_sitepage-mobi-view .layout_core_container_tabs .tip{ display:none;}
+.layout_sitepage_overview_sitepage .seaocore_add{display:none;}
+.layout_sitepage_title_sitepage #profile_status{
+	text-align:center;
+}
+.layout_sitepage_mainphoto_sitepage {
+	margin:10px auto;
+	width:200px;
+	overflow: hidden;
+	clear:both;
+}
+.layout_sitepage_mainphoto_sitepage .sitepage_photo > img{
+	width:200px;
+	border:none !important;
+}
+.sitepage_photo_edit_wrapper .sitepage_photo_edit{display:none !Important;}
+.sitepage_profile_sponsorfeatured {
+	height:30px;
+	width:100%;
+	clear:both;
+	text-align:center;
+	line-height:30px;
+	font-size:17px;
+	color:#fff;
+	font-weight:bold;
+	text-shadow:#666 0px 0px 5px;
+}
+.layout_sitepage_info_sitepage .comments{
+	width:auto;
+}
+.layout_sitepage_info_sitepage .comments .comments_options
+{
+	text-align:left;
+}
+.layout_sitepage_overview_sitepage .tip{
+	display:none;
+}
+.page_photo_lightbox_content{
+	background-color:$theme_body_background_color;
+}
+li.sitepageoffer_show {
+	border:2px dashed $theme_foreground_border_color !important;
+	border-top:2px dashed $theme_foreground_border_color !important;
+	background-color:$theme_foreground_background_color;
+}
+/*FEED ITEMS*/
+ul.feed .feed_attachment_sitepage_page {
+	display:block;
+	overflow:hidden;
+	margin:0px 5px 5px 0px;
+	vertical-align:top;
+}
+ul.feed .feed_attachment_sitepage_page > div > a {
+	display:block;
+	float:left;
+	margin-right:7px;
+}
+ul.feed .feed_attachment_sitepage_page > div > a > img {
+	display:inline-block;
+	max-width:90px;
+	max-height:90px;
+	vertical-align:top;
+}
+ul.feed .feed_attachment_sitepage_page > div > div {
+	overflow:hidden;
+}
+
+
+/*activity feeds*/
+/*sitepagenote feed item start here*/
+.feed_attachment_sitepagenote_note > div{
+  overflow: hidden;
+}
+.feed_attachment_sitepagenote_note > div > a{
+  display: inline-block;
+  float: left;
+  margin-right: 7px;
+}
+.feed_attachment_sitepagenote_note > div > a > img{
+  display: block;
+  max-width: 90px;
+  max-height: 90px;
+}
+.feed_attachment_sitepagenote_note > div > div{
+  overflow: hidden;
+}
+/*sitepagenote feed item end here*/
+/*sitepagevent feed item start here*/
+.feed_attachment_sitepageevent_event > div{
+  overflow: hidden;
+}
+.feed_attachment_sitepageevent_event > div > a{
+  display: inline-block;
+  float: left;
+  margin-right: 7px;
+}
+.feed_attachment_sitepageevent_event > div > a > img{
+  display: block;
+  max-width: 90px;
+  max-height: 90px;
+}
+.feed_attachment_sitepageevent_event > div > div{
+  overflow: hidden;
+}
+/*sitepagevent feed item end here*/
+/*sitepageoffer feed item start here*/
+.feed_attachment_sitepageoffer_offer > div{
+  overflow: hidden;
+}
+.feed_attachment_sitepageoffer_offer > div > a{
+  display: inline-block;
+  float: left;
+  margin-right: 7px;
+}
+.feed_attachment_sitepageoffer_offer > div > a > img{
+  display: block;
+  max-width: 90px;
+  max-height: 90px;
+}
+.feed_attachment_sitepageoffer_offer > div > div{
+  overflow: hidden;
+}
+/*sitepageoffer feed item end here*/
+/*CSS FOR ALL SITEPAGE MODULE LIST ON SITEPAGE PROFILE START HERE*/
+.layout_core_container_tabs .layout_right{
+ display:none;
+}
+.seaocore_add,
+.layout_sitepagemusic_profile_sitepagemusic > h3,
+.layout_sitepageform_sitepage_viewform > h3,
+.layout_sitepageoffer_profile_sitepageoffers > h3,
+.layout_sitepage_discussion_sitepage > h3,
+.layout_sitepagereview_profile_sitepagereviews h3,
+.layout_sitepagepoll_profile_sitepagepolls h3,
+.layout_sitepageevent_profile_sitepageevents > h3,
+.layout_sitepagenote_profile_sitepagenotes h3,
+.layout_sitepagedocument_profile_sitepagedocuments > h3{
+	display:none;
+}
+.layout_sitepagereview_profile_sitepagereviews .seaocore_add{
+	display:block;
+}
+ul.sitepage_profile_list {
+	clear:both;
+}
+ul.sitepage_profile_list > li {
+	clear:both;
+	padding:10px;
+	overflow:hidden;
+}
+ul.sitepage_profile_list > li + li {
+	border-top-width:1px;
+	padding-top:15px;
+}
+ul.sitepage_profile_list > li > img, 
+ul.sitepage_profile_list > li > a {
+	display:block;
+	float:left;
+	overflow:hidden;
+	margin-right:8px;
+	font-weight:bold;
+}
+ul.sitepage_profile_list li > a img {
+	border-width:1px;
+}
+ul.sitepage_profile_list li .sitepage_profile_list_options {
+	display:none;
+}
+ul.sitepage_profile_list li .sitepage_profile_list_info {
+	overflow:hidden;
+}
+ul.sitepage_profile_list li .sitepage_profile_list_title {
+	font-weight:bold;
+	margin-bottom:5px;
+	overflow:auto;
+}
+ul.sitepage_profile_list li .sitepage_profile_list_title > a, 
+ul.sitepage_profile_list li .sitepage_profile_list_title .list_title {
+	font-size:14px;
+	overflow:hidden;
+}
+ul.sitepage_profile_list li .sitepage_profile_list_title span {
+	float:right;
+}
+ul.sitepage_profile_list li .sitepage_profile_list_info_date {
+	font-size:.8em;
+	color:$theme_font_color_light;
+}
+ul.sitepage_profile_list li .sitepage_profile_list_info_date .rating_star_big_generic {
+	width:8px;
+	height:8px;
+}
+ul.sitepage_profile_list li .sitepage_profile_list_info_des {
+	margin-top:5px;
+}
+/*CSS FOR ALL SITEPAGE MODULE LIST ON SITEPAGE PROFILE END HERE*/
+/*sitepage list filters start here*/
+.sitepage_list_filters {
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	padding:7px;
+	overflow:hidden;
+	margin-bottom:15px;
+	clear:both;
+	+foreground;
+}
+.sitepage_list_filter_first {
+	float:left;
+	width:auto !important;
+	padding-top:3px;
+}
+.sitepage_list_filter_field {
+	float:left;
+	width:auto!important;
+}
+.layout_sitepageevent_profile_sitepageevents .sitepage_list_filter_field{
+	width:auto!important;
+}
+/*sitepage list filters end here*/
+
+
+
+
+/*css for all icon and constand start here*/
+/* ICONS */
+.icon_sitepage_ad_create {
+	background-image:url(~/application/modules/Sitepage/externals/images/icons/plus16.gif);
+}
+.icon_sitepage_update {
+	background-image:url(~/application/modules/Sitepage/externals/images/update.png);
+}
+.icon_sitepage_info {
+	background-image:url(~/application/modules/Sitepage/externals/images/info.png);
+}
+.icon_sitepage_form {
+	background-image:url(~/application/modules/Sitepage/externals/images/form.png);
+}
+.icon_sitepage_publish {
+	background-image:url(~/application/modules/Sitepage/externals/images/sitepage_publish.png);
+}
+.icon_sitepages_invite {
+	background-image:url(~/application/modules/Sitepage/externals/images/invite.png);
+}
+.icon_sitepages_new {
+	background-image:url(~/application/modules/Sitepage/externals/images/create.png);
+}
+.icon_sitepages_edit {
+	background-image:url(~/application/modules/Sitepage/externals/images/edit.png);
+}
+.icon_sitepages_dashboard {
+	background-image:url(~/application/modules/Sitepage/externals/images/dashboard.png);
+}
+.icon_sitepages_close {
+	background-image:url(~/application/modules/Sitepage/externals/images/close.png);
+}
+.icon_sitepages_open {
+	background-image:url(~/application/modules/Sitepage/externals/images/unclose.png);
+}
+.icon_sitepages_delete {
+	background-image:url(~/application/modules/Sitepage/externals/images/delete.png);
+}
+.icon_sitepages_add {
+	background-image:url(~/application/modules/Sitepage/externals/images/plus_icon.png);
+}
+.icon_sitepages_photo_new {
+	background-image:url(~/application/modules/Sitepage/externals/images/upload.png);
+}
+.icon_sitepages_back {
+	background-image:url(~/application/modules/Sitepage/externals/images/back.png);
+}
+.icon_sitepages_share {
+	background-image:url(~/application/modules/Sitepage/externals/images/share.png);
+}
+.icon_sitepages_print {
+	background-image:url(~/application/modules/Sitepage/externals/images/printer.png);
+}
+.icon_sitepages_report {
+	background-image:url(~/application/modules/Sitepage/externals/images/report.png);
+}
+.icon_sitepages_tellafriend {
+	background-image:url(~/application/modules/Sitepage/externals/images/tellafriend_icon.png);
+}
+.sitepage_quick_create {
+	background-image:url(~/application/modules/Sitepage/externals/images/icons/sitepage_add.png);
+}
+.notification_type_sitepage_manageadmin, .activity_icon_sitepage_new {
+	background-image:url(~/application/modules/Sitepage/externals/images/icons/sitepage.png);
+}
+.sitepage_gutter_editstyle {
+	background-image:url(~/application/modules/Sitepage/externals/images/style.png);
+}
+.icon_sitepages_overview, .sitepage_gutter_editoverview {
+	background-image:url(~/application/modules/Sitepage/externals/images/overview_icon.png);
+}
+.icon_sitepages_map {
+	background-image:url(~/application/modules/Sitepage/externals/images/map.png);
+}
+.icon_sitepages_map_edit {
+	background-image:url(~/application/modules/Sitepage/externals/images/map_edit_icon.png);
+}
+.item_icon_sitepage_photo,
+.activity_icon_sitepage_photo_upload {
+	background-image:url(~/application/modules/Sitepage/externals/images/photo/view.png);
+}
+.icon_sitepages_comment {
+	background-image:url(~/application/modules/Sitepage/externals/images/comment.png);
+}
+.item_icon_sitepage_topic, .activity_icon_sitepage_topic_create, .icon_sitepages_discussion {
+	background-image:url(~/application/modules/Sitepage/externals/images/comment.png);
+}
+.sitepage_gutter_favourite {
+	background-image:url(~/application/modules/Sitepage/externals/images/link.gif);
+}
+.sitepage_gutter_favouritedelete {
+	background-image:url(~/application/modules/Sitepage/externals/images/unlink.gif);
+}
+.sitepage_gutter_editlayout {
+	background-image:url(~/application/modules/Sitepage/externals/images/layout_edit.png);
+}
+.icon_sitepages_dispute {
+	background-image:url(~/application/modules/Sitepage/externals/images/icon-dispute.gif);
+}
+.icon_sitepages_claim {
+	background-image:url(~/application/modules/Sitepage/externals/images/claim.png);
+}
+.icon_sitepages_page-owner {
+	background-image:url(~/application/modules/Sitepage/externals/images/page-owner.png);
+}
+.icon_sitepage_back {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/back16.gif);
+}
+.sitepge_photos_list div.thumb_photo .photo_hide a {
+	background-image: url(~/application/modules/Sitepage/externals/images/close_icon.png) !important;
+}
+.icon_sitepage_page_link {
+	background-image: url(~/application/modules/Sitepage/externals/images/page_link.png);
+}
+/*css for all link button start here*/
+.sitepage_badge_buttons a,
+.sitepage_featuredadmins_add a, .sitepage_create_link a, .sitepage_getstarted_btn a, .sitepage_edit_content .sitepage_edit_header > a {
+	padding:5px 10px;
+	font-weight:bold;
+	border:none;
+	background-repeat:repeat-x;
+	background-position:0px 1px;
+	font-size:11px;
+	outline:none;
+}
+.sitepage_badge_buttons a:hover, 
+.sitepage_featuredadmins_add a:hover, .sitepage_create_link a:hover, .sitepage_getstarted_btn a:hover, .sitepage_edit_content .sitepage_edit_header > a:hover {
+	cursor:pointer;
+	text-decoration:none;
+}
+/*css for all link button end here*/
+/*css for all icon and constand end here*/
+/*discussion icon start here*/
+.icon_sitepage_post_new {
+	background-image: url(~/application/modules/Sitepage/externals/images/post/create.png);
+}
+.icon_sitepage_post_edit {
+	background-image: url(~/application/modules/Sitepage/externals/images/post/edit.png);
+}
+.icon_sitepage_post_reply {
+	background-image: url(~/application/modules/Sitepage/externals/images/post/reply.png);
+}
+.icon_sitepage_post_stick {
+	background-image: url(~/application/modules/Sitepage/externals/images/post/stick.png);
+}
+.icon_sitepage_post_unstick {
+	background-image: url(~/application/modules/Sitepage/externals/images/post/unstick.png);
+}
+.icon_sitepage_post_close {
+	background-image: url(~/application/modules/Sitepage/externals/images/post/close.png);
+}
+.icon_sitepage_post_open {
+	background-image: url(~/application/modules/Sitepage/externals/images/post/unclose.png);
+}
+.icon_sitepage_post_rename {
+	background-image: url(~/application/modules/Sitepage/externals/images/post/rename.png);
+}
+.icon_sitepage_post_delete {
+	background-image: url(~/application/modules/Sitepage/externals/images/post/delete.png);
+}
+.icon_sitepage_post_quote {
+	background-image: url(~/application/modules/Sitepage/externals/images/post/quote.png);
+}
+.icon_sitepage_topic_watch {
+	background-image: url(~/application/modules/Sitepage/externals/images/watch.png);
+}
+.icon_sitepage_topic_unwatch {
+	background-image: url(~/application/modules/Sitepage/externals/images/unwatch.png);
+}
+.icon_sitepage_photo_new {
+	background-image: url(~/application/modules/Sitepage/externals/images/photo/upload.png);
+}
+.icon_sitepage_photo_view {
+	background-image: url(~/application/modules/Sitepage/externals/images/photo/view.png);
+}
+ul.sitepage_sitepages .sitepage_sitepages_sticky a {
+	background-image: url(~/application/modules/Sitepage/externals/images/post/stick.png);
+}
+div.sitepage_sitepages_thread_options_closed {
+	background-image: url(~/application/modules/Sitepage/externals/images/post/close.png);
+}
+.activity_icon_sitepage_topic_reply, .item_icon_sitepage_post, .notification_type_sitepage_discussion_response, .notification_type_sitepage_discussion_reply {
+	background-image: url(~/application/modules/Sitepage/externals/images/types/post.png);
+}
+/*discussion icon end here*/
+/*note icon start here*/
+ /* ICONS */
+.activity_icon_sitepagenote_admin_new, .activity_icon_sitepagenote_new, .icon_sitepagenote_note {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/note.png);
+}
+.icon_sitepagenote_new {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/new.png);
+}
+.icon_sitepagenote_edit {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/edit.png);
+}
+.icon_sitepagenote_delete {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/delete.png);
+}
+.icon_sitepagenote_photo_new {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/upload.png);
+}
+.icon_sitepagenote_photo_edit {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/album_editinfo.png);
+}
+.icon_sitepagenote_viewall {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/note.png);
+}
+.icon_sitepagenote_publish {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/sitepagenote_publish.png);
+}
+.icon_sitepagenote_photos_flip_horizontal {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/flip_horizontal.png);
+}
+.icon_sitepagenote_photos_flip_vertical {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/flip_vertical.png);
+}
+.icon_sitepagenote_photos_rotate_ccw {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/rotate_ccw.png);
+}
+.icon_sitepagenote_photos_rotate_cw {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/rotate_cw.png);
+}
+/*note icon end here*/
+/*event icon start here*/
+.notification_type_sitepageevent_invite, 
+.notification_type_sitepageevent_accepted,
+.icon_sitepageevent,
+.item_icon_sitepageevent_event {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/sitepageevent.png);
+}
+.icon_sitepageevent_new, .icon_sitepageevent_create {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/sitepageevent_create.png);
+}
+.icon_sitepageevent_edit {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/edit.png);
+}
+.activity_icon_sitepageevent_join,
+.icon_sitepageevent_join {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/sitepageevent_join.png);
+}
+.icon_sitepageevent_delete {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/delete.png);
+}
+.icon_sitepageevent_leave {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/sitepageevent_leave.png);
+}
+.icon_sitepageevent_accept {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/sitepageevent_accept.png);
+}
+.icon_sitepageevent_reject {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/sitepageevent_reject.png);
+}
+.icon_sitepageevent_cancel {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/sitepageevent_cancel.png);
+}
+.sitepageevent_rsvp .sitepageevent_radio_loading {
+	background-image: url(~/application/modules/Sitepage/externals/images/loading.gif);
+}
+/*event icon end here*/
+/*poll icon start here*/
+ /* ACTION TYPE ICONS */
+.activity_icon_comment_sitepagepoll {
+	background-image: url(~/application/modules/Sitepage/externals/images/types/post.png);
+}
+/* ITEM TYPE ICONS */
+.item_icon_sitepagepoll_detail,
+.icon_sitepagepoll_viewall,
+.item_icon_sitepagepoll_poll,
+.item_icon_sitepagepoll {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/sitepagepoll.png) !important;
+}
+/* ICONS */
+.icon_sitepagepoll_new {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/sitepagepoll_new.png);
+}
+.icon_sitepagepoll_delete {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/sitepagepoll_delete.png);
+}
+.sitepagepoll_view_single .sitepagepoll_radio_loading {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/loading.gif);
+}
+/*poll icon end here*/
+/*document icon start here*/
+.activity_icon_comment_sitepagedocument {
+	background-image: url(~/application/modules/Sitepage/externals/images/types/post.png);
+}
+.item_icon_sitepagedocument {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/sitepagedocument.png) !important;
+}
+.icon_sitepagedocument_new {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/sitepagedocument_new.png);
+}
+.icon_sitepagedocument_edit {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/sitepagedocument_edit.png);
+}
+.icon_sitepagedocument_delete {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/sitepagedocument_delete.png);
+}
+.item_icon_sitepagedocument_detail, .icon_sitepagedocument_viewall {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/sitepagedocument_allentries.png);
+}
+.icon_sitepagedocument_featured0 {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/sitepagedocument_goldmedal0.png);
+}
+.icon_sitepagedocument_featured1 {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/sitepagedocument_goldmedal1.png);
+}
+.icon_sitepagedocument_publish {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/sitepagedocument_publish.png);
+}
+.item_icon_sitepagedocument_document {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/sitepagedocument16.png);
+}
+/*document icon end here*/
+/*video icons start here*/
+ /* ICONS */
+.item_icon_sitepagevideo_video, .activity_icon_sitepagevideo_new, .icon_type_sitepagevideo {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/video16.png);
+}
+.icon_sitepagevideo_comment {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/comment.png);
+}
+.icon_type_sitepagevideo_new {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/sitepagevideo_new.png);
+}
+.icon_type_sitepagevideo_edit {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/edit.png);
+}
+.icon_type_sitepagevideo_delete {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/delete.png);
+}
+.icon_type_sitepagevideo_back {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/back.gif);
+}
+.icon_type_sitepagevideo_share {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/share.png);
+}
+.icon_type_sitepagevideo_report {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/sitepagevideo_report.png);
+}
+.icon_type_sitepagevideo_embed {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/embed.png);
+}
+/*video icons end here*/
+/*review icons start here*/
+.activity_icon_sitepagereview_new, .icon_sitepages_review, .activity_icon_review_sitepage {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/review.png);
+}
+.icon_sitepagereview_back {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/back16.gif);
+}
+/*review icons end here*/
+/*offer icons start here*/
+.sitepageoffer_type_offer {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/offer.png);
+}
+.sitepageoffer_type_addoffer {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/add.png);
+}
+.sitepageoffer_type_editoffer {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/edit.png);
+}
+.sitepageoffer_type_deleteoffer {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/delete.png);
+}
+.sitepageoffer_type_makefeatured {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/offer_featured.png);
+}
+.sitepageoffer_type_removefeatured {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/offer_unfeatured.png);
+}
+.item_icon_sitepageoffer_offer {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/offer.png);
+}
+/*offer icons end here*/
+/*invite icons start here*/
+ .sitepageinvite_gutter_sitepageinvite {
+	background-image:url(~/application/modules/Sitepage/externals/images/icons/invite.png);
+}
+.notification_type_sitepage_suggested {
+	background-image:url(~/application/modules/Sitepage/externals/images/icons/sitepage.png);
+}
+/*invite icons end here*/
+/*album icon sstart here*/
+/*icons*/
+.sitepage_icon_photos_new {
+	background-image: url(~/application/modules/Sitepage/externals/images/photo/add.png);
+}
+.activity_icon_sitepagealbum_photo_new, .sitepage_icon_photos_manage {
+	background-image: url(~/application/modules/Sitepage/externals/images/photo/view.png);
+}
+.sitepage_icon_photos_settings {
+	background-image: url(~/application/modules/Sitepage/externals/images/photo/album_editinfo.png);
+}
+.sitepage_icon_photos_delete {
+	background-image: url(~/application/modules/Sitepage/externals/images/photo/album_delete.png);
+}
+.icon_sitepage_photos_flip_horizontal {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/flip_horizontal.png);
+}
+.icon_sitepage_photos_flip_vertical {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/flip_vertical.png);
+}
+.icon_sitepage_photos_rotate_ccw {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/rotate_ccw.png);
+}
+.icon_sitepage_photos_rotate_cw {
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/rotate_cw.png);
+}
+/*album icon end here*/
+/*sitepagemusic icons start here*/
+/* ICONS */
+.icon_sitepagemusic_new{
+  background-image: url(~/application/modules/Sitepage/externals/images/photo/add.png);
+}
+.icon_sitepagemusic_edit{
+  background-image: url(~/application/modules/Sitepage/externals/images/edit.png);
+}
+.icon_sitepagemusic_delete{
+  background-image: url(~/application/modules/Sitepage/externals/images/delete.png);
+}
+.icon_music_playonprofile,
+.icon_music_disableonprofile{
+  background-image: url(~/application/modules/Sitepage/externals/images/upload.png);
+}
+.icon_music_upload{
+  background-image: url(~/application/modules/Sitepage/externals/images/upload.png);
+}
+/*sitepagemusic icons end here*/
+/*Browse Location*/
+.sitepage_map_container, .sitepage_map_container_right{
+	display:none !important;
+}
+.sitepage_advanced_search_form #fieldset-grp3 .form-wrapper{
+	width:auto !important;
+	float:none !important;
+}
+.sitepage_advanced_search_form #fieldset-grp3 .form-element input[type="text"], 
+.sitepage_advanced_search_form #fieldset-grp3 .form-element select{
+	width:95% !important;	
+}
+.sitepage_advanced_search_form #fieldset-grp3 .description{
+	margin-bottom:10px;
+}
+.sitepage_advanced_search_form #advances_search{
+	margin:10px 0 0!important;
+}
+.sitepage_advanced_search_form #fieldset-grp1, 
+.sitepage_advanced_search_form #fieldset-grp2{
+	margin-top:10px !important;
+}
+#global_page_sitepage-index-mobilemap .sitepage_advanced_search_form #fieldset-grp1 .form-wrapper, 
+#global_page_sitepage-index-mobilemap .sitepage_advanced_search_form #fieldset-grp2 .form-wrapper{
+	display:block;
+}

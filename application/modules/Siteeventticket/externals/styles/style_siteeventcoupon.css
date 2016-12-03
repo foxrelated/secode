@@ -1,0 +1,328 @@
+/* $Id: style_siteeventcoupon.css 2015-05-11 00:00:00Z SocialEngineAddOns Copyright 2015-2016 BigStep Technologies Pvt. Ltd. $ */
+
+ /*Create and Edit Form*/
+ #global_page_siteeventcoupon-index-create p.error,
+ #global_page_siteeventcoupon-index-edit p.error{
+	 font-size:11px !important;
+	 color:red;
+ }
+ #global_page_siteeventcoupon-index-create #photo{
+	 float:left;
+	 margin-top:-10px;
+ }
+ #global_page_siteeventcoupon-index-edit input:disabled{
+	 background-color:#E0E0E0;
+ }
+ #global_page_siteeventcoupon-index-create #end_time-wrapper .calendar_output_span,
+ #global_page_siteeventcoupon-index-edit #end_time-wrapper .calendar_output_span {
+	 display:inline-block;
+	 margin-right:15px;
+	 min-width:60px;
+ }
+ #global_page_siteeventcoupon-index-create #end_time-wrapper select + select, 
+ #global_page_siteeventcoupon-index-edit #end_time-wrapper select + select {
+	 margin-left:5px;
+ }
+ #global_page_siteeventcoupon-index-edit #global_content_simple > .clr{
+	 margin:10px;
+	 width:595px;
+ }
+ #global_page_siteeventcoupon-index-edit #global_content_simple .global_form div.form-label{
+	 width:90px;
+ }
+ #global_page_siteeventcoupon-index-edit #global_content_simple .global_form div > p{
+	 min-width:450px;
+ }
+ /*Coupon Listing*/
+ #global_page_siteeventcoupon-index-index div.global_form > div > div > h3{
+	background:none;
+	padding:0px;
+	font-weight:bold;
+	font-size:17px;
+}
+#global_page_siteeventcoupon-index-index div.global_form > div > div > h3{
+	background:none;
+	padding:0px;
+	font-weight:bold;
+	font-size:17px;
+}
+ ul.siteeventcoupon_list{
+	 clear: both;
+ }
+ ul.siteeventcoupon_list > li{
+	 clear: both;
+	 padding: 5px 10px 15px;
+	 overflow: hidden;
+ }
+ ul.siteeventcoupon_list > li + li{
+	 padding-top: 15px;
+	 border-top-width:1px;
+	 border-top-style:solid;
+ }
+ ul.siteeventcoupon_list > li.siteeventcoupon_show + li{
+	 border-top:none;
+ }
+ ul.siteeventcoupon_list .siteeventcoupon_list_options{
+	 float: right;
+	 overflow: hidden;
+	 padding-left: 20px;
+	 width:150px;
+ }
+ ul.siteeventcoupon_list .siteeventcoupon_list_options > a{
+	 clear: both;
+	 display: block;
+	 margin: 5px;
+	 font-size: .8em;
+	 padding-top: 2px;
+	 padding-bottom: 2px;
+ }
+ 
+ /*Coupon View Page*/
+ .siteeventcoupon_view{
+	 clear:both;
+ }
+ .siteeventcoupon_view_stat{
+	 font-size:11px;
+	 margin-bottom:10px;
+ }
+ .siteeventcoupon_view_options a{
+	 margin-bottom:5px;
+ }
+
+
+
+
+
+.icon_siteeventticket_printer {
+  background-image:url(../images/printer.png);
+}
+.icon_siteeventticket_invite {
+  background-image:url(../images/send.png);
+}
+/*Create Coupon*/
+/*Header of Event*/
+.siteevent_viewevents_head{
+	padding-bottom:5px;
+	overflow:auto;
+	margin-bottom:10px;
+}
+.siteevent_viewevents_head img{
+	float:left;
+	margin-right:5px;
+}
+.siteevent_viewevents_head > a{
+	float:left;
+}
+.siteevent_viewevents_head h2{
+	font-size:17px;
+	letter-spacing:normal;
+	overflow:hidden;
+	margin-bottom:3px;
+	vertical-align: middle;
+	display: table-cell;
+	height:48px;
+}
+
+/*Check Availability Button*/
+#coupon_code-element input,
+#coupon_code-element #coupon_code_varifys,
+#coupon_code-element #coupon_code_alert{
+  float:left;
+}
+#coupon_code-element a.check_availability_button{
+  font-size:11px;
+  margin-left:10px;
+  padding:3px !important;
+}
+#coupon_code-element #coupon_code_alert{
+  clear:both;
+  margin-top:5px;
+}
+#coupon_code-element #coupon_code_alert img{
+  margin-right:5px;
+}
+
+/*Coupon view*/
+.siteevent_coupon_block{
+	padding:10px;
+	overflow:hidden;
+	width:auto;
+}
+.siteevent_coupon_block + .siteevent_coupon_block{
+	margin-top:10px;
+}
+.siteevent_coupon_photo{
+	border-width: 1px;
+	float: left;
+	height: 130px;
+	margin-right: 15px;
+	text-align: center;
+	width: 130px;
+}
+.siteevent_coupon_photo > a {
+	display: table-cell;
+	height: 130px;
+	text-align: center;
+	vertical-align: middle;
+	width: 130px;
+}
+.siteevent_coupon_photo img{
+	max-height: 130px;
+	max-width: 130px;
+}
+.siteevent_coupon_details{
+	overflow:hidden;
+}
+.siteevent_coupon_title{
+	font-size:14px;
+	font-weight:bold;
+	margin-bottom:5px;
+}
+.siteevent_coupon_date{
+	margin-bottom:5px;
+	overflow:hidden;
+}
+.siteevent_coupon_date span{
+	margin-right:5px;
+	float:left;
+}
+.siteevent_coupon_stats{
+	clear:both;
+	margin-bottom:5px;
+}
+.siteeventcoupon_code{
+	margin-right:5px;
+	display:inline-block;
+}
+.siteeventcoupon_code .siteeventcoupon_code_num{
+	background-color:#000000;
+	border:none;
+	border-radius:3px 3px 3px 3px;
+	color:#FFFFFF;
+	display:inline-block;
+	font-size:13px;
+	font-weight:bold;
+	max-width:140px;
+	padding:5px 10px;
+	text-align:center;
+	width:130px !important;
+}
+.siteevent_coupon_discount{
+	margin-right:5px;
+	background:url(../images/dis-bg.png) no-repeat right;
+	padding-right:19px !important;
+	display:inline-block;
+}
+.siteevent_coupon_discount span.discount_value{
+	background-color:#FF0000;
+	border-radius:3px 0px 0px 3px;
+	color:#FFFFFF;
+	display:inline-block;
+	font-size:13px;
+	font-weight:bold;
+	padding:5px 0 5px 10px;
+}
+.siteeventcoupon_left{
+	border-radius:3px;
+	display:inline-block;
+	font-size:13px;
+	font-weight:bold;
+	padding:5px 10px;
+	border-width: 1px;
+	/*background-color:$theme_body_background_color;
+	border:1px solid $theme_border_color;*/
+}
+/*tooltip*/
+.siteeventcoupon_tip_wrapper{
+	position:relative;
+}
+.siteeventcoupon_tip{
+	display: none;
+	background-image:url(../images/tip-bg.png);
+	padding:5px;
+	position: absolute;
+	text-align: left;
+	font-size:12px;
+	color:#FFFFFF;
+	left:0px;
+	font-weight:bold;
+	top:-30px;
+	white-space:nowrap;
+}
+.siteeventcoupon_tip i{
+	left:0px;
+	float:left;
+	height:6px;
+	left:5px;
+	position:absolute;
+	width:15px;
+	background-image:url(../images/arrow-bottom.png);
+	bottom:-6px;
+}
+.siteeventcoupon_tip_wrapper:hover .siteeventcoupon_tip{
+	display:block;
+}
+/*Options*/
+.siteevent_profile_list_options {
+	float:right;
+	padding:0 10px;
+	width:150px;
+}
+.siteevent_profile_list_options > a {
+	clear:both;
+	margin:7px 0px 0px 0px;
+	font-size:.8em;
+	padding-top:1px;
+	float:left;
+	line-height:16px;
+}
+.sitestorecoupon_des{
+	clear:both;
+}
+.sitestorecoupon_action{
+	padding-top:10px;
+	font-weight:bold;
+}
+.sitestorecoupon_des_tip{
+	margin:10px 0 0 -5px;
+	clear:both;
+	width:160px;
+}
+.sitestorecoupon_des_tip i{
+	background-image:url(../images/arrow-top.png);
+	top:-6px;
+}
+.sitestorecoupon_sidebar_listing .sitestorecoupon_code .siteeventcoupon_tip{
+	top:-45px;
+	white-space:normal;
+	width:150px;
+}
+
+/* Responsive work  */
+@media screen and (max-width:920px){
+	/* coupon create form */
+	form#siteeventticket_create_coupon .form-element {max-width: 100%;width: 70%;}
+	/* Coupon create form select boxes */
+	#siteeventticket_create_coupon #start_time-element > select {width: auto !important;}	
+	/*Coupon options*/
+	div.siteevent_profile_list_options {width:100%;}
+}
+
+@media screen and (max-width:694px){
+	/* coupon create form */
+	form#siteeventticket_create_coupon .form-element {width: 100%;}	
+}
+
+@media screen and (max-width:630px){
+	/* Coupon thumb image */
+	.siteevent_coupon_photo img{max-width:none;min-width:inherit;width:auto;}
+	.siteevent_coupon_photo, .siteevent_coupon_details {margin: 0;width: 100%;text-align:center;}
+	/*Coupon Options*/
+	div.siteevent_profile_list_options > a { clear: none;margin: 5px;}	
+}
+
+@media screen and (max-width:420px){
+	/* Create coupon form */
+	#siteeventticket_create_coupon .form-element input[type="text"], 
+	#siteeventticket_create_coupon .form-element select {box-sizing: border-box;max-width: inherit;width: 100%;}	
+}

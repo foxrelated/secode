@@ -35,7 +35,7 @@ class Dbbackup_AdminBackupsettingsController extends Core_Controller_Action_Admi
     $dir_name_temp = Engine_Api::_()->getApi('settings', 'core')->dbbackup_directoryname;
 
     //SETTING THE SESSION FOR THE TABLES.
-    $session = new Zend_Session_Namespace();
+    $session = new Zend_Session_Namespace('backup');
     $session->tables_temp = $tables_temp;
     $tmpPath = APPLICATION_PATH . DIRECTORY_SEPARATOR . 'temporary' . DIRECTORY_SEPARATOR;
     $archiveSourcePath = APPLICATION_PATH . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR;
@@ -304,7 +304,7 @@ class Dbbackup_AdminBackupsettingsController extends Core_Controller_Action_Admi
 
       $this->view->backup_completecodes = $values['backup_completecode'];
       $this->view->dbname = $dbname;
-      $session = new Zend_Session_Namespace();
+      $session = new Zend_Session_Namespace('backup');
       if (!empty($table_selected)) {
         unset($session->tables_temp);
         $session->table_selected = $table_selected;
@@ -405,7 +405,7 @@ class Dbbackup_AdminBackupsettingsController extends Core_Controller_Action_Admi
     $fileAdapterinfo = include $fileAdapter;
 
     //SETTING THE SELECTED TABLE INTO THE SESSION.
-    $session = new Zend_Session_Namespace();
+    $session = new Zend_Session_Namespace('backup');
     $session->fileadapter = $fileAdapterinfo['adapter'];
     $table_selected = $session->table_selected;
     $folder_selecteds = $session->folderselected;
@@ -510,7 +510,7 @@ class Dbbackup_AdminBackupsettingsController extends Core_Controller_Action_Admi
 
     //GETTING THE ACKUP OPTIONS HOW TO YOU WANT BACKUP.
     $backup_options = $_GET['backup_options'];
-
+    $backup_time = time();
     //GETTING THE ACKUP OPTIONS HOW TO YOU WANT BACKUP.
     $backup_completecode = $_GET['backup_completecode'];
 
@@ -1473,7 +1473,7 @@ class Dbbackup_AdminBackupsettingsController extends Core_Controller_Action_Admi
 
   //THIS FUNCTION USE FOR LOCKING THE DATABASE.
   public function lockDatabse() {
-    $session = new Zend_Session_Namespace();
+    $session = new Zend_Session_Namespace('backup');
     $table_selected = $session->table_selected;
     $fileAdapterinfo['adapter'] = $session->fileadapter;
     $num_selected_table = count($table_selected['tables']);
@@ -1504,7 +1504,7 @@ class Dbbackup_AdminBackupsettingsController extends Core_Controller_Action_Admi
 
   //THIS FUNCTION RETURN THE ROW OF THE TABLES START.
   public function fetchrows($sql) {
-    $session = new Zend_Session_Namespace();
+    $session = new Zend_Session_Namespace('backup');
     $fileAdapterinfo['adapter'] = $session->fileadapter;
     $dbinfo = Engine_Db_Table::getDefaultAdapter()->getConfig();
     $db = Engine_Db_Table::getDefaultAdapter();
@@ -1731,7 +1731,7 @@ class Dbbackup_AdminBackupsettingsController extends Core_Controller_Action_Admi
 
   //THIS FUNCTION RETURN THE ROW OF THE TABLES START.
   public function database_fetchrow($sql) {
-    $session = new Zend_Session_Namespace();
+    $session = new Zend_Session_Namespace('backup');
     $fileAdapterinfo['adapter'] = $session->fileadapter;
     $db = Engine_Db_Table::getDefaultAdapter();
     $export = Engine_Db_Export::factory($db);
@@ -1838,7 +1838,7 @@ class Dbbackup_AdminBackupsettingsController extends Core_Controller_Action_Admi
 
   //THIS FUNCTION USE FOR UNLOCKING THE DATABASE.
   public function unlockDatabse() {
-    $session = new Zend_Session_Namespace();
+    $session = new Zend_Session_Namespace('backup');
     $fileAdapterinfo['adapter'] = $session->fileadapter;
     $db = Engine_Db_Table::getDefaultAdapter();
     $export = Engine_Db_Export::factory($db);

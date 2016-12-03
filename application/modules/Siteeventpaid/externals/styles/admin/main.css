@@ -1,0 +1,184 @@
+/* $Id: main.css 2015-05-11 00:00:00Z SocialEngineAddOns Copyright 2015-2016 BigStep Technologies Pvt. Ltd. $ */
+/*css for packages page start here*/
+.siteeventpaid_pakage_form .settings form {
+  float:none;
+}
+.siteeventpaid_pakage_form .settings .form-description {
+  max-width: none;
+}
+
+.settings .form-description{
+  max-width: none !important;
+}
+
+.siteeventpaid_pakage_form .settings .form-element .description,
+.siteeventpaid_pakage_form .settings .form-element{
+  max-width:650px;
+}
+.siteeventpaid_pakage_form #buttons-label{
+  display:none;
+}
+.siteeventpaid_pakage_form input[type="checkbox"]{
+  float:left;
+}
+.siteeventpaid_pakage_form .settings .form-options-wrapper{
+  max-width:none;
+}
+.siteeventpaid_pakage_form .settings .form-options-wrapper li{
+  min-width:300px;
+}
+.siteeventpaid_pakage_form label.optional{
+  float:left;
+  max-width:600px;
+  margin-top:-2px;
+}
+#order-element li.package-event{
+  cursor: move;
+}
+#order-element li.package-event:hover{
+  background:#fbfbfb;
+}
+#global_page_siteeventpaid-admin-settings-form-search .admin_table th > div,
+#global_page_siteeventpaid-admin-package-index .admin_table th > div{
+  font-weight:bold;
+  float:left;
+  padding:0 5px;
+  white-space:normal;
+  font-size:11px;
+}
+#order-element li.package-event .admin_table td > div{
+  float:left;
+  padding:0 5px;
+  white-space:normal;
+}
+.siteeventpaid_package_page
+{
+  padding:10px;
+  +rounded(3px);
+  clear:both;
+  background-color: #E9F4FA;
+}
+ul.siteeventpaid_package_event
+{
+  padding:5px;
+  border:1px solid #D0E2EC;
+  background-color: #FFFFFF;
+}
+ul.siteeventpaid_package_event > li + li
+{
+  border-top-width:1px;
+  border-top-style:solid;
+}
+ul.siteeventpaid_package_event > li
+{
+  clear:both;
+  overflow:hidden;
+  padding:10px 10px;
+  width:660px;
+}
+ul.siteeventpaid_package_event .siteeventpaid_package_event_title
+{
+  overflow:auto;
+  padding-bottom:5px;
+  margin-bottom:5px;
+}
+ul.siteeventpaid_package_event .siteeventpaid_package_event_title h3
+{
+  letter-spacing:normal;
+  margin-top:3px;
+  overfloaw:hidden;
+}
+.siteeventpaid_create_link
+{
+  float:right;
+}
+.siteeventpaid_create_link a
+{
+  float:left;
+}
+.siteeventpaid_package_stat
+{
+  padding:5px;
+  overflow:hidden;
+  font-size:11px;
+  background-color: #E9F4FA;
+}
+.siteeventpaid_package_stat span
+{
+  float: left;
+  line-height: 16px;
+  margin-right: 10px;
+  width: 150px;
+}
+.siteeventpaid_package_stat_apps
+{
+  clear:both;
+  width:auto !important;
+}
+.siteeventpaid_package_stat b
+{
+  font-weight:bold;
+}
+ul.siteeventpaid_package_event .siteeventpaid_event_details
+{
+  clear:both;
+  float:left;
+  margin-top:10px;
+}
+/*css for packages page end here*/
+
+
+.icon_siteeventpaid_admin_add{background-image:url(~/application/modules/Siteevent/externals/images/add.png);}
+.icon_siteeventpaid_admin_back{background-image:url(~/application/modules/Siteevent/externals/images/back.png);}
+
+/*for admin side manage eventing*/
+#event select{
+  width:150px;
+  margin-left:10px;
+  float:left;
+  padding-top:.4em ;
+  padding-bottom:.4em ;
+
+}
+.form-errors{
+  float:left;
+  width:100%;
+}
+#filter_form select{
+  width:150px;
+  padding-top:.3em ;
+  padding-bottom:.3em ;
+}
+#query{
+  padding:0.4em 0.5em;
+}
+/*for admin side manage eventing*/
+.manageevent_table_scroll{
+  width:100%;overflow-x:auto;margin-bottom: 20px;
+}
+.browseby{
+  margin-right:0px!important;
+}
+#global_page_payment-admin-gateway-index table{
+  width:100%!important;
+}
+.createpackages{
+  width:100%;
+  float:left;
+  margin-top:10px;
+  margin-bottom:10px;
+}
+
+
+.settings .form-errors + .form-elements{
+  clear:both;
+}
+.admin_table, .admin_table + .buttons{
+  clear: both;
+  float: left;
+  margin-top: 10px;
+}
+div.admin_table_centered{display: table-cell;}
+html table.admin_table tbody tr td:last-child{
+  white-space: inherit;
+}

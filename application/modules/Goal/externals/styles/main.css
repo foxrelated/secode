@@ -1,0 +1,327 @@
+h2.goal_title{
+    margin-bottom: 5px !important;
+}
+ul#completed_tasks_list{
+	max-height: 148px;
+	overflow: auto;
+	}
+ul#completed_tasks_list > li {
+    margin: 5px;
+    padding: 5px;
+    border-width: 1px;
+    line-height: 20px;
+    clear:both;
+    overflow:hidden;
+    background-color: #fbfbf7;
+}
+ul#completed_tasks_list > li:hover{
+    background-color: #f6f6ec;
+}
+ul#completed_tasks_list > li span.task_title{
+	margin-right: 35px;
+	min-width: 275px;
+	max-width: 275px;
+	display: inline-block;
+	font-weight: bold;
+	height: 18px;
+	overflow: hidden;
+}
+ul#completed_tasks_list > li span.task_option{
+    float: right;
+}
+.cat-link{
+    font-weight: bold;
+    color: #555 !important;
+}
+.layout_page_goal_profile_index .layout_goal_tasks_completed{
+    border-width: 1px;
+	margin: 10px 0px 5px;
+}
+.layout_page_goal_profile_index .layout_goal_tasks_completed h4.completed_tasks{
+    padding: .5em 5px;
+}
+.layout_page_goal_profile_index .layout_goal_tasks_due{
+    border-width: 1px;
+	margin: 10px 0px 5px;
+}
+.layout_page_goal_profile_index .layout_goal_tasks_due h4.completed_tasks{
+    padding: .5em 5px;
+}
+.layout_page_goal_profile_index .tip{
+	margin: 0px 5px;
+	}
+#progressContainer {
+    overflow: hidden;
+	margin-top: 5px;
+}
+#progressContainer span.percentage_title{
+	margin-top: 3px;
+	display: block;
+	}
+.progress_bar {
+        height:20px;
+        background-color:#f6f6ec;
+        border: 1px solid #D9DDE9;
+        width: 250px;
+        float: left;
+        margin-right: 10px;
+    }
+.progress {
+        height:20px;
+        background-color:#444;
+}
+
+.task_profile_edit {
+    background-image:url(~/application/modules/Goal/externals/images/edit_goal_ico.png);
+    background-position: center center;
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    text-indent: -9999px;
+}
+.task_profile_delete {
+    background-image:url(~/application/modules/Goal/externals/images/delete_goal_ico.png);
+    background-position: center center;
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    text-indent: -9999px;
+}
+.goal_manage_edit {
+    background-image:url(~/application/modules/Goal/externals/images/edit_goal_ico.png);
+    background-position: center center;
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    text-indent: -9999px;
+}
+.goal_manage_delete {
+    background-image:url(~/application/modules/Goal/externals/images/delete_goal_ico.png);
+    background-position: center center;
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    text-indent: -9999px;
+}
+
+ul.feed .feed_attachment_goal > div > a > img {
+    display: inline-block;
+    max-height: 90px;
+    max-width: 90px;
+    vertical-align: top;
+}
+ul.feed .feed_attachment_goal {
+    display: block;
+    margin: 0 5px 5px 0;
+    overflow: hidden;
+    vertical-align: top;
+}
+ul.feed .feed_attachment_goal > div > a {
+    display: block;
+    float: left;
+    margin-right: 7px;
+}
+.layout_main > div > div +  div.layout_goal_goal_categories{
+	margin-top: 10px;
+	}
+#goal_create_form #starttime-hour,
+#goal_create_form #starttime-minute,
+#goal_create_form #starttime-ampm,
+#goal_create_form #endtime-hour,
+#goal_create_form #endtime-minute,
+#goal_create_form #endtime-ampm,
+#goal_edit_form #starttime-hour,
+#goal_edit_form #starttime-minute,
+#goal_edit_form #starttime-ampm,
+#goal_edit_form #endtime-hour,
+#goal_edit_form #endtime-minute,
+#goal_edit_form #endtime-ampm,
+
+#goal_task_edit #duedate-hour,
+#goal_task_edit #duedate-minute,
+#goal_task_edit #duedate-ampm,
+
+#smoothbox_window #global_page_goal-task-add div.form-elements #duedate-hour,
+#smoothbox_window #global_page_goal-task-add div.form-elements #duedate-minute,
+#smoothbox_window #global_page_goal-task-add div.form-elements #duedate-ampm{
+	display: none;
+	}
+#goal_create_form div.event_calendar_container button.event_calendar{
+	background-repeat: no-repeat;
+	}
+.goals_browse > li{
+	overflow: hidden;
+	}
+ul.goals_browse > li + li {
+	margin-top: 15px;
+	border-top-width: 1px;
+	padding-top: 15px;
+}
+#global_page_goal-index-manage .goals_desc{
+	display:  none;
+	}
+	
+#global_page_goal-index-manage .layout_middle > div{
+	margin-bottom: 10px;
+	}
+#global_page_goal-index-manage .layout_middle > div > ul{
+	padding: 5px;
+	border-width: 1px;
+	}
+#global_page_goal-index-manage .layout_middle > div > ul li{
+	background-color: #fbfbf7;
+	padding: 5px;
+	}
+
+#global_page_goal-index-manage ul.goals_browse > li + li{
+	
+	border-width: 0px;
+	}	
+#global_page_goal-index-manage ul.goals_browse > li{
+	border-width: 1px !important;
+	}
+#global_page_goal-index-manage ul#completed_tasks_list {
+	max-height: 110px;
+	padding-top: 0px;
+}
+ul#completed_tasks_list li:first-child{
+	margin-top: 0px;
+	}
+#global_page_goal-index-manage ul#completed_tasks_list > li{
+	margin: 5px 0px;
+	}
+#global_page_goal-index-manage div.layout_goal_goals_active ul.goals_browse{
+	max-height: 307px;
+	overflow: auto;
+	}
+.goals_browse div.goals_photo{
+	overflow: hidden;
+	float: left;
+	margin-right: 10px;
+	}
+.goals_browse div.goals_photo > a{
+	max-height: 100px;
+	overflow: hidden;
+	display: block;
+	}	
+.goals_browse div.goals_photo > a > img{
+	width: 100px;
+	display: block;
+	}
+.goals_browse div.goals_photo > div.owner_title{
+	text-align: center;
+	}
+.goals_browse div.goals_info{
+	float: left;
+	width: 705px;
+	}
+.generic_layout_container .goals_title{
+	overflow: hidden;
+	}
+.generic_layout_container .goals_title h3 {
+	background-color: transparent;
+	padding-left: 0px;
+	margin: 0px;
+	padding: 0px;
+	float: left;
+        font-weight: bold;
+}
+.generic_layout_container .goals_title span.goals_time{
+	float: right;
+	margin-left: 15px;
+        font-size: 11px;
+	}
+.task-edit-remove{
+	float: right;
+	margin-top: 2px;
+	}
+.layout_goal_goals_completed div.goal-options,       
+.layout_goal_goals_active div.goal-options{
+            float: right;
+            margin-right: 10px;
+            margin-top: 5px;
+        }
+        .layout_page_goal_index_manage ul#completed_tasks_list > li span.task_title{
+            max-width: none;
+        }        
+#category_list > li {
+    padding: 0px 0px 3px 4px;
+}
+.goal-views{
+    font-size: 12px;
+}
+.layout_goal_profile_info {
+    margin-top: 10px;
+}
+.layout_goal_profile_info > h3{
+    margin-bottom: 4px !important;
+}
+.goal_desc h4{
+    margin-bottom: 5px;
+}
+.layout_goal_tasks_due .tip span{
+    margin-bottom: 5px !important;
+}
+.layout_page_goal_index_browse .layout_main .layout_middle {
+    background-color: #fff;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, .12);
+    padding: 1.5em;
+}
+.layout_goal_goal_categories,
+.layout_goal_browse_search {
+    background-color: #fff;
+}
+#category_list{
+	border-width: 1px;
+	+rounded(3px);
+	padding: 10px;
+	}
+.layout_goal_recent_goals {
+    margin-top: 10px;
+}
+.task_title{
+    font-weight: bold;
+}
+.task_title > a{
+    font-weight: bold;
+}
+.goals_profile_tab_title{
+    font-weight: bold;
+}
+
+
+.layout_page_goal_index_browse .browse_progressbar .browse_likes_count{
+    display: inline-block !important;
+}
+.layout_goal_goals .goals_photo a img {
+    width: auto !important;
+}
+.layout_goal_goals .goals_status,
+.layout_goal_goals .goal_endTime {
+    font-size: 0.8em;
+}
+#global_page_goal-task-add .global_form > div,
+#global_page_goal-task-edit .global_form > div	{
+	float: none;
+	}
+span.task_option a.task_option_link button{
+	padding: 3px 5px;
+	font-size: 12px;
+	}
+.task_date,
+.task_completed_date{
+	float: right;
+	margin: 0px 10px;	
+	}	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

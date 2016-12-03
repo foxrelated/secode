@@ -1,0 +1,136 @@
+#sep_slider_left
+{
+    position: fixed;
+    left:0px;
+    top:150px;
+}
+#sep_slider_right
+{
+    position: fixed;
+    right: 0px;
+    top: 150px;
+}
+#sep_slider_left .socialslider_frame
+{
+    height: 360px;
+    width: 305px; 
+    position: absolute;
+    margin-left: -305px;
+    overflow: visible;
+}
+#sep_slider_left .socialslider_panel
+{
+    float: left;
+    height: 360px; 
+    width: 300px; 
+    padding: 5px 5px 5px 0;
+    border-radius: 0px 4px 4px 0px;
+}
+
+#sep_slider_left .socialslider_inner
+{
+    background: #fff;
+    height: 100%;
+}
+#sep_slider_left .socialslider_head
+{ 
+    /*position: absolute;*/
+    right: -28px;
+    position: absolute; 
+    float: left;
+    width: 28px; 
+    height: 80px;
+    cursor: pointer;
+    border-radius: 0 3px 3px 0;
+
+}
+
+#sep_slider_right .socialslider_frame
+{
+    height: 360px;
+    width: 305px; 
+    margin-right: -305px;
+    position: absolute;
+    overflow: visible;
+}
+
+#sep_slider_right .socialslider_panel
+{
+    float: right;
+    height: 360px; 
+    width: 300px; 
+    padding: 5px 0 5px 5px;
+    border-radius: 4px 0px 0px 4px;
+}
+
+#sep_slider_right .socialslider_inner
+{
+    background: #fff;
+    height: 100%;
+}
+#sep_slider_right .socialslider_head
+{ 
+    float: left;
+    width: 28px; 
+    height: 80px;
+    cursor: pointer;
+    border-radius: 3px 0 0 3px;
+    position: absolute;
+    left: -28px;
+
+}
+.youtube_videos{
+    border-top-color: #9B9B9B;
+    overflow-y: auto;
+    width: 100%;
+    height: 250px;
+}
+.youtube_videos_list{
+    border: 0 none;
+    clear: none;
+    font-size: 100%;
+    line-height: 18px;
+    margin: 0;
+    padding: 0;
+}
+.youtube_videos_list_element{
+
+}
+.youtube_videos > ul > li{
+    overflow: hidden;
+    padding: 5px 10px;
+}
+.youtube_videos_link{
+    float: left;
+    margin-top: 3px;
+}
+.youtube_videos_list_element_img{
+    width: 61px;
+    height: 45px;
+    background-color: white;
+    border: 2px solid #EFEFEF;
+    padding: 1px;
+}
+.youtube_videos_list_details{
+    margin-left: 70px;
+    margin-top: 3px;
+}
+a.youtube_videos_title_link{
+    color: #195BCC;
+    display: block;
+    font-weight: bold;
+    line-height: 1.2 !important;
+    margin-bottom: 1px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.youtube_videos_views{
+    color: #989898;
+    display: block;
+    font-size: 10px;
+    line-height: 1.5;
+}
+.socialslider_inner .twtr-doc{
+    width: 300px;
+    border-radius: 0;
+}

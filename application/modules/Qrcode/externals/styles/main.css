@@ -1,0 +1,112 @@
+#infocontent table
+{
+	width:350px;
+}
+
+#infocontent table > thead >tr
+{
+	border-bottom: 2px solid #eee;
+}
+
+#qrcode_create
+{
+	float:left;
+}
+
+
+#display{
+	display:none;
+	float:left;
+	width:100%;
+	padding:10px;
+	padding-left:10px;
+}
+#option-text .image-field
+{
+	margin-bottom: 10px;
+	float:left;
+	padding:20px 10px 10px 0;
+	width:35%;
+}
+
+.shadow{
+    -moz-box-shadow: 2px 2px 2px #888;
+    -webkit-box-shadow: 2px 2px 2px #888;
+     box-shadow: 2px 2px 2px #888;
+     box-sizing: url()
+    
+}
+.shadow img{
+	width:95%;
+	max-width:200px;
+	max-height:200px;
+	text-align:center;
+}
+
+#radio{
+	width: 500px;
+	padding:30px 0px 20px 0;
+}
+
+#radio label
+{
+	float:left;
+	padding-right:7px;
+}
+
+#qrCode {
+	width: 130px;
+	background-color: #ffffff;
+	background-image: url('~/application/modules/Qrcode/externals/images/cross.jpg');
+	background-position: center;
+	background-repeat: no-repeat;
+	border-radius: 15px;
+	/*-moz-box-shadow: 0 0 5px #888;
+	-webkit-box-shadow: 0 0 5px #888;
+	box-shadow: 0 0 5px #888;*/
+	margin-right: 15px;
+    display: block;
+    text-align:center;	
+}
+
+#option-text
+{
+	padding:12px;
+}
+#create{
+
+	width:100%;
+	padding-top:15px;
+	text-align:right;
+	float:right;
+	margin-right:20px;
+}
+
+.info{
+	
+	float:left;
+	width:100%;
+}
+
+#qrimage
+{
+	padding-left:17px;
+	padding-top:11px;
+}
+#right-content
+{
+	float:left;
+	width:35%;
+}
+#imgwidth
+{
+	width:100%;
+}
+
+#msg
+{
+	color: green;
+}
+#radio > #field-0 ,#radio label:first-child{
+	
+}

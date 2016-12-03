@@ -234,7 +234,7 @@ class Dbbackup_AdminManageController extends Core_Controller_Action_Admin {
       if (isset($_POST['fileOffset']))
         $offset = $_POST['fileOffset'];
 
-      $session = new Zend_Session_Namespace();
+      $session = new Zend_Session_Namespace('backup');
       if (!(isset($session->file_size)))
         $session->file_size = 0;
 

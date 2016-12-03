@@ -1,0 +1,31 @@
+
+/*Page And Extensions Notification Icon*/
+.notification_type_liked, .notification_type_sitepage_contentlike{
+	background-image: url(~/application/modules/Sitepage/externals/images/like.png) !important;
+}
+.notification_type_sitepage_manageadmin{
+	background-image:url(~/application/modules/Sitepage/externals/images/icons/sitepage.png);
+}
+.notification_type_sitepageevent_invite, .notification_type_sitepageevent_accepted, .notification_type_sitepageevent_create{
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/sitepageevent.png);
+}
+
+.notification_type_sitepage_notificationpost, .notification_type_sitepagemember_notificationpost, .notification_type_sitepage_contentcomment, .notification_type_sitepage_discussion_response, .notification_type_sitepage_discussion_reply{
+	background-image:url(~/application/modules/Sitepage/externals/images/comment.png);
+}
+
+.notification_type_sitepagenote_create{
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/note.png);
+}
+.notification_type_sitepagevideo_create{
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/video16.png);
+}
+.notification_type_sitepagealbum_create{
+  background-image: url(~/application/modules/Sitepage/externals/images/photo/view.png);
+}
+.notification_type_sitepageoffer_create{
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/offer.png);
+}
+.notification_type_sitepagemusic_create{
+  background-image: url(~/application/modules/Sitepage/externals/images/music/music.png);
+}

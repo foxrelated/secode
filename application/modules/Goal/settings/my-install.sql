@@ -1,0 +1,1 @@
+INSERT IGNORE INTO `engine4_core_modules` (`name`, `title`, `description`, `version`, `enabled`, `type`) VALUES  ('goal', 'Goals', 'Goal creation and task management.', '4.8.8', 1, 'extra') ;

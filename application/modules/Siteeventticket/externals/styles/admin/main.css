@@ -1,0 +1,71 @@
+/* $Id: main.css 2015-05-11 00:00:00Z SocialEngineAddOns Copyright 2015-2016 BigStep Technologies Pvt. Ltd. $ */
+.search select{padding:6px;}
+.search form > div {margin-bottom:10px;}
+/*------------ALL INVOICE WORK AND TABLE WORK-------------*/
+
+.invoice_details_wrap{
+	border-width:1px;
+	overflow:hidden;
+}
+.invoice_add_details_wrap{
+	border-right-width:1px;
+	width: 50%;
+}
+.invoice_add_details + .invoice_add_details ,
+.siteevent_detail_table table tr + tr
+{
+	border-top-width:1px;
+}
+.invoice_add_details,
+.invoice_order_details_wrap li,
+.invoice_ttlamt_box_wrap,
+.invoice_note_box{
+	padding: 10px;
+}
+.invoice_order_details_wrap{
+	width: 600px;
+}
+.invoice_order_details_wrap li + li{
+	border-top-width: 1px;
+}
+.invoice_order_details_wrap li > div + div{
+  overflow: hidden;
+}
+.siteevent_detail_table{
+	margin:0;
+	border:none;
+}
+.siteevent_detail_table table{
+	width:100%;
+	border-width: 1px;
+	margin-top:1px;
+}
+.siteevent_detail_table_head{
+	background-color:#EAEAEA !important;
+}
+.siteevent_detail_table_head th, 
+.siteevent_detail_table .quantity,
+.siteevent_detail_table .price,
+.siteevent_detail_table .total{
+	text-align:center;
+}
+.siteevent_detail_table table td + td{
+	border-left-width:1px;
+}
+.siteevent_detail_table .quantity,
+.siteevent_detail_table .price,
+.siteevent_detail_table .total,
+.invoice_order_info{
+	width:170px;
+}
+.siteevent_detail_table .ticket{
+	width:452px;
+	text-align:center;
+}
+.invoice_ttlamt_box_wrap{
+	/*background: none repeat scroll 0 0 #EAEAEA;*/
+  border-top: 1px solid #CCCCCC;
+	border-bottom: 1px solid #CCCCCC;
+	width: 100%;
+	box-sizing: border-box;
+}

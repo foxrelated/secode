@@ -31,7 +31,7 @@
 			<li><input type='checkbox' value=1 id='modulesfiles' name='Uncheck_modulesfilesall'  onclick="doCheckAllModuleFiles();" /> <?php echo 'Check all' ?></li>
 			<li>
 				<?php
-					$session = new Zend_Session_Namespace();
+					$session = new Zend_Session_Namespace('backup');
 					$resultsmodulefiles = $session->resultsmodulefiles;
 					foreach($resultsmodulefiles as $values) {
 						$name = explode(" ",$values);

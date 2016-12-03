@@ -1,0 +1,285 @@
+/* $Id: main.css 2015-05-11 00:00:00Z SocialEngineAddOns Copyright 2015-2016 BigStep Technologies Pvt. Ltd. $ */
+.admin_table div{display: table-cell;}
+
+/*create new product*/
+/*css for packages page start here*/
+.siteeventpaid_create_wrapper > h3{
+  margin-bottom:5px;
+}
+.siteeventpaid_create_wrapper > h3 + p{
+  margin-bottom:15px;
+}
+.siteeventpaid_create_step{
+  border:none;
+  margin:0 5px 5px;
+  padding:0px;
+}
+.siteeventpaid_package_page{
+ 	-moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  clear:both;
+}
+ul.siteeventpaid_package_list{
+  border:1px solid $theme_border_medium_color;
+  border-style:solid;
+  padding:5px;
+}
+ul.siteeventpaid_package_list > li + li{
+  padding:10px;
+  margin-bottom:10px;
+  border-top:1px solid $theme_border_medium_color;
+}
+ul.siteeventpaid_package_list > li{
+  clear:both;
+  overflow:hidden;
+  padding:10px 0px;
+}
+ul.siteeventpaid_package_list > li > h3{
+  background: none;
+  font-weight: bold;
+  letter-spacing: normal;
+  margin-top: 3px;
+  margin-bottom:5px;
+  padding: 0;
+}
+ul.siteeventpaid_package_list .siteeventpaid_package_list_title{
+  overflow:auto;
+  padding-bottom:5px;
+  margin-bottom:5px;
+}
+ul.siteeventpaid_package_list .siteeventpaid_package_list_title h3{
+  background: none;
+  font-weight: bold;
+  letter-spacing: normal;
+  margin-top: 3px;
+  padding: 0;
+}
+.siteeventpaid_package_list_title h3 a:hover{
+  text-decoration:none;
+}
+.siteeventpaid_create_link{
+  float:right;
+}
+.siteeventpaid_create_link a{
+  float:left;
+}
+[dir="rtl"] .siteeventpaid_create_link,
+[dir="rtl"] .siteeventpaid_create_link a{
+  float:left;
+}
+.siteeventpaid_package_stat{
+  padding:5px;
+  overflow:hidden;
+  font-size:11px;
+}
+.siteeventpaid_package_stat span{
+  float:left;
+  line-height:16px;
+  margin-right:10px;
+  width:24%;
+}
+.siteeventpaid_package_stat_apps{
+  clear:both;
+  width:auto !important;
+}
+ul.siteeventpaid_package_list .siteeventpaid_event_details{
+  clear:both;
+  float:left;
+  margin-top:10px;
+}
+[dir="rtl"] ul.siteeventpaid_package_list .siteeventpaid_event_details{
+  float:right;
+}
+/*-----------------------------------for vertical css--------------------------------------------*/
+.siteeventpaid_package_list{
+  background-color:$theme_body_background_color;
+  border-color:$theme_foreground_border_color !important;
+}
+ul.siteeventpaid_package_list > li{
+  border-bottom:1px solid $theme_border_medium_color;
+} 
+ul.siteeventpaid_package_list > li:first-child{
+  margin-bottom:20px;
+  border-bottom:none;
+}
+ul.siteeventpaid_package_list > li:last-child{
+  border-bottom:none;
+}
+#paidEventsPanel .contentblock_right_inner{
+  border-left:1px solid $theme_border_medium_color;
+  border-right:0px;
+}
+/*left section*/
+.highlightleft{
+  font-size:15px;
+}
+.contentblock_left_text{
+  width:130px;
+  padding:0 5px;
+  height: 40px;
+  line-height: 40px;
+  /* float:left;*/
+  border-left-width:1px;
+}
+.contentblock_left_text:first-child{
+  margin-top:84px;
+  border-top-width:1px;
+}
+/*vertical section*/
+#scroll-areas{
+  border-left:1px solid $theme_border_medium_color;
+  width:828px!important;
+  border-right:1px solid $theme_border_medium_color;
+}
+.contentblock_right_inner{
+  border-right:1px solid $theme_border_color;
+}
+.contentblock_right_text{
+  border-bottom:1px solid $theme_border_medium_color;
+}
+.contentblock_right_text:last-child{
+  border-bottom:none;
+}
+.contentblock_right_inner_heading{
+  background-color: $theme_topbar_background_color;
+  color: $theme_topbar_menu_link_color;
+}
+.highlightright:last-child{
+  border:none;
+}
+.contentblock_right_inner_heading a:link{
+  color: $theme_topbar_menu_link_color;
+}
+.contentblock_right_inner_heading a:link:hover{
+  text-decoration:none;
+}
+
+/*vertivalview*/
+.siteeventpaid_package_vertical{
+  position:relative;
+  padding-top:20px !important;
+}
+.siteeventpaid_package_vertical #scrollbar_before{
+  position:absolute;
+}
+#paidEventsPanel .scroll-pane{
+  overflow:auto;
+}
+#paidEventsPanel .scroll-content {
+  margin-left: 0px;
+  width:100%; 
+  display:table;
+  float:left;
+}
+#paidEventsPanel .contentblock_right_inner {
+  float:left;
+  padding:0;
+  text-align:center;
+  overflow:hidden;
+  -moz-transition:all 0.6s linear;
+  -o-transition:all 0.6s linear;
+  -webkit-transition:all 0.6s linear;
+  transition:all 0.6s linear;	
+  display:inherit;
+}
+#paidEventsPanel .contentblock_right_inner .contentblock_description{
+  line-height: normal;
+  overflow-y: auto;
+  font-size: 12px;
+}
+/*#paidEventsPanel .scroll-content{
+  width:93% !important;
+}*/
+#paidEventsPanel .horizontalScrollbar {
+  clear:both;
+}
+#paidEventsPanel .horizontalTrack {
+  border-radius:10px;
+  box-shadow:inset 0 0 6px rgba(0, 0, 0, 0.5);
+  float:left;
+  height:15px;
+  width:255px; /*635px; */
+  position:relative;
+  background:#ddd;
+  overflow:hidden;
+}
+#paidEventsPanel .horizontalThumb {
+  background:#aaa;
+  border-radius:10px;
+  box-shadow:inset 0 0 6px rgba(0, 0, 0, 0.5);
+  cursor:pointer;
+  position:absolute;
+  top:0;
+  left:0;
+  height:15px;
+  width:15px;
+  overflow:hidden;
+}
+/*--create new package--*/
+/*leftblock*/
+.siteevent_create_event_form h3:first-child{
+  margin-bottom:7px;
+}
+.siteevent_layout_left{
+  overflow:hidden;
+}
+.siteevent_layout_left .global_form > div{
+  float:none !important;
+}
+.siteevent_layout_left .global_form div.form-label{
+  width: 130px;
+}
+.siteevent_layout_left .global_form div.form-element{
+  overflow:hidden;
+}
+.siteevent_layout_left .global_form div > div > h3{
+  display:none;
+}
+/*leftblock*/
+.siteeventpage_layout_right{
+  float:right;
+  width:255px;
+  margin-left:10px;
+}
+.siteeventpage_layout_right .siteevent_package_list_title h3{
+  font-size:14px;
+}
+.siteeventpage_layout_right .siteevent_package_stat{
+  padding:0;
+}
+.siteeventpage_layout_right .siteevent_package_stat span{
+  width:100%!important;
+  text-align:right;
+  float:left;
+  font-size:11px;
+  line-height:20px;
+}
+.siteeventpage_layout_right .siteevent_package_stat span b{
+  min-width:70%;
+  float:left;
+  text-align:left;
+}
+[dir="rtl"] .siteeventpage_layout_right{
+  float:left;
+  margin-right:10px;
+  margin-left:0px;
+}
+#body-element{
+  float:none;
+}
+
+/*Responsive css work start form here*/
+@media only screen and (max-width: 920px) {
+	/*Horizontal Package*/
+	.contentblock_left_text {width: 90%;}
+	#paidEventsPanel div.scroll-content {display: flex;overflow: auto;}
+	#paidEventsPanel div.contentblock_right_inner {display: table-cell;float: none;}
+	div.contentblock_right_inner_heading {min-width: 200px;}
+	#list-scroll-areas {overflow-x: auto !important;}
+	/*create Event form*/
+	div.siteeventpage_layout_right {float: none; margin: 0; width: 100%;}
+}
+@media only screen and (max-width: 768px) {
+	div.siteeventpaid_package_stat span {width: 46%;}
+}

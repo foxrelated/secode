@@ -1,0 +1,17 @@
+/* $Id: main.css 6590 2012-20-06 00:00:00Z SocialEngineAddOns Copyright 2011-2012 BigStep Technologies Pvt. Ltd. $ */
+
+.tag {
+-moz-border-radius:3px 3px 3px 3px;
+background-color:#D3E6EF;
+display:inline-block;
+float:left;
+font-size:0.8em;
+font-weight:bold;
+margin:0 10px 5px 0;
+padding:0.4em 0.6em;
+}
+.tag > a {
+padding-left:6px;
+text-decoration:none;
+text-transform:uppercase;
+}

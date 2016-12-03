@@ -1,0 +1,305 @@
+/* $Id: main.css 2011-05-05 9:40:21Z SocialEngineAddOns Copyright 2010-2011 BigStep Technologies Pvt. Ltd. $ */
+
+.activity_icon_sitepage_post_self, .activity_icon_sitepage_post{
+	background-image: url(~/application/modules/Sitepage/externals/images/sitepage_post.png);
+}
+.item_icon_sitepage, .item_icon_sitepage_page, .notification_type_sitepage_manageadmin{
+	background-image:url(~/application/modules/Sitepage/externals/images/icons/sitepage.png);
+}
+.item_icon_sitepagedocument_document, .item_icon_sitepagedocument{
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/sitepagedocument.png) !important;
+}
+.notification_type_liked, .notification_type_sitepage_contentlike{
+	background-image: url(~/application/modules/Sitepage/externals/images/like.png) !important;
+}
+.notification_type_sitepage_page_invite, .notification_type_sitepageevent_invite, .notification_type_sitepageevent_accepted, .icon_sitepageevent, .item_icon_sitepageevent_event, .item_icon_sitepageevent, .notification_type_sitepageevent_create{
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/sitepageevent.png);
+}
+.item_icon_sitepage_topic, .activity_icon_sitepage_topic_create, .icon_sitepages_discussion, .item_icon_sitepage_post, .notification_type_sitepage_notificationpost, .notification_type_sitepagediscussion_create, .notification_type_sitepagemember_notificationpost, .notification_type_sitepage_contentcomment {
+	background-image:url(~/application/modules/Sitepage/externals/images/comment.png);
+}
+.activity_icon_sitepagereview_new, .icon_sitepages_review, .activity_icon_review_sitepage, .item_icon_sitepagereview{
+	background-image: url(~/application/modules/Sitepage/externals/images/icons/review.png);
+}
+.activity_icon_sitepagealbum_photo_new, .sitepage_icon_photos_manage, .item_icon_sitepage_photo, .activity_icon_sitepage_photo_upload{
+	background-image: url(~/application/modules/Sitepage/externals/images/photo/view.png);
+}
+/*CSS FOR ALL SIDEBAR WIDGETS START HERE*/
+.sitepage_search_alphabetic, .sitepageevent_sidebar, .sitepagealbum_sidebar, ul.sitepage_browse_sitepage_day, ul.sitepagelike_users_block, ul.sitepage_sidebar_info, ul.sitepage_sidebar_list{
+	+foreground;
+	+rounded;
+	padding: 5px;
+	margin-bottom:15px;
+}
+.sitepagevideo_length{
+	+opacity(.7);
+	+rounded(4px, true, true, false, true);
+}
+/*rounded*/
+.layout_sitepage_contactdetails_sitepage, .sitepage_sitepages_options, ul.sitepage_sitepages .sitepage_sitepages_replies, .button{
+	+rounded;
+}
+/*foreground*/
+.Sitepagecontent_featured_slider, ul.admin_fields .field, ul.sitepage_sitepages_thread > li, ul.sitepage_sitepages .sitepage_sitepages_replies, .sitepage_sitepages_options, .sitepagedocument_carousel, div.sitepagenote_viewmedia_info, ul.sitepagenote_view li .sitepagenote_images, .sitepagepage_note_tag_options, .sitepage_getstarted .sitepage_getstarted_num div, .sitepage_list_filters, .browsesitepages_criteria, .sitepage_profile_location, .sitepagelike_members_popup .top, div.pagelayout_layoutbox_menu{
+	+foreground;
+}
+.layout_sitepage_contactdetails_sitepage{
+	background-image: url( ~/application/modules/Seaocore/externals/images/blk-bg.png);
+	+foreground;
+}
+div.sitepage_photo_info, #sitepageevent_stats > ul, .sitepageevent_sidebar, .sitepageevent_rsvp_form, .sitepagereviews_gutter, .sitepage_gutter, .sitepagenotes_view_photo, .sitepagedocuments_gutter_photo{
+	+foreground;
+	+rounded;
+}
+#global_page_sitepage-layout-widget .global_form div.form-label{
+	width:70px!important;
+}
+li.sitepageoffer_show{
+	border:2px dashed $theme_foreground_border_color !important;
+	border-top:2px dashed $theme_foreground_border_color !important;
+}
+/*constants css start here*/
+/*theme body background color*/
+.sitepage_reports_list_wrapper > div, ul.sitepage_sitepages_thread .sitepage_sitepages_thread_body blockquote, ul.sitepage_package_list, .edit_form .global_form_box > div, .sitepage_edit_insights > div, .sitepage_map_container, .sitepage_location_fields_map{
+	background-color:$theme_body_background_color;
+}
+/*theme foreground background color*/
+.sitepage_cover_information, .sitepage_reports_list_wrapper, .sitepage_reports_list_wrapper > div table th, li.sitepageoffer_show, .sitepagevideo_owner, .layout_simple_head, .sitepage_package_stat, .sitepage_package_page, .sitepagelike_popup_paging .paginator_previous a:hover, .sitepagelike_popup_paging .paginator_next a:hover, .edit_form .global_form_box, .sitepage_edit_insights{
+	background-color:$theme_foreground_background_color;
+}
+/*theme foreground border color*/
+.sitepage_reports_list_wrapper > div,ul.sitepage_sitepages_thread > li, ul.sitepage_sitepages_thread .sitepage_sitepages_thread_details, div.sitepage_photo_info, ul.sitepageoffer_list > li + li, .sitepageform_separator, div.sitepagenote_viewmedia_info, ul.sitepage_package_list, .layout_simple_head, .sitepage_edit_insights > div, ul.sitepagelike_users_block h3, .edit_form .global_form_box > div{
+	border-color:$theme_foreground_border_color;
+}
+/*theme border color dark*/
+#sitepageevent_form_invite #users-element, .sitepage_categories_sitepage h6, .sitepage_img_view .sitepage_thumb ul li > a:hover, .sitepage_map_container, .sitepage_map_container_map_area{
+	border-color:$theme_border_dark_color
+}
+.sitepage_advanced_search_form #fieldset-grp1, .sitepage_advanced_search_form #fieldset-grp2{
+	border-color:$theme_border_medium_color
+}
+/*theme font color*/
+.sitepage_search_alphabetic a.bold, .sitepage_slidebox h5, .sitepage_slidebox h5 a, ul.searchbox_autosuggest > li.autocompleter-selected, ul.searchbox_autosuggest > li:hover{
+	color:$theme_font_color;
+}
+/*theme buttontabs*/
+.sitepagelike_members_popup .sitepagelike_member_search_box a.selected{
+	background-color:$theme_buttontabs_background_color_active;
+	color:$theme_buttontabs_font_color_active;
+}
+.sitepagelike_members_popup .sitepagelike_member_search_box .link a{
+	color:$theme_buttontabs_font_color;
+}
+/*theme form background color*/
+.sitepage_claim_comment, .sitepage_form > div > div{
+	background-color: $theme_form_background_color;
+}
+/*theme form border color*/
+.sitepage_claim_comment, .sitepage_form > div > div{
+	border-color:$theme_form_border_color;
+}
+/*theme list background color*/
+ul.searchbox_autosuggest{
+	background:$theme_list_background_color;
+}
+ul.searchbox_autosuggest > li.autocompleter-selected, ul.searchbox_autosuggest > li:hover, .sitepage_getstarted_head, #sitepage_options li:hover, #sitepage_options .active{
+	background:$theme_list_background_color_hover;
+}
+.sitepageevent_sidebar .sitepageevent_sidebar_header, .sitepagealbum_sidebar .sitepagealbum_sidebar_header{
+	border-color:$theme_foreground_border_color_light;
+}
+.sitepage_controllers, .sitepage_badge_buttons a, #page_url-element a.check_availability_button, .sitepage_featuredadmins_add a, .sitepage_create_link a, .sitepage_getstarted_btn a, .sitepage_edit_content .sitepage_edit_header > a{
+	background-color:$theme_button_background_color;
+}
+.sitepage_controllers:hover, .sitepage_badge_buttons a:hover, #page_url-element a.check_availability_button:hover, .sitepage_featuredadmins_add a:hover, .sitepage_create_link a:hover, .sitepage_getstarted_btn a:hover, .sitepage_edit_content .sitepage_edit_header > a:hover{
+	background-color:$theme_button_background_color_hover;
+}
+.button, .sitepage_badge_buttons a, #page_url-element a.check_availability_button, .sitepage_featuredadmins_add a, .sitepage_create_link a, .sitepage_getstarted_btn a, .sitepage_edit_content .sitepage_edit_header > a{
+	color: $theme_button_font_color !important;
+}
+.sitepage_categories_sitepage .sub_cat a:hover, .sitepage_categories_sitepage .sub_cat a.active{
+	background-color:$theme_border_color;
+}
+ul.sitepagealbum_sidebar_thumbs .thumbs_photo, ul.sitepage_thumbs .thumbs_photo, div.sitepage_photo_view #media_photo, #compose-sitepagevideo-body .compose-preview-image{
+	border: 1px solid $theme_photo_border_color;
+}
+ul.sitepage_thumbs .thumbs_photo:hover{
+	border: 1px solid $theme_photo_border_color_hover;
+}
+/*theme font color light*/
+.sitepage_gutter_view_stats,
+.sitepageoffer_list_info_date,
+.sitepage_report_table table th,
+.sitepageevent_sidebar ul li .sitepageevent_details, 
+div.sitepage_sitepages_thread_options_closed, 
+ul.sitepage_sitepages .sitepage_sitepages_lastreply_info_date, 
+ul.sitepage_sitepages .sitepage_sitepages_replies, 
+ul.sitepage_sitepages_thread .sitepage_sitepages_thread_details_date, 
+.sitepage_profile_album_stat, 
+ul.sitepage_thumbs .thumbs_info, 
+ul.sitepagereview_profile li .sitepagereview_profile_info_date, 
+ul.sitepagereviews_view .sitepagereviews_view_stats, 
+div.sitepagevideo_view .comments_options span, 
+.sitepagevideo_stats > span, 
+div.sitepagevideo_view .sitepagevideo_date, 
+ul.sitepagevideo_profile .sitepagevideo_profile_info_date, 
+.sitepagepolls_view .sitepagepolls_view_info_date, 
+ul.sitepagedocuments_view .sitepagedocuments_view_date, 
+ul.sitepagenote_view .sitepagenote_view_stats, 
+ul.sitepageevent_members .sitepageevent_members_rsvp, 
+ul.sitepage_sidebar_list .sitepage_sidebar_list_details, 
+ul.searchbox_autosuggest > li.autocompleter-choices > a, 
+.sitepage_featuredadmins_count, 
+.sitepages_browse_filters .form-element span.overTxtLabel, 
+ul.sitepage_sidebar_info li ul li, 
+.sitepagelike_popup_user_likes_sitepage .item_details .item_stat, 
+.browsesitepages_criteria span.overTxtLabel,
+.sitepage_edit_insights_table table th, 
+ul.sitepage_profile_list li .sitepage_profile_list_info_date, 
+ul.sitepages_locationdetails .sitepages_locationdetails_info_date, 
+ul.sitepagevideos_browse .video_stats{
+	color:$theme_font_color_light;
+}
+/*theme border color medium*/
+.sitepage_album_box, .sitepage_img_view .sitepage_thumb ul li > a, .sitepage_search_header, .sitepage_search_result, ul.sitepage_sitepages_thread .sitepage_sitepages_thread_body blockquote, div.details, div.write_link, div.sitepage_write_overview .des_edit, div.sitepage_write_overview .textarea textarea{
+	border-color:$theme_border_medium_color;
+}
+/*theme border bottom color*/
+ul.searchbox_autosuggest{
+	border-color:$theme_border_color;
+}
+ul.sitepages_editphotos > li, ul.sitepagenote_view .sitepagenote_view_stats, .sitepage_categories_sitepage .sub_cat a, ul.searchbox_autosuggest > li + li, .print_page_title, .sitepage_addremove_fav_popup_title{
+	border-bottom-color:$theme_border_color;
+}
+.tabs > ul li.sitepage_tab_open > a{
+  border-bottom: none;
+  background-color: $theme_pulldown_background_color_active !important;
+  color: $theme_pulldown_font_color_active !important;
+  position: relative;
+}
+.sitepage_tab_open ul li.active > a{
+	color:$theme_font_color !important;
+}
+.sitepage_list_highlight{
+  background-image: url(~/application/modules/Seaocore/externals/images/blk-bg.png);
+	background-color:$theme_foreground_background_color;
+	border:1px solid $theme_foreground_border_color !important;
+	+rounded;
+	padding:10px;
+	margin:10px 0 0;
+}
+/*constants css end here*/
+.mright10{margin-right:10px;!important}
+.mtop10{margin-top:10px!important;}
+.mtop5{margin-top:5px!important;}
+.mleft5{margin-left:5px!important;}
+.mtop15{margin-top:15px!important;}
+.mbot15{margin-bottom:15px!important;}
+.mbot5{margin-bottom:5px!important;}
+.mbot10{margin-bottom:10px!important;}
+.ptop10{padding-top:10px!important;}
+.p5{padding:5px!important;}
+.border0{border:none !important}
+.btop{border-top-width:1px;}
+.bold{font-weight:bold!important;}
+.widthfull{width:100%!important;}
+.center{text-align:center !important;}
+
+/*FEED ITEMS*/
+.feed_attachment_sitepage_page, 
+.feed_attachment_sitepagenote_note,
+.feed_attachment_sitepageevent_event,
+.feed_attachment_sitepageoffer_offer{
+	display:block;
+	overflow:hidden;
+	margin:0px 5px 5px 0px;
+	vertical-align:top;
+}
+.feed_attachment_sitepage_page > div, 
+.feed_attachment_sitepagenote_note > div,
+.feed_attachment_sitepageevent_event > div,
+.feed_attachment_sitepageoffer_offer > div{
+  overflow: hidden;
+}
+.feed_attachment_sitepage_page > div > a, 
+.feed_attachment_sitepagenote_note > div > a,
+.feed_attachment_sitepageevent_event > div > a,
+.feed_attachment_sitepageoffer_offer > div > a{
+	display:block;
+	float:left;
+	margin-right:7px;
+}
+.feed_attachment_sitepage_page > div > a > img, 
+.feed_attachment_sitepagenote_note > div > a > img,
+.feed_attachment_sitepageevent_event > div > a > img,
+.feed_attachment_sitepageoffer_offer > div > a > img{
+	display:block;
+	max-width:90px;
+	max-height:90px;
+	vertical-align:top;
+}
+.feed_attachment_sitepage_page > div > div, 
+.feed_attachment_sitepagenote_note > div > div,
+.feed_attachment_sitepageevent_event > div > div,
+.feed_attachment_sitepageoffer_offer > div > div{
+	overflow:hidden;
+}
+
+/*User Facebook Page Feed Widget*/
+.page_fb_feed_mainbox{border:1px solid $theme_border_dark_color;}
+.page_fb_feed_box_top{border-bottom:1px solid $theme_border_medium_color;}
+.feed_attachment_facebook_photo{border:1px solid $theme_photo_border_color;}
+.feed_attachment_facebook_photo:hover{border:1px solid $theme_photo_border_color_hover;}
+.feed_attachment_facebook > div > div {border-left:2px solid $theme_border_medium_color;}
+ul.page_fb_feeds .feed_item_stats *{ color:$theme_font_color_light;}
+
+#sitepages_overview #body-element #body_ifr{
+  height: 450px !important;
+}
+.sitepage_profile_loading_image{
+	background-image:url(~/application/modules/Seaocore/externals/images/loading.gif);
+	width:100%;
+	height:150px;
+	background-repeat:no-repeat;
+	background-position:center;
+}
+/*Composer icons*/
+#compose-sitepagephoto-activator{
+	background-image:url(~/application/modules/Sitepage/externals/images/photo/album_upload.png);
+}
+#compose-sitepagevideo-activator{
+	background-image:url(~/application/modules/Sitepage/externals/images/icons/sitepagevideo_new.png);
+}
+
+
+#sitepage-followsitepagepage, #sitepage-sitepageactivitycomment, #sitepage-sitepageactivitylike, #sitepage-sitepagecontentcomment, #sitepage-sitepagecontentlike, #sitepage-sitepagemembernotificationpost, #sitepage-sitepagemembernotificationpostparent, #sitepage-sitepagenotificationpost, #sitepage-sitepagenotificationpostparent
+{
+    display: none;
+}
+
+label[for="sitepage-followsitepagepage"] { display: none !important; }
+label[for="sitepage-sitepageactivitycomment"] { display: none !important; }
+label[for="sitepage-sitepageactivitylike"] { display: none !important; }
+label[for="sitepage-sitepagecontentcomment"] { display: none !important; }
+label[for="sitepage-sitepagecontentlike"] { display: none !important; }
+label[for="sitepage-sitepagenotificationpost"] { display: none !important; }
+label[for="sitepage-sitepagenotificationpostparent"] { display: none !important; }
+
+.sitepage_top_link{
+  margin-top: -22px;
+}
+
+.sitepage_bottom_link {
+  margin-top: 22px;
+}
+.sitepage-search-box .form-elements{
+  background-color: $theme_body_background_color;
+  border: 1px solid $theme_border_medium_color;
+}
+/* ====================== Responsive work ======================== */
+
+@media only screen and (max-width:920px){
+/* Edit overview textarea dashboard */
+#body-element #body_ifr, #sitepages_overview #body-element #body_ifr{height:200px !important;}
+	
+}

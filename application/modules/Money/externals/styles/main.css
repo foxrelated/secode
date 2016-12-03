@@ -1,0 +1,106 @@
+/*
+ADMIN TABLE LIST 
+Styles most tabular data in the admin panel.
+*/
+.money_table_form{
+   
+}
+table.money_table thead tr th
+{
+  +foreground;
+  padding: 5px;
+  border-bottom: 1px solid #aaa;
+  font-weight: bold;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  white-space: nowrap;
+  border-left: 0px;
+  border-right: 0px;
+  border-top: 0px;
+  color: #666;
+}
+table.money_table thead tr th a
+{
+  font-weight: bold;
+}
+table.money_table tbody tr:nth-child(even)
+{
+  background-color: #f8f8f8;
+}
+table.money_table tbody tr td
+{
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  font-size: .9em;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  white-space: nowrap;
+  vertical-align: top;
+}
+th.money_table_short
+{
+  width: 1%;
+}
+td.money_table_options
+{
+  color: #ccc;
+}
+.money_table_centered
+{
+  text-align: center;
+}
+.money_table_bold,
+.money_table_bold a
+{
+  font-weight: bold;
+}
+td.money_table_options > span.sep
+{
+  display: none;
+}
+td.money_table_options > a + span.sep
+{
+  display: inline;
+}
+.money_red{
+    background-color: #FC0349;
+}
+.money_icon{
+    background-image: url(~/application/modules/Money/externals/images/money.png);
+    background-repeat: no-repeat;
+    padding-left: 20px;
+}
+.product_photo{
+    float: left;
+    overflow: hidden;
+    margin-right: 25px;
+}
+.product_photo > img{
+    max-width: 240px;
+    max-height: 220px;
+}
+.product_description{
+    overflow: hidden;
+}
+.product_title{
+    font-size: 30px;
+}
+.product_owner{
+    font-size: .8em;
+    color: #999;
+}
+.product_body{
+    margin-top: 10px;
+}
+.product_options{
+    text-align: right;
+    float: right;
+    overflow: hidden;
+    margin-right: 10px;
+}
+.product_amount{
+    font-size: 41px;
+}
+.amount_title{
+    font-size: 15px;
+}

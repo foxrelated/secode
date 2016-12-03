@@ -31,7 +31,7 @@
 			<li><input type='checkbox' value=1 id='tables' name='Uncheck_all'  onclick="doCheckAll();" /> <?php echo 'Uncheck all' ?></li>
 			<li>
 				<?php
-					$session = new Zend_Session_Namespace();
+					$session = new Zend_Session_Namespace('backup');
 					$tablesinfo = $session->tables_temp;
 					foreach($tablesinfo as $values) {
 						foreach($values as $result_table) { ?>	

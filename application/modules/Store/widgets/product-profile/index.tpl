@@ -1,0 +1,134 @@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<!-- Load Plugin after jQuery library -->
+<script src="<?php echo $this->layout()->staticBaseUrl . 'application/modules/Store/externals/scripts/sti.js';?>"></script>
+<!-- Plugin style sheet -->
+<link rel="stylesheet" href="<?php echo $this->layout()->staticBaseUrl . 'application/modules/Store/externals/styles/css/sti.css';?>" />
+
+<div class="profile-items-listing">
+	 <div class="handle-items-listing">
+	    <div class="handle-overflow-listing">
+	      <span class="listing-title"><?php echo $this->translate('Items %s', sprintf("%03d", count($this->products))); ?></span>
+		  <span class="listing-information-right"><a href="/items-you-may-like"><?php echo $this->translate('Items you may like'); ?></a></span>
+		</div>
+		<ul>
+			<?php foreach ($this->products as $item) :?>
+
+		   <li class="handle-listing"> 
+		      
+			    <div class="listing-border">
+			    	<?php $photo_url = $item->getPhotoUrl();
+						if (empty($photo_url)) $photo_url = $this->layout()->staticBaseUrl . 'application/modules/Store/externals/images/nophoto_product_thumb_normal.png'; ?>
+
+				     <a href="<?php echo $item->getHref();?>"><div title="<?php echo $this->translate('Item Profile Page')?>" class="listing-item has-item" data-media="<?php echo $photo_url;?>" data-title="<?php echo $item->getTitle();?>" data-summary="<?php echo $item->getDescription();?>" style="background-image: url('<?php echo $photo_url;?>')">
+				     </div></a>
+
+					 <div class="listing-description">
+
+					       <div class="listing-item-name">
+						     <?php echo $this->htmlLink($item->getHref(),$this->string()->truncate($item->getTitle()))?>
+					       </div>
+
+								<span title="<?php echo $this->translate('Business Request Page')?>" class="briefcase">
+									<?php if ($this->subject()->getIdentity() == $this->viewer()->getIdentity()) :?>
+									<a href="<?php echo $this->url(array('id'=>$item->getIdentity()), 'store_request', true);?>" >
+										<img src="/application/modules/User/externals/images/briefcase_filled.png">
+										<?php if (($request_count = $item->getRequestCount()) > 0) :?>
+										<span class="request-count"><?php echo $request_count;?></span>
+										<?php endif;?>
+										</a>
+									<?php else: ?>
+									<a href="javascript:void(0)" onclick="product_manager.showAddingBlock('<?php echo $item->getIdentity();?>');"><img src="./application/modules/User/externals/images/briefcase_filled.png"></a>
+									<?php endif;?>
+								</span> 
+
+						<div class="listing-item-condition">
+						   	<ul>
+						   		<?php if (!empty($item->item_condition)):?>
+ 							    <li><?php echo $this->translate('Condition: '); ?><?php echo $this->translate($item->getCondition()); ?></li> 
+							    <?php endif;?>
+							    <?php $price = $item->getPrice(); 
+							    if ($price && $item->isStoreCredit()) :
+								$priceStr = Engine_Api::_()->store()->getCredits((double)$price);
+							    ?>
+							    <li>OGV: <?php echo $priceStr;?></li>
+								<?php else :?>
+								<li><?php echo $this->toCurrency($price, $this->currency); ?></li>
+							    <?php endif;?>
+							</ul>
+						</div>
+
+						<div class="listing-item-social-share">
+                             				<ul>
+				                                <li title="<?php echo $this->translate('Share on Facebook')?>"> <a href="javascript:void(0);" class="social-share-btn" rel="sti-facebook-btn"><img src="./application/modules/Core/externals/images/facebook-25.png"></a></li> 
+				                                <li title="<?php echo $this->translate('Share on Twitter')?>"> <a href="javascript:void(0);" class="social-share-btn" rel="sti-twitter-btn"><img src="./application/modules/Core/externals/images/twitter-25.png"></a></li> 
+				                                <li title="<?php echo $this->translate('Share on Google+')?>"> <a href="javascript:void(0);" class="social-share-btn" rel="sti-google-btn"><img src="./application/modules/Core/externals/images/google_plus-25.png"></a></li> 
+				                                <li title="<?php echo $this->translate('Share on Pinterest')?>"> <a href="javascript:void(0);" class="social-share-btn" rel="sti-pinterest-btn"><img src="./application/modules/Core/externals/images/pinterest-25.png"></a></li> 
+				                                <li title="<?php echo $this->translate('Share on LinkedIn')?>"> <a href="javascript:void(0);" class="social-share-btn" rel="sti-linkedin-btn"><img src="./application/modules/Core/externals/images/linkedin-25.png"></a></li>  
+				                           </ul>
+                           			</div>
+
+					 </div>
+				</div>
+			</li>
+			<?php endforeach;?>
+			<?php if ($this->viewer()->getIdentity() == $this->subject()->getIdentity()) :?>
+			<li class="handle-listing"> 
+		      
+			    <div class="listing-border">
+
+				     <div class="listing-image">
+					    <span title="<?php echo $this->translate('Add an Item Page')?>" class="empty-listing"><a href="<?php echo $this->url(array('action' => 'create'), 'store_products', true)?>"><img src="./application/modules/Store/externals/images/add-big.png"></a></span>
+			 	     </div>
+
+					 <div class="listing-description">
+
+					       <div class="listing-item-name">
+						     <?php echo $this->translate('Item name'); ?>
+					       </div>
+
+						<span title="<?php echo $this->translate('Business Request Page')?>" class="briefcase"><img src="./application/modules/User/externals/images/briefcase_filled.png"></span>
+
+						   <div class="listing-item-condition">
+						   	<ul>
+ 							    <li> <?php echo $this->translate('Condition: '); ?><?php echo $this->translate('-'); ?></li> 
+							    <li>OGV: 0</li>
+							</ul>
+						   </div>
+						   <div class="listing-item-social-share">
+							<ul>
+								<li title="<?php echo $this->translate('Share on Facebook')?>"><img src="./application/modules/Core/externals/images/facebook-25.png"></li> 
+                                					<li title="<?php echo $this->translate('Share on Twitter')?>"><img src="./application/modules/Core/externals/images/twitter-25.png"></li> 
+                                					<li title="<?php echo $this->translate('Share on Google+')?>"><img src="./application/modules/Core/externals/images/google_plus-25.png"></li> 
+                                					<li title="<?php echo $this->translate('Share on Pinterest')?>"><img src="./application/modules/Core/externals/images/pinterest-25.png"></li> 
+                                					<li title="<?php echo $this->translate('Share on LinkedIn')?>"><img src="./application/modules/Core/externals/images/linkedin-25.png"></li>  
+                             				</ul>
+
+						   </div>
+					 </div>
+				</div>
+			</li>
+			<?php endif; ?>
+		</ul>
+	 
+	 </div>
+</div>
+
+<script type="text/javascript">
+	jQuery.noConflict();
+	jQuery(document).ready(function() { 
+	  jQuery('div.listing-item.has-item').sti({
+	      selector: 'div.listing-item.has-item',
+	      primary_menu: ["facebook", "twitter", "google", "pinterest",  "linkedin"],
+	      sharer: '<?php echo 'http://'.$_SERVER['HTTP_HOST'].$this->layout()->staticBaseUrl . 'application/modules/Store/externals/scripts/sharer.php';?>'
+	  });
+	  
+	  jQuery('.social-share-btn').on('click', function() {
+			var li = jQuery(this).closest('.handle-listing')[0];
+			var rel = jQuery(this).attr('rel');
+			jQuery(li).find('.listing-item').mouseover();
+			if (jQuery(li).find('.'+rel).length > 0) {
+				(jQuery(li).find('.'+rel)[0]).click();
+			}
+		});
+	});
+</script>

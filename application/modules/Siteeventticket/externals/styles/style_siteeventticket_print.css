@@ -1,0 +1,155 @@
+/* $Id: style_siteeventticket_print.css 2015-05-11 00:00:00Z SocialEngineAddOns Copyright 2015-2016 BigStep Technologies Pvt. Ltd. $ */
+
+
+/*-----------------PRINT INVOICE CSS START FROM HERE-----------------*/
+body{
+	background:#fff;
+}
+div, td {
+	color: #555555;
+	font-size: 10pt;
+	text-align: left;
+}
+* {
+	font-family: tahoma,arial,verdana,sans-serif;
+}
+* {
+	/*border: 0 solid #EAEAEA;*/
+	margin: 0;
+	padding: 0;
+}
+.txt_center{
+  text-align: center;
+}
+#global_content_simple {
+   width:100% !important;
+}
+span#global_content_simple{
+	display:list-item;
+}
+.fleft{
+  float: left;
+}
+.fright{
+  float: right;
+}
+.mtop10 {
+	margin-top:10px;
+}
+.mbot5 {
+	margin-bottom:5px;
+}
+.invoice_wrap{
+	margin:0 auto;
+	width:630px;
+}
+.invoice_head_wrap{
+	background-color: #EAEAEA;
+	border: 1px solid #CCCCCC;
+	height: 40px;
+	line-height:40px;
+	padding:2px 10px;
+}
+.invoice_head .name{
+	font-size: 13pt;
+}
+.invoice_head .logo{
+	width:300px;
+	height:40px;
+}
+.invoice_head .logo img{
+	max-height:40px;
+}
+.invoice_details_wrap{
+	border: 1px solid #CCCCCC;
+	overflow:hidden;
+}
+.invoice_add_details_wrap{
+	border-right: 1px solid #CCCCCC;
+	width: 315px;
+  float:left;
+	box-sizing: border-box;
+}
+.invoice_add_details + .invoice_add_details ,
+.siteevent_detail_table table tr + tr
+{
+	border-top: 1px solid #CCCCCC;
+}
+.invoice_add_details,
+.invoice_order_details_wrap li,
+.invoice_ttlamt_box_wrap,
+.invoice_note_box{
+	padding: 10px;
+}
+.invoice_order_details_wrap{
+	width: 314px;
+  float: right;
+  list-style: none;
+	margin-left:-1px;
+	border-left:1px solid #CCCCCC;
+	box-sizing: border-box;
+}
+.invoice_order_details_wrap li{
+  list-style: none;
+}
+.invoice_order_details_wrap li + li {
+	border-top: 1px solid #CCCCCC;
+}
+.siteevent_detail_table{
+	margin:0;
+	border:none;
+}
+.siteevent_detail_table table{
+	width:100%;
+	border: 1px solid #CCCCCC;
+	margin-top:1px;
+}
+.siteevent_detail_table_head{
+	background-color: #EAEAEA;
+}
+.siteeventticket_data_table tr + tr td{
+	border-top:1px solid #ccc;
+}
+.siteeventticket_data_table tr td, 
+.siteeventticket_data_table tr th{
+	padding:7px 10px;
+}
+.siteevent_detail_table table td + td{
+	border-left:1px solid #ccc;
+}
+.siteevent_detail_table .quantity,
+.siteevent_detail_table .price,
+.siteevent_detail_table .total,
+.invoice_order_info{
+	width:128px;
+}
+.siteevent_detail_table .ticket{
+	width:452px;
+}
+.invoice_ttlamt_box_wrap{
+	/*background-color: #EAEAEA;*/
+	border-top: 1px solid #CCCCCC;
+	border-bottom: 1px solid #CCCCCC;
+	width: 100%;
+	box-sizing: border-box;
+}
+.invoice_ttlamt_box{
+	margin-bottom:5px;
+	width: 100%;
+}
+.invoice_ttlamt_box .fleft {
+	text-align: right;
+	width: 80%;
+}
+/* Print invoice CSS Stop from here */
+
+/*Responsive css*/
+@media only screen and (max-width: 920px) {
+	.siteeventticket_data_table tr td, .siteeventticket_data_table tr th {display: table-cell;}
+}
+@media only screen and (max-width: 768px) {
+	/*Invoice*/
+	div.invoice_head .logo {width: auto;}
+	div.invoice_wrap {width: 100%;}
+	div.invoice_add_details_wrap, div.invoice_order_details_wrap { width: 100%;}
+}

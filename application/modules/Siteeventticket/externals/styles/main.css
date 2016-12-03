@@ -1,0 +1,181 @@
+/* $Id: main.css 2015-05-11 00:00:00Z SocialEngineAddOns Copyright 2015-2016 BigStep Technologies Pvt. Ltd. $ */
+#siteeventticket_add_quick{
+  min-width: 700px;
+}
+/*#siteeventticket_add_quick.global_form input + label{
+width:92%;
+}*/
+
+/*Available tickets*/
+.siteeventticket_list{
+	max-height: 351px;
+	overflow: auto;
+	margin-bottom: 5px;
+}
+ul.siteeventticket_list_wrap{
+	border-width:5px;
+} 
+ul.siteeventticket_list_wrap > li {
+	clear: both;
+	overflow: hidden;
+	padding: 10px;
+}
+ul.siteeventticket_list_wrap > li + li {
+	border-top-width:5px;
+}
+ul.siteeventticket_list_wrap .siteeventticket_title {
+	font-size: 16px !important;
+	margin-top:10px;
+}
+ul.siteeventticket_list_wrap .siteeventticket_price {
+	font-size: 25px !important;
+	font-weight: bold !important;
+}
+.layout_Siteeventticket_event_tickets a.siteevent_buttonlink {
+	font-size: 14px;
+	font-weight: normal;
+	padding: 7px;
+	margin: 10px 5px 0;
+}
+/*Dashboard >> Tickets*/
+ul.siteeventticket_list_wrap .siteeventticket_list_block{
+	width:85%;
+}
+.siteevent_dashboard_content ul.siteeventticket_list_wrap li + li{
+	border-top-width:1px;
+}
+ul.siteeventticket_list_wrap li .siteeventticket_list_block span {
+	display:inline-block;
+	vertical-align: middle;
+	width: 32%;
+	word-wrap: break-word;
+}
+
+/*checkout >> Payment methods*/
+.siteeventticket_payment_methods_wrap {
+	border-width: 1px;
+  padding: 15px;
+}
+.siteeventticket_payment_method {
+	padding-top: 10px;
+}
+.siteeventticket_payment_method label > span {
+  vertical-align: top;
+}
+.siteeventticket_payment_method label > img {
+  margin-top: -5px;
+}
+#cheque {
+	margin-left: 15px;
+}
+#cheque div.siteeventticket_payment_l {
+	width: 200px;
+}
+
+/*Dshboard*/
+.siteevent_dashboard_content .global_form > div > div > h3 + p{
+	max-width:none;
+}
+.siteeventticket_icon_payment{
+	background-image: url(~/application/modules/Siteeventticket/externals/images/money.png);
+}
+/*
+	Event  TABLE LIST 
+	Styles most tabular data in the table rates.
+*/
+.siteeventticket_amount_table td{
+	font-size:16px;
+}
+.siteeventticket_amount_table td div{
+	font-size:16px;
+	margin-top:5px;
+}
+.siteeventticket_amount_table td.highlight div{
+	font-size:20px;
+}
+.siteeventticket_data_table{
+	overflow-x:auto;
+	width:100%;
+	margin:0;
+	padding-bottom:10px;
+	margin-bottom:15px;
+	border:none;	
+}
+.siteeventticket_data_table table{
+	width:100%;
+	border-width: 1px;
+	margin-top:1px;	
+	overflow:hidden;
+}
+.siteeventticket_data_table thead tr th {
+ /*+foreground;*/
+	padding: 10px;
+	border-bottom: 1px solid #aaa;
+	font-weight: bold;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	white-space: nowrap;
+}
+.siteeventticket_data_table thead tr th a {
+	font-weight: bold;
+}
+.siteeventticket_data_table tr td,
+.siteeventticket_data_table tr th{
+	padding: 7px 10px;
+	display:table-cell;
+}
+.siteeventticket_data_table tbody tr .nowrap {
+	white-space: nowrap;
+}
+.siteeventticket_data_table tbody tr td:last-child {
+	white-space: nowrap;
+}
+.siteeventticket_data_table tbody tr .wrap {
+	white-space: normal;
+}
+td.siteeventticket_data_table_options {
+	color: #ccc;
+}
+/*Order Non-payment*/
+.global_form #non_payment_seller_reason-label.form-label {
+  width: 100% !important;
+}
+textarea#non_payment_seller_message{
+	width:90% !important;
+}
+/*Print-Coupon*/
+.seaocore_print_store {
+	width:700px;
+}
+/*Dashboard >> Transactions*/
+.siteevent_transactions_integers .event_calendar_container {
+	display: inline-block !important;
+	margin-right: 10px;
+}
+/*Dashboard >> sales statistics*/
+.event_statistics_info {
+	width: 65%;
+}
+.layout_siteeventticket_ticket_statistics li h3 {
+	border-bottom-width: 1px;
+	margin-bottom: 10px;
+	padding: 5px 0;
+}
+/*Event Attendees sidebar widget*/
+.layout_siteeventticket_members_bought_ticket .member_thumb {
+	display: inline-block;
+	margin: 2px;
+}
+
+/*Responsive css*/
+@media only screen and (max-width: 768px) {
+	/*Print tickets*/
+	#global_page_siteeventticket-order-print-ticket #global_content_simple > div {overflow: auto;}
+	/*Add ticket Popup*/
+	form#siteeventticket_add_quick {box-sizing: border-box;min-width: 100% !important;}
+	#sell_starttime-element > select, #sell_endtime-element > select {width: auto;}
+	/*Dashboard*/
+	.siteeventticket_data_table tr td, .siteeventticket_data_table tr th {display: block;}
+	/*My tickets page*/
+	#siteevent_manage_event div.tabs_alt > ul > li > a {padding:3px !important;}
+}

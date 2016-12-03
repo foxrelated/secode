@@ -1,0 +1,3 @@
+-- ----------------------------------------------------------------------------------------
+INSERT IGNORE INTO `engine4_core_menuitems` (`name`, `module`, `label`, `plugin`, `params`, `menu`, `submenu`, `enabled`, `custom`, `order`) VALUES 
+('mcard_admin_faqs', 'mcard', 'FAQ', '', '{"route":"admin_default","module":"mcard","controller":"settings", "action":"faq"}', 'mcard_admin_main', '', '1', '0', 3);
